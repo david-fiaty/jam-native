@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { GoogleMap, useJsApiLoader, OverlayView, InfoWindow, OverlayViewF } from "@react-google-maps/api";
 import { Config } from "@/constants/Config";
+import SpinnerView from "./SpinnerView";
 
 const containerStyle = {
   width: "100%",
@@ -24,13 +25,12 @@ export default function JamsMapView() {
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
 
-  if (!isLoaded) return <div>Loading...</div>;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={13}>
       {places.map((place) => (
         <React.Fragment key={place.id}>
-          {/* Custom Marker */}
           <OverlayViewF
             position={place.position}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
