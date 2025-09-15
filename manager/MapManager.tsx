@@ -60,7 +60,16 @@ class MapManager {
   }
 
   getMarkerDescription = (item: any) => {
-    return item?.caption || '';
+    let description: any = '';
+
+    if (this.isProfileMarker(item)) {
+      description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore';
+    }
+    else if (this.isJamMarker(item)) {
+      description = item?.caption || '';
+    }
+    
+    return description;
   }
 
   getProfileMarkerInnerColor(item: any) {
