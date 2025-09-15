@@ -18,7 +18,7 @@ const places = [
   { id: 2, name: "Marker Two", position: { lat: 37.7849, lng: -122.4094 } },
 ];
 
-export default function JamsMapView() {
+const JamsMapView = () => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: Config.mapApiKey,
   });
@@ -70,3 +70,5 @@ export default function JamsMapView() {
     </GoogleMap>
   );
 }
+
+export default JamsMapView;
