@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   fieldTitle: {
     color: Layout.colors.gray,
-    fontSize: 12,
+    fontSize: 11,
   },
   fieldValue: {
     fontSize: 12,
