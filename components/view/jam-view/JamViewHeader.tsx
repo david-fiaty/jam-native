@@ -7,6 +7,7 @@ import TextView from "@/components/view/TextView";
 import IconView from "@/components/view/IconView";
 import JamStatusButton from "@/components/button/JamStatusButton";
 import ModalManager from '@/manager/ModalManager';
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   row?: any;
@@ -17,13 +18,7 @@ const JamViewHeader = ({ row }: Props) => {
   const collaboratorsCount = parseInt(row?.collaborators?.length);
 
   const renderOwnerName = () => {
-    let ownerName: string = row?.profile?.profile_name;
-
-    if (ownerName?.length > Config.maxUserNameLength) {  
-      ownerName = ownerName.substring(0, Config.maxUserNameLength) + '...';
-    } 
-
-    return ownerName;
+    return EntityManager.getJamOwnerName(row);
   };
 
   useEffect(() => {
