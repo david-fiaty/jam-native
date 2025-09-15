@@ -22,7 +22,7 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
   const markerInnerColor: string = innerColor || 'red';
   const markerTitleColor: string = titleColor || markerInnerColor;
 
-  const iconSize: number = markerSize/3; 
+  const iconSize: number = markerSize / 3;
 
   const outerCircleStyles: any = {
     width: markerSize,
@@ -32,9 +32,9 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
   };
 
   const innerCircleStyles: any = {
-    width: markerSize - Layout.space.base/2,
-    height: markerSize - Layout.space.base/2,
-    borderRadius: (markerSize - Layout.space.base/2) / 2,
+    width: markerSize - Layout.space.base / 2,
+    height: markerSize - Layout.space.base / 2,
+    borderRadius: (markerSize - Layout.space.base / 2) / 2,
     backgroundColor: markerInnerColor,
   };
 
@@ -50,8 +50,8 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
     <View style={styles.container}>
       {title && (
         <View style={styles.titleContainer}>
-          <TextView 
-            color={markerTitleColor} 
+          <TextView
+            color={markerTitleColor}
             size={styles.titleContainer.fontSize}
           >
             {title}
@@ -59,7 +59,7 @@ const ProfileMarkerView = ({ title, description, size, iconName, titleColor, out
         </View>
       )}
 
-      <View style={[styles.outerCircle, outerCircleStyles]}>
+      <View style={[styles.outerCircle, styles.outerShadow, outerCircleStyles]}>
         <View style={[styles.innerCircle, innerCircleStyles]}>
           {iconName && (
             <IconView
@@ -108,6 +108,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
+  },
+  outerShadow: {
+    shadowColor: '#171717',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
   },
 });
 
