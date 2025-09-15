@@ -38,7 +38,7 @@ const JamCalloutView = ({ item }: Props) => {
       <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
       <TextView style={styles.fieldValue}>{UserManager.getProfileTypeLabel(item?.profile_type)}</TextView>
 
-      {item?.profile_description && (
+      {item?.caption && (
         <>
           <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
           <TextView style={styles.fieldValue}>{DataManager.truncateText(item?.caption, 50)}</TextView>
