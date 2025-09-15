@@ -39,13 +39,11 @@ const JamCalloutView = ({ item }: Props) => {
       <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
       <TextView style={styles.fieldValue}>{EntityManager.getJamTypeLabel(item?.type)}</TextView>
 
-      {item?.caption && (
-        <>
-          <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
-          <TextView style={styles.fieldValue}>{DataManager.truncateText(item?.caption, 50)}</TextView>
-        </>
-      )}
-
+      <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
+      <TextView style={styles.fieldValue}>
+        {item?.caption ? DataManager.truncateText(item?.caption, 50) : i18n.t('Unavailable')}
+      </TextView>
+    
       <TouchableOpacity
         onPress={() => onShowMorePress(item)}
         style={styles.showMoreButton}
