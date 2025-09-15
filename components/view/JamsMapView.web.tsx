@@ -1,6 +1,5 @@
-// JamsMapView.web.tsx
 import React, { useState } from "react";
-import { GoogleMap, useJsApiLoader, OverlayView, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, OverlayView, InfoWindow, OverlayViewF } from "@react-google-maps/api";
 import { Config } from "@/constants/Config";
 
 const containerStyle = {
@@ -32,7 +31,7 @@ export default function JamsMapView() {
       {places.map((place) => (
         <React.Fragment key={place.id}>
           {/* Custom Marker */}
-          <OverlayView
+          <OverlayViewF
             position={place.position}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
           >
@@ -52,7 +51,7 @@ export default function JamsMapView() {
             >
               📍
             </div>
-          </OverlayView>
+          </OverlayViewF>
 
           {/* Callout / InfoWindow */}
           {selectedPlace?.id === place.id && (
