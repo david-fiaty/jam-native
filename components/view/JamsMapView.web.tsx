@@ -91,7 +91,9 @@ const JamsMapView = () => {
               y: -height,
             })}
           >
-            {MapManager.renderMarker(item)}
+            <div onClick={() => setSelectedPlace(item)}>
+              {MapManager.renderMarker(item)}
+            </div>
           </OverlayViewF>
 
           {selectedPlace?.id === item.id && (
