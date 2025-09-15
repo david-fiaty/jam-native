@@ -191,6 +191,8 @@ const JamsMapView = () => {
         {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
         {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
       </GoogleMap>
+
+      <MapLegendView />
     </View>
   );
 }
