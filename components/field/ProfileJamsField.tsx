@@ -37,17 +37,6 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     SectionManager.push(router, path, params);
   };
 
-  /*
-  const onItemPress = (row: any) => {
-    SectionManager.push(router, 'profile-jams', {
-      jamId: JSON.stringify([row?.item?.id]),
-      title: row?.item?.title,
-      disableInfiniteScroll: true,
-    });
-  };
-
-  */
-
   const renderAddButton = () => {
     return (
       <AddItemButton
