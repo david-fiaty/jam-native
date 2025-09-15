@@ -6,6 +6,10 @@ import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
 import ScreenManager from "./ScreenManager";
+import { View } from "react-native";
+import TextView from "@/components/view/TextView";
+import JamCalloutView from "@/components/view/marker-view/JamCalloutView";
+import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView";
 
 class MapManager {
   renderMarker = (item: any, zoomLevel?: any) => {
@@ -34,6 +38,16 @@ class MapManager {
     );
   }
 
+  renderMarkerCallout(item: any) {
+    return (
+      <>
+        {this.isJamMarker(item) && <JamCalloutView item={item} />}
+
+        {this.isProfileMarker(item) && <ProfileCalloutView item={item} />}
+      </>
+    );
+  }
+
   isProfileMarker(item: any) {
     return ['organization', 'venue', 'personal'].includes(item?.profile_type);
   }
@@ -49,7 +63,7 @@ class MapManager {
       title = UserManager.getProfileDisplayName(item);
       if (!ScreenManager.isWeb()) {
         title = DataManager.truncateText(title, 10);
-        title = String(title).charAt(0).toUpperCase() + String(title).slice(1).toLowerCase(); 
+        title = String(title).charAt(0).toUpperCase() + String(title).slice(1).toLowerCase();
       }
     }
     else if (this.isJamMarker(item)) {
@@ -68,7 +82,7 @@ class MapManager {
     else if (this.isJamMarker(item)) {
       description = item?.caption || '';
     }
-    
+
     return description;
   }
 
