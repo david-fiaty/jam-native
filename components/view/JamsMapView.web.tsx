@@ -12,6 +12,7 @@ import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
+import DataManager from "@/manager/DataManager";
 
 const containerStyle = {
   width: "100%",
@@ -108,8 +109,10 @@ const JamsMapView = () => {
               }}
             >
               <div>
-                <h4>{MapManager.getMarkerTitle(item)}</h4>
-                <p>{MapManager.getMarkerDescription(item)}</p>
+                <div>{UserManager.getProfileDisplayName(item)}</div>
+                <div>{item?.profile_name}</div>
+                <div>{UserManager.getProfileTypeLabel(item?.profile_type)}</div>
+                <div>{DataManager.truncateText(item?.profile_description, 55)}</div>
               </div>
             </InfoWindow>
           )}
