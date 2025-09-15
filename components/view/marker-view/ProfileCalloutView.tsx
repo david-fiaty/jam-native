@@ -72,10 +72,11 @@ const styles = StyleSheet.create({
     color: Layout.colors.black,
     backgroundColor: Layout.colors.tertiary,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base/2,
+    paddingHorizontal: Layout.space.base,
+    paddingVertical: Layout.space.base/2,
     textAlign: 'center',
     alignSelf: 'flex-start',
-  }
+  },
 });
 
 export default ProfileCalloutView;
