@@ -130,7 +130,11 @@ const JamsMapView = () => {
                 <div>{item?.profile_name}</div>
                 <div>{UserManager.getProfileTypeLabel(item?.profile_type)}</div>
                 <div>{DataManager.truncateText(item?.profile_description, 55)}</div>
-                <button onClick={() => onButtonPress(item)}>{i18n.t('Show more')}</button>
+                <button 
+                  //onClick={() => onButtonPress(item)}
+                >
+                  {i18n.t('Show more')}
+                </button>
               </div>
             </InfoWindow>
           )}
