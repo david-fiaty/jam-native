@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import TextView from "../TextView";
 import i18n from "@/translation/i18n";
@@ -41,7 +41,7 @@ const JamCalloutView = ({ item }: Props) => {
         onPress={() => onShowMorePress(item)}
         style={styles.showMoreButton}
       >
-        {i18n.t('Show more')}
+        <Text>{i18n.t('Show more')}</Text>
       </TouchableOpacity>
     </View>
   );
