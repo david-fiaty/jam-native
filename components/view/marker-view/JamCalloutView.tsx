@@ -1,31 +1,22 @@
-import React, { ReactNode } from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useRouter } from "expo-router";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import TextView from "../TextView";
 import i18n from "@/translation/i18n";
-import SectionManager from "@/manager/SectionManager";
-import UserManager from "@/manager/UserManager";
 import DataManager from "@/manager/DataManager";
 import EntityManager from "@/manager/EntityManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   item: any;
 };
 
 const JamCalloutView = ({ item }: Props) => {
-  const router = useRouter();
-
   const onShowMorePress = (row: any) => {
-    let path: string = 'public-jam';
-    let params: any = {
+    ModalManager.toggleModal('PublicJamSection', {
       jamId: row?.id,
-      title: i18n.t('Jam'),
       itemData: JSON.stringify(row),
-      disableInfiniteScroll: true,
-    };
-
-    SectionManager.push(router, path, params);
+    });
   };
 
   return (
@@ -33,25 +24,24 @@ const JamCalloutView = ({ item }: Props) => {
       <TextView style={styles.fieldTitle}>{i18n.t('@host')}</TextView>
       <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
 
-      <TextView style={styles.fieldTitle}>{i18n.t('User name')}</TextView>
-      <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
-
-      <TextView style={styles.fieldTitle}>{i18n.t('@host')}</TextView>
-      <TextView style={styles.fieldValue}>{EntityManager.getJamOwnerName(item)}</TextView>
+      <TextView style={styles.fieldTitle}>{i18n.t('Type')}</TextView>
+      <TextView style={styles.fieldValue}>{EntityManager.getJamTypeLabel(item?.type)}</TextView>
 
       <TextView style={styles.fieldTitle}>{i18n.t('Name')}</TextView>
-      <TextView style={styles.fieldValue}>{item?.title ? item?.title : i18n.t('Unavailable')}</TextView>
+      <TextView style={styles.fieldValue}>
+        {item?.title ? DataManager.truncateText(item?.title, 50) : i18n.t('Unavailable')}
+      </TextView>
 
       <TextView style={styles.fieldTitle}>{i18n.t('Description')}</TextView>
       <TextView style={styles.fieldValue}>
         {item?.caption ? DataManager.truncateText(item?.caption, 50) : i18n.t('Unavailable')}
       </TextView>
-    
+
       <TouchableOpacity
         onPress={() => onShowMorePress(item)}
         style={styles.showMoreButton}
       >
-        {i18n.t('Show more')}
+        <Text>{i18n.t('Show more')}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -77,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingHorizontal: Layout.space.base,
     paddingVertical: Layout.space.base / 2,
-    marginTop: Layout.space.base/2,
+    marginTop: Layout.space.base / 2,
     textAlign: 'center',
     alignSelf: 'flex-start',
   },

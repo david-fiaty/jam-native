@@ -21,6 +21,8 @@ import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
 import PrivateProfileSection from '../section/profile/PrivateProfileSection';
 import SearchFiltersForm from '../form/SearchFiltersForm';
+import PublicJamSection from '../section/jam/PublicJamSection';
+import PublicProfileSection from '../section/profile/PublicProfileSection';
 
 type Props = {
   currentSection?: any;
@@ -178,6 +180,16 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateProfileSection',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
+      },
+      {
+        id: 'PublicJamSection',
+        title: i18n.t('Jam'),
+        render: (params: any) => <PublicJamSection {...params} />,
+      },
+      {
+        id: 'PublicProfileSection',
+        title: i18n.t('Profile'),
+        render: (params: any) => <PublicProfileSection {...params} />,
       },
     ].map((o: any) => {
       return {
