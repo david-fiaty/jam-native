@@ -70,13 +70,13 @@ const JamsMapView = () => {
         <Marker
           key={item.id}
           coordinate={getMarkerPosition(item)}
+          title={'marker tiiitle'}
+          description={'a description for a super cool marker'}
         >
           {MapManager.renderMarker(item, zoomLevel)}
 
           <Callout>
-            <View style={{width: 150, height: 150}}>
-              <TextView>Test tooltip callout</TextView>
-            </View>
+            {MapManager.renderMarkerCallout(item)}
           </Callout>
         </Marker>
       );
