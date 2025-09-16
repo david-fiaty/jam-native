@@ -7,6 +7,7 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import DataManager from "@/manager/DataManager";
 import SectionManager from "@/manager/SectionManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   item: any;
@@ -16,10 +17,9 @@ const ProfileCalloutView = ({ item }: Props) => {
   const router = useRouter();
 
   const onShowMorePress = (row: any) => {
-    SectionManager.push(router, 'public-profile', { 
-      profileId: row?.id, 
+    ModalManager.toggleModal('PublicProfileSection', {
+      profileId: row?.id,
       itemData: JSON.stringify(row),
-      title: i18n.t("{{ name }}'s profile", {name: UserManager.getProfileDisplayName(row) }),
     });
   };
 
