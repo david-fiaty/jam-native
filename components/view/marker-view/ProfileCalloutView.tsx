@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useRouter } from "expo-router";
 import { Layout } from '@/constants/Layout';
 import TextView from "../TextView";
@@ -43,7 +43,7 @@ const ProfileCalloutView = ({ item }: Props) => {
         onPress={() => onShowMorePress(item)}
         style={styles.showMoreButton}
       >
-        {i18n.t('Show more')}
+        <Text>{i18n.t('Show more')}</Text>
       </TouchableOpacity>
     </View>
   );
