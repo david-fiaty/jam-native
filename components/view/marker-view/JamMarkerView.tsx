@@ -20,10 +20,10 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
   const markerTitleColor: string = titleColor || 'black';
 
   const titleContainerStyles: any = {
-    borderRadius: Layout.radius.round*2,
+    borderRadius: Layout.radius.round * 2,
     backgroundColor: markerBackgroundColor,
-    paddingHorizontal: Layout.space.base/1.2,
-    paddingVertical: Layout.space.base/4,
+    paddingHorizontal: Layout.space.base / 1.2,
+    paddingVertical: Layout.space.base / 4,
   };
 
   const bottomArrowStyles: any = {
@@ -36,8 +36,8 @@ const JamMarkerView = ({ title, description, size, titleColor, backgroundColor, 
 
   return (
     <View style={styles.container}>
-      <View style={titleContainerStyles}>
-        <TextView 
+      <View style={[styles.titleContainer, titleContainerStyles]}>
+        <TextView
           color={markerTitleColor}
           size={9}
           bold={true}
@@ -56,6 +56,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titleContainer: {
+    shadowColor: '#171717',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 6,
   },
   bottomArrow: {
     width: 0,
