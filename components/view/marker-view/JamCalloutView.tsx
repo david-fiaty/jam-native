@@ -1,30 +1,22 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { useRouter } from "expo-router";
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import TextView from "../TextView";
 import i18n from "@/translation/i18n";
-import SectionManager from "@/manager/SectionManager";
 import DataManager from "@/manager/DataManager";
 import EntityManager from "@/manager/EntityManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   item: any;
 };
 
 const JamCalloutView = ({ item }: Props) => {
-  const router = useRouter();
-
   const onShowMorePress = (row: any) => {
-    let path: string = 'public-jam';
-    let params: any = {
+    ModalManager.toggleModal('PublicJamSection', {
       jamId: row?.id,
-      title: i18n.t('Jam'),
       itemData: JSON.stringify(row),
-      disableInfiniteScroll: true,
-    };
-
-    SectionManager.push(router, path, params);
+    });
   };
 
   return (
@@ -49,7 +41,7 @@ const JamCalloutView = ({ item }: Props) => {
         onPress={() => onShowMorePress(item)}
         style={styles.showMoreButton}
       >
-        {i18n.t('Show more')}
+        <Text>{i18n.t('Show more')}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -75,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingHorizontal: Layout.space.base,
     paddingVertical: Layout.space.base / 2,
-    marginTop: Layout.space.base/2,
+    marginTop: Layout.space.base / 2,
     textAlign: 'center',
     alignSelf: 'flex-start',
   },
