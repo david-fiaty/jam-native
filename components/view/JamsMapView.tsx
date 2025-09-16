@@ -73,11 +73,11 @@ const JamsMapView = () => {
         >
           {MapManager.renderMarker(item, zoomLevel)}
 
-          {/*<Callout>
-            <View>
+          <Callout>
+            <View style={{width: 150, height: 150}}>
               <TextView>Test tooltip callout</TextView>
             </View>
-          </Callout> */}
+          </Callout>
         </Marker>
       );
     }
