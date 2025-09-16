@@ -59,6 +59,16 @@ const logo: any = {
 
 const mapStyle: any = [
   {
+    featureType: "poi", 
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+  {
+    featureType: "transit",
+    elementType: "labels",
+    stylers: [{ visibility: "off" }],
+  },
+  {
     "elementType": "geometry",
     "stylers": [
       {
