@@ -63,7 +63,7 @@ const mapStyle: any = [
     "elementType": "labels",
     "stylers": [
       { 
-        "visibility": "off" 
+        "visibility": "off",
       }
     ],
   },
@@ -72,7 +72,7 @@ const mapStyle: any = [
     "elementType": "labels",
     "stylers": [
       { 
-        "visibility": "off" 
+        "visibility": "off" ,
       }
     ],
   },
