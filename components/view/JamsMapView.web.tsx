@@ -131,7 +131,7 @@ const JamsMapView = () => {
         center={initialRegion}
         zoom={zoomLevel}
         options={{
-          //styles: Layout.mapStyle,
+          styles: Layout.mapStyle,
           disableDefaultUI: true,
           zoomControl: false,
           mapTypeControl: false,
