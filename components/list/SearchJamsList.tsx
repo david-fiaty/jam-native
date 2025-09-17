@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -19,6 +19,7 @@ const numColumns = 2;
 
 const SearchJamsList = ({ data }: Props) => {
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
@@ -56,8 +57,20 @@ const SearchJamsList = ({ data }: Props) => {
   };
 
   const fetchTabResults = async (key: string) => {
+    if (!isLoaded) return;
+
+    setIsFetching(true);
+
     console.log('fetching more...', key)
+
+    setIsFetching(false);
   };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+  }, [isLoaded]);
 
   return (
     <BoxView
