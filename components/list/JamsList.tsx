@@ -101,12 +101,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         onEndReached={onEndReached}
       />
 
-      {isFetching && (
+      {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" />
         </View>
       )}
-      
+
     </BoxView>
   );
 };
