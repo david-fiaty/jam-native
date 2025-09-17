@@ -44,6 +44,7 @@ class EntityManager {
     let defaults = {
       profile_id: profileId,
       page_size: Config.paginationSize,
+      page: 1,
       profile_type: 'all',
     };
 
@@ -86,6 +87,7 @@ class EntityManager {
     let defaults = {
       profile_id: profileId,
       page_size: Config.paginationSize,
+      page: 1,
       jam_type: 'all',
     };
 
@@ -135,6 +137,7 @@ class EntityManager {
     let defaults = {
       profile_id: profileId,
       page_size: Config.paginationSize,
+      page: 1,
     };
 
     return await DataManager.get('listProjects', { ...defaults, ...options });
