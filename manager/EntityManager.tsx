@@ -43,7 +43,7 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
-      pagination_size: Config.paginationSize,
+      page_size: Config.paginationSize,
       profile_type: 'all',
     };
 
@@ -85,7 +85,7 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
-      pagination_size: Config.paginationSize,
+      page_size: Config.paginationSize,
       jam_type: 'all',
     };
 
@@ -134,7 +134,7 @@ class EntityManager {
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
-      pagination_size: Config.paginationSize,
+      page_size: Config.paginationSize,
     };
 
     return await DataManager.get('listProjects', { ...defaults, ...options });
