@@ -49,7 +49,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
     setIsFetching(true);
 
-    let results: any = {...searchResults};
     let moreResults: any = await EntityManager.listJams({
       page: currentPage,
     });
@@ -57,9 +56,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     if (currentPage > 1 && !moreResults?.length) {
       setHasMore(false);
     }
-    else {
-      setListData([...results[key], ...moreResults]);
+    else if (!!moreResults?.length) {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...listData]);
     }
 
     setIsFetching(false);
@@ -86,6 +88,8 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(listData?.length);
 
   return (
     <BoxView
