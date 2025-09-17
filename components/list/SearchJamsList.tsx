@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -9,6 +9,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
+import { Config } from "@/constants/Config";
 
 type Props = {
   data?: any;
@@ -18,6 +19,8 @@ const numColumns = 2;
 
 const SearchJamsList = ({ data }: Props) => {
   const router = useRouter();
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -45,6 +48,16 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
+  const onEndReached = async () => {
+    if (Config.infiniteScrollEnabled === true) {
+      await fetchTabResults('jam');
+    }
+  };
+
+  const fetchTabResults = async (key: string) => {
+    console.log('fetching more...')
+  };
+
   return (
     <BoxView
       direction="column"
@@ -60,6 +73,8 @@ const SearchJamsList = ({ data }: Props) => {
           contentContainerStyle={styles.contentContainerStyle}
           columnWrapperStyle={styles.columnWrapperStyle}
           renderItem={(row: any) => renderItem(row)}
+          onEndReachedThreshold={0.5}
+          onEndReached={onEndReached}
         />
       )}
 
