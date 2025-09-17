@@ -49,9 +49,11 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     setIsFetching(true);
 
     let results: any = {...searchResults};
-    let moreResults: any = EntityManager.listJams({
+    let moreResults: any = await EntityManager.listJams({
       page: currentPage,
     });
+
+    console.log(moreResults)
 
     setListData([...results[key], ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
