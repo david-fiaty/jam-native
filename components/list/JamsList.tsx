@@ -55,7 +55,9 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
     if (currentPage > 1 && !moreResults?.length) {
       setHasMore(false);
-      console.log('reached end of list')
+      console.log('reached list end')
+      setListData((prevData) => [...(prevData || []), ...listData]);
+      setCurrentPage(1);
     }
     else if (!!moreResults?.length) {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
