@@ -50,12 +50,13 @@ const SearchJamsList = ({ data }: Props) => {
 
   const onEndReached = async () => {
     if (Config.infiniteScrollEnabled === true) {
+      console.log('list end reached');
       await fetchTabResults('jam');
     }
   };
 
   const fetchTabResults = async (key: string) => {
-    console.log('fetching more...')
+    console.log('fetching more...', key)
   };
 
   return (
