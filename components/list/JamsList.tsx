@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -25,6 +26,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         isPublic={false}
       />
     );
+  };
+
+  const onEndReached = async () => {
+    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
+      console.log('on end reached')
+    }
   };
 
   const getListData = (key: string) => {
@@ -56,7 +63,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
-        //onEndReached={onEndReached}
+        onEndReached={onEndReached}
       />
     </BoxView>
   );
