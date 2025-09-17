@@ -53,13 +53,13 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       page: currentPage,
     });
 
-    if (currentPage > 1 && !moreResults?.length) {
+    if (!moreResults?.length) {
       setHasMore(false);
       console.log('reached list end')
       setListData((prevData) => [...(prevData || []), ...listData]);
       setCurrentPage(1);
     }
-    else if (!!moreResults?.length) {
+    else {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
     }
