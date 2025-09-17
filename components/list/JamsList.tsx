@@ -7,6 +7,7 @@ import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
@@ -15,7 +16,9 @@ type Props = {
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
+  const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -45,18 +48,33 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
     setIsFetching(true);
 
+    let results: any = {...searchResults};
+    let moreResults: any = EntityManager.listJams({
+      page: currentPage,
+    });
+
+    setListData([...results[key], ...moreResults]);
+    setCurrentPage((prevPage: number) => prevPage + 1);
+
     setIsFetching(false);
   };
 
   const onEndReached = async () => {
     if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      console.log('on end reached')
+      await fetchListData('jam');
     }
+  };
+
+  const renderListFooter = () => {
+    if (!isFetching) return null;
+
+    return <SpinnerView />;
   };
 
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
+      setListData(getListData('jam'));
 
       prevSearchState.current = searchState;
     }
@@ -68,12 +86,13 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >  
       <ListView
-        data={getListData('jam')}
+        data={listData}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
         onEndReached={onEndReached}
+        ListFooterComponent={renderListFooter}
       />
     </BoxView>
   );
