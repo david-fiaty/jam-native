@@ -14,6 +14,8 @@ type Props = {
 };
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
