@@ -35,7 +35,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const getListData = (key: string) => {
-    let results: any = {...searchResults};
+    let results: any = { ...searchResults };
 
     if (idArray?.length > 0) {
       results[key] = results[key].filter((o: any) => idArray.includes(o.id));
@@ -49,12 +49,22 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
     setIsFetching(true);
 
-    let moreResults: any = await EntityManager.listJams({
-      query_text: searchState.searchValue,
-      query_title: searchState.searchValue,
+    let payload: any = {
       page_size: Config.paginationSize,
       page: currentPage,
-    });
+    };
+
+    if (!!searchState.searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchState.searchValue,
+          query_title: searchState.searchValue,
+        },
+      };
+    }
+
+    let moreResults: any = await EntityManager.listJams(payload);
 
     if (!moreResults?.length) {
       setListData(prevData => [...prevData, ...listData]);
@@ -94,7 +104,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     <BoxView
       direction="column"
       style={styles.container}
-    >  
+    >
       <ListView
         data={listData}
         contentContainerStyle={Layout.listContainer}
@@ -121,7 +131,7 @@ const styles = StyleSheet.create({
   },
   loadingMore: {
     paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base*2,
+    paddingBottom: Layout.space.base * 2,
   },
 });
 
