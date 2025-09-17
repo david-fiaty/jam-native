@@ -40,6 +40,7 @@ class EntityManager {
   }
 
   async listProfiles(options?: any) {
+    options = options || {};
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -83,6 +84,7 @@ class EntityManager {
   }
 
   async listJams(options?: any) {
+    options = options || {};
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -133,12 +135,13 @@ class EntityManager {
   }
 
   async listProjects(options?: any) {
+    options = options || {};
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
       page_size: Config.paginationSize,
       page: 1,
-    };
+    }; 
 
     return await DataManager.get('listProjects', { ...defaults, ...options });
   }
