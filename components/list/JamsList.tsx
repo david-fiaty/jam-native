@@ -101,9 +101,12 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         onEndReached={onEndReached}
       />
 
-      <View style={styles.loadingMore}>
-        <SpinnerView size="small" />
-      </View>
+      {isFetching && (
+        <View style={styles.loadingMore}>
+          <SpinnerView size="small" />
+        </View>
+      )}
+      
     </BoxView>
   );
 };
@@ -114,7 +117,8 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   loadingMore: {
-    padding: Layout.space.base*2,
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base*2,
   },
 });
 
