@@ -30,12 +30,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     );
   };
 
-  const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      console.log('on end reached')
-    }
-  };
-
   const getListData = (key: string) => {
     let results: any = {...searchResults};
 
@@ -46,9 +40,18 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     return results[key];
   };
 
-  const fetchListData = (key: string) => {
-    
-    
+  const fetchListData = async (key: string) => {
+    if (!hasMore) return;
+
+    setIsFetching(true);
+
+    setIsFetching(false);
+  };
+
+  const onEndReached = async () => {
+    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
+      console.log('on end reached')
+    }
   };
 
   useEffect(() => {
