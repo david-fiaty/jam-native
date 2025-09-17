@@ -18,7 +18,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState<boolean>(true);
   const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
@@ -45,7 +44,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const fetchListData = async (key: string) => {
-    if (!hasMore || !isLoaded) return;
+    if (!isLoaded) return;
 
     setIsFetching(true);
 
@@ -54,9 +53,9 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     });
 
     if (!moreResults?.length) {
-      setHasMore(false);
-      //setListData((prevData) => [...(prevData || []), ...listData]);
-      //setCurrentPage(1);
+      console.log('end of list')
+      setListData(getListData('jam'));
+      setCurrentPage(1);
     }
     else {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
