@@ -59,6 +59,21 @@ const logo: any = {
 
 const mapStyle: any = [
   {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.stroke",
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.icon", 
+    "stylers": [{ "visibility": "off" }]
+  },
+  {
     "featureType": "poi", 
     "elementType": "labels",
     "stylers": [
