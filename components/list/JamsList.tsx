@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import EntityManager from "@/manager/EntityManager";
+import { View } from "react-native-animatable";
 
 type Props = {
   idArray?: any;
@@ -99,6 +100,10 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         onEndReachedThreshold={0.5}
         onEndReached={onEndReached}
       />
+
+      <View style={styles.loadingMore}>
+        <SpinnerView size="small" />
+      </View>
     </BoxView>
   );
 };
@@ -107,6 +112,9 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+  },
+  loadingMore: {
+    padding: Layout.space.base*2,
   },
 });
 
