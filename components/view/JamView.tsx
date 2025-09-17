@@ -46,6 +46,7 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
+    width: '100%',
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base*1.5,

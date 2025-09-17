@@ -28,7 +28,7 @@ const MapLegendView = () => {
     <>
       {!isVisible && (
         <TouchableOpacity
-          style={styles.openButton}
+          style={[styles.openButton, styles.shadow]}
           onPress={toggleLegend}
         >
           <IconView
@@ -38,7 +38,7 @@ const MapLegendView = () => {
         </TouchableOpacity>
       )}
 
-      <Animated.View style={[styles.legendWrapper, { width: widthAnim, overflow: 'hidden' }]}>
+      <Animated.View style={[styles.legendWrapper, styles.shadow, { width: widthAnim, overflow: 'hidden' }]}>
         <View style={styles.legendContainer}>
           <TextView style={styles.sectionTitle}>
             {i18n.t('Jams')}
@@ -191,6 +191,12 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     fontSize: 10,
     padding: Layout.space.base,
+  },
+  shadow: {
+    shadowColor: '#171717',
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,    
   },
 });
 
