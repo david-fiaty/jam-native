@@ -53,8 +53,8 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     });
 
     if (!moreResults?.length) {
-      //setListData(getListData('jam'));
-      setListData(listData);
+      console.log('end of list');
+      setListData(prevData => [...prevData, ...listData]);
       setCurrentPage(1);
     }
     else {
