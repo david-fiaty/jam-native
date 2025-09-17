@@ -1,7 +1,7 @@
 export const Config: any = {
   dataCacheEnabled: false,
   imageCacheEnabled: true,
-  infiniteScrollEnabled: false,
+  infiniteScrollEnabled: true,
   defaultRoute: '/welcome',
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',
@@ -14,7 +14,7 @@ export const Config: any = {
   appNamespace: 'jam-native',
   dateFormat: 'MMM Do YYYY HH:mm',
   logoImageSize: 512,
-  paginationSize: 5,
+  paginationSize: 6,
   maxUserNameLength: 28,
   notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,
