@@ -54,8 +54,13 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       page: currentPage,
     });
 
-    setListData([...results[key], ...moreResults]);
-    setCurrentPage((prevPage: number) => prevPage + 1);
+    if (currentPage > 1 && !moreResults?.length) {
+      setHasMore(false);
+    }
+    else {
+      setListData([...results[key], ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
     setIsFetching(false);
   };
