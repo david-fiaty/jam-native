@@ -50,6 +50,9 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     setIsFetching(true);
 
     let moreResults: any = await EntityManager.listJams({
+      query_text: searchState.searchValue,
+      query_title: searchState.searchValue,
+      page_size: Config.paginationSize,
       page: currentPage,
     });
 
