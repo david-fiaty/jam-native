@@ -15,6 +15,7 @@ type Props = {
 };
 
 const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
@@ -44,7 +45,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const fetchListData = async (key: string) => {
-    if (!hasMore) return;
+    if (!hasMore || !isLoaded) return;
 
     setIsFetching(true);
 
@@ -52,8 +53,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     let moreResults: any = await EntityManager.listJams({
       page: currentPage,
     });
-
-    console.log(moreResults)
 
     setListData([...results[key], ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
@@ -67,20 +66,21 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     }
   };
 
-  const renderListFooter = () => {
-    if (!isFetching) return null;
-
-    return <SpinnerView />;
-  };
-
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
-      setListData(getListData('jam'));
-
       prevSearchState.current = searchState;
     }
   }, [searchState]);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setListData(getListData('jam'));
+      setIsLoaded(true);
+    }
+  }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -94,7 +94,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
         onEndReached={onEndReached}
-        ListFooterComponent={renderListFooter}
       />
     </BoxView>
   );
