@@ -53,8 +53,8 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     });
 
     if (!moreResults?.length) {
-      console.log('end of list')
-      setListData(getListData('jam'));
+      //setListData(getListData('jam'));
+      setListData(listData);
       setCurrentPage(1);
     }
     else {
@@ -86,8 +86,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log(listData?.length);
 
   return (
     <BoxView
