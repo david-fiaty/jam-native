@@ -46,6 +46,11 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
     return results[key];
   };
 
+  const fetchListData = (key: string) => {
+    
+    
+  };
+
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
