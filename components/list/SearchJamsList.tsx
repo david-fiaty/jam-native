@@ -2,6 +2,7 @@ import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
@@ -9,7 +10,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
-import { Config } from "@/constants/Config";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   data?: any;
@@ -22,6 +23,7 @@ const SearchJamsList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [listData, setListData] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -68,9 +70,12 @@ const SearchJamsList = ({ data }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
+      setListData(data);
       setIsLoaded(true);
     }
-  }, [isLoaded]);
+  }, [isLoaded, data]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
@@ -80,9 +85,9 @@ const SearchJamsList = ({ data }: Props) => {
       scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container}
     >
-      {!!data?.length && (
+      {!!listData?.length && (
         <ListView
-          data={data}
+          data={listData}
           numColumns={numColumns}
           contentContainerStyle={styles.contentContainerStyle}
           columnWrapperStyle={styles.columnWrapperStyle}
@@ -92,7 +97,7 @@ const SearchJamsList = ({ data }: Props) => {
         />
       )}
 
-      {!data?.length && (
+      {!listData?.length && (
         <TextView>{i18n.t('No results available')}</TextView>
       )}
     </BoxView>
