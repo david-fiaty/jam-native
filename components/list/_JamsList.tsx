@@ -1,85 +1,98 @@
-import { useState, useEffect } from "react";
-import { StyleSheet } from 'react-native';
-import { useSelector } from "react-redux";
+import { useState, useEffect, useRef } from "react";
+import { StyleSheet, View } from 'react-native';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
-import ListItem from "./jams-list/ListItem";
-import UserManager from "@/manager/UserManager";
+import JamView from "../view/JamView";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
-  disableInfiniteScroll?: boolean;
 };
 
-const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
+const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [sectorsData, setSectorsData] = useState<any>([]);
-  const [profileData, setProfileData] = useState<any>(null);
-  const appState = useSelector((state: any) => state.app);
-  const searchState: any = useSelector((state: any) => state.search);
-  const userState = useSelector((state: any) => state.user);
-
-  const getProfileData = async () => {
-    return await UserManager.getProfileData();
-  };
-
-  const onListItemAction = async () => {
-    setProfileData(await getProfileData());
-  };
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [listData, setListData] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any>({});
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
 
   const renderItem = (row: any) => {
     return (
-      <ListItem
-        row={row}
-        sectorsData={sectorsData}
-        profileData={profileData}
-        onListItemAction={onListItemAction}
+      <JamView
+        jamId={row?.item?.id}
+        itemData={row?.item}
+        isPublic={false}
       />
     );
   };
 
-  const getListData = () => {
-    let data: any [] = JSON.parse(searchState.currentResults)?.jam || [];
+  const getListData = (key: string) => {
+    let results: any = { ...searchResults };
 
     if (idArray?.length > 0) {
-      data = data.filter((o: any) => idArray.includes(o.id));
+      results[key] = results[key].filter((o: any) => idArray.includes(o.id));
     }
 
-    return data;
+    return results[key];
   };
 
-  /*
-  const loadSearchData = () => {
-    let data: any[] = SearchManager.getResults()?.jam || [];
+  const fetchListData = async (key: string) => {
+    if (!isLoaded) return;
 
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      setSearchData(prevData => [...prevData, ...data]);
+    setIsFetching(true);
+
+    let payload: any = {
+      page_size: Config.paginationSize,
+      page: currentPage + 1,
+    };
+
+    if (!!searchState.searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchState.searchValue,
+          query_title: searchState.searchValue,
+        },
+      };
+    }
+
+    let moreResults: any = await EntityManager.listJams(payload);
+
+    if (!moreResults?.length) {
+      setListData(prevData => [...prevData, ...listData]);
+      setCurrentPage(1);
     }
     else {
-      setSearchData(data); 
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
     }
-  };
-  */
 
-  /*
-  const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      await loadSearchData();
-    }
+    setIsFetching(false);
   };
-  */
+
+  const onEndReached = async () => {
+    await fetchListData('jam');
+  };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setSectorsData(appState.sectorsData);
-        setProfileData(userState.profileData);
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, appState, userState]);
+    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
+      setSearchResults(JSON.parse(searchState.currentResults) || {});
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setListData(getListData('jam'));
+      setIsLoaded(true);
+    }
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -89,13 +102,20 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={getListData()}
+        data={listData}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
-        //onEndReached={onEndReached}
+        onEndReached={onEndReached}
       />
+
+      {isLoaded && isFetching && (
+        <View style={styles.loadingMore}>
+          <SpinnerView size="small" />
+        </View>
+      )}
+
     </BoxView>
   );
 };
@@ -104,6 +124,10 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+  },
+  loadingMore: {
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base * 2,
   },
 });
 
