@@ -36,7 +36,6 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
               SectionManager.push(router, 'project-jams', {
                 jamId: JSON.stringify(projectData?.jams || []),
                 title: i18n.t('Project Jams'),
-                disableInfiniteScroll: true,
               });
             }}>
               <TextView underline={true}>{i18n.t("View all")}</TextView>

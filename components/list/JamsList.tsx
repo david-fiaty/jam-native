@@ -11,10 +11,9 @@ import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
-  disableInfiniteScroll?: boolean;
 };
 
-const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
+const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -78,9 +77,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      await fetchListData('jam');
-    }
+    await fetchListData('jam');
   };
 
   useEffect(() => {

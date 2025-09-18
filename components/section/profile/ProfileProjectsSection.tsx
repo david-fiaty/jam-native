@@ -14,7 +14,7 @@ const ProfileProjectsSection = ({ projectId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <ProjectsList idArray={JSON.parse(projectId)} disableInfiniteScroll={true} />
+      <ProjectsList idArray={JSON.parse(projectId)} />
     </BoxView>
   );
 };

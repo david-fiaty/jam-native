@@ -34,7 +34,6 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
       SectionManager.push(router, 'project-jams', {
         jamId: JSON.stringify([row.item.id]),
         title: row?.item?.title,
-        disableInfiniteScroll: true,
       });
     }
     else if (deletable) {

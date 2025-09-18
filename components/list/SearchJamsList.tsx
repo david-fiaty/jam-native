@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
@@ -24,6 +25,7 @@ const SearchJamsList = ({ data }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -31,7 +33,6 @@ const SearchJamsList = ({ data }: Props) => {
       jamId: row?.item?.id,
       title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-      disableInfiniteScroll: true,
     });
   };
 
@@ -52,7 +53,6 @@ const SearchJamsList = ({ data }: Props) => {
   };
 
   const onEndReached = async () => {  
-    console.log('list end reached');
     await fetchTabResults('jam');
   };
 
@@ -61,6 +61,20 @@ const SearchJamsList = ({ data }: Props) => {
 
     setIsFetching(true);
 
+    let payload: any = {
+      page_size: Config.paginationSize,
+      page: currentPage,
+    };
+
+    if (!!searchState.searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchState.searchValue,
+          query_title: searchState.searchValue,
+        },
+      };
+    }
     console.log('fetching more...', key)
 
     setIsFetching(false);
