@@ -15,7 +15,7 @@ type Props = {
   emptyMessage?: any;
   onEndReachedThreshold?: any;
   scrollEventThrottle?: any;
-  onScroll?: () => void;
+  onScroll?: (event: any) => void;
   onEndReached?: () => void;
   keyExtractor?: ((row: any, index?: number) => string);
   renderItem: ((item: any) => JSX.Element);
