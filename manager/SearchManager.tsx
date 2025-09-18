@@ -38,10 +38,8 @@ class SearchManager {
   }
 
   async sendRequest(searchValue?: string) {
-    let payload: any = {
-      page: 5, 
-    };
-
+    let payload: any = {};
+ 
     if (searchValue?.length) {
       payload = {
         ...payload,
