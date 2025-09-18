@@ -11,7 +11,6 @@ import ProjectViewField from "../field/ProjectViewField";
 
 type Props = {
   idArray: any;
-  disableInfiniteScroll?: boolean;
 };
 
 const ProjectsList = ({ idArray }: Props) => {

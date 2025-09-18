@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -8,14 +8,12 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import EntityManager from "@/manager/EntityManager";
-import { View } from "react-native-animatable";
 
 type Props = {
   idArray?: any;
-  disableInfiniteScroll?: boolean;
 };
 
-const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
+const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -51,7 +49,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
     let payload: any = {
       page_size: Config.paginationSize,
-      page: currentPage,
+      page: currentPage + 1,
     };
 
     if (!!searchState.searchValue?.length) {
@@ -79,9 +77,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   };
 
   const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      await fetchListData('jam');
-    }
+    await fetchListData('jam');
   };
 
   useEffect(() => {
