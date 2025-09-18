@@ -36,8 +36,6 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
   const getListData = (key: string) => {
     let results: any = { ...searchResults };
 
-    console.log('load 1')
-
     if (idArray?.length > 0) {
       results[key] = results[key].filter((o: any) => idArray.includes(o.id));
     }
@@ -47,6 +45,8 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
   const fetchListData = async (key: string) => {
     if (!isLoaded) return;
+
+    setIsFetching(true);
 
     let payload: any = {
       page_size: Config.paginationSize,
@@ -73,13 +73,13 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
     }
+
+    setIsFetching(false);
   };
 
   const onEndReached = async () => {
     if (Config.infiniteScrollEnabled === true && disableInfiniteScroll !== true) {
-      setIsFetching(true);
       await fetchListData('jam');
-      setIsFetching(false);
     }
   };
 
@@ -92,6 +92,7 @@ const JamsList = ({ idArray, disableInfiniteScroll }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
+      setListData(getListData('jam'));
       setIsLoaded(true);
     }
   }, [isLoaded]);
