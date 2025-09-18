@@ -35,7 +35,6 @@ class SearchManager {
 
   async loadMoreResults(key: string, currentPage: number) {
     let searchState: any = Store.getState().search;
-    let currentResults: any = JSON.parse(searchState.currentResults);
     let searchValue: any = searchState.searchValue;
     let moreResults: any = [];
 
@@ -63,7 +62,7 @@ class SearchManager {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    return [...currentResults[key], ...moreResults];  
+    return moreResults;  
   }
 
   async sendRequest(searchValue?: string) {
