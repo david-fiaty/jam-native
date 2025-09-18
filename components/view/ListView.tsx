@@ -14,6 +14,7 @@ type Props = {
   showsHorizontalScrollIndicator?: boolean;
   emptyMessage?: any;
   onEndReachedThreshold?: any;
+  onScroll?: () => void;
   onEndReached?: () => void;
   keyExtractor?: ((row: any, index?: number) => string);
   renderItem: ((item: any) => JSX.Element);
@@ -29,12 +30,13 @@ const ListView = ({
   showsHorizontalScrollIndicator,
   emptyMessage,
   onEndReachedThreshold,
+  onScroll,
   onEndReached,
   keyExtractor,
   renderItem,
 }: Props) => {
 
-  const listRef = useRef<any>();
+  const listRef = useRef<any>(null);
 
   return (
     <FlatList
@@ -50,6 +52,7 @@ const ListView = ({
       maxToRenderPerBatch={Config.paginationSize}
       removeClippedSubviews={true}
       windowSize={5}
+      onScroll={onScroll}
       onEndReachedThreshold={onEndReachedThreshold}
       onEndReached={onEndReached}
       keyExtractor={keyExtractor}
