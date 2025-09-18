@@ -122,8 +122,6 @@ const SearchJamsList = ({ data }: Props) => {
           contentContainerStyle={styles.contentContainerStyle}
           columnWrapperStyle={styles.columnWrapperStyle}
           renderItem={(row: any) => renderItem(row)}
-          //onEndReachedThreshold={0.5}
-          //onEndReached={onEndReached}
           scrollEventThrottle={16}
           onScroll={handleScroll}
         />
