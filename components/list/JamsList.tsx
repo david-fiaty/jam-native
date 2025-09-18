@@ -81,11 +81,11 @@ const JamsList = ({ idArray }: Props) => {
         onEndReached={onEndReached}
       />
 
-      {/*isLoaded && isFetching && (
+      {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" />
         </View>
-      )*/}
+      )}
 
     </BoxView>
   );
