@@ -35,6 +35,34 @@ class SearchManager {
 
   async loadMoreResults(key: string, currentPage: number) {
     let searchState: any = Store.getState().search;
+    let searchValue: any = searchState.searchValue;
+    let moreResults: any = [];
+
+    let payload: any = {
+      page: currentPage + 1,
+    };
+
+    if (searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchValue,
+          query_title: searchValue,
+        },
+      };
+    }
+
+    if (key == 'jam') {
+      moreResults = await EntityManager.listJams(payload);
+    }
+    else if (key == 'profile') {
+      moreResults = await EntityManager.listProfiles(payload);
+    }
+    else if (key == 'project') {
+      moreResults = await EntityManager.listProjects(payload);
+    }
+
+    return moreResults;  
   }
 
   async sendRequest(searchValue?: string) {
