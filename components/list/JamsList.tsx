@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import EntityManager from "@/manager/EntityManager";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   idArray?: any;
@@ -42,6 +43,12 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
+  const onEndReached = async () => {
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    setCurrentPage((prevPage: number) => prevPage + 1);
+  };
+
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
@@ -51,6 +58,7 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
+      setListData(getListData('jam'))
       setIsLoaded(true);
     }
   }, [isLoaded]);
@@ -63,12 +71,12 @@ const JamsList = ({ idArray }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={getListData('jam')}
+        data={listData}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-        //onEndReachedThreshold={0.5}
-        //onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
+        onEndReached={onEndReached}
       />
 
       {/*isLoaded && isFetching && (
