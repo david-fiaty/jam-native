@@ -14,7 +14,7 @@ const ProjectJamsSection = ({ jamId }: Props) => {
       justify="center"
       style={styles.container}
     >
-      <JamsList idArray={JSON.parse(jamId)} disableInfiniteScroll={true} />
+      <JamsList idArray={JSON.parse(jamId)} />
     </BoxView>
   );
 };

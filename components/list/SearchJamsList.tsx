@@ -1,6 +1,7 @@
 import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
@@ -11,6 +12,7 @@ import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   data?: any;
@@ -24,6 +26,7 @@ const SearchJamsList = ({ data }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -31,7 +34,6 @@ const SearchJamsList = ({ data }: Props) => {
       jamId: row?.item?.id,
       title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-      disableInfiniteScroll: true,
     });
   };
 
@@ -51,9 +53,13 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
-  const onEndReached = async () => {  
-    console.log('list end reached');
-    await fetchTabResults('jam');
+  const handleScroll = async (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
+      await fetchTabResults('jam');
+    }
   };
 
   const fetchTabResults = async (key: string) => {
@@ -61,7 +67,32 @@ const SearchJamsList = ({ data }: Props) => {
 
     setIsFetching(true);
 
-    console.log('fetching more...', key)
+    let payload: any = {
+      page_size: Config.paginationSize,
+      page: currentPage + 1,
+      jamType: searchState.currentTab == 'jam' ? 'all' : searchState.currentTab,
+    };
+
+    if (!!searchState.searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchState.searchValue,
+          query_title: searchState.searchValue,
+        },
+      };
+    }
+
+    let moreResults: any = await EntityManager.listJams(payload);
+
+    if (!moreResults?.length) {
+      setListData(prevData => [...prevData, ...listData]);
+      setCurrentPage(1);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
     setIsFetching(false);
   };
@@ -90,8 +121,10 @@ const SearchJamsList = ({ data }: Props) => {
           contentContainerStyle={styles.contentContainerStyle}
           columnWrapperStyle={styles.columnWrapperStyle}
           renderItem={(row: any) => renderItem(row)}
-          onEndReachedThreshold={0.5}
-          onEndReached={onEndReached}
+          //onEndReachedThreshold={0.5}
+          //onEndReached={onEndReached}
+          scrollEventThrottle={16}
+          onScroll={handleScroll}
         />
       )}
 
@@ -107,9 +140,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
   },
-  contentContainerStyle: { 
-    gap: Layout.space.base, 
-    paddingBottom: Layout.space.base 
+  contentContainerStyle: {
+    gap: Layout.space.base,
+    paddingBottom: Layout.space.base
   },
   columnWrapperStyle: {
     gap: Layout.space.base,
