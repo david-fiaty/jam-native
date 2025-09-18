@@ -44,7 +44,6 @@ const ProjectJamsList = ({ resource, field, title, idArray, addButton, allButton
       SectionManager.push(router, 'jam-item', { 
         jamId: JSON.stringify([row?.item?.id]), 
         title: row?.item?.title,
-        disableInfiniteScroll: true,
       });
     }
     else {

@@ -252,7 +252,6 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             SectionManager.push(router, 'profile-jams', {
               jamId: JSON.stringify(profileData?.profile_jams || []),
               title: groupTitle,
-              disableInfiniteScroll: true,
             });
           }}>
             <TextView underline={true}>{i18n.t("View all")}</TextView>
@@ -283,7 +282,6 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             SectionManager.push(router, 'profile-jams', {
               jamId: JSON.stringify(profileData?.saved_jams || []),
               title: groupTitle,
-              disableInfiniteScroll: true,
             });
           }}>
             <TextView underline={true}>{i18n.t("View all")}</TextView>

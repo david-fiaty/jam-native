@@ -29,7 +29,6 @@ const ProfileJamsFieldSelect = ({ idArray, isPublic, emptyMessage, addable }: Pr
     SectionManager.push(router, 'profile-jams', {
       jamId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
-      disableInfiniteScroll: true,
     });
   };
 
