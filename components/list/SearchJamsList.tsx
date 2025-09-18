@@ -1,7 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
@@ -9,6 +11,9 @@ import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
+import SpinnerView from "../view/SpinnerView";
+import EntityManager from "@/manager/EntityManager";
+import { View } from "react-native-animatable";
 
 type Props = {
   data?: any;
@@ -18,6 +23,11 @@ const numColumns = 2;
 
 const SearchJamsList = ({ data }: Props) => {
   const router = useRouter();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [listData, setListData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -25,7 +35,6 @@ const SearchJamsList = ({ data }: Props) => {
       jamId: row?.item?.id,
       title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-      disableInfiniteScroll: true,
     });
   };
 
@@ -45,6 +54,59 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
+  const handleScroll = async (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
+      await fetchTabResults('jam');
+    }
+  };
+
+  const fetchTabResults = async (key: string) => {
+    if (!isLoaded) return;
+
+    setIsFetching(true);
+
+    let payload: any = {
+      page_size: Config.paginationSize,
+      page: currentPage + 1,
+      jamType: searchState.currentTab == 'jam' ? 'all' : searchState.currentTab,
+    };
+
+    if (!!searchState.searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchState.searchValue,
+          query_title: searchState.searchValue,
+        },
+      };
+    }
+
+    let moreResults: any = await EntityManager.listJams(payload);
+
+    if (!moreResults?.length) {
+      setListData(prevData => [...prevData, ...listData]);
+      setCurrentPage(1);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
+
+    setIsFetching(false);
+  };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setListData(data);
+      setIsLoaded(true);
+    }
+  }, [isLoaded, data]);
+
+  if (!isLoaded) return <SpinnerView />;
+
   return (
     <BoxView
       direction="column"
@@ -53,17 +115,19 @@ const SearchJamsList = ({ data }: Props) => {
       scroll={ScreenManager.isWeb() ? true : false}
       style={styles.container}
     >
-      {!!data?.length && (
+      {!!listData?.length && (
         <ListView
-          data={data}
+          data={listData}
           numColumns={numColumns}
           contentContainerStyle={styles.contentContainerStyle}
           columnWrapperStyle={styles.columnWrapperStyle}
           renderItem={(row: any) => renderItem(row)}
+          scrollEventThrottle={16}
+          onScroll={handleScroll}
         />
       )}
 
-      {!data?.length && (
+      {!listData?.length && (
         <TextView>{i18n.t('No results available')}</TextView>
       )}
     </BoxView>
@@ -75,9 +139,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
   },
-  contentContainerStyle: { 
-    gap: Layout.space.base, 
-    paddingBottom: Layout.space.base 
+  contentContainerStyle: {
+    gap: Layout.space.base,
+    paddingBottom: Layout.space.base
   },
   columnWrapperStyle: {
     gap: Layout.space.base,
@@ -93,6 +157,10 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  loadingMore: {
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base * 2,
   },
 });
 
