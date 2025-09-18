@@ -39,6 +39,9 @@ class SearchManager {
     let moreResults: any = [];
     let payload: any = {};
 
+    return;
+
+    
     if (key == 'jam') {
       moreResults = EntityManager.listJams(payload);
     }
@@ -49,7 +52,7 @@ class SearchManager {
       moreResults = EntityManager.listProjects(payload);
     }
 
-    
+
     //Store.dispatch(setCurrentResults(currentResults));
 
   }
