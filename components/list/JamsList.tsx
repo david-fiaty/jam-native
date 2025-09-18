@@ -45,7 +45,7 @@ const JamsList = ({ idArray }: Props) => {
 
   const onEndReached = async () => {
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    setListData((prevData) => [...(prevData || []), ...(moreResults || [])]);
     setCurrentPage((prevPage: number) => prevPage + 1);
   };
 
