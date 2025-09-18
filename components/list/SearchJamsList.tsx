@@ -13,6 +13,7 @@ import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from "@/manager/EntityManager";
+import { View } from "react-native-animatable";
 
 type Props = {
   data?: any;
@@ -121,8 +122,6 @@ const SearchJamsList = ({ data }: Props) => {
           contentContainerStyle={styles.contentContainerStyle}
           columnWrapperStyle={styles.columnWrapperStyle}
           renderItem={(row: any) => renderItem(row)}
-          //onEndReachedThreshold={0.5}
-          //onEndReached={onEndReached}
           scrollEventThrottle={16}
           onScroll={handleScroll}
         />
@@ -158,6 +157,10 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  loadingMore: {
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base * 2,
   },
 });
 
