@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import EntityManager from "@/manager/EntityManager";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   idArray?: any;
@@ -42,42 +43,10 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
-  const fetchListData = async (key: string) => {
-    if (!isLoaded) return;
-
-    setIsFetching(true);
-
-    let payload: any = {
-      page_size: Config.paginationSize,
-      page: currentPage + 1,
-    };
-
-    if (!!searchState.searchValue?.length) {
-      payload = {
-        ...payload,
-        ...{
-          query_text: searchState.searchValue,
-          query_title: searchState.searchValue,
-        },
-      };
-    }
-
-    let moreResults: any = await EntityManager.listJams(payload);
-
-    if (!moreResults?.length) {
-      setListData(prevData => [...prevData, ...listData]);
-      setCurrentPage(1);
-    }
-    else {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-      setCurrentPage((prevPage: number) => prevPage + 1);
-    }
-
-    setIsFetching(false);
-  };
-
   const onEndReached = async () => {
-    await fetchListData('jam');
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    setCurrentPage((prevPage: number) => prevPage + 1);
   };
 
   useEffect(() => {
@@ -89,7 +58,7 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setListData(getListData('jam'));
+      setListData(getListData('jam'))
       setIsLoaded(true);
     }
   }, [isLoaded]);
@@ -110,11 +79,11 @@ const JamsList = ({ idArray }: Props) => {
         onEndReached={onEndReached}
       />
 
-      {isLoaded && isFetching && (
+      {/*isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" />
         </View>
-      )}
+      )*/}
 
     </BoxView>
   );
