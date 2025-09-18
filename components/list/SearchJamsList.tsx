@@ -12,6 +12,7 @@ import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   data?: any;
@@ -52,8 +53,16 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
-  const handleScroll = async () => {  
-    await fetchTabResults('jam');
+  const handleScroll = async (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    if (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    ) {
+      await fetchTabResults('jam');
+    }
   };
 
   const fetchTabResults = async (key: string) => {
@@ -63,11 +72,9 @@ const SearchJamsList = ({ data }: Props) => {
 
     let payload: any = {
       page_size: Config.paginationSize,
-      page: currentPage,
+      page: currentPage + 1,
       jamType: searchState.currentTab == 'jam' ? 'all' : searchState.currentTab,
     };
-
-    console.log(payload)
 
     if (!!searchState.searchValue?.length) {
       payload = {
@@ -77,6 +84,17 @@ const SearchJamsList = ({ data }: Props) => {
           query_title: searchState.searchValue,
         },
       };
+    }
+
+    let moreResults: any = await EntityManager.listJams(payload);
+
+    if (!moreResults?.length) {
+      setListData(prevData => [...prevData, ...listData]);
+      setCurrentPage(1);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
     }
 
     setIsFetching(false);
@@ -125,9 +143,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
   },
-  contentContainerStyle: { 
-    gap: Layout.space.base, 
-    paddingBottom: Layout.space.base 
+  contentContainerStyle: {
+    gap: Layout.space.base,
+    paddingBottom: Layout.space.base
   },
   columnWrapperStyle: {
     gap: Layout.space.base,
