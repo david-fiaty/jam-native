@@ -36,12 +36,28 @@ class SearchManager {
   async loadMoreResults(key: string, currentPage: number) {
     let searchState: any = Store.getState().search;
     let currentResults: any = JSON.parse(searchState.currentResults);
+    let searchValue: any = searchState.searchValue;
     let moreResults: any = [];
-    let payload: any = {};
 
-    return;
+    let payload: any = {
+      page: currentPage + 1,
+    };
 
-    
+    if (searchValue?.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchValue,
+          query_title: searchValue,
+        },
+      };
+    }
+
+    console.log(payload);
+
+    return; 
+
+
     if (key == 'jam') {
       moreResults = EntityManager.listJams(payload);
     }
