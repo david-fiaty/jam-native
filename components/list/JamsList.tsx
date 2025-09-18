@@ -45,7 +45,7 @@ const JamsList = ({ idArray }: Props) => {
 
   const onEndReached = async () => {
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
-    console.log(moreResults?.length);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
   };
 
   useEffect(() => {
@@ -57,6 +57,7 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
+      setListData(getListData('jam'))
       setIsLoaded(true);
     }
   }, [isLoaded]);
@@ -69,7 +70,7 @@ const JamsList = ({ idArray }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={getListData('jam')}
+        data={listData}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
