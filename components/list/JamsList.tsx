@@ -44,9 +44,11 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   const onEndReached = async () => {
+    setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
     setListData((prevData) => [...(prevData || []), ...(moreResults || [])]);
     setCurrentPage((prevPage: number) => prevPage + 1);
+    setIsFetching(false);
   };
 
   useEffect(() => {
@@ -79,11 +81,11 @@ const JamsList = ({ idArray }: Props) => {
         onEndReached={onEndReached}
       />
 
-      {/*isLoaded && isFetching && (
+      {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" />
         </View>
-      )*/}
+      )}
 
     </BoxView>
   );
