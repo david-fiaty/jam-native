@@ -13,6 +13,7 @@ import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import EntityManager from "@/manager/EntityManager";
+import { View } from "react-native-animatable";
 
 type Props = {
   data?: any;
@@ -131,6 +132,12 @@ const SearchJamsList = ({ data }: Props) => {
       {!listData?.length && (
         <TextView>{i18n.t('No results available')}</TextView>
       )}
+
+      {isLoaded && isFetching && (
+        <View style={styles.loadingMore}>
+          <SpinnerView size="small" />
+        </View>
+      )}
     </BoxView>
   );
 };
@@ -158,6 +165,10 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  loadingMore: {
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base * 2,
   },
 });
 
