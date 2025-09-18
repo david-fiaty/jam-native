@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import EntityManager from "@/manager/EntityManager";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   idArray?: any;
@@ -42,6 +43,10 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
+  const onEndReached = async () => {
+    await SearchManager.loadMoreResults('jam', currentPage);
+  };
+
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
@@ -68,7 +73,7 @@ const JamsList = ({ idArray }: Props) => {
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         //onEndReachedThreshold={0.5}
-        //onEndReached={onEndReached}
+        onEndReached={onEndReached}
       />
 
       {/*isLoaded && isFetching && (
