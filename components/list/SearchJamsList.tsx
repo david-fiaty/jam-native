@@ -130,12 +130,6 @@ const SearchJamsList = ({ data }: Props) => {
       {!listData?.length && (
         <TextView>{i18n.t('No results available')}</TextView>
       )}
-
-      {isLoaded && isFetching && (
-        <View style={styles.loadingMore}>
-          <SpinnerView size="small" />
-        </View>
-      )}
     </BoxView>
   );
 };
