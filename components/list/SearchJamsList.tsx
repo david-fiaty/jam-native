@@ -31,7 +31,6 @@ const SearchJamsList = ({ data }: Props) => {
       jamId: row?.item?.id,
       title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-      disableInfiniteScroll: true,
     });
   };
 

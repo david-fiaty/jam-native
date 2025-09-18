@@ -31,7 +31,6 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
       projectId: row?.item?.id,
       title: i18n.t('Project'),
       itemData: JSON.stringify(row?.item),
-      disableInfiniteScroll: true,
     };
 
     SectionManager.push(router, path, params);

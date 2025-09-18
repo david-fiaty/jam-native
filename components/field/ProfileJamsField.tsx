@@ -31,7 +31,6 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
       jamId: row?.item?.id,
       title: i18n.t('Jam'),
       itemData: JSON.stringify(row?.item),
-      disableInfiniteScroll: true,
     };
 
     SectionManager.push(router, path, params);
