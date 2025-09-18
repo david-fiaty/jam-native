@@ -49,7 +49,7 @@ const JamsList = ({ idArray }: Props) => {
 
     let payload: any = {
       page_size: Config.paginationSize,
-      page: currentPage,
+      page: currentPage + 1,
     };
 
     if (!!searchState.searchValue?.length) {
