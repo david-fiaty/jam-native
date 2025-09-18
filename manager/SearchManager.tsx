@@ -35,6 +35,23 @@ class SearchManager {
 
   async loadMoreResults(key: string, currentPage: number) {
     let searchState: any = Store.getState().search;
+    let currentResults: any = JSON.parse(searchState.currentResults);
+    let moreResults: any = [];
+    let payload: any = {};
+
+    if (key == 'jam') {
+      moreResults = EntityManager.listJams(payload);
+    }
+    else if (key == 'profile') {
+      moreResults = EntityManager.listProfiles(payload);
+    }
+    else if (key == 'project') {
+      moreResults = EntityManager.listProjects(payload);
+    }
+
+    
+    //Store.dispatch(setCurrentResults(currentResults));
+
   }
 
   async sendRequest(searchValue?: string) {
