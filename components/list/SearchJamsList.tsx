@@ -52,7 +52,7 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
-  const onEndReached = async () => {  
+  const handleScroll = async () => {  
     await fetchTabResults('jam');
   };
 
@@ -64,7 +64,10 @@ const SearchJamsList = ({ data }: Props) => {
     let payload: any = {
       page_size: Config.paginationSize,
       page: currentPage,
+      jamType: searchState.currentTab == 'jam' ? 'all' : searchState.currentTab,
     };
+
+    console.log(payload)
 
     if (!!searchState.searchValue?.length) {
       payload = {
@@ -75,7 +78,6 @@ const SearchJamsList = ({ data }: Props) => {
         },
       };
     }
-    console.log('fetching more...', key)
 
     setIsFetching(false);
   };
@@ -105,7 +107,8 @@ const SearchJamsList = ({ data }: Props) => {
           columnWrapperStyle={styles.columnWrapperStyle}
           renderItem={(row: any) => renderItem(row)}
           onEndReachedThreshold={0.5}
-          onEndReached={onEndReached}
+          //onEndReached={onEndReached}
+          onScroll={handleScroll}
         />
       )}
 
