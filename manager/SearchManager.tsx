@@ -33,13 +33,20 @@ class SearchManager {
     }
   }
 
+  async loadMoreResults(key: string, currentPage: number) {
+    let searchState: any = Store.getState().search;
+  }
+
   async sendRequest(searchValue?: string) {
     let payload: any = {};
-
+ 
     if (searchValue?.length) {
       payload = {
-        query_text: searchValue,
-        query_title: searchValue,
+        ...payload,
+        ...{
+          query_text: searchValue,
+          query_title: searchValue,
+        },
       };
     }
 
