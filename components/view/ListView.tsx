@@ -14,6 +14,7 @@ type Props = {
   showsHorizontalScrollIndicator?: boolean;
   emptyMessage?: any;
   onEndReachedThreshold?: any;
+  scrollEventThrottle?: any;
   onScroll?: () => void;
   onEndReached?: () => void;
   keyExtractor?: ((row: any, index?: number) => string);
@@ -30,6 +31,7 @@ const ListView = ({
   showsHorizontalScrollIndicator,
   emptyMessage,
   onEndReachedThreshold,
+  scrollEventThrottle,
   onScroll,
   onEndReached,
   keyExtractor,
@@ -52,6 +54,7 @@ const ListView = ({
       maxToRenderPerBatch={Config.paginationSize}
       removeClippedSubviews={true}
       windowSize={5}
+      scrollEventThrottle={scrollEventThrottle}
       onScroll={onScroll}
       onEndReachedThreshold={onEndReachedThreshold}
       onEndReached={onEndReached}
