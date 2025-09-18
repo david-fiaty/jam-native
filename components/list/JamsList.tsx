@@ -44,7 +44,8 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   const onEndReached = async () => {
-    await SearchManager.loadMoreResults('jam', currentPage);
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
+    console.log(moreResults?.length);
   };
 
   useEffect(() => {
@@ -72,7 +73,7 @@ const JamsList = ({ idArray }: Props) => {
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-        //onEndReachedThreshold={0.5}
+        onEndReachedThreshold={0.5}
         onEndReached={onEndReached}
       />
 
