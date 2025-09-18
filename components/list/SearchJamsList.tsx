@@ -51,11 +51,9 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
-  const onEndReached = async () => {
-    if (Config.infiniteScrollEnabled === true) {
-      console.log('list end reached');
-      await fetchTabResults('jam');
-    }
+  const onEndReached = async () => {  
+    console.log('list end reached');
+    await fetchTabResults('jam');
   };
 
   const fetchTabResults = async (key: string) => {
