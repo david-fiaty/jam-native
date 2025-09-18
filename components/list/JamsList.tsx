@@ -42,44 +42,6 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
-  const fetchListData = async (key: string) => {
-    if (!isLoaded) return;
-
-    setIsFetching(true);
-
-    let payload: any = {
-      page_size: Config.paginationSize,
-      page: currentPage + 1,
-    };
-
-    if (!!searchState.searchValue?.length) {
-      payload = {
-        ...payload,
-        ...{
-          query_text: searchState.searchValue,
-          query_title: searchState.searchValue,
-        },
-      };
-    }
-
-    let moreResults: any = await EntityManager.listJams(payload);
-
-    if (!moreResults?.length) {
-      setListData(prevData => [...prevData, ...listData]);
-      setCurrentPage(1);
-    }
-    else {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-      setCurrentPage((prevPage: number) => prevPage + 1);
-    }
-
-    setIsFetching(false);
-  };
-
-  const onEndReached = async () => {
-    await fetchListData('jam');
-  };
-
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
@@ -89,7 +51,6 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setListData(getListData('jam'));
       setIsLoaded(true);
     }
   }, [isLoaded]);
@@ -102,19 +63,19 @@ const JamsList = ({ idArray }: Props) => {
       style={styles.container}
     >
       <ListView
-        data={listData}
+        data={getListData('jam')}
         contentContainerStyle={Layout.listContainer}
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-        onEndReachedThreshold={0.5}
-        onEndReached={onEndReached}
+        //onEndReachedThreshold={0.5}
+        //onEndReached={onEndReached}
       />
 
-      {isLoaded && isFetching && (
+      {/*isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" />
         </View>
-      )}
+      )*/}
 
     </BoxView>
   );
