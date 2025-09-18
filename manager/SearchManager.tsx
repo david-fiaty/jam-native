@@ -53,24 +53,17 @@ class SearchManager {
       };
     }
 
-    console.log(payload);
-
-    return; 
-
-
     if (key == 'jam') {
-      moreResults = EntityManager.listJams(payload);
+      moreResults = await EntityManager.listJams(payload);
     }
     else if (key == 'profile') {
-      moreResults = EntityManager.listProfiles(payload);
+      moreResults = await EntityManager.listProfiles(payload);
     }
     else if (key == 'project') {
-      moreResults = EntityManager.listProjects(payload);
+      moreResults = await EntityManager.listProjects(payload);
     }
 
-
-    //Store.dispatch(setCurrentResults(currentResults));
-
+    return [...currentResults[key], ...moreResults];  
   }
 
   async sendRequest(searchValue?: string) {
