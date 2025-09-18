@@ -63,8 +63,6 @@ class SearchManager {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    moreResults = this.applyFilters({ key: moreResults }, currentFilters);
-
     return moreResults;  
   }
 
