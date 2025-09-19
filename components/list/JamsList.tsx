@@ -60,10 +60,11 @@ const JamsList = ({ idArray }: Props) => {
   }, [searchState]);
 
   useEffect(() => {
-    fetchListData();
     if (!isLoaded) {
       setIsLoaded(true);
     }
+    
+    fetchListData();
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
