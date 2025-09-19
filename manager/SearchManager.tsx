@@ -33,14 +33,14 @@ class SearchManager {
     }
   }
 
-  async loadMoreResults(key: string, currentPage: number) {
+  async loadMoreResults(key: string, page: number) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
     let moreResults: any = [];
 
     let payload: any = {
-      page: currentPage + 1,
+      page: page,
     };
 
     if (searchValue?.length) {
@@ -63,7 +63,9 @@ class SearchManager {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    return this.applyFilters({ [key]: moreResults }, currentFilters)[key];
+    moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key]; 
+
+    return moreResults || [];
   }
 
   async sendRequest(searchValue?: string) {
