@@ -43,8 +43,8 @@ const JamsList = ({ idArray }: Props) => {
 
   const onEndReached = async () => {
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
-    setListData((prevData) => [...(prevData || []), ...(moreResults || [])]);
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage + 1);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
@@ -58,7 +58,7 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setListData(getListData('jam'))
+      setListData(getListData('jam'));
       setIsLoaded(true);
     }
   }, [isLoaded]);
