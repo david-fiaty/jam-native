@@ -31,7 +31,7 @@ const JamsList = ({ idArray }: Props) => {
     );
   };
 
-  // Todo - Filter by id array
+  // Todo - Filter by idArray
   /*
   const getListData = (key: string) => {
     let results: any = { ...searchResults };
