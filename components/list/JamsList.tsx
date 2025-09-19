@@ -41,10 +41,16 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
-  const onEndReached = async () => {
-    setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage + 1);
+  const fetchListData = async (key: string) => {
+    let moreResults: any[] = await SearchManager.loadMoreResults(key, currentPage + 1);
     setListData((prevData) => [...(prevData || []), ...moreResults]);
+  };
+
+  const onEndReached = async () => {
+    if (!isLoaded) return;
+
+    setIsFetching(true);
+    await fetchListData('jam');
     setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
@@ -58,10 +64,13 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setListData(getListData('jam'));
       setIsLoaded(true);
     }
   }, [isLoaded]);
+
+  useEffect(() => {
+    fetchListData('jam');
+  }, []);
 
   if (!isLoaded) return <SpinnerView />;
 
