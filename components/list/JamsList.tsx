@@ -2,12 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
-import EntityManager from "@/manager/EntityManager";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = {
@@ -43,10 +41,13 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
-  const onEndReached = async () => {
+  const fetchListData = async () => {
+    if (isFetching) return;
     setIsFetching(true);
+
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
-    setListData((prevData) => [...(prevData || []), ...(moreResults || [])]);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
+
     setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
@@ -60,10 +61,13 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setListData(getListData('jam'))
       setIsLoaded(true);
     }
   }, [isLoaded]);
+
+  useEffect(() => {
+    fetchListData();
+  }, []);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -78,7 +82,7 @@ const JamsList = ({ idArray }: Props) => {
         renderItem={renderItem}
         keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
         onEndReachedThreshold={0.5}
-        onEndReached={onEndReached}
+        onEndReached={fetchListData}
       />
 
       {isLoaded && isFetching && (
