@@ -24,19 +24,11 @@ const SearchView = () => {
     let results: any = {
       ...searchResults,
       ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
+        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults),
       },
     };
 
     return results[key];
-  };
-
-  const renderJamsList = () => {
-    return (
-      <SearchJamsList
-        data={getTabResults('jam')}
-      />
-    );
   };
 
   const renderProfilesList = () => {
@@ -90,7 +82,7 @@ const SearchView = () => {
 
       <SearchFiltersView />
 
-      {SearchManager.isJamTab(searchState.currentTab) && renderJamsList()}
+      {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
 
       {SearchManager.isProfileTab(searchState.currentTab) && renderProfilesList()}
 
