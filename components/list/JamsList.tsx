@@ -87,10 +87,9 @@ const JamsList = ({ idArray }: Props) => {
 
       {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
-          <SpinnerView size="small" />
+          <SpinnerView size="small" color="white" />
         </View>
       )}
-
     </BoxView>
   );
 };
@@ -99,10 +98,16 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    position: 'relative',
   },
   loadingMore: {
     paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base * 2,
+    paddingBottom: Layout.space.base,
+    backgroundColor: Layout.colors.primary,
+    opacity: 0.7,
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
   },
 });
 
