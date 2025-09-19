@@ -72,25 +72,28 @@ const JamsList = ({ idArray }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      style={styles.container}
-    >
-      <ListView
-        data={listData}
-        contentContainerStyle={Layout.listContainer}
-        renderItem={renderItem}
-        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-        onEndReachedThreshold={0.5}
-        onEndReached={fetchListData}
-      />
+    <>
+      <BoxView
+        direction="column"
+        style={styles.container}
+      >
+        <ListView
+          data={listData}
+          contentContainerStyle={Layout.listContainer}
+          renderItem={renderItem}
+          keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
+          onEndReachedThreshold={0.5}
+          onEndReached={fetchListData}
+        />
 
+
+      </BoxView>
       {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" color="white" />
         </View>
       )}
-    </BoxView>
+    </>
   );
 };
 
@@ -98,16 +101,16 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    position: 'relative',
   },
   loadingMore: {
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base,
     backgroundColor: Layout.colors.primary,
-    opacity: 0.7,
+    opacity: 0.85,
     position: 'absolute',
     bottom: 0,
-    width: '100%',
+    right: 0,
+    left: 0,
   },
 });
 
