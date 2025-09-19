@@ -42,7 +42,7 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   const fetchListData = async (key: string) => {
-    let moreResults: any[] = await SearchManager.loadMoreResults(key, currentPage + 1);
+    let moreResults: any[] = await SearchManager.loadMoreResults(key, currentPage);
     setListData((prevData) => [...(prevData || []), ...moreResults]);
   };
 
