@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -11,6 +11,7 @@ import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   data?: any;
@@ -50,53 +51,56 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
-  const onEndReached = async () => {  
-    await fetchTabResults('jam');
-  };
-
-  const fetchTabResults = async (key: string) => {
-    if (!isLoaded) return;
-
+  const fetchListData = async () => {
+    if (isFetching) return;
     setIsFetching(true);
 
-    console.log('fetching more...', key)
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
 
+    setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
 
   useEffect(() => {
-    if (!isLoaded) {
-      setListData(data);
-      setIsLoaded(true);
-    }
-  }, [isLoaded, data]);
+    if (!isLoaded) setIsLoaded(true);
+    fetchListData();
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      justify="flex-start"
-      scroll={ScreenManager.isWeb() ? true : false}
-      style={styles.container}
-    >
-      {!!listData?.length && (
-        <ListView
-          data={listData}
-          numColumns={numColumns}
-          contentContainerStyle={styles.contentContainerStyle}
-          columnWrapperStyle={styles.columnWrapperStyle}
-          renderItem={(row: any) => renderItem(row)}
-          onEndReachedThreshold={0.5}
-          onEndReached={onEndReached}
-        />
-      )}
+    <>
+      <BoxView
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
+        scroll={ScreenManager.isWeb() ? true : false}
+        style={styles.container}
+      >
+        {!!listData?.length && (
+          <ListView
+            data={listData}
+            numColumns={numColumns}
+            contentContainerStyle={styles.contentContainerStyle}
+            columnWrapperStyle={styles.columnWrapperStyle}
+            renderItem={(row: any) => renderItem(row)}
+            onEndReachedThreshold={0.5}
+            onEndReached={fetchListData}
+          />
+        )}
 
-      {!listData?.length && (
-        <TextView>{i18n.t('No results available')}</TextView>
+        {isLoaded && !isFetching && !listData?.length && (
+          <TextView>{i18n.t('No results available')}</TextView>
+        )}
+      </BoxView>
+
+      {isLoaded && isFetching && !!listData?.length && (
+        <View style={styles.loadingMore}>
+          <SpinnerView size="small" color="white" />
+        </View>
       )}
-    </BoxView>
+    </>
   );
 };
 
@@ -105,9 +109,9 @@ const styles = StyleSheet.create({
     width: "100%",
     flexShrink: 1,
   },
-  contentContainerStyle: { 
-    gap: Layout.space.base, 
-    paddingBottom: Layout.space.base 
+  contentContainerStyle: {
+    gap: Layout.space.base,
+    paddingBottom: Layout.space.base
   },
   columnWrapperStyle: {
     gap: Layout.space.base,
@@ -123,6 +127,16 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  loadingMore: {
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base,
+    backgroundColor: Layout.colors.primary,
+    opacity: 0.75,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });
 
