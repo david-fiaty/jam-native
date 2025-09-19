@@ -83,7 +83,6 @@ const SearchJamsList = () => {
     }
   }, [searchState]);
 
-
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);
     fetchListData();
@@ -107,8 +106,6 @@ const SearchJamsList = () => {
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
             renderItem={(row: any) => renderItem(row)}
-            //onEndReachedThreshold={0.5}
-            //onEndReached={fetchListData}
             onScroll={handleScroll}
             scrollEventThrottle={16}
           />
