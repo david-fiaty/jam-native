@@ -63,12 +63,12 @@ class SearchManager {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    return moreResults;  
+    return moreResults;
   }
 
   async sendRequest(searchValue?: string) {
     let payload: any = {};
- 
+
     if (searchValue?.length) {
       payload = {
         ...payload,
@@ -96,44 +96,60 @@ class SearchManager {
     if (!searchFilters) return searchResults;
 
     if (searchFilters?.countries?.length) {
-      searchResults.jam = searchResults.jam.filter((o: any) => {
-        return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-      });
+      if (searchResults?.jam) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
+        });
+      }
 
-      searchResults.project = searchResults.project.filter((o: any) => {
-        return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-      });
+      if (searchResults?.project) {
+        searchResults.project = searchResults.project.filter((o: any) => {
+          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
+        });
+      }
 
-      searchResults.profile = searchResults.profile.filter((o: any) => {
-        return searchFilters.countries.some((id: any) => o?.country?.includes(id));
-      });
+      if (searchResults?.profile) {
+        searchResults.profile = searchResults.profile.filter((o: any) => {
+          return searchFilters.countries.some((id: any) => o?.country?.includes(id));
+        });
+      }
     }
 
     if (searchFilters?.sectors?.length) {
-      searchResults.jam = searchResults.jam.filter((o: any) => {
-        return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-      });
+      if (searchResults?.jam) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
+        });
+      }
 
-      searchResults.project = searchResults.project.filter((o: any) => {
-        return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-      });
+      if (searchResults?.project) {
+        searchResults.project = searchResults.project.filter((o: any) => {
+          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
+        });
+      }
 
-      searchResults.profile = searchResults.profile.filter((o: any) => {
-        return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-      });
+      if (searchResults?.profile) {
+        searchResults.profile = searchResults.profile.filter((o: any) => {
+          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
+        });
+      }
     }
 
     if (searchFilters?.locationTypes?.length) {
-      searchResults.jam = searchResults.jam.filter((o: any) => {
-        return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
-      });
+      if (searchResults?.jam) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
+        });
+      }
     }
 
     if (searchFilters?.jamTypes?.length) {
-      searchResults.jam = searchResults.jam.filter((o: any) => {
-        return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
-      });
-    } 
+      if (searchResults?.jam) {
+        searchResults.jam = searchResults.jam.filter((o: any) => {
+          return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
+        });
+      }
+    }
 
     return searchResults;
   }
