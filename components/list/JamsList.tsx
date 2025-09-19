@@ -31,6 +31,8 @@ const JamsList = ({ idArray }: Props) => {
     );
   };
 
+  // Todo - Filter by idArray
+  /*
   const getListData = (key: string) => {
     let results: any = { ...searchResults };
 
@@ -40,6 +42,7 @@ const JamsList = ({ idArray }: Props) => {
 
     return results[key];
   };
+  */
 
   const fetchListData = async () => {
     if (isFetching) return;
