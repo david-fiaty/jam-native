@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.primary,
     opacity: 0.75,
     position: 'absolute',
-    bottom: 0,
+    bottom: 40, // Todo - Make dynamic
     right: 0,
     left: 0,
   },
