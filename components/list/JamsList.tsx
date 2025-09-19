@@ -63,7 +63,7 @@ const JamsList = ({ idArray }: Props) => {
     if (!isLoaded) {
       setIsLoaded(true);
     }
-    
+
     fetchListData();
   }, [isLoaded]);
 
@@ -87,7 +87,7 @@ const JamsList = ({ idArray }: Props) => {
 
       </BoxView>
 
-      {isLoaded && isFetching && (
+      {isLoaded && isFetching && !!listData?.length && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" color="white" />
         </View>
