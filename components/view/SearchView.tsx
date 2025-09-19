@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -15,45 +15,8 @@ import SearchManager from "@/manager/SearchManager";
 const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
-
-  const getTabResults = (key: string) => {
-    let results: any = {
-      ...searchResults,
-      ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
-      },
-    };
-
-    return results[key];
-  };
-
-  const renderJamsList = () => {
-    return (
-      <SearchJamsList
-        data={getTabResults('jam')}
-      />
-    );
-  };
-
-  const renderProfilesList = () => {
-    return (
-      <SearchProfilesList
-        data={getTabResults('profile')}
-      />
-    );
-  };
-
-  const renderProjectsList = () => {
-    return (
-      <SearchProjectsList
-        data={getTabResults('project')}
-      />
-    );
-  };
 
   useEffect(() => {
     if (!isLoaded) {
@@ -64,14 +27,6 @@ const SearchView = () => {
       setIsLoaded(true);
     }
   }, [searchState, searchTabs, isLoaded]);
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -90,11 +45,11 @@ const SearchView = () => {
 
       <SearchFiltersView />
 
-      {SearchManager.isJamTab(searchState.currentTab) && renderJamsList()}
+      {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
 
-      {SearchManager.isProfileTab(searchState.currentTab) && renderProfilesList()}
+      {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList />}
 
-      {SearchManager.isProjectTab(searchState.currentTab) && renderProjectsList()}
+      {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList />}
     </BoxView>
   );
 };
