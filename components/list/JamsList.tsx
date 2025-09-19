@@ -2,12 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
-import EntityManager from "@/manager/EntityManager";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = {
