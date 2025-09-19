@@ -138,6 +138,12 @@ class SearchManager {
     return searchResults;
   }
 
+  getFilters() {
+    return {
+
+    };
+  };
+
   getTabResults(key: string, currentTab: string, currentResults: any) {
     let tab: string = currentTab;
     let data: any = { ...currentResults };
