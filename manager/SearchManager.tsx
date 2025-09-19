@@ -63,7 +63,7 @@ class SearchManager {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    return this.applyFilters({ [key]: moreResults }, currentFilters);
+    return this.applyFilters({ [key]: moreResults }, currentFilters)[key];
   }
 
   async sendRequest(searchValue?: string) {
@@ -93,7 +93,7 @@ class SearchManager {
   }
 
   applyFilters(searchResults: any, searchFilters: any) {
-    if (!searchFilters) return searchResults;
+    if (!searchFilters || !Object.keys(searchFilters)?.length) return searchResults;
 
     if (searchFilters?.countries?.length) {
       if (searchResults?.jam) {
