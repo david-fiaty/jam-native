@@ -133,16 +133,10 @@ class SearchManager {
       searchResults.jam = searchResults.jam.filter((o: any) => {
         return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
       });
-    }
+    } 
 
     return searchResults;
   }
-
-  getFilters() {
-    return {
-
-    };
-  };
 
   getTabResults(key: string, currentTab: string, currentResults: any) {
     let tab: string = currentTab;
