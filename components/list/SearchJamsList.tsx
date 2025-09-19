@@ -62,6 +62,18 @@ const SearchJamsList = ({ data }: Props) => {
     setIsFetching(false);
   };
 
+const handleScroll = (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    if (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    ) {
+      fetchListData();
+    }
+  };
+
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);
     fetchListData();
@@ -85,8 +97,10 @@ const SearchJamsList = ({ data }: Props) => {
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
             renderItem={(row: any) => renderItem(row)}
-            onEndReachedThreshold={0.5}
-            onEndReached={fetchListData}
+            //onEndReachedThreshold={0.5}
+            //onEndReached={fetchListData}
+            onScroll={handleScroll}
+            scrollEventThrottle={16} 
           />
         )}
 
@@ -95,7 +109,7 @@ const SearchJamsList = ({ data }: Props) => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && (
+      {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" color="white" />
         </View>
