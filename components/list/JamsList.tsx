@@ -2,12 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
-import EntityManager from "@/manager/EntityManager";
 import SearchManager from "@/manager/SearchManager";
 
 type Props = {
@@ -43,10 +41,15 @@ const JamsList = ({ idArray }: Props) => {
     return results[key];
   };
 
-  const onEndReached = async () => {
+  const fetchListData = async () => {
+    if (isFetching) return;
+    setIsFetching(true);
+
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
     setListData((prevData) => [...(prevData || []), ...moreResults]);
+
     setCurrentPage((prevPage: number) => prevPage + 1);
+    setIsFetching(false);
   };
 
   useEffect(() => {
@@ -58,34 +61,38 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setListData(getListData('jam'))
       setIsLoaded(true);
     }
+
+    fetchListData();
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      style={styles.container}
-    >
-      <ListView
-        data={listData}
-        contentContainerStyle={Layout.listContainer}
-        renderItem={renderItem}
-        keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
-        onEndReachedThreshold={0.5}
-        onEndReached={onEndReached}
-      />
+    <>
+      <BoxView
+        direction="column"
+        style={styles.container}
+      >
+        <ListView
+          data={listData}
+          contentContainerStyle={Layout.listContainer}
+          renderItem={renderItem}
+          keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
+          onEndReachedThreshold={0.5}
+          onEndReached={fetchListData}
+        />
 
-      {/*isLoaded && isFetching && (
+
+      </BoxView>
+
+      {isLoaded && isFetching && !!listData?.length && (
         <View style={styles.loadingMore}>
-          <SpinnerView size="small" />
+          <SpinnerView size="small" color="white" />
         </View>
-      )*/}
-
-    </BoxView>
+      )}
+    </>
   );
 };
 
@@ -96,7 +103,13 @@ const styles = StyleSheet.create({
   },
   loadingMore: {
     paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base * 2,
+    paddingBottom: Layout.space.base,
+    backgroundColor: Layout.colors.primary,
+    opacity: 0.75,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
   },
 });
 
