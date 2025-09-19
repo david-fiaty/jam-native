@@ -1,7 +1,6 @@
 import React, { memo, useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
-import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
@@ -12,8 +11,7 @@ import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
-import EntityManager from "@/manager/EntityManager";
-import { View } from "react-native-animatable";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   data?: any;
@@ -27,7 +25,6 @@ const SearchJamsList = ({ data }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -54,83 +51,70 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
-  const handleScroll = async (event: any) => {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const paddingToBottom = 0;
-
-    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
-      await fetchTabResults('jam');
-    }
-  };
-
-  const fetchTabResults = async (key: string) => {
-    if (!isLoaded) return;
-
+  const fetchListData = async () => {
+    if (isFetching) return;
     setIsFetching(true);
 
-    let payload: any = {
-      page_size: Config.paginationSize,
-      page: currentPage + 1,
-      jamType: searchState.currentTab == 'jam' ? 'all' : searchState.currentTab,
-    };
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
 
-    if (!!searchState.searchValue?.length) {
-      payload = {
-        ...payload,
-        ...{
-          query_text: searchState.searchValue,
-          query_title: searchState.searchValue,
-        },
-      };
-    }
-
-    let moreResults: any = await EntityManager.listJams(payload);
-
-    if (!moreResults?.length) {
-      setListData(prevData => [...prevData, ...listData]);
-      setCurrentPage(1);
-    }
-    else {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-      setCurrentPage((prevPage: number) => prevPage + 1);
-    }
-
+    setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      setListData(data);
-      setIsLoaded(true);
+const handleScroll = (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    if (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    ) {
+      fetchListData();
     }
-  }, [isLoaded, data]);
+  };
+
+  useEffect(() => {
+    if (!isLoaded) setIsLoaded(true);
+    fetchListData();
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      justify="flex-start"
-      scroll={ScreenManager.isWeb() ? true : false}
-      style={styles.container}
-    >
-      {!!listData?.length && (
-        <ListView
-          data={listData}
-          numColumns={numColumns}
-          contentContainerStyle={styles.contentContainerStyle}
-          columnWrapperStyle={styles.columnWrapperStyle}
-          renderItem={(row: any) => renderItem(row)}
-          scrollEventThrottle={16}
-          onScroll={handleScroll}
-        />
-      )}
+    <>
+      <BoxView
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
+        scroll={ScreenManager.isWeb() ? true : false}
+        style={styles.container}
+      >
+        {!!listData?.length && (
+          <ListView
+            data={listData}
+            numColumns={numColumns}
+            contentContainerStyle={styles.contentContainerStyle}
+            columnWrapperStyle={styles.columnWrapperStyle}
+            renderItem={(row: any) => renderItem(row)}
+            //onEndReachedThreshold={0.5}
+            //onEndReached={fetchListData}
+            onScroll={handleScroll}
+            scrollEventThrottle={16} 
+          />
+        )}
 
-      {!listData?.length && (
-        <TextView>{i18n.t('No results available')}</TextView>
+        {isLoaded && !isFetching && !listData?.length && (
+          <TextView>{i18n.t('No results available')}</TextView>
+        )}
+      </BoxView>
+
+      {isLoaded && isFetching && (
+        <View style={styles.loadingMore}>
+          <SpinnerView size="small" color="white" />
+        </View>
       )}
-    </BoxView>
+    </>
   );
 };
 
@@ -160,7 +144,13 @@ const styles = StyleSheet.create({
   },
   loadingMore: {
     paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base * 2,
+    paddingBottom: Layout.space.base,
+    backgroundColor: Layout.colors.primary,
+    opacity: 0.75,
+    position: 'absolute',
+    bottom: 40, // Todo - Make dynamic
+    right: 0,
+    left: 0,
   },
 });
 
