@@ -14,13 +14,9 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 
-type Props = {
-  data?: any;
-};
-
 const numColumns = 2;
 
-const SearchProjectsList = ({ data }: Props) => {
+const SearchProjectsList = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -29,7 +25,6 @@ const SearchProjectsList = ({ data }: Props) => {
   const [searchResults, setSearchResults] = useState<any>({});
   const prevSearchState: any = useRef(null);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const [currentData, setCurrentData] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
