@@ -1,6 +1,7 @@
-import React, { useState, useEffect, memo } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React, { memo, useState, useEffect, useRef } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
@@ -11,6 +12,7 @@ import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
+import SearchManager from "@/manager/SearchManager";
 
 type Props = {
   data?: any;
@@ -21,6 +23,12 @@ const numColumns = 2;
 const SearchProjectsList = ({ data }: Props) => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [listData, setListData] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any>({});
+  const prevSearchState: any = useRef(null);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const [currentData, setCurrentData] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
@@ -48,39 +56,80 @@ const SearchProjectsList = ({ data }: Props) => {
     );
   };
 
+  const fetchListData = async () => {
+    if (isFetching) return;
+    setIsFetching(true);
+
+    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage);
+    moreResults = SearchManager.getTabResults('project', searchState.currentTab, { profile: moreResults });
+    moreResults = await EntityManager.addProjectsImages(moreResults);
+
+    setListData(moreResults);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
+
+    setCurrentPage((prevPage: number) => prevPage + 1);
+    setIsFetching(false);
+  };
+
+  const handleScroll = (event: any) => {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    if (
+      layoutMeasurement.height + contentOffset.y >=
+      contentSize.height - paddingToBottom
+    ) {
+      fetchListData();
+    }
+  };
+
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setCurrentData(await EntityManager.addProjectsImages(data));
-        setIsLoaded(true)
-      }
-    })();
-  }, [isLoaded, data]);
+    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
+      setSearchResults(JSON.parse(searchState.currentResults) || {});
+
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
+
+  useEffect(() => {
+    if (!isLoaded) setIsLoaded(true);
+    fetchListData();
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      justify="flex-start"
-      scroll={ScreenManager.isWeb() ? true : false}
-      style={styles.container}
-    >
-      {isLoaded && !!currentData?.length && (
-        <ListView
-          data={currentData}
-          numColumns={numColumns}
-          contentContainerStyle={styles.contentContainerStyle}
-          columnWrapperStyle={styles.columnWrapperStyle}
-          renderItem={(row: any) => renderItem(row)}
-        />
-      )}
+    <>
+      <BoxView
+        direction="column"
+        align="flex-start"
+        justify="flex-start"
+        scroll={ScreenManager.isWeb() ? true : false}
+        style={styles.container}
+      >
+        {isLoaded && !!listData?.length && (
+          <ListView
+            data={listData}
+            numColumns={numColumns}
+            contentContainerStyle={styles.contentContainerStyle}
+            columnWrapperStyle={styles.columnWrapperStyle}
+            renderItem={(row: any) => renderItem(row)}
+            onScroll={handleScroll}
+            scrollEventThrottle={16}
+          />
+        )}
 
-      {isLoaded && !currentData?.length && (
-        <TextView>{i18n.t('No results available')}</TextView>
+        {isLoaded && !isFetching && !listData?.length && (
+          <TextView>{i18n.t('No results available')}</TextView>
+        )}
+      </BoxView>
+
+      {isLoaded && isFetching && (
+        <View style={styles.loadingMore}>
+          <SpinnerView size="small" color="white" />
+        </View>
       )}
-    </BoxView>
+    </>
   );
 };
 
@@ -107,6 +156,16 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  loadingMore: {
+    paddingTop: Layout.space.base,
+    paddingBottom: Layout.space.base,
+    backgroundColor: Layout.colors.primary,
+    opacity: 0.75,
+    position: 'absolute',
+    bottom: 40, // Todo - Make dynamic
+    right: 0,
+    left: 0,
   },
 });
 
