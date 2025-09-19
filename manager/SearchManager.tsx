@@ -63,7 +63,9 @@ class SearchManager {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    return this.applyFilters({ [key]: moreResults }, currentFilters)[key];
+    moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key]; 
+
+    return moreResults || [];
   }
 
   async sendRequest(searchValue?: string) {
