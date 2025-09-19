@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
@@ -49,17 +48,6 @@ const SearchJamsList = () => {
         {output}
       </TouchableOpacity>
     );
-  };
-
-  const getTabResults = (key: string) => {
-    let results: any = {
-      ...searchResults,
-      ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults),
-      },
-    };
-
-    return results[key];
   };
 
   const fetchListData = async () => {
