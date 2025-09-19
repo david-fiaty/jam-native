@@ -60,14 +60,11 @@ const JamsList = ({ idArray }: Props) => {
   }, [searchState]);
 
   useEffect(() => {
+    fetchListData();
     if (!isLoaded) {
       setIsLoaded(true);
     }
   }, [isLoaded]);
-
-  useEffect(() => {
-    fetchListData();
-  }, []);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -88,6 +85,7 @@ const JamsList = ({ idArray }: Props) => {
 
 
       </BoxView>
+
       {isLoaded && isFetching && (
         <View style={styles.loadingMore}>
           <SpinnerView size="small" color="white" />
@@ -106,7 +104,7 @@ const styles = StyleSheet.create({
     paddingTop: Layout.space.base,
     paddingBottom: Layout.space.base,
     backgroundColor: Layout.colors.primary,
-    opacity: 0.85,
+    opacity: 0.75,
     position: 'absolute',
     bottom: 0,
     right: 0,
