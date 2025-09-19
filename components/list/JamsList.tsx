@@ -60,10 +60,7 @@ const JamsList = ({ idArray }: Props) => {
   }, [searchState]);
 
   useEffect(() => {
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-
+    if (!isLoaded) setIsLoaded(true);
     fetchListData();
   }, [isLoaded]);
 
@@ -83,8 +80,6 @@ const JamsList = ({ idArray }: Props) => {
           onEndReachedThreshold={0.5}
           onEndReached={fetchListData}
         />
-
-
       </BoxView>
 
       {isLoaded && isFetching && !!listData?.length && (
