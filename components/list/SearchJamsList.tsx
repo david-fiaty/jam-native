@@ -1,5 +1,6 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -13,18 +14,17 @@ import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 
-type Props = {
-  data?: any;
-};
-
 const numColumns = 2;
 
-const SearchJamsList = ({ data }: Props) => {
+const SearchJamsList = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<any>({});
+  const prevSearchState: any = useRef(null);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -51,6 +51,17 @@ const SearchJamsList = ({ data }: Props) => {
     );
   };
 
+  const getTabResults = (key: string) => {
+    let results: any = {
+      ...searchResults,
+      ...{
+        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults),
+      },
+    };
+
+    return results[key];
+  };
+
   const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
@@ -62,7 +73,7 @@ const SearchJamsList = ({ data }: Props) => {
     setIsFetching(false);
   };
 
-const handleScroll = (event: any) => {
+  const handleScroll = (event: any) => {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const paddingToBottom = 0;
 
@@ -73,6 +84,15 @@ const handleScroll = (event: any) => {
       fetchListData();
     }
   };
+
+  useEffect(() => {
+    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
+      setSearchResults(JSON.parse(searchState.currentResults) || {});
+
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
+
 
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);
@@ -100,7 +120,7 @@ const handleScroll = (event: any) => {
             //onEndReachedThreshold={0.5}
             //onEndReached={fetchListData}
             onScroll={handleScroll}
-            scrollEventThrottle={16} 
+            scrollEventThrottle={16}
           />
         )}
 
