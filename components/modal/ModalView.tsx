@@ -40,10 +40,10 @@ const ModalView = ({ currentSection, style }: Props) => {
 
   const getContainerStyle = () => {
     let modalHeight: number = ScreenManager.getModalSize().height;
-    let footerHeight: number = screenState.footerLayout.bottom;
-    let navHeight: number = insets.bottom;
+    let footerHeight: number = screenState.footerLayout?.bottom || 0;
+    let systemTabsHeight: number = insets.bottom;
 
-    let height: number = modalHeight - footerHeight - navHeight;
+    let height: number = modalHeight - footerHeight - systemTabsHeight;
 
     return {
       height: height,
