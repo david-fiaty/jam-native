@@ -43,7 +43,7 @@ const ModalView = ({ currentSection, style }: Props) => {
     let footerHeight: number = screenState.footerLayout?.bottom || 45.5;
     let systemTabsHeight: number = insets.bottom;
 
-    let height: number = modalHeight - footerHeight - systemTabsHeight;
+    let height: number = modalHeight - footerHeight - systemTabsHeight - Layout.space.base;
 
     return {
       height: height,
