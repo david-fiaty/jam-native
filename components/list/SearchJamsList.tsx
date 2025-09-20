@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
@@ -21,8 +21,6 @@ const SearchJamsList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const prevSearchState: any = useRef(null);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
@@ -66,14 +64,6 @@ const SearchJamsList = () => {
   const handleScroll = (event: any) => {
     ScreenManager.handleScrollEvent(event, fetchListData);
   };
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);

@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
@@ -20,8 +20,6 @@ const SearchProfilesList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const prevSearchState: any = useRef(null);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
 
   const onItemPress = (row: any) => {
@@ -57,14 +55,6 @@ const SearchProfilesList = () => {
   const handleScroll = (event: any) => {
     ScreenManager.handleScrollEvent(event, fetchListData);
   };
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);
