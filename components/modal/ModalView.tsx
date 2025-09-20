@@ -36,14 +36,13 @@ const ModalView = ({ currentSection, style }: Props) => {
   const insets: any = useSafeAreaInsets();
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
+  const screenState: any = useSelector((state: any) => state.screen, shallowEqual);
+  const footerHeight: number = screenState.footerLayout?.bottom || 45.5;
 
   const getContainerStyle = () => {
     let modalHeight: number = ScreenManager.getModalSize().height;
-    let footerHeight: number = ScreenManager.getFooterSize().height;
-    let navHeight: number = insets.bottom;
-    let paddingOffset: number = Layout.space.base * 6;
-    
-    let height: number = modalHeight - footerHeight - navHeight - paddingOffset;
+    let systemTabsHeight: number = insets.bottom;
+    let height: number = modalHeight - footerHeight - systemTabsHeight - Layout.space.base;
 
     return {
       height: height,
