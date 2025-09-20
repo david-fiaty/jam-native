@@ -42,13 +42,9 @@ const SearchView = () => {
         currentTab={searchState.currentTab}
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
-
       <SearchFiltersView />
-
       {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
-
       {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList />}
-
       {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList />}
     </BoxView>
   );
