@@ -18,6 +18,8 @@ type Props = {
   field?: any;
 };
 
+const pageSize: number = 8;
+
 const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
   const [profilesData, setProfilesData] = useState<any>(null);
@@ -27,14 +29,11 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const clearSearch = () => {
+  const clearSearch = async () => {
     setIsSearching(true);
-    
-    EntityManager.listProfiles().then((items: any) => {
-      setProfilesData(items);
-      setIsSearching(false);
-      setSearchValue('');
-    });
+    setProfilesData(await getProfilesData());
+    setIsSearching(false);
+    setSearchValue('');
   };
 
   const renderSearchIcon = () => {
@@ -54,14 +53,24 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     return <></>;
   };
 
-  const onSubmitEditing = () => {
+  const onSubmitEditing = async () => {
     setIsSearching(true);
-    let options = searchValue.length ? { query_text: searchValue } : {};
 
-    EntityManager.listProfiles(options).then((items: any) => {
-      setIsSearching(false);
-      setProfilesData(items);
-    });
+    let payload: any = {
+      page_size: pageSize,
+    };
+
+    if (!!searchValue.length) {
+      payload = {
+        ...payload,
+        ...{
+          query_text: searchValue,
+        },
+      }
+    }
+
+    setProfilesData(await EntityManager.listProfiles(payload));
+    setIsSearching(false);
   };
 
   const toggleItem = (entityId: number) => {
@@ -83,7 +92,11 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   };
 
   const getProfilesData = async () => {
-    return await EntityManager.listProfiles();
+    let payload: any = {
+      page_size: pageSize,
+    };
+    
+    return await EntityManager.listProfiles(payload);
   };
 
   useEffect(() => {
