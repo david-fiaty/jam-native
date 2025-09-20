@@ -31,18 +31,16 @@ const JamsList = ({ idArray }: Props) => {
     );
   };
 
-  // Todo - Filter by idArray
-  /*
-  const getListData = (key: string) => {
+  const getListData = async () => {
+    let key: string = 'jam';
     let results: any = { ...searchResults };
 
     if (idArray?.length > 0) {
       results[key] = results[key].filter((o: any) => idArray.includes(o.id));
     }
 
-    return results[key];
+    setListData(results[key]);
   };
-  */
 
   const fetchListData = async () => {
     if (isFetching) return;
@@ -63,9 +61,15 @@ const JamsList = ({ idArray }: Props) => {
   }, [searchState]);
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
-  }, [isLoaded]);
+    if (!idArray?.length) {
+      if (!isLoaded) setIsLoaded(true);
+      fetchListData();
+    }
+    else if (!isLoaded) {
+      getListData();
+      setIsLoaded(true);
+    }
+  }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
