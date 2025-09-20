@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
@@ -23,6 +24,8 @@ import PrivateProfileSection from '../section/profile/PrivateProfileSection';
 import SearchFiltersForm from '../form/SearchFiltersForm';
 import PublicJamSection from '../section/jam/PublicJamSection';
 import PublicProfileSection from '../section/profile/PublicProfileSection';
+import ScreenManager from '@/manager/ScreenManager';
+import { Layout } from '@/constants/Layout';
 
 type Props = {
   currentSection?: any;
@@ -30,8 +33,22 @@ type Props = {
 };
 
 const ModalView = ({ currentSection, style }: Props) => {
+  const insets: any = useSafeAreaInsets();
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
+
+  const getContainerStyle = () => {
+    let modalHeight: number = ScreenManager.getModalSize().height;
+    let footerHeight: number = ScreenManager.getFooterSize().height;
+    let navHeight: number = insets.bottom;
+    let paddingOffset: number = Layout.space.base * 6;
+    
+    let height: number = modalHeight - footerHeight - navHeight - paddingOffset;
+
+    return {
+      height: height,
+    };
+  };
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
@@ -220,7 +237,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       animationIn={currentModal?.effect?.in}
       animationOut={currentModal?.effect?.out}
       isVisible={canShowModal()}
-      style={[styles.container, style]}
+      style={[styles.container, style, getContainerStyle()]}
     >
       {renderBackButton()}
 
