@@ -40,19 +40,10 @@ const ModalView = ({ currentSection, style }: Props) => {
 
   const getContainerStyle = () => {
     let modalHeight: number = ScreenManager.getModalSize().height;
-    //let footerHeight: number = ScreenManager.getFooterSize().height;
-    let footerHeight: number = 45.5;
+    let footerHeight: number = screenState.footerLayout.bottom;
     let navHeight: number = insets.bottom;
-    //let paddingOffset: number = Layout.space.base * 6; // Todo - Make more dynamic?
-    let paddingOffset: number = 55;
 
-    //console.log(footerHeight)
-    
-    //let height: number = modalHeight - footerHeight - navHeight - paddingOffset;
-
-    let height: number = modalHeight - 45.5 - navHeight;
-
-    console.log('----', screenState.footerLayout);
+    let height: number = modalHeight - footerHeight - navHeight;
 
     return {
       height: height,
