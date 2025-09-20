@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: Layout.colors.primary,
-    opacity: 1,
     padding: Layout.space.base,
     borderRadius: Layout.radius.round,
   },
