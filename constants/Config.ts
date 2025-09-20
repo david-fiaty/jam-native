@@ -13,7 +13,7 @@ export const Config: any = {
   appNamespace: 'jam-native',
   dateFormat: 'MMM Do YYYY HH:mm',
   logoImageSize: 512,
-  paginationSize: 10,
+  paginationSize: 20,
   maxUserNameLength: 28,
   notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,

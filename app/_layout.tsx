@@ -20,7 +20,6 @@ const RootLayout = () => {
     statusBarStyle: 'dark',
     animation: 'fade',
     headerShown: false,
-    statusBarBackgroundColor: Layout.colors.white,
     headerTintColor: Layout.colors.white,    
     headerStyle: {
       backgroundColor: Layout.colors.white, 
