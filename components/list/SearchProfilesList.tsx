@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
@@ -20,8 +20,6 @@ const SearchProfilesList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const prevSearchState: any = useRef(null);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
 
   const onItemPress = (row: any) => {
@@ -45,8 +43,7 @@ const SearchProfilesList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage);
-    moreResults = SearchManager.getTabResults('profile', searchState.currentTab, { profile: moreResults });
+    let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
 
@@ -55,21 +52,8 @@ const SearchProfilesList = () => {
   };
 
   const handleScroll = (event: any) => {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const paddingToBottom = 0;
-
-    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
-      fetchListData();
-    }
+    ScreenManager.handleScrollEvent(event, fetchListData);
   };
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);
