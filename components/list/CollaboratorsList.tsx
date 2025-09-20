@@ -18,7 +18,7 @@ type Props = {
   field?: any;
 };
 
-const pageSize: number = 8;
+const pageSize: number = 9;
 
 const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
