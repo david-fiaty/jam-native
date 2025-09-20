@@ -18,7 +18,7 @@ type Props = {
   field?: any;
 };
 
-const pageSize: number = 10;
+const pageSize: number = 9;
 
 const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
@@ -126,16 +126,18 @@ const CollaboratorsList = ({ resource, field }: Props) => {
       />
 
       {profilesData?.length > 0 && (
-        <ListView
-          data={profilesData}
-          renderItem={(row: any) => (
-            <ProfileListItemView
-              row={row}
-              selected={selectedProfiles.includes(row.item.id)}
-              onListItemPress={(o: any) => toggleItem(o.item.id)}
-            />
-          )}
-        />
+        <View style={Layout.borderedListContainer}>
+          <ListView
+            data={profilesData}
+            renderItem={(row: any) => (
+              <ProfileListItemView
+                row={row}
+                selected={selectedProfiles.includes(row.item.id)}
+                onListItemPress={(o: any) => toggleItem(o.item.id)}
+              />
+            )}
+          />
+        </View>
       )}
 
       {!profilesData?.length &&
