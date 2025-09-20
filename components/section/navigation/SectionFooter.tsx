@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from 'expo-router';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import IconView from '@/components/view/IconView';
 import BoxView from '@/components/view/BoxView';
 import ModalManager from '@/manager/ModalManager';
@@ -31,7 +31,18 @@ const SectionFooter = ({ style }: Props) => {
   }, []);
 
   return (
-    <BoxView direction="row" align="center" justify="space-around" style={[styles.container, style]}>
+    <View
+      onLayout={(event: any) => {
+        const { x, y, width, height } = event.nativeEvent.layout;
+        console.log(event.nativeEvent.layout)
+      }}
+    >
+    <BoxView
+      direction="row"
+      align="center"
+      justify="space-around"
+      style={[styles.container, style]}
+    >
       <IconView
         name="location"
         radius="round"
@@ -59,6 +70,7 @@ const SectionFooter = ({ style }: Props) => {
         onPress={() => isLoggedIn ? ModalManager.toggleModal('PrivateProfileSection') : SectionManager.push(router, 'login')}
       />
     </BoxView>
+    </View>
   );
 };
 
