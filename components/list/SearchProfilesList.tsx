@@ -58,10 +58,7 @@ const SearchProfilesList = () => {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const paddingToBottom = 0;
 
-    if (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    ) {
+    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
       fetchListData();
     }
   };
@@ -88,7 +85,7 @@ const SearchProfilesList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {!!listData?.length && (
+        {isLoaded && !!listData?.length && (
           <ListView
             data={listData}
             contentContainerStyle={styles.contentContainerStyle}

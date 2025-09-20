@@ -56,10 +56,9 @@ const SearchProjectsList = () => {
     setIsFetching(true);
 
     let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage);
-    moreResults = SearchManager.getTabResults('project', searchState.currentTab, { profile: moreResults });
+    moreResults = SearchManager.getTabResults('project', searchState.currentTab, { project: moreResults });
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
-    setListData(moreResults);
     setListData((prevData) => [...(prevData || []), ...moreResults]);
 
     setCurrentPage((prevPage: number) => prevPage + 1);
@@ -70,10 +69,7 @@ const SearchProjectsList = () => {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const paddingToBottom = 0;
 
-    if (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    ) {
+    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
       fetchListData();
     }
   };

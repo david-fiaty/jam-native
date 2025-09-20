@@ -67,10 +67,7 @@ const SearchJamsList = () => {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const paddingToBottom = 0;
 
-    if (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    ) {
+    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
       fetchListData();
     }
   };
