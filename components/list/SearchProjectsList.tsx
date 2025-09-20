@@ -53,8 +53,7 @@ const SearchProjectsList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage);
-    moreResults = SearchManager.getTabResults('project', searchState.currentTab, { project: moreResults });
+    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage, searchState.currentTab);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);

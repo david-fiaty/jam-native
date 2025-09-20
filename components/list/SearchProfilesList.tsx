@@ -43,8 +43,7 @@ const SearchProfilesList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage);
-    moreResults = SearchManager.getTabResults('profile', searchState.currentTab, { profile: moreResults });
+    let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
 
