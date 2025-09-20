@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -13,6 +13,7 @@ import MediaManager from "@/manager/MediaManager";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
+import LoadingMoreView from "../view/LoadingMoreView";
 
 const numColumns = 2;
 
@@ -99,7 +100,7 @@ const SearchProjectsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && ScreenManager.renderLoadingMore()}
+      {isLoaded && isFetching && <LoadingMoreView />}
     </>
   );
 };

@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -13,6 +13,7 @@ import TextView from "../view/TextView";
 import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
+import LoadingMoreView from "../view/LoadingMoreView";
 
 const SearchProfilesList = () => {
   const router = useRouter();
@@ -84,7 +85,7 @@ const SearchProfilesList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && ScreenManager.renderLoadingMore()}
+      {isLoaded && isFetching && <LoadingMoreView />}
     </>
   );
 };

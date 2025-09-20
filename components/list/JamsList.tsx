@@ -8,7 +8,7 @@ import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
 import EntityManager from "@/manager/EntityManager";
-import ScreenManager from "@/manager/ScreenManager";
+import LoadingMoreView from "../view/LoadingMoreView";
 
 type Props = {
   idArray?: any;
@@ -84,7 +84,7 @@ const JamsList = ({ idArray }: Props) => {
         />
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && ScreenManager.renderLoadingMore()}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView />}
     </>
   );
 };

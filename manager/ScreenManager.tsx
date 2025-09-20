@@ -1,10 +1,9 @@
-import { Dimensions, ScaledSize, StatusBar, Platform, View } from 'react-native';
+import { Dimensions, ScaledSize, StatusBar, Platform } from 'react-native';
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { Layout } from '@/constants/Layout';
 import { setMessage } from '@/redux/slices/MessageSlice';
 import { Config } from '@/constants/Config';
 import Store from '@/redux/Store';
-import SpinnerView from '@/components/view/SpinnerView';
 
 class ScreenManager {
   messageTimeout?: any;
@@ -158,14 +157,6 @@ class ScreenManager {
     }
   }
 
-  renderLoadingMore() {
-    return (
-      <View style={styles.loadingMore}>
-        <SpinnerView size="small" color="white" />
-      </View>
-    );
-  }
-
   isTablet() {
     // Todo - Implement tablet detection
     return true;
@@ -186,19 +177,6 @@ class ScreenManager {
   isMobile() {
     return !this.isWeb() && !this.isTablet(); 
   }
-};
-
-const styles: any = {
-  loadingMore: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-  },
 };
 
 export default (new ScreenManager());
