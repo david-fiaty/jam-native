@@ -34,6 +34,7 @@ const SectionFooter = ({ style }: Props) => {
     <View
       onLayout={(event: any) => {
         const { x, y, width, height } = event.nativeEvent.layout;
+        // Todo - Save footer height in state or remove
         console.log(event.nativeEvent.layout)
       }}
     >
