@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from 'expo-router';
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { setFooterLayout } from "@/redux/slices/ScreenSlice";
 import { Layout } from '@/constants/Layout';
 import { StyleSheet, View } from 'react-native';
 import IconView from '@/components/view/IconView';
@@ -15,6 +16,7 @@ type Props = {
 
 const SectionFooter = ({ style }: Props) => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
 
@@ -31,46 +33,40 @@ const SectionFooter = ({ style }: Props) => {
   }, []);
 
   return (
-    <View
-      onLayout={(event: any) => {
-        const { x, y, width, height } = event.nativeEvent.layout;
-        // Todo - Save footer height in state or remove
-        console.log(event.nativeEvent.layout)
-      }}
-    >
-    <BoxView
-      direction="row"
-      align="center"
-      justify="space-around"
-      style={[styles.container, style]}
-    >
-      <IconView
-        name="location"
-        radius="round"
-        size={16}
-        padding={4}
-        theme={getIconTheme('JamsMapView')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamsMapView') : SectionManager.push(router, 'login')}
-      />
+    <View onLayout={(e: any) => dispatch(setFooterLayout(e.nativeEvent.layout))}>
+      <BoxView
+        direction="row"
+        align="center"
+        justify="space-around"
+        style={[styles.container, style]}
+      >
+        <IconView
+          name="location"
+          radius="round"
+          size={16}
+          padding={4}
+          theme={getIconTheme('JamsMapView')}
+          onPress={() => isLoggedIn ? ModalManager.toggleModal('JamsMapView') : SectionManager.push(router, 'login')}
+        />
 
-      <IconView
-        name="plus"
-        radius="round"
-        size={16}
-        padding={4}
-        theme={getIconTheme('JamForm')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('JamForm', { resource: 'jam' }) : SectionManager.push(router, 'login')}
-      />
+        <IconView
+          name="plus"
+          radius="round"
+          size={16}
+          padding={4}
+          theme={getIconTheme('JamForm')}
+          onPress={() => isLoggedIn ? ModalManager.toggleModal('JamForm', { resource: 'jam' }) : SectionManager.push(router, 'login')}
+        />
 
-      <IconView
-        name="user"
-        radius="round"
-        size={16}
-        padding={4}
-        theme={getIconTheme('PrivateProfileSection')}
-        onPress={() => isLoggedIn ? ModalManager.toggleModal('PrivateProfileSection') : SectionManager.push(router, 'login')}
-      />
-    </BoxView>
+        <IconView
+          name="user"
+          radius="round"
+          size={16}
+          padding={4}
+          theme={getIconTheme('PrivateProfileSection')}
+          onPress={() => isLoggedIn ? ModalManager.toggleModal('PrivateProfileSection') : SectionManager.push(router, 'login')}
+        />
+      </BoxView>
     </View>
   );
 };
