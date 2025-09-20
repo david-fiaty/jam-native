@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
@@ -12,6 +12,7 @@ import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
+import LoadingMoreView from "../view/LoadingMoreView";
 
 const numColumns = 2;
 
@@ -97,11 +98,7 @@ const SearchJamsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && (
-        <View style={styles.loadingMore}>
-          <SpinnerView size="small" color="white" />
-        </View>
-      )}
+      {isLoaded && isFetching && <LoadingMoreView />}
     </>
   );
 };
@@ -129,16 +126,6 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-  },
-  loadingMore: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
-    position: 'absolute',
-    bottom: 40, // Todo - Make dynamic
-    right: 0,
-    left: 0,
   },
 });
 
