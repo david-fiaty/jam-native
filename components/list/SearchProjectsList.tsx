@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
@@ -22,8 +22,6 @@ const SearchProjectsList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const prevSearchState: any = useRef(null);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
@@ -55,8 +53,7 @@ const SearchProjectsList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage);
-    moreResults = SearchManager.getTabResults('project', searchState.currentTab, { project: moreResults });
+    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage, searchState.currentTab);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
@@ -66,21 +63,8 @@ const SearchProjectsList = () => {
   };
 
   const handleScroll = (event: any) => {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const paddingToBottom = 0;
-
-    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
-      fetchListData();
-    }
+    ScreenManager.handleScrollEvent(event, fetchListData);
   };
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   useEffect(() => {
     if (!isLoaded) setIsLoaded(true);
