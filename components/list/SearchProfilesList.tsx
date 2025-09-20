@@ -1,5 +1,5 @@
 import React, { memo, useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -13,6 +13,7 @@ import TextView from "../view/TextView";
 import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
+import LoadingMoreView from "../view/LoadingMoreView";
 
 const SearchProfilesList = () => {
   const router = useRouter();
@@ -84,11 +85,7 @@ const SearchProfilesList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && (
-        <View style={styles.loadingMore}>
-          <SpinnerView size="small" color="white" />
-        </View>
-      )}
+      {isLoaded && isFetching && <LoadingMoreView />}
     </>
   );
 };
@@ -113,16 +110,6 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-  },
-  loadingMore: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
-    position: 'absolute',
-    bottom: 40, // Todo - Make dynamic
-    right: 0,
-    left: 0,
   },
 });
 
