@@ -33,7 +33,7 @@ class SearchManager {
     }
   }
 
-  async loadMoreResults(key: string, page: number) {
+  async loadMoreResults(key: string, page: number, currentTab?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
@@ -65,7 +65,25 @@ class SearchManager {
 
     moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key]; 
 
+    if (moreResults && currentTab) {
+      moreResults = this.getTabResults(key, currentTab, { [key]: moreResults });
+    }
+
     return moreResults || [];
+  }
+
+  getTabResults(key: string, currentTab: string, currentResults: any) {
+    let tab: string = currentTab;
+    let data: any = { ...currentResults };
+
+    if (key == 'jam' && tab && tab != 'jam') {
+      data[key] = data[key].filter((o: any) => o.type == tab);
+    }
+    else if (key == 'profile' && tab && tab != 'jammer') {
+      data[key] = data[key].filter((o: any) => o.profile_type == tab);
+    }
+
+    return data[key];
   }
 
   async sendRequest(searchValue?: string) {
@@ -154,20 +172,6 @@ class SearchManager {
     }
 
     return searchResults;
-  }
-
-  getTabResults(key: string, currentTab: string, currentResults: any) {
-    let tab: string = currentTab;
-    let data: any = { ...currentResults };
-
-    if (key == 'jam' && tab && tab != 'jam') {
-      data[key] = data[key].filter((o: any) => o.type == tab);
-    }
-    else if (key == 'profile' && tab && tab != 'jammer') {
-      data[key] = data[key].filter((o: any) => o.profile_type == tab);
-    }
-
-    return data[key];
   }
 
   isJamTab(key: string) {
