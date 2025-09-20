@@ -7,7 +7,7 @@ const LoadingMoreView = () => {
   return (
     <BoxView style={styles.wrapper} direction="row" align="center" justify="center">
       <View style={styles.container}>
-      <SpinnerView size="small" color="white" />
+        <SpinnerView size="small" color="white" />
       </View>
     </BoxView>
   );
@@ -23,7 +23,6 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
     padding: Layout.space.base,
     borderRadius: Layout.radius.round,
   },
