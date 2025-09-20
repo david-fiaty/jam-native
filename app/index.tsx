@@ -1,4 +1,3 @@
-import * as NavigationBar from 'expo-navigation-bar';
 import { useEffect, useState, useRef } from 'react';
 import { setCountriesData, setSectorsData } from '@/redux/slices/AppSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';
@@ -26,7 +25,7 @@ export default () => {
     dispatch(setCurrentLanguage(code || Config.fallbackLanguage));
     i18next.changeLanguage(code);
   };
-  
+
   useEffect(() => {
     (async () => {
       await setLanguage();
