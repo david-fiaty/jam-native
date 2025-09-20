@@ -7,6 +7,8 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
+import EntityManager from "@/manager/EntityManager";
+import LoadingMoreView from "../view/LoadingMoreView";
 
 type Props = {
   idArray?: any;
@@ -31,18 +33,9 @@ const JamsList = ({ idArray }: Props) => {
     );
   };
 
-  // Todo - Filter by idArray
-  /*
-  const getListData = (key: string) => {
-    let results: any = { ...searchResults };
-
-    if (idArray?.length > 0) {
-      results[key] = results[key].filter((o: any) => idArray.includes(o.id));
-    }
-
-    return results[key];
+  const getListData = async () => {
+    setListData(await EntityManager.getJams(idArray));
   };
-  */
 
   const fetchListData = async () => {
     if (isFetching) return;
@@ -63,9 +56,15 @@ const JamsList = ({ idArray }: Props) => {
   }, [searchState]);
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
-  }, [isLoaded]);
+    if (!idArray?.length) {
+      if (!isLoaded) setIsLoaded(true);
+      fetchListData();
+    }
+    else if (!isLoaded) {
+      getListData();
+      setIsLoaded(true);
+    }
+  }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -85,11 +84,7 @@ const JamsList = ({ idArray }: Props) => {
         />
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && (
-        <View style={styles.loadingMore}>
-          <SpinnerView size="small" color="white" />
-        </View>
-      )}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView />}
     </>
   );
 };
@@ -98,16 +93,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-  },
-  loadingMore: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
   },
 });
 
