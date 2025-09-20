@@ -8,6 +8,7 @@ import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
 import EntityManager from "@/manager/EntityManager";
+import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
   idArray?: any;
@@ -83,11 +84,7 @@ const JamsList = ({ idArray }: Props) => {
         />
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && (
-        <View style={styles.loadingMore}>
-          <SpinnerView size="small" color="white" />
-        </View>
-      )}
+      {isLoaded && isFetching && !!listData?.length && ScreenManager.renderLoadingMore()}
     </>
   );
 };
@@ -96,16 +93,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-  },
-  loadingMore: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
   },
 });
 

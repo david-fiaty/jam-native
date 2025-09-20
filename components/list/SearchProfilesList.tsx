@@ -84,11 +84,7 @@ const SearchProfilesList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && (
-        <View style={styles.loadingMore}>
-          <SpinnerView size="small" color="white" />
-        </View>
-      )}
+      {isLoaded && isFetching && ScreenManager.renderLoadingMore()}
     </>
   );
 };
@@ -113,16 +109,6 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
-  },
-  loadingMore: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base,
-    backgroundColor: Layout.colors.primary,
-    opacity: 0.75,
-    position: 'absolute',
-    bottom: 40, // Todo - Make dynamic
-    right: 0,
-    left: 0,
   },
 });
 
