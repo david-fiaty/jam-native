@@ -18,7 +18,7 @@ type Props = {
   field?: any;
 };
 
-const pageSize: number = 10;
+const pageSize: number = 9;
 
 const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
@@ -66,7 +66,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
         ...{
           query_text: searchValue,
         },
-      }
+      };
     }
 
     setProfilesData(await EntityManager.listProfiles(payload));
@@ -126,16 +126,19 @@ const CollaboratorsList = ({ resource, field }: Props) => {
       />
 
       {profilesData?.length > 0 && (
-        <ListView
-          data={profilesData}
-          renderItem={(row: any) => (
-            <ProfileListItemView
-              row={row}
-              selected={selectedProfiles.includes(row.item.id)}
-              onListItemPress={(o: any) => toggleItem(o.item.id)}
-            />
-          )}
-        />
+        <View style={Layout.borderedListContainer}>
+          <ListView
+            contentContainerStyle={styles.listContainer}
+            data={profilesData}
+            renderItem={(row: any) => (
+              <ProfileListItemView
+                row={row}
+                selected={selectedProfiles.includes(row.item.id)}
+                onListItemPress={(o: any) => toggleItem(o.item.id)}
+              />
+            )}
+          />
+        </View>
       )}
 
       {!profilesData?.length &&
@@ -146,6 +149,9 @@ const CollaboratorsList = ({ resource, field }: Props) => {
 };
 
 const styles = StyleSheet.create({
+  listContainer: {
+    gap: Layout.space.base/2,
+  },
   inputTextFieldContainer: {
     backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
