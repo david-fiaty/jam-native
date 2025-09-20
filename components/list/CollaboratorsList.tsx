@@ -18,7 +18,7 @@ type Props = {
   field?: any;
 };
 
-const pageSize: number = 9;
+const pageSize: number = 10;
 
 const CollaboratorsList = ({ resource, field }: Props) => {
   const dispatch = useDispatch();
@@ -39,9 +39,9 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   const renderSearchIcon = () => {
     if (!isSearching && searchValue) {
       return (
-        <IconView 
-          name="delete" 
-          theme="clear" 
+        <IconView
+          name="delete"
+          theme="clear"
           onPress={clearSearch}
         />
       );
@@ -81,12 +81,12 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     else {
       profileList.push(entityId);
     }
-    
+
     setSelectedProfiles(profileList);
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
+      key: field,
       value: profileList,
     }));
   };
@@ -95,13 +95,13 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     let payload: any = {
       page_size: pageSize,
     };
-    
+
     return await EntityManager.listProfiles(payload);
   };
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) { 
+      if (!isLoaded) {
         if (!profilesData) setProfilesData(await getProfilesData());
         if (formData?.[field]?.length && !selectedProfiles.length) {
           setSelectedProfiles(formData[field]);
@@ -116,33 +116,31 @@ const CollaboratorsList = ({ resource, field }: Props) => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <InputTextField 
+      <InputTextField
         value={searchValue}
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Search...')} 
+        placeholder={i18n.t('Search...')}
         onChangeText={(text: string) => setSearchValue(text)}
         onSubmitEditing={onSubmitEditing}
         rightIcon={renderSearchIcon()}
       />
 
-      <View style={Layout.borderedListContainer}>
-        {profilesData?.length > 0 &&
-          <ListView
-            data={profilesData}
-            renderItem={(row: any) => (
-              <ProfileListItemView 
-                row={row}
-                selected={selectedProfiles.includes(row.item.id)}
-                onListItemPress={(o: any) => toggleItem(o.item.id)}  
-              />
-            )}
-          />
-        }
+      {profilesData?.length > 0 && (
+        <ListView
+          data={profilesData}
+          renderItem={(row: any) => (
+            <ProfileListItemView
+              row={row}
+              selected={selectedProfiles.includes(row.item.id)}
+              onListItemPress={(o: any) => toggleItem(o.item.id)}
+            />
+          )}
+        />
+      )}
 
-        {!profilesData?.length && 
-          <TextView>{i18n.t('No collaborators found.')}</TextView>
-        }
-      </View>
+      {!profilesData?.length &&
+        <TextView>{i18n.t('No collaborators found.')}</TextView>
+      }
     </BoxView>
   );
 };
