@@ -7,6 +7,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
@@ -32,14 +33,7 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   const getListData = async () => {
-    let key: string = 'jam';
-    let results: any = { ...searchResults };
-
-    if (idArray?.length > 0) {
-      results[key] = results[key].filter((o: any) => idArray.includes(o.id));
-    }
-
-    setListData(results[key]);
+    setListData(await EntityManager.getJams(idArray));
   };
 
   const fetchListData = async () => {
