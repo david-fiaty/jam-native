@@ -55,12 +55,7 @@ const SearchProfilesList = () => {
   };
 
   const handleScroll = (event: any) => {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const paddingToBottom = 0;
-
-    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
-      fetchListData();
-    }
+    ScreenManager.handleScrollEvent(event, fetchListData);
   };
 
   useEffect(() => {
