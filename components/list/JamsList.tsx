@@ -7,6 +7,7 @@ import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
 import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
+import EntityManager from "@/manager/EntityManager";
 
 type Props = {
   idArray?: any;
@@ -31,18 +32,9 @@ const JamsList = ({ idArray }: Props) => {
     );
   };
 
-  // Todo - Filter by idArray
-  /*
-  const getListData = (key: string) => {
-    let results: any = { ...searchResults };
-
-    if (idArray?.length > 0) {
-      results[key] = results[key].filter((o: any) => idArray.includes(o.id));
-    }
-
-    return results[key];
+  const getListData = async () => {
+    setListData(await EntityManager.getJams(idArray));
   };
-  */
 
   const fetchListData = async () => {
     if (isFetching) return;
@@ -63,9 +55,15 @@ const JamsList = ({ idArray }: Props) => {
   }, [searchState]);
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
-  }, [isLoaded]);
+    if (!idArray?.length) {
+      if (!isLoaded) setIsLoaded(true);
+      fetchListData();
+    }
+    else if (!isLoaded) {
+      getListData();
+      setIsLoaded(true);
+    }
+  }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
