@@ -7,6 +7,7 @@ import UserReducer from './slices/UserSlice';
 import FormReducer from './slices/FormSlice';
 import SectionReducer from './slices/SectionSlice';
 import CommentReducer from './slices/CommentSlice';
+import ScreenReducer from './slices/ScreenSlice';
 
 const Store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const Store = configureStore({
     form: FormReducer,
     section: SectionReducer,
     comment: CommentReducer,
+    screen: ScreenReducer,
   },
   middleware: getDefaultMiddleware =>
     process.env.NODE_ENV === 'production' ? getDefaultMiddleware() : getDefaultMiddleware({
