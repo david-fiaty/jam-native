@@ -40,6 +40,9 @@ const ModalView = ({ currentSection, style }: Props) => {
   //const footerHeight: number = screenState.footerLayout?.bottom || 45.5; // Todo - Should be ready with useEffect
   const footerHeight: number = screenState.footerLayout?.bottom || 0;
 
+
+  console.log(modalState.active.length);
+
   const getContainerStyle = () => {
     let systemTabsHeight: number = insets.bottom;
     let modalHeight: number = ScreenManager.getModalSize().height;
