@@ -1,8 +1,9 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
@@ -14,7 +15,6 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
-import { Config } from "@/constants/Config";
 
 const numColumns = 2;
 
@@ -25,6 +25,7 @@ const SearchProjectsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -80,6 +81,16 @@ const SearchProjectsList = () => {
     if (!isLoaded) setIsLoaded(true);
     fetchListData();
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+      setListData([]);
+      setCurrentPage(1);
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
+
 
   if (!isLoaded) return <SpinnerView />;
 
