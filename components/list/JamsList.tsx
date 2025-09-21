@@ -9,6 +9,7 @@ import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
 import EntityManager from "@/manager/EntityManager";
 import LoadingMoreView from "../view/LoadingMoreView";
+import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
@@ -39,10 +40,11 @@ const JamsList = ({ idArray }: Props) => {
 
   const fetchListData = async () => {
     if (isFetching) return;
+    
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
 
-    if (!moreResults?.length) {
+    if (!moreResults?.length && !!Config.infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('jam', 1);
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage(2);
@@ -84,8 +86,8 @@ const JamsList = ({ idArray }: Props) => {
         <ListView
           data={listData}
           contentContainerStyle={Layout.listContainer}
-          renderItem={renderItem}
           keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
+          renderItem={renderItem}
           onEndReachedThreshold={0.5}
           onEndReached={fetchListData}
         />
