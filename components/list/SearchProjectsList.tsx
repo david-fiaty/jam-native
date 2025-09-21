@@ -121,7 +121,7 @@ const SearchProjectsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && <LoadingMoreView />}
+      {isLoaded && isFetching && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
     </>
   );
 };
