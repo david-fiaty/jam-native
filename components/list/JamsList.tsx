@@ -40,6 +40,7 @@ const JamsList = ({ idArray }: Props) => {
 
   const fetchListData = async () => {
     if (isFetching) return;
+    
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
 
