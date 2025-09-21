@@ -39,7 +39,7 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   const fetchListData = async () => {
-    if (isFetching) return;
+    if (isFetching || !!idArray?.length) return;
     
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
@@ -58,11 +58,13 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-      prevSearchState.current = searchState;
+    if (!idArray?.length) {
+      if (prevSearchState.current?.currentResults !== searchState.currentResults) {
+        setSearchResults(JSON.parse(searchState.currentResults) || {});
+        prevSearchState.current = searchState;
+      }
     }
-  }, [searchState]);
+  }, [searchState, idArray]);
 
   useEffect(() => {
     if (!idArray?.length) {
