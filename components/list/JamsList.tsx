@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -9,7 +10,6 @@ import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
 import EntityManager from "@/manager/EntityManager";
 import LoadingMoreView from "../view/LoadingMoreView";
-import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
@@ -19,6 +19,7 @@ const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [cycle, setCycle] = useState(0);
   const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
@@ -40,13 +41,19 @@ const JamsList = ({ idArray }: Props) => {
 
   const fetchListData = async () => {
     if (isFetching) return;
-    
+
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
 
     if (!moreResults?.length && !!Config.infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('jam', 1);
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
+
+      setCycle((prev) => prev + 1);
+      setListData((prevData) => [
+        ...(prevData || []), 
+        ...moreResults.map((item) => ({ ...item, cycle: cycle + 1 })),
+      ]);
+      
       setCurrentPage(2);
     }
     else {

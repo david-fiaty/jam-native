@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import SectionManager from "@/manager/SectionManager";
@@ -14,13 +15,13 @@ import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import LoadingMoreView from "../view/LoadingMoreView";
-import { Config } from "@/constants/Config";
 
 const SearchProfilesList = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [cycle, setCycle] = useState(0);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
 
@@ -49,7 +50,13 @@ const SearchProfilesList = () => {
 
     if (!moreResults?.length && !!Config.infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('profile', 1, searchState.currentTab);
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
+
+      setCycle((prev) => prev + 1);
+      setListData((prevData) => [
+        ...(prevData || []),
+        ...moreResults.map((item) => ({ ...item, cycle: cycle + 1 })),
+      ]);
+      
       setCurrentPage(2);
     }
     else {

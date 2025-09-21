@@ -3,6 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
@@ -13,7 +14,6 @@ import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
-import { Config } from "@/constants/Config";
 
 const numColumns = 2;
 
@@ -22,6 +22,7 @@ const SearchJamsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [cycle, setCycle] = useState(0);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
@@ -58,7 +59,13 @@ const SearchJamsList = () => {
 
     if (!moreResults?.length && !!Config.infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('jam', 1, searchState.currentTab);
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
+
+      setCycle((prev) => prev + 1);
+      setListData((prevData) => [
+        ...(prevData || []), 
+        ...moreResults.map((item) => ({ ...item, cycle: cycle + 1 })),
+      ]);
+      
       setCurrentPage(2);
     }
     else {
