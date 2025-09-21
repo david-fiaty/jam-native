@@ -23,7 +23,6 @@ const SearchProjectsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cycle, setCycle] = useState(0);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
@@ -62,13 +61,7 @@ const SearchProjectsList = () => {
     if (!moreResults?.length && !!Config.infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('project', 1, searchState.currentTab);
       moreResults = await EntityManager.addProjectsImages(moreResults);
-    
-      setCycle((prev) => prev + 1);
-      setListData((prevData) => [
-        ...(prevData || []), 
-        ...moreResults.map((item) => ({ ...item, cycle: cycle + 1 })),
-      ]);
-      
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage(2);
     }
     else {
@@ -105,6 +98,7 @@ const SearchProjectsList = () => {
             numColumns={numColumns}
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
+            keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
             onScroll={handleScroll}
             scrollEventThrottle={16}
