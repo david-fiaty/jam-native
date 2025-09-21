@@ -191,11 +191,6 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <SelectJamsForm {...params} />,
       },
       {
-        id: 'PrivateProfileSection',
-        title: i18n.t('Your profile'),
-        render: (params: any) => <PrivateProfileSection {...params} />,
-      },
-      {
         id: 'PublicJamSection',
         title: i18n.t('Jam'),
         render: (params: any) => <PublicJamSection {...params} />,
@@ -204,6 +199,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PublicProfileSection',
         title: i18n.t('Profile'),
         render: (params: any) => <PublicProfileSection {...params} />,
+      },
+      {
+        id: 'PrivateProfileSection',
+        title: i18n.t('Your profile'),
+        render: (params: any) => <PrivateProfileSection {...params} />,
       },
     ].map((o: any) => {
       return {

@@ -15,6 +15,8 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
+import ModalManager from "@/manager/ModalManager";
+import UserManager from "@/manager/UserManager";
 
 const numColumns = 2;
 
@@ -29,6 +31,14 @@ const SearchProjectsList = () => {
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
+    /*
+    ModalManager.toggleModal('PublicProjectSection', {
+      profileId: row?.item?.id,
+      itemData: JSON.stringify(row?.item),
+      title: i18n.t("{{ name }}'s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
+    });
+    */
+
     SectionManager.push(router, 'public-project', {
       projectId: row?.item?.id,
       itemData: JSON.stringify(row?.item),

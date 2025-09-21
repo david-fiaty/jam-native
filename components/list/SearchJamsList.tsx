@@ -1,11 +1,9 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
-import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
@@ -14,11 +12,11 @@ import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
+import ModalManager from "@/manager/ModalManager";
 
 const numColumns = 2;
 
 const SearchJamsList = () => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,7 +26,7 @@ const SearchJamsList = () => {
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'public-jam', {
+    ModalManager.toggleModal('PublicJamSection', {
       jamId: row?.item?.id,
       title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
