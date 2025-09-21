@@ -1,13 +1,15 @@
 import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
 import JamView from "@/components/view/JamView";
+import JamsList from "@/components/list/JamsList";
 
 type Props = {
-  jamId: any;
+  jamId?: any;
+  idArray?: any;
   itemData?: any;
 };
 
-const PublicJamSection = ({ jamId, itemData }: Props) => {
+const PublicJamSection = ({ jamId, idArray, itemData }: Props) => {
   return (
     <BoxView
       direction="column"
@@ -15,11 +17,17 @@ const PublicJamSection = ({ jamId, itemData }: Props) => {
       justify="flex-start"
       style={styles.container}
     >
-      <JamView 
-        isPublic={true} 
-        jamId={jamId}
-        itemData={itemData ? JSON.parse(itemData) : null}
-      />
+      {jamId && (
+        <JamView
+          isPublic={true}
+          jamId={jamId}
+          itemData={itemData ? JSON.parse(itemData) : null}
+        />
+      )}
+
+      {!!idArray?.length && (
+        <JamsList idArray={idArray} />
+      )}
     </BoxView>
   );
 };
