@@ -17,7 +17,6 @@ type Props = {
 const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [hasMore, setHasMore] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
