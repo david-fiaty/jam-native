@@ -17,7 +17,7 @@ const PublicJamSection = ({ jamId, idArray, itemData }: Props) => {
       justify="flex-start"
       style={styles.container}
     >
-      {!!jamId?.length && (
+      {jamId && (
         <JamView
           isPublic={true}
           jamId={jamId}

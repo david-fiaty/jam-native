@@ -17,7 +17,7 @@ const PrivateJamSection = ({ jamId, idArray, itemData }: Props) => {
       justify="flex-start"
       style={styles.container}
     >
-      {!!jamId?.length && (
+      {jamId && (
         <JamView
           isPublic={false}
           jamId={jamId}
