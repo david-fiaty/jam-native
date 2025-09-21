@@ -29,8 +29,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   const onItemPress = (row: any) => {
     if (isPublic || !deletable) {
       ModalManager.toggleModal('PublicJamSection', {
-        idArray: row?.item?.id,
+        jamId: row?.item?.id,
         title: row?.item?.title,
+        itemData: JSON.stringify(row?.item),
       });
     }
     else if (deletable) {
@@ -164,8 +165,8 @@ const styles = StyleSheet.create({
   },
   deleteIcon: {
     position: 'absolute',
-    top: Layout.space.base/2,
-    right: Layout.space.base/2,
+    top: Layout.space.base / 2,
+    right: Layout.space.base / 2,
   }
 });
 
