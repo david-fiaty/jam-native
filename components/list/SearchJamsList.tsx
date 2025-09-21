@@ -79,6 +79,15 @@ const SearchJamsList = () => {
     fetchListData();
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+      setListData([]);
+      setCurrentPage(1);
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
+
   if (!isLoaded) return <SpinnerView />;
 
   return (
