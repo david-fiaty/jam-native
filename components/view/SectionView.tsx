@@ -27,7 +27,6 @@ import PrivateProfileSection from "../section/profile/PrivateProfileSection";
 import PublicProjectSection from "../section/project/PublicProjectSection";
 import PrivateProjectSection from "../section/project/PrivateProjectSection";
 import ProjectJamsSection from "../section/project/ProjectJamsSection";
-import ProfileProjectsSection from "../section/profile/ProfileProjectsSection";
 import PublicJamSection from "../section/jam/PublicJamSection";
 import PrivateJamSection from "../section/jam/PrivateJamSection";
 import ProjectFormSection from "../section/project/ProjectFormSection";
@@ -142,12 +141,6 @@ const SectionView = () => {
         title: i18n.t('Jams'),
         showBackButton: false,
         render: (params: any) => <JamsSection {...params} />,
-      },
-      {
-        id: 'profile-projects',
-        title: i18n.t('Profile Projects'),
-        showBackButton: true,
-        render: (params: any) => <ProfileProjectsSection {...params} />,
       },
       {
         id: 'project-jams',
