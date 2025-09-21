@@ -14,6 +14,7 @@ import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import LoadingMoreView from "../view/LoadingMoreView";
+import { Config } from "@/constants/Config";
 
 const SearchProfilesList = () => {
   const router = useRouter();
@@ -46,9 +47,16 @@ const SearchProfilesList = () => {
 
     let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab);
 
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    if (!moreResults?.length && !!Config.infiniteScroll) {
+      moreResults = await SearchManager.loadMoreResults('profile', 1, searchState.currentTab);
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage(2);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
-    setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
 
