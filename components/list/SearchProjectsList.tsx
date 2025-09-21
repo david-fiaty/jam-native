@@ -1,13 +1,11 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import TextView from "../view/TextView";
-import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
@@ -16,12 +14,10 @@ import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
-import UserManager from "@/manager/UserManager";
 
 const numColumns = 2;
 
 const SearchProjectsList = () => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,18 +27,10 @@ const SearchProjectsList = () => {
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
-    /*
     ModalManager.toggleModal('PublicProjectSection', {
-      profileId: row?.item?.id,
-      itemData: JSON.stringify(row?.item),
-      title: i18n.t("{{ name }}'s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
-    });
-    */
-
-    SectionManager.push(router, 'public-project', {
       projectId: row?.item?.id,
       itemData: JSON.stringify(row?.item),
-      title: row?.item?.title
+      title: row?.item?.title,
     });
   };
 
