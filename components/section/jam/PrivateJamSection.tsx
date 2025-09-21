@@ -4,7 +4,7 @@ import JamView from "@/components/view/JamView";
 import JamsList from "@/components/list/JamsList";
 
 type Props = {
-  jamId: any;
+  jamId?: any;
   idArray?: any;
   itemData?: any;
 };
