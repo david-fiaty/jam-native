@@ -24,11 +24,9 @@ import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "../section/NotificationItemSection";
 import PublicProfileSection from "../section/profile/PublicProfileSection";
 import PrivateProfileSection from "../section/profile/PrivateProfileSection";
-import ProfileJamsSection from "../section/profile/ProfileJamsSection";
 import PublicProjectSection from "../section/project/PublicProjectSection";
 import PrivateProjectSection from "../section/project/PrivateProjectSection";
 import ProjectJamsSection from "../section/project/ProjectJamsSection";
-import ProfileProjectsSection from "../section/profile/ProfileProjectsSection";
 import PublicJamSection from "../section/jam/PublicJamSection";
 import PrivateJamSection from "../section/jam/PrivateJamSection";
 import ProjectFormSection from "../section/project/ProjectFormSection";
@@ -143,18 +141,6 @@ const SectionView = () => {
         title: i18n.t('Jams'),
         showBackButton: false,
         render: (params: any) => <JamsSection {...params} />,
-      },
-      {
-        id: 'profile-jams',
-        title: i18n.t('Profile Jams'),
-        showBackButton: true,
-        render: (params: any) => <ProfileJamsSection {...params} />,
-      },
-      {
-        id: 'profile-projects',
-        title: i18n.t('Profile Projects'),
-        showBackButton: true,
-        render: (params: any) => <ProfileProjectsSection {...params} />,
       },
       {
         id: 'project-jams',

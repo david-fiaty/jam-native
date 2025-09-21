@@ -20,6 +20,7 @@ import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import SpinnerView from "./SpinnerView";
 import EntityManager from "@/manager/EntityManager";
+import ModalManager from "@/manager/ModalManager";
 
 const profileImageSize: number = 111;
 
@@ -249,8 +250,8 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
           </TextView>
 
           <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileData?.profile_jams || []),
+            ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
+              idArray: profileData?.profile_jams || [],
               title: groupTitle,
             });
           }}>
@@ -279,8 +280,8 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
           </TextView>
 
           <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileData?.saved_jams || []),
+            ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
+              idArray: profileData?.saved_jams || [],
               title: groupTitle,
             });
           }}>
@@ -302,7 +303,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
       return EntityManager.findProfile(profileId);
     }
     else {
-      return {...userState.profileData};
+      return { ...userState.profileData };
     }
   };
 
@@ -391,7 +392,7 @@ const styles = StyleSheet.create({
   },
   groupTitleContainer: {
     width: '100%',
-    marginTop: Layout.space.base*1.5,
+    marginTop: Layout.space.base * 1.5,
   },
   groupTitle: {
     fontWeight: 'bold',

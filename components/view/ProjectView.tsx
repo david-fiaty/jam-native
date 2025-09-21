@@ -11,6 +11,7 @@ import ProjectJamsField from "../field/ProjectJamsField";
 import SectionManager from "@/manager/SectionManager";
 import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   projectId?: any;
@@ -28,13 +29,13 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({projectData?.jams?.length || 0})
+            {i18n.t('Jams')} ({ projectData?.jams?.length || 0 })
           </TextView>
 
           {isPublic && (
             <TouchableOpacity onPress={() => {
-              SectionManager.push(router, 'project-jams', {
-                jamId: JSON.stringify(projectData?.jams || []),
+              ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
+                idArray: projectData?.jams || [],
                 title: i18n.t('Project Jams'),
               });
             }}>
