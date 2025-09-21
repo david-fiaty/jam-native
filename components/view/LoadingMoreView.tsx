@@ -5,7 +5,12 @@ import BoxView from './BoxView';
 
 const LoadingMoreView = () => {
   return (
-    <BoxView style={styles.wrapper} direction="row" align="center" justify="center">
+    <BoxView 
+      style={styles.wrapper} 
+      direction="row" 
+      align="center" 
+      justify="center"
+    >
       <View style={styles.container}>
         <SpinnerView size="small" color="white" />
       </View>
