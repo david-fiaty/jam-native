@@ -10,6 +10,7 @@ import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
+import ModalManager from "@/manager/ModalManager";
 
 const numColumns = 3;
 
@@ -26,14 +27,11 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    let path: string = isPublic ? 'public-jam' : 'private-jam';
-    let params: any = {
+    ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
       jamId: row?.item?.id,
-      title: i18n.t('Jam'),
+      title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-    };
-
-    SectionManager.push(router, path, params);
+    });
   };
 
   const renderAddButton = () => {
