@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -17,6 +17,7 @@ type Props = {
 const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const [searchResults, setSearchResults] = useState<any>({});
