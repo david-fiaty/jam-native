@@ -23,7 +23,6 @@ const SearchView = () => {
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
-
       prevSearchState.current = searchState;
     }
   }, [searchState]);
