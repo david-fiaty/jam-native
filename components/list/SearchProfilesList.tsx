@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import SectionManager from "@/manager/SectionManager";
@@ -46,9 +47,16 @@ const SearchProfilesList = () => {
 
     let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab);
 
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    if (!moreResults?.length && !!Config.infiniteScroll) {
+      moreResults = await SearchManager.loadMoreResults('profile', 1, searchState.currentTab);
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage(2);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
-    setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
 
@@ -74,6 +82,7 @@ const SearchProfilesList = () => {
           <ListView
             data={listData}
             contentContainerStyle={styles.contentContainerStyle}
+            keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
             onScroll={handleScroll}
             scrollEventThrottle={16}
