@@ -14,6 +14,7 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
+import { Config } from "@/constants/Config";
 
 const numColumns = 2;
 
@@ -57,9 +58,17 @@ const SearchProjectsList = () => {
     let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage, searchState.currentTab);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    if (!moreResults?.length && !!Config.infiniteScroll) {
+      moreResults = await SearchManager.loadMoreResults('project', 1, searchState.currentTab);
+      moreResults = await EntityManager.addProjectsImages(moreResults);
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage(2);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
-    setCurrentPage((prevPage: number) => prevPage + 1);
     setIsFetching(false);
   };
 
@@ -89,6 +98,7 @@ const SearchProjectsList = () => {
             numColumns={numColumns}
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
+            keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
             onScroll={handleScroll}
             scrollEventThrottle={16}
