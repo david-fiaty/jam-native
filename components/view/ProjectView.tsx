@@ -29,7 +29,7 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
       <>
         <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
           <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({projectData?.jams?.length || 0})
+            {i18n.t('Jams')} ({ projectData?.jams?.length || 0 })
           </TextView>
 
           {isPublic && (
