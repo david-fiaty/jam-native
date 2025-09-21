@@ -26,10 +26,13 @@ const ProfileJamsFieldSelect = ({ idArray, isPublic, emptyMessage, addable }: Pr
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
+    // Todo - Use modal for call, no more section available
+    /*
     SectionManager.push(router, 'profile-jams', {
       jamId: JSON.stringify([row?.item?.id]),
       title: row?.item?.title,
     });
+    */
   };
 
   const renderAddButton = () => {
