@@ -250,7 +250,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
           </TextView>
 
           <TouchableOpacity onPress={() => {
-            ModalManager.toggleModal('PrivateJamSection', {
+            ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
               idArray: profileData?.profile_jams || [],
               title: groupTitle,
             });
@@ -280,8 +280,8 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
           </TextView>
 
           <TouchableOpacity onPress={() => {
-            SectionManager.push(router, 'profile-jams', {
-              jamId: JSON.stringify(profileData?.saved_jams || []),
+            ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
+              idArray: profileData?.saved_jams || [],
               title: groupTitle,
             });
           }}>
