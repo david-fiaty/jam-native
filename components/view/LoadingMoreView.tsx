@@ -3,10 +3,18 @@ import { StyleSheet, View } from 'react-native';
 import SpinnerView from './SpinnerView';
 import BoxView from './BoxView';
 
-const LoadingMoreView = () => {
+type Props = {
+  bottomSpace?: any;
+};
+
+const LoadingMoreView = ({ bottomSpace }: Props) => {
+  const wrapperStyle: any = {
+    bottom: bottomSpace || Layout.space.base,
+  };
+
   return (
     <BoxView 
-      style={styles.wrapper} 
+      style={[styles.wrapper, wrapperStyle]} 
       direction="row" 
       align="center" 
       justify="center"
@@ -22,7 +30,6 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: 'transparent',
     position: 'absolute',
-    bottom: Layout.space.base,
     right: 0,
     left: 0,
   },
