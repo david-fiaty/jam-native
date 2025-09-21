@@ -145,7 +145,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # New release
 - Finalisation pagination + infinite scroll sur feed et search screens
 - Amelioration perf rendu UI (different de perf chargement API data) 
-- Avancement profile screens
+- Avancement + bug fixes profile screens (finalisation en cours)
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
