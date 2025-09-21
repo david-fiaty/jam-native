@@ -63,7 +63,12 @@ const ModalView = ({ currentSection, style }: Props) => {
     const currentModalIndex: number = getCurrentModalIndex();
 
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
-      return <ModalBackButton currentModal={currentModal} visible={activeModalsCount !== currentModalIndex} />;
+      return (
+        <ModalBackButton 
+          currentModal={currentModal} 
+          visible={activeModalsCount !== currentModalIndex} 
+        />
+      );
     }
 
     return <></>;
@@ -229,6 +234,7 @@ const ModalView = ({ currentSection, style }: Props) => {
           showTitle: true,
           showBackButton: true,
           params: {},
+          toolbarButtons: [],
           sectionId: null,
           effect: {
             in: 'slideInUp',
