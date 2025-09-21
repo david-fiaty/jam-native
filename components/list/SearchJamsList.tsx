@@ -1,8 +1,9 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
@@ -13,7 +14,6 @@ import TextView from "../view/TextView";
 import SpinnerView from "../view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
-import { Config } from "@/constants/Config";
 
 const numColumns = 2;
 
@@ -24,6 +24,7 @@ const SearchJamsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
