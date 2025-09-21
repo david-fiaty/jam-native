@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
@@ -23,7 +23,8 @@ const SearchProfilesList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-
+  const prevSearchState: any = useRef(null);
+  
   const onItemPress = (row: any) => {
     SectionManager.push(router, 'public-profile', {
       profileId: row?.item?.id,
@@ -68,6 +69,15 @@ const SearchProfilesList = () => {
     if (!isLoaded) setIsLoaded(true);
     fetchListData();
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+      setListData([]);
+      setCurrentPage(1);
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   return (
     <>
