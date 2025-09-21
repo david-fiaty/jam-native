@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from "react-native"
-import { useRouter } from "expo-router";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
-import SectionManager from '@/manager/SectionManager';
 import MediaManager from '@/manager/MediaManager';
 import AddItemButton from '../button/AddItemButton';
 import i18n from '@/translation/i18n';
@@ -24,15 +22,14 @@ type Props = {
 };
 
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
-  const router = useRouter();
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
     if (isPublic || !deletable) {
-      SectionManager.push(router, 'project-jams', {
-        jamId: JSON.stringify([row.item.id]),
+      ModalManager.toggleModal('PublicJamSection', {
+        idArray: row?.item?.id,
         title: row?.item?.title,
       });
     }
