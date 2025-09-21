@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -9,7 +10,6 @@ import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
 import EntityManager from "@/manager/EntityManager";
 import LoadingMoreView from "../view/LoadingMoreView";
-import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
@@ -66,8 +66,8 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     if (!idArray?.length) {
-      if (!isLoaded) setIsLoaded(true);
       fetchListData();
+      if (!isLoaded) setIsLoaded(true);
     }
     else if (!isLoaded) {
       getListData();

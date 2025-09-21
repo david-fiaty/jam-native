@@ -26,6 +26,9 @@ import PublicJamSection from '../section/jam/PublicJamSection';
 import PublicProfileSection from '../section/profile/PublicProfileSection';
 import ScreenManager from '@/manager/ScreenManager';
 import { Layout } from '@/constants/Layout';
+import PublicProjectSection from '../section/project/PublicProjectSection';
+import PrivateProjectSection from '../section/project/PrivateProjectSection';
+import PrivateJamSection from '../section/jam/PrivateJamSection';
 
 type Props = {
   currentSection?: any;
@@ -191,11 +194,6 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <SelectJamsForm {...params} />,
       },
       {
-        id: 'PrivateProfileSection',
-        title: i18n.t('Your profile'),
-        render: (params: any) => <PrivateProfileSection {...params} />,
-      },
-      {
         id: 'PublicJamSection',
         title: i18n.t('Jam'),
         render: (params: any) => <PublicJamSection {...params} />,
@@ -204,6 +202,26 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PublicProfileSection',
         title: i18n.t('Profile'),
         render: (params: any) => <PublicProfileSection {...params} />,
+      },
+      {
+        id: 'PublicProjectSection',
+        title: i18n.t('Project'),
+        render: (params: any) => <PublicProjectSection {...params} />,
+      },
+      {
+        id: 'PrivateJamSection',
+        title: i18n.t('Your Jam'),
+        render: (params: any) => <PrivateJamSection {...params} />,
+      },
+      {
+        id: 'PrivateProfileSection',
+        title: i18n.t('Your profile'),
+        render: (params: any) => <PrivateProfileSection {...params} />,
+      },
+      {
+        id: 'PrivateProjectSection',
+        title: i18n.t('Your project'),
+        render: (params: any) => <PrivateProjectSection {...params} />,
       },
     ].map((o: any) => {
       return {

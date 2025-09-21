@@ -10,6 +10,7 @@ import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   idArray?: any;
@@ -26,14 +27,11 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
-    let path: string = isPublic ? 'public-project' : 'private-project';
-    let params: any = {
-      projectId: row?.item?.id,
-      title: i18n.t('Project'),
+    ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
+      jamId: row?.item?.id,
+      title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-    };
-
-    SectionManager.push(router, path, params);
+    });
   };
 
   const renderAddButton = () => {
