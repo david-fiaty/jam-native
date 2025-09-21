@@ -37,7 +37,8 @@ const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
   const screenState: any = useSelector((state: any) => state.screen, shallowEqual);
-  const footerHeight: number = screenState.footerLayout?.bottom || 45.5; // Todo - Should be ready with useEffect
+  //const footerHeight: number = screenState.footerLayout?.bottom || 45.5; // Todo - Should be ready with useEffect
+  const footerHeight: number = screenState.footerLayout?.bottom || 0;
 
   const getContainerStyle = () => {
     let systemTabsHeight: number = insets.bottom;
