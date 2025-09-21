@@ -36,7 +36,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   const insets: any = useSafeAreaInsets();
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
-
+ 
   const getContainerStyle = () => {
     let systemTabsHeight: number = insets.bottom;
     let modalHeight: number = ScreenManager.getModalSize().height;
