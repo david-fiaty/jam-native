@@ -1,12 +1,10 @@
 import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
-import SectionManager from "@/manager/SectionManager";
 import BoxView from "../view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
@@ -15,9 +13,9 @@ import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
 import SpinnerView from "../view/SpinnerView";
 import LoadingMoreView from "../view/LoadingMoreView";
+import ModalManager from "@/manager/ModalManager";
 
 const SearchProfilesList = () => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +24,7 @@ const SearchProfilesList = () => {
   const prevSearchState: any = useRef(null);
   
   const onItemPress = (row: any) => {
-    SectionManager.push(router, 'public-profile', {
+    ModalManager.toggleModal('PublicProfileSection', {
       profileId: row?.item?.id,
       itemData: JSON.stringify(row?.item),
       title: i18n.t("{{ name }}'s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
