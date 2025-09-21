@@ -44,7 +44,7 @@ const SearchView = () => {
       direction="column"
       align="center"
       justify="flex-start"
-      style={[styles.container, Layout.screenContent]}
+      style={[Layout.formContainer, styles.container]}
     >
       <TabsView
         tabs={searchTabs}
@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    flexShrink: 1,
+    paddingBottom: 0,
   },
 });
 
