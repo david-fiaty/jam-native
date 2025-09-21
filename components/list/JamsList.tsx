@@ -40,11 +40,18 @@ const JamsList = ({ idArray }: Props) => {
   const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
-
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
 
-    setCurrentPage((prevPage: number) => prevPage + 1);
+    if (!moreResults?.length) {
+      moreResults = await SearchManager.loadMoreResults('jam', 1);
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage(2);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
+
     setIsFetching(false);
   };
 
