@@ -1,29 +1,32 @@
 import React, { useState, useEffect, useRef } from "react";
 import { GoogleMap, useJsApiLoader, OverlayView, InfoWindow, OverlayViewF } from "@react-google-maps/api";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
-import UserManager from "@/manager/UserManager";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
+import LoadingMoreView from "./LoadingMoreView";
+
+const zoomLevel: number = 7;
+const pixelOffset: number = 40;
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
-  const searchTabs: any[] = SearchManager.getSearchTabs();
+  const [isFetching, setIsFetching] = useState<boolean>(false);
+  const [listData, setListData] = useState<any>({});
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [initialRegion, setInitialRegion] = useState<any>(null);
-  const zoomLevel: number = 7;
-  const pixelOffset: number = 40;
+  const searchTabs: any[] = SearchManager.getSearchTabs();
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: Config.mapApiKey,
@@ -93,6 +96,27 @@ const JamsMapView = () => {
     }
   };
 
+  const fetchListData = async () => {
+    let currentPage: number = 1;
+    let pageSize: number = 10;
+
+    setIsFetching(true);
+    
+    const [jam, profile, project] = await Promise.all([
+      SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadMoreResults('project', currentPage, searchState.currentTab, pageSize),
+    ]);
+
+    setListData({
+      jam: jam,
+      profile: profile,
+      project: project,
+    });
+
+    setIsFetching(false);
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -106,12 +130,15 @@ const JamsMapView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
+    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+      fetchListData();
       prevSearchState.current = searchState;
     }
   }, [searchState]);
+
+  useEffect(() => {
+    fetchListData();
+  }, []);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -139,12 +166,14 @@ const JamsMapView = () => {
           fullscreenControl: true,
         }}
       >
-        {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-        {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-        {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
+        {SearchManager.isJamTab(searchState.currentTab) && (listData?.jam || []).map((item: any) => renderMarker(item))}
+        {SearchManager.isProfileTab(searchState.currentTab) && (listData?.profile || []).map((item: any) => renderMarker(item))}
+        {SearchManager.isProjectTab(searchState.currentTab) && (listData?.project || []).map((item: any) => renderMarker(item))}
       </GoogleMap>
 
       <MapLegendView />
+
+      {isLoaded && isFetching && <LoadingMoreView />}
     </View>
   );
 }
