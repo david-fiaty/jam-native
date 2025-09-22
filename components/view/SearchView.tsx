@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -16,17 +16,11 @@ const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
-  // Todo - Shouldn't this be removed, useless now?
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
+  const onTabPress = (tabId: string) => {
+    dispatch(setCurrentTab(tabId));
+  };
 
   useEffect(() => {
     if (!isLoaded) {
@@ -50,7 +44,7 @@ const SearchView = () => {
       <TabsView
         tabs={searchTabs}
         currentTab={searchState.currentTab}
-        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+        onItemPress={onTabPress}
       />
       <SearchFiltersView />
       {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}

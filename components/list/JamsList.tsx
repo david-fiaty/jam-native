@@ -1,8 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from 'react-native';
-import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -13,16 +11,15 @@ import LoadingMoreView from "../view/LoadingMoreView";
 
 type Props = {
   idArray?: any;
-};
+}; 
+
+const infiniteScroll: boolean = true;
 
 const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
 
   const renderItem = (row: any) => {
     return (
@@ -44,7 +41,7 @@ const JamsList = ({ idArray }: Props) => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
 
-    if (!moreResults?.length && !!Config.infiniteScroll) {
+    if (!moreResults?.length && infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('jam', 1);
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage(2);
@@ -56,15 +53,6 @@ const JamsList = ({ idArray }: Props) => {
 
     setIsFetching(false);
   };
-
-  useEffect(() => {
-    if (!idArray?.length) {
-      if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-        setSearchResults(JSON.parse(searchState.currentResults) || {});
-        prevSearchState.current = searchState;
-      }
-    }
-  }, [searchState, idArray]);
 
   useEffect(() => {
     if (!idArray?.length) {
