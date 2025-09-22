@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Layout } from '@/constants/Layout';
 import Modal from "react-native-modal";
 import ModalBackButton from './ModalBackButton';
 import i18n from '@/translation/i18n';
@@ -25,7 +23,6 @@ import PrivateProfileSection from '../section/profile/PrivateProfileSection';
 import SearchFiltersForm from '../form/SearchFiltersForm';
 import PublicJamSection from '../section/jam/PublicJamSection';
 import PublicProfileSection from '../section/profile/PublicProfileSection';
-import ScreenManager from '@/manager/ScreenManager';
 import PublicProjectSection from '../section/project/PublicProjectSection';
 import PrivateProjectSection from '../section/project/PrivateProjectSection';
 import PrivateJamSection from '../section/jam/PrivateJamSection';
@@ -36,24 +33,8 @@ type Props = {
 };
 
 const ModalView = ({ currentSection, style }: Props) => {
-  const insets: any = useSafeAreaInsets();
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
- 
-  /*
-  const getContainerStyle = () => {
-    // Todo - How to fix insets.bottom returning 0 on web
-    let systemTabsHeight: number = ScreenManager.isWeb() ? 45.5 : insets.bottom;
-    let modalHeight: number = ScreenManager.getModalSize().height;
-    let height: number = modalHeight - systemTabsHeight - Layout.space.base;
-
-    return {};
-
-    return {
-      height: height,
-    };
-  };
-  */
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
