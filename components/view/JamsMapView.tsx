@@ -20,6 +20,7 @@ const JamsMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [searchResults, setSearchResults] = useState<any>({});
+  const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
@@ -70,8 +71,9 @@ const JamsMapView = () => {
   const getListData = async (key: string) => {
     let currentPage: number = 1;
     let pageSize: number = 1;
+    let data: any[] = await SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize);
 
-    return await SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize);
+    setListData(data);
   };
 
   const getMarkerPosition = (item: any) => {
@@ -127,12 +129,10 @@ const JamsMapView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
+    getListData(searchState.currentTab);
+    if (!isLoaded) setIsLoaded(true);
+  
+  }, [isLoaded, searchState]);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
@@ -157,9 +157,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && getTabResults('jam').map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && getTabResults('profile').map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && getTabResults('project').map((item: any) => renderMarker(item))}
+          {listData.map((item: any) => renderMarker(item))}
         </MapView>
 
         <MapLegendView />
