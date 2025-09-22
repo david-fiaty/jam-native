@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
 import ListView from "../view/ListView";
@@ -14,6 +13,8 @@ import LoadingMoreView from "../view/LoadingMoreView";
 type Props = {
   idArray?: any;
 };
+
+const infiniteScroll: boolean = true;
 
 const JamsList = ({ idArray }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -44,7 +45,7 @@ const JamsList = ({ idArray }: Props) => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
 
-    if (!moreResults?.length && !!Config.infiniteScroll) {
+    if (!moreResults?.length && infiniteScroll) {
       moreResults = await SearchManager.loadMoreResults('jam', 1);
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage(2);
