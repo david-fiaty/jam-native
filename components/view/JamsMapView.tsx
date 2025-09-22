@@ -128,7 +128,6 @@ const JamsMapView = () => {
       if (!isLoaded) {
         if (!searchState.currentTab) {
           dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
-          await getListData();
         }
 
         setIsLoaded(true);
@@ -144,6 +143,10 @@ const JamsMapView = () => {
       prevSearchState.current = searchState;
     }
   }, [searchState]);
+
+  useEffect(() => {
+    getListData();
+  }, []);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
