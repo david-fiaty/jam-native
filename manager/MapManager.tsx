@@ -6,12 +6,28 @@ import JamMarkerView from "@/components/view/marker-view/JamMarkerView";
 import ProfileMarkerView from "@/components/view/marker-view/ProfileMarkerView";
 import DataManager from "./DataManager";
 import ScreenManager from "./ScreenManager";
-import { View } from "react-native";
-import TextView from "@/components/view/TextView";
 import JamCalloutView from "@/components/view/marker-view/JamCalloutView";
 import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView";
+import SearchManager from "./SearchManager";
 
 class MapManager {
+  async getMapData(searchState: any) {    
+    let currentPage: number = 1;
+    let pageSize: number = 10;
+    
+    const [jam, profile, project] = await Promise.all([
+      SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadMoreResults('project', currentPage, searchState.currentTab, pageSize),
+    ]);
+
+    return {
+      jam: jam,
+      profile: profile,
+      project: project,
+    };
+  }
+
   renderMarker = (item: any, zoomLevel?: any) => {
     return (
       <>
