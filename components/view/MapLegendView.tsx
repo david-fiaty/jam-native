@@ -171,12 +171,12 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     textTransform: 'uppercase',
-    color: Layout.colors.gray,
+    color: Layout.colors.darkGray,
     fontSize: 10,
     marginTop: Layout.space.base/2,
   },
   textView: {
-    color: Layout.colors.gray,
+    color: Layout.colors.darkGray,
     fontSize: 11,
   },
   sectorsContainer: {

@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   filterTagDisabled: {
-    backgroundColor: Layout.colors.gray,
+    backgroundColor: Layout.colors.lightGray,
     color: Layout.colors.primary,
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base / 1.5,

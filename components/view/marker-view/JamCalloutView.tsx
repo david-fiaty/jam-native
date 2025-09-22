@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   fieldTitle: {
-    color: Layout.colors.gray,
+    color: Layout.colors.darkGray,
     fontSize: 11,
   },
   fieldValue: {

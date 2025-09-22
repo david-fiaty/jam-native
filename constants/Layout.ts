@@ -4,7 +4,8 @@ const colors = {
   tertiary: '#FAA000',
   white: '#FFFFFF',
   black: '#000000',
-  gray: '#808080',
+  darkGray: '#808080',
+  lightGray: '#e5e5e5',
 };
 
 const space: any = {
@@ -113,7 +114,7 @@ const mapStyle: any = [
     "elementType": "geometry.fill",
     "stylers": [
       {
-        "color": colors.gray,
+        "color": colors.lightGray,
       }
     ]
   },
@@ -122,7 +123,7 @@ const mapStyle: any = [
     "elementType": "geometry.stroke",
     "stylers": [
       {
-        "color": colors.gray,
+        "color": colors.lightGray,
       }
     ]
   }

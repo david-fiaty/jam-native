@@ -140,7 +140,7 @@ class MapManager {
         key: 'past',
         label: i18n.t('Past'),
         titleColor: Layout.colors.white,
-        backgroundColor: Layout.colors.gray,
+        backgroundColor: Layout.colors.darkGray,
       },
       {
         key: 'live',
