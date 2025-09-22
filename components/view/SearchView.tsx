@@ -16,17 +16,7 @@ const SearchView = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const [searchResults, setSearchResults] = useState<any>({});
-  const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
-
-  // Todo - Shouldn't this be removed, useless now?
-  useEffect(() => {
-    if (prevSearchState.current?.currentResults !== searchState.currentResults) {
-      setSearchResults(JSON.parse(searchState.currentResults) || {});
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
 
   useEffect(() => {
     if (!isLoaded) {
