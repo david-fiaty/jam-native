@@ -43,6 +43,13 @@ class SearchManager {
       page: page,
     };
 
+    if (pageSize) {
+      payload = {
+        ...payload,
+        ...{ page_size: pageSize },
+      };
+    }
+
     if (searchValue?.length) {
       payload = {
         ...payload,
