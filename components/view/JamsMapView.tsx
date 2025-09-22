@@ -19,7 +19,7 @@ const JamsMapView = () => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(0);
-  const [searchResults, setSearchResults] = useState<any>({});
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const [listData, setListData] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -44,31 +44,7 @@ const JamsMapView = () => {
     };
   };
 
-  const getTabResults = (key: string) => {
-    /*
-    let currentPage: number = 1;
-    let pageSize: number = 20;
-
-    return SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize).then((data: any) => {
-
-      console.log(data)
-      return data;
-    });
-    */
-
-    /*
-    let results: any = {
-      ...searchResults,
-      ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
-      },
-    };
-
-    return results[key];
-    */
-  };
-
-  const getListData = async () => {
+  const fetchListData = async () => {
     let currentPage: number = 1;
     let pageSize: number = 10;
 
@@ -139,21 +115,17 @@ const JamsMapView = () => {
 
   useEffect(() => {
     if (prevSearchState.current?.currentTab !== searchState.currentTab) {
-      getListData();
+      fetchListData();
       prevSearchState.current = searchState;
     }
   }, [searchState]);
 
   useEffect(() => {
-    getListData();
+    fetchListData();
   }, []);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
-  //console.log('jam', listData?.jam?.length);
-  //console.log('profile', listData?.profile?.length);
-  //console.log('project', listData?.project?.length);
-  
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
