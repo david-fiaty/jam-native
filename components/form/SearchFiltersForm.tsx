@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { useRouter } from 'expo-router';
-import { setSearchFilters, setSearchValue } from '@/redux/slices/SearchSlice';
+import { setSearchFilters } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from '@/translation/i18n';
 import InputTextField from '../field/InputTextField';
-import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import SearchManager from '@/manager/SearchManager';
@@ -24,7 +22,6 @@ const SearchFiltersForm = () => {
   const [currentFilters, setCurrentFilters] = useState<any>({});
   const [currentKeywords, setCurrentKeywords] = useState<string>('');
   const [filtersConfig, setFiltersConfig] = useState<any>({});
-  const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search, shallowEqual);
 
   const toggleFilters = (key: string) => {
