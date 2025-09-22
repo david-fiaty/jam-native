@@ -18,6 +18,10 @@ const SearchView = () => {
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
+  const onTabPress = (tabId: string) => {
+    dispatch(setCurrentTab(tabId));
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!searchState.currentTab) {
@@ -40,7 +44,7 @@ const SearchView = () => {
       <TabsView
         tabs={searchTabs}
         currentTab={searchState.currentTab}
-        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+        onItemPress={onTabPress}
       />
       <SearchFiltersView />
       {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
