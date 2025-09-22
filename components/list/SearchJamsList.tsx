@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   contentContainerStyle: {
     gap: Layout.space.base,
-    paddingBottom: Layout.space.base
+    paddingBottom: Layout.space.base,
   },
   columnWrapperStyle: {
     gap: Layout.space.base,
