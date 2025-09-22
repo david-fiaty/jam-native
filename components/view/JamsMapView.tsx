@@ -1,6 +1,6 @@
 import MapView, { Callout, Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -12,14 +12,14 @@ import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
-import TextView from "./TextView";
+import LoadingMoreView from "./LoadingMoreView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(0);
-  const [searchResults, setSearchResults] = useState<any>({});
+  const [isFetching, setIsFetching] = useState<boolean>(false);
   const [listData, setListData] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
@@ -44,45 +44,10 @@ const JamsMapView = () => {
     };
   };
 
-  const getTabResults = (key: string) => {
-    /*
-    let currentPage: number = 1;
-    let pageSize: number = 20;
-
-    return SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize).then((data: any) => {
-
-      console.log(data)
-      return data;
-    });
-    */
-
-    /*
-    let results: any = {
-      ...searchResults,
-      ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
-      },
-    };
-
-    return results[key];
-    */
-  };
-
-  const getListData = async () => {
-    let currentPage: number = 1;
-    let pageSize: number = 10;
-
-    const [jam, profile, project] = await Promise.all([
-      SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadMoreResults('project', currentPage, searchState.currentTab, pageSize),
-    ]);
-
-    setListData({
-      jam: jam,
-      profile: profile,
-      project: project,
-    });
+  const fetchListData = async () => {
+    setIsFetching(true);
+    setListData(await MapManager.getMapData(searchState));
+    setIsFetching(false);
   };
 
   const getMarkerPosition = (item: any) => {
@@ -103,7 +68,6 @@ const JamsMapView = () => {
           coordinate={getMarkerPosition(item)}
         >
           {MapManager.renderMarker(item, zoomLevel)}
-
           <Callout>
             {MapManager.renderMarkerCallout(item)}
           </Callout>
@@ -139,23 +103,18 @@ const JamsMapView = () => {
 
   useEffect(() => {
     if (prevSearchState.current?.currentTab !== searchState.currentTab) {
-      getListData();
+      fetchListData();
       prevSearchState.current = searchState;
     }
   }, [searchState]);
 
   useEffect(() => {
-    getListData();
+    fetchListData();
   }, []);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
-  //console.log('jam', listData?.jam?.length);
-  //console.log('profile', listData?.profile?.length);
-  //console.log('project', listData?.project?.length);
-  
   return (
-    <TouchableWithoutFeedback>
       <View style={styles.container}>
 
         <TabsView
@@ -181,8 +140,10 @@ const JamsMapView = () => {
         </MapView>
 
         <MapLegendView />
+        
+        {isLoaded && isFetching && <LoadingMoreView />}
       </View>
-    </TouchableWithoutFeedback>
+  
   );
 };
 
@@ -193,6 +154,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexGrow: 1,
     backgroundColor: Layout.colors.white,
+    position: 'relative',
   },
   map: {
     flex: 1,
