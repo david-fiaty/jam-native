@@ -12,7 +12,7 @@ import LoadingMoreView from "../view/LoadingMoreView";
 
 type Props = {
   idArray?: any;
-};
+}; 
 
 const infiniteScroll: boolean = true;
 
