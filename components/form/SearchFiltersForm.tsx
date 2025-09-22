@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { setSearchFilters } from '@/redux/slices/SearchSlice';
+import { setSearchFilters, setSearchValue } from '@/redux/slices/SearchSlice';
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -57,9 +57,10 @@ const SearchFiltersForm = () => {
   const applyFilters = async () => {
     setIsApplyProcessing(true);
     dispatch(setSearchFilters(currentFilters));
+    dispatch(setSearchValue(currentKeywords));
 
     // Todo - Shouldn't this be removed, useless now?
-    await SearchManager.loadResults(currentKeywords, currentFilters);
+    //await SearchManager.loadResults(currentKeywords, currentFilters);
 
     setIsApplyProcessing(false);
     ModalManager.toggleModal('SearchFiltersForm');
@@ -72,7 +73,7 @@ const SearchFiltersForm = () => {
     dispatch(setSearchFilters({}));
 
     // Todo - Shouldn't this be removed, useless now?
-    await SearchManager.loadResults();
+    //await SearchManager.loadResults();
     
     setIsResetProcessing(false);
   };
