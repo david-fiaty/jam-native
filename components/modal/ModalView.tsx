@@ -40,6 +40,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   const [currentModal, setCurrentModal] = useState<any>(null);
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
  
+  /*
   const getContainerStyle = () => {
     // Todo - How to fix insets.bottom returning 0 on web
     let systemTabsHeight: number = ScreenManager.isWeb() ? 45.5 : insets.bottom;
@@ -52,6 +53,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       height: height,
     };
   };
+  */
 
   const canShowModal = () => {
     return currentModal !== null && currentModal?.sectionId === currentSection?.id;
@@ -261,7 +263,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       animationIn={currentModal?.effect?.in}
       animationOut={currentModal?.effect?.out}
       isVisible={canShowModal()}
-      style={[styles.container, style, getContainerStyle()]}
+      style={[styles.container, style]}
     >
       {renderBackButton()}
 
