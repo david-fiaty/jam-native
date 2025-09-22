@@ -45,11 +45,11 @@ const JamsMapView = () => {
   };
 
   const fetchListData = async () => {
-    setIsFetching(true);
-
     let currentPage: number = 1;
     let pageSize: number = 100;
 
+    setIsFetching(true);
+    
     const [jam, profile, project] = await Promise.all([
       SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
       SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab, pageSize),
