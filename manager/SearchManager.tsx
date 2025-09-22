@@ -33,7 +33,7 @@ class SearchManager {
     }
   }
 
-  async loadMoreResults(key: string, page: number, currentTab?: any) {
+  async loadMoreResults(key: string, page: number, currentTab?: any, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
