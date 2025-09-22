@@ -41,6 +41,7 @@ const ModalView = ({ currentSection, style }: Props) => {
   const modalState: any = useSelector((state: any) => state.modal, shallowEqual);
  
   const getContainerStyle = () => {
+    // Todo - How to fix insets.bottom returning 0 on web
     let systemTabsHeight: number = ScreenManager.isWeb() ? 45.5 : insets.bottom;
     let modalHeight: number = ScreenManager.getModalSize().height;
     let height: number = modalHeight - systemTabsHeight - Layout.space.base;
