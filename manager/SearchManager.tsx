@@ -193,6 +193,18 @@ class SearchManager {
     return ['project'].includes(key);
   }
 
+  getFiltersConfig() {
+    let appState: any = Store.getState().app;
+
+    return {
+      countries: appState.countriesData.map((o: any) => { return { id: o.code, name: o.name } }),
+      sectors: appState.sectorsData,
+      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
+      locationTypes: EntityManager.getLocationTypes(),
+      jamTypes: EntityManager.getJamTypes(),
+    };
+  }
+
   getSearchTabs() {
     return [
       {
