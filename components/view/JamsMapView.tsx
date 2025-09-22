@@ -48,7 +48,7 @@ const JamsMapView = () => {
     setIsFetching(true);
 
     let currentPage: number = 1;
-    let pageSize: number = 10;
+    let pageSize: number = 100;
 
     const [jam, profile, project] = await Promise.all([
       SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
