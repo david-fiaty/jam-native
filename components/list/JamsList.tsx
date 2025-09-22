@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSelector, shallowEqual } from "react-redux";
 import { StyleSheet } from 'react-native';
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -20,6 +21,8 @@ const JamsList = ({ idArray }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
 
   const renderItem = (row: any) => {
     return (
@@ -53,6 +56,13 @@ const JamsList = ({ idArray }: Props) => {
 
     setIsFetching(false);
   };
+
+  useEffect(() => {
+    if (prevSearchState.current !== searchState) {
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   useEffect(() => {
     if (!idArray?.length) {
