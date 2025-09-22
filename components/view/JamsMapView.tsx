@@ -83,7 +83,6 @@ const JamsMapView = () => {
           coordinate={getMarkerPosition(item)}
         >
           {MapManager.renderMarker(item, zoomLevel)}
-
           <Callout>
             {MapManager.renderMarkerCallout(item)}
           </Callout>
@@ -131,7 +130,6 @@ const JamsMapView = () => {
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
-    <TouchableWithoutFeedback>
       <View style={styles.container}>
 
         <TabsView
@@ -160,7 +158,7 @@ const JamsMapView = () => {
         
         {isLoaded && isFetching && <LoadingMoreView />}
       </View>
-    </TouchableWithoutFeedback>
+  
   );
 };
 
