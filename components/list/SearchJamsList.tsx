@@ -70,7 +70,7 @@ const SearchJamsList = () => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+    if (prevSearchState.current !== searchState) {
       setListData([]);
       setCurrentPage(1);
       fetchListData();
