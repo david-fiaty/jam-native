@@ -12,7 +12,6 @@ import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
-import TextView from "./TextView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
