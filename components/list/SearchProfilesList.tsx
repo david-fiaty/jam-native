@@ -2,7 +2,6 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import ListView from "../view/ListView";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -43,18 +42,10 @@ const SearchProfilesList = () => {
   const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
-
     let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab);
 
-    if (!moreResults?.length && !!Config.infiniteScroll) {
-      moreResults = await SearchManager.loadMoreResults('profile', 1, searchState.currentTab);
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-      setCurrentPage(2);
-    }
-    else {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-      setCurrentPage((prevPage: number) => prevPage + 1);
-    }
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    setCurrentPage((prevPage: number) => prevPage + 1);
 
     setIsFetching(false);
   };
