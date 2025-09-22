@@ -7,12 +7,10 @@ import { Badge } from '@rneui/themed';
 import IconView from './IconView';
 import BoxView from './BoxView';
 import TextView from './TextView';
-import SectionManager from '@/manager/SectionManager';
 import i18n from '@/translation/i18n';
 import ModalManager from "@/manager/ModalManager";
 
 const SearchFiltersView = () => {
-  const router = useRouter();
   const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
