@@ -1,6 +1,6 @@
 import MapView, { Callout, Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
