@@ -175,9 +175,9 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && listData?.jam.map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && listData?.profile.map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && listData?.project.map((item: any) => renderMarker(item))}
+          {SearchManager.isJamTab(searchState.currentTab) && (listData?.jam || []).map((item: any) => renderMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && (listData?.profile || []).map((item: any) => renderMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && (listData?.project || []).map((item: any) => renderMarker(item))}
         </MapView>
 
         <MapLegendView />
