@@ -1,7 +1,6 @@
 export const Config: any = {
   dataCacheEnabled: false,
   imageCacheEnabled: true,
-  infiniteScroll: true,
   defaultRoute: '/welcome',
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',
