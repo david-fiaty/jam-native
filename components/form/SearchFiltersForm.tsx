@@ -27,16 +27,6 @@ const SearchFiltersForm = () => {
   const appState = useSelector((state: any) => state.app);
   const searchState = useSelector((state: any) => state.search, shallowEqual);
 
-  const getFiltersConfig = () => {
-    return {
-      countries: appState.countriesData.map((o: any) => { return { id: o.code, name: o.name } }),
-      sectors: appState.sectorsData,
-      subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-      locationTypes: EntityManager.getLocationTypes(),
-      jamTypes: EntityManager.getJamTypes(),
-    };
-  };
-
   const toggleFilters = (key: string) => {
     let searchFilters: any = { ...currentFilters };
 
@@ -276,7 +266,7 @@ const SearchFiltersForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setFiltersConfig(getFiltersConfig())
+      setFiltersConfig(SearchManager.getFiltersConfig())
       setCurrentKeywords(searchState.searchValue);
       setCurrentFilters(searchState.searchFilters);
       setIsLoaded(true);

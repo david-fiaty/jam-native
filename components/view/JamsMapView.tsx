@@ -1,6 +1,6 @@
 import MapView, { Callout, Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -46,22 +46,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-
-    let currentPage: number = 1;
-    let pageSize: number = 10;
-
-    const [jam, profile, project] = await Promise.all([
-      SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadMoreResults('project', currentPage, searchState.currentTab, pageSize),
-    ]);
-
-    setListData({
-      jam: jam,
-      profile: profile,
-      project: project,
-    });
-
+    setListData(await MapManager.getMapData(searchState));
     setIsFetching(false);
   };
 
@@ -83,7 +68,6 @@ const JamsMapView = () => {
           coordinate={getMarkerPosition(item)}
         >
           {MapManager.renderMarker(item, zoomLevel)}
-
           <Callout>
             {MapManager.renderMarkerCallout(item)}
           </Callout>
@@ -131,7 +115,6 @@ const JamsMapView = () => {
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
-    <TouchableWithoutFeedback>
       <View style={styles.container}>
 
         <TabsView
@@ -160,7 +143,7 @@ const JamsMapView = () => {
         
         {isLoaded && isFetching && <LoadingMoreView />}
       </View>
-    </TouchableWithoutFeedback>
+  
   );
 };
 
