@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
