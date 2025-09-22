@@ -68,10 +68,11 @@ const JamsMapView = () => {
     */
   };
 
-  const getListData = async (key: string) => {
+  const getListData = async () => {
+
     let currentPage: number = 1;
-    let pageSize: number = 1;
-    let data: any[] = await SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize);
+    let pageSize: number = 10;
+    let data: any[] = await SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize);
 
     setListData(data);
   };
@@ -129,10 +130,10 @@ const JamsMapView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   useEffect(() => {
-    getListData(searchState.currentTab);
+    getListData();
     if (!isLoaded) setIsLoaded(true);
   
-  }, [isLoaded, searchState]);
+  }, [isLoaded]);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
