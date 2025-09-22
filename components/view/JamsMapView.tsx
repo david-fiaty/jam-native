@@ -44,6 +44,17 @@ const JamsMapView = () => {
   };
 
   const getTabResults = (key: string) => {
+    /*
+    let currentPage: number = 1;
+    let pageSize: number = 20;
+
+    return SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize).then((data: any) => {
+
+      console.log(data)
+      return data;
+    });
+    */
+
     let results: any = {
       ...searchResults,
       ...{

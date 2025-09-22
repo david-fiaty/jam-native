@@ -70,7 +70,10 @@ const SearchFiltersForm = () => {
   const applyFilters = async () => {
     setIsApplyProcessing(true);
     dispatch(setSearchFilters(currentFilters));
+
+    // Todo - Shouldn't this be removed, useless now?
     await SearchManager.loadResults(currentKeywords, currentFilters);
+
     setIsApplyProcessing(false);
     ModalManager.toggleModal('SearchFiltersForm');
   };
@@ -80,7 +83,10 @@ const SearchFiltersForm = () => {
     setCurrentFilters({});
     setCurrentKeywords('');
     dispatch(setSearchFilters({}));
+
+    // Todo - Shouldn't this be removed, useless now?
     await SearchManager.loadResults();
+    
     setIsResetProcessing(false);
   };
 
