@@ -411,9 +411,22 @@ const headerVisibleOptions: object = {
       );
 
 
+  /*
 
-Bonjour, pour information, Expo 54 vient de sortir et peut dans certains cas s'installer automatiquement sur vos telephones
+  import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-Un upgrade de expo 52 a 53 a ete fait recemment, mais pas d'upgrade de expo 53 a 54 n'est prevu pour l'instant.
+  const insets: any = useSafeAreaInsets();
 
-Comme precedemment, si vous rencontrez une erreur en lancant l'application native, il faudra suivre le lien sur la page pour downgrader la version de Expo Go installee sur votre device
+  const getContainerStyle = () => {
+    // Todo - How to fix insets.bottom returning 0 on web
+    let systemTabsHeight: number = ScreenManager.isWeb() ? 45.5 : insets.bottom;
+    let modalHeight: number = ScreenManager.getModalSize().height;
+    let height: number = modalHeight - systemTabsHeight - Layout.space.base;
+
+    return {};
+
+    return {
+      height: height,
+    };
+  };
+  */
