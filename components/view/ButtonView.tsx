@@ -32,7 +32,7 @@ const ButtonView = ({ label, theme, disabled, onPress, isProcessing, containerSt
         color: Layout.colors.white,
       };
     }
-    else if (!theme || theme == 'gray') {
+    else if (!theme || ['lightGray', 'darkGray'].includes(theme)) {
       return {
         color: Layout.colors.black,
       };
