@@ -46,7 +46,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     let currentPage: number = 1;
-    let pageSize: number = 100;
+    let pageSize: number = 10;
 
     setIsFetching(true);
     
