@@ -12,6 +12,7 @@ import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
+import LoadingMoreView from "./LoadingMoreView";
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,8 @@ const JamsMapView = () => {
   };
 
   const fetchListData = async () => {
+    setIsFetching(true);
+
     let currentPage: number = 1;
     let pageSize: number = 10;
 
@@ -58,6 +61,8 @@ const JamsMapView = () => {
       profile: profile,
       project: project,
     });
+
+    setIsFetching(false);
   };
 
   const getMarkerPosition = (item: any) => {
@@ -152,6 +157,8 @@ const JamsMapView = () => {
         </MapView>
 
         <MapLegendView />
+        
+        {isLoaded && isFetching && <LoadingMoreView />}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -164,6 +171,7 @@ const styles = StyleSheet.create({
     width: '100%',
     flexGrow: 1,
     backgroundColor: Layout.colors.white,
+    position: 'relative',
   },
   map: {
     flex: 1,
