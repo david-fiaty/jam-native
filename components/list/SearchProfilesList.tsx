@@ -10,7 +10,6 @@ import UserManager from "@/manager/UserManager";
 import TextView from "../view/TextView";
 import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
-import SpinnerView from "../view/SpinnerView";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
