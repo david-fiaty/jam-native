@@ -294,7 +294,7 @@ const SearchFiltersForm = () => {
         <ButtonView
           label={i18n.t("Reset")}
           containerStyle={styles.actionsButton}
-          theme="gray"
+          theme="lightGray"
           onPress={resetFilters}
           isProcessing={isResetProcessing}
         />
