@@ -55,6 +55,7 @@ const JamsMapView = () => {
     });
     */
 
+    /*
     let results: any = {
       ...searchResults,
       ...{
@@ -63,6 +64,14 @@ const JamsMapView = () => {
     };
 
     return results[key];
+    */
+  };
+
+  const getListData = async (key: string) => {
+    let currentPage: number = 1;
+    let pageSize: number = 1;
+
+    return await SearchManager.loadMoreResults(key, currentPage, searchState.currentTab, pageSize);
   };
 
   const getMarkerPosition = (item: any) => {
