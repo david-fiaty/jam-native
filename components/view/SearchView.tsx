@@ -20,6 +20,7 @@ const SearchView = () => {
   const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
+  // Todo - Shouldn't this be removed, useless now?
   useEffect(() => {
     if (prevSearchState.current?.currentResults !== searchState.currentResults) {
       setSearchResults(JSON.parse(searchState.currentResults) || {});
