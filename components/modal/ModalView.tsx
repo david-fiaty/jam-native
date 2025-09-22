@@ -46,6 +46,8 @@ const ModalView = ({ currentSection, style }: Props) => {
     let modalHeight: number = ScreenManager.getModalSize().height;
     let height: number = modalHeight - systemTabsHeight - Layout.space.base;
 
+    return {};
+
     return {
       height: height,
     };
