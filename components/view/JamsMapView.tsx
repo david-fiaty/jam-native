@@ -128,6 +128,7 @@ const JamsMapView = () => {
       if (!isLoaded) {
         if (!searchState.currentTab) {
           dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+          await getListData();
         }
 
         setIsLoaded(true);
@@ -138,13 +139,18 @@ const JamsMapView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   useEffect(() => {
-    getListData();
-    if (!isLoaded) setIsLoaded(true);
-  
-  }, [isLoaded]);
+    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+      getListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
+  //console.log('jam', listData?.jam?.length);
+  //console.log('profile', listData?.profile?.length);
+  //console.log('project', listData?.project?.length);
+  
   return (
     <TouchableWithoutFeedback>
       <View style={styles.container}>
@@ -166,9 +172,9 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && listData.jam.map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && listData.profile.map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && listData.project.map((item: any) => renderMarker(item))}
+          {SearchManager.isJamTab(searchState.currentTab) && listData?.jam.map((item: any) => renderMarker(item))}
+          {SearchManager.isProfileTab(searchState.currentTab) && listData?.profile.map((item: any) => renderMarker(item))}
+          {SearchManager.isProjectTab(searchState.currentTab) && listData?.project.map((item: any) => renderMarker(item))}
         </MapView>
 
         <MapLegendView />
