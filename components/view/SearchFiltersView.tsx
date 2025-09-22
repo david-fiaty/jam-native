@@ -1,6 +1,5 @@
 import { useState, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { Badge } from '@rneui/themed';
