@@ -7,7 +7,6 @@ import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager';
-import SearchManager from '@/manager/SearchManager';
 import EntityManager from '@/manager/EntityManager';
 
 export default () => {
