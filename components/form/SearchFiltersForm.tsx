@@ -68,7 +68,6 @@ const SearchFiltersForm = () => {
     dispatch(setSearchValue(''));
     setCurrentFilters({});
     setCurrentKeywords('');
-    
     setIsResetProcessing(false);
   };
 
