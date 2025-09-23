@@ -3,7 +3,7 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
-  async loadMoreResults(key: string, page: number, currentTab?: any, pageSize?: any) {
+  async loadResults(key: string, page: number, currentTab?: any, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
