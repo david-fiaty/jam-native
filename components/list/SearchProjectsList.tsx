@@ -86,7 +86,7 @@ const SearchProjectsList = ({ data }: Props) => {
   }, [searchState, isLoaded]);
   */
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <>
@@ -97,7 +97,7 @@ const SearchProjectsList = ({ data }: Props) => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             numColumns={numColumns}
