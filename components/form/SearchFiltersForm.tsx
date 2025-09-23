@@ -64,9 +64,10 @@ const SearchFiltersForm = () => {
 
   const resetFilters = async () => {
     setIsResetProcessing(true);
+    dispatch(setSearchFilters({}));
+    dispatch(setSearchValue(''));
     setCurrentFilters({});
     setCurrentKeywords('');
-    dispatch(setSearchFilters({}));
     setIsResetProcessing(false);
   };
 

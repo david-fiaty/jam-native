@@ -89,7 +89,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         setProfileId(profileId);
 
         if (!isNaN(parseInt(jamId)) && parseInt(jamId) > 0) {
-          jamData = await EntityManager.findJam(jamId);
+          jamData = (await EntityManager.getJams([jamId]))?.[0];
         }
 
         dispatch(setFormData<any>({
