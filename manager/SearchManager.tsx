@@ -3,6 +3,28 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
+  async getListData(currentPage: number, pageSize: number) {
+    let searchState: any = Store.getState().search;
+    
+    const [jam, profile, project] = await Promise.all([
+      this.loadResults('jam', currentPage, searchState.currentTab, pageSize),
+      this.loadResults('profile', currentPage, searchState.currentTab, pageSize),
+      this.loadResults('project', currentPage, searchState.currentTab, pageSize),
+    ]);
+
+    return {
+      jam: jam,
+      jammer: profile,
+      project: project,
+      looking: jam.filter((o: any) => o.type == 'looking'),
+      call: jam.filter((o: any) => o.type == 'call'),
+      event: jam.filter((o: any) => o.type == 'event'),
+      personal: profile.filter((o: any) => o.profile_type == 'personal'),
+      organization: profile.filter((o: any) => o.profile_type == 'organization'),
+      venue: profile.filter((o: any) => o.profile_type == 'venue'),
+    };
+  }
+
   async loadResults(key: string, page: number, currentTab?: any, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
