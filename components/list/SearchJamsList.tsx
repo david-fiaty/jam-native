@@ -48,11 +48,11 @@ const SearchJamsList = () => {
     );
   };
 
-  const fetchListData = async (currentTab: string) => {
+  const fetchListData = async () => {
     if (isFetching) return;
     
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage, currentTab);
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
@@ -68,7 +68,7 @@ const SearchJamsList = () => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
-      fetchListData(searchState.currentTab);
+      fetchListData();
       prevSearchState.current = searchState;
       setIsLoaded(true);
     }
