@@ -22,8 +22,14 @@ class MapManager {
 
     return {
       jam: jam,
-      profile: profile,
+      jammer: profile,
       project: project,
+      looking: jam.filter((o: any) => o.type == 'looking'),
+      call: jam.filter((o: any) => o.type == 'call'),
+      event: jam.filter((o: any) => o.type == 'event'),
+      personal: profile.filter((o: any) => o.profile_type == 'personal'),
+      organization: profile.filter((o: any) => o.profile_type == 'organization'),
+      venue: profile.filter((o: any) => o.profile_type == 'venue'),
     };
   }
 
