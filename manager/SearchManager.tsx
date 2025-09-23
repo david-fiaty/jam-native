@@ -178,8 +178,8 @@ class SearchManager {
   getSearchTabs() {
     return [
       {
-        id: 'all',
-        label: i18n.t('All'),
+        id: 'jam',
+        label: i18n.t('Jams'),
         numColumns: 2,
         default: true,
       },
