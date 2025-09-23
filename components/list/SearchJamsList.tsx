@@ -65,8 +65,10 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    };
   }, [isLoaded]);
 
   useEffect(() => {
@@ -107,7 +109,7 @@ const SearchJamsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
     </>
   );
 };

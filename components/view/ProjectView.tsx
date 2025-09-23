@@ -58,7 +58,7 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProjectData(itemData || await EntityManager.findProject(projectId));
+        setProjectData(itemData || (await EntityManager.getProjects([projectId]))?.[0]);
         setIsLoaded(true);
       }
     })();

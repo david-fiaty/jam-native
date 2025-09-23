@@ -6,7 +6,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
-import SectionManager from "@/manager/SectionManager";
 import ProfileViewField from "../field/ProfileViewField";
 import TextView from "@/components/view/TextView";
 import ImageView from "@/components/view/ImageView";
@@ -19,7 +18,6 @@ import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import SpinnerView from "./SpinnerView";
-import EntityManager from "@/manager/EntityManager";
 import ModalManager from "@/manager/ModalManager";
 
 const profileImageSize: number = 111;
@@ -300,7 +298,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
 
   const getProfileData = async () => {
     if (isPublic) {
-      return EntityManager.findProfile(profileId);
+      return await UserManager.getProfileData({ profile_id: profileId || null });
     }
     else {
       return { ...userState.profileData };
