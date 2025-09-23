@@ -14,6 +14,7 @@ export const Config: any = {
   dateFormat: 'MMM Do YYYY HH:mm',
   logoImageSize: 512,
   paginationSize: 6,
+  maxMapResults: 10,
   maxUserNameLength: 28,
   notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,

@@ -13,9 +13,6 @@ import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 import LoadingMoreView from "./LoadingMoreView";
-
-const currentPage: number = 1;
-const pageSize: number = 10;
     
 const JamsMapView = () => {
   const dispatch = useDispatch();
@@ -49,7 +46,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await SearchManager.getListData(currentPage, pageSize));
+    setListData(await SearchManager.getListData(1, Config.maxMapResults));
     setIsFetching(false);
   };
 

@@ -13,8 +13,6 @@ import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 import LoadingMoreView from "./LoadingMoreView";
 
-const currentPage: number = 1;
-const pageSize: number = 10;
 const zoomLevel: number = 7;
 const pixelOffset: number = 40;
 
@@ -88,7 +86,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await SearchManager.getListData(currentPage, pageSize));
+    setListData(await SearchManager.getListData(1, Config.maxMapResults));
     setIsFetching(false);
   };
   
