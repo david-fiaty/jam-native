@@ -84,9 +84,7 @@ const SearchJamsList = ({ data }: Props) => {
   }, [searchState, isLoaded]);
   */
 
-  if (!isLoaded) return <SpinnerView />;
-
-  console.log(data?.length, listData?.length)
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <>
