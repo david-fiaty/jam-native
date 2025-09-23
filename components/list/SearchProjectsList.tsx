@@ -67,8 +67,10 @@ const SearchProjectsList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    };
   }, [isLoaded]);
 
   useEffect(() => {
@@ -79,7 +81,6 @@ const SearchProjectsList = () => {
       prevSearchState.current = searchState;
     }
   }, [searchState]);
-
 
   if (!isLoaded) return <SpinnerView />;
 
