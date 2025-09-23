@@ -11,10 +11,8 @@ import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView
 import SearchManager from "./SearchManager";
 
 class MapManager {
-  async getMapData() {    
+  async getMapData(currentPage: number, pageSize: number) {    
     let searchState: any = Store.getState().search;
-    let currentPage: number = 1;
-    let pageSize: number = 10;
     
     const [jam, profile, project] = await Promise.all([
       SearchManager.loadResults('jam', currentPage, searchState.currentTab, pageSize),
