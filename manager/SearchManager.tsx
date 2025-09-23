@@ -51,14 +51,13 @@ class SearchManager {
   }
 
   getTabResults(key: string, currentTab: string, currentResults: any) {
-    let tab: string = currentTab;
     let data: any = { ...currentResults };
 
-    if (key == 'jam' && tab && tab != 'jam') {
-      data[key] = data[key].filter((o: any) => o.type == tab);
+    if (this.isJamTab(currentTab)) {
+      data[key] = data[key].filter((o: any) => o.type == currentTab);
     }
-    else if (key == 'profile' && tab && tab != 'jammer') {
-      data[key] = data[key].filter((o: any) => o.profile_type == tab);
+    else if (this.isProfileTab(currentTab)) {
+      data[key] = data[key].filter((o: any) => o.profile_type == currentTab);
     }
 
     return data[key];
