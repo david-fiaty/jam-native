@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -13,7 +13,6 @@ import SearchManager from "@/manager/SearchManager";
 
 const SearchView = () => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
