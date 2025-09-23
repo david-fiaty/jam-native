@@ -65,18 +65,14 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
-  }, [isLoaded]);
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+    if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
       fetchListData();
       prevSearchState.current = searchState;
+      setIsLoaded(true);
     }
-  }, [searchState]);
+  }, [searchState, isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -107,7 +103,7 @@ const SearchJamsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
     </>
   );
 };

@@ -4,35 +4,6 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
-  async loadResults(searchValue?: any, searchFilters?: any) {
-    let searchState: any = Store.getState().search;
-    let searchResults: any = {};
-
-    if (!searchValue?.length) {
-      Store.dispatch(setSearchValue(''));
-      let defaultResults: any = JSON.parse(searchState.defaultResults);
-
-      if (Object.keys(defaultResults).length > 0) {
-        searchResults = this.applyFilters(defaultResults, searchFilters);
-        searchResults = JSON.stringify(searchResults);
-        Store.dispatch(setCurrentResults(searchResults));
-      }
-      else {
-        searchResults = await this.sendRequest() || {};
-        searchResults = JSON.stringify(searchResults);
-        Store.dispatch(setCurrentResults(searchResults));
-        Store.dispatch(setDefaultResults(searchResults));
-      }
-    }
-    else {
-      Store.dispatch(setSearchValue(searchValue));
-      searchResults = await this.sendRequest(searchValue) || {};
-      searchResults = this.applyFilters(searchResults, searchFilters);
-      searchResults = JSON.stringify(searchResults);
-      Store.dispatch(setCurrentResults(searchResults));
-    }
-  }
-
   async loadMoreResults(key: string, page: number, currentTab?: any, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;

@@ -6,8 +6,7 @@ import { setCurrentLanguage } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
-import ScreenManager from '@/manager/ScreenManager';
-import SearchManager from '@/manager/SearchManager';
+import ScreenManager from '@/manager/ScreenManager'; 
 import EntityManager from '@/manager/EntityManager';
 
 export default () => {
@@ -29,7 +28,6 @@ export default () => {
   useEffect(() => {
     (async () => {
       await setLanguage();
-      await SearchManager.loadResults();
   
       const [sectors, countries] = await Promise.all([
         EntityManager.getSectors(),
