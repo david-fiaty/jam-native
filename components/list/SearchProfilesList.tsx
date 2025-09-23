@@ -39,10 +39,10 @@ const SearchProfilesList = () => {
     );
   };
 
-  const fetchListData = async (currentTab: string) => {
+  const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, currentTab);
+    let moreResults: any[] = await SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
@@ -58,7 +58,7 @@ const SearchProfilesList = () => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
-      fetchListData(searchState.currentTab);
+      fetchListData();
       prevSearchState.current = searchState;
       setIsLoaded(true);
     }
