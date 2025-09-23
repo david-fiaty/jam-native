@@ -71,6 +71,11 @@ const SearchProjectsList = ({ data }: Props) => {
   };
 
   useEffect(() => {
+    setListData(data);
+  }, [data]);
+
+  /*
+  useEffect(() => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
@@ -79,8 +84,9 @@ const SearchProjectsList = ({ data }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+  */
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <>
@@ -91,7 +97,7 @@ const SearchProjectsList = ({ data }: Props) => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             numColumns={numColumns}
@@ -99,8 +105,8 @@ const SearchProjectsList = ({ data }: Props) => {
             columnWrapperStyle={styles.columnWrapperStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
+            //onScroll={handleScroll}
+            //scrollEventThrottle={16}
           />
         )}
 

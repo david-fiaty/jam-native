@@ -59,6 +59,11 @@ const SearchProfilesList = ({ data }: Props) => {
   };
 
   useEffect(() => {
+    setListData(data);
+  }, [data]);
+
+  /*
+  useEffect(() => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
@@ -67,8 +72,11 @@ const SearchProfilesList = ({ data }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+  */
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!isLoaded) return <SpinnerView />;
+
+  console.log(data?.length)
   
   return (
     <>
@@ -79,14 +87,14 @@ const SearchProfilesList = ({ data }: Props) => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             contentContainerStyle={styles.contentContainerStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
+            //onScroll={handleScroll}
+            //scrollEventThrottle={16}
           />
         )}
 
