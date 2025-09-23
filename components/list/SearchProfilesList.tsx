@@ -74,7 +74,9 @@ const SearchProfilesList = ({ data }: Props) => {
   }, [searchState, isLoaded]);
   */
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!isLoaded) return <SpinnerView />;
+
+  console.log(data?.length)
   
   return (
     <>
@@ -85,7 +87,7 @@ const SearchProfilesList = ({ data }: Props) => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             contentContainerStyle={styles.contentContainerStyle}
