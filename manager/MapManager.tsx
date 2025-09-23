@@ -8,31 +8,8 @@ import DataManager from "./DataManager";
 import ScreenManager from "./ScreenManager";
 import JamCalloutView from "@/components/view/marker-view/JamCalloutView";
 import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView";
-import SearchManager from "./SearchManager";
 
 class MapManager {
-  async getMapData(currentPage: number, pageSize: number) {    
-    let searchState: any = Store.getState().search;
-    
-    const [jam, profile, project] = await Promise.all([
-      SearchManager.loadResults('jam', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadResults('profile', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadResults('project', currentPage, searchState.currentTab, pageSize),
-    ]);
-
-    return {
-      jam: jam,
-      jammer: profile,
-      project: project,
-      looking: jam.filter((o: any) => o.type == 'looking'),
-      call: jam.filter((o: any) => o.type == 'call'),
-      event: jam.filter((o: any) => o.type == 'event'),
-      personal: profile.filter((o: any) => o.profile_type == 'personal'),
-      organization: profile.filter((o: any) => o.profile_type == 'organization'),
-      venue: profile.filter((o: any) => o.profile_type == 'venue'),
-    };
-  }
-
   renderMarker = (item: any, zoomLevel?: any) => {
     return (
       <>
