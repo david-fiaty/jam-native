@@ -13,9 +13,13 @@ import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
+type Props = {
+  data?: any;
+};
+
 const numColumns = 2;
 
-const SearchJamsList = () => {
+const SearchJamsList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
