@@ -20,7 +20,6 @@ const SearchJamsList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
-  const [firstPageData, setfirstPageData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
@@ -55,10 +54,6 @@ const SearchJamsList = () => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab);
 
-    if (!firstPageData) {
-      setfirstPageData(moreResults);
-    }
-
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
 
@@ -70,22 +65,18 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    };
   }, [isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
-      if (prevSearchState.current?.searchFilters === searchState.searchFilters) {
-        setListData(firstPageData);
-      }
-      else {
-        setListData([]);
-        setfirstPageData([]);
-        setCurrentPage(1);
-        fetchListData();
-        prevSearchState.current = searchState;
-      }
+    if (prevSearchState.current !== searchState) {
+      setListData([]);
+      setCurrentPage(1);
+      fetchListData();
+      prevSearchState.current = searchState;
     }
   }, [searchState]);
 
