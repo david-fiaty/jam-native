@@ -16,9 +16,9 @@ class MapManager {
     let pageSize: number = 10;
     
     const [jam, profile, project] = await Promise.all([
-      SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadMoreResults('profile', currentPage, searchState.currentTab, pageSize),
-      SearchManager.loadMoreResults('project', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadResults('jam', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadResults('profile', currentPage, searchState.currentTab, pageSize),
+      SearchManager.loadResults('project', currentPage, searchState.currentTab, pageSize),
     ]);
 
     return {
