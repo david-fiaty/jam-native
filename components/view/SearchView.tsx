@@ -30,6 +30,8 @@ const SearchView = () => {
     if (!searchState.currentTab) {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
     }
+
+    getListData();
   }, [searchState, searchTabs]);
 
   return (
