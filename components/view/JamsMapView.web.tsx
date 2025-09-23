@@ -115,15 +115,11 @@ const JamsMapView = () => {
   }, [searchState, searchTabs, isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+    if (prevSearchState.current !== searchState) {
       fetchListData();
       prevSearchState.current = searchState;
     }
   }, [searchState]);
-
-  useEffect(() => {
-    fetchListData();
-  }, []);
 
   if (!isLoaded) return <SpinnerView />;
 

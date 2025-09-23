@@ -12,6 +12,7 @@ import ProfileListItemView from "../view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
+import SpinnerView from "../view/SpinnerView";
 
 const SearchProfilesList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -54,19 +55,17 @@ const SearchProfilesList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) setIsLoaded(true);
-    fetchListData();
-  }, [isLoaded]);
-
-  useEffect(() => {
-    if (prevSearchState.current?.currentTab !== searchState.currentTab) {
+    if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
       fetchListData();
       prevSearchState.current = searchState;
+      setIsLoaded(true);
     }
-  }, [searchState]);
+  }, [searchState, isLoaded]);
 
+  if (!isLoaded) return <SpinnerView />;
+  
   return (
     <>
       <BoxView
@@ -92,7 +91,7 @@ const SearchProfilesList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
     </>
   );
 };

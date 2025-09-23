@@ -58,23 +58,16 @@ const SearchFiltersForm = () => {
     setIsApplyProcessing(true);
     dispatch(setSearchFilters(currentFilters));
     dispatch(setSearchValue(currentKeywords));
-
-    // Todo - Shouldn't this be removed, useless now?
-    //await SearchManager.loadResults(currentKeywords, currentFilters);
-
     setIsApplyProcessing(false);
     ModalManager.toggleModal('SearchFiltersForm');
   };
 
   const resetFilters = async () => {
     setIsResetProcessing(true);
+    dispatch(setSearchFilters({}));
+    dispatch(setSearchValue(''));
     setCurrentFilters({});
     setCurrentKeywords('');
-    dispatch(setSearchFilters({}));
-
-    // Todo - Shouldn't this be removed, useless now?
-    //await SearchManager.loadResults();
-    
     setIsResetProcessing(false);
   };
 

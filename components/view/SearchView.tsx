@@ -23,16 +23,10 @@ const SearchView = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) {
-      if (!searchState.currentTab) {
-        dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
-      }
-
-      setIsLoaded(true);
+    if (!searchState.currentTab) {
+      dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
     }
-  }, [searchState, searchTabs, isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />;
+  }, [searchState, searchTabs]);
 
   return (
     <BoxView

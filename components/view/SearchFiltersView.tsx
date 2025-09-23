@@ -23,6 +23,11 @@ const SearchFiltersView = () => {
   };
 
   const getResultsCount = (key: string) => {
+    return 77;
+
+    // Todo - Refactor filters results count
+
+    /*
     let results: any = {};
 
     if (prevSearchState.current !== searchState) {
@@ -35,6 +40,7 @@ const SearchFiltersView = () => {
     }
 
     return results[key].length;
+    */
   };
 
   return (
