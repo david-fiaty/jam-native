@@ -121,10 +121,6 @@ const JamsMapView = () => {
     }
   }, [searchState]);
 
-  useEffect(() => {
-    fetchListData();
-  }, []);
-
   if (!isLoaded) return <SpinnerView />;
 
   return (
