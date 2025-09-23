@@ -14,7 +14,11 @@ import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "../view/SpinnerView";
 
-const SearchProfilesList = () => {
+type Props = {
+  data?: any;
+};
+
+const SearchProfilesList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
