@@ -42,10 +42,10 @@ const JamsList = ({ idArray }: Props) => {
     if (isFetching || !!idArray?.length) return;
     
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage);
+    let moreResults: any[] = await SearchManager.loadResults('jam', currentPage);
 
     if (!moreResults?.length && infiniteScroll) {
-      moreResults = await SearchManager.loadMoreResults('jam', 1);
+      moreResults = await SearchManager.loadResults('jam', 1);
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage(2);
     }
