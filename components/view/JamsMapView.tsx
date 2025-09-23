@@ -14,6 +14,9 @@ import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 import LoadingMoreView from "./LoadingMoreView";
 
+const currentPage: number = 1;
+const pageSize: number = 10;
+    
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -46,7 +49,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await MapManager.getMapData());
+    setListData(await SearchManager.getListData(currentPage, pageSize));
     setIsFetching(false);
   };
 
@@ -112,7 +115,6 @@ const JamsMapView = () => {
 
   return (
       <View style={styles.container}>
-
         <TabsView
           tabs={searchTabs}
           currentTab={searchState.currentTab}
@@ -130,9 +132,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && (listData?.jam || []).map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && (listData?.profile || []).map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && (listData?.project || []).map((item: any) => renderMarker(item))}
+          { (listData?.[searchState.currentTab] || []).map((item: any) => renderMarker(item)) }
         </MapView>
 
         <MapLegendView />
