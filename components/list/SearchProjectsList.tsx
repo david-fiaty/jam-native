@@ -49,11 +49,11 @@ const SearchProjectsList = () => {
     );
   };
 
-  const fetchListData = async () => {
+  const fetchListData = async (currentTab: string) => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadMoreResults('project', currentPage, currentTab);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
@@ -70,7 +70,7 @@ const SearchProjectsList = () => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
-      fetchListData();
+      fetchListData(searchState.currentTab);
       prevSearchState.current = searchState;
       setIsLoaded(true);
     }
