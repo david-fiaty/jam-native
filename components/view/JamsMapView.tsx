@@ -14,6 +14,9 @@ import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 import LoadingMoreView from "./LoadingMoreView";
 
+const currentPage: number = 1;
+const pageSize: number = 10;
+    
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -46,7 +49,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await MapManager.getMapData());
+    setListData(await MapManager.getMapData(currentPage, pageSize));
     setIsFetching(false);
   };
 
