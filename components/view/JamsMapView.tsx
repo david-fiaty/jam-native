@@ -108,10 +108,6 @@ const JamsMapView = () => {
     }
   }, [searchState]);
 
-  useEffect(() => {
-    fetchListData();
-  }, []);
-
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
