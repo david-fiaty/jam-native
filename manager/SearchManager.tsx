@@ -30,7 +30,7 @@ class SearchManager {
       };
     }
 
-    if (key == 'jam') {
+    if (key == 'jam' || key == 'all') {
       moreResults = await EntityManager.listJams(payload);
     }
     else if (key == 'profile') {
@@ -152,7 +152,7 @@ class SearchManager {
   }
 
   isJamTab(key: string) {
-    return ['jam', 'looking', 'call', 'event'].includes(key);
+    return ['all', 'jam', 'looking', 'call', 'event'].includes(key);
   }
 
   isProfileTab(key: string) {
@@ -178,8 +178,8 @@ class SearchManager {
   getSearchTabs() {
     return [
       {
-        id: 'jam',
-        label: i18n.t('Jams'),
+        id: 'all',
+        label: i18n.t('All'),
         numColumns: 2,
         default: true,
       },
