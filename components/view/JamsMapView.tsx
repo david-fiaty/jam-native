@@ -115,7 +115,6 @@ const JamsMapView = () => {
 
   return (
       <View style={styles.container}>
-
         <TabsView
           tabs={searchTabs}
           currentTab={searchState.currentTab}
@@ -134,9 +133,6 @@ const JamsMapView = () => {
           onRegionChangeComplete={onRegionChangeComplete}
         >
           { (listData?.[searchState.currentTab] || []).map((item: any) => renderMarker(item)) }
-          {/*SearchManager.isJamTab(searchState.currentTab) && (listData?.jam || []).map((item: any) => renderMarker(item))*/}
-          {/*SearchManager.isProfileTab(searchState.currentTab) && (listData?.profile || []).map((item: any) => renderMarker(item))*/}
-          {/*SearchManager.isProjectTab(searchState.currentTab) && (listData?.project || []).map((item: any) => renderMarker(item))*/}
         </MapView>
 
         <MapLegendView />
