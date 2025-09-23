@@ -42,9 +42,11 @@ class SearchManager {
 
     moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key]; 
 
+    /*
     if (moreResults && currentTab) {
       moreResults = this.getTabResults(key, currentTab, { [key]: moreResults });
     }
+    */
 
     return moreResults || [];
   }
