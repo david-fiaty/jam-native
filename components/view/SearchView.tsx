@@ -8,7 +8,6 @@ import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
-import SpinnerView from "./SpinnerView";
 import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 
