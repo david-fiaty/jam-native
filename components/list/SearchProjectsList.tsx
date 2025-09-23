@@ -71,6 +71,11 @@ const SearchProjectsList = ({ data }: Props) => {
   };
 
   useEffect(() => {
+    setListData(data);
+  }, [data]);
+
+  /*
+  useEffect(() => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
@@ -79,6 +84,7 @@ const SearchProjectsList = ({ data }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+  */
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -99,8 +105,8 @@ const SearchProjectsList = ({ data }: Props) => {
             columnWrapperStyle={styles.columnWrapperStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
+            //onScroll={handleScroll}
+            //scrollEventThrottle={16}
           />
         )}
 
