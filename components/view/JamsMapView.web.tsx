@@ -98,7 +98,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await MapManager.getMapData(searchState));
+    setListData(await MapManager.getMapData());
     setIsFetching(false);
   };
   
