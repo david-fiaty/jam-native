@@ -11,7 +11,8 @@ import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView
 import SearchManager from "./SearchManager";
 
 class MapManager {
-  async getMapData(searchState: any) {    
+  async getMapData() {    
+    let searchState: any = Store.getState().search;
     let currentPage: number = 1;
     let pageSize: number = 10;
     
