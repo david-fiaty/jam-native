@@ -58,13 +58,6 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState) {
-      fetchListData();
-      prevSearchState.current = searchState;
-    }
-  }, [searchState]);
-
-  useEffect(() => {
     if (!idArray?.length) {
       fetchListData();
       if (!isLoaded) setIsLoaded(true);
