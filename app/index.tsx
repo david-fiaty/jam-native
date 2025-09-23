@@ -29,7 +29,6 @@ export default () => {
   useEffect(() => {
     (async () => {
       await setLanguage();
-      await SearchManager.loadResults();
   
       const [sectors, countries] = await Promise.all([
         EntityManager.getSectors(),
