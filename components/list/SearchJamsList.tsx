@@ -52,7 +52,7 @@ const SearchJamsList = () => {
     if (isFetching) return;
     
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadMoreResults('all', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadMoreResults('jam', currentPage, searchState.currentTab);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
