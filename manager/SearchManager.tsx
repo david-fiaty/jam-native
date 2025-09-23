@@ -1,4 +1,3 @@
-import { setCurrentResults, setDefaultResults, setSearchValue } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
