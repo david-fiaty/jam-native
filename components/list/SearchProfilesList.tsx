@@ -75,8 +75,6 @@ const SearchProfilesList = ({ data }: Props) => {
   */
 
   //if (!isLoaded) return <SpinnerView />;
-
-  console.log(data?.length)
   
   return (
     <>
