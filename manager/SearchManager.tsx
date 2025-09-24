@@ -54,7 +54,7 @@ class SearchManager {
     if (currentTab.entityType == 'jam') {
       payload = {
         ...payload,
-        ...{ jam_type: currentTab.id },
+        ...{ [currentTab.queryArg]: currentTab.id },
       };
 
       moreResults = await EntityManager.listJams(payload);
@@ -62,7 +62,7 @@ class SearchManager {
     else if (currentTab.entityType == 'profile') {
       payload = {
         ...payload,
-        ...{ profile_type: currentTab.id },
+        ...{ [currentTab.queryArg]: currentTab.id },
       };
 
       moreResults = await EntityManager.listProfiles(payload);
@@ -212,6 +212,7 @@ class SearchManager {
         id: 'jam',
         label: i18n.t('Jams'),
         entityType: 'jam',
+        queryArg: 'jam_type',
         numColumns: 2,
         default: true,
       },
@@ -219,48 +220,56 @@ class SearchManager {
         id: 'looking',
         label: i18n.t('Lookings'),
         entityType: 'jam',
+        queryArg: 'jam_type',
         numColumns: 2,
       },
       {
         id: 'call',
         label: i18n.t('Calls'),
         entityType: 'jam',
+        queryArg: 'jam_type',
         numColumns: 2,
       },
       {
         id: 'event',
         label: i18n.t('Events'),
         entityType: 'jam',
+        queryArg: 'jam_type',
         numColumns: 2,
       },
       {
         id: 'jammer',
         label: i18n.t('Jammers'),
         entityType: 'profile',
+        queryArg: 'profile_type',
         numColumns: 1,
       },
       {
         id: 'personal',
         label: i18n.t('Artists'),
         entityType: 'profile',
+        queryArg: 'profile_type',
         numColumns: 1,
       },
       {
         id: 'organization',
         label: i18n.t('Organization'),
         entityType: 'profile',
+        queryArg: 'profile_type',
         numColumns: 1,
       },
       {
         id: 'venue',
         label: i18n.t('Venues'),
         entityType: 'profile',
+        queryArg: 'profile_type',
         numColumns: 2,
       },
       {
         id: 'project',
         label: i18n.t('Projects'),
         entityType: 'project',
+        queryArg: 'profile_type',
         numColumns: 2,
       },
     ];
