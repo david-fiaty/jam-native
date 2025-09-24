@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
@@ -11,7 +12,7 @@ import LoadingMoreView from "../view/LoadingMoreView";
 
 type Props = {
   idArray?: any;
-}; 
+};
 
 const infiniteScroll: boolean = true;
 
@@ -20,6 +21,8 @@ const JamsList = ({ idArray }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
 
   const renderItem = (row: any) => {
     return (
@@ -37,7 +40,7 @@ const JamsList = ({ idArray }: Props) => {
 
   const fetchListData = async () => {
     if (isFetching || !!idArray?.length) return;
-    
+
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults('jam', currentPage);
 
@@ -55,15 +58,21 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    if (!idArray?.length) {
-      fetchListData();
-      if (!isLoaded) setIsLoaded(true);
-    }
-    else if (!isLoaded) {
-      getListData();
-      setIsLoaded(true);
-    }
-  }, [isLoaded, idArray]);
+    (async () => {
+      if (!isLoaded && idArray?.length > 0) {
+        await getListData();
+        setIsLoaded(true);
+      }
+      else if (!isLoaded && !idArray?.length) {
+        await fetchListData();
+        setIsLoaded(true);
+      }
+      else if (prevSearchState.current !== searchState) {
+        await fetchListData();
+        prevSearchState.current = searchState;
+      }
+    })();
+  }, [isLoaded, searchState, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
