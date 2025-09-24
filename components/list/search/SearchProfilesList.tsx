@@ -44,7 +44,13 @@ const SearchProfilesList = () => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
+    if (currentPage === 1) {
+      setListData(moreResults);
+    }
+    else {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+    }
+
     setCurrentPage((prevPage: number) => prevPage + 1);
 
     setIsFetching(false);
@@ -60,6 +66,8 @@ const SearchProfilesList = () => {
       setIsLoaded(true);
     }
     else if (prevSearchState.current !== searchState) {
+      setListData([]);
+      setCurrentPage(1);
       fetchListData();
       prevSearchState.current = searchState;
     }
