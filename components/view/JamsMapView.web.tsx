@@ -21,7 +21,7 @@ const JamsMapView = () => {
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [listData, setListData] = useState<any>({});
+  const [listData, setListData] = useState<any[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [initialRegion, setInitialRegion] = useState<any>(null);
@@ -86,7 +86,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await SearchManager.getListData(1, Config.maxMapResults));
+    setListData(await SearchManager.loadResults(searchState.currentTab, 1, Config.maxMapResults));
     setIsFetching(false);
   };
   
@@ -135,7 +135,7 @@ const JamsMapView = () => {
           fullscreenControl: true,
         }}
       >
-        { (listData?.[searchState.currentTab] || []).map((item: any) => renderMarker(item)) }
+        { (listData || []).map((item: any) => renderMarker(item)) }
       </GoogleMap>
 
       <MapLegendView />
