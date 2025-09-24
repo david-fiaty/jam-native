@@ -3,26 +3,6 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
-  async getListData(currentPage: number, pageSize: number) {
-    const [jam, profile, project] = await Promise.all([
-      this.loadResults('jam', currentPage, pageSize),
-      this.loadResults('profile', currentPage, pageSize),
-      this.loadResults('project', currentPage, pageSize),
-    ]);
-
-    return {
-      jam: jam,
-      jammer: profile,
-      project: project,
-      looking: jam.filter((o: any) => o.type == 'looking'),
-      call: jam.filter((o: any) => o.type == 'call'),
-      event: jam.filter((o: any) => o.type == 'event'),
-      personal: profile.filter((o: any) => o.profile_type == 'personal'),
-      organization: profile.filter((o: any) => o.profile_type == 'organization'),
-      venue: profile.filter((o: any) => o.profile_type == 'venue'),
-    };
-  }
-
   async loadResults(tabId: string, currentPage: number, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
@@ -76,20 +56,6 @@ class SearchManager {
     moreResults = this.applyFilters({ [currentTab.entityType]: moreResults }, currentFilters)[currentTab.entityType];
 
     return moreResults || [];
-  }
-
-  getTabResults(key: string, currentTab: string, currentResults: any) {
-    let tab: string = currentTab;
-    let data: any = { ...currentResults };
-
-    if (key == 'jam' && tab && tab != 'jam') {
-      data[key] = data[key].filter((o: any) => o.type == tab);
-    }
-    else if (key == 'profile' && tab && tab != 'jammer') {
-      data[key] = data[key].filter((o: any) => o.profile_type == tab);
-    }
-
-    return data[key];
   }
 
   async sendRequest(searchValue?: string) {
