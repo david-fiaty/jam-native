@@ -54,7 +54,7 @@ class SearchManager {
     if (currentTab.entityType == 'jam') {
       payload = {
         ...payload,
-        ...{ jam_type: currentTab.entityType },
+        ...{ jam_type: currentTab.id },
       };
 
       moreResults = await EntityManager.listJams(payload);
@@ -62,7 +62,7 @@ class SearchManager {
     else if (currentTab.entityType == 'profile') {
       payload = {
         ...payload,
-        ...{ profile_type: currentTab.entityType },
+        ...{ profile_type: currentTab.id },
       };
 
       moreResults = await EntityManager.listProfiles(payload);
