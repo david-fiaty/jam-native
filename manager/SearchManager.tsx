@@ -3,7 +3,7 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
-  async getListData(currentPage: number, pageSize: number) {    
+  async getListData(currentPage: number, pageSize: number) {
     const [jam, profile, project] = await Promise.all([
       this.loadResults('jam', currentPage, pageSize),
       this.loadResults('profile', currentPage, pageSize),
@@ -23,14 +23,15 @@ class SearchManager {
     };
   }
 
-  async loadResults(key: string, page: number, pageSize?: any, currentTab?: string) {
+  async loadResults(currentTab: string, currentPage: number, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
     let moreResults: any = [];
+    let key: string = '';
 
     let payload: any = {
-      page: page,
+      page: currentPage,
     };
 
     if (pageSize) {
@@ -50,17 +51,30 @@ class SearchManager {
       };
     }
 
-    if (key == 'jam') {
+    if (this.isJamTab(currentTab)) {
+      key = 'jam';
+      payload = {
+        ...payload,
+        ...{ jam_type: currentTab },
+      };
+
       moreResults = await EntityManager.listJams(payload);
     }
-    else if (key == 'profile') {
+    else if (this.isProfileTab(currentTab)) {
+      key = 'profile';
+      payload = {
+        ...payload,
+        ...{ profile_type: currentTab },
+      };
+
       moreResults = await EntityManager.listProfiles(payload);
     }
-    else if (key == 'project') {
+    else if (this.isProjectTab(currentTab)) {
+      key = 'project';
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key]; 
+    moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key];
 
     return moreResults || [];
   }
