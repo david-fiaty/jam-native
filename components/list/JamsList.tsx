@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { StyleSheet } from 'react-native';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import SpinnerView from "../view/SpinnerView";
@@ -20,6 +21,8 @@ const JamsList = ({ idArray }: Props) => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
 
   const renderItem = (row: any) => {
     return (
@@ -64,8 +67,12 @@ const JamsList = ({ idArray }: Props) => {
         await getListData();
         setIsLoaded(true);
       }
+      else if (prevSearchState.current !== searchState) {
+        await fetchListData();
+        prevSearchState.current = searchState;
+      }
     })();
-  }, [isLoaded, idArray]);
+  }, [isLoaded, idArray, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
