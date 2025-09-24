@@ -53,7 +53,7 @@ const SearchProjectsList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadResults('project', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
@@ -87,7 +87,7 @@ const SearchProjectsList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             numColumns={numColumns}

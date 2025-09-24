@@ -19,7 +19,7 @@ const SearchView = () => {
   const onTabPress = (tabId: string) => {
     dispatch(setCurrentTab(tabId));
   };
-
+  
   useEffect(() => {
     if (!searchState.currentTab) {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
@@ -38,7 +38,9 @@ const SearchView = () => {
         currentTab={searchState.currentTab}
         onItemPress={onTabPress}
       />
+
       <SearchFiltersView />
+
       {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
       {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList />}
       {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList />}
