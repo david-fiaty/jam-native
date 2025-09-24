@@ -2,17 +2,17 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import ListView from "../view/ListView";
+import ListView from "@/components/view/ListView";
 import i18n from "@/translation/i18n";
-import BoxView from "../view/BoxView";
+import BoxView from "@/components/view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import UserManager from "@/manager/UserManager";
-import TextView from "../view/TextView";
-import ProfileListItemView from "../view/ProfileListItemView";
+import TextView from "@/components/view/TextView";
+import ProfileListItemView from "@/components/view/ProfileListItemView";
 import SearchManager from "@/manager/SearchManager";
-import LoadingMoreView from "../view/LoadingMoreView";
+import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
-import SpinnerView from "../view/SpinnerView";
+import SpinnerView from "@/components/view/SpinnerView";
 
 const SearchProfilesList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -21,7 +21,7 @@ const SearchProfilesList = () => {
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
-  
+
   const onItemPress = (row: any) => {
     ModalManager.toggleModal('PublicProfileSection', {
       profileId: row?.item?.id,
@@ -42,7 +42,7 @@ const SearchProfilesList = () => {
   const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults('profile', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
@@ -55,14 +55,15 @@ const SearchProfilesList = () => {
   };
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState || !isLoaded) {
-      setListData([]);
-      setCurrentPage(1);
+    if (!isLoaded) {
       fetchListData();
-      prevSearchState.current = searchState;
       setIsLoaded(true);
     }
-  }, [searchState, isLoaded]);
+    else if (prevSearchState.current !== searchState) {
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
   
@@ -75,7 +76,7 @@ const SearchProfilesList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             contentContainerStyle={styles.contentContainerStyle}

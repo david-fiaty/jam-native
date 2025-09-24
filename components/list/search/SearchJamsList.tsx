@@ -2,15 +2,15 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import ListView from "../view/ListView";
-import BoxView from "../view/BoxView";
+import ListView from "@/components/view/ListView";
+import BoxView from "@/components/view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import i18n from "@/translation/i18n";
-import TextView from "../view/TextView";
-import SpinnerView from "../view/SpinnerView";
+import TextView from "@/components/view/TextView";
+import SpinnerView from "@/components/view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
-import LoadingMoreView from "../view/LoadingMoreView";
+import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
 const numColumns = 2;
@@ -52,7 +52,7 @@ const SearchJamsList = () => {
     if (isFetching) return;
     
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults('jam', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
@@ -65,14 +65,15 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState || !isLoaded) {
-      setListData([]);
-      setCurrentPage(1);
+    if (!isLoaded) {
       fetchListData();
-      prevSearchState.current = searchState;
       setIsLoaded(true);
     }
-  }, [searchState, isLoaded]);
+    else if (prevSearchState.current !== searchState) {
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
