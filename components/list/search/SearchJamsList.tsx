@@ -50,7 +50,7 @@ const SearchJamsList = () => {
 
   const fetchListData = async () => {
     if (isFetching) return;
-    
+
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
@@ -65,14 +65,16 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) {
-      fetchListData();
-      setIsLoaded(true);
-    }
-    else if (prevSearchState.current !== searchState) {
-      fetchListData();
-      prevSearchState.current = searchState;
-    }
+    (async () => {
+      if (!isLoaded) {
+        await fetchListData();
+        setIsLoaded(true);
+      }
+      else if (prevSearchState.current !== searchState) {
+        await fetchListData();
+        prevSearchState.current = searchState;
+      }
+    })();
   }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -104,7 +106,7 @@ const SearchJamsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
     </>
   );
 };
