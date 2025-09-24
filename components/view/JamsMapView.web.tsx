@@ -135,7 +135,7 @@ const JamsMapView = () => {
           fullscreenControl: true,
         }}
       >
-        { (listData || []).map((item: any) => renderMarker(item)) }
+        {(listData || []).map((item: any) => renderMarker(item))}
       </GoogleMap>
 
       <MapLegendView />
