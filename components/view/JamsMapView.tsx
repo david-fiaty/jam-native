@@ -46,7 +46,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await SearchManager.getListData(1, Config.maxMapResults));
+    setListData(await SearchManager.getListData(searchState.currentTab, 1, Config.maxMapResults));
     setIsFetching(false);
   };
 
