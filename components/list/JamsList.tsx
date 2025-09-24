@@ -59,36 +59,20 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
-      if (!isLoaded) {
-        await fetchListData();
-        setIsLoaded(true);
-      }
-      else if (prevSearchState.current !== searchState) {
-        await fetchListData();
-        prevSearchState.current = searchState;
-      }
-    })();
-  }, [isLoaded, searchState]);
-
-  /*
-  useEffect(() => {
-    (async () => {
-      if (!idArray?.length) {
-        await fetchListData();
-        if (!isLoaded) setIsLoaded(true);
-      }
-      else if (!isLoaded) {
+      if (!isLoaded && idArray?.length > 0) {
         await getListData();
         setIsLoaded(true);
       }
+      else if (!isLoaded && !idArray?.length) {
+        await fetchListData();
+        setIsLoaded(true);
+      }
       else if (prevSearchState.current !== searchState) {
         await fetchListData();
         prevSearchState.current = searchState;
       }
     })();
-  }, [isLoaded, idArray, searchState]);
-*/
-
+  }, [isLoaded, searchState, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
