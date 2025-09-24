@@ -19,6 +19,12 @@ const SearchView = () => {
   const onTabPress = (tabId: string) => {
     dispatch(setCurrentTab(tabId));
   };
+
+  const renderList = (tabId: string) => {
+    if (SearchManager.isJamTab(tabId)) return <SearchJamsList />
+    else if (SearchManager.isProfileTab(tabId)) return <SearchProfilesList />
+    else if (SearchManager.isProjectTab(tabId)) return <SearchProjectsList />
+  };
   
   useEffect(() => {
     if (!searchState.currentTab) {
@@ -41,9 +47,7 @@ const SearchView = () => {
 
       <SearchFiltersView />
 
-      {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
-      {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList />}
-      {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList />}
+      {renderList(searchState.currentTab)}
     </BoxView>
   );
 };

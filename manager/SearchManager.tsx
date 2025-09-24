@@ -180,16 +180,16 @@ class SearchManager {
     return searchResults;
   }
 
-  isJamTab(key: string) {
-    return ['jam', 'looking', 'call', 'event'].includes(key);
+  isJamTab(tabId: string) {
+    return this.getSearchTab(tabId)?.entityType == 'jam';
   }
 
-  isProfileTab(key: string) {
-    return ['jammer', 'venue', 'organization', 'personal'].includes(key);
+  isProfileTab(tabId: string) {
+    return this.getSearchTab(tabId)?.entityType == 'profile';
   }
 
-  isProjectTab(key: string) {
-    return ['project'].includes(key);
+  isProjectTab(tabId: string) {
+    return this.getSearchTab(tabId)?.entityType == 'project';
   }
 
   getFiltersConfig() {
