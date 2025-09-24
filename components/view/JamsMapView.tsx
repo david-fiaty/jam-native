@@ -13,14 +13,14 @@ import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 import LoadingMoreView from "./LoadingMoreView";
-
+    
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [listData, setListData] = useState<any>({});
+  const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
@@ -46,7 +46,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await MapManager.getMapData());
+    setListData(await SearchManager.loadResults(searchState.currentTab, 1, Config.maxMapResults));
     setIsFetching(false);
   };
 
@@ -112,7 +112,6 @@ const JamsMapView = () => {
 
   return (
       <View style={styles.container}>
-
         <TabsView
           tabs={searchTabs}
           currentTab={searchState.currentTab}
@@ -130,9 +129,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          {SearchManager.isJamTab(searchState.currentTab) && (listData?.jam || []).map((item: any) => renderMarker(item))}
-          {SearchManager.isProfileTab(searchState.currentTab) && (listData?.profile || []).map((item: any) => renderMarker(item))}
-          {SearchManager.isProjectTab(searchState.currentTab) && (listData?.project || []).map((item: any) => renderMarker(item))}
+          {(listData || []).map((item: any) => renderMarker(item))}
         </MapView>
 
         <MapLegendView />

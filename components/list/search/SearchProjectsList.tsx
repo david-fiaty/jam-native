@@ -2,16 +2,16 @@ import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import ListView from "../view/ListView";
+import ListView from "@/components/view/ListView";
 import i18n from "@/translation/i18n";
-import TextView from "../view/TextView";
-import BoxView from "../view/BoxView";
+import TextView from "@/components/view/TextView";
+import BoxView from "@/components/view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import EntityManager from "@/manager/EntityManager";
-import SpinnerView from "../view/SpinnerView";
+import SpinnerView from "@/components/view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
-import LoadingMoreView from "../view/LoadingMoreView";
+import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
 const numColumns = 2;
@@ -53,7 +53,7 @@ const SearchProjectsList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadResults('project', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
@@ -67,14 +67,15 @@ const SearchProjectsList = () => {
   };
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState || !isLoaded) {
-      setListData([]);
-      setCurrentPage(1);
+    if (!isLoaded) {
       fetchListData();
-      prevSearchState.current = searchState;
       setIsLoaded(true);
     }
-  }, [searchState, isLoaded]);
+    else if (prevSearchState.current !== searchState) {
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -87,7 +88,7 @@ const SearchProjectsList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             numColumns={numColumns}

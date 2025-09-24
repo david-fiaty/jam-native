@@ -3,9 +3,9 @@ import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
-import SearchJamsList from "../list/SearchJamsList";
-import SearchProfilesList from "../list/SearchProfilesList";
-import SearchProjectsList from "../list/SearchProjectsList";
+import SearchJamsList from "../list/search/SearchJamsList";
+import SearchProfilesList from "../list/search/SearchProfilesList";
+import SearchProjectsList from "../list/search/SearchProjectsList";
 import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import SearchFiltersView from "./SearchFiltersView";
@@ -20,6 +20,12 @@ const SearchView = () => {
     dispatch(setCurrentTab(tabId));
   };
 
+  const renderList = (tabId: string) => {
+    if (SearchManager.isJamTab(tabId)) return <SearchJamsList />
+    else if (SearchManager.isProfileTab(tabId)) return <SearchProfilesList />
+    else if (SearchManager.isProjectTab(tabId)) return <SearchProjectsList />
+  };
+  
   useEffect(() => {
     if (!searchState.currentTab) {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
@@ -38,10 +44,10 @@ const SearchView = () => {
         currentTab={searchState.currentTab}
         onItemPress={onTabPress}
       />
+
       <SearchFiltersView />
-      {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
-      {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList />}
-      {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList />}
+
+      {renderList(searchState.currentTab)}
     </BoxView>
   );
 };
