@@ -56,13 +56,7 @@ const SearchProjectsList = () => {
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
-    if (currentPage === 1) {
-      setListData(moreResults);
-    }
-    else {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-    }
-
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
 
     setIsFetching(false);
@@ -78,8 +72,6 @@ const SearchProjectsList = () => {
       setIsLoaded(true);
     }
     else if (prevSearchState.current !== searchState) {
-      setListData([]);
-      setCurrentPage(1);
       fetchListData();
       prevSearchState.current = searchState;
     }
@@ -114,7 +106,7 @@ const SearchProjectsList = () => {
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
     </>
   );
 };
