@@ -14,11 +14,7 @@ import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 import SpinnerView from "../view/SpinnerView";
 
-type Props = {
-  data?: any;
-};
-
-const SearchProfilesList = ({ data }: Props) => {
+const SearchProfilesList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,7 +42,7 @@ const SearchProfilesList = ({ data }: Props) => {
   const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults('profile', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);

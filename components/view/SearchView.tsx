@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
 import SearchJamsList from "../list/SearchJamsList";
 import SearchProfilesList from "../list/SearchProfilesList";
 import SearchProjectsList from "../list/SearchProjectsList";
@@ -14,7 +13,6 @@ import SearchManager from "@/manager/SearchManager";
 
 const SearchView = () => {
   const dispatch = useDispatch();
-  const [listData, setListData] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
@@ -22,16 +20,10 @@ const SearchView = () => {
     dispatch(setCurrentTab(tabId));
   };
   
-  const getListData = async () => {
-    setListData(await SearchManager.getListData(1, Config.paginationSize));
-  };
-  
   useEffect(() => {
     if (!searchState.currentTab) {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
     }
-
-    getListData();
   }, [searchState, searchTabs]);
 
   return (
@@ -49,9 +41,9 @@ const SearchView = () => {
 
       <SearchFiltersView />
 
-      {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList data={listData?.[searchState.currentTab]} />}
-      {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList data={listData?.[searchState.currentTab]} />}
-      {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList data={listData?.[searchState.currentTab]} />}
+      {SearchManager.isJamTab(searchState.currentTab) && <SearchJamsList />}
+      {SearchManager.isProfileTab(searchState.currentTab) && <SearchProfilesList />}
+      {SearchManager.isProjectTab(searchState.currentTab) && <SearchProjectsList />}
     </BoxView>
   );
 };

@@ -13,13 +13,9 @@ import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
-type Props = {
-  data?: any;
-};
-
 const numColumns = 2;
 
-const SearchJamsList = ({ data }: Props) => {
+const SearchJamsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,7 +52,7 @@ const SearchJamsList = ({ data }: Props) => {
     if (isFetching) return;
     
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults('jam', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
