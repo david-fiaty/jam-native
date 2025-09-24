@@ -51,27 +51,27 @@ class SearchManager {
       };
     }
 
-    if (this.isJamTab(tabId)) {
+    if (currentTab.entityType == 'jam') {
       payload = {
         ...payload,
-        ...{ jam_type: currentTab.type },
+        ...{ jam_type: currentTab.entityType },
       };
 
       moreResults = await EntityManager.listJams(payload);
     }
-    else if (this.isProfileTab(tabId)) {
+    else if (currentTab.entityType == 'profile') {
       payload = {
         ...payload,
-        ...{ profile_type: currentTab.type },
+        ...{ profile_type: currentTab.entityType },
       };
 
       moreResults = await EntityManager.listProfiles(payload);
     }
-    else if (this.isProjectTab(tabId)) {
+    else if (currentTab.entityType == 'project') {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    moreResults = this.applyFilters({ [currentTab.type]: moreResults }, currentFilters)[currentTab.type];
+    moreResults = this.applyFilters({ [currentTab.entityType]: moreResults }, currentFilters)[currentTab.entityType];
 
     return moreResults || [];
   }
@@ -210,57 +210,57 @@ class SearchManager {
     return [
       {
         id: 'jam',
-        type: 'jam',
         label: i18n.t('Jams'),
+        entityType: 'jam',
         numColumns: 2,
         default: true,
       },
       {
         id: 'looking',
-        type: 'jam',
         label: i18n.t('Lookings'),
+        entityType: 'jam',
         numColumns: 2,
       },
       {
         id: 'call',
-        type: 'jam',
         label: i18n.t('Calls'),
+        entityType: 'jam',
         numColumns: 2,
       },
       {
         id: 'event',
-        type: 'jam',
         label: i18n.t('Events'),
+        entityType: 'jam',
         numColumns: 2,
       },
       {
         id: 'jammer',
-        type: 'profile',
         label: i18n.t('Jammers'),
+        entityType: 'profile',
         numColumns: 1,
       },
       {
         id: 'personal',
-        type: 'profile',
         label: i18n.t('Artists'),
+        entityType: 'profile',
         numColumns: 1,
       },
       {
         id: 'organization',
-        type: 'profile',
         label: i18n.t('Organization'),
+        entityType: 'profile',
         numColumns: 1,
       },
       {
         id: 'venue',
-        type: 'profile',
         label: i18n.t('Venues'),
+        entityType: 'profile',
         numColumns: 2,
       },
       {
         id: 'project',
-        type: 'project',
         label: i18n.t('Projects'),
+        entityType: 'project',
         numColumns: 2,
       },
     ];
