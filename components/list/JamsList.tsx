@@ -59,6 +59,20 @@ const JamsList = ({ idArray }: Props) => {
 
   useEffect(() => {
     (async () => {
+      if (!isLoaded) {
+        await fetchListData();
+        setIsLoaded(true);
+      }
+      else if (prevSearchState.current !== searchState) {
+        await fetchListData();
+        prevSearchState.current = searchState;
+      }
+    })();
+  }, [isLoaded, searchState]);
+
+  /*
+  useEffect(() => {
+    (async () => {
       if (!idArray?.length) {
         await fetchListData();
         if (!isLoaded) setIsLoaded(true);
@@ -73,6 +87,8 @@ const JamsList = ({ idArray }: Props) => {
       }
     })();
   }, [isLoaded, idArray, searchState]);
+*/
+
 
   if (!isLoaded) return <SpinnerView />;
 
