@@ -59,18 +59,6 @@ const SearchProfilesList = () => {
     if (!isLoaded) setIsLoaded(true);
   }, [isLoaded]);
 
-  /*
-  useEffect(() => {
-    if (prevSearchState.current !== searchState || !isLoaded) {
-      setListData([]);
-      setCurrentPage(1);
-      fetchListData();
-      prevSearchState.current = searchState;
-      setIsLoaded(true);
-    }
-  }, [searchState, isLoaded]);
-  */
-
   if (!isLoaded) return <SpinnerView />;
   
   return (
