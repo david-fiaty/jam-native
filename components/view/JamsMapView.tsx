@@ -129,7 +129,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          { (listData?.[searchState.currentTab] || []).map((item: any) => renderMarker(item)) }
+          { (listData || []).map((item: any) => renderMarker(item)) }
         </MapView>
 
         <MapLegendView />
