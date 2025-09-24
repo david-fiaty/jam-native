@@ -46,7 +46,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await SearchManager.getListData(1, Config.maxMapResults));
+    setListData(await SearchManager.loadResults(searchState.currentTab, 1, Config.maxMapResults));
     setIsFetching(false);
   };
 
@@ -129,7 +129,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          { (listData?.[searchState.currentTab] || []).map((item: any) => renderMarker(item)) }
+          { (listData || []).map((item: any) => renderMarker(item)) }
         </MapView>
 
         <MapLegendView />
