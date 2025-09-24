@@ -14,13 +14,9 @@ import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
-type Props = {
-  data?: any;
-};
-
 const numColumns = 2;
 
-const SearchProjectsList = ({ data }: Props) => {
+const SearchProjectsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -57,7 +53,7 @@ const SearchProjectsList = ({ data }: Props) => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any[] = await SearchManager.loadResults('project', currentPage, searchState.currentTab);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
     setListData((prevData) => [...(prevData || []), ...moreResults]);
@@ -71,11 +67,6 @@ const SearchProjectsList = ({ data }: Props) => {
   };
 
   useEffect(() => {
-    setListData(data);
-  }, [data]);
-
-  /*
-  useEffect(() => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
@@ -84,9 +75,8 @@ const SearchProjectsList = ({ data }: Props) => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
-  */
 
-  //if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <>
@@ -105,8 +95,8 @@ const SearchProjectsList = ({ data }: Props) => {
             columnWrapperStyle={styles.columnWrapperStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
-            //onScroll={handleScroll}
-            //scrollEventThrottle={16}
+            onScroll={handleScroll}
+            scrollEventThrottle={16}
           />
         )}
 
