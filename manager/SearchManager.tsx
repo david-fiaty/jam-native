@@ -52,17 +52,19 @@ class SearchManager {
     }
 
     if (currentTab.entityType == 'jam') {
+      let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;  
       payload = {
         ...payload,
-        ...{ jam_type: currentTab.id },
+        ...{ jam_type: jamType },
       };
 
       moreResults = await EntityManager.listJams(payload);
     }
     else if (currentTab.entityType == 'profile') {
+      let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;  
       payload = {
         ...payload,
-        ...{ profile_type: currentTab.id },
+        ...{ profile_type: profileType },
       };
 
       moreResults = await EntityManager.listProfiles(payload);
