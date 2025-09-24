@@ -10,6 +10,7 @@ import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
+import DataManager from "@/manager/DataManager";
 
 const SearchView = () => {
   const dispatch = useDispatch();
@@ -21,9 +22,15 @@ const SearchView = () => {
   };
 
   const renderList = (tabId: string) => {
-    if (SearchManager.isJamTab(tabId)) return <SearchJamsList />
-    else if (SearchManager.isProfileTab(tabId)) return <SearchProfilesList />
-    else if (SearchManager.isProjectTab(tabId)) return <SearchProjectsList />
+    if (SearchManager.isJamTab(tabId)) {
+      return <SearchJamsList key={DataManager.createUuid()} />
+    }
+    else if (SearchManager.isProfileTab(tabId)) {
+      return <SearchProfilesList key={DataManager.createUuid()} />
+    }
+    else if (SearchManager.isProjectTab(tabId)) {
+      return <SearchProjectsList key={DataManager.createUuid()} />
+    }
   };
   
   useEffect(() => {
