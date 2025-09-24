@@ -1,17 +1,17 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import ListView from "../view/ListView";
+import ListView from "@/components/view/ListView";
 import i18n from "@/translation/i18n";
-import TextView from "../view/TextView";
-import BoxView from "../view/BoxView";
+import TextView from "@/components/view/TextView";
+import BoxView from "@/components/view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
 import MediaManager from "@/manager/MediaManager";
 import EntityManager from "@/manager/EntityManager";
-import SpinnerView from "../view/SpinnerView";
+import SpinnerView from "@/components/view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
-import LoadingMoreView from "../view/LoadingMoreView";
+import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
 const numColumns = 2;
@@ -22,6 +22,7 @@ const SearchProjectsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -66,9 +67,18 @@ const SearchProjectsList = () => {
   };
 
   useEffect(() => {
-    fetchListData();
-    if (!isLoaded) setIsLoaded(true);
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    }
   }, [isLoaded]);
+  
+  useEffect(() => {
+    if (prevSearchState.current !== searchState) {
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
