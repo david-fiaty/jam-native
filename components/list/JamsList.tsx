@@ -11,7 +11,7 @@ import LoadingMoreView from "../view/LoadingMoreView";
 
 type Props = {
   idArray?: any;
-}; 
+};
 
 const infiniteScroll: boolean = true;
 
@@ -37,7 +37,7 @@ const JamsList = ({ idArray }: Props) => {
 
   const fetchListData = async () => {
     if (isFetching || !!idArray?.length) return;
-    
+
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults('jam', currentPage);
 
@@ -55,14 +55,16 @@ const JamsList = ({ idArray }: Props) => {
   };
 
   useEffect(() => {
-    if (!idArray?.length) {
-      fetchListData();
-      if (!isLoaded) setIsLoaded(true);
-    }
-    else if (!isLoaded) {
-      getListData();
-      setIsLoaded(true);
-    }
+    (async () => {
+      if (!idArray?.length) {
+        await fetchListData();
+        if (!isLoaded) setIsLoaded(true);
+      }
+      else if (!isLoaded) {
+        await getListData();
+        setIsLoaded(true);
+      }
+    })();
   }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
