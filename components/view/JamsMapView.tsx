@@ -20,7 +20,7 @@ const JamsMapView = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [listData, setListData] = useState<any>({});
+  const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const searchTabs: any[] = SearchManager.getSearchTabs();
