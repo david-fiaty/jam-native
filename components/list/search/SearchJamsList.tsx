@@ -65,8 +65,10 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
-    fetchListData();
-    if (!isLoaded) setIsLoaded(true);
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    }
   }, [isLoaded]);
 
   useEffect(() => {
