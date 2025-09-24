@@ -67,14 +67,16 @@ const SearchProjectsList = () => {
   };
 
   useEffect(() => {
-    if (!isLoaded) {
-      fetchListData();
-      setIsLoaded(true);
-    }
-    else if (prevSearchState.current !== searchState) {
-      fetchListData();
-      prevSearchState.current = searchState;
-    }
+    (async () => {
+      if (!isLoaded) {
+        await fetchListData();
+        setIsLoaded(true);
+      }
+      else if (prevSearchState.current !== searchState) {
+        await fetchListData();
+        prevSearchState.current = searchState;
+      }
+    })();
   }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
