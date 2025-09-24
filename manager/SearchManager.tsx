@@ -23,12 +23,12 @@ class SearchManager {
     };
   }
 
-  async loadResults(currentTab: string, currentPage: number, pageSize?: any) {
+  async loadResults(tabId: string, currentPage: number, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
     let moreResults: any = [];
-    let key: string = '';
+    let currentTab: any = this.getSearchTab(tabId);
 
     let payload: any = {
       page: currentPage,
@@ -51,30 +51,27 @@ class SearchManager {
       };
     }
 
-    if (this.isJamTab(currentTab)) {
-      key = 'jam';
+    if (this.isJamTab(tabId)) {
       payload = {
         ...payload,
-        ...{ jam_type: currentTab },
+        ...{ jam_type: currentTab.type },
       };
 
       moreResults = await EntityManager.listJams(payload);
     }
-    else if (this.isProfileTab(currentTab)) {
-      key = 'profile';
+    else if (this.isProfileTab(tabId)) {
       payload = {
         ...payload,
-        ...{ profile_type: currentTab },
+        ...{ profile_type: currentTab.type },
       };
 
       moreResults = await EntityManager.listProfiles(payload);
     }
-    else if (this.isProjectTab(currentTab)) {
-      key = 'project';
+    else if (this.isProjectTab(tabId)) {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key];
+    moreResults = this.applyFilters({ [currentTab.type]: moreResults }, currentFilters)[currentTab.type];
 
     return moreResults || [];
   }
@@ -205,51 +202,64 @@ class SearchManager {
     };
   }
 
+  getSearchTab(tabId: string) {
+    return this.getSearchTabs().find((o: any) => o.id == tabId);
+  }
+
   getSearchTabs() {
     return [
       {
         id: 'jam',
+        type: 'jam',
         label: i18n.t('Jams'),
         numColumns: 2,
         default: true,
       },
       {
         id: 'looking',
+        type: 'jam',
         label: i18n.t('Lookings'),
         numColumns: 2,
       },
       {
         id: 'call',
+        type: 'jam',
         label: i18n.t('Calls'),
         numColumns: 2,
       },
       {
         id: 'event',
+        type: 'jam',
         label: i18n.t('Events'),
         numColumns: 2,
       },
       {
         id: 'jammer',
+        type: 'profile',
         label: i18n.t('Jammers'),
         numColumns: 1,
       },
       {
         id: 'personal',
+        type: 'profile',
         label: i18n.t('Artists'),
         numColumns: 1,
       },
       {
         id: 'organization',
+        type: 'profile',
         label: i18n.t('Organization'),
         numColumns: 1,
       },
       {
         id: 'venue',
+        type: 'profile',
         label: i18n.t('Venues'),
         numColumns: 2,
       },
       {
         id: 'project',
+        type: 'project',
         label: i18n.t('Projects'),
         numColumns: 2,
       },
