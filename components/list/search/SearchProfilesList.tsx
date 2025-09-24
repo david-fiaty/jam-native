@@ -55,10 +55,12 @@ const SearchProfilesList = () => {
   };
 
   useEffect(() => {
-    fetchListData();
-    if (!isLoaded) setIsLoaded(true);
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    }
   }, [isLoaded]);
-
+  
   useEffect(() => {
     if (prevSearchState.current !== searchState) {
       fetchListData();
