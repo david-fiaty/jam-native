@@ -1,45 +1,56 @@
-import React, { memo, useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import React, { memo, useState, useEffect, useRef } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
-import ListView from "../view/ListView";
-import i18n from "@/translation/i18n";
-import BoxView from "../view/BoxView";
+import ListView from "@/components/view/ListView";
+import BoxView from "@/components/view/BoxView";
 import ScreenManager from "@/manager/ScreenManager";
-import UserManager from "@/manager/UserManager";
-import TextView from "../view/TextView";
-import ProfileListItemView from "../view/ProfileListItemView";
+import MediaManager from "@/manager/MediaManager";
+import i18n from "@/translation/i18n";
+import TextView from "@/components/view/TextView";
+import SpinnerView from "@/components/view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
-import LoadingMoreView from "../view/LoadingMoreView";
+import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
-import SpinnerView from "../view/SpinnerView";
 
-const SearchProfilesList = () => {
+const numColumns = 2;
+
+const SearchJamsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
+  const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
-    ModalManager.toggleModal('PublicProfileSection', {
-      profileId: row?.item?.id,
+    ModalManager.toggleModal('PublicJamSection', {
+      jamId: row?.item?.id,
+      title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
-      title: i18n.t("{{ name }}'s profile", { name: UserManager.getProfileDisplayName(row?.item) }),
     });
   };
 
   const renderItem = (row: any) => {
+    let output: any = null;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
+
+    output = MediaManager.renderImage(imageUrl, {
+      numColumns: numColumns,
+      imageSize: imageSize,
+    });
+
     return (
-      <ProfileListItemView
-        row={row}
-        onListItemPress={(row: any) => onItemPress(row)}
-      />
+      <TouchableOpacity onPress={() => onItemPress(row)}>
+        {output}
+      </TouchableOpacity>
     );
   };
 
   const fetchListData = async () => {
     if (isFetching) return;
+    
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
@@ -54,12 +65,21 @@ const SearchProfilesList = () => {
   };
 
   useEffect(() => {
-    fetchListData();
-    if (!isLoaded) setIsLoaded(true);
+    if (!isLoaded) {
+      fetchListData();
+      setIsLoaded(true);
+    }
   }, [isLoaded]);
 
+  useEffect(() => {
+    if (prevSearchState.current !== searchState) {
+      fetchListData();
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
+
   if (!isLoaded) return <SpinnerView />;
-  
+
   return (
     <>
       <BoxView
@@ -72,7 +92,9 @@ const SearchProfilesList = () => {
         {!!listData?.length && (
           <ListView
             data={listData}
+            numColumns={numColumns}
             contentContainerStyle={styles.contentContainerStyle}
+            columnWrapperStyle={styles.columnWrapperStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
             onScroll={handleScroll}
@@ -99,6 +121,9 @@ const styles = StyleSheet.create({
     gap: Layout.space.base,
     paddingBottom: Layout.space.base,
   },
+  columnWrapperStyle: {
+    gap: Layout.space.base,
+  },
   title: {
     fontWeight: "bold",
     marginBottom: Layout.space.base,
@@ -113,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(SearchProfilesList);
+export default memo(SearchJamsList);
