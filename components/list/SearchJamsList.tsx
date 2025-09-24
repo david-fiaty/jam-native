@@ -13,9 +13,13 @@ import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
+type Props = {
+  data?: any;
+};
+
 const numColumns = 2;
 
-const SearchJamsList = () => {
+const SearchJamsList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -65,6 +69,11 @@ const SearchJamsList = () => {
   };
 
   useEffect(() => {
+    setListData(data);
+  }, [data]);
+
+  /*
+  useEffect(() => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
@@ -73,8 +82,9 @@ const SearchJamsList = () => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+  */
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <>
@@ -93,8 +103,8 @@ const SearchJamsList = () => {
             columnWrapperStyle={styles.columnWrapperStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
+            //onScroll={handleScroll}
+            //scrollEventThrottle={16}
           />
         )}
 

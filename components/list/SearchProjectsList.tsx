@@ -14,9 +14,13 @@ import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "../view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
+type Props = {
+  data?: any;
+};
+
 const numColumns = 2;
 
-const SearchProjectsList = () => {
+const SearchProjectsList = ({ data }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +71,11 @@ const SearchProjectsList = () => {
   };
 
   useEffect(() => {
+    setListData(data);
+  }, [data]);
+
+  /*
+  useEffect(() => {
     if (prevSearchState.current !== searchState || !isLoaded) {
       setListData([]);
       setCurrentPage(1);
@@ -75,8 +84,9 @@ const SearchProjectsList = () => {
       setIsLoaded(true);
     }
   }, [searchState, isLoaded]);
+  */
 
-  if (!isLoaded) return <SpinnerView />;
+  //if (!isLoaded) return <SpinnerView />;
 
   return (
     <>
@@ -87,7 +97,7 @@ const SearchProjectsList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {isLoaded && !!listData?.length && (
+        {!!listData?.length && (
           <ListView
             data={listData}
             numColumns={numColumns}
@@ -95,8 +105,8 @@ const SearchProjectsList = () => {
             columnWrapperStyle={styles.columnWrapperStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
-            onScroll={handleScroll}
-            scrollEventThrottle={16}
+            //onScroll={handleScroll}
+            //scrollEventThrottle={16}
           />
         )}
 

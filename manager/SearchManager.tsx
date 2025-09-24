@@ -3,14 +3,35 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
-  async loadResults(key: string, page: number, currentTab?: any, pageSize?: any) {
+  async getListData(currentPage: number, pageSize: number) {
+    const [jam, profile, project] = await Promise.all([
+      this.loadResults('jam', currentPage, pageSize),
+      this.loadResults('profile', currentPage, pageSize),
+      this.loadResults('project', currentPage, pageSize),
+    ]);
+
+    return {
+      jam: jam,
+      jammer: profile,
+      project: project,
+      looking: jam.filter((o: any) => o.type == 'looking'),
+      call: jam.filter((o: any) => o.type == 'call'),
+      event: jam.filter((o: any) => o.type == 'event'),
+      personal: profile.filter((o: any) => o.profile_type == 'personal'),
+      organization: profile.filter((o: any) => o.profile_type == 'organization'),
+      venue: profile.filter((o: any) => o.profile_type == 'venue'),
+    };
+  }
+
+  async loadResults(tabId: string, currentPage: number, pageSize?: any) {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
     let moreResults: any = [];
+    let currentTab: any = this.getSearchTab(tabId);
 
     let payload: any = {
-      page: page,
+      page: currentPage,
     };
 
     if (pageSize) {
@@ -30,21 +51,27 @@ class SearchManager {
       };
     }
 
-    if (key == 'jam') {
+    if (currentTab.entityType == 'jam') {
+      payload = {
+        ...payload,
+        ...{ jam_type: currentTab.id },
+      };
+
       moreResults = await EntityManager.listJams(payload);
     }
-    else if (key == 'profile') {
+    else if (currentTab.entityType == 'profile') {
+      payload = {
+        ...payload,
+        ...{ profile_type: currentTab.id },
+      };
+
       moreResults = await EntityManager.listProfiles(payload);
     }
-    else if (key == 'project') {
+    else if (currentTab.entityType == 'project') {
       moreResults = await EntityManager.listProjects(payload);
     }
 
-    moreResults = this.applyFilters({ [key]: moreResults }, currentFilters)[key]; 
-
-    if (moreResults && currentTab) {
-      moreResults = this.getTabResults(key, currentTab, { [key]: moreResults });
-    }
+    moreResults = this.applyFilters({ [currentTab.entityType]: moreResults }, currentFilters)[currentTab.entityType];
 
     return moreResults || [];
   }
@@ -175,52 +202,65 @@ class SearchManager {
     };
   }
 
+  getSearchTab(tabId: string) {
+    return this.getSearchTabs().find((o: any) => o.id == tabId);
+  }
+
   getSearchTabs() {
     return [
       {
         id: 'jam',
         label: i18n.t('Jams'),
+        entityType: 'jam',
         numColumns: 2,
         default: true,
       },
       {
         id: 'looking',
         label: i18n.t('Lookings'),
+        entityType: 'jam',
         numColumns: 2,
       },
       {
         id: 'call',
         label: i18n.t('Calls'),
+        entityType: 'jam',
         numColumns: 2,
       },
       {
         id: 'event',
         label: i18n.t('Events'),
+        entityType: 'jam',
         numColumns: 2,
       },
       {
         id: 'jammer',
         label: i18n.t('Jammers'),
+        entityType: 'profile',
         numColumns: 1,
       },
       {
         id: 'personal',
         label: i18n.t('Artists'),
+        entityType: 'profile',
         numColumns: 1,
       },
       {
         id: 'organization',
         label: i18n.t('Organization'),
+        entityType: 'profile',
         numColumns: 1,
       },
       {
         id: 'venue',
         label: i18n.t('Venues'),
+        entityType: 'profile',
         numColumns: 2,
       },
       {
         id: 'project',
         label: i18n.t('Projects'),
+        entityType: 'project',
         numColumns: 2,
       },
     ];

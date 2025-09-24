@@ -18,7 +18,6 @@ const pixelOffset: number = 40;
 
 const JamsMapView = () => {
   const dispatch = useDispatch();
-  const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const prevSearchState: any = useRef(null);
   const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -42,17 +41,6 @@ const JamsMapView = () => {
     }
 
     return { lat: lat, lng: lng };
-  };
-
-  const getTabResults = (key: string) => {
-    let results: any = {
-      ...searchResults,
-      ...{
-        [key]: SearchManager.getTabResults(key, searchState.currentTab, searchResults)
-      },
-    };
-
-    return results[key];
   };
 
   const getMarkerPosition = (item: any) => {
@@ -98,7 +86,7 @@ const JamsMapView = () => {
 
   const fetchListData = async () => {
     setIsFetching(true);
-    setListData(await MapManager.getMapData());
+    setListData(await SearchManager.getListData(1, Config.maxMapResults));
     setIsFetching(false);
   };
   
@@ -147,9 +135,7 @@ const JamsMapView = () => {
           fullscreenControl: true,
         }}
       >
-        {SearchManager.isJamTab(searchState.currentTab) && (listData?.jam || []).map((item: any) => renderMarker(item))}
-        {SearchManager.isProfileTab(searchState.currentTab) && (listData?.profile || []).map((item: any) => renderMarker(item))}
-        {SearchManager.isProjectTab(searchState.currentTab) && (listData?.project || []).map((item: any) => renderMarker(item))}
+        { (listData?.[searchState.currentTab] || []).map((item: any) => renderMarker(item)) }
       </GoogleMap>
 
       <MapLegendView />
