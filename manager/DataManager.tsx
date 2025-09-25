@@ -4,29 +4,33 @@ import ApiManager from './ApiManager';
 import moment from "moment";
 
 class DataManager {
-  async get(key: keyof typeof Endpoints, options?: any, variables?: any, search?: boolean) {
+  async get(key: any, options?: any, variables?: any, search?: boolean) {
     let data: any = await ApiManager.get(key, options, variables); 
 
-    if (search === true) {
-      console.log(key, data[Endpoints[key]?.countKey])
+    if (Endpoints[key]?.dataKey === null) {
+      return data;
     }
 
-    if (Endpoints[key]?.dataKey !== null) {
+    if (search === true) {
+      return {
+        count: data?.[Endpoints[key].countKey],
+        data: data?.[Endpoints[key].dataKey],
+      }
+    }
+    else {
       return data?.[Endpoints[key].dataKey];
     }
-
-    return data;
   }
 
-  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async post(key: any, data: any, variables?: any) {
     return await ApiManager.post(key, data, variables);
   }
 
-  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async delete(key: any, data: any, variables?: any) {
     return await ApiManager.delete(key, data, variables);
   }
 
-  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async put(key: any, data: any, variables?: any) {
     return await ApiManager.put(key, data, variables);
   }
 
