@@ -10,8 +10,7 @@ import ModalManager from "@/manager/ModalManager";
 
 const SearchFiltersView = () => {
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-
-  console.log(searchState.tabResults);
+  const resultCount: any = searchState.tabResults?.[searchState.currentTab];
   
   return (
     <TouchableOpacity 
@@ -25,7 +24,7 @@ const SearchFiltersView = () => {
       >
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Filter results')}</TextView>
-          <Badge value={searchState.tabResults[searchState.currentTab]} />
+          {resultCount && <Badge value={resultCount} />}
         </BoxView>
         
         <IconView
