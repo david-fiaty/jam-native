@@ -1,3 +1,4 @@
+import { setTabResults } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
@@ -58,7 +59,15 @@ class SearchManager {
 
     if (data?.length > 0) {
       data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
+      total = data.length;
     }
+
+    setTabResults({
+      ...searchState.tabResults,
+      ...{ 
+        [tabId]: total,
+      },
+    });
 
     return data;
   }
