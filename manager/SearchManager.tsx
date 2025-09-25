@@ -56,18 +56,26 @@ class SearchManager {
 
     let data: any[] = results?.data || [];
     let total: number = results?.total || 0;
+    
+    console.log({
+      tabId: tabId,
+      data: total,
+    })
 
     if (data?.length > 0) {
       data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
       total = data.length;
     }
 
-    Store.dispatch(setTabResults({
-      ...searchState.tabResults,
+    let tabResults = {...searchState.tabResults};
+    tabResults = {
+      ...tabResults,
       ...{ 
         [tabId]: total,
       },
-    }));
+    };
+
+    Store.dispatch(setTabResults(tabResults));
 
     return data;
   }
