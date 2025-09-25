@@ -72,12 +72,8 @@ const SearchProjectsList = () => {
         await fetchListData();
         setIsLoaded(true);
       }
-      else if (prevSearchState.current !== searchState) {
-        await fetchListData();
-        prevSearchState.current = searchState;
-      }
     })();
-  }, [isLoaded, searchState]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 

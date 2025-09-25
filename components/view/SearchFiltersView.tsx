@@ -1,4 +1,3 @@
-import { useState, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
@@ -10,38 +9,7 @@ import i18n from '@/translation/i18n';
 import ModalManager from "@/manager/ModalManager";
 
 const SearchFiltersView = () => {
-  const [searchResults, setSearchResults] = useState<any>({});
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
-  
-  const renderResultsCount = () => {
-    if (Object.keys(searchState.searchFilters).length > 0 || searchState.searchValue.length > 0) {
-      let resultsCount: number = getResultsCount('jam');
-
-      return <Badge value={resultsCount} />;
-    }
-  };
-
-  const getResultsCount = (key: string) => {
-    return 77;
-
-    // Todo - Refactor filters results count
-
-    /*
-    let results: any = {};
-
-    if (prevSearchState.current !== searchState) {
-      results = JSON.parse(searchState.currentResults) || {};
-      setSearchResults(results);
-      prevSearchState.current = searchState;
-    }
-    else {
-      results = searchResults;
-    }
-
-    return results[key].length;
-    */
-  };
 
   return (
     <TouchableOpacity 
@@ -55,7 +23,7 @@ const SearchFiltersView = () => {
       >
         <BoxView direction="row" align="center" justify="flex-start">
           <TextView>{i18n.t('Filter results')}</TextView>
-          {renderResultsCount()}
+          <Badge value={searchState.tabResults[searchState.currentTab]} />
         </BoxView>
         
         <IconView
