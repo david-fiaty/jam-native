@@ -184,43 +184,7 @@ https://dev.jammm.app/backend/api/v1/profiles/?items_ids=3,9,10,11,16,17,84,1957
 
 
 
-
-
-
-    "liked_jams": [
-        39
-    ],
-    "saved_jams": [
-        32
-    ],
-    "liked_projects": [],
-    "saved_projects": [],
-    "profile_jams": [
-        32,
-        37,
-        39
-    ],
-    "profile_projects": []
-
-
-
-{
-    "tokens": {
-        "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUwNDI3MTkxLCJpYXQiOjE3NDE3ODcxOTEsImp0aSI6IjA3MjVhYjE3NWJjNTQ4NGE4NTJiOWEyMTJiNDM3ZmVhIiwidXNlcl9pZCI6MTJ9.EXoai6Abq3kh9Spq3g0jDVb84SFknJuuJe6kn8h3kqo",
-        "access_token_exp": 1750427191,
-        "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc1OTA2NzE5MSwiaWF0IjoxNzQxNzg3MTkxLCJqdGkiOiIzM2M1NjEwNmY1MjY0NzMxODdlYmQ2NjFmMjA0OGYyNCIsInVzZXJfaWQiOjEyfQ.Fh6Wxzg3VS9g8FZMMfyPN0_VE6qTQgdADQKgamaGW2U",
-        "refresh_token_exp": 1759067191
-    },
-    "is_user_created": false
-}
-
-
-  useEffect(() => {
-    (async () => {
-     
-    })();
-  });
-
+  const tabResults: any = Object.fromEntries(SearchManager.getSearchTabs().map((o: any) => [o.id, 0]));
 
   const getSelectedMedia = () => {
     let mediaList: any = [...selectedMedia || []];

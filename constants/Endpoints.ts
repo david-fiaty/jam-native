@@ -1,21 +1,21 @@
-const Endpoints = {
+const Endpoints: any = {
   listJams: {
     path: '/jams/mobile-feed/',
     cacheable: true,
     dataKey: 'new_items_to_display', 
-    countKey: 'total_items_count',
+    totalKey: 'total_items_count',
   },
   listProjects: {
     path: '/projects/mobile-feed/',
     cacheable: true,
     dataKey: 'new_items_to_display',
-    countKey: 'total_items_count',
+    totalKey: 'total_items_count',
   },
   listProfiles: {
     path: '/profiles/mobile-feed/',
     cacheable: true,
     dataKey: 'new_items_to_display',
-    countKey: 'total_items_count',
+    totalKey: 'total_items_count',
   },
   getJams: {
     path: '/jams/',
