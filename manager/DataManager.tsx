@@ -15,7 +15,7 @@ class DataManager {
       return {
         total: data?.[Endpoints[key].totalKey],
         data: data?.[Endpoints[key].dataKey],
-      }
+      };
     }
     else {
       return data?.[Endpoints[key].dataKey];
