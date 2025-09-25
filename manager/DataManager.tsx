@@ -1,38 +1,37 @@
+import { Config } from '@/constants/Config';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 import moment from "moment";
-import { Config } from '@/constants/Config';
 
 class DataManager {
-  async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
-    let data: any = await ApiManager.get(key, options, variables);
+  async get(key: any, options?: any, variables?: any, search?: boolean) {
+    let data: any = await ApiManager.get(key, options, variables); 
 
-    if (Endpoints[key]?.dataKey !== null) {
-      return data?.[Endpoints[key].dataKey];
+    if (Endpoints[key]?.dataKey === null) {
+      return data;
     }
 
-    return data;
+    if (search === true) {
+      return {
+        total: data?.[Endpoints[key].totalKey],
+        data: data?.[Endpoints[key].dataKey],
+      };
+    }
+    else {
+      return data?.[Endpoints[key].dataKey];
+    }
   }
 
-  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async post(key: any, data: any, variables?: any) {
     return await ApiManager.post(key, data, variables);
   }
 
-  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async delete(key: any, data: any, variables?: any) {
     return await ApiManager.delete(key, data, variables);
   }
 
-  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async put(key: any, data: any, variables?: any) {
     return await ApiManager.put(key, data, variables);
-  }
-
-  async find(key: keyof typeof Endpoints, idField: string, idValues: any) {
-    idValues = Array.isArray(idValues) ? idValues : [idValues];
-    let data: any = await ApiManager.get(key);
-    let haystack: any = data?.[Endpoints[key]?.dataKey];
-    let result: any = haystack.find((item: any) => idValues.includes(item[idField]));
-
-    return result || {};
   }
 
   createUuid() { 
