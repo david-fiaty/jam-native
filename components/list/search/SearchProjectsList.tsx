@@ -63,9 +63,9 @@ const SearchProjectsList = () => {
     setIsFetching(false);
   };
 
-  const handleScroll = (event: any) => {
+  const handleScroll = async (event: any) => {
     if (SearchManager.canLoadMore(event)) {
-      fetchListData();
+      await fetchListData();
     }
   };
 
