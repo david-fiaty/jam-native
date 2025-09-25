@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { setCountriesData, setSectorsData } from '@/redux/slices/AppSlice';
+import { setTabResults } from '@/redux/slices/SearchSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';
 import { useDispatch } from "react-redux";
 import { setCurrentLanguage } from '@/redux/slices/UserSlice';
@@ -8,6 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
 import ScreenManager from '@/manager/ScreenManager'; 
 import EntityManager from '@/manager/EntityManager';
+import SearchManager from '@/manager/SearchManager';
 
 export default () => {
   const dispatch = useDispatch();
@@ -29,6 +31,7 @@ export default () => {
     (async () => {
       await setLanguage();
   
+      const tabResults: any = Object.fromEntries(SearchManager.getSearchTabs().map((o: any) => [o.id, 0]));
       const [sectors, countries] = await Promise.all([
         EntityManager.getSectors(),
         EntityManager.getCountries(),
@@ -36,6 +39,8 @@ export default () => {
 
       dispatch(setSectorsData(sectors));
       dispatch(setCountriesData(countries));
+      dispatch(setTabResults(tabResults));
+
       setAppReady(true);
     })();
   }, []);
