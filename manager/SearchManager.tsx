@@ -72,9 +72,9 @@ class SearchManager {
     }
 
     const [jam, profile, project] = await Promise.all([
-      EntityManager.listJams(payload),
-      EntityManager.listProfiles(payload),
-      EntityManager.listProjects(payload),
+      EntityManager.listJams(payload, true),
+      EntityManager.listProfiles(payload, true),
+      EntityManager.listProjects(payload, true),
     ]);
 
     return {
