@@ -62,12 +62,12 @@ class SearchManager {
       total = data.length;
     }
 
-    setTabResults({
+    Store.dispatch(setTabResults({
       ...searchState.tabResults,
       ...{ 
         [tabId]: total,
       },
-    });
+    }));
 
     return data;
   }
