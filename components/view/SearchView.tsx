@@ -10,7 +10,6 @@ import TabsView from "./TabsView";
 import BoxView from "./BoxView";
 import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
-import DataManager from "@/manager/DataManager";
 
 const SearchView = () => {
   const dispatch = useDispatch();
