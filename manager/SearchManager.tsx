@@ -38,7 +38,7 @@ class SearchManager {
         ...{ jam_type: jamType },
       };
 
-      moreResults = await EntityManager.listJams(payload);
+      moreResults = await EntityManager.listJams(payload, true);
     }
     else if (currentTab.entityType == 'profile') {
       let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;  
@@ -47,41 +47,15 @@ class SearchManager {
         ...{ profile_type: profileType },
       };
 
-      moreResults = await EntityManager.listProfiles(payload);
+      moreResults = await EntityManager.listProfiles(payload, true);
     }
     else if (currentTab.entityType == 'project') {
-      moreResults = await EntityManager.listProjects(payload);
+      moreResults = await EntityManager.listProjects(payload, true);
     }
 
     moreResults = this.applyFilters({ [currentTab.entityType]: moreResults }, currentFilters)[currentTab.entityType];
 
     return moreResults || [];
-  }
-
-  async sendRequest(searchValue?: string) {
-    let payload: any = {};
-
-    if (searchValue?.length) {
-      payload = {
-        ...payload,
-        ...{
-          query_text: searchValue,
-          query_title: searchValue,
-        },
-      };
-    }
-
-    const [jam, profile, project] = await Promise.all([
-      EntityManager.listJams(payload, true),
-      EntityManager.listProfiles(payload, true),
-      EntityManager.listProjects(payload, true),
-    ]);
-
-    return {
-      jam: jam || [],
-      profile: profile || [],
-      project: project || [],
-    };
   }
 
   applyFilters(searchResults: any, searchFilters: any) {
