@@ -54,14 +54,15 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
 
-
     if (results?.data?.length > 0) {
       // Todo - Double check filtering
-      //data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
-      //total = data.length;
+      //results.data = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
+      //results.total = results.data.length;
+      //let test = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
+      //console.log(test.length)
     }
 
-    if (searchState.tabResults?.[tabId] !== results?.total ) {
+    if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
       let tabResults = {...searchState.tabResults};
       tabResults[tabId] = results?.total;
       Store.dispatch(setTabResults(tabResults));
@@ -130,6 +131,13 @@ class SearchManager {
     }
 
     return searchResults;
+  }
+
+  canLoadMore(event: any) {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   }
 
   isJamTab(tabId: string) {

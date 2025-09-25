@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -20,7 +20,6 @@ const SearchProfilesList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
 
   const onItemPress = (row: any) => {
     ModalManager.toggleModal('PublicProfileSection', {
@@ -44,14 +43,18 @@ const SearchProfilesList = () => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
-    setCurrentPage((prevPage: number) => prevPage + 1);
+    if (moreResults?.length > 0) {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
     setIsFetching(false);
   };
 
-  const handleScroll = (event: any) => {
-    ScreenManager.handleScrollEvent(event, fetchListData);
+  const handleScroll = async (event: any) => {
+    if (SearchManager.canLoadMore(event)) {
+      await fetchListData();
+    }
   };
 
   useEffect(() => {
