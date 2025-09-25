@@ -133,13 +133,11 @@ class SearchManager {
     return searchResults;
   }
 
-  handleScrollEvent(event: any, callback: any) {
+  canLoadMore(event: any) {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const paddingToBottom = 0;
 
-    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
-      callback();
-    }
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   }
 
   isJamTab(tabId: string) {

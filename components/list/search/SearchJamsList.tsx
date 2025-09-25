@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -21,7 +21,6 @@ const SearchJamsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -63,7 +62,9 @@ const SearchJamsList = () => {
   };
 
   const handleScroll = (event: any) => {
-    SearchManager.handleScrollEvent(event, fetchListData);
+    if (SearchManager.canLoadMore(event)) {
+      fetchListData();
+    }
   };
 
   useEffect(() => {
