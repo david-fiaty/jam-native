@@ -8,6 +8,7 @@ class EntityManager {
   async listJams(options?: any, search?: boolean) {
     options = options || {};
     let profileId = await UserManager.getProfileId();
+    let variables = {};
     let defaults = {
       profile_id: profileId,
       page_size: Config.paginationSize,
@@ -15,12 +16,13 @@ class EntityManager {
       jam_type: 'all',
     };
 
-    return await DataManager.get('listJams', { ...defaults, ...options });
+    return await DataManager.get('listJams', { ...defaults, ...options }, variables, search);
   }
 
   async listProfiles(options?: any, search?: boolean) {
     options = options || {};
     let profileId = await UserManager.getProfileId();
+    let variables = {};
     let defaults = {
       profile_id: profileId,
       page_size: Config.paginationSize,
@@ -28,11 +30,12 @@ class EntityManager {
       profile_type: 'all',
     };
 
-    return await DataManager.get('listProfiles', { ...defaults, ...options });
+    return await DataManager.get('listProfiles', { ...defaults, ...options }, variables, search);
   }
 
   async listProjects(options?: any, search?: boolean) {
     options = options || {};
+    let variables = {};
     let profileId = await UserManager.getProfileId();
     let defaults = {
       profile_id: profileId,
@@ -40,7 +43,7 @@ class EntityManager {
       page: 1,
     }; 
 
-    return await DataManager.get('listProjects', { ...defaults, ...options });
+    return await DataManager.get('listProjects', { ...defaults, ...options }, variables, search);
   }
 
   async getJams(idArray: any) {
