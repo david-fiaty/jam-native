@@ -53,10 +53,10 @@ const SearchProjectsList = () => {
     if (isFetching) return;
     setIsFetching(true);
 
-    let moreResults: any = await SearchManager.loadResults(searchState.currentTab, currentPage);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
-    setListData((prevData) => [...(prevData || []), ...(moreResults?.data || [])]);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
 
     setIsFetching(false);
@@ -72,8 +72,12 @@ const SearchProjectsList = () => {
         await fetchListData();
         setIsLoaded(true);
       }
+      else if (prevSearchState.current !== searchState) {
+        //await fetchListData();
+        //prevSearchState.current = searchState;
+      }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
