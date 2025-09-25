@@ -7,7 +7,7 @@ class SearchManager {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
-    let moreResults: any = [];
+    let results: any[] = [];
     let currentTab: any = this.getSearchTab(tabId);
 
     let payload: any = {
@@ -38,7 +38,7 @@ class SearchManager {
         ...{ jam_type: jamType },
       };
 
-      moreResults = await EntityManager.listJams(payload, true);
+      results = await EntityManager.listJams(payload, true);
     }
     else if (currentTab.entityType == 'profile') {
       let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;  
@@ -47,15 +47,20 @@ class SearchManager {
         ...{ profile_type: profileType },
       };
 
-      moreResults = await EntityManager.listProfiles(payload, true);
+      results = await EntityManager.listProfiles(payload, true);
     }
     else if (currentTab.entityType == 'project') {
-      moreResults = await EntityManager.listProjects(payload, true);
+      results = await EntityManager.listProjects(payload, true);
     }
 
-    moreResults = this.applyFilters({ [currentTab.entityType]: moreResults }, currentFilters)[currentTab.entityType];
 
-    return moreResults || [];
+    if (results?.data?.length > 0) {
+      // Todo - Double check filtering
+      //data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
+      //total = data.length;
+    }
+
+    return results || [];
   }
 
   applyFilters(searchResults: any, searchFilters: any) {

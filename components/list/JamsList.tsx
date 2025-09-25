@@ -42,15 +42,15 @@ const JamsList = ({ idArray }: Props) => {
     if (isFetching || !!idArray?.length) return;
 
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults('jam', currentPage);
+    let moreResults: any = await SearchManager.loadResults('jam', currentPage);
 
-    if (!moreResults?.length && infiniteScroll) {
+    if (!moreResults?.data?.length && infiniteScroll) {
       moreResults = await SearchManager.loadResults('jam', 1);
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setListData((prevData) => [...(prevData || []), ...(moreResults?.data || [])]);
       setCurrentPage(2);
     }
     else {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setListData((prevData) => [...(prevData || []), ...(moreResults?.data || [])]);
       setCurrentPage((prevPage: number) => prevPage + 1);
     }
 
@@ -70,8 +70,8 @@ const JamsList = ({ idArray }: Props) => {
         setIsLoaded(true);
       }
       else if (prevSearchState.current !== searchState) {
-        await fetchListData();
-        prevSearchState.current = searchState;
+        //await fetchListData();
+        //prevSearchState.current = searchState;
       }
     })();
   }, [isLoaded, searchState, idArray]);
