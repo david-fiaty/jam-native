@@ -1,4 +1,3 @@
-import { setTabResults } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
@@ -54,30 +53,14 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
 
-    let data: any[] = results?.data || [];
-    let total: number = results?.total || 0;
-    
-    console.log({
-      tabId: tabId,
-      data: total,
-    })
 
-    if (data?.length > 0) {
-      data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
-      total = data.length;
+    if (results?.data?.length > 0) {
+      // Todo - Double check filtering
+      //data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
+      //total = data.length;
     }
 
-    let tabResults = {...searchState.tabResults};
-    tabResults = {
-      ...tabResults,
-      ...{ 
-        [tabId]: total,
-      },
-    };
-
-    Store.dispatch(setTabResults(tabResults));
-
-    return data;
+    return results || [];
   }
 
   applyFilters(searchResults: any, searchFilters: any) {
