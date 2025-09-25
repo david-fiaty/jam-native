@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
@@ -43,8 +43,12 @@ const SearchFiltersView = () => {
     */
   };
 
-  console.log(searchState.tabResults)
+  useEffect(() => {
+    
+  }, []);
 
+   console.log(searchState.tabResults)
+   
   return (
     <TouchableOpacity 
       onPress={() => ModalManager.toggleModal('SearchFiltersForm')} 
