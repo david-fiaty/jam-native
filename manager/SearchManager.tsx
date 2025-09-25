@@ -54,12 +54,11 @@ class SearchManager {
     }
 
     let data: any[] = results?.data || [];
-    let count: number = results?.count || 0;
+    let total: number = results?.total || 0;
 
     console.log({
       tabId: tabId,
-      //data: data,
-      count: count,
+      total: total,
     })
 
     data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
