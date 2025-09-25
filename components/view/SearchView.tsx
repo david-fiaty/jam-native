@@ -23,13 +23,13 @@ const SearchView = () => {
 
   const renderList = (tabId: string) => {
     if (SearchManager.isJamTab(tabId)) {
-      return <SearchJamsList key={DataManager.createUuid()} />
+      return <SearchJamsList key={tabId} />
     }
     else if (SearchManager.isProfileTab(tabId)) {
-      return <SearchProfilesList key={DataManager.createUuid()} />
+      return <SearchProfilesList key={tabId} />
     }
     else if (SearchManager.isProjectTab(tabId)) {
-      return <SearchProjectsList key={DataManager.createUuid()} />
+      return <SearchProjectsList key={tabId} />
     }
   };
   
