@@ -148,15 +148,6 @@ class ScreenManager {
     }, duration || Config.messageDisplayDuration);
   }
 
-  handleScrollEvent(event: any, callback: any) {
-    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
-    const paddingToBottom = 0;
-
-    if (layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom) {
-      callback();
-    }
-  }
-
   isTablet() {
     // Todo - Implement tablet detection
     return true;
