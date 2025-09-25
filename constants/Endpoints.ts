@@ -1,4 +1,4 @@
-const Endpoints = {
+const Endpoints: any = {
   listJams: {
     path: '/jams/mobile-feed/',
     cacheable: true,
