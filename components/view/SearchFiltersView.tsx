@@ -43,6 +43,8 @@ const SearchFiltersView = () => {
     */
   };
 
+  console.log(searchState.tabResults)
+
   return (
     <TouchableOpacity 
       onPress={() => ModalManager.toggleModal('SearchFiltersForm')} 
