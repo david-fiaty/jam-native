@@ -54,6 +54,8 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
 
+    console.log(results)
+
     if (results?.data?.length > 0) {
       // Todo - Double check filtering
       //results.data = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
@@ -63,10 +65,9 @@ class SearchManager {
     }
 
     if (searchState.tabResults?.[tabId] !== results?.total ) {
-      Store.dispatch(setTabResults({
-        ...searchState.tabResults,
-        ...{ [tabId] : results?.total },
-      }));
+      let tabResults = {...searchState.tabResults};
+      tabResults[tabId] = results?.total;
+      Store.dispatch(setTabResults(tabResults));
     }
 
     return results?.data || [];
