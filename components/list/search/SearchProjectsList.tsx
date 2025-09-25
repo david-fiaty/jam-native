@@ -73,8 +73,8 @@ const SearchProjectsList = () => {
         setIsLoaded(true);
       }
       else if (prevSearchState.current !== searchState) {
-        await fetchListData();
-        prevSearchState.current = searchState;
+        //await fetchListData();
+        //prevSearchState.current = searchState;
       }
     })();
   }, [isLoaded, searchState]);
