@@ -4,10 +4,10 @@ import ApiManager from './ApiManager';
 import moment from "moment";
 
 class DataManager {
-  async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
+  async get(key: keyof typeof Endpoints, options?: any, variables?: any, search?: boolean) {
     let data: any = await ApiManager.get(key, options, variables); 
 
-    if (Endpoints[key]?.countKey) {
+    if (search === true) {
       console.log(key, data[Endpoints[key]?.countKey])
     }
 
