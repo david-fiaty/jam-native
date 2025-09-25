@@ -54,11 +54,12 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
 
-
     if (results?.data?.length > 0) {
       // Todo - Double check filtering
-      //data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
-      //total = data.length;
+      //results.data = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
+      //results.total = results.data.length;
+      //let test = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
+      //console.log(test.length)
     }
 
     if (searchState.tabResults?.[tabId] !== results?.total ) {
