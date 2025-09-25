@@ -52,9 +52,9 @@ const SearchJamsList = () => {
     if (isFetching) return;
 
     setIsFetching(true);
-    let moreResults: any = await SearchManager.loadResults(searchState.currentTab, currentPage);
+    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
-    setListData((prevData) => [...(prevData || []), ...(moreResults?.data || [])]);
+    setListData((prevData) => [...(prevData || []), ...moreResults]);
     setCurrentPage((prevPage: number) => prevPage + 1);
 
     setIsFetching(false);
@@ -70,12 +70,8 @@ const SearchJamsList = () => {
         await fetchListData();
         setIsLoaded(true);
       }
-      else if (prevSearchState.current !== searchState) {
-        //await fetchListData();
-        //prevSearchState.current = searchState;
-      }
     })();
-  }, [isLoaded, searchState]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
