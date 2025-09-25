@@ -63,9 +63,10 @@ class SearchManager {
     }
 
     if (searchState.tabResults?.[tabId] !== results?.total ) {
-      let tabResults = {...searchState.tabResults};
-      tabResults[tabId] = results?.total;
-      Store.dispatch(setTabResults(tabResults));
+      Store.dispatch(setTabResults({
+        ...searchState.tabResults,
+        ...{ [tabId] : results?.total },
+      }));
     }
 
     return results?.data || [];
