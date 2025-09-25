@@ -69,12 +69,8 @@ const JamsList = ({ idArray }: Props) => {
         
         setIsLoaded(true);
       }
-      else if (prevSearchState.current !== searchState) {
-        //await fetchListData();
-        //prevSearchState.current = searchState;
-      }
     })();
-  }, [isLoaded, searchState, idArray]);
+  }, [isLoaded, idArray]);
 
   if (!isLoaded) return <SpinnerView />;
 
