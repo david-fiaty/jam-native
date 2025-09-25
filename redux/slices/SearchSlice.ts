@@ -5,8 +5,7 @@ const SearchSlice = createSlice({
   initialState: {
     searchValue: '',
     currentTab: null,
-    currentResults: '{}',
-    defaultResults: '{}',
+    currentResults: [],
     searchFilters: {},
   },
   reducers: {
@@ -19,14 +18,11 @@ const SearchSlice = createSlice({
     setCurrentResults: (state, action) => {
       state.currentResults = action.payload;
     },
-    setDefaultResults: (state, action) => {
-      state.defaultResults = action.payload;
-    },
     setSearchFilters: (state, action) => {
       state.searchFilters = action.payload;
     },
-  },
+  }, 
 });
 
-export const { setSearchValue, setSearchFilters, setCurrentTab, setCurrentResults, setDefaultResults } = SearchSlice.actions;
+export const { setSearchValue, setSearchFilters, setCurrentTab, setCurrentResults } = SearchSlice.actions;
 export default SearchSlice.reducer;
