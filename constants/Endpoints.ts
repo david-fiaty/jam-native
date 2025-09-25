@@ -4,21 +4,18 @@ const Endpoints: any = {
     cacheable: true,
     dataKey: 'new_items_to_display', 
     countKey: 'total_items_count',
-    entityType: 'jam',
   },
   listProjects: {
     path: '/projects/mobile-feed/',
     cacheable: true,
     dataKey: 'new_items_to_display',
     countKey: 'total_items_count',
-    entityType: 'project',
   },
   listProfiles: {
     path: '/profiles/mobile-feed/',
     cacheable: true,
     dataKey: 'new_items_to_display',
     countKey: 'total_items_count',
-    entityType: 'profile',
   },
   getJams: {
     path: '/jams/',
