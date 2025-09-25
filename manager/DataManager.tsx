@@ -13,7 +13,7 @@ class DataManager {
 
     if (search === true) {
       return {
-        count: data?.[Endpoints[key].countKey],
+        total: data?.[Endpoints[key].totalKey],
         data: data?.[Endpoints[key].dataKey],
       }
     }
