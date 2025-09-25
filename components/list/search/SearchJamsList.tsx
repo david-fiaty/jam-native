@@ -63,7 +63,7 @@ const SearchJamsList = () => {
   };
 
   const handleScroll = (event: any) => {
-    ScreenManager.handleScrollEvent(event, fetchListData);
+    SearchManager.handleScrollEvent(event, fetchListData);
   };
 
   useEffect(() => {
