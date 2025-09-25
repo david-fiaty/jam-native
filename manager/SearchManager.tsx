@@ -56,14 +56,11 @@ class SearchManager {
     let data: any[] = results?.data || [];
     let total: number = results?.total || 0;
 
-    console.log({
-      tabId: tabId,
-      total: total,
-    })
+    if (data?.length > 0) {
+      data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
+    }
 
-    data = this.applyFilters({ [currentTab.entityType]: data }, currentFilters)[currentTab.entityType];
-
-    return data || [];
+    return data;
   }
 
   applyFilters(searchResults: any, searchFilters: any) {
