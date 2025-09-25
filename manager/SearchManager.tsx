@@ -62,7 +62,7 @@ class SearchManager {
       //console.log(test.length)
     }
 
-    if (searchState.tabResults?.[tabId] !== results?.total ) {
+    if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
       let tabResults = {...searchState.tabResults};
       tabResults[tabId] = results?.total;
       Store.dispatch(setTabResults(tabResults));
@@ -131,6 +131,13 @@ class SearchManager {
     }
 
     return searchResults;
+  }
+
+  canLoadMore(event: any) {
+    const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
+    const paddingToBottom = 0;
+
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height - paddingToBottom;
   }
 
   isJamTab(tabId: string) {
