@@ -44,8 +44,10 @@ const SearchProfilesList = () => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
-    setListData((prevData) => [...(prevData || []), ...moreResults]);
-    setCurrentPage((prevPage: number) => prevPage + 1);
+    if (moreResults?.length > 0) {
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setCurrentPage((prevPage: number) => prevPage + 1);
+    }
 
     setIsFetching(false);
   };
