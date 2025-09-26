@@ -53,14 +53,10 @@ class SearchManager {
     else if (this.isProjectTab(tabId)) {
       results = await EntityManager.listProjects(payload, true);
     }
-
-    console.log('total 1', results.total)
     
     if (results?.data?.length > 0) {
       results.data = this.applyFilters(tabId, results.data, currentFilters);
       results.total = results.data.length;
-
-      console.log('total 2', results.total)
     }
 
     if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
