@@ -60,6 +60,9 @@ class SearchManager {
       //results.total = results.data.length;
       //let test = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
       //console.log(test.length)
+
+      results.data = this.applyFilters(tabId, results.data, currentFilters);
+      
     }
 
     if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
@@ -71,6 +74,14 @@ class SearchManager {
     return results?.data || [];
   }
 
+  applyFilters(tabId: string, searchResults: any, searchFilters: any) {
+
+    console.log(tabId, searchFilters);
+
+    return searchResults;
+  }
+
+  /*
   applyFilters(searchResults: any, searchFilters: any) {
     if (!searchFilters || !Object.keys(searchFilters)?.length) return searchResults;
 
@@ -132,6 +143,7 @@ class SearchManager {
 
     return searchResults;
   }
+    */
 
   canLoadMore(event: any) {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
