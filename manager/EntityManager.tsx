@@ -16,8 +16,6 @@ class EntityManager {
       jam_type: 'all',
     };
 
-    console.log({ ...defaults, ...options })
-
     return await DataManager.get('listJams', { ...defaults, ...options }, variables, search);
   }
 
