@@ -53,7 +53,7 @@ class SearchManager {
     else if (currentTab.entityType == 'project') {
       results = await EntityManager.listProjects(payload, true);
     }
-    
+
     if (results?.data?.length > 0) {
       results.data = this.applyFilters(tabId, results.data, currentFilters);
       results.total = results.data.length;
