@@ -54,11 +54,13 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
 
+    console.log('--- total 1', results?.data?.length)
+
     if (results?.data?.length > 0) {
-      results.data = this.applyFilters(tabId, results.data, currentFilters);
+      results.data = this.applyFilters(tabId, results.data, {});
       results.total = results.data.length;
 
-      console.log(results.total)
+      console.log('--- total 2', results?.data?.length)
     }
 
     if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
@@ -71,55 +73,58 @@ class SearchManager {
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
+
+    return searchResults;
+
     if (!Object.keys(searchFilters)?.length) return searchResults;
 
     if (this.isJamTab(tabId)) {
-      if (searchFilters?.countries?.length) {
+      if (searchFilters?.countries) {
         searchResults = searchResults.filter((o: any) => {
           return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
         });
       }
 
-      if (searchFilters?.sectors?.length) {
+      if (searchFilters?.sectors) {
         searchResults = searchResults.filter((o: any) => {
           return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
         });
       }
 
-      if (searchFilters?.locationTypes?.length) {
+      if (searchFilters?.locationTypes) {
         searchResults = searchResults.filter((o: any) => {
           return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
         });
       }
 
-      if (searchFilters?.jamTypes?.length) {
+      if (searchFilters?.jamTypes) {
         searchResults = searchResults.filter((o: any) => {
           return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
         });
       }
     }
     else if (this.isProfileTab(tabId)) {
-      if (searchFilters?.countries?.length) {
+      if (searchFilters?.countries) {
         searchResults = searchResults.filter((o: any) => {
           return searchFilters.countries.some((id: any) => o?.country?.includes(id));
         });
       }
 
-      if (searchFilters?.sectors?.length) {
+      if (searchFilters?.sectors) {
         searchResults = searchResults.filter((o: any) => {
           return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
         });
       }
     }
     else if (this.isProjectTab(tabId)) {
-      if (searchFilters?.countries?.length) {
+      if (searchFilters?.countries) {
         searchResults = searchResults.filter((o: any) => {
           return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
         });
       }
 
-      if (searchFilters?.sectors?.length) {
-        searchResults = searchResults.project.filter((o: any) => {
+      if (searchFilters?.sectors) {
+        searchResults = searchResults.filter((o: any) => {
           return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
         });
       }
