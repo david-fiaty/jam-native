@@ -55,8 +55,8 @@ class SearchManager {
     }
     
     if (results?.data?.length > 0) {
-      results.data = this.applyFilters(tabId, results.data, currentFilters);
-      results.total = results.data.length;
+      //results.data = this.applyFilters(tabId, results.data, currentFilters);
+      //results.total = results.data.length;
 
       if (results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
         let tabResults = {...searchState.tabResults};
