@@ -32,7 +32,7 @@ class SearchManager {
       };
     }
 
-    if (currentTab.entityType == 'jam') {
+    if (this.isJamTab(tabId)) {
       let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;  
       payload = {
         ...payload,
@@ -41,7 +41,7 @@ class SearchManager {
 
       results = await EntityManager.listJams(payload, true);
     }
-    else if (currentTab.entityType == 'profile') {
+    else if (this.isProfileTab(tabId)) {
       let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;  
       payload = {
         ...payload,
@@ -50,13 +50,17 @@ class SearchManager {
 
       results = await EntityManager.listProfiles(payload, true);
     }
-    else if (currentTab.entityType == 'project') {
+    else if (this.isProjectTab(tabId)) {
       results = await EntityManager.listProjects(payload, true);
     }
 
+    console.log('total 1', results.total)
+    
     if (results?.data?.length > 0) {
       results.data = this.applyFilters(tabId, results.data, currentFilters);
       results.total = results.data.length;
+
+      console.log('total 2', results.total)
     }
 
     if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
