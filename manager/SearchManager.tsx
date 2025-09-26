@@ -65,14 +65,6 @@ class SearchManager {
       }
     }
 
-    /*
-    if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
-      let tabResults = {...searchState.tabResults};
-      tabResults[tabId] = results?.total;
-      Store.dispatch(setTabResults(tabResults));
-    }
-      */
-
     return results?.data || [];
   }
 
