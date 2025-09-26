@@ -75,8 +75,43 @@ class SearchManager {
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
+    if (!Object.keys(searchFilters)?.length) return searchResults;
 
-    console.log(tabId, searchFilters);
+    if (this.isJamTab(tabId)) {
+      if (searchFilters?.countries?.length) {
+
+      }
+
+      if (searchFilters?.sectors?.length) {
+
+      }
+
+      if (searchFilters?.locationTypes?.length) {
+      
+      }
+
+      if (searchFilters?.jamTypes?.length) {
+
+      }
+    }
+    else if (this.isProfileTab(tabId)) {
+      if (searchFilters?.countries?.length) {
+
+      }
+
+      if (searchFilters?.sectors?.length) {
+
+      }
+    }
+    else if (this.isProjectTab(tabId)) {
+      if (searchFilters?.countries?.length) {
+
+      }
+
+      if (searchFilters?.sectors?.length) {
+
+      }
+    }
 
     return searchResults;
   }
