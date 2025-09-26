@@ -53,14 +53,10 @@ class SearchManager {
     else if (currentTab.entityType == 'project') {
       results = await EntityManager.listProjects(payload, true);
     }
-
-    console.log('--- total 1', results?.data?.length)
-
+    
     if (results?.data?.length > 0) {
-      results.data = this.applyFilters(tabId, results.data, {});
+      results.data = this.applyFilters(tabId, results.data, currentFilters);
       results.total = results.data.length;
-
-      console.log('--- total 2', results?.data?.length)
     }
 
     if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
@@ -73,9 +69,6 @@ class SearchManager {
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
-
-    return searchResults;
-
     if (!Object.keys(searchFilters)?.length) return searchResults;
 
     if (this.isJamTab(tabId)) {
