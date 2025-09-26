@@ -55,14 +55,10 @@ class SearchManager {
     }
 
     if (results?.data?.length > 0) {
-      // Todo - Double check filtering
-      //results.data = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
-      //results.total = results.data.length;
-      //let test = this.applyFilters({ [currentTab.entityType]: results.data }, currentFilters)[currentTab.entityType];
-      //console.log(test.length)
-
       results.data = this.applyFilters(tabId, results.data, currentFilters);
-      
+      results.total = results.data.length;
+
+      console.log(results.total)
     }
 
     if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
