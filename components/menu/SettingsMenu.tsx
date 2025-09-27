@@ -7,7 +7,6 @@ import i18n from '@/translation/i18n';
 import UserManager from '@/manager/UserManager';
 import BoxView from '../view/BoxView';
 import SectionManager from '@/manager/SectionManager';
-import ModalManager from '@/manager/ModalManager';
 
 const SettingsMenu = () => {
   const router = useRouter();
@@ -16,7 +15,7 @@ const SettingsMenu = () => {
     return [
       {
         label: i18n.t('Your profile'),
-        onPress: () => ModalManager.toggleModal('PrivateProfileSection'),
+        onPress: () => SectionManager.push(router, 'private-profile'),
       },
       {
         label: i18n.t('Change password'),
