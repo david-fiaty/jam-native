@@ -55,6 +55,7 @@ class SearchManager {
     }
     
     if (results?.data?.length > 0) {
+      // Todo - Apply filters
       //results.data = this.applyFilters(tabId, results.data, currentFilters);
       //results.total = results.data.length;
 
@@ -64,14 +65,6 @@ class SearchManager {
         Store.dispatch(setTabResults(tabResults));
       }
     }
-
-    /*
-    if (results?.data && results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
-      let tabResults = {...searchState.tabResults};
-      tabResults[tabId] = results?.total;
-      Store.dispatch(setTabResults(tabResults));
-    }
-      */
 
     return results?.data || [];
   }
