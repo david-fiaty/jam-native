@@ -206,7 +206,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            component: 'SearchFiltersForm',
+            component: 'JamFormSection',
           },
         ],
       },
@@ -217,7 +217,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            component: 'SearchFiltersForm',
+            component: 'PrivateProfileSection',
           },
         ],
       },
@@ -228,7 +228,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            component: 'SearchFiltersForm',
+            component: 'PrivateProjectSection',
           },
         ],
       },
