@@ -55,6 +55,7 @@ class SearchManager {
     }
     
     if (results?.data?.length > 0) {
+      // Todo - Apply filters
       //results.data = this.applyFilters(tabId, results.data, currentFilters);
       //results.total = results.data.length;
 
