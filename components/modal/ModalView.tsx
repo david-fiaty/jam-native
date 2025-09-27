@@ -123,6 +123,12 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'SearchView',
         title: i18n.t('Search'),
         render: (params: any) => <SearchView {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Filter'),
+            component: 'SearchFiltersForm',
+          },
+        ],
       },
       {
         id: 'SettingsMenu',
