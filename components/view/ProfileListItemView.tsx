@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     ...Layout.listItem,
     ...{
       padding: Layout.space.base / 1.3,
+      width: '80%',
     },
   },
   profileImage: {
