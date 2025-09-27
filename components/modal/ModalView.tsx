@@ -217,7 +217,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            component: 'PrivateProfileSection',
+            component: 'ProfileFormSection',
           },
         ],
       },
@@ -228,7 +228,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         toolbarButtons: [
           {
             label: i18n.t('Edit'),
-            component: 'PrivateProjectSection',
+            component: 'ProjectFormSection',
           },
         ],
       },
