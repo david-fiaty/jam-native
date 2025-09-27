@@ -23,11 +23,8 @@ import LanguageForm from "../form/LanguageForm";
 import ResetPasswordForm from "../form/ResetPasswordForm";
 import NotificationItemSection from "../section/NotificationItemSection";
 import PublicProfileSection from "../section/profile/PublicProfileSection";
-import PrivateProfileSection from "../section/profile/PrivateProfileSection";
 import PublicProjectSection from "../section/project/PublicProjectSection";
-import PrivateProjectSection from "../section/project/PrivateProjectSection";
 import PublicJamSection from "../section/jam/PublicJamSection";
-import PrivateJamSection from "../section/jam/PrivateJamSection";
 import ProjectFormSection from "../section/project/ProjectFormSection";
 import JamFormSection from "../section/jam/JamFormSection";
 import SearchView from "./SearchView";
@@ -161,39 +158,6 @@ const SectionView = () => {
         id: 'public-profile',
         title: i18n.t('Profile'),
         render: (params: any) => <PublicProfileSection {...params} />,
-      },
-      {
-        id: 'private-jam',
-        title: i18n.t('Your Jam'),
-        render: (params: any) => <PrivateJamSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit Jam'),
-            sectionId: 'edit-jam',
-          },
-        ],
-      },
-      {
-        id: 'private-project',
-        title: i18n.t('Your project'),
-        render: (params: any) => <PrivateProjectSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit Project'),
-            sectionId: 'edit-project',
-          },
-        ],
-      },
-      {
-        id: 'private-profile',
-        title: i18n.t('Your profile'),
-        render: (params: any) => <PrivateProfileSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit Profile'),
-            sectionId: 'profile-form',
-          },
-        ],
       },
       {
         id: 'profile-form',
