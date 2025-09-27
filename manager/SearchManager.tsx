@@ -203,7 +203,7 @@ class SearchManager {
       },
       {
         id: 'organization',
-        label: i18n.t('Organization'),
+        label: i18n.t('Organizations'),
         entityType: 'profile',
         numColumns: 1,
       },
