@@ -50,9 +50,9 @@ const ModalView = ({ currentSection, style }: Props) => {
 
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
       return (
-        <ModalBackButton
-          currentModal={currentModal}
-          visible={activeModalsCount !== currentModalIndex}
+        <ModalBackButton 
+          currentModal={currentModal} 
+          visible={activeModalsCount !== currentModalIndex} 
         />
       );
     }
@@ -113,12 +113,6 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'JamForm',
         title: i18n.t('Create a Jam'),
         render: (params: any) => <JamForm {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Test'),
-            component: 'SearchFiltersForm',
-          },
-        ],
       },
       {
         id: 'JamsMapView',
