@@ -68,8 +68,6 @@ const ProfileForm = () => {
     })();
   }, [isLoaded, formData, resource]);
 
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <BoxView
       direction="column"
@@ -78,230 +76,234 @@ const ProfileForm = () => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <ProfileImageField
-          value={formData?.upload_profile_picture?.url}
-          onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
-        />
-        {FormManager.renderError('upload_profile_picture')}
+      {!isLoaded && <SpinnerView />};
 
-        <TextView>{i18n.t('Profile type')}*</TextView>
-        <ProfileTypeField
-          value={formData?.profile_type}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
-          disabled={true}
-        />
-        {FormManager.renderError('profile_type')}
+      {isLoaded && (
+        <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+          <ProfileImageField
+            value={formData?.upload_profile_picture?.url}
+            onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
+          />
+          {FormManager.renderError('upload_profile_picture')}
 
-        {/* Personal profile */}
-        {formData?.profile_type == 'personal' && (
-          <>
-            <TextView>
-              {i18n.t('First name')}*
-            </TextView>
-            <InputTextField
-              value={formData?.profile_personal?.first_name}
-              placeholder={i18n.t('Enter your first name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
-                ...(formData?.profile_personal || {}),
-                ...{ first_name: value },
-              }, ['string'])}
-            />
-            {FormManager.renderError('profile_personal.first_name')}
+          <TextView>{i18n.t('Profile type')}*</TextView>
+          <ProfileTypeField
+            value={formData?.profile_type}
+            onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
+            disabled={true}
+          />
+          {FormManager.renderError('profile_type')}
 
-            <TextView>
-              {i18n.t('Last name')}
-            </TextView>
-            <InputTextField
-              value={formData?.profile_personal?.last_name}
-              placeholder={i18n.t('Enter your last name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
-                ...(formData?.profile_personal || {}),
-                ...{ last_name: value },
-              }, ['string'])}
-            />
-            {FormManager.renderError('profile_personal.last_name')}
-          </>
-        )}
+          {/* Personal profile */}
+          {formData?.profile_type == 'personal' && (
+            <>
+              <TextView>
+                {i18n.t('First name')}*
+              </TextView>
+              <InputTextField
+                value={formData?.profile_personal?.first_name}
+                placeholder={i18n.t('Enter your first name')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+                  ...(formData?.profile_personal || {}),
+                  ...{ first_name: value },
+                }, ['string'])}
+              />
+              {FormManager.renderError('profile_personal.first_name')}
 
-        {/* Organization profile */}
-        {formData?.profile_type == 'organization' && (
-          <>
-            <TextView>
-              {i18n.t('Organization name')}*
-            </TextView>
-            <InputTextField
-              value={formData?.profile_organization?.organization_name}
-              placeholder={i18n.t('Enter your organization name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-                ...(formData?.profile_organization || {}),
-                ...{ organization_name: value },
-              }, ['string'])}
-            />
-            {FormManager.renderError('profile_organization.organization_name')}
+              <TextView>
+                {i18n.t('Last name')}
+              </TextView>
+              <InputTextField
+                value={formData?.profile_personal?.last_name}
+                placeholder={i18n.t('Enter your last name')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+                  ...(formData?.profile_personal || {}),
+                  ...{ last_name: value },
+                }, ['string'])}
+              />
+              {FormManager.renderError('profile_personal.last_name')}
+            </>
+          )}
 
-            <TextView>
-              {i18n.t('Creation year')}
-            </TextView>
-            <InputTextField
-              keyboardType="number-pad"
-              value={formData?.profile_organization?.creation_year}
-              placeholder={i18n.t('Enter the creation year')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-                ...(formData?.profile_organization || {}),
-                ...{ creation_year: value },
-              })}
-            />
-            {FormManager.renderError('profile_organization.creation_year')}
-          </>
-        )}
+          {/* Organization profile */}
+          {formData?.profile_type == 'organization' && (
+            <>
+              <TextView>
+                {i18n.t('Organization name')}*
+              </TextView>
+              <InputTextField
+                value={formData?.profile_organization?.organization_name}
+                placeholder={i18n.t('Enter your organization name')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+                  ...(formData?.profile_organization || {}),
+                  ...{ organization_name: value },
+                }, ['string'])}
+              />
+              {FormManager.renderError('profile_organization.organization_name')}
 
-        {/* Venue profile */}
-        {formData?.profile_type == 'venue' && (
-          <>
-            <TextView>
-              {i18n.t('Venue name')}*
-            </TextView>
-            <InputTextField
-              value={formData?.profile_venue?.venue_name}
-              placeholder={i18n.t('Enter the venue name')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-                ...(formData?.profile_venue || {}),
-                ...{ venue_name: value },
-              }, ['string'])}
-            />
-            {FormManager.renderError('profile_venue.venue_name')}
+              <TextView>
+                {i18n.t('Creation year')}
+              </TextView>
+              <InputTextField
+                keyboardType="number-pad"
+                value={formData?.profile_organization?.creation_year}
+                placeholder={i18n.t('Enter the creation year')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+                  ...(formData?.profile_organization || {}),
+                  ...{ creation_year: value },
+                })}
+              />
+              {FormManager.renderError('profile_organization.creation_year')}
+            </>
+          )}
 
-            <TextView>
-              {i18n.t('Venue types')}*
-            </TextView>
-            <VenueTypesField
-              resource={resource}
-              field="venue_types"
-              parent="profile_venue"
-              placeholder={i18n.t('Select venue types')}
-              value={formData?.profile_venue?.venue_types}
-              onPress={() => ModalManager.toggleModal('VenueTypesList', {
-                resource: resource,
-                field: "venue_types",
-                parent: "profile_venue",
-              })}
-            />
-            {FormManager.renderError('profile_venue.venue_types')}
+          {/* Venue profile */}
+          {formData?.profile_type == 'venue' && (
+            <>
+              <TextView>
+                {i18n.t('Venue name')}*
+              </TextView>
+              <InputTextField
+                value={formData?.profile_venue?.venue_name}
+                placeholder={i18n.t('Enter the venue name')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+                  ...(formData?.profile_venue || {}),
+                  ...{ venue_name: value },
+                }, ['string'])}
+              />
+              {FormManager.renderError('profile_venue.venue_name')}
 
-            <TextView>
-              {i18n.t('Creation year')}
-            </TextView>
-            <InputTextField
-              keyboardType="number-pad"
-              value={formData?.profile_venue?.creation_year}
-              placeholder={i18n.t('Enter the creation year')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-                ...(formData?.profile_venue || {}),
-                ...{ creation_year: value },
-              }, ['number'])}
-            />
-            {FormManager.renderError('profile_venue.creation_year')}
-          </>
-        )}
+              <TextView>
+                {i18n.t('Venue types')}*
+              </TextView>
+              <VenueTypesField
+                resource={resource}
+                field="venue_types"
+                parent="profile_venue"
+                placeholder={i18n.t('Select venue types')}
+                value={formData?.profile_venue?.venue_types}
+                onPress={() => ModalManager.toggleModal('VenueTypesList', {
+                  resource: resource,
+                  field: "venue_types",
+                  parent: "profile_venue",
+                })}
+              />
+              {FormManager.renderError('profile_venue.venue_types')}
 
-        {/* All profiles */}
-        {formData?.profile_type?.length && (
-          <>
-            <TextView>
-              {i18n.t('Profile name (with no spaces)')}*
-            </TextView>
-            <InputTextField
-              value={formData?.profile_name}
-              placeholder={i18n.t('Profile name')}
-              // Todo - Add nospace validation
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
-            />
-            {FormManager.renderError('profile_name')}
+              <TextView>
+                {i18n.t('Creation year')}
+              </TextView>
+              <InputTextField
+                keyboardType="number-pad"
+                value={formData?.profile_venue?.creation_year}
+                placeholder={i18n.t('Enter the creation year')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+                  ...(formData?.profile_venue || {}),
+                  ...{ creation_year: value },
+                }, ['number'])}
+              />
+              {FormManager.renderError('profile_venue.creation_year')}
+            </>
+          )}
 
-            <TextView>
-              {i18n.t('About')}
-            </TextView>
-            <InputTextareaField
-              value={formData?.profile_description}
-              placeholder={i18n.t('Profile description')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
-            />
-            {FormManager.renderError('profile_description')}
+          {/* All profiles */}
+          {formData?.profile_type?.length && (
+            <>
+              <TextView>
+                {i18n.t('Profile name (with no spaces)')}*
+              </TextView>
+              <InputTextField
+                value={formData?.profile_name}
+                placeholder={i18n.t('Profile name')}
+                // Todo - Add nospace validation
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
+              />
+              {FormManager.renderError('profile_name')}
 
-            <TextView>
-              {i18n.t('Address')}
-            </TextView>
-            <InputTextField
-              value={formData?.address}
-              placeholder={i18n.t('Enter your address')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
-            />
-            {FormManager.renderError('address')}
+              <TextView>
+                {i18n.t('About')}
+              </TextView>
+              <InputTextareaField
+                value={formData?.profile_description}
+                placeholder={i18n.t('Profile description')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
+              />
+              {FormManager.renderError('profile_description')}
 
-            <SectorsField
-              resource={resource}
-              field="sectors_ids"
-              value={formData?.sectors_ids}
-            />
+              <TextView>
+                {i18n.t('Address')}
+              </TextView>
+              <InputTextField
+                value={formData?.address}
+                placeholder={i18n.t('Enter your address')}
+                onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
+              />
+              {FormManager.renderError('address')}
 
-            <TextView>{i18n.t('Country')}</TextView>
-            <CountriesField
-              multiple={false}
-              resource={resource}
-              field="scope_country_code"
-              placeholder={i18n.t('Select a country')}
-              value={formData?.scope_country_code}
-              onPress={() => ModalManager.toggleModal('CountriesList', {
-                resource: resource,
-                field: 'scope_country_code',
-                multiple: false,
-              })}
-            />
-            {FormManager.renderError('scope_country_code')}
+              <SectorsField
+                resource={resource}
+                field="sectors_ids"
+                value={formData?.sectors_ids}
+              />
 
-            <TextView>
-              {i18n.t('Location')}
-            </TextView>
-            <LocationPickerField
-              resource="profile"
-              placeholder={i18n.t('Select your location')}
-              onChangeValue={(data: any) => {
-                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
-                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
-              }}
-              onPress={() => ModalManager.toggleModal('LocationMapView', {
-                resource: 'profile',
-                latitude: {
+              <TextView>{i18n.t('Country')}</TextView>
+              <CountriesField
+                multiple={false}
+                resource={resource}
+                field="scope_country_code"
+                placeholder={i18n.t('Select a country')}
+                value={formData?.scope_country_code}
+                onPress={() => ModalManager.toggleModal('CountriesList', {
+                  resource: resource,
+                  field: 'scope_country_code',
+                  multiple: false,
+                })}
+              />
+              {FormManager.renderError('scope_country_code')}
+
+              <TextView>
+                {i18n.t('Location')}
+              </TextView>
+              <LocationPickerField
+                resource="profile"
+                placeholder={i18n.t('Select your location')}
+                onChangeValue={(data: any) => {
+                  FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
+                  FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
+                }}
+                onPress={() => ModalManager.toggleModal('LocationMapView', {
+                  resource: 'profile',
+                  latitude: {
+                    field: 'geolocation_latitude',
+                    value: formData?.geolocation_latitude,
+                  },
+                  longitude: {
+                    field: 'geolocation_longitude',
+                    value: formData?.geolocation_longitude,
+                  },
+                })}
+                latitude={{
                   field: 'geolocation_latitude',
                   value: formData?.geolocation_latitude,
-                },
-                longitude: {
+                }}
+                longitude={{
                   field: 'geolocation_longitude',
                   value: formData?.geolocation_longitude,
-                },
-              })}
-              latitude={{
-                field: 'geolocation_latitude',
-                value: formData?.geolocation_latitude,
-              }}
-              longitude={{
-                field: 'geolocation_longitude',
-                value: formData?.geolocation_longitude,
-              }}
-            />
-          </>
-        )}
+                }}
+              />
+            </>
+          )}
 
-        {/* Submit button */}
-        <View style={styles.submitButtonContainer}>
-          <ButtonView
-            label={i18n.t('Update')}
-            isProcessing={isProcessing}
-            onPress={submitForm}
-          />
-        </View>
-      </BoxView>
+          {/* Submit button */}
+          <View style={styles.submitButtonContainer}>
+            <ButtonView
+              label={i18n.t('Update')}
+              isProcessing={isProcessing}
+              onPress={submitForm}
+            />
+          </View>
+        </BoxView>
+      )}
     </BoxView>
   );
 }
