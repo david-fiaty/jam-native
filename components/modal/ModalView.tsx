@@ -125,6 +125,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <SearchView {...params} />,
         toolbarButtons: [
           {
+            type: 'label',
             label: i18n.t('Filter'),
             component: 'SearchFiltersForm',
           },
