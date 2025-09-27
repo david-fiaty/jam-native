@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
@@ -34,6 +34,19 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
         {i18n.t(currentModal?.title)}
       </TextView>
 
+      {currentModal.toolbarButtons?.length > 0 && (
+        <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
+          {currentModal.toolbarButtons.map((o: any, i: number) => (
+            <TouchableOpacity
+              key={`button-${i}`}
+              onPress={() => ModalManager.toggleModal(o.component)}
+            >
+              <TextView underline={true}>{o.label}</TextView>
+            </TouchableOpacity>
+          ))}
+        </BoxView>
+      )}
+
     </BoxView>
   );
 };
@@ -47,6 +60,10 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
+  },
+  toolbar: {
+    flex: 1,
+    paddingRight: Layout.space.base,
   },
 });
 
