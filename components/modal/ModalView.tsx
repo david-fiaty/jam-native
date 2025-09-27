@@ -113,12 +113,6 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'JamForm',
         title: i18n.t('Create a Jam'),
         render: (params: any) => <JamForm {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Test'),
-            component: 'SearchFiltersForm',
-          },
-        ],
       },
       {
         id: 'JamsMapView',
@@ -209,16 +203,34 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateJamSection',
         title: i18n.t('Your Jam'),
         render: (params: any) => <PrivateJamSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            component: 'SearchFiltersForm',
+          },
+        ],
       },
       {
         id: 'PrivateProfileSection',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            component: 'SearchFiltersForm',
+          },
+        ],
       },
       {
         id: 'PrivateProjectSection',
         title: i18n.t('Your project'),
         render: (params: any) => <PrivateProjectSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            component: 'SearchFiltersForm',
+          },
+        ],
       },
     ].map((o: any) => {
       return {
