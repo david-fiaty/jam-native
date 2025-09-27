@@ -50,9 +50,9 @@ const ModalView = ({ currentSection, style }: Props) => {
 
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
       return (
-        <ModalBackButton
-          currentModal={currentModal}
-          visible={activeModalsCount !== currentModalIndex}
+        <ModalBackButton 
+          currentModal={currentModal} 
+          visible={activeModalsCount !== currentModalIndex} 
         />
       );
     }
@@ -203,34 +203,16 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateJamSection',
         title: i18n.t('Your Jam'),
         render: (params: any) => <PrivateJamSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            component: 'JamFormSection',
-          },
-        ],
       },
       {
         id: 'PrivateProfileSection',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            component: 'ProfileFormSection',
-          },
-        ],
       },
       {
         id: 'PrivateProjectSection',
         title: i18n.t('Your project'),
         render: (params: any) => <PrivateProjectSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            component: 'ProjectFormSection',
-          },
-        ],
       },
     ].map((o: any) => {
       return {
