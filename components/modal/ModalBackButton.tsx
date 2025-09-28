@@ -1,4 +1,5 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect } from "react";
+import { BackHandler, StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
@@ -15,7 +16,17 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
   const onBackPress = () => {
     ModalManager.toggleModal(currentModal?.id);
+    return true;
   };
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   if (!visible === true) {
     return <></>;
