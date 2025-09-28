@@ -38,7 +38,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={() => ModalManager.toggleModal(currentModal?.id)}
+      onPress={onBackPress}
     >
       <IconView
         name="previous"
@@ -56,7 +56,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
             return (
               <TouchableOpacity
                 key={`button-${i}`}
-                onPress={onBackPress}
+                onPress={() => ModalManager.toggleModal(o.component)}
               >
                 <BoxView direction="row" align="center" justify="flex-end">
                   <TextView>{o.label}</TextView>
@@ -65,7 +65,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
                       name={o.icon}
                       theme="transparent"
                       padding={0}
-                      size={15}
+                      size={14}
                     />
                   )}
                 </BoxView>
