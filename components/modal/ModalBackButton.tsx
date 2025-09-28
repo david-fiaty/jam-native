@@ -36,17 +36,28 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
       {currentModal.toolbarButtons?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
-          {currentModal.toolbarButtons.map((o: any, i: number) => (
-            <TouchableOpacity
-              key={`button-${i}`}
-              onPress={() => ModalManager.toggleModal(o.component)}
-            >
-              <TextView underline={true}>{o.label}</TextView>
-            </TouchableOpacity>
-          ))}
+          {currentModal.toolbarButtons.map((o: any, i: number) => {
+            return (
+              <TouchableOpacity
+                key={`button-${i}`}
+                onPress={() => ModalManager.toggleModal(o.component)}
+              >
+                <BoxView direction="row" align="center" justify="flex-end">
+                  <TextView>{o.label}</TextView>
+                  {o?.icon && (
+                    <IconView
+                      name={o.icon}
+                      theme="transparent"
+                      padding={0}
+                      size={16}
+                    />
+                  )}
+                </BoxView>
+              </TouchableOpacity>
+            );
+          })}
         </BoxView>
       )}
-
     </BoxView>
   );
 };
@@ -63,7 +74,6 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     flex: 1,
-    paddingRight: Layout.space.base,
   },
 });
 
