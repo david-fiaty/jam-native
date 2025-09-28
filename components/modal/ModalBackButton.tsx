@@ -42,7 +42,6 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
                 key={`button-${i}`}
                 onPress={() => ModalManager.toggleModal(o.component)}
               >
-
                 <BoxView direction="row" align="center" justify="flex-end">
                   <TextView>{o.label}</TextView>
                   {o?.icon && (
@@ -59,7 +58,6 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
           })}
         </BoxView>
       )}
-
     </BoxView>
   );
 };
