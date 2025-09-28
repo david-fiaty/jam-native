@@ -197,7 +197,7 @@ const SectionView = () => {
       },
       {
         id: 'profile-form',
-        title: i18n.t('Edit Profile'),
+        title: i18n.t('Edit'),
         render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
