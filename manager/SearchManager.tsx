@@ -72,7 +72,7 @@ class SearchManager {
   shouldRefreshResults(prevState: any, currentState: any) {
     return prevState !== currentState
       && prevState?.currentTab !== currentState.currentTab
-      && (true);
+      && (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
