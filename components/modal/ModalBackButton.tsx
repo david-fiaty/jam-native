@@ -1,4 +1,5 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect } from "react";
+import { BackHandler, StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import BoxView from '@/components/view/BoxView';
 import IconView from '@/components/view/IconView';
@@ -15,7 +16,17 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
   const onBackPress = () => {
     ModalManager.toggleModal(currentModal?.id);
+    return true;
   };
+
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   if (!visible === true) {
     return <></>;
@@ -27,7 +38,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={() => ModalManager.toggleModal(currentModal?.id)}
+      onPress={onBackPress}
     >
       <IconView
         name="previous"
@@ -45,7 +56,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
             return (
               <TouchableOpacity
                 key={`button-${i}`}
-                onPress={onBackPress}
+                onPress={() => ModalManager.toggleModal(o.component)}
               >
                 <BoxView direction="row" align="center" justify="flex-end">
                   <TextView>{o.label}</TextView>
@@ -54,7 +65,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
                       name={o.icon}
                       theme="transparent"
                       padding={0}
-                      size={16}
+                      size={14}
                     />
                   )}
                 </BoxView>

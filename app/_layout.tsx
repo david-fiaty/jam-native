@@ -38,7 +38,7 @@ const RootLayout = () => {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  const backAction = () => {  
+  const onBackPress = () => {  
     SectionManager.back(router);
     return true;
   };
@@ -50,7 +50,7 @@ const RootLayout = () => {
 
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
-      backAction,
+      onBackPress,
     );
 
     return () => backHandler.remove();
