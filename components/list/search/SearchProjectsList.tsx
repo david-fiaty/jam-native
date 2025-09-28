@@ -56,6 +56,10 @@ const SearchProjectsList = () => {
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
     moreResults = await EntityManager.addProjectsImages(moreResults);
 
+    if (currentPage === 1) {
+      setCurrentData(moreResults);
+    }
+
     if (moreResults?.length > 0) {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
