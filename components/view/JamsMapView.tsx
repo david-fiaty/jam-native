@@ -7,7 +7,6 @@ import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import UserManager from "@/manager/UserManager";
-import SearchFiltersView from "./SearchFiltersView";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
@@ -117,8 +116,6 @@ const JamsMapView = () => {
           currentTab={searchState.currentTab}
           onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
         />
-
-        <SearchFiltersView />
 
         <MapView
           style={styles.map}
