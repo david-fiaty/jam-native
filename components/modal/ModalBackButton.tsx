@@ -12,6 +12,11 @@ type Props = {
 };
 
 const ModalBackButton = ({ currentModal, visible }: Props) => {
+
+  const onBackPress = () => {
+    ModalManager.toggleModal(currentModal?.id);
+  };
+
   if (!visible === true) {
     return <></>;
   }
@@ -40,7 +45,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
             return (
               <TouchableOpacity
                 key={`button-${i}`}
-                onPress={() => ModalManager.toggleModal(o.component)}
+                onPress={onBackPress}
               >
                 <BoxView direction="row" align="center" justify="flex-end">
                   <TextView>{o.label}</TextView>
