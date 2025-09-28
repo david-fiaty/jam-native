@@ -145,7 +145,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # New release
 - Finalisation pagination + filtres sur search screens
 - Finalisation profile new screens
-- Ajustement couleurs maps
+- Ajustement couleurs et marqueurs maps
 - Fix action device back button 
 
 # Todo 
