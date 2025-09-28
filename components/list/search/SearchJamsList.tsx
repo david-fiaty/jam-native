@@ -83,8 +83,8 @@ const SearchJamsList = () => {
   }, [isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState) {
-      prevSearchState.current = searchState;  
+    if (SearchManager.shouldRefreshResults(prevSearchState.current, searchState)) {
+      console.log(prevSearchState.current, searchState)
     }
   }, [searchState]);
 
