@@ -120,7 +120,6 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <JamsMapView {...params} />,
         toolbarButtons: [
           {
-            type: 'label',
             label: i18n.t('Filter'),
             icon: 'filter',
             component: 'SearchFiltersForm',
