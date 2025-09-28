@@ -48,7 +48,6 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
               direction="row"
               align="center"
               justify="space-between"
-              style={styles.container}
             >
               <ImageView
                 uri={uri}
