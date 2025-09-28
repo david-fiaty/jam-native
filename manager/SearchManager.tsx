@@ -69,8 +69,8 @@ class SearchManager {
     return results?.data || [];
   }
 
-  shouldRefreshResults(searchState: any) {
-    return false;
+  shouldRefreshResults(prevSearchState: any, currentSearchState: any) {
+    return prevSearchState !== currentSearchState;
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
