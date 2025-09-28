@@ -69,7 +69,7 @@ class SearchManager {
     return results?.data || [];
   }
 
-  shouldRefreshResults () {
+  shouldRefreshResults(searchState: any) {
     return false;
   }
 
