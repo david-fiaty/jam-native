@@ -143,9 +143,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Trim textarea fields like input text fields?
 
 # New release
-- Finalisation pagination + infinite scroll sur feed et search screens
-- Amelioration perf rendu UI (different de perf chargement API data) 
-- Avancement + bug fixes profile screens (finalisation en cours)
+- Finalisation pagination + filtres sur search screens
+- Finalisation profile new screens
+- Ajustement couleurs maps
+- Fix action device back button 
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
