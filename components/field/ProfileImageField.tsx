@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
@@ -28,10 +28,15 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
     if (onChangeValue) onChangeValue(mediaList);
   };
 
+  const deleteImage = () => {
+    // Todo - Implement delete action
+    console.log('delete image')
+  };
+
   return (
     <MediaPickerField
       label={
-        <BoxView direction="row" align="center" style={styles.container}>
+        <BoxView direction="row" align="center">
           {!uri?.length && (
             <BoxView direction="row" align="center" justify="flex-start" style={styles.iconContainer}>
               <IconView name="image" theme="secondary" size={26} padding={48} radius="round" />
@@ -52,7 +57,13 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
                 resizeMode="cover"
                 style={styles.imagePreview}
               />
-              <TextView>{i18n.t("Change your profile image.")}</TextView>
+
+              <TouchableOpacity
+                style={styles.deleteImage}
+                onPress={deleteImage}
+              >
+                <IconView name="delete" theme="primary" size={12} padding={3.5} />
+              </TouchableOpacity>
             </BoxView>
           )}
         </BoxView>
@@ -63,15 +74,17 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
   iconContainer: {
     width: '100%',
   },
   imagePreview: {
     borderRadius: Layout.radius.round,
-  }
+  },
+  deleteImage: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
 });
 
 export default ProfileImageField;
