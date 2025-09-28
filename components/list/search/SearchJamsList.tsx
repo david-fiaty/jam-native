@@ -84,6 +84,7 @@ const SearchJamsList = () => {
 
   useEffect(() => {
     if (SearchManager.shouldRefreshResults(prevSearchState.current, searchState)) {
+      // Todo - Finish check implementation
       console.log(prevSearchState.current, searchState)
     }
   }, [searchState]);
