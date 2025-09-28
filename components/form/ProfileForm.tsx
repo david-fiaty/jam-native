@@ -79,6 +79,7 @@ const ProfileForm = () => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+        <TextView>{i18n.t('Profile Image')}</TextView>
         <ProfileImageField
           value={formData?.upload_profile_picture?.url}
           onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
