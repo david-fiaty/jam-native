@@ -13,7 +13,7 @@ const SectionBackButton = () => {
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section, shallowEqual);
 
-  const onPress = () => {
+  const onBackPress = () => {
     SectionManager.back(router);
   };
 
@@ -34,7 +34,7 @@ const SectionBackButton = () => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={onPress}
+      onPress={onBackPress}
     >
       <IconView
         name="previous"
@@ -66,7 +66,6 @@ const SectionBackButton = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Layout.colors.white,
-    width: '100%',
     padding: Layout.space.base,
     paddingLeft: Layout.space.base * 1.5,
   },
