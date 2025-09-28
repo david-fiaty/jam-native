@@ -65,7 +65,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
                       name={o.icon}
                       theme="transparent"
                       padding={0}
-                      size={16}
+                      size={15}
                     />
                   )}
                 </BoxView>
