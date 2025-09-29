@@ -86,7 +86,7 @@ class SearchManager {
 
     */
 
-    return results?.data || [];
+    //return results?.data || [];
   }
 
   shouldReload(prevState: any, currentState: any) {
