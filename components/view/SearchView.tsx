@@ -40,12 +40,12 @@ const SearchView = () => {
   }, [searchState, searchTabs]);
 
   useEffect(() => {
-    if (SearchManager.shouldRefreshResults(prevSearchState.current, searchState)) {
+    if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
 
       console.log('--------------')
       console.log('-->', prevSearchState.current)
       console.log('-->', searchState)
-      
+
       prevSearchState.current = searchState;
     }
   }, [searchState]);
