@@ -19,7 +19,6 @@ const SearchProfilesList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentData, setCurrentData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
 
   const onItemPress = (row: any) => {
@@ -43,10 +42,6 @@ const SearchProfilesList = () => {
     if (isFetching) return;
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
-
-    if (currentPage === 1) {
-      setCurrentData(moreResults);
-    }
 
     if (moreResults?.length > 0) {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
