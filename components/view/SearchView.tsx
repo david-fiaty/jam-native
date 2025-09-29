@@ -23,13 +23,28 @@ const SearchView = () => {
 
   const renderList = (tabId: string) => {
     if (SearchManager.isJamTab(tabId)) {
-      return <SearchJamsList key={tabId} />
+      return (
+        <SearchJamsList 
+          key={tabId} 
+          state={{prev: prevSearchState, curr: searchState}} 
+        />
+      );
     }
     else if (SearchManager.isProfileTab(tabId)) {
-      return <SearchProfilesList key={tabId} />
+      return (
+        <SearchProfilesList 
+          key={tabId} 
+          state={{prev: prevSearchState, curr: searchState}} 
+        />
+      );
     }
     else if (SearchManager.isProjectTab(tabId)) {
-      return <SearchProjectsList key={tabId} />
+      return (
+        <SearchProjectsList 
+          key={tabId} 
+          state={{prev: prevSearchState, curr: searchState}} 
+        />
+      );
     }
   };
   

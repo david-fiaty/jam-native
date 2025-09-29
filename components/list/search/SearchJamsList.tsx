@@ -15,11 +15,7 @@ import ModalManager from "@/manager/ModalManager";
 
 const numColumns = 2;
 
-type Props = {
-  state?: any;
-};
-
-const SearchJamsList = ({ state }: Props) => {
+const SearchJamsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);

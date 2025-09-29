@@ -14,13 +14,9 @@ import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
 
-type Props = {
-  state?: any;
-};
-
 const numColumns = 2;
 
-const SearchProjectsList = ({ state }: Props) => {
+const SearchProjectsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
