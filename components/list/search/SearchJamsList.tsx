@@ -87,9 +87,9 @@ const SearchJamsList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {!!searchState.tabResults?.[searchState.currentTab]?.listData?.length && (
+        {!!listData?.length && (
           <ListView
-            data={searchState.tabResults?.[searchState.currentTab]?.listData || []}
+            data={listData}
             numColumns={numColumns}
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
@@ -100,12 +100,12 @@ const SearchJamsList = () => {
           />
         )}
 
-        {isLoaded && !isFetching && !searchState.tabResults?.[searchState.currentTab]?.listData?.length && (
+        {isLoaded && !isFetching && !listData?.length && (
           <TextView>{i18n.t('No results available')}</TextView>
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!searchState.tabResults?.[searchState.currentTab]?.listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
     </>
   );
 };
