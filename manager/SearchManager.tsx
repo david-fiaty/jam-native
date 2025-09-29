@@ -64,10 +64,13 @@ class SearchManager {
         tabResults[tabId] = {
           total: results?.total,
           currentPage: currentPage,
+
+          /*
           listData: [
             ...(tabResults?.[tabId]?.listData || []),
             ...(results?.data || []),
           ],
+          */
         };
 
         Store.dispatch(setTabResults(tabResults));
