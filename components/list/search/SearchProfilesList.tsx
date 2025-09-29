@@ -41,13 +41,7 @@ const SearchProfilesList = () => {
   const fetchListData = async () => {
     if (isFetching) return;
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
-
-    if (moreResults?.length > 0) {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
-      setCurrentPage((prevPage: number) => prevPage + 1);
-    }
-
+    await SearchManager.loadResults(searchState.currentTab, currentPage);
     setIsFetching(false);
   };
 
@@ -77,9 +71,9 @@ const SearchProfilesList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {!!listData?.length && (
+        {!!searchState?.tabResults?.[searchState.currentTab]?.listData?.length && (
           <ListView
-            data={listData}
+            data={searchState?.tabResults?.[searchState.currentTab]?.listData || []}
             contentContainerStyle={styles.contentContainerStyle}
             keyExtractor={(row: any, index?: number) => `${row.id}-${index}`}
             renderItem={(row: any) => renderItem(row)}
@@ -88,12 +82,12 @@ const SearchProfilesList = () => {
           />
         )}
 
-        {isLoaded && !isFetching && !listData?.length && (
+        {isLoaded && !isFetching && !searchState?.tabResults?.[searchState.currentTab]?.listData?.length && (
           <TextView>{i18n.t('No results available')}</TextView>
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
+      {isLoaded && isFetching && !!searchState?.tabResults?.[searchState.currentTab]?.listData?.length && <LoadingMoreView bottomSpace={ Layout.space.base*2 } />}
     </>
   );
 };
