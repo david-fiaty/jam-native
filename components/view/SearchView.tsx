@@ -53,11 +53,6 @@ const SearchView = () => {
 
   useEffect(() => {
     if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
-
-      console.log('--------------')
-      console.log('-->', prevSearchState.current)
-      console.log('-->', searchState)
-
       prevSearchState.current = searchState;
     }
   }, [searchState]);
