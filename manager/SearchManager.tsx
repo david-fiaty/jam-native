@@ -61,6 +61,8 @@ class SearchManager {
 
      // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
         let tabResults: any = {...searchState.tabResults};
+
+        /*
         let listData: any [] = [
           ...new Map([
             ...(tabResults?.[tabId]?.listData || []), 
@@ -68,11 +70,12 @@ class SearchManager {
           ].map(item => [item.id, item])).values()
         ];
 
-
+        */
+       
         tabResults[tabId] = {
           total: results?.total,
           currentPage: currentPage,
-          listData: listData,
+          //listData: listData,
         };
 
         Store.dispatch(setTabResults(tabResults));
