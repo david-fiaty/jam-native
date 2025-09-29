@@ -60,17 +60,22 @@ class SearchManager {
       //results.total = results.data.length;
 
      // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
-        let tabResults = {...searchState.tabResults};
+        let tabResults: any = {...searchState.tabResults};
+
+        /*
+        let listData: any [] = [
+          ...new Map([
+            ...(tabResults?.[tabId]?.listData || []), 
+            ...(results?.data || [])
+          ].map(item => [item.id, item])).values()
+        ];
+
+        */
+       
         tabResults[tabId] = {
           total: results?.total,
           currentPage: currentPage,
-
-          /*
-          listData: [
-            ...(tabResults?.[tabId]?.listData || []),
-            ...(results?.data || []),
-          ],
-          */
+          //listData: listData,
         };
 
         Store.dispatch(setTabResults(tabResults));

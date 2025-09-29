@@ -19,6 +19,7 @@ const SearchProfilesList = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentData, setCurrentData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
 
   const onItemPress = (row: any) => {
