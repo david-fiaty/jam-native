@@ -54,24 +54,6 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
     
-    let tabResults: any = {...searchState.tabResults};
-    
-    let listData: any = [
-      ...(tabResults?.[tabId]?.listData || []),
-      ...(results || []),
-    ];
-
-    currentPage = (currentPage || 1) + 1;
-
-    tabResults[tabId] = {
-      currentPage: currentPage,
-      listData: listData,
-      total: listData.length,
-    };
-
-    Store.dispatch(setTabResults(tabResults));
-
-    /*
     if (results?.data?.length > 0) {
       // Todo - Apply filters
       //results.data = this.applyFilters(tabId, results.data, currentFilters);
@@ -84,9 +66,7 @@ class SearchManager {
       }
     }
 
-    */
-
-    //return results?.data || [];
+    return results?.data || [];
   }
 
   shouldReload(prevState: any, currentState: any) {
