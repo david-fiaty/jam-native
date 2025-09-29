@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
@@ -15,20 +15,33 @@ const SearchView = () => {
   const dispatch = useDispatch();
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
   const searchTabs: any[] = SearchManager.getSearchTabs();
-
+  const prevSearchState: any = useRef(null);
+  
   const onTabPress = (tabId: string) => {
     dispatch(setCurrentTab(tabId));
   };
 
   const renderList = (tabId: string) => {
     if (SearchManager.isJamTab(tabId)) {
-      return <SearchJamsList key={tabId} />
+      return (
+        <SearchJamsList 
+          key={tabId}
+        />
+      );
     }
     else if (SearchManager.isProfileTab(tabId)) {
-      return <SearchProfilesList key={tabId} />
+      return (
+        <SearchProfilesList 
+          key={tabId} 
+        />
+      );
     }
     else if (SearchManager.isProjectTab(tabId)) {
-      return <SearchProjectsList key={tabId} />
+      return (
+        <SearchProjectsList 
+          key={tabId} 
+        />
+      );
     }
   };
   
@@ -37,6 +50,12 @@ const SearchView = () => {
       dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
     }
   }, [searchState, searchTabs]);
+
+  useEffect(() => {
+    if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
+      prevSearchState.current = searchState;
+    }
+  }, [searchState]);
 
   return (
     <BoxView
