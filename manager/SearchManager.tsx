@@ -59,14 +59,36 @@ class SearchManager {
       //results.data = this.applyFilters(tabId, results.data, currentFilters);
       //results.total = results.data.length;
 
-      if (results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
-        let tabResults = {...searchState.tabResults};
-        tabResults[tabId] = results?.total;
+     // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
+        let tabResults: any = {...searchState.tabResults};
+
+        /*
+        let listData: any [] = [
+          ...new Map([
+            ...(tabResults?.[tabId]?.listData || []), 
+            ...(results?.data || [])
+          ].map(item => [item.id, item])).values()
+        ];
+
+        */
+       
+        tabResults[tabId] = {
+          total: results?.total,
+          currentPage: currentPage,
+          //listData: listData,
+        };
+
         Store.dispatch(setTabResults(tabResults));
-      }
+      //}
     }
 
     return results?.data || [];
+  }
+
+  shouldReload(prevState: any, currentState: any) {
+    return prevState !== currentState
+      && prevState?.currentTab !== currentState.currentTab
+      //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {

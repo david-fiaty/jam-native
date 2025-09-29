@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { BackHandler, StyleSheet, TouchableOpacity } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { useRouter } from 'expo-router';
 import { Layout } from '@/constants/Layout';
@@ -13,8 +13,9 @@ const SectionBackButton = () => {
   const [currentSection, setCurrentSection] = useState<any>(null);
   const sectionState: any = useSelector((state: any) => state.section, shallowEqual);
 
-  const onPress = () => {
+  const onBackPress = () => {
     SectionManager.back(router);
+    return true;
   };
 
   const getCurrentSection = () => {
@@ -28,13 +29,22 @@ const SectionBackButton = () => {
     setCurrentSection(getCurrentSection());
   }, [sectionState]);
 
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return !!currentSection?.title && (
     <BoxView
       direction="row"
       align="center"
       justify="flex-start"
       style={styles.container}
-      onPress={onPress}
+      onPress={onBackPress}
     >
       <IconView
         name="previous"
@@ -66,7 +76,6 @@ const SectionBackButton = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Layout.colors.white,
-    width: '100%',
     padding: Layout.space.base,
     paddingLeft: Layout.space.base * 1.5,
   },

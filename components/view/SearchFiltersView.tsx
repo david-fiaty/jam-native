@@ -10,7 +10,7 @@ import ModalManager from "@/manager/ModalManager";
 
 const SearchFiltersView = () => {
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const resultCount: any = searchState.tabResults?.[searchState.currentTab];
+  const resultCount: any = searchState.tabResults?.[searchState.currentTab]?.total;
   
   return (
     <TouchableOpacity 

@@ -26,6 +26,7 @@ import PublicProfileSection from '../section/profile/PublicProfileSection';
 import PublicProjectSection from '../section/project/PublicProjectSection';
 import PrivateProjectSection from '../section/project/PrivateProjectSection';
 import PrivateJamSection from '../section/jam/PrivateJamSection';
+import ProfileFormSection from '../section/profile/ProfileFormSection';
 
 type Props = {
   currentSection?: any;
@@ -118,6 +119,13 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'JamsMapView',
         title: i18n.t('Jams map'),
         render: (params: any) => <JamsMapView {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Filter'),
+            icon: 'filter',
+            component: 'SearchFiltersForm',
+          },
+        ],
       },
       {
         id: 'SearchView',
@@ -208,6 +216,17 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateProfileSection',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            component: 'ProfileFormSection',
+          },
+        ],
+      },
+      {
+        id: 'ProfileFormSection',
+        title: i18n.t('Your profile'),
+        render: (params: any) => <ProfileFormSection {...params} />,
       },
       {
         id: 'PrivateProjectSection',
