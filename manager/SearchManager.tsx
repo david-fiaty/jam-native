@@ -59,11 +59,15 @@ class SearchManager {
       //results.data = this.applyFilters(tabId, results.data, currentFilters);
       //results.total = results.data.length;
 
-      if (results?.total && searchState.tabResults?.[tabId] !== results?.total ) {
+     // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
         let tabResults = {...searchState.tabResults};
-        tabResults[tabId] = results?.total;
+        tabResults[tabId] = {
+          total: results?.total,
+          currentPage: currentPage,
+        };
+
         Store.dispatch(setTabResults(tabResults));
-      }
+      //}
     }
 
     return results?.data || [];
