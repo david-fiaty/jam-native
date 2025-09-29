@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -18,9 +18,11 @@ const numColumns = 2;
 const SearchJamsList = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [currentPage, setCurrentPage] = useState(1);
   const [listData, setListData] = useState<any[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentData, setCurrentData] = useState<any[]>([]);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -53,6 +55,10 @@ const SearchJamsList = () => {
     setIsFetching(true);
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
+    if (currentPage === 1) {
+      setCurrentData(moreResults);
+    } 
+
     if (moreResults?.length > 0) {
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
@@ -75,6 +81,14 @@ const SearchJamsList = () => {
       }
     })();
   }, [isLoaded]);
+
+  useEffect(() => {
+    if (SearchManager.shouldRefreshResults(prevSearchState.current, searchState)) {
+      // Todo - Finish check implementation
+      console.log(prevSearchState.current, searchState)
+    }
+  }, [searchState]);
+
 
   if (!isLoaded) return <SpinnerView />;
 
