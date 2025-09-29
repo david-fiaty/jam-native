@@ -78,6 +78,8 @@ const SearchJamsList = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  console.log(searchState.tabResults)
+
   return (
     <>
       <BoxView
