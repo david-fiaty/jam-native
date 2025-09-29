@@ -25,8 +25,7 @@ const SearchView = () => {
     if (SearchManager.isJamTab(tabId)) {
       return (
         <SearchJamsList 
-          key={tabId} 
-          state={{prev: prevSearchState, curr: searchState}} 
+          key={tabId}
         />
       );
     }
@@ -34,7 +33,6 @@ const SearchView = () => {
       return (
         <SearchProfilesList 
           key={tabId} 
-          state={{prev: prevSearchState, curr: searchState}} 
         />
       );
     }
@@ -42,7 +40,6 @@ const SearchView = () => {
       return (
         <SearchProjectsList 
           key={tabId} 
-          state={{prev: prevSearchState, curr: searchState}} 
         />
       );
     }
