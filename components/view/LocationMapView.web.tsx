@@ -14,6 +14,8 @@ type Props = {
   longitude?: any;
 };
 
+const zoomLevel: number = 7;
+
 const LocationMapView = ({ resource, latitude, longitude }: Props) => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -66,11 +68,15 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
       <GoogleMap
         mapContainerStyle={styles.map}
         center={getInitialRegion()}
-        zoom={7}
+        zoom={zoomLevel}
         onClick={(e: any) => onMapPress(e)}
         options={{
           styles: Layout.mapStyle,
           disableDefaultUI: true,
+          zoomControl: false,
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: true,
         }}
       >
         {selectedLocation && (

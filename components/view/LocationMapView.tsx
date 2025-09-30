@@ -113,6 +113,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
             provider={PROVIDER_DEFAULT}
             customMapStyle={Layout.mapStyle}
             showsUserLocation={true}
+            showsMyLocationButton={true}
             onPress={onMapPress}
             initialRegion={getInitialRegion()}
           >
