@@ -5,16 +5,23 @@ import i18n from "@/translation/i18n";
 
 class SearchManager {
   async loadResults(tabId: string, currentPage: number, pageSize?: any) {
+    // Variables
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
     let results: any = {};
     let currentTab: any = this.getSearchTab(tabId);
 
-    let payload: any = {
-      page: currentPage,
+    // Base payload
+    let payload: any = {};
+
+    // Current page
+    payload = {
+      ...payload,
+      ...{ page: currentPage },
     };
 
+    // Page size
     if (pageSize) {
       payload = {
         ...payload,
@@ -22,6 +29,7 @@ class SearchManager {
       };
     }
 
+    // Search value
     if (searchValue?.length) {
       payload = {
         ...payload,
@@ -32,8 +40,33 @@ class SearchManager {
       };
     }
 
+    // Countries filter
+    if (currentFilters?.countries?.length > 0) {
+      payload = {
+        ...payload,
+        ...{ query_countries_codes: currentFilters.countries.join(',') },
+      };
+    }
+
+    // Sectors filter
+    if (currentFilters?.sectors) {
+      payload = {
+        ...payload,
+        ...{ query_sectors_ids: [...currentFilters.sectors, ...(currentFilters.subSectors || [])].join(',') },
+      };
+    }
+
+    // Location types filter
+    if (currentFilters?.locationTypes && this.isJamTab(tabId)) {
+      payload = {
+        ...payload,
+        ...{ location_types: currentFilters.locationTypes.join(',') },
+      };
+    }
+
     if (this.isJamTab(tabId)) {
-      let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;  
+      let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;
+
       payload = {
         ...payload,
         ...{ jam_type: jamType },
@@ -42,7 +75,8 @@ class SearchManager {
       results = await EntityManager.listJams(payload, true);
     }
     else if (this.isProfileTab(tabId)) {
-      let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;  
+      let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;
+
       payload = {
         ...payload,
         ...{ profile_type: profileType },
@@ -53,33 +87,24 @@ class SearchManager {
     else if (this.isProjectTab(tabId)) {
       results = await EntityManager.listProjects(payload, true);
     }
-    
+
     if (results?.data?.length > 0) {
-      // Todo - Apply filters
-      //results.data = this.applyFilters(tabId, results.data, currentFilters);
-      //results.total = results.data.length;
-
-     // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
-        let tabResults: any = {...searchState.tabResults};
-
+      let tabResults: any = { ...searchState.tabResults };
+     
+      tabResults[tabId] = {
+        total: results?.total,
+        currentPage: currentPage,
         /*
-        let listData: any [] = [
+        listData: [
           ...new Map([
-            ...(tabResults?.[tabId]?.listData || []), 
+            ...(tabResults?.[tabId]?.listData || []),
             ...(results?.data || [])
           ].map(item => [item.id, item])).values()
-        ];
-
+        ],
         */
-       
-        tabResults[tabId] = {
-          total: results?.total,
-          currentPage: currentPage,
-          //listData: listData,
-        };
+      };
 
-        Store.dispatch(setTabResults(tabResults));
-      //}
+      Store.dispatch(setTabResults(tabResults));
     }
 
     return results?.data || [];
@@ -88,70 +113,7 @@ class SearchManager {
   shouldReload(prevState: any, currentState: any) {
     return prevState !== currentState
       && prevState?.currentTab !== currentState.currentTab
-      //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
-  }
-
-  applyFilters(tabId: string, searchResults: any, searchFilters: any) {
-
-
-    //&query_sectors_ids=20,13
-    //&query_countries_codes=tg,ng
-
-    if (!Object.keys(searchFilters)?.length) return searchResults;
-
-    if (this.isJamTab(tabId)) {
-      if (searchFilters?.countries) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-        });
-      }
-
-      if (searchFilters?.sectors) {
-        searchResults = searchResults.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
-
-      if (searchFilters?.locationTypes) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
-        });
-      }
-
-      if (searchFilters?.jamTypes) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
-        });
-      }
-    }
-    else if (this.isProfileTab(tabId)) {
-      if (searchFilters?.countries) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.country?.includes(id));
-        });
-      }
-
-      if (searchFilters?.sectors) {
-        searchResults = searchResults.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
-    }
-    else if (this.isProjectTab(tabId)) {
-      if (searchFilters?.countries) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-        });
-      }
-
-      if (searchFilters?.sectors) {
-        searchResults = searchResults.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
-    }
-
-    return searchResults;
+    //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
   canLoadMore(event: any) {
@@ -181,7 +143,6 @@ class SearchManager {
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
-      jamTypes: EntityManager.getJamTypes(),
     };
   }
 
