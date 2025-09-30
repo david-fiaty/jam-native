@@ -68,8 +68,6 @@ class SearchManager {
         ...{ jam_type: (currentTab.id == 'jam' ? 'all' : currentTab.id) },
       };
 
-      console.log(payload)
-
       results = await EntityManager.listJams(payload, true);
     }
     else if (this.isProfileTab(tabId)) {
