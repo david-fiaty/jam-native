@@ -1,6 +1,6 @@
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
-import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { useState, useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 import { Config } from "@/constants/Config";
 import { useDispatch } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -15,29 +15,24 @@ type Props = {
 };
 
 const LocationMapView = ({ resource, latitude, longitude }: Props) => {
-  const mapRef = useRef<any>();
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
 
+  const { isLoaded } = useJsApiLoader({
+    googleMapsApiKey: Config.mapApiKey,
+  });
+
   const getInitialRegion = () => {
-    let latitude: any = Config.defaultLocation.latitude;
-    let longitude: any = Config.defaultLocation.longitude;
-    let latitudeDelta: any = 0.2;
-    let longitudeDelta: any = 0.2;
+    let lat: any = Config.defaultLocation.latitude;
+    let lng: any = Config.defaultLocation.longitude;
 
     if (currentLocation?.latitude && currentLocation?.longitude) {
-      latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude;
+      lat = currentLocation.latitude;
+      lng = currentLocation.longitude;
     }
 
-    return {
-      lat: latitude,
-      lng: longitude,
-      //latitudeDelta: latitudeDelta,
-      //longitudeDelta: longitudeDelta,
-    };
+    return { lat: lat, lng: lng };
   };
 
   const onMapPress = async (event: any) => {
@@ -62,35 +57,27 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
     })();
+  }, []);
 
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded]);
-
-  //if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  if (!isLoaded) return <SpinnerView />;
 
   return (
-    <LoadScript googleMapsApiKey={Config.mapApiKey}>
-      <TouchableWithoutFeedback>
-        <View style={[Layout.screenContent, styles.container]}>
-          <GoogleMap
-            mapContainerStyle={styles.map}
-            center={getInitialRegion()}
-            zoom={7}
-            onClick={(e: any) => onMapPress(e)}
-            options={{
-              styles: Layout.mapStyle,
-              disableDefaultUI: true,
-            }}
-          >
-            {selectedLocation && (
-              <Marker position={selectedLocation} />
-            )}
-          </GoogleMap>
-        </View>
-      </TouchableWithoutFeedback>
-    </LoadScript>
+    <View style={[Layout.screenContent, styles.container]}>
+      <GoogleMap
+        mapContainerStyle={styles.map}
+        center={getInitialRegion()}
+        zoom={7}
+        onClick={(e: any) => onMapPress(e)}
+        options={{
+          styles: Layout.mapStyle,
+          disableDefaultUI: true,
+        }}
+      >
+        {selectedLocation && (
+          <Marker position={selectedLocation} />
+        )}
+      </GoogleMap>
+    </View>
   );
 };
 
