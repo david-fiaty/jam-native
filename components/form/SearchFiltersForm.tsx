@@ -79,7 +79,7 @@ const SearchFiltersForm = () => {
     setCurrentKeywords('');
   };
 
-  const renderAllFiltersTag = (key: string) => {
+  const renderAllTag = (key: string) => {
     let isEnabled: boolean = currentFilters?.[key]?.length === filtersConfig?.[key]?.length;
 
     return (
@@ -159,7 +159,7 @@ const SearchFiltersForm = () => {
           justify="flex-start"
           style={styles.filterContainer}
         >
-          {renderAllFiltersTag(key)}
+          {renderAllTag(key)}
           {(filtersConfig.countries || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
@@ -180,7 +180,7 @@ const SearchFiltersForm = () => {
           justify="flex-start"
           style={styles.filterContainer}
         >
-          {renderAllFiltersTag(key)}
+          {renderAllTag(key)}
           {(filtersConfig.sectors || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
@@ -201,7 +201,7 @@ const SearchFiltersForm = () => {
           justify="flex-start"
           style={styles.filterContainer}
         >
-          {renderAllFiltersTag(key)}
+          {renderAllTag(key)}
           {((filtersConfig.sectors || [])
             .filter((o: any) => currentFilters.sectors.includes(o.id))
             .map((sector: any) => {
@@ -227,7 +227,7 @@ const SearchFiltersForm = () => {
           justify="flex-start"
           style={styles.filterContainer}
         >
-          {renderAllFiltersTag(key)}
+          {renderAllTag(key)}
           {(filtersConfig.locationTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
@@ -248,7 +248,7 @@ const SearchFiltersForm = () => {
           justify="flex-start"
           style={styles.filterContainer}
         >
-          {renderAllFiltersTag(key)}
+          {renderAllTag(key)}
           {(filtersConfig.jamTypes || []).map((item: any) => renderFilterTag(key, item))}
         </BoxView>
       </>
