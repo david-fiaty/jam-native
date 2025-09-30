@@ -116,65 +116,6 @@ class SearchManager {
     //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
-  applyFilters(tabId: string, searchResults: any, searchFilters: any) {
-
-    if (!Object.keys(searchFilters)?.length) return searchResults;
-
-    if (this.isJamTab(tabId)) {
-      if (searchFilters?.countries) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-        });
-      }
-
-      if (searchFilters?.sectors) {
-        searchResults = searchResults.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
-
-      if (searchFilters?.locationTypes) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.locationTypes.some((id: any) => o?.location_type?.includes(id));
-        });
-      }
-
-      if (searchFilters?.jamTypes) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.jamTypes.some((id: any) => o?.type?.includes(id));
-        });
-      }
-    }
-    else if (this.isProfileTab(tabId)) {
-      if (searchFilters?.countries) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.country?.includes(id));
-        });
-      }
-
-      if (searchFilters?.sectors) {
-        searchResults = searchResults.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
-    }
-    else if (this.isProjectTab(tabId)) {
-      if (searchFilters?.countries) {
-        searchResults = searchResults.filter((o: any) => {
-          return searchFilters.countries.some((id: any) => o?.countries?.includes(id));
-        });
-      }
-
-      if (searchFilters?.sectors) {
-        searchResults = searchResults.filter((o: any) => {
-          return [...searchFilters.sectors, ...(searchFilters.subSectors || [])].some((id: number) => o?.sectors?.includes(id));
-        });
-      }
-    }
-
-    return searchResults;
-  }
-
   canLoadMore(event: any) {
     const { layoutMeasurement, contentOffset, contentSize } = event.nativeEvent;
     const paddingToBottom = 0;
@@ -202,7 +143,6 @@ class SearchManager {
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
       locationTypes: EntityManager.getLocationTypes(),
-      jamTypes: EntityManager.getJamTypes(),
     };
   }
 
