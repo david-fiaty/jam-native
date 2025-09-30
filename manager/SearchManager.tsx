@@ -92,6 +92,11 @@ class SearchManager {
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
+
+
+    //&query_sectors_ids=20,13
+    //&query_countries_codes=tg,ng
+
     if (!Object.keys(searchFilters)?.length) return searchResults;
 
     if (this.isJamTab(tabId)) {
