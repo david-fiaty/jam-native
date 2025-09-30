@@ -5,16 +5,23 @@ import i18n from "@/translation/i18n";
 
 class SearchManager {
   async loadResults(tabId: string, currentPage: number, pageSize?: any) {
+    // Variables
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
     let results: any = {};
     let currentTab: any = this.getSearchTab(tabId);
 
-    let payload: any = {
-      page: currentPage,
+    // Base payload
+    let payload: any = {};
+
+    // Current page
+    payload = {
+      ...payload,
+      ...{ page: currentPage },
     };
 
+    // Page size
     if (pageSize) {
       payload = {
         ...payload,
@@ -22,6 +29,7 @@ class SearchManager {
       };
     }
 
+    // Search value
     if (searchValue?.length) {
       payload = {
         ...payload,
@@ -31,6 +39,9 @@ class SearchManager {
         },
       };
     }
+
+    // Query filters
+    
 
     if (this.isJamTab(tabId)) {
       let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;  
