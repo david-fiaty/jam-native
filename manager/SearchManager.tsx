@@ -9,11 +9,9 @@ class SearchManager {
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
     let currentFilters: any = searchState.searchFilters;
-    let results: any = {};
     let currentTab: any = this.getSearchTab(tabId);
-
-    // Base payload
     let payload: any = {};
+    let results: any = {};
 
     // Current page
     payload = {
