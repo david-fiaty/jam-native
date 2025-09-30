@@ -58,6 +58,7 @@ class SearchManager {
 
     if (this.isJamTab(tabId)) {
       let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;
+      
       payload = {
         ...payload,
         ...{ jam_type: jamType },
@@ -67,6 +68,7 @@ class SearchManager {
     }
     else if (this.isProfileTab(tabId)) {
       let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;
+
       payload = {
         ...payload,
         ...{ profile_type: profileType },
