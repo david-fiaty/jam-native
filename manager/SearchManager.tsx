@@ -40,11 +40,24 @@ class SearchManager {
       };
     }
 
-    // Query filters
-    
+    // Countries filter
+    if (currentFilters?.countries?.length > 0) {
+      payload = {
+        ...payload,
+        ...{ query_countries_codes: currentFilters.countries.join(',') },
+      };
+    }
+
+    // Sectors filter
+    if (currentFilters?.sectors) {
+      payload = {
+        ...payload,
+        ...{ query_sectors_ids: [...currentFilters.sectors, ...(currentFilters.subSectors || [])].join(',') },
+      };
+    }
 
     if (this.isJamTab(tabId)) {
-      let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;  
+      let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;
       payload = {
         ...payload,
         ...{ jam_type: jamType },
@@ -53,7 +66,7 @@ class SearchManager {
       results = await EntityManager.listJams(payload, true);
     }
     else if (this.isProfileTab(tabId)) {
-      let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;  
+      let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;
       payload = {
         ...payload,
         ...{ profile_type: profileType },
@@ -64,32 +77,32 @@ class SearchManager {
     else if (this.isProjectTab(tabId)) {
       results = await EntityManager.listProjects(payload, true);
     }
-    
+
     if (results?.data?.length > 0) {
       // Todo - Apply filters
       //results.data = this.applyFilters(tabId, results.data, currentFilters);
       //results.total = results.data.length;
 
-     // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
-        let tabResults: any = {...searchState.tabResults};
+      // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
+      let tabResults: any = { ...searchState.tabResults };
 
-        /*
-        let listData: any [] = [
-          ...new Map([
-            ...(tabResults?.[tabId]?.listData || []), 
-            ...(results?.data || [])
-          ].map(item => [item.id, item])).values()
-        ];
+      /*
+      let listData: any [] = [
+        ...new Map([
+          ...(tabResults?.[tabId]?.listData || []), 
+          ...(results?.data || [])
+        ].map(item => [item.id, item])).values()
+      ];
 
-        */
-       
-        tabResults[tabId] = {
-          total: results?.total,
-          currentPage: currentPage,
-          //listData: listData,
-        };
+      */
 
-        Store.dispatch(setTabResults(tabResults));
+      tabResults[tabId] = {
+        total: results?.total,
+        currentPage: currentPage,
+        //listData: listData,
+      };
+
+      Store.dispatch(setTabResults(tabResults));
       //}
     }
 
@@ -99,14 +112,10 @@ class SearchManager {
   shouldReload(prevState: any, currentState: any) {
     return prevState !== currentState
       && prevState?.currentTab !== currentState.currentTab
-      //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
+    //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
   applyFilters(tabId: string, searchResults: any, searchFilters: any) {
-
-
-    //&query_sectors_ids=20,13
-    //&query_countries_codes=tg,ng
 
     if (!Object.keys(searchFilters)?.length) return searchResults;
 
