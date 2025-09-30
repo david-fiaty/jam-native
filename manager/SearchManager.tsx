@@ -56,9 +56,17 @@ class SearchManager {
       };
     }
 
+    // Location types filter
+    if (currentFilters?.locationTypes && this.isJamTab(tabId)) {
+      payload = {
+        ...payload,
+        ...{ location_types: currentFilters.locationTypes.join(',') },
+      };
+    }
+
     if (this.isJamTab(tabId)) {
       let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;
-      
+
       payload = {
         ...payload,
         ...{ jam_type: jamType },
@@ -81,31 +89,22 @@ class SearchManager {
     }
 
     if (results?.data?.length > 0) {
-      // Todo - Apply filters
-      //results.data = this.applyFilters(tabId, results.data, currentFilters);
-      //results.total = results.data.length;
-
-      // if (results?.total && searchState.tabResults?.[tabId]?.total !== results?.total ) {
       let tabResults: any = { ...searchState.tabResults };
-
-      /*
-      let listData: any [] = [
-        ...new Map([
-          ...(tabResults?.[tabId]?.listData || []), 
-          ...(results?.data || [])
-        ].map(item => [item.id, item])).values()
-      ];
-
-      */
-
+     
       tabResults[tabId] = {
         total: results?.total,
         currentPage: currentPage,
-        //listData: listData,
+        /*
+        listData: [
+          ...new Map([
+            ...(tabResults?.[tabId]?.listData || []),
+            ...(results?.data || [])
+          ].map(item => [item.id, item])).values()
+        ],
+        */
       };
 
       Store.dispatch(setTabResults(tabResults));
-      //}
     }
 
     return results?.data || [];
