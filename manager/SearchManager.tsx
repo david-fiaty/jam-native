@@ -65,21 +65,17 @@ class SearchManager {
     }
 
     if (this.isJamTab(tabId)) {
-      let jamType: string = currentTab.id == 'jam' ? 'all' : currentTab.id;
-
       payload = {
         ...payload,
-        ...{ jam_type: jamType },
+        ...{ jam_type: (currentTab.id == 'jam' ? 'all' : currentTab.id) },
       };
 
       results = await EntityManager.listJams(payload, true);
     }
     else if (this.isProfileTab(tabId)) {
-      let profileType: string = currentTab.id == 'jammer' ? 'all' : currentTab.id;
-
       payload = {
         ...payload,
-        ...{ profile_type: profileType },
+        ...{ profile_type: (currentTab.id == 'jammer' ? 'all' : currentTab.id) },
       };
 
       results = await EntityManager.listProfiles(payload, true);
