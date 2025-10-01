@@ -84,15 +84,10 @@ class SearchManager {
 
     if (results?.data?.length > 0) {
       let tabResults: any = { ...searchState.tabResults };
-
+     
       tabResults[tabId] = {
         total: results?.total,
         currentPage: currentPage,
-        listData: [
-          ...(tabResults?.[tabId]?.listData || []),
-          ...(results?.data || []),
-        ],
-
         /*
         listData: [
           ...new Map([
@@ -112,7 +107,7 @@ class SearchManager {
   shouldReload(prevState: any, currentState: any) {
     return prevState !== currentState
       && prevState?.currentTab !== currentState.currentTab
-      && (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
+    //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
   canLoadMore(event: any) {
