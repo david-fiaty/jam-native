@@ -88,7 +88,7 @@ class ApiManager {
     };
 
     if (Endpoints[key]?.multipart === true) {
-      headers['Content-Type'] = 'multipart/form-data';
+      headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
     }
 
     if (Object.keys(tokenData).length > 0) {
