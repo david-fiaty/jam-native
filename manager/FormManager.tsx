@@ -5,20 +5,26 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  addImage(imageData: any, formData: any) {
-    let data: any = new FormData();
+  addImages(fieldName: string, formData: any) {
+    let imageData: any = formData?.[fieldName]?.[0];
 
-    data.append('image', {
-      uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
-      type: imageData.mimeType,
-      name: imageData.fileName,
-    });
+    if (imageData) {
+      let data: any = new FormData();
 
-    for (const key in formData) {
-      data.append(key, formData[key]);
+      data.append('image', {
+        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
+        type: imageData.mimeType,
+        name: imageData.fileName,
+      });
+
+      for (const key in formData) {
+        data.append(key, formData[key]);
+      }
+
+      return data;
     }
-  
-    return data;
+
+    return formData;
   }
 
   resetForm(resource: any) {
