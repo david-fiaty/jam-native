@@ -1,9 +1,32 @@
+import { Platform } from "react-native";
 import { setFormData, setFormErrors, resetFormData } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
+  processImages(fieldName: string, formData: any) {
+    let imageData: any = formData?.[fieldName]?.[0];
+
+    if (imageData) {
+      let data: any = new FormData();
+
+      data.append(fieldName, {
+        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
+        type: imageData.mimeType,
+        name: imageData.fileName,
+      });
+
+      for (const key in formData) {
+        data.append(key, formData[key]);
+      }
+
+      return data;
+    }
+
+    return formData;
+  }
+
   resetForm(resource: any) {
     Store.dispatch(resetFormData(resource));
   }
