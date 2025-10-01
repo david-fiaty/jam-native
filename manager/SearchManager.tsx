@@ -112,7 +112,7 @@ class SearchManager {
   shouldReload(prevState: any, currentState: any) {
     return prevState !== currentState
       && prevState?.currentTab !== currentState.currentTab
-    //&& (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
+      && (prevState?.searchValue !== currentState.searchValue || prevState?.searchFilters !== currentState.searchFilters);
   }
 
   canLoadMore(event: any) {
