@@ -45,9 +45,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const submitForm = async () => {
     setIsProcessing(true);
 
-    // Todo - Handle media
-    //let media: any = MediaManager.prepareUpload(formData?.upload_medias); 
-
     let message: any = {
       title: i18n.t('Create Jam'),
       content: i18n.t('Jam data successfully submitted.'),
