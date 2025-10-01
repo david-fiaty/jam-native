@@ -12,6 +12,7 @@ import SpinnerView from "@/components/view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
+import { setCurrentTab } from "@/redux/slices/SearchSlice";
 
 const numColumns = 2;
 
@@ -54,7 +55,7 @@ const SearchJamsList = () => {
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
     if (moreResults?.length > 0) {
-      setListData((prevData) => [...(prevData || []), ...moreResults]);
+      //setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
     }
 
@@ -87,9 +88,9 @@ const SearchJamsList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {!!listData?.length && (
+        {!!searchState.tabResults?.[searchState.currentTab]?.listData?.length && (
           <ListView
-            data={listData}
+            data={searchState.tabResults?.[searchState.currentTab]?.listData}
             numColumns={numColumns}
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
@@ -100,12 +101,12 @@ const SearchJamsList = () => {
           />
         )}
 
-        {isLoaded && !isFetching && !listData?.length && (
+        {isLoaded && !isFetching && !searchState.tabResults?.[searchState.currentTab]?.listData?.length && (
           <TextView>{i18n.t('No results available')}</TextView>
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
+      {isLoaded && isFetching && !!searchState.tabResults?.[searchState.currentTab]?.listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
     </>
   );
 };
