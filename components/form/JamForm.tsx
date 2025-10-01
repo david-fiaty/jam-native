@@ -108,7 +108,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         setIsLoaded(true);
       }
     })();
-
   }, [isLoaded, profileId, jamId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
