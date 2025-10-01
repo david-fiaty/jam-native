@@ -11,7 +11,7 @@ class FormManager {
     if (imageData) {
       let data: any = new FormData();
 
-      data.append('image', {
+      data.append(fieldName, {
         uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
         type: imageData.mimeType,
         name: imageData.fileName,
