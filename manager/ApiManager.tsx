@@ -5,7 +5,7 @@ import SessionManager from './SessionManager';
 class ApiManager {
   async get(key: any, options?: any, variables?: any) {
     let url: string = this.getUrl(key, options, variables);
-    let data: any = await this.sendRequest(url, 'GET');
+    let data: any = await this.sendRequest(key, url, 'GET');
 
     return data;
   }
@@ -14,7 +14,7 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-      return await this.sendRequest(url, 'POST', data);
+      return await this.sendRequest(key, url, 'POST', data);
     } 
     catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-      return await this.sendRequest(url, 'PUT', data);
+      return await this.sendRequest(key, url, 'PUT', data);
     } 
     catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ class ApiManager {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
-      return await this.sendRequest(url, 'DELETE', data);
+      return await this.sendRequest(key, url, 'DELETE', data);
     } 
     catch (error) {
       console.log(error);
@@ -60,12 +60,12 @@ class ApiManager {
     return url;
   }
 
-  async sendRequest(url: string, method: string, data?: any) {
+  async sendRequest(key: string, url: string, method: string, data?: any) {
     try {
       let response: any = await fetch(url, {
         ...{
           method: method,
-          headers: await this.getHeaders(),
+          headers: await this.getHeaders(key),
         },
         ...(data ? { body: JSON.stringify(data) } : {}),
       });
@@ -81,11 +81,15 @@ class ApiManager {
     return await response.json();
   }
 
-  async getHeaders() {
+  async getHeaders(key: string) {
     let tokenData: any = await SessionManager.getTokenData();
     let headers: any = {
       'Content-Type': 'application/json',
     };
+
+    if (Endpoints[key]?.multipart === true) {
+      headers['Content-Type'] = 'multipart/form-data';
+    }
 
     if (Object.keys(tokenData).length > 0) {
       headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
