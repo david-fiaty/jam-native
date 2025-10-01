@@ -44,6 +44,14 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const jamCategories: any = EntityManager.getJamTypes();
 
   const submitForm = async () => {
+    console.log({
+      type: formData?.upload_medias?.[0]?.mimeType,
+      uri: formData?.upload_medias?.[0]?.uri,
+      fileName: formData?.upload_medias?.[0]?.fileName,
+    });
+
+    return;
+
     setIsProcessing(true);
 
     // Todo - Handle media
@@ -111,13 +119,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   }, [isLoaded, profileId, jamId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  console.log({
-    type: formData?.upload_medias?.[0]?.mimeType,
-    uri: formData?.upload_medias?.[0]?.uri,
-    fileName: formData?.upload_medias?.[0]?.fileName,
-
-  });
 
   return (
     <BoxView
