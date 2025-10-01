@@ -5,7 +5,7 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  addImages(fieldName: string, formData: any) {
+  processImages(fieldName: string, formData: any) {
     let imageData: any = formData?.[fieldName]?.[0];
 
     if (imageData) {
