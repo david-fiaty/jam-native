@@ -4,7 +4,6 @@ import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from './DataManager';
-import i18n from '@/translation/i18n';
 import NoImageView from '@/components/view/NoImageView';
 import ImageView from '@/components/view/ImageView';
 
