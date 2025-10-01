@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect } from "react";
+import React, { memo, useState, useEffect, useRef } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -22,6 +22,7 @@ const SearchJamsList = () => {
   const [listData, setListData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
+  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -74,8 +75,15 @@ const SearchJamsList = () => {
         await fetchListData();
         setIsLoaded(true);
       }
+
+      if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
+        console.log('-----');
+        console.log(' --->', prevSearchState);
+        console.log(' --->', searchState);
+        prevSearchState.current = searchState;
+      }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, searchState]);
 
   if (!isLoaded) return <SpinnerView />;
 
