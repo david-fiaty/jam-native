@@ -40,12 +40,6 @@ class MediaManager {
     return Config.imageUrl + path;
   }
 
-  prepareUpload(data: any) {
-    return data.map((item: any) => {
-      return DataManager.extract(['base64'], item);
-    }); 
-  };
-
   fetchImageAsBase64(url: string) {
     return new Promise(async (resolve, reject) => {
       try {
