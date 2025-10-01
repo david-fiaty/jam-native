@@ -23,7 +23,6 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
-import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
@@ -44,14 +43,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const jamCategories: any = EntityManager.getJamTypes();
 
   const submitForm = async () => {
-    console.log({
-      type: formData?.upload_medias?.[0]?.mimeType,
-      uri: formData?.upload_medias?.[0]?.uri,
-      fileName: formData?.upload_medias?.[0]?.fileName,
-    });
-
-    return;
-
     setIsProcessing(true);
 
     // Todo - Handle media
@@ -61,6 +52,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       title: i18n.t('Create Jam'),
       content: i18n.t('Jam data successfully submitted.'),
     };
+
+    let payload: any = FormManager.addImages('upload_medias', formData);
 
     let result: any = await EntityManager.addJam(formData);
 
