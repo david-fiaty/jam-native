@@ -136,6 +136,7 @@ const Endpoints: any = {
     path: '/jams/',
     cacheable: false,
     dataKey: null,
+    multipart: true,
   },
   updateJam: {
     path: '/jams/',
