@@ -58,9 +58,17 @@ class DataManager {
     );
   }
 
-  formatDate(value: string) {
+  toUiDate(value: string) {
     if (value) {
-      return moment(value).format(Config.dateFormat);
+      return moment(value).format(Config.uiDateFormat);
+    }
+
+    return value;
+  }
+
+  toDbDate(value: string) {
+    if (value) {
+      return moment(value).format(Config.toDbDate);
     }
 
     return value;
