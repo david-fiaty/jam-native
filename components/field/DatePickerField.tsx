@@ -25,7 +25,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
     setShow(false);
   };
 
-  const handleConfirm = (value: any) => {
+  const handleConfirm = (value: any) => {)
     if (value) setDate(value);
     if (onChangeValue) onChangeValue(value);
     hideDatePicker();
