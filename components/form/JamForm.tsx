@@ -56,6 +56,9 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
     let result: any = await EntityManager.addJam(formData);
 
+    console.log('------- JAM FORM RESPONSE ----');
+    console.log('-------', result);
+
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
       FormManager.addServerErrors(resource, result.response);
@@ -108,6 +111,13 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   }, [isLoaded, profileId, jamId, resource]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log({
+    type: formData?.upload_medias?.[0]?.mimeType,
+    uri: formData?.upload_medias?.[0]?.uri,
+    fileName: formData?.upload_medias?.[0]?.fileName,
+
+  });
 
   return (
     <BoxView
