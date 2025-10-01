@@ -23,7 +23,6 @@ import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import DataManager from "@/manager/DataManager";
-import MediaManager from "@/manager/MediaManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
@@ -54,7 +53,15 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       content: i18n.t('Jam data successfully submitted.'),
     };
 
-    let result: any = await EntityManager.addJam(formData);
+    let payload: any = FormManager.processImages('upload_medias', formData);
+
+    console.log('------- JAM FORM PAYLOAD ----');
+    console.log('------', payload);
+
+    let result: any = await EntityManager.addJam(payload);
+
+    console.log('------- JAM FORM RESPONSE ----');
+    console.log('-------', result);
 
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
