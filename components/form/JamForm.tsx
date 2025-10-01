@@ -54,8 +54,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     };
 
     let payload: any = FormManager.addImages('upload_medias', formData);
-
-    let result: any = await EntityManager.addJam(formData);
+    let result: any = await EntityManager.addJam(payload);
 
     console.log('------- JAM FORM RESPONSE ----');
     console.log('-------', result);
