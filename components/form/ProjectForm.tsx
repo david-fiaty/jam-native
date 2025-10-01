@@ -155,7 +155,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
-              ...{ start_datetime: DataManager.formatDate(value) },
+              ...{ start_datetime: DataManager.toDbDate(value) },
             })
           }
         />
@@ -166,7 +166,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           onChangeValue={(value: any) =>
             updateField('period', {
               ...(formData?.period || {}),
-              ...{ end_datetime: DataManager.formatDate(value) },
+              ...{ end_datetime: DataManager.toDbDate(value) },
             })
           }
         />
