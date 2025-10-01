@@ -71,7 +71,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Start")} `}</TextView>
-          {DataManager.formatDate(row?.period?.start_datetime) || i18n.t("Unavailable")}
+          {DataManager.toDbDate(row?.period?.start_datetime) || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );
@@ -87,7 +87,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("End")} `}</TextView>
-          {DataManager.formatDate(row?.period?.end_datetime) || i18n.t("Unavailable")}
+          {DataManager.toDbDate(row?.period?.end_datetime) || i18n.t("Unavailable")}
         </TextView>
       </BoxView>
     );

@@ -200,7 +200,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           value={formData?.period?.start_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
-            ...{ start_datetime: DataManager.formatDate(value) },
+            ...{ start_datetime: DataManager.toDbDate(value) },
           }, ['date'])}
         />
         {FormManager.renderError('period')}
@@ -210,7 +210,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           value={formData?.period?.end_datetime}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
-            ...{ end_datetime: DataManager.formatDate(value) },
+            ...{ end_datetime: DataManager.toDbDate(value) },
           }, ['date'])}
         />
         {FormManager.renderError('period')}
