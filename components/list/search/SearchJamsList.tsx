@@ -63,6 +63,10 @@ const SearchJamsList = () => {
     setIsFetching(false);
   };
 
+  const getListData = async () => {
+    
+  };
+
   const handleScroll = async (event: any) => {
     if (SearchManager.canLoadMore(event)) {
       await fetchListData();
