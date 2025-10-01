@@ -3,14 +3,14 @@ import Endpoints from '@/constants/Endpoints';
 import SessionManager from './SessionManager';
 
 class ApiManager {
-  async get(key: keyof typeof Endpoints, options?: any, variables?: any) {
+  async get(key: any, options?: any, variables?: any) {
     let url: string = this.getUrl(key, options, variables);
     let data: any = await this.sendRequest(url, 'GET');
 
     return data;
   }
 
-  async post(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async post(key: any, data: any, variables?: any) {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
@@ -21,7 +21,7 @@ class ApiManager {
     }
   }
 
-  async put(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async put(key: any, data: any, variables?: any) {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
@@ -32,7 +32,7 @@ class ApiManager {
     }
   }
 
-  async delete(key: keyof typeof Endpoints, data: any, variables?: any) {
+  async delete(key: any, data: any, variables?: any) {
     let url: string = this.getUrl(key, {}, variables);
 
     try {
@@ -43,7 +43,7 @@ class ApiManager {
     }
   }
 
-  getUrl(key: keyof typeof Endpoints, options?: any, variables?: any) {
+  getUrl(key: any, options?: any, variables?: any) {
     let path: string = Endpoints[key].path;
     let url: string = Config.apiUrl + path;
 
