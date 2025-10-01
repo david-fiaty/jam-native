@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -12,7 +12,6 @@ import SpinnerView from "@/components/view/SpinnerView";
 import SearchManager from "@/manager/SearchManager";
 import LoadingMoreView from "@/components/view/LoadingMoreView";
 import ModalManager from "@/manager/ModalManager";
-import { setCurrentTab } from "@/redux/slices/SearchSlice";
 
 const numColumns = 2;
 
@@ -22,7 +21,6 @@ const SearchJamsList = () => {
   const [listData, setListData] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const searchState: any = useSelector((state: any) => state.search, shallowEqual);
-  const prevSearchState: any = useRef(null);
   const imageSize = MediaManager.getThumbnailSize(numColumns);
 
   const onItemPress = (row: any) => {
@@ -56,7 +54,7 @@ const SearchJamsList = () => {
     let moreResults: any[] = await SearchManager.loadResults(searchState.currentTab, currentPage);
 
     if (moreResults?.length > 0) {
-      //setListData((prevData) => [...(prevData || []), ...moreResults]);
+      setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage((prevPage: number) => prevPage + 1);
     }
 
@@ -75,15 +73,8 @@ const SearchJamsList = () => {
         await fetchListData();
         setIsLoaded(true);
       }
-
-      if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
-        console.log('-----');
-        console.log(' --->', prevSearchState);
-        console.log(' --->', searchState);
-        prevSearchState.current = searchState;
-      }
     })();
-  }, [isLoaded, searchState]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -96,9 +87,9 @@ const SearchJamsList = () => {
         scroll={ScreenManager.isWeb() ? true : false}
         style={styles.container}
       >
-        {!!searchState.tabResults?.[searchState.currentTab]?.listData?.length && (
+        {!!listData?.length && (
           <ListView
-            data={searchState.tabResults?.[searchState.currentTab]?.listData}
+            data={listData}
             numColumns={numColumns}
             contentContainerStyle={styles.contentContainerStyle}
             columnWrapperStyle={styles.columnWrapperStyle}
@@ -109,12 +100,12 @@ const SearchJamsList = () => {
           />
         )}
 
-        {isLoaded && !isFetching && !searchState.tabResults?.[searchState.currentTab]?.listData?.length && (
+        {isLoaded && !isFetching && !listData?.length && (
           <TextView>{i18n.t('No results available')}</TextView>
         )}
       </BoxView>
 
-      {isLoaded && isFetching && !!searchState.tabResults?.[searchState.currentTab]?.listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
+      {isLoaded && isFetching && !!listData?.length && <LoadingMoreView bottomSpace={Layout.space.base * 2} />}
     </>
   );
 };
