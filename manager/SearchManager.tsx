@@ -88,14 +88,7 @@ class SearchManager {
       tabResults[tabId] = {
         total: results?.total,
         currentPage: currentPage,
-        /*
-        listData: [
-          ...new Map([
-            ...(tabResults?.[tabId]?.listData || []),
-            ...(results?.data || [])
-          ].map(item => [item.id, item])).values()
-        ],
-        */
+        listData: [],
       };
 
       Store.dispatch(setTabResults(tabResults));
