@@ -148,6 +148,8 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Ajustement couleurs et marqueurs maps
 - Fix action device back button 
 
+- Upload image error: "Multipart form parse error - Request max total header size exceeded"
+
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
 - Implement reverse geocoding
