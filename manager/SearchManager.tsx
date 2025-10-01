@@ -84,10 +84,15 @@ class SearchManager {
 
     if (results?.data?.length > 0) {
       let tabResults: any = { ...searchState.tabResults };
-     
+
       tabResults[tabId] = {
         total: results?.total,
         currentPage: currentPage,
+        listData: [
+          ...(tabResults?.[tabId]?.listData || []),
+          ...(results?.data || [])
+        ],
+
         /*
         listData: [
           ...new Map([
