@@ -82,6 +82,11 @@ class SearchManager {
       results = await EntityManager.listProjects(payload, true);
     }
 
+    console.log(Object.keys(results))
+
+    return [];
+
+
     if (results?.data?.length > 0) {
       let tabResults: any = { ...searchState.tabResults };
      
