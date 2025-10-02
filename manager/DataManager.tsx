@@ -7,11 +7,19 @@ class DataManager {
   async get(key: any, options?: any, variables?: any, search?: boolean) {
     let data: any = await ApiManager.get(key, options, variables); 
 
-    if (Endpoints[key]?.dataKey === null || search === true) {
+    if (Endpoints[key]?.dataKey === null) {
       return data;
     }
 
-    return data?.[Endpoints[key].dataKey];
+    if (search === true) {
+      return {
+        total: data?.[Endpoints[key].totalKey],
+        data: data?.[Endpoints[key].dataKey],
+      };
+    }
+    else {
+      return data?.[Endpoints[key].dataKey];
+    }
   }
 
   async post(key: any, data: any, variables?: any) {
