@@ -5,28 +5,6 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  processImages(fieldName: string, formData: any) {
-    let imageData: any = formData?.[fieldName]?.[0];
-
-    if (imageData) {
-      let data: any = new FormData();
-
-      data.append(fieldName, {
-        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
-        type: imageData.mimeType,
-        name: imageData.fileName,
-      });
-
-      for (const key in formData) {
-        data.append(key, formData[key]);
-      }
-
-      return data;
-    }
-
-    return formData;
-  }
-
   resetForm(resource: any) {
     Store.dispatch(resetFormData(resource));
   }
@@ -226,6 +204,67 @@ class FormManager {
       },
     };
   }
+
+  objectToFormData(obj: any, form = new FormData(), namespace = '') {
+    for (let key in obj) {
+      if (!obj.hasOwnProperty(key)) continue;
+
+      const formKey = namespace ? `${namespace}[${key}]` : key;
+      const value = obj[key];
+
+      if (value === null || value === undefined) {
+        continue;
+      }
+      else if (value instanceof File || value instanceof Blob) {
+        form.append(formKey, value);
+      }
+      else if (Array.isArray(value)) {
+        value.forEach((element, index) => {
+          const tempKey = `${formKey}[${index}]`;
+          if (element instanceof File || element instanceof Blob) {
+            form.append(formKey + '[]', element);
+          }
+          else if (typeof element === 'object') {
+            this.objectToFormData(element, form, tempKey);
+          }
+          else {
+            form.append(formKey + '[]', element);
+          }
+        });
+      }
+      else if (typeof value === 'object') {
+        this.objectToFormData(value, form, formKey);
+      }
+      else {
+        form.append(formKey, value);
+      }
+    }
+
+    return form;
+  }
+
+  processImages(fieldName: string, formData: any) {
+    let imageData: any = formData?.[fieldName]?.[0];
+
+    if (imageData) {
+      let data: any = new FormData();
+
+      data.append(fieldName, {
+        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
+        type: imageData.mimeType,
+        name: imageData.fileName,
+      });
+
+      for (const key in formData) {
+        data.append(key, formData[key]);
+      }
+
+      return data;
+    }
+
+    return formData;
+  }
+
 };
 
 export default (new FormManager());
