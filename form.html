@@ -1,0 +1,89 @@
+<input id="upload_medias" name="upload_medias" type="file" />
+<button id="submit">Submit</button>
+
+
+<script>
+    const url = 'https://dev.jammm.app/backend/api/v1/jams/';
+
+    const headers = {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MTQwNDA2LCJpYXQiOjE3NTk1MDA0MDYsImp0aSI6IjM1YzE3ZTU1OGQ1NTQ5NWViYjAzYTk5NDY4MmVjZDJkIiwidXNlcl9pZCI6IjEyIn0.mvKTcTfOYBWfVOIB2vCG7AwV1Zi068OBJBr4mPcpsVE',
+    };
+
+    const jamData = {
+        "title": "Test " + Date.now(),
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "profile_id": 3,
+        "callaborators_ids": [1, 4318],
+        "period": { "start_datetime": "2018-11-20T15:58:44-06:00", "end_datetime": "2018-11-20T15:58:44-06:01" },
+        "sectors_ids": [13, 25],
+        "location_type": "online_physical",
+        "geolocation_latitude": "9",
+        "geolocation_longitude": "2",
+        "geographical_scope": "specific",
+        "scope_countries_codes": ["ng"],
+        "type": "call"
+    };
+
+    const fileInput = document.querySelector('#upload_medias');
+
+    async function uploadData() {
+        const formData = objectToFormData(jamData);
+
+
+        console.log(fileInput.files[0])
+        return;
+
+        if (fileInput.files.length > 0) {
+            formData.append('upload_medias', fileInput.files[0]);
+        }
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            console.log('response: ', result);
+        } catch (error) {
+            console.error('error: ', error);
+        }
+    }
+
+    function objectToFormData(obj, form = new FormData(), namespace = '') {
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) continue;
+
+            const formKey = namespace ? `${namespace}[${key}]` : key;
+            const value = obj[key];
+
+            if (value === null || value === undefined) {
+                continue;
+            }
+            else if (Array.isArray(value)) {
+                value.forEach((element, index) => {
+                    const tempKey = `${formKey}[${index}]`;
+                    if (typeof element === 'object' && !(element instanceof File)) {
+                        objectToFormData(element, form, tempKey);
+                    } else {
+                        form.append(tempKey, element);
+                    }
+                });
+            }
+            else if (typeof value === 'object') {
+                objectToFormData(value, form, formKey);
+            }
+            else {
+                form.append(formKey, value);
+            }
+        }
+
+        return form;
+    }
+</script>
+
+<script>
+    document.querySelector('#submit').addEventListener('click', uploadData);
+</script>

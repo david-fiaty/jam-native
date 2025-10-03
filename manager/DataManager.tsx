@@ -5,7 +5,7 @@ import moment from "moment";
 
 class DataManager {
   async get(key: any, options?: any, variables?: any, search?: boolean) {
-    let data: any = await ApiManager.get(key, options, variables); 
+    let data: any = await ApiManager.get(key, options, variables);
 
     if (Endpoints[key]?.dataKey === null) {
       return data;
@@ -34,21 +34,21 @@ class DataManager {
     return await ApiManager.put(key, data, variables);
   }
 
-  createUuid() { 
+  createUuid() {
     var d = new Date().getTime();
-    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;
-    
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16;
-        if (d > 0){
-            r = (d + r)%16 | 0;
-            d = Math.floor(d/16);
-        } else {
-            r = (d2 + r)%16 | 0;
-            d2 = Math.floor(d2/16);
-        }
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now() * 1000)) || 0;
 
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      var r = Math.random() * 16;
+      if (d > 0) {
+        r = (d + r) % 16 | 0;
+        d = Math.floor(d / 16);
+      } else {
+        r = (d2 + r) % 16 | 0;
+        d2 = Math.floor(d2 / 16);
+      }
+
+      return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
   }
 
@@ -76,24 +76,24 @@ class DataManager {
 
   isUrl(value: string) {
     let url;
-    
+
     try {
       url = new URL(value);
     } catch (error) {
       console.log(error);
-      return false;  
+      return false;
     }
-  
+
     return url.protocol === "http:" || url.protocol === "https:";
   }
 
   isBase64(value: string) {
-    if (!value || value == 'undefined' || value === '' || value.trim() === '')  return false; 
+    if (!value || value == 'undefined' || value === '' || value.trim() === '') return false;
 
     try {
-        return btoa(atob(value)) == value;
+      return btoa(atob(value)) == value;
     } catch (err) {
-        return false;
+      return false;
     }
   }
 
