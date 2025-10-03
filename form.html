@@ -9,7 +9,7 @@
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MTQwNDA2LCJpYXQiOjE3NTk1MDA0MDYsImp0aSI6IjM1YzE3ZTU1OGQ1NTQ5NWViYjAzYTk5NDY4MmVjZDJkIiwidXNlcl9pZCI6IjEyIn0.mvKTcTfOYBWfVOIB2vCG7AwV1Zi068OBJBr4mPcpsVE',
     };
 
-    const data = {
+    const jamData = {
         "title": "Test " + Date.now(),
         "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         "profile_id": 3,
@@ -27,11 +27,7 @@
     const fileInput = document.querySelector('#upload_medias');
 
     async function uploadData() {
-        const formData = new FormData();
-
-        Object.entries(data).forEach(([key, value]) => {
-            formData.append(key, value);
-        });
+        const formData = objectToFormData(jamData);
 
         if (fileInput.files.length > 0) {
             formData.append('upload_medias', fileInput.files[0]);
