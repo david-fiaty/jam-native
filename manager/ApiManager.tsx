@@ -69,17 +69,13 @@ class ApiManager {
 
       if (Endpoints[key]?.multipart !== true) {
         headers['Content-Type'] = 'application/json';
+        body = JSON.stringify(data);
       }
 
       if (Object.keys(tokenData).length > 0 && tokenData?.access_token) {
         headers['Authorization'] = `Bearer ${tokenData.access_token}`;
       }
-
-      // Body
-      if (Endpoints[key]?.multipart !== true) {
-        body = JSON.stringify(data);
-      }
-
+      
       // Request
       let response: any = await fetch(url, {
           method: method,
