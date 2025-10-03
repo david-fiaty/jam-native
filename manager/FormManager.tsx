@@ -205,7 +205,7 @@ class FormManager {
     };
   }
 
-  objectToFormData(obj: any, form = new FormData(), namespace = '') {
+  objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
     for (let key in obj) {
       if (!obj.hasOwnProperty(key)) continue;
 
@@ -215,21 +215,32 @@ class FormManager {
       if (value === null || value === undefined) {
         continue;
       }
-      else if (value instanceof File || value instanceof Blob) {
-        form.append(formKey, value);
-      }
       else if (Array.isArray(value)) {
         value.forEach((element, index) => {
-          const tempKey = `${formKey}[${index}]`;
-          if (element instanceof File || element instanceof Blob) {
-            form.append(formKey + '[]', element);
+          if (element && element.uri && element.type) {
+            const name = element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`;
+
+            form.append(formKey + '[]', {
+              uri: element.uri,
+              name: name,
+              type: element.type,
+            });
           }
           else if (typeof element === 'object') {
-            this.objectToFormData(element, form, tempKey);
+            this.objectToFormData(element, form, `${formKey}[${index}]`);
           }
           else {
             form.append(formKey + '[]', element);
           }
+        });
+      }
+      else if (value && value.uri && value.type) {
+        const name = value.fileName || `file.${value.type.split('/')[1] || 'jpg'}`;
+
+        form.append(formKey, {
+          uri: value.uri,
+          name: name,
+          type: value.type,
         });
       }
       else if (typeof value === 'object') {
@@ -242,29 +253,6 @@ class FormManager {
 
     return form;
   }
-
-  processImages(fieldName: string, formData: any) {
-    let imageData: any = formData?.[fieldName]?.[0];
-
-    if (imageData) {
-      let data: any = new FormData();
-
-      data.append(fieldName, {
-        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
-        type: imageData.mimeType,
-        name: imageData.fileName,
-      });
-
-      for (const key in formData) {
-        data.append(key, formData[key]);
-      }
-
-      return data;
-    }
-
-    return formData;
-  }
-
 };
 
 export default (new FormManager());

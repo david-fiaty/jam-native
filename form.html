@@ -29,6 +29,10 @@
     async function uploadData() {
         const formData = objectToFormData(jamData);
 
+
+        console.log(fileInput.files[0])
+        return;
+
         if (fileInput.files.length > 0) {
             formData.append('upload_medias', fileInput.files[0]);
         }
@@ -75,7 +79,7 @@
                 form.append(formKey, value);
             }
         }
-        
+
         return form;
     }
 </script>
