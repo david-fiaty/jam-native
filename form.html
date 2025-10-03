@@ -1,4 +1,3 @@
-
 <input id="upload_medias" name="upload_medias" type="file" />
 <button id="submit">Submit</button>
 
@@ -46,11 +45,41 @@
             });
 
             const result = await response.json();
-            
+
             console.log('response: ', result);
         } catch (error) {
             console.error('error: ', error);
         }
+    }
+
+    function objectToFormData(obj, form = new FormData(), namespace = '') {
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) continue;
+
+            const formKey = namespace ? `${namespace}[${key}]` : key;
+            const value = obj[key];
+
+            if (value === null || value === undefined) {
+                continue;
+            }
+            else if (Array.isArray(value)) {
+                value.forEach((element, index) => {
+                    const tempKey = `${formKey}[${index}]`;
+                    if (typeof element === 'object' && !(element instanceof File)) {
+                        objectToFormData(element, form, tempKey);
+                    } else {
+                        form.append(tempKey, element);
+                    }
+                });
+            }
+            else if (typeof value === 'object') {
+                objectToFormData(value, form, formKey);
+            }
+            else {
+                form.append(formKey, value);
+            }
+        }
+        return form;
     }
 </script>
 
