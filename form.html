@@ -1,11 +1,11 @@
-<form>
-    <input id="upload_medias" name="upload_medias" type="file" />
-    <button id="submit">Submit</button>
-</form>
+
+<input id="upload_medias" name="upload_medias" type="file" />
+<button id="submit">Submit</button>
+
 
 <script>
     const url = 'https://dev.jammm.app/backend/api/v1/jams/';
-    
+
     const headers = {
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MTQwNDA2LCJpYXQiOjE3NTk1MDA0MDYsImp0aSI6IjM1YzE3ZTU1OGQ1NTQ5NWViYjAzYTk5NDY4MmVjZDJkIiwidXNlcl9pZCI6IjEyIn0.mvKTcTfOYBWfVOIB2vCG7AwV1Zi068OBJBr4mPcpsVE',
     };
@@ -47,9 +47,9 @@
 
             const result = await response.json();
             
-            console.log('Upload success:', result);
+            console.log('response: ', result);
         } catch (error) {
-            console.error('Upload error:', error);
+            console.error('error: ', error);
         }
     }
 </script>
