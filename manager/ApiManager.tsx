@@ -62,12 +62,12 @@ class ApiManager {
 
   async sendRequest(key: string, url: string, method: string, data?: any) {
     try {
+      // Headers
       let tokenData: any = await SessionManager.getTokenData();
+      let body: any = data || {};
       let headers: any = {
         'Content-Type': 'application/json',
       };
-
-      console.log(tokenData)
 
       if (Endpoints[key]?.multipart === true) {
         headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
@@ -77,12 +77,16 @@ class ApiManager {
         headers['Authorization'] = `Bearer ${tokenData.access_token}`;
       }
 
+      // Body
+      if (Endpoints[key]?.multipart !== true) {
+        body = JSON.stringify(data);
+      }
+
+      // Payload
       let response: any = await fetch(url, {
-        ...{
           method: method,
           headers: headers,
-        },
-        ...(data ? { body: JSON.stringify(data) } : {}),
+          body: body,
       });
 
       return await this.processResponse(response);
