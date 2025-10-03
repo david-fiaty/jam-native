@@ -5,28 +5,6 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
-  processImages(fieldName: string, formData: any) {
-    let imageData: any = formData?.[fieldName]?.[0];
-
-    if (imageData) {
-      let data: any = new FormData();
-
-      data.append(fieldName, {
-        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
-        type: imageData.mimeType,
-        name: imageData.fileName,
-      });
-
-      for (const key in formData) {
-        data.append(key, formData[key]);
-      }
-
-      return data;
-    }
-
-    return formData;
-  }
-
   resetForm(resource: any) {
     Store.dispatch(resetFormData(resource));
   }
@@ -225,6 +203,57 @@ class FormManager {
         },
       },
     };
+  }
+
+  objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
+    for (let key in obj) {
+      if (!obj.hasOwnProperty(key)) continue;
+
+      const formKey = namespace ? `${namespace}[${key}]` : key;
+      const value = obj[key];
+
+      if (value === null || value === undefined) {
+        continue;
+      }
+      else if (Array.isArray(value)) {
+        value.forEach((element, index) => {
+          if (element && element.uri && element.type) {
+            const name = element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`;
+            const uri = Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri;
+            
+            form.append(formKey + '[]', {
+              uri: uri,
+              name: name,
+              type: element.type,
+            });
+          }
+          else if (typeof element === 'object') {
+            this.objectToFormData(element, form, `${formKey}[${index}]`);
+          }
+          else {
+            form.append(formKey + '[]', element);
+          }
+        });
+      }
+      else if (value && value.uri && value.type) {
+        const name = value.fileName || `file.${value.type.split('/')[1] || 'jpg'}`;
+        const uri = Platform.OS === 'ios' ? value.uri.replace('file://', '') : value.uri;
+
+        form.append(formKey, {
+          uri: uri,
+          name: name,
+          type: value.type,
+        });
+      }
+      else if (typeof value === 'object') {
+        this.objectToFormData(value, form, formKey);
+      }
+      else {
+        form.append(formKey, value);
+      }
+    }
+
+    return form;
   }
 };
 
