@@ -3,6 +3,7 @@ import { Config } from '@/constants/Config';
 import DataManager from './DataManager';
 import UserManager from './UserManager';
 import i18n from '@/translation/i18n';
+import FormManager from './FormManager';
 
 class EntityManager {
   async listJams(options?: any, search?: boolean) {
@@ -195,7 +196,8 @@ class EntityManager {
   }
 
   async addJam(entityData: any) {
-    let response: any = await DataManager.post('addJam', entityData);
+    let payload: any = FormManager.objectToFormData(entityData);
+    let response: any = await DataManager.post('addJam', payload);
     let success: boolean = false;
 
     if (response?.id > 0) success = true;
