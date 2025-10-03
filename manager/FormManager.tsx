@@ -242,6 +242,29 @@ class FormManager {
 
     return form;
   }
+
+  processImages(fieldName: string, formData: any) {
+    let imageData: any = formData?.[fieldName]?.[0];
+
+    if (imageData) {
+      let data: any = new FormData();
+
+      data.append(fieldName, {
+        uri: Platform.OS === 'ios' ? imageData.uri.replace('file://', '') : imageData.uri,
+        type: imageData.mimeType,
+        name: imageData.fileName,
+      });
+
+      for (const key in formData) {
+        data.append(key, formData[key]);
+      }
+
+      return data;
+    }
+
+    return formData;
+  }
+
 };
 
 export default (new FormManager());
