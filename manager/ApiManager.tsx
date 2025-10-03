@@ -82,22 +82,18 @@ class ApiManager {
         body = JSON.stringify(data);
       }
 
-      // Payload
+      // Request
       let response: any = await fetch(url, {
           method: method,
           headers: headers,
           body: body,
       });
 
-      return await this.processResponse(response);
+      return await response.json();
     }
     catch (error) {
       console.error(error, url);
     }
-  }
-
-  async processResponse(response: any) {
-    return await response.json();
   }
 };
 
