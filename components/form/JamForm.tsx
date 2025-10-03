@@ -51,14 +51,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     };
 
     let payload: any = FormManager.processImages('upload_medias', formData);
-
-    console.log('------- JAM FORM PAYLOAD ----');
-    console.log('------', payload);
-
     let result: any = await EntityManager.addJam(payload);
-
-    console.log('------- JAM FORM RESPONSE ----');
-    console.log('-------', result);
 
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
