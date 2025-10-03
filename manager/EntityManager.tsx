@@ -197,9 +197,6 @@ class EntityManager {
   async addJam(entityData: any) {
     let response: any = await DataManager.post('addJam', entityData);
     let success: boolean = false;
-    
-
-    console.log(response);
 
     if (response?.id > 0) success = true;
 
