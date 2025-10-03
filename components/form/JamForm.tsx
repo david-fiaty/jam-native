@@ -50,7 +50,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       content: i18n.t('Jam data successfully submitted.'),
     };
 
-    let payload: any = FormManager.processImages('upload_medias', formData);
+    let payload: any = FormManager.objectToFormData(formData);
     let result: any = await EntityManager.addJam(payload);
 
     if (result.success === false) {
