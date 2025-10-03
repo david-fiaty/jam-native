@@ -4,7 +4,6 @@ import { Config } from '@/constants/Config';
 import * as FileSystem from 'expo-file-system';
 import ScreenManager from "@/manager/ScreenManager";
 import DataManager from './DataManager';
-import i18n from '@/translation/i18n';
 import NoImageView from '@/components/view/NoImageView';
 import ImageView from '@/components/view/ImageView';
 
@@ -40,12 +39,6 @@ class MediaManager {
   getImageUrl(path: any) {
     return Config.imageUrl + path;
   }
-
-  prepareUpload(data: any) {
-    return data.map((item: any) => {
-      return DataManager.extract(['base64'], item);
-    }); 
-  };
 
   fetchImageAsBase64(url: string) {
     return new Promise(async (resolve, reject) => {
