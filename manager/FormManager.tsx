@@ -219,9 +219,10 @@ class FormManager {
         value.forEach((element, index) => {
           if (element && element.uri && element.type) {
             const name = element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`;
-
+            const uri = Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri;
+            
             form.append(formKey + '[]', {
-              uri: element.uri,
+              uri: uri,
               name: name,
               type: element.type,
             });
@@ -236,9 +237,10 @@ class FormManager {
       }
       else if (value && value.uri && value.type) {
         const name = value.fileName || `file.${value.type.split('/')[1] || 'jpg'}`;
+        const uri = Platform.OS === 'ios' ? value.uri.replace('file://', '') : value.uri;
 
         form.append(formKey, {
-          uri: value.uri,
+          uri: uri,
           name: name,
           type: value.type,
         });
