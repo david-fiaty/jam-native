@@ -65,12 +65,10 @@ class ApiManager {
       // Headers
       let tokenData: any = await SessionManager.getTokenData();
       let body: any = data || {};
-      let headers: any = {
-        'Content-Type': 'application/json',
-      };
+      let headers: any = {};
 
-      if (Endpoints[key]?.multipart === true) {
-        headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
+      if (Endpoints[key]?.multipart !== true) {
+        headers['Content-Type'] = 'application/json';
       }
 
       if (Object.keys(tokenData).length > 0 && tokenData?.access_token) {
