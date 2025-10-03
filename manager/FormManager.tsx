@@ -219,10 +219,11 @@ class FormManager {
         value.forEach((element, index) => {
           if (element && element.uri && element.type) {
             const name = element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`;
+
             form.append(formKey + '[]', {
               uri: element.uri,
               name: name,
-              type: element.type
+              type: element.type,
             });
           }
           else if (typeof element === 'object') {
@@ -235,10 +236,11 @@ class FormManager {
       }
       else if (value && value.uri && value.type) {
         const name = value.fileName || `file.${value.type.split('/')[1] || 'jpg'}`;
+
         form.append(formKey, {
           uri: value.uri,
           name: name,
-          type: value.type
+          type: value.type,
         });
       }
       else if (typeof value === 'object') {
