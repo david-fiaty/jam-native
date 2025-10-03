@@ -141,7 +141,7 @@ class SearchManager {
     return [
       {
         id: 'jam',
-        label: i18n.t('All'),
+        label: i18n.t('Jams'),
         entityType: 'jam',
         numColumns: 2,
         default: true,
