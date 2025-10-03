@@ -15,7 +15,7 @@ class ApiManager {
 
     try {
       return await this.sendRequest(key, url, 'POST', data);
-    } 
+    }
     catch (error) {
       console.log(error);
     }
@@ -26,7 +26,7 @@ class ApiManager {
 
     try {
       return await this.sendRequest(key, url, 'PUT', data);
-    } 
+    }
     catch (error) {
       console.log(error);
     }
@@ -37,7 +37,7 @@ class ApiManager {
 
     try {
       return await this.sendRequest(key, url, 'DELETE', data);
-    } 
+    }
     catch (error) {
       console.log(error);
     }
@@ -62,40 +62,38 @@ class ApiManager {
 
   async sendRequest(key: string, url: string, method: string, data?: any) {
     try {
+      // Headers
+      let tokenData: any = await SessionManager.getTokenData();
+      let body: any = data || {};
+      let headers: any = {
+        'Content-Type': 'application/json',
+      };
+
+      if (Endpoints[key]?.multipart === true) {
+        headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
+      }
+
+      if (Object.keys(tokenData).length > 0 && tokenData?.access_token) {
+        headers['Authorization'] = `Bearer ${tokenData.access_token}`;
+      }
+
+      // Body
+      if (Endpoints[key]?.multipart !== true) {
+        body = JSON.stringify(data);
+      }
+
+      // Request
       let response: any = await fetch(url, {
-        ...{
           method: method,
-          headers: await this.getHeaders(key),
-        },
-        ...(data ? { body: JSON.stringify(data) } : {}),
+          headers: headers,
+          body: body,
       });
-  
-      return await this.processResponse(response);
-    } 
+
+      return await response.json();
+    }
     catch (error) {
       console.error(error, url);
     }
-  }
-
-  async processResponse(response: any) {
-    return await response.json();
-  }
-
-  async getHeaders(key: string) {
-    let tokenData: any = await SessionManager.getTokenData();
-    let headers: any = {
-      'Content-Type': 'application/json',
-    };
-
-    if (Endpoints[key]?.multipart === true) {
-      headers['Content-Type'] = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW';
-    }
-
-    if (Object.keys(tokenData).length > 0) {
-      headers['Authorization'] = `Bearer ${tokenData?.access_token || ''}`; 
-    }
-    
-    return headers;
   }
 };
 
