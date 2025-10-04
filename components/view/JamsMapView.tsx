@@ -1,6 +1,6 @@
 import MapView, { Callout, Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setCurrentTab } from "@/redux/slices/SearchSlice";
 import { Layout } from "@/constants/Layout";
@@ -12,7 +12,7 @@ import TabsView from "./TabsView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
 import LoadingMoreView from "./LoadingMoreView";
-    
+
 const JamsMapView = () => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -110,13 +110,14 @@ const JamsMapView = () => {
   if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
-      <View style={styles.container}>
-        <TabsView
-          tabs={searchTabs}
-          currentTab={searchState.currentTab}
-          onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
-        />
+    <View style={styles.container}>
+      <TabsView
+        tabs={searchTabs}
+        currentTab={searchState.currentTab}
+        onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
+      />
 
+      <TouchableWithoutFeedback>
         <MapView
           style={styles.map}
           provider={PROVIDER_DEFAULT}
@@ -130,10 +131,11 @@ const JamsMapView = () => {
         </MapView>
 
         <MapLegendView />
-        
-        {isLoaded && isFetching && <LoadingMoreView />}
-      </View>
-  
+      </TouchableWithoutFeedback>
+
+      {isLoaded && isFetching && <LoadingMoreView />}
+    </View>
+
   );
 };
 
