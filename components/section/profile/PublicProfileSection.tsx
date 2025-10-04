@@ -10,7 +10,6 @@ const PublicProfileSection = ({ profileId, itemData }: Props) => {
     <ProfileView 
       profileId={profileId} 
       isPublic={true}
-      itemData={itemData ? JSON.parse(itemData) : null}
     />
   );
 };
