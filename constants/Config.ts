@@ -30,7 +30,7 @@ export const Config: any = {
     viewedNotifications: 'viewedNotifications', 
   },
   forceLogin: {
-    enabled: true,
+    enabled: false,
     credentials: {
       email: 'mitsiomotu@yopmail.com',
       password: 'Password1234',
