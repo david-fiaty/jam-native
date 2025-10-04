@@ -18,7 +18,6 @@ const PublicProjectSection = ({ projectId, itemData }: Props) => {
       <ProjectView 
         isPublic={true} 
         projectId={projectId}
-        itemData={itemData ? JSON.parse(itemData) : null}
       />
     </BoxView>
   );
