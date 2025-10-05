@@ -13,6 +13,7 @@ const JamFormSection = ({ jamId }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
+      scroll={true}
     >
       <JamForm
         isPublic={false}
