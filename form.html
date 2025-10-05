@@ -29,13 +29,15 @@
     async function uploadData() {
         const formData = objectToFormData(jamData);
 
-
-        console.log(fileInput.files[0])
-        return;
-
         if (fileInput.files.length > 0) {
             formData.append('upload_medias', fileInput.files[0]);
         }
+
+        for (const pair of formData.entries()) {
+            console.log(`${pair[0]}: ${pair[1]}`);
+        }
+        
+        return;
 
         try {
             const response = await fetch(url, {
