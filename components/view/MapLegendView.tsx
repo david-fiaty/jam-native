@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
   openButton: {
     position: 'absolute',
     bottom: Layout.space.base * 5,
-    backgroundColor: Layout.colors.white,
+    backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base / 2,
     height: 30,
   },
