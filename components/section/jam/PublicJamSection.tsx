@@ -21,6 +21,7 @@ const PublicJamSection = ({ jamId, idArray, itemData }: Props) => {
         <JamView
           isPublic={true}
           jamId={jamId}
+          itemData={itemData}
         />
       )}
 
