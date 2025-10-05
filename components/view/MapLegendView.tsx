@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
   closeButton: {
     position: 'absolute',
     right: 0,
-    backgroundColor: Layout.colors.white,
+    backgroundColor: Layout.colors.secondary,
     padding: Layout.space.base / 2,
     height: 30,
   },
@@ -158,6 +158,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: Layout.colors.secondary,
   },
   legendContainer: {
     position: 'absolute',
