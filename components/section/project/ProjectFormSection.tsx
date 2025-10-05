@@ -13,6 +13,7 @@ const ProjectFormSection = ({ projectId }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
+      scroll={true}
     >
       <ProjectForm
         isPublic={false}
