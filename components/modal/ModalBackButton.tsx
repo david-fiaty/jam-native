@@ -36,19 +36,25 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
     <BoxView
       direction="row"
       align="center"
-      justify="flex-start"
+      justify="space-between"
       style={styles.container}
-      onPress={onBackPress}
     >
-      <IconView
-        name="previous"
-        theme="clear"
-        padding={0}
-      />
+      <BoxView 
+        direction="row" 
+        align="center"
+        onPress={onBackPress}
+        style={{backgroundColor: 'red'}}
+      >
+        <IconView
+          name="previous"
+          theme="clear"
+          padding={0}
+        />
 
-      <TextView style={styles.title}>
-        {i18n.t(currentModal?.title)}
-      </TextView>
+        <TextView style={styles.title}>
+          {i18n.t(currentModal?.title)}
+        </TextView>
+      </BoxView>
 
       {currentModal.toolbarButtons?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
@@ -90,6 +96,7 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     flex: 1,
+    backgroundColor: 'gray',
   },
 });
 
