@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     flex: 1,
+    backgroundColor: 'red'
   },
 });
 
