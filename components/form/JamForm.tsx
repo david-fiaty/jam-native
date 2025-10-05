@@ -214,16 +214,16 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <CountriesField
           multiple={false}
           resource={resource}
-          field="country"
+          field="scope_countries_codes"
           placeholder={i18n.t('Select a country')}
-          value={formData?.country}
+          value={formData?.scope_countries_codes}
           onPress={() => ModalManager.toggleModal('CountriesList', {
             resource: resource,
-            field: 'country',
+            field: 'scope_countries_codes',
             multiple: false,
           })}
         />
-        {FormManager.renderError('country')}
+        {FormManager.renderError('scope_countries_codes')}
 
         <SectorsField
           resource={resource}
