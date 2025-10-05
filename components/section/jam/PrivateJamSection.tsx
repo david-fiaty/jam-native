@@ -21,6 +21,7 @@ const PrivateJamSection = ({ jamId, idArray, itemData }: Props) => {
         <JamView
           isPublic={false}
           jamId={jamId}
+          itemData={itemData}
         />
       )}
 
