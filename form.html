@@ -1,7 +1,6 @@
 <input id="upload_medias" name="upload_medias" type="file" />
 <button id="submit">Submit</button>
 
-
 <script>
     const url = 'https://dev.jammm.app/backend/api/v1/jams/';
 
@@ -28,10 +27,6 @@
 
     async function uploadData() {
         const formData = objectToFormData(jamData);
-
-
-        console.log(fileInput.files[0])
-        return;
 
         if (fileInput.files.length > 0) {
             formData.append('upload_medias', fileInput.files[0]);
