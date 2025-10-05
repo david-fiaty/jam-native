@@ -13,7 +13,6 @@ type Props = {
 };
 
 const ModalBackButton = ({ currentModal, visible }: Props) => {
-
   const onBackPress = () => {
     ModalManager.toggleModal(currentModal?.id);
     return true;
@@ -43,7 +42,6 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
         direction="row" 
         align="center"
         onPress={onBackPress}
-        style={{backgroundColor: 'red'}}
       >
         <IconView
           name="previous"
@@ -96,7 +94,6 @@ const styles = StyleSheet.create({
   },
   toolbar: {
     flex: 1,
-    backgroundColor: 'gray',
   },
 });
 
