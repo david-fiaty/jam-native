@@ -7,6 +7,7 @@ import JamViewImage from "./jam-view/JamViewImage";
 import JamViewToolbar from "./jam-view/JamViewToolbar";
 import JamViewDetails from "./jam-view/JamViewDetails";
 import EntityManager from "@/manager/EntityManager";
+import SpinnerView from "./SpinnerView";
 
 type Props = {
   jamId?: any;
@@ -34,14 +35,19 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
     <View
       style={styles.container}
     >
-      <JamViewHeader row={jamData} />
-      <JamViewImage row={jamData} />
-      <JamViewToolbar
-        row={jamData}
-        profileData={userState.profileData}
-        onListItemAction={onListItemAction}
-      />
-      <JamViewDetails row={jamData} sectorsData={appState.sectorsData} />
+      {!isLoaded && <SpinnerView />}
+      {isLoaded && (
+        <>
+          <JamViewHeader row={jamData} />
+          <JamViewImage row={jamData} />
+          <JamViewToolbar
+            row={jamData}
+            profileData={userState.profileData}
+            onListItemAction={onListItemAction}
+          />
+          <JamViewDetails row={jamData} sectorsData={appState.sectorsData} />
+        </>
+      )}
     </View>
   );
 };
@@ -49,6 +55,7 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    minHeight: 350,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base * 1.5,
