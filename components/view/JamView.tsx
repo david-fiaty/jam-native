@@ -36,6 +36,7 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
       style={styles.container}
     >
       {!isLoaded && <SpinnerView />}
+
       {isLoaded && (
         <>
           <JamViewHeader row={jamData} />
@@ -55,7 +56,7 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    minHeight: 350,
+    minHeight: 500,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base * 1.5,
