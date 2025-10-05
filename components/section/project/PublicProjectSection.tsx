@@ -14,10 +14,12 @@ const PublicProjectSection = ({ projectId, itemData }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
+      scroll={true}
     >
       <ProjectView 
         isPublic={true} 
         projectId={projectId}
+        //itemData={itemData}
       />
     </BoxView>
   );

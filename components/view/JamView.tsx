@@ -7,7 +7,6 @@ import JamViewImage from "./jam-view/JamViewImage";
 import JamViewToolbar from "./jam-view/JamViewToolbar";
 import JamViewDetails from "./jam-view/JamViewDetails";
 import EntityManager from "@/manager/EntityManager";
-import BoxView from "./BoxView";
 
 type Props = {
   jamId?: any;
