@@ -13,7 +13,6 @@ type Props = {
 };
 
 const ModalBackButton = ({ currentModal, visible }: Props) => {
-
   const onBackPress = () => {
     ModalManager.toggleModal(currentModal?.id);
     return true;
@@ -36,19 +35,24 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
     <BoxView
       direction="row"
       align="center"
-      justify="flex-start"
+      justify="space-between"
       style={styles.container}
-      onPress={onBackPress}
     >
-      <IconView
-        name="previous"
-        theme="clear"
-        padding={0}
-      />
+      <BoxView 
+        direction="row" 
+        align="center"
+        onPress={onBackPress}
+      >
+        <IconView
+          name="previous"
+          theme="clear"
+          padding={0}
+        />
 
-      <TextView style={styles.title}>
-        {i18n.t(currentModal?.title)}
-      </TextView>
+        <TextView style={styles.title}>
+          {i18n.t(currentModal?.title)}
+        </TextView>
+      </BoxView>
 
       {currentModal.toolbarButtons?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
