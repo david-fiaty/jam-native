@@ -147,6 +147,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Finalisation profile new screens
 - Ajustement couleurs et marqueurs maps
 - Fix action device back button 
+- Fix entity views bottom scroll
 
 - Upload image error: "Multipart form parse error - Request max total header size exceeded"
 
