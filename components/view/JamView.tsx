@@ -32,9 +32,7 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
   }, [isLoaded, jamId, itemData]);
 
   return (
-    <BoxView
-      direction="column"
-      scroll={true}
+    <View
       style={styles.container}
     >
       <JamViewHeader row={jamData} />
@@ -45,14 +43,13 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
         onListItemAction={onListItemAction}
       />
       <JamViewDetails row={jamData} sectorsData={appState.sectorsData} />
-    </BoxView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    height: '100%',
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     marginBottom: Layout.space.base * 1.5,
