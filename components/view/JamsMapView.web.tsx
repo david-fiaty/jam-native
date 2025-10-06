@@ -42,19 +42,12 @@ const JamsMapView = () => {
     return { lat: lat, lng: lng };
   };
 
-  const getMarkerPosition = (item: any) => {
-    const lat = parseFloat(item?.geolocation_latitude);
-    const lng = parseFloat(item?.geolocation_longitude);
-
-    return { lat: lat, lng: lng };
-  };
-
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
         <React.Fragment key={item.id}>
           <OverlayViewF
-            position={getMarkerPosition(item)}
+            position={MapManager.getMarkerPosition(item)}
             mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
             getPixelPositionOffset={(width, height) => ({
               x: -(width / 2),
@@ -68,7 +61,7 @@ const JamsMapView = () => {
 
           {selectedPlace && selectedPlace?.id === item.id && (
             <InfoWindow
-              position={getMarkerPosition(selectedPlace)}
+              position={MapManager.getMarkerPosition(selectedPlace)}
               onCloseClick={() => setSelectedPlace(null)}
               options={{
                 disableAutoPan: false,
