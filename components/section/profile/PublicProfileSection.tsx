@@ -12,7 +12,7 @@ const PublicProfileSection = ({ profileId, itemData }: Props) => {
     <BoxView
       direction="column"
       align="center"
-      justify="flex-start"
+      justify="center"
       style={styles.container}
       scroll={true}
     >

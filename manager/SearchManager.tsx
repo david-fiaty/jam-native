@@ -141,14 +141,14 @@ class SearchManager {
     return [
       {
         id: 'jam',
-        label: i18n.t('Jams'),
+        label: i18n.t('JAMs!'),
         entityType: 'jam',
         numColumns: 2,
         default: true,
       },
       {
         id: 'looking',
-        label: i18n.t('Lookings'),
+        label: i18n.t('Looking'),
         entityType: 'jam',
         numColumns: 2,
       },
@@ -166,7 +166,7 @@ class SearchManager {
       },
       {
         id: 'jammer',
-        label: i18n.t('Jammers'),
+        label: i18n.t('JAMMERS'),
         entityType: 'profile',
         numColumns: 1,
       },

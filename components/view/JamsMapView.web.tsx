@@ -7,7 +7,6 @@ import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SearchManager from "@/manager/SearchManager";
 import TabsView from "./TabsView";
-import SearchFiltersView from "./SearchFiltersView";
 import SpinnerView from "./SpinnerView";
 import MapManager from "@/manager/MapManager";
 import MapLegendView from "./MapLegendView";
@@ -119,8 +118,6 @@ const JamsMapView = () => {
         currentTab={searchState.currentTab}
         onItemPress={(tabId: string) => dispatch(setCurrentTab(tabId))}
       />
-
-      <SearchFiltersView />
 
       <GoogleMap
         mapContainerStyle={styles.map}
