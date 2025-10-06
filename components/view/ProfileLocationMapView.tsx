@@ -1,13 +1,13 @@
-import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { useDispatch } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
+import MapManager from "@/manager/MapManager";
 
 type Props = {
   itemData?: any;
@@ -16,6 +16,7 @@ type Props = {
 const ProfileLocationMapView = ({ itemData }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
+  const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const getInitialRegion = () => {
@@ -35,6 +36,22 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
       latitudeDelta: latitudeDelta,
       longitudeDelta: longitudeDelta,
     };
+  };
+
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={MapManager.getMarkerPosition(item)}
+        >
+          {MapManager.renderMarker(item, zoomLevel)}
+          <Callout>
+            {MapManager.renderMarkerCallout(item)}
+          </Callout>
+        </Marker>
+      );
+    }
   };
 
   useEffect(() => {
@@ -66,13 +83,7 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
             showsMyLocationButton={true}
             initialRegion={getInitialRegion()}
           >
-            <Marker
-              pinColor={Layout.colors.tertiary}
-              coordinate={{
-                latitude: parseFloat(itemData?.geolocation_latitude),
-                longitude: parseFloat(itemData?.geolocation_longitude),
-              }}
-            />
+            {renderMarker(itemData)}
           </MapView>
         </View>
       </TouchableWithoutFeedback>
