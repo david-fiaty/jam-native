@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
 import TextView from "@/components/view/TextView";
@@ -22,12 +22,12 @@ const ProfileViewField = ({ label, iconRight, onIconRightPress, children }: Prop
       {children}
 
       {iconRight && (
-        <IconView 
-          name={iconRight} 
-          size={18}
-          containerStyle={styles.iconRight} 
-          onPress={onIconRightPress}
-        /> 
+        <TouchableOpacity onPress={onIconRightPress} style={styles.iconRight}>
+          <IconView
+            name={iconRight}
+            size={18}
+          />
+        </TouchableOpacity>
       )}
     </BoxView>
   );
@@ -41,20 +41,20 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderColor: Layout.colors.secondary,
     borderRadius: Layout.radius.round,
-    paddingHorizontal: Layout.space.base/1.4,
-    paddingVertical: Layout.space.base/1.8,
+    paddingHorizontal: Layout.space.base / 1.4,
+    paddingVertical: Layout.space.base / 1.8,
     gap: 0,
   },
   label: {
     color: Layout.colors.black,
     fontSize: 12,
-    marginBottom: Layout.space.base/2.3,
+    marginBottom: Layout.space.base / 2.3,
   },
   iconRight: {
     position: 'absolute',
     right: Layout.space.base,
-    top: 0,
-    bottom: 0,
+    top: Layout.space.base,
+    bottom: Layout.space.base,
   },
 });
 
