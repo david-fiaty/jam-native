@@ -21,7 +21,6 @@ type Props = {
 const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
-  const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const getInitialRegion = () => {
@@ -29,12 +28,8 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
     let longitude: any = Config.defaultLocation.longitude;
     let latitudeDelta: any = 0.2;
     let longitudeDelta: any = 0.2;
-
-    if (selectedLocation?.latitude && selectedLocation?.longitude) {
-      latitude = selectedLocation.latitude;
-      longitude = selectedLocation.longitude; 
-    }
-    else if (currentLocation?.latitude && currentLocation?.longitude) {
+    
+    if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
       longitude = currentLocation.longitude; 
     }
