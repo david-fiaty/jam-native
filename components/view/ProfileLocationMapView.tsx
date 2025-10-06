@@ -10,11 +10,10 @@ import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 
 type Props = {
-  latitude?: any;
-  longitude?: any;
+  profileData?: any;
 };
 
-const ProfileLocationMapView = ({ latitude, longitude }: Props) => {
+const ProfileLocationMapView = ({ profileData }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -49,8 +48,6 @@ const ProfileLocationMapView = ({ latitude, longitude }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-
-  console.log(latitude, longitude)
   
   return (
     <BoxView 
@@ -69,15 +66,13 @@ const ProfileLocationMapView = ({ latitude, longitude }: Props) => {
             showsMyLocationButton={true}
             initialRegion={getInitialRegion()}
           >
-            { /*<Marker
+            <Marker
               pinColor={Layout.colors.tertiary}
-              title={i18n.t("Selected location")}
-              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
               coordinate={{
-                latitude: parseFloat(selectedLocation?.latitude),
-                longitude: parseFloat(selectedLocation?.longitude),
+                latitude: parseFloat(profileData?.geolocation_latitude),
+                longitude: parseFloat(profileData?.geolocation_longitude),
               }}
-            />*/}
+            />
           </MapView>
         </View>
       </TouchableWithoutFeedback>
