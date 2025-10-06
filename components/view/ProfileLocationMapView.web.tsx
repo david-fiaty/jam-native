@@ -36,25 +36,6 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
 
     return { lat: lat, lng: lng };
   };
-
-  const onMapPress = async (event: any) => {
-    const lat = event.latLng.lat();
-    const lng = event.latLng.lng();
-    setSelectedLocation({ lat, lng });
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: latitude.field,
-      value: lat,
-    }));
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: longitude.field,
-      value: lng,
-    }));
-  };
-
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -69,7 +50,6 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
         mapContainerStyle={styles.map}
         center={getInitialRegion()}
         zoom={zoomLevel}
-        onClick={(e: any) => onMapPress(e)}
         options={{
           styles: Layout.mapStyle,
           disableDefaultUI: true,
