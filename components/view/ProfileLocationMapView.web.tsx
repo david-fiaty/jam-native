@@ -8,12 +8,12 @@ import UserManager from "@/manager/UserManager";
 import SpinnerView from "./SpinnerView";
 
 type Props = {
-  profileData?: any;
+  itemData?: any;
 };
 
 const zoomLevel: number = 7;
 
-const ProfileLocationMapView = ({ profileData }: Props) => {
+const ProfileLocationMapView = ({ itemData }: Props) => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
