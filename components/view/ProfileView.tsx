@@ -34,6 +34,11 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
   const userState = useSelector((state: any) => state.user, shallowEqual);
+  const appState = useSelector((state: any) => state.app, shallowEqual);
+
+  const getCountryLabel = (code: any) => {
+    return appState.countriesData.find((o: any) => o.code == code)?.name;
+  };
 
   const renderHeader = () => {
     return (
@@ -146,7 +151,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
 
           <ProfileViewField label={i18n.t('Country')}>
             <TextView>
-              {profileData?.country ? JSON.stringify(profileData.country) : i18n.t('Unavailable')}
+              {profileData?.country ? getCountryLabel(profileData.country) : i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
@@ -181,7 +186,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
 
           <ProfileViewField label={i18n.t('Country')}>
             <TextView>
-              {profileData?.country ? JSON.stringify(profileData.country) : i18n.t('Unavailable')}
+              {profileData?.country ? getCountryLabel(profileData.country) : i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
@@ -208,9 +213,9 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             </TextView>
           </ProfileViewField>
 
-          <ProfileViewField label={i18n.t('Country')}>
+          <ProfileViewField label={i18n.t('Country')} iconRight="location">
             <TextView>
-              {profileData?.country ? JSON.stringify(profileData.country) : i18n.t('Unavailable')}
+              {profileData?.country ? getCountryLabel(profileData.country) : i18n.t('Unavailable')}
             </TextView>
           </ProfileViewField>
         </BoxView>
