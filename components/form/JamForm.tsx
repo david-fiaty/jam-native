@@ -166,7 +166,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
                 FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
                 FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
               }}
-              onPress={() => ModalManager.toggleModal('LocationMapView', {
+              onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
                 resource: resource,
                 latitude: {
                   field: 'geolocation_latitude',

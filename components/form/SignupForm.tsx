@@ -287,7 +287,7 @@ const SignupForm = () => {
               FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
               FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
             }}
-            onPress={() => ModalManager.toggleModal('LocationMapView', {
+            onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
               resource: 'profile',
               latitude: {
                 field: 'geolocation_latitude',
