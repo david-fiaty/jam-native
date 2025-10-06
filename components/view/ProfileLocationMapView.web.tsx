@@ -33,6 +33,7 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
 
     return { lat: lat, lng: lng };
   };
+  
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
