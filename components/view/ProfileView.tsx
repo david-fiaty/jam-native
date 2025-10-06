@@ -213,7 +213,11 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             </TextView>
           </ProfileViewField>
 
-          <ProfileViewField label={i18n.t('Country')} iconRight="location">
+          <ProfileViewField 
+            label={i18n.t('Country')} 
+            iconRight="location"
+            onIconRightPress={() => console.log('map view')}
+          >
             <TextView>
               {profileData?.country ? getCountryLabel(profileData.country) : i18n.t('Unavailable')}
             </TextView>
