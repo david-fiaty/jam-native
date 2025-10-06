@@ -6,19 +6,15 @@ import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
-import i18n from "@/translation/i18n";
 import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
-import ButtonView from "./ButtonView";
-import ModalManager from "@/manager/ModalManager";
 
 type Props = {
-  resource: string,
   latitude?: any;
   longitude?: any;
 };
 
-const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
+const ProfileLocationMapView = ({ latitude, longitude }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -83,12 +79,6 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
           </MapView>
         </View>
       </TouchableWithoutFeedback>
-  
-      <ButtonView
-        label={i18n.t('Submit')}
-        onPress={() => updateSelectedLocation()} 
-        containerStyle={styles.confirmButton}  
-      />
     </BoxView>
   );
 };
