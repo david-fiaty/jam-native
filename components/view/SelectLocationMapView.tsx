@@ -18,7 +18,7 @@ type Props = {
   longitude?: any;
 };
 
-const LocationMapView = ({ resource, latitude, longitude }: Props) => {
+const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -37,7 +37,7 @@ const LocationMapView = ({ resource, latitude, longitude }: Props) => {
       value: selectedLocation.longitude, 
     }));
 
-    ModalManager.toggleModal('LocationMapView');
+    ModalManager.toggleModal('SelectLocationMapView');
   };
 
   const onMapPress = async (event: MapPressEvent) => {
@@ -159,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LocationMapView;
+export default SelectLocationMapView;

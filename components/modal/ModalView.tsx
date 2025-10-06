@@ -12,7 +12,7 @@ import NotificationsMenu from "@/components/menu/NotificationsMenu";
 import HostsList from "@/components/list/HostsList";
 import MoreJamActionsView from "@/components/view/MoreJamActionsView";
 import JammersList from "@/components/list/JammersList";
-import LocationMapView from "@/components/view/LocationMapView";
+import SelectLocationMapView from "@/components/view/SelectLocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from '../list/CountriesList';
 import SelectJamsForm from '../form/SelectJamsForm';
@@ -183,9 +183,9 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <CountriesList {...params} />,
       },
       {
-        id: 'LocationMapView',
+        id: 'SelectLocationMapView',
         title: i18n.t('Your location'),
-        render: (params: any) => <LocationMapView {...params} />,
+        render: (params: any) => <SelectLocationMapView {...params} />,
       },
       {
         id: 'SelectJamsForm',

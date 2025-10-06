@@ -16,7 +16,7 @@ type Props = {
 
 const zoomLevel: number = 7;
 
-const LocationMapView = ({ resource, latitude, longitude }: Props) => {
+const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
   const dispatch = useDispatch();
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [currentLocation, setCurrentLocation] = useState<any>(null);
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LocationMapView;
+export default SelectLocationMapView;
