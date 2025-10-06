@@ -49,6 +49,8 @@ const ProfileLocationMapView = ({ latitude, longitude }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+
+  console.log(latitude, longitude)
   
   return (
     <BoxView 
