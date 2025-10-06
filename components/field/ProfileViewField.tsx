@@ -7,11 +7,12 @@ import IconView from "../view/IconView";
 
 type Props = {
   label?: any;
-  iconRight?: any
+  iconRight?: any;
+  onIconRightPress?: () => void;
   children?: ReactNode;
 };
 
-const ProfileViewField = ({ label, iconRight, children }: Props) => {
+const ProfileViewField = ({ label, iconRight, onIconRightPress, children }: Props) => {
   return (
     <BoxView style={styles.container} direction="column" align="flex-start" justify="flex-start">
       {label && (
@@ -25,6 +26,7 @@ const ProfileViewField = ({ label, iconRight, children }: Props) => {
           name={iconRight} 
           size={18}
           containerStyle={styles.iconRight} 
+          onPress={onIconRightPress}
         /> 
       )}
     </BoxView>
