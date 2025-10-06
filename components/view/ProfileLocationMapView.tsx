@@ -10,10 +10,10 @@ import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 
 type Props = {
-  profileData?: any;
+  itemData?: any;
 };
 
-const ProfileLocationMapView = ({ profileData }: Props) => {
+const ProfileLocationMapView = ({ itemData }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -69,8 +69,8 @@ const ProfileLocationMapView = ({ profileData }: Props) => {
             <Marker
               pinColor={Layout.colors.tertiary}
               coordinate={{
-                latitude: parseFloat(profileData?.geolocation_latitude),
-                longitude: parseFloat(profileData?.geolocation_longitude),
+                latitude: parseFloat(itemData?.geolocation_latitude),
+                longitude: parseFloat(itemData?.geolocation_longitude),
               }}
             />
           </MapView>
