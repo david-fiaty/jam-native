@@ -216,7 +216,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
           <ProfileViewField
             label={i18n.t('Country')}
             iconRight="location"
-            onIconRightPress={() => () => ModalManager.toggleModal('ProfileLocationMapView', {
+            onIconRightPress={() => ModalManager.toggleModal('ProfileLocationMapView', {
               
             })}
           >
