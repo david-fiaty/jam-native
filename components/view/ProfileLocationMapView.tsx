@@ -24,45 +24,6 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const updateSelectedLocation = () => {
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: latitude.field, 
-      value: selectedLocation.latitude, 
-    }));
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: longitude.field, 
-      value: selectedLocation.longitude, 
-    }));
-
-    ModalManager.toggleModal('ProfileLocationMapView');
-  };
-
-  const onMapPress = async (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
-  };
-
-  const getSelectedLocation = async () => {
-    let deviceLocation: any = await UserManager.getLocation();
-
-    if (latitude?.value && longitude?.value) {
-      return {
-        latitude: latitude.value,
-        longitude: longitude.value,
-      };
-    } 
-    else if (deviceLocation?.latitude && deviceLocation?.longitude) {
-      return deviceLocation;
-    }
-    
-    return {
-      latitude: Config.defaultLocation.latitude,
-      longitude: Config.defaultLocation.longitude,
-    };
-  };
-
   const getInitialRegion = () => {
     let latitude: any = Config.defaultLocation.latitude;
     let longitude: any = Config.defaultLocation.longitude;
@@ -89,7 +50,6 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
-      setSelectedLocation(await getSelectedLocation());
 
       if (!isLoaded) {
         setIsLoaded(true);
@@ -114,10 +74,9 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
             customMapStyle={Layout.mapStyle}
             showsUserLocation={true}
             showsMyLocationButton={true}
-            onPress={onMapPress}
             initialRegion={getInitialRegion()}
           >
-            <Marker
+            { /*<Marker
               pinColor={Layout.colors.tertiary}
               title={i18n.t("Selected location")}
               description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
@@ -125,7 +84,7 @@ const ProfileLocationMapView = ({ resource, latitude, longitude }: Props) => {
                 latitude: parseFloat(selectedLocation?.latitude),
                 longitude: parseFloat(selectedLocation?.longitude),
               }}
-            />
+            />*/}
           </MapView>
         </View>
       </TouchableWithoutFeedback>
