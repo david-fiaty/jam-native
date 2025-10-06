@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Config } from "@/constants/Config";
 import { useDispatch } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import UserManager from "@/manager/UserManager";
 import SpinnerView from "./SpinnerView";
