@@ -38,22 +38,12 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
     };
   };
 
-  const getMarkerPosition = (item: any) => {
-    const lat = parseFloat(item?.geolocation_latitude);
-    const lng = parseFloat(item?.geolocation_longitude);
-
-    return {
-      latitude: lat,
-      longitude: lng,
-    };
-  };
-
   const renderMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
         <Marker
           key={item.id}
-          coordinate={getMarkerPosition(item)}
+          coordinate={MapManager.getMarkerPosition(item)}
         >
           {MapManager.renderMarker(item, zoomLevel)}
           <Callout>

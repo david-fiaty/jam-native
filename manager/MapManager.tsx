@@ -54,6 +54,24 @@ class MapManager {
     return ['call', 'looking', 'event', 'random'].includes(item?.type);
   }
 
+  getMarkerPosition = (item: any): any => {
+    const lat = parseFloat(item?.geolocation_latitude);
+    const lng = parseFloat(item?.geolocation_longitude);
+
+    if (ScreenManager.isWeb()) {
+      return {
+        lat: lat,
+        lng: lng,
+      };
+    } 
+    else {
+      return {
+        latitude: lat,
+        longitude: lng,
+      };
+    }
+  }
+
   getMarkerTitle(item: any) {
     let title: string = '';
 
