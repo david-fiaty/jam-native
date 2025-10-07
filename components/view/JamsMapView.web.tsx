@@ -81,21 +81,24 @@ const JamsMapView = () => {
     setListData(await SearchManager.loadResults(searchState.currentTab, 1, Config.maxMapResults));
     setIsFetching(false);
   };
-  
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        if (!searchState.currentTab) {
-          dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
-        }
-
+        await fetchListData();
         setInitialRegion(getInitialRegion());
       }
     })();
-  }, [searchState, searchTabs, isLoaded]);
+  }, [isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState) {
+    if (!searchState.currentTab) {
+      dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+    }
+  }, [searchState, searchTabs]);
+
+  useEffect(() => {
+    if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
       fetchListData();
       prevSearchState.current = searchState;
     }
