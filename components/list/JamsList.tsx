@@ -9,6 +9,7 @@ import JamView from "../view/JamView";
 import SearchManager from "@/manager/SearchManager";
 import EntityManager from "@/manager/EntityManager";
 import LoadingMoreView from "../view/LoadingMoreView";
+import { Config } from "@/constants/Config";
 
 type Props = {
   idArray?: any;
@@ -41,10 +42,10 @@ const JamsList = ({ idArray }: Props) => {
     if (isFetching || idArray?.length > 0) return;
 
     setIsFetching(true);
-    let moreResults: any[] = await SearchManager.loadResults('jam', currentPage);
+    let moreResults: any[] = await SearchManager.loadResults('jam', currentPage, Config.paginationSize, false);
 
     if (!moreResults?.length && infiniteScroll) {
-      moreResults = await SearchManager.loadResults('jam', 1);
+      moreResults = await SearchManager.loadResults('jam', 1, Config.paginationSize, false);
       setListData((prevData) => [...(prevData || []), ...moreResults]);
       setCurrentPage(2);
     }
