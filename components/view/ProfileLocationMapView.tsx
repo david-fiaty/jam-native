@@ -1,7 +1,6 @@
 import MapView, { Marker, PROVIDER_GOOGLE, PROVIDER_DEFAULT, Callout } from "react-native-maps";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
-import { useDispatch } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -14,7 +13,6 @@ type Props = {
 };
 
 const ProfileLocationMapView = ({ itemData }: Props) => {
-  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(0);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
