@@ -1,4 +1,4 @@
-import MapView, { Callout, Marker, PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { PROVIDER_DEFAULT, PROVIDER_GOOGLE } from "react-native-maps";
 import { useState, useEffect, useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
@@ -47,22 +47,6 @@ const JamsMapView = () => {
     setIsFetching(true);
     setListData(await SearchManager.loadResults(searchState.currentTab, 1, Config.maxMapResults));
     setIsFetching(false);
-  };
-
-  const renderMarker = (item: any) => {
-    if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      return (
-        <Marker
-          key={item.id}
-          coordinate={MapManager.getMarkerPosition(item)}
-        >
-          {MapManager.renderMarker(item, zoomLevel)}
-          <Callout>
-            {MapManager.renderMarkerCallout(item)}
-          </Callout>
-        </Marker>
-      );
-    }
   };
 
   const getZoomLevel = (region: any) => {
@@ -116,7 +100,7 @@ const JamsMapView = () => {
           showsMyLocationButton={true}
           onRegionChangeComplete={onRegionChangeComplete}
         >
-          {(listData || []).map((item: any) => renderMarker(item))}
+          {(listData || []).map((item: any) => MapManager.renderNativeMarker(item))}
         </MapView>
 
         <MapLegendView />
