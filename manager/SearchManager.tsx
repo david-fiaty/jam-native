@@ -31,7 +31,7 @@ class SearchManager {
     }
 
     // Search value
-    if (searchValue?.length) {
+    if (applyFilters && searchValue?.length) {
       payload = {
         ...payload,
         ...{
