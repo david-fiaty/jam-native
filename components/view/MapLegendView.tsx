@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   legendWrapper: {
     position: 'absolute',
     bottom: 40,
-    height: 302,
+    minHeight: 330,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',

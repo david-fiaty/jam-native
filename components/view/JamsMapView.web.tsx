@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
     padding: 0,
     gap: Layout.space.base,
     width: '100%',
-    flexGrow: 1,
+    height: '100%',
+    flexShrink: 1,
     backgroundColor: Layout.colors.white,
   },
   map: {
