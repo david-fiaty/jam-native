@@ -8,11 +8,16 @@ import TextView from "./TextView";
 import MapManager from "@/manager/MapManager";
 import BoxView from "./BoxView";
 import i18n from "@/translation/i18n";
+import ScreenManager from "@/manager/ScreenManager";
 
 const MapLegendView = () => {
   const [isVisible, setIsVisible] = useState(false);
   const widthAnim = useRef(new Animated.Value(0)).current;
   const appState = useSelector((state: any) => state.app, shallowEqual);
+
+  const legendWrapperStyle: any = {
+    minHeight: ScreenManager.isWeb() ? 330 : 305, 
+  };
 
   const toggleLegend = () => {
     Animated.timing(widthAnim, {
@@ -38,7 +43,7 @@ const MapLegendView = () => {
         </TouchableOpacity>
       )}
 
-      <Animated.View style={[styles.legendWrapper, styles.shadow, { width: widthAnim, overflow: 'hidden' }]}>
+      <Animated.View style={[styles.legendWrapper, legendWrapperStyle, styles.shadow, { width: widthAnim, overflow: 'hidden' }]}>
         <View style={styles.legendContainer}>
           <TextView style={styles.sectionTitle}>
             {i18n.t('Jams')}
@@ -154,7 +159,6 @@ const styles = StyleSheet.create({
   legendWrapper: {
     position: 'absolute',
     bottom: 40,
-    minHeight: 330,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',
