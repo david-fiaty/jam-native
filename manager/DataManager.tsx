@@ -130,6 +130,16 @@ class DataManager {
 
     return truncated + ellipsis;
   }
+
+  toPositiveInt(value: any) {
+    const num = Number(value);          
+
+    if (Number.isNaN(num) || num < 0) {  
+      return 0;
+    }
+    
+    return Math.floor(num);    
+  }
 };
 
 export default (new DataManager());
