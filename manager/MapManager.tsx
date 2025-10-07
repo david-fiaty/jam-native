@@ -14,6 +14,10 @@ const zoomLevel: number = 7;
 const pixelOffset: number = 40;
 
 class MapManager {
+  renderWebMarker = (item: any) => {
+    // Todo - Move web marker rendering here
+  }
+  
   renderNativeMarker = (item: any) => {
     if (item?.geolocation_longitude && item?.geolocation_latitude) {
       return (
