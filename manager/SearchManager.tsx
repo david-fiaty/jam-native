@@ -4,7 +4,7 @@ import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
 
 class SearchManager {
-  async loadResults(tabId: string, currentPage: number, pageSize?: any) {
+  async loadResults(tabId: string, currentPage: number, pageSize?: any, applyFilters?: boolean) {
     // Variables
     let searchState: any = Store.getState().search;
     let searchValue: any = searchState.searchValue;
@@ -12,6 +12,9 @@ class SearchManager {
     let currentTab: any = this.getSearchTab(tabId);
     let payload: any = {};
     let results: any = {};
+
+    // Apply filters
+    applyFilters = applyFilters === false ? false : true;
 
     // Current page
     payload = {
@@ -28,7 +31,7 @@ class SearchManager {
     }
 
     // Search value
-    if (searchValue?.length) {
+    if (applyFilters && searchValue?.length) {
       payload = {
         ...payload,
         ...{
@@ -39,7 +42,7 @@ class SearchManager {
     }
 
     // Countries filter
-    if (currentFilters?.countries?.length > 0) {
+    if (applyFilters && currentFilters?.countries?.length > 0) {
       payload = {
         ...payload,
         ...{ query_countries_codes: currentFilters.countries.join(',') },
@@ -47,7 +50,7 @@ class SearchManager {
     }
 
     // Sectors filter
-    if (currentFilters?.sectors) {
+    if (applyFilters && currentFilters?.sectors) {
       payload = {
         ...payload,
         ...{ query_sectors_ids: [...currentFilters.sectors, ...(currentFilters.subSectors || [])].join(',') },
@@ -55,13 +58,14 @@ class SearchManager {
     }
 
     // Location types filter
-    if (currentFilters?.locationTypes && this.isJamTab(tabId)) {
+    if (applyFilters && currentFilters?.locationTypes && this.isJamTab(tabId)) {
       payload = {
         ...payload,
         ...{ location_types: currentFilters.locationTypes.join(',') },
       };
     }
 
+    // Process tab data
     if (this.isJamTab(tabId)) {
       payload = {
         ...payload,
