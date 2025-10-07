@@ -36,22 +36,6 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
     };
   };
 
-  const renderMarker = (item: any) => {
-    if (item?.geolocation_longitude && item?.geolocation_latitude) {
-      return (
-        <Marker
-          key={item.id}
-          coordinate={MapManager.getMarkerPosition(item)}
-        >
-          {MapManager.renderMarker(item, zoomLevel)}
-          <Callout>
-            {MapManager.renderMarkerCallout(item)}
-          </Callout>
-        </Marker>
-      );
-    }
-  };
-
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -81,7 +65,7 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
             showsMyLocationButton={true}
             initialRegion={getInitialRegion()}
           >
-            {renderMarker(itemData)}
+            {MapManager.renderNativeMarker(itemData)}
           </MapView>
         </View>
       </TouchableWithoutFeedback>
