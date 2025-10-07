@@ -8,8 +8,28 @@ import DataManager from "./DataManager";
 import ScreenManager from "./ScreenManager";
 import JamCalloutView from "@/components/view/marker-view/JamCalloutView";
 import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView";
+import { Callout, Marker } from "react-native-maps";
+
+const zoomLevel: number = 7;
+const pixelOffset: number = 40;
 
 class MapManager {
+  renderNativeMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={this.getMarkerPosition(item)}
+        >
+          {this.renderMarker(item, zoomLevel)}
+          <Callout>
+            {this.renderMarkerCallout(item)}
+          </Callout>
+        </Marker>
+      );
+    }
+  }
+
   renderMarker = (item: any, zoomLevel?: any) => {
     return (
       <>
