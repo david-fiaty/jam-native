@@ -25,9 +25,9 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
     let latitudeDelta: any = 0.2;
     let longitudeDelta: any = 0.2;
     
-    if (currentLocation?.latitude && currentLocation?.longitude) {
-      latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude; 
+    if (itemData?.geolocation_latitude && itemData?.geolocation_longitude) {
+      latitude = parseFloat(itemData.geolocation_latitude);
+      longitude = parseFloat(itemData.geolocation_longitude); 
     }
 
     return {
