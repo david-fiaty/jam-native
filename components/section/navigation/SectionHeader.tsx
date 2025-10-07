@@ -10,6 +10,7 @@ import IconView from '@/components/view/IconView';
 import ModalManager from '@/manager/ModalManager';
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   style?: any;
@@ -44,17 +45,14 @@ const SectionHeader = ({ style }: Props) => {
   };
 
   const getNotificationsCount = () => {
-    return notifications.length - viewedNotificationsCount;
+    return DataManager.toPositiveInt(notifications.length - viewedNotificationsCount);
   };
 
   const renderNotificationsCount = () => {
     let count: number = getNotificationsCount();
+    let output: string = ` ${count}${count > 0 ? '+' : ''} `;
 
-    if (count > 0) {
-      return ` ${count}+ `;
-    }
-
-    return ` ${count} `;
+    return output;
   };
 
   useEffect(() => {
