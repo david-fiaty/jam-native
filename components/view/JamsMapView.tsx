@@ -63,19 +63,28 @@ const JamsMapView = () => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        if (!searchState.currentTab) {
-          dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
-        }
-
-        setIsLoaded(true);
+        await fetchListData();
       }
-
-      setCurrentLocation(await UserManager.getLocation());
     })();
-  }, [searchState, searchTabs, isLoaded]);
+  }, [isLoaded]);
 
   useEffect(() => {
-    if (prevSearchState.current !== searchState) {
+    (async () => {
+      setCurrentLocation(await UserManager.getLocation());
+      if (!isLoaded) {
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded]);
+
+  useEffect(() => {
+    if (!searchState.currentTab) {
+      dispatch(setCurrentTab((searchTabs.find((o: any) => o?.default === true))?.id));
+    }
+  }, [searchState, searchTabs]);
+
+  useEffect(() => {
+    if (SearchManager.shouldReload(prevSearchState.current, searchState)) {
       fetchListData();
       prevSearchState.current = searchState;
     }
