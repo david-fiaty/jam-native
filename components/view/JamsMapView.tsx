@@ -62,14 +62,16 @@ const JamsMapView = () => {
 
   useEffect(() => {
     (async () => {
-      setCurrentLocation(await UserManager.getLocation());
+      if (!isLoaded) {
+        await fetchListData();
+      }
     })();
-  }, []);
+  }, [isLoaded]);
 
   useEffect(() => {
     (async () => {
+      setCurrentLocation(await UserManager.getLocation());
       if (!isLoaded) {
-        await fetchListData();
         setIsLoaded(true);
       }
     })();
