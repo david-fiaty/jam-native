@@ -1,4 +1,4 @@
-import MapView, { PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, PROVIDER_DEFAULT, Marker, Callout } from "react-native-maps";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { Layout } from "@/constants/Layout";
@@ -36,6 +36,22 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
     };
   };
 
+  const renderMarker = (item: any) => {
+    if (item?.geolocation_longitude && item?.geolocation_latitude) {
+      return (
+        <Marker
+          key={item.id}
+          coordinate={MapManager.getMarkerPosition(item)}
+        >
+          {MapManager.renderMarker(item, zoomLevel)}
+          <Callout>
+            {MapManager.renderMarkerCallout(item)}
+          </Callout>
+        </Marker>
+      );
+    }
+  };
+
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -65,7 +81,7 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
             showsMyLocationButton={true}
             initialRegion={getInitialRegion()}
           >
-            {MapManager.renderNativeMarker(itemData)}
+            {renderMarker(itemData)}
           </MapView>
         </View>
       </TouchableWithoutFeedback>
