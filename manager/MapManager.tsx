@@ -9,9 +9,6 @@ import ScreenManager from "./ScreenManager";
 import JamCalloutView from "@/components/view/marker-view/JamCalloutView";
 import ProfileCalloutView from "@/components/view/marker-view/ProfileCalloutView";
 
-const zoomLevel: number = 7;
-const pixelOffset: number = 40;
-
 class MapManager {
   renderMarker = (item: any, zoomLevel?: any) => {
     return (
