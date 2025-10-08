@@ -247,7 +247,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was liked.');
 
-      this.updateLocalProfileReference('liked_jams', 'add', entityId);
+      await this.updateLocalProfileReference('liked_jams', 'add', entityId);
     }
 
     return {
@@ -275,7 +275,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
       
-      this.updateLocalProfileReference('liked_jams', 'delete', entityId);
+      await this.updateLocalProfileReference('liked_jams', 'delete', entityId);
     }
 
     return {
@@ -302,7 +302,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was saved.');
 
-      this.updateLocalProfileReference('saved_jams', 'add', entityId);
+      await this.updateLocalProfileReference('saved_jams', 'add', entityId);
     }
 
     return {
@@ -329,7 +329,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unsaved.');
 
-      this.updateLocalProfileReference('saved_jams', 'delete', entityId);
+      await this.updateLocalProfileReference('saved_jams', 'delete', entityId);
     }
 
     return {
