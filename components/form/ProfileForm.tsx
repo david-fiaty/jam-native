@@ -20,6 +20,7 @@ import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
+import MediaManager from "@/manager/MediaManager";
 
 const resource: string = 'profile';
 
@@ -27,8 +28,8 @@ const ProfileForm = () => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form?.[resource]);
+  const userState = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -53,20 +54,16 @@ const ProfileForm = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setProfileId(await UserManager.getProfileId());
+    if (!isLoaded) {
+      dispatch(setFormData<any>({
+        resource: resource,
+        key: null,
+        value: userState.profileData,
+      }));
 
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          value: await UserManager.getProfileData(),
-        }));
-
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, formData, resource]);
+      setIsLoaded(true);
+    }
+  }, [isLoaded, resource, userState]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -81,7 +78,7 @@ const ProfileForm = () => {
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('Profile Image')}</TextView>
         <ProfileImageField
-          value={formData?.upload_profile_picture?.url}
+          value={formData?.profile_picture?.url}
           onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
         />
         {FormManager.renderError('upload_profile_picture')}
