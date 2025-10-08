@@ -25,8 +25,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   };
 
   const deleteImage = () => {
-    // Todo - Implement delete action
-    console.log('delete image')
+    setUri('');
   };
 
   useEffect(() => {
