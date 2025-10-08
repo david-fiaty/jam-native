@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
@@ -16,13 +16,9 @@ type Props = {
 };
 
 const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
-  let profileData: any = [];
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [uri, setUri] = useState<any>('');
-
-  if (!uri && value?.length > 0) {
-    setUri(MediaManager.getImageUrl(value));
-  }
-
+  
   const onSelectItem = (mediaList: any) => {
     setUri(mediaList[0]?.uri);
     if (onChangeValue) onChangeValue(mediaList);
@@ -33,6 +29,13 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
     console.log('delete image')
   };
 
+  useEffect(() => {
+    if (!isLoaded) {
+      setUri(value || '');
+      setIsLoaded(true);
+    }
+  }, [value, isLoaded]);
+  
   return (
     <MediaPickerField
       label={
@@ -50,7 +53,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
               justify="space-between"
             >
               <ImageView
-                uri={uri}
+                uri={MediaManager.getImageUrl(uri)}
                 width={132}
                 height={132}
                 resizeMode="cover"
