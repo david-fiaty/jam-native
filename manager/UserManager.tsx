@@ -10,6 +10,7 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import ScreenManager from './ScreenManager';
 import StaticData from '@/constants/StaticData';
+import { setProfileData } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -247,7 +248,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was liked.');
 
-      await this.updateLocalProfileReference('liked_jams', 'add', entityId);
+      await this.updateProfileState('liked_jams', 'add', entityId);
     }
 
     return {
@@ -275,7 +276,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
       
-      await this.updateLocalProfileReference('liked_jams', 'delete', entityId);
+      await this.updateProfileState('liked_jams', 'delete', entityId);
     }
 
     return {
@@ -302,7 +303,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was saved.');
 
-      await this.updateLocalProfileReference('saved_jams', 'add', entityId);
+      await this.updateProfileState('saved_jams', 'add', entityId);
     }
 
     return {
@@ -329,7 +330,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unsaved.');
 
-      await this.updateLocalProfileReference('saved_jams', 'delete', entityId);
+      await this.updateProfileState('saved_jams', 'delete', entityId);
     }
 
     return {
@@ -339,39 +340,17 @@ class UserManager {
     };
   }
 
-  async updateLocalProfileReference (key: string, action: string, value: any) {
-    let localProfileData: any = '{}';
-    let references = [];
-
-    if (ScreenManager.isWeb()) {
-      localProfileData = localStorage.getItem(Config.storageKeys.profileData) || '{}';
-    }
-    else {
-      localProfileData = (await AsyncStorage.getItem(Config.storageKeys.profileData)) || '{}';
-    }
-
-    localProfileData = JSON.parse(localProfileData);
+  async updateProfileState (key: string, action: string, value: any) {
+    let profileData: any = {...Store.getState().user.profileData};
 
     if (action == 'add') {
-      references = [...new Set([...localProfileData?.[key] || [], value])];
+      profileData[key] = [...new Set([...profileData?.[key] || [], value])];
     }
     else if (action == 'delete') {
-      references = [...localProfileData?.[key] || []].filter((v: any) => v != value);
+      profileData[key] = [...profileData?.[key] || []].filter((v: any) => v != value);
     } 
 
-    localProfileData = {
-      ...localProfileData,
-      ...{ [key]: references },
-    };
-
-    localProfileData = JSON.stringify(localProfileData);
-
-    if (ScreenManager.isWeb()) {
-      localStorage.setItem(Config.storageKeys.profileData, localProfileData);
-    }
-    else {
-      await AsyncStorage.setItem(Config.storageKeys.profileData, localProfileData);
-    }
+    Store.dispatch(setProfileData(profileData));
   }
 
   async getViewedNotifications() {
