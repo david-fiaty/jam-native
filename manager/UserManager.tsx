@@ -248,7 +248,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was liked.');
 
-      await this.updateProfileState('liked_jams', 'add', entityId);
+      this.updateProfileState('liked_jams', 'add', entityId);
     }
 
     return {
@@ -276,7 +276,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
       
-      await this.updateProfileState('liked_jams', 'delete', entityId);
+      this.updateProfileState('liked_jams', 'delete', entityId);
     }
 
     return {
@@ -303,7 +303,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was saved.');
 
-      await this.updateProfileState('saved_jams', 'add', entityId);
+      this.updateProfileState('saved_jams', 'add', entityId);
     }
 
     return {
@@ -330,7 +330,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unsaved.');
 
-      await this.updateProfileState('saved_jams', 'delete', entityId);
+      this.updateProfileState('saved_jams', 'delete', entityId);
     }
 
     return {
@@ -340,7 +340,7 @@ class UserManager {
     };
   }
 
-  async updateProfileState (key: string, action: string, value: any) {
+  updateProfileState (key: string, action: string, value: any) {
     let profileData: any = {...Store.getState().user.profileData};
 
     if (action == 'add') {
