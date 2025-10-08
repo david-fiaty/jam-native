@@ -139,18 +139,25 @@ class UserManager {
 
   async getProfileData(params?: any, options?: any) {
     options = options || {};
-    let profileId: number = !params?.profile_id ? await this.getProfileId() : params.profile_id;
-    let variables: any = { '[profile_id]': profileId };
-    let defaults: any = {};
     let profileData: any = {};
     let localProfileData: any = null;
     
-    if (profileId > 0) {
+    if (params?.profile_id > 0) {
+      let variables: any = { '[profile_id]': params.profile_id };
+      let defaults: any = {};
       profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
+    else {
+      let userState: any = Store.getState().user; 
+      profileData = {...userState.profileData};
+    }
 
-    if (ScreenManager.isWeb()) localProfileData = localStorage.getItem(Config.storageKeys.profileData)
-    else localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
+    if (ScreenManager.isWeb()) {
+      localProfileData = localStorage.getItem(Config.storageKeys.profileData);
+    }
+    else {
+      localProfileData = await AsyncStorage.getItem(Config.storageKeys.profileData);
+    }
 
     return {
       ...(profileData || {}),
