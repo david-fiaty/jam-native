@@ -108,7 +108,6 @@ const JamsMapView = () => {
 
   return (
     <View style={[Layout.screenContent, styles.container]}>
-
       <TabsView
         tabs={searchTabs}
         currentTab={searchState.currentTab}
