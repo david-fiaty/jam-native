@@ -18,20 +18,6 @@ type Props = {
 const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [uri, setUri] = useState<any>('');
-  
-  const onSelectItem = (data: any) => {
-    let uri: string = getImageUrl(data.uri);
-    setUri(uri);
-
-    /*
-    setUri(mediaList[0]?.uri);
-    if (onChangeValue) onChangeValue(mediaList);
-    */
-  };
-
-  const deleteImage = () => {
-    setUri('');
-  };
 
   const getImageUrl = (uri: any) => {
     if (uri.startsWith('file://')) {
@@ -42,13 +28,25 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
     }
   };
 
+  const onSelectItem = (data: any) => {
+    let uri: string = getImageUrl(data[0].uri);
+    setUri(uri);
+
+    // Todo - Update form data
+    //if (onChangeValue) onChangeValue(mediaList);
+  };
+
+  const deleteImage = () => {
+    setUri('');
+  };
+
   useEffect(() => {
     if (!isLoaded) {
-      setUri(value || '');
+      setUri(value ? getImageUrl(value) : '');
       setIsLoaded(true);
     }
   }, [value, isLoaded]);
-  
+
   return (
     <MediaPickerField
       label={
@@ -66,7 +64,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
               justify="space-between"
             >
               <ImageView
-                uri={getImageUrl(uri)}
+                uri={uri}
                 width={132}
                 height={132}
                 resizeMode="cover"
