@@ -218,6 +218,16 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_name')}
 
             <TextView>
+              {i18n.t('Email')}
+            </TextView>
+            <InputTextField
+              value={formData?.email}
+              placeholder={i18n.t('Email')}
+              onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['email'])}
+            />
+            {FormManager.renderError('email')}
+
+            <TextView>
               {i18n.t('About')}
             </TextView>
             <InputTextareaField
