@@ -337,8 +337,6 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
     })();
   }, [isLoaded, itemData]);
 
-
-  console.log(Object.keys(profileData))
   return (
     <BoxView
       direction="column"
