@@ -340,7 +340,7 @@ class UserManager {
     };
   }
 
-  updateProfileReference (key: string, value: any) {
+  updateProfileReference(key: string, value: any) {
     let profileData: any = {...Store.getState().user.profileData};
     let array: any [] = profileData?.[key] || [];
 
