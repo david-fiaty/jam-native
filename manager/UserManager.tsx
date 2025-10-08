@@ -248,7 +248,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was liked.');
 
-      this.updateProfileReference('liked_jams', 'add', entityId);
+      this.updateProfileReference('liked_jams', entityId);
     }
 
     return {
@@ -276,7 +276,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
       
-      this.updateProfileReference('liked_jams', 'delete', entityId);
+      this.updateProfileReference('liked_jams', entityId);
     }
 
     return {
@@ -303,7 +303,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was saved.');
 
-      this.updateProfileReference('saved_jams', 'add', entityId);
+      this.updateProfileReference('saved_jams', entityId);
     }
 
     return {
@@ -330,7 +330,7 @@ class UserManager {
       success = true;
       message.content = i18n.t('The Jam was unsaved.');
 
-      this.updateProfileReference('saved_jams', 'delete', entityId);
+      this.updateProfileReference('saved_jams', entityId);
     }
 
     return {
@@ -340,7 +340,7 @@ class UserManager {
     };
   }
 
-  updateProfileReference (key: string, action: string, value: any) {
+  updateProfileReference (key: string, value: any) {
     let profileData: any = {...Store.getState().user.profileData};
     let array: any [] = profileData?.[key] || [];
 
