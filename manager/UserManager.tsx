@@ -342,13 +342,9 @@ class UserManager {
 
   updateProfileReference (key: string, action: string, value: any) {
     let profileData: any = {...Store.getState().user.profileData};
+    let array: any [] = profileData?.[key] || [];
 
-    if (action == 'add') {
-      profileData[key] = [...new Set([...profileData?.[key] || [], value])];
-    }
-    else if (action == 'delete') {
-      profileData[key] = [...profileData?.[key] || []].filter((v: any) => v != value);
-    } 
+    profileData[key] = array.includes(value) ? array.filter(v => v !== value) : [...array, value];
 
     Store.dispatch(setProfileData(profileData));
   }
