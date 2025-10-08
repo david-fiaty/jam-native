@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
@@ -16,22 +16,36 @@ type Props = {
 };
 
 const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
-  let profileData: any = [];
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [uri, setUri] = useState<any>('');
 
-  if (!uri && value?.length > 0) {
-    setUri(MediaManager.getImageUrl(value));
-  }
+  const getImageUrl = (uri: any) => {
+    if (uri.startsWith('file://')) {
+      return uri;
+    }
+    else {
+      return MediaManager.getImageUrl(uri);
+    }
+  };
 
-  const onSelectItem = (mediaList: any) => {
-    setUri(mediaList[0]?.uri);
-    if (onChangeValue) onChangeValue(mediaList);
+  const onSelectItem = (data: any) => {
+    let uri: string = getImageUrl(data[0].uri);
+    setUri(uri);
+
+    // Todo - Update form data
+    //if (onChangeValue) onChangeValue(mediaList);
   };
 
   const deleteImage = () => {
-    // Todo - Implement delete action
-    console.log('delete image')
+    setUri('');
   };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setUri(value ? getImageUrl(value) : '');
+      setIsLoaded(true);
+    }
+  }, [value, isLoaded]);
 
   return (
     <MediaPickerField
