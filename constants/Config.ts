@@ -14,7 +14,7 @@ export const Config: any = {
   uiDateFormat: 'MMM Do YYYY HH:mm',
   dbDateFormat: 'YYYY-MM-DDTHH:mm:ssZ',
   logoImageSize: 512,
-  paginationSize: 20,
+  paginationSize: 50,
   maxMapResults: 50,
   maxUserNameLength: 28,
   notificationUpdateInterval: 10000,
