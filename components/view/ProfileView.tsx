@@ -335,7 +335,6 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
         setIsLoaded(true);
       }
     })();
-
   }, [isLoaded, itemData]);
 
   return (
