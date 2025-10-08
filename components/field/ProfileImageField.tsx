@@ -19,13 +19,27 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [uri, setUri] = useState<any>('');
   
-  const onSelectItem = (mediaList: any) => {
+  const onSelectItem = (data: any) => {
+    let uri: string = getImageUrl(data.uri);
+    setUri(uri);
+
+    /*
     setUri(mediaList[0]?.uri);
     if (onChangeValue) onChangeValue(mediaList);
+    */
   };
 
   const deleteImage = () => {
     setUri('');
+  };
+
+  const getImageUrl = (uri: any) => {
+    if (uri.startsWith('file://')) {
+      return uri;
+    }
+    else {
+      return MediaManager.getImageUrl(uri);
+    }
   };
 
   useEffect(() => {
@@ -52,7 +66,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
               justify="space-between"
             >
               <ImageView
-                uri={MediaManager.getImageUrl(uri)}
+                uri={getImageUrl(uri)}
                 width={132}
                 height={132}
                 resizeMode="cover"
