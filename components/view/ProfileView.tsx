@@ -335,6 +335,8 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
     })();
   }, [isLoaded, itemData]);
 
+  console.log(appState.venueTypes)
+
   return (
     <BoxView
       direction="column"
