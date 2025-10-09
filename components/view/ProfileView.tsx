@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useRouter } from 'expo-router';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -18,6 +17,7 @@ import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import ModalManager from "@/manager/ModalManager";
+import EntityManager from "@/manager/EntityManager";
 
 const profileImageSize: number = 111;
 
@@ -29,7 +29,6 @@ type Props = {
 };
 
 const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
   const userState = useSelector((state: any) => state.user, shallowEqual);
