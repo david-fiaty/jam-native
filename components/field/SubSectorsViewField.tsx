@@ -16,7 +16,11 @@ const SubSectorsViewField = ({ idArray }: Props) => {
       return <TextView>{i18n.t('Unavailable')}</TextView>
     }
 
-    let subSectors: any[] = (sectorsData.filter((o: any) => idArray.includes(o.id)).map((sector: any) => sector.sub_sectors)).flat();
+    let subSectors: any[] = (sectorsData
+      .filter((o: any) => idArray.includes(o.id))
+      .map((sector: any) => sector.sub_sectors))
+      .flat()
+      .filter((o: any) => idArray.includes(o.id));
 
     return (
       <TextView>
