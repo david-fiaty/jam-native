@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { setCountriesData, setSectorsData } from '@/redux/slices/AppSlice';
+import { setCountriesData, setSectorsData, setVenueTypesData } from '@/redux/slices/AppSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';
 import { useDispatch } from "react-redux";
 import { setCurrentLanguage } from '@/redux/slices/UserSlice';
@@ -29,13 +29,15 @@ export default () => {
     (async () => {
       await setLanguage();
   
-      const [sectors, countries] = await Promise.all([
+      const [sectors, countries, venueTypes] = await Promise.all([
         EntityManager.getSectors(),
         EntityManager.getCountries(),
+        EntityManager.getVenueTypes(),
       ]);
 
       dispatch(setSectorsData(sectors));
       dispatch(setCountriesData(countries));
+      dispatch(setVenueTypesData(countries));
       setAppReady(true);
     })();
   }, []);
