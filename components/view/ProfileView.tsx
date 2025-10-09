@@ -172,7 +172,11 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
 
           <ProfileViewField label={i18n.t('Venue types')}>
             <TextView>
-              Venue types
+              {
+                appState.venueTypesData
+                  .filter((o: any) => (profileData?.profile_venue?.venue_types || []).includes(o.id))
+                  .map((o: any) => o.name).join(', ')
+              }
             </TextView>
           </ProfileViewField>
 
@@ -334,8 +338,6 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
       }
     })();
   }, [isLoaded, itemData]);
-
-  console.log(appState.venueTypesData)
 
   return (
     <BoxView
