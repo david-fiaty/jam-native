@@ -104,7 +104,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
         style={styles.detail}
       >
         <TextView>
-          <TextView style={styles.detailLabel}>{`${i18n.t("Industry")} `}</TextView>
+          <TextView style={styles.detailLabel}>{`${i18n.t("Industries")} `}</TextView>
           <SectorsViewField idArray={row?.sectors || []} />
         </TextView>
       </BoxView>
@@ -120,7 +120,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
         style={styles.detail}
       >
         <TextView>
-          <TextView style={styles.detailLabel}>{`${i18n.t("Sector")} `}</TextView>
+          <TextView style={styles.detailLabel}>{`${i18n.t("Sectors")} `}</TextView>
           <SubSectorsViewField idArray={row?.sectors || []} />
         </TextView>
       </BoxView>
