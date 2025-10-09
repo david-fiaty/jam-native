@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
@@ -24,6 +24,7 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
   const [venueTypes, setVenueTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const deleteItem = (item: any) => {
     let currentData: any = {...formData};
@@ -43,15 +44,13 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        if (!venueTypes) setVenueTypes(await EntityManager.getVenueTypes());
-        setIsLoaded(true);
-      }
-      
-      setCurrentValue(formData?.[parent]?.[field] || []);
-    })();    
-  }, [isLoaded, value, formData, parent, field]);
+    if (!isLoaded) {
+      if (!venueTypes) setVenueTypes(appState.venueTypes);
+      setIsLoaded(true);
+    }
+    
+    setCurrentValue(formData?.[parent]?.[field] || []);
+  }, [isLoaded, value, formData, parent, field, appState]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
