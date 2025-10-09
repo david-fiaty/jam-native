@@ -217,7 +217,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
 
         <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
-            {renderCommentsButton()}
+            {/* renderCommentsButton() */}
           </BoxView>
 
           <BoxView align="center">
