@@ -101,7 +101,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
         )}
 
         {!isLikeProcessing && (
-          <IconView 
+          <IconView
             name="like"
             theme={getLikeIconTheme()}
             size={12}
@@ -114,18 +114,22 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
   };
 
   const renderJammersButton = () => {
-    let jammersIds: any [] = [...row?.jammers || []];
+    let jammersIds: any[] = [...row?.jammers || []];
 
     if (isJamLiked()) jammersIds = [...new Set([...jammersIds, profileData.id])];
-    else jammersIds = jammersIds.filter((v: any) => v != profileData.id); 
+    else jammersIds = jammersIds.filter((v: any) => v != profileData.id);
 
-    return jammersIds?.length > 0 && (
-      <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.id, jammersIds: jammersIds })}>
-        <TextView>
-          {jammersIds?.length} {jammersIds?.length == 1 ? i18n.t("jammer") : i18n.t("jammers")}
-        </TextView>
-      </TouchableOpacity>
-    );
+    if (jammersIds?.length > 0) {
+      return (
+        <TouchableOpacity onPress={() => ModalManager.toggleModal('JammersList', { jamId: row?.id, jammersIds: jammersIds })}>
+          <TextView>
+            {jammersIds?.length} {jammersIds?.length == 1 ? i18n.t("jammer") : i18n.t("jammers")}
+          </TextView>
+        </TouchableOpacity>
+      );
+    }
+
+    return <></>;
   };
 
   const renderSaveButton = () => {
@@ -136,7 +140,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
         direction="row"
         align="center"
       >
-        <IconView 
+        <IconView
           name="save"
           theme={getSaveIconTheme()}
           size={12}
@@ -181,18 +185,18 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
         direction="row"
         align="center"
       >
-        <IconView 
+        <IconView
           name="chat"
           theme="tertiary"
           size={12}
           padding={6}
-          /*
-          // Todo - Implement and enable comments
-          onPress={() => ModalManager.toggleModal('JamCommentsList', { 
-            entityId: row?.id, 
-            entityType: 'jam' 
-          })}
-          */
+        /*
+        // Todo - Implement and enable comments
+        onPress={() => ModalManager.toggleModal('JamCommentsList', { 
+          entityId: row?.id, 
+          entityType: 'jam' 
+        })}
+        */
         />
       </BoxView>
     );
@@ -210,7 +214,7 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
           {renderLikeButton()}
           {renderJammersButton()}
         </BoxView>
-  
+
         <BoxView direction="row" align="center" justify="flex-end">
           <BoxView align="center">
             {renderCommentsButton()}
@@ -219,13 +223,13 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
           <BoxView align="center">
             {renderSaveButton()}
           </BoxView>
-  
+
           <BoxView align="center">
             {renderShareButton()}
           </BoxView>
         </BoxView>
       </BoxView>
-    );  
+    );
   };
 
   useEffect(() => {
@@ -237,8 +241,8 @@ const JamViewToolbar = ({ row, profileData, onListItemAction }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Layout.space.base/2,
-    padding: Layout.space.base*1.2,
+    paddingTop: Layout.space.base / 2,
+    padding: Layout.space.base * 1.2,
   },
   spinnerContainer: {
     marginLeft: 5,
