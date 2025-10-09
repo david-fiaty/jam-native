@@ -76,7 +76,7 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!venueTypes) setVenueTypes(appState.venueTypes);
+      if (!venueTypes) setVenueTypes(appState.venueTypesData);
 
       setSelectedVenues(formData?.[parent]?.[field] || []);
       setIsLoaded(true);

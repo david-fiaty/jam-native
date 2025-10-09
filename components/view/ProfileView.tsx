@@ -335,7 +335,7 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
     })();
   }, [isLoaded, itemData]);
 
-  console.log(appState.venueTypes)
+  console.log(appState.venueTypesData)
 
   return (
     <BoxView

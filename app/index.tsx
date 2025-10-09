@@ -37,7 +37,7 @@ export default () => {
 
       dispatch(setSectorsData(sectors));
       dispatch(setCountriesData(countries));
-      dispatch(setVenueTypesData(countries));
+      dispatch(setVenueTypesData(venueTypes));
       setAppReady(true);
     })();
   }, []);

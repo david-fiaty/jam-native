@@ -45,7 +45,7 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!venueTypes) setVenueTypes(appState.venueTypes);
+      if (!venueTypes) setVenueTypes(appState.venueTypesData);
       setIsLoaded(true);
     }
     
