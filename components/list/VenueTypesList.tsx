@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
@@ -22,11 +22,12 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
   const [selectedVenues, setSelectedVenues] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const toggleItem = (entityId: number) => {
     let selectedIds: any[] = [...selectedVenues];
-    let currentData: any = {...formData};
-    
+    let currentData: any = { ...formData };
+
     if (selectedIds.includes(entityId)) {
       selectedIds = selectedIds.filter((value: number) => value !== entityId);
     }
@@ -41,9 +42,9 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
       key: parent,
       value: {
         ...(currentData?.[parent] || {}),
-        ...{ [field]: selectedIds},
+        ...{ [field]: selectedIds },
       },
-    }));  
+    }));
   };
 
   const renderItem = (row: any) => {
@@ -54,9 +55,9 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
         key={row?.item?.id}
         onPress={() => toggleItem(row?.item?.id)}
       >
-        <BoxView 
-          direction="row" 
-          align="center" 
+        <BoxView
+          direction="row"
+          align="center"
           justify="flex-start"
           style={styles.container}
         >
@@ -74,15 +75,13 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        if (!venueTypes) setVenueTypes(await EntityManager.getVenueTypes());
-        
-        setSelectedVenues(formData?.[parent]?.[field] || []);
-        setIsLoaded(true);
-      }
-    })();
-  }, [venueTypes, formData, field, parent, selectedVenues]);
+    if (!isLoaded) {
+      if (!venueTypes) setVenueTypes(appState.venueTypes);
+
+      setSelectedVenues(formData?.[parent]?.[field] || []);
+      setIsLoaded(true);
+    }
+  }, [venueTypes, formData, field, parent, selectedVenues, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
