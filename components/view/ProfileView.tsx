@@ -17,7 +17,6 @@ import ProfileProjectsField from "../field/ProfileProjectsField";
 import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
-import SpinnerView from "./SpinnerView";
 import ModalManager from "@/manager/ModalManager";
 
 const profileImageSize: number = 111;
@@ -336,8 +335,6 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
       }
     })();
   }, [isLoaded, itemData]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
