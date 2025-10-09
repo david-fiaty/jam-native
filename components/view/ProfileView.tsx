@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { useRouter } from 'expo-router';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import BoxView from "@/components/view/BoxView";
@@ -17,8 +16,8 @@ import ProfileProjectsField from "../field/ProfileProjectsField";
 import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
-import SpinnerView from "./SpinnerView";
 import ModalManager from "@/manager/ModalManager";
+import EntityManager from "@/manager/EntityManager";
 
 const profileImageSize: number = 111;
 
@@ -30,7 +29,6 @@ type Props = {
 };
 
 const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
-  const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
   const userState = useSelector((state: any) => state.user, shallowEqual);
@@ -174,7 +172,11 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
 
           <ProfileViewField label={i18n.t('Venue types')}>
             <TextView>
-              Venue types
+              {
+                appState.venueTypesData
+                  .filter((o: any) => (profileData?.profile_venue?.venue_types || []).includes(o.id))
+                  .map((o: any) => o.name).join(', ')
+              }
             </TextView>
           </ProfileViewField>
 
@@ -345,65 +347,59 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
       style={styles.container}
       scroll={true}
     >
-      {!isLoaded && <SpinnerView />}
-      
-      {isLoaded && (
-        <>
-          <ProfileViewField>
-            <TextView style={styles.profileTitle}>
-              {UserManager.getProfileDisplayName(profileData)}
-            </TextView>
-          </ProfileViewField>
+      <ProfileViewField>
+        <TextView style={styles.profileTitle}>
+          {UserManager.getProfileDisplayName(profileData)}
+        </TextView>
+      </ProfileViewField>
 
-          <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
-            {renderHeader()}
+      <BoxView direction="row" align="flex-start" justify="flex-start" style={styles.profileHeader}>
+        {renderHeader()}
+      </BoxView>
+
+      <ProfileViewField label={i18n.t('Industries')}>
+        <SectorsViewField idArray={profileData?.sectors || []} />
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Sub-industries')}>
+        <SubSectorsViewField idArray={profileData?.sectors || []} />
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Description')}>
+        <TextView>
+          {profileData?.profile_description || i18n.t('Unavailable')}
+        </TextView>
+      </ProfileViewField>
+
+      <ProfileViewField label={i18n.t('Main activities')}>
+        {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
+        {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
+        {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
+      </ProfileViewField>
+
+      <CollapsibleView
+        label={(
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
+            <TextView style={styles.collapsibleLabelClosed}>
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileData) : UserManager.getProfileTypeLabel(profileData?.profile_type)})
+            </TextView>
+            <IconView name="collapsed" theme="transparent" padding={0} />
           </BoxView>
-
-          <ProfileViewField label={i18n.t('Industries')}>
-            <SectorsViewField idArray={profileData?.sectors || []} />
-          </ProfileViewField>
-
-          <ProfileViewField label={i18n.t('Sub-industries')}>
-            <SubSectorsViewField idArray={profileData?.sectors || []} />
-          </ProfileViewField>
-
-          <ProfileViewField label={i18n.t('Description')}>
-            <TextView>
-              {profileData?.profile_description || i18n.t('Unavailable')}
+        )}
+        openedLabel={
+          <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
+            <TextView style={styles.collapsibleLabelOpened}>
+              {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileData) : UserManager.getProfileTypeLabel(profileData?.profile_type)})
             </TextView>
-          </ProfileViewField>
+            <IconView name="expanded" theme="white" padding={0} />
+          </BoxView>
+        }
+        content={renderCollapsibleFields()}
+      />
 
-          <ProfileViewField label={i18n.t('Main activities')}>
-            {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
-            {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
-            {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
-          </ProfileViewField>
-
-          <CollapsibleView
-            label={(
-              <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderClosed}>
-                <TextView style={styles.collapsibleLabelClosed}>
-                  {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileData) : UserManager.getProfileTypeLabel(profileData?.profile_type)})
-                </TextView>
-                <IconView name="collapsed" theme="transparent" padding={0} />
-              </BoxView>
-            )}
-            openedLabel={
-              <BoxView direction="row" align="center" justify="space-between" style={styles.collapsibleHeaderOpened}>
-                <TextView style={styles.collapsibleLabelOpened}>
-                  {i18n.t('View more')} ({isOwner ? UserManager.getProfileDisplayName(profileData) : UserManager.getProfileTypeLabel(profileData?.profile_type)})
-                </TextView>
-                <IconView name="expanded" theme="white" padding={0} />
-              </BoxView>
-            }
-            content={renderCollapsibleFields()}
-          />
-
-          {renderProfileProjects()}
-          {renderProfileJams()}
-          {!isPublic && renderSavedJams()}
-        </>
-      )}
+      {renderProfileProjects()}
+      {renderProfileJams()}
+      {!isPublic && renderSavedJams()}
     </BoxView>
   );
 };
