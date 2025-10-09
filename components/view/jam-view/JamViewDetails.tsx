@@ -6,6 +6,8 @@ import JamViewCollapsible from "./JamViewCollapsible";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
 import EntityManager from "@/manager/EntityManager";
+import SectorsViewField from "@/components/field/SectorsViewField";
+import SubSectorsViewField from "@/components/field/SubSectorsViewField";
 
 type Props = {
   row?: any;
@@ -94,8 +96,6 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
   };
 
   const renderSector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.sectors?.[0]);
-
     return (
       <BoxView
         direction="row"
@@ -105,15 +105,13 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Industry")} `}</TextView>
-          {firstSector ? firstSector?.name : i18n.t("Unavailable")}
+          <SectorsViewField idArray={row?.sectors || []} />
         </TextView>
       </BoxView>
     );
   };
 
   const renderSubsector = () => {
-    let firstSector: any = sectorsData?.find((o: any) => o.id == row?.sectors?.[0]);
-
     return (
       <BoxView
         direction="row"
@@ -123,7 +121,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Sector")} `}</TextView>
-          {firstSector ? firstSector?.sub_sectors[0]?.name : i18n.t("Unavailable")}
+          <SubSectorsViewField idArray={row?.sectors || []} />
         </TextView>
       </BoxView>
     );
