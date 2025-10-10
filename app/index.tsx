@@ -1,4 +1,3 @@
-import 'setimmediate';
 import { useEffect, useState, useRef } from 'react';
 import { setCountriesData, setSectorsData, setVenueTypesData } from '@/redux/slices/AppSlice';
 import { useRouter, useRootNavigationState } from 'expo-router';

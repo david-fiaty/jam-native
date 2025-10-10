@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import React from 'react';
-import Swiper from 'react-native-swiper';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 type Props = {
   data?: any;
@@ -32,14 +32,14 @@ const TextSlideshow = ({ data }: Props) => {
 
   return (
     <View style={styles.wrapper}>
-      <Swiper
-        showsButtons={false}
+      <SwiperFlatList
+        //showsButtons={false}
         paginationStyle={styles.pager}
-        dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}
+        //dot={<View style={styles.dot} />}
+        //activeDot={<View style={styles.activeDot} />}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
-      </Swiper>
+      </SwiperFlatList>
     </View>
   );
 };
