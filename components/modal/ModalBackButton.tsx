@@ -41,8 +41,8 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
       justify="space-between"
       style={styles.container}
     >
-      <BoxView 
-        direction="row" 
+      <BoxView
+        direction="row"
         align="center"
         onPress={onBackPress}
       >
@@ -59,26 +59,21 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
       {Object.keys(currentModal?.toolbarButton || {})?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
-          {currentModal.toolbarButtons.map((o: any, i: number) => {
-            return (
-              <TouchableOpacity
-                key={`button-${i}`}
-                onPress={() => ModalManager.toggleModal(o.component)}
-              >
-                <BoxView direction="row" align="center" justify="flex-end">
-                  <TextView>{o.label}</TextView>
-                  {o?.icon && (
-                    <IconView
-                      name={o.icon}
-                      theme="transparent"
-                      padding={0}
-                      size={14}
-                    />
-                  )}
-                </BoxView>
-              </TouchableOpacity>
-            );
-          })}
+          <TouchableOpacity
+            onPress={() => ModalManager.toggleModal(currentModal?.toolbarButton?.component)}
+          >
+            <BoxView direction="row" align="center" justify="flex-end">
+              <TextView>{currentModal?.toolbarButton?.label}</TextView>
+              {currentModal?.toolbarButton?.icon && (
+                <IconView
+                  name={currentModal?.toolbarButton?.icon}
+                  theme="transparent"
+                  padding={0}
+                  size={14}
+                />
+              )}
+            </BoxView>
+          </TouchableOpacity>
         </BoxView>
       )}
     </BoxView>
