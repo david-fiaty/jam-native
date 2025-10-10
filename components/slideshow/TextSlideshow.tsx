@@ -1,96 +1,59 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Layout } from '@/constants/Layout';
+// App.tsx or SwiperExample.tsx
 import React from 'react';
+import { View, Text, Image, StyleSheet, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 
-type Props = {
-  data?: any;
-};
+const { width } = Dimensions.get('window');
 
-const dotSize: number = 8;
-const slideHeight: number = 100;
-const wrapperHeight: number = 140;
-const pagerHeight: number = 20;
+const slides = [
+  { id: 1, title: 'Welcome', color: '#FF6B6B', image: 'https://picsum.photos/id/1018/600/400' },
+  { id: 2, title: 'Discover', color: '#4ECDC4', image: 'https://picsum.photos/id/1025/600/400' },
+  { id: 3, title: 'Enjoy', color: '#1A535C', image: 'https://picsum.photos/id/1035/600/400' },
+];
 
-const TextSlideshow = ({ data }: Props) => {
-  const renderItem = (item: any, index: number) => {
-    return (
-      <View 
-        key={`dot-${index}`}
-        style={styles.slide}
-      >
-        <Text style={styles.title}>
-          {item.title}
-        </Text>
-
-        <Text style={styles.content}>
-          {item.content}
-        </Text>
-      </View>      
-    );
-  };
-
+const SwiperExample = () => {
   return (
-    <View style={styles.wrapper}>
+    <View style={styles.container}>
       <Swiper
-        showsButtons={false}
-        paginationStyle={styles.pager}
-        dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}
+        loop={true}
+        autoplay={true}
+        autoplayTimeout={3}
+        showsPagination={true}
+        activeDotColor="#fff"
+        dotColor="rgba(255,255,255,0.4)"
       >
-        {data?.map((item: any, index: number) => renderItem(item, index))}
+        {slides.map((slide) => (
+          <View key={slide.id} style={[styles.slide, { backgroundColor: slide.color }]}>
+            <Image source={{ uri: slide.image }} style={styles.image} />
+            <Text style={styles.text}>{slide.title}</Text>
+          </View>
+        ))}
       </Swiper>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    height: wrapperHeight,
-    marginTop: Layout.space.base,
-    width: '100%',
+  container: {
+    flex: 1,
   },
   slide: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    height: slideHeight,
   },
-  title: {
-    color: Layout.colors.primary,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    width: '100%',
-    marginBottom: Layout.space.base,
-    paddingHorizontal: Layout.space.base*3,
+  image: {
+    width,
+    height: 300,
+    resizeMode: 'cover',
   },
-  content: {
-    color: Layout.colors.primary,
-    textAlign: 'center',
-    width: '100%',
-    paddingHorizontal: Layout.space.base*2.1,
-  },
-  pager: {
-    top: slideHeight + Layout.space.base,
-    height: pagerHeight,
-  },
-  dot: {
-    backgroundColor: Layout.colors.white,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
-  },
-  activeDot: {
-    backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
+  text: {
+    position: 'absolute',
+    bottom: 60,
+    color: '#fff',
+    fontSize: 28,
+    fontWeight: 'bold',
   },
 });
 
-export default TextSlideshow;
+export default SwiperExample;
