@@ -166,34 +166,28 @@ const SectionView = () => {
         id: 'private-jam',
         title: i18n.t('Your Jam'),
         render: (params: any) => <PrivateJamSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit Jam'),
-            sectionId: 'edit-jam',
-          },
-        ],
+        toolbarButton: {
+          label: i18n.t('Edit Jam'),
+          sectionId: 'edit-jam',
+        },
       },
       {
         id: 'private-project',
         title: i18n.t('Your project'),
         render: (params: any) => <PrivateProjectSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit Project'),
-            sectionId: 'edit-project',
-          },
-        ],
+        toolbarButton: {
+          label: i18n.t('Edit Project'),
+          sectionId: 'edit-project',
+        },
       },
       {
         id: 'private-profile',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            sectionId: 'profile-form',
-          },
-        ],
+        toolbarButton: {
+          label: i18n.t('Edit'),
+          sectionId: 'profile-form',
+        },
       },
       {
         id: 'profile-form',
@@ -244,7 +238,8 @@ const SectionView = () => {
           showBackButton: true,
           backButtonRoute: null,
           params: {},
-          toolbarButtons: [],
+          toolbarButton: {},
+          editButton: {},
         },
         ...o,
       };
@@ -265,7 +260,7 @@ const SectionView = () => {
 
   return (
     <View style={styles.container}>
-      
+
       <MessageView />
       {currentSection?.showHeader === true && <SectionHeader style={styles.header} />}
       {showBackButton() === true && <SectionBackButton />}
