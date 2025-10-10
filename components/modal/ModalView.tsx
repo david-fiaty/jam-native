@@ -28,6 +28,7 @@ import PrivateProjectSection from '../section/project/PrivateProjectSection';
 import PrivateJamSection from '../section/jam/PrivateJamSection';
 import ProfileFormSection from '../section/profile/ProfileFormSection';
 import ProfileLocationMapView from '../view/ProfileLocationMapView';
+import JamFormSection from '../section/jam/JamFormSection';
 
 type Props = {
   currentSection?: any;
@@ -52,9 +53,9 @@ const ModalView = ({ currentSection, style }: Props) => {
 
     if (currentModal?.showTitle === true && currentModal?.showBackButton === true) {
       return (
-        <ModalBackButton 
-          currentModal={currentModal} 
-          visible={activeModalsCount !== currentModalIndex} 
+        <ModalBackButton
+          currentModal={currentModal}
+          visible={activeModalsCount !== currentModalIndex}
         />
       );
     }
@@ -120,13 +121,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'JamsMapView',
         title: i18n.t('Jams map'),
         render: (params: any) => <JamsMapView {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Filter'),
-            icon: 'filter',
-            component: 'SearchFiltersForm',
-          },
-        ],
+        toolbarButton: {
+          label: i18n.t('Filter'),
+          icon: 'filter',
+          component: 'SearchFiltersForm',
+        },
       },
       {
         id: 'SearchView',
@@ -217,17 +216,25 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateJamSection',
         title: i18n.t('Your Jam'),
         render: (params: any) => <PrivateJamSection {...params} />,
+        toolbarButton: {
+          label: i18n.t('Edit'),
+          component: 'JamFormSection',
+          idField: 'jamId',
+        },
+      },
+      {
+        id: 'JamFormSection',
+        title: i18n.t('Edit Jam'),
+        render: (params: any) => <JamFormSection {...params} />,
       },
       {
         id: 'PrivateProfileSection',
         title: i18n.t('Your profile'),
         render: (params: any) => <PrivateProfileSection {...params} />,
-        toolbarButtons: [
-          {
-            label: i18n.t('Edit'),
-            component: 'ProfileFormSection',
-          },
-        ],
+        toolbarButton: {
+          label: i18n.t('Edit'),
+          component: 'ProfileFormSection',
+        },
       },
       {
         id: 'ProfileFormSection',
@@ -245,7 +252,8 @@ const ModalView = ({ currentSection, style }: Props) => {
           showTitle: true,
           showBackButton: true,
           params: {},
-          toolbarButtons: [],
+          toolbarButton: {},
+          editButton: {},
           sectionId: null,
           effect: {
             in: 'slideInUp',

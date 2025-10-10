@@ -28,7 +28,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
 
   const onItemPress = (row: any) => {
     ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
-      jamId: row?.item?.id,
+      projectId: row?.item?.id,
       title: row?.item?.title,
       itemData: JSON.stringify(row?.item),
     });
