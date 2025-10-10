@@ -28,7 +28,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
   }, []);
 
   console.log(currentModal?.params?.jamId)
-  console.log(currentModal?.toolbarButtons[0]?.idField)
+  console.log(currentModal?.toolbarButton?.idField)
 
   if (!visible === true) {
     return <></>;
@@ -57,7 +57,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
         </TextView>
       </BoxView>
 
-      {currentModal.toolbarButtons?.length > 0 && (
+      {Object.keys(currentModal?.toolbarButton || {})?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
           {currentModal.toolbarButtons.map((o: any, i: number) => {
             return (
