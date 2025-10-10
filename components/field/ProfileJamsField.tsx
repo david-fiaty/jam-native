@@ -30,7 +30,6 @@ const ProfileJamsField = ({ idArray, isPublic, emptyMessage, addable }: Props) =
     ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
       jamId: row?.item?.id,
       title: row?.item?.title,
-      itemData: JSON.stringify(row?.item),
     });
   };
 
