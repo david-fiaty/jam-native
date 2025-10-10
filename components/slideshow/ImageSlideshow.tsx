@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import React from 'react';
-import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import Swiper from 'react-native-swiper';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
@@ -35,14 +35,14 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <View style={styles.wrapper}>
-      <SwiperFlatList
-        //showsButtons={false}
+      <Swiper
+        showsButtons={false}
         paginationStyle={styles.pager}
-        //dot={<View style={styles.dot} />}
-        //activeDot={<View style={styles.activeDot} />}
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
-      </SwiperFlatList>
+      </Swiper>
     </View>
   );
 };
