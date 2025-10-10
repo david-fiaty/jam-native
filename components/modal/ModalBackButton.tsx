@@ -26,10 +26,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
     return () => backHandler.remove();
   }, []);
-
-  console.log(currentModal?.params?.jamId)
-  console.log(currentModal?.toolbarButton?.idField)
-
+  
   if (!visible === true) {
     return <></>;
   }
@@ -80,7 +77,9 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
       {Object.keys(currentModal?.editButton || {})?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
           <TouchableOpacity
-            onPress={() => ModalManager.toggleModal(currentModal?.editButton?.component)}
+            onPress={() => ModalManager.toggleModal(currentModal?.editButton?.component, {
+              [currentModal?.editButton?.idField]: currentModal?.params?.[currentModal?.editButton?.idField],
+            })}
           >
             <BoxView direction="row" align="center" justify="flex-end">
               <TextView>{currentModal?.editButton?.label}</TextView>
