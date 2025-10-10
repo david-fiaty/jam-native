@@ -27,6 +27,9 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
     return () => backHandler.remove();
   }, []);
 
+  console.log(currentModal?.params?.jamId)
+  console.log(currentModal?.toolbarButtons[0]?.idField)
+
   if (!visible === true) {
     return <></>;
   }

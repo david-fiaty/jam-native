@@ -28,6 +28,7 @@ import PrivateProjectSection from '../section/project/PrivateProjectSection';
 import PrivateJamSection from '../section/jam/PrivateJamSection';
 import ProfileFormSection from '../section/profile/ProfileFormSection';
 import ProfileLocationMapView from '../view/ProfileLocationMapView';
+import JamFormSection from '../section/jam/JamFormSection';
 
 type Props = {
   currentSection?: any;
@@ -217,6 +218,18 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateJamSection',
         title: i18n.t('Your Jam'),
         render: (params: any) => <PrivateJamSection {...params} />,
+        toolbarButtons: [
+          {
+            label: i18n.t('Edit'),
+            component: 'JamFormSection',
+            idField: 'jamId',
+          },
+        ],
+      },
+      {
+        id: 'JamFormSection',
+        title: i18n.t('Edit Jam'),
+        render: (params: any) => <JamFormSection {...params} />,
       },
       {
         id: 'PrivateProfileSection',
