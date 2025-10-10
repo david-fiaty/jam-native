@@ -63,17 +63,13 @@ const SectionBackButton = () => {
 
       {Object.keys(currentSection?.toolbarButton || {})?.length > 0 && (
         <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
-          {currentSection.toolbarButtons.map((o: any, i: number) => (
             <TouchableOpacity
-              key={`button-${i}`}
-              onPress={() => SectionManager.push(router, o.sectionId, currentSection?.params)}
+              onPress={() => SectionManager.push(router, currentSection?.toolbarButton?.sectionId, currentSection?.params)}
             >
-              <TextView underline={true}>{o.label}</TextView>
+              <TextView underline={true}>{currentSection?.toolbarButton?.label}</TextView>
             </TouchableOpacity>
-          ))}
         </BoxView>
       )}
-
     </BoxView>
   );
 };
