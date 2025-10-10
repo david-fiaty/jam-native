@@ -76,6 +76,26 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
           </TouchableOpacity>
         </BoxView>
       )}
+
+      {Object.keys(currentModal?.editButton || {})?.length > 0 && (
+        <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
+          <TouchableOpacity
+            onPress={() => ModalManager.toggleModal(currentModal?.editButton?.component)}
+          >
+            <BoxView direction="row" align="center" justify="flex-end">
+              <TextView>{currentModal?.editButton?.label}</TextView>
+              {currentModal?.editButton?.icon && (
+                <IconView
+                  name={currentModal?.editButton?.icon}
+                  theme="transparent"
+                  padding={0}
+                  size={14}
+                />
+              )}
+            </BoxView>
+          </TouchableOpacity>
+        </BoxView>
+      )}
     </BoxView>
   );
 };
