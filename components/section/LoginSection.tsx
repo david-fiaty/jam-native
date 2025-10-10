@@ -52,23 +52,23 @@ const LoginSection = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView 
-      direction="column" 
-      align="center" 
-      justify="center" 
+    <BoxView
+      direction="column"
+      align="center"
+      justify="center"
       style={Layout.screenContent}
     >
-      <LogoView size={80} />    
-      <TextView style={styles.slogan}>{i18n.t('Welcome back')}</TextView> 
+      <LogoView size={80} />
+      <TextView style={styles.slogan}>{i18n.t('Welcome back')}</TextView>
 
       <DividerView />
-  
-      <TabsView 
-        tabs={tabsData} 
-        currentTab={currentTab} 
+
+      <TabsView
+        tabs={tabsData}
+        currentTab={currentTab}
         onItemPress={(tabId: string) => setCurrentTab(tabId)}
       />
-      
+
       {currentTab === 'email' && <LoginEmailForm />}
 
       {currentTab === 'phone' && <LoginPhoneForm />}
@@ -92,8 +92,8 @@ const LoginSection = () => {
       <DividerView />
 
       <GoogleLoginButton />
-      { /*<FacebookLoginButton />*/ }
-      { /*<InstagramLoginButton />*/ }
+      { /*<FacebookLoginButton />*/}
+      { /*<InstagramLoginButton />*/}
 
     </BoxView>
   );
