@@ -216,7 +216,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'PrivateJamSection',
         title: i18n.t('Your Jam'),
         render: (params: any) => <PrivateJamSection {...params} />,
-        toolbarButton: {
+        editButton: {
           label: i18n.t('Edit'),
           component: 'JamFormSection',
           idField: 'jamId',
