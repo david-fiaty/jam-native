@@ -18,6 +18,8 @@ const SectorsViewField = ({ idArray }: Props) => {
 
     let sectors: any[] = sectorsData.filter((o: any) => idArray.includes(o.id));
 
+    if (!sectors?.length) return <TextView>{i18n.t('Unavailable')}</TextView>
+
     return (
       <TextView>
         {sectors.map((sector: any, i: number) => {
