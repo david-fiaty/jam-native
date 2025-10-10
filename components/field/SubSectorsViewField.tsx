@@ -22,6 +22,12 @@ const SubSectorsViewField = ({ idArray }: Props) => {
       .flat()
       .filter((o: any) => idArray.includes(o.id));
 
+    if (!subSectors?.length) {
+      return (
+        <TextView>{i18n.t('Unavailable')}</TextView>
+      );
+    }
+
     return (
       <TextView>
         {subSectors.map((subSector: any, i: number) => {
