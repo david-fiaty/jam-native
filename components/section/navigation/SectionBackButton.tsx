@@ -70,6 +70,16 @@ const SectionBackButton = () => {
             </TouchableOpacity>
         </BoxView>
       )}
+
+      {Object.keys(currentSection?.editButton || {})?.length > 0 && (
+        <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
+            <TouchableOpacity
+              onPress={() => SectionManager.push(router, currentSection?.editButton?.sectionId, currentSection?.params)}
+            >
+              <TextView underline={true}>{currentSection?.editButton?.label}</TextView>
+            </TouchableOpacity>
+        </BoxView>
+      )}
     </BoxView>
   );
 };
