@@ -92,8 +92,8 @@ const LoginSection = () => {
       <DividerView />
 
       <GoogleLoginButton />
-      <FacebookLoginButton />
-      <InstagramLoginButton />
+      { /*<FacebookLoginButton />*/ }
+      { /*<InstagramLoginButton />*/ }
 
     </BoxView>
   );
