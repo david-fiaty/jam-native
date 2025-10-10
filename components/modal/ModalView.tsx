@@ -254,7 +254,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       },
       {
         id: 'ProjectFormSection',
-        title: i18n.t('Edit Project'),
+        title: i18n.t('Edit project'),
         render: (params: any) => <ProjectFormSection {...params} />,
       },
     ].map((o: any) => {
