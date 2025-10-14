@@ -203,8 +203,40 @@ class FormManager {
         },
       },
     };
-  } 
+  }
 
+  objectToFormData(obj: any, form = new FormData(), namespace: string = '') {
+    for (let key in obj) {
+      if (!obj.hasOwnProperty(key)) continue;
+
+      const formKey = namespace ? `${namespace}[${key}]` : key;
+      const value = obj[key];
+
+      if (value === null || value === undefined) {
+        continue;
+      }
+      else if (Array.isArray(value)) {
+        value.forEach((element, index) => {
+          const tempKey = `${formKey}[${index}]`;
+          if (typeof element === 'object' && !(element instanceof File)) {
+            this.objectToFormData(element, form, tempKey);
+          } else {
+            form.append(tempKey, element);
+          }
+        });
+      }
+      else if (typeof value === 'object') {
+        this.objectToFormData(value, form, formKey);
+      }
+      else {
+        form.append(formKey, value);
+      }
+    }
+
+    return form;
+  }
+
+  /*
   objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
     for (let key in obj) {
       if (!obj.hasOwnProperty(key)) continue;
@@ -255,6 +287,7 @@ class FormManager {
 
     return form;
   }
+    */
 };
 
 export default (new FormManager());
