@@ -1,5 +1,14 @@
-<input id="upload_medias" name="upload_medias" type="file" />
-<button id="submit">Submit</button>
+<h2>Create Jam test</h2>
+
+<h4>Single file</h4>
+<input id="single_file_upload" name="single_file_upload[]" type="file" />
+<button id="submit_single_file">Submit single file</button>
+
+<br><br>
+
+<h4>Multiple files</h4>
+<input id="multiple_files_upload" name="multiple_files_upload[]" type="file" multiple />
+<button id="submit_multiple_files">Submit multiple files</button>
 
 <script>
     const url = 'https://dev.jammm.app/backend/api/v1/jams/';
@@ -23,13 +32,17 @@
         "type": "call"
     };
 
-    const fileInput = document.querySelector('#upload_medias');
+    const fileInput = document.querySelector('#media_field');
 
     async function uploadData() {
+        // Jam data to form data
         const formData = objectToFormData(jamData);
 
+        // Add jam images as form data
         if (fileInput.files.length > 0) {
-            formData.append('upload_medias', fileInput.files[0]);
+            for (var i = 0; i < fileInput.files.length; i++) {
+                formData.append('upload_medias[]', fileInput.files[i]);
+            }
         }
 
         try {
