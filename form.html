@@ -1,7 +1,19 @@
-<input id="upload_medias" name="upload_medias" type="file" />
-<button id="submit">Submit</button>
+<h2>Create Jam test</h2>
+
+<h4>Single file</h4>
+<input id="single_file_input" name="single_file_input" type="file" />
+<button id="submit_single_file">Submit single file</button>
+
+<br><br>
+
+<h4>Multiple files</h4>
+<input id="multiple_files_input" name="multiple_files_input[]" type="file" multiple />
+<button id="submit_multiple_files">Submit multiple files</button>
 
 <script>
+    // Django max upload error
+    //https://stackoverflow.com/questions/68392781/django-file-uploader-throwing-error-cannot-pickle-io-bufferedrandom-object
+
     const url = 'https://dev.jammm.app/backend/api/v1/jams/';
 
     const headers = {
@@ -23,15 +35,32 @@
         "type": "call"
     };
 
-    const fileInput = document.querySelector('#upload_medias');
+    const singleFileInput = document.querySelector('#single_file_input');
+    const multipleFilesInput = document.querySelector('#multiple_files_input');
 
-    async function uploadData() {
+    async function uploadSingleFile() {
         const formData = objectToFormData(jamData);
 
-        if (fileInput.files.length > 0) {
-            formData.append('upload_medias', fileInput.files[0]);
+        if (singleFileInput.files.length > 0) {
+            formData.append('upload_medias', singleFileInput.files[0]);
         }
 
+        await sendRequest(formData);
+    }
+
+    async function uploadMultipleFiles() {
+        const formData = objectToFormData(jamData);
+
+        if (multipleFilesInput.files.length > 0) {
+            for (var i = 0; i < multipleFilesInput.files.length; i++) {
+                formData.append('upload_medias[]', multipleFilesInput.files[i]);
+            }
+        }
+
+        await sendRequest(formData);
+    }
+
+    async function sendRequest(formData) {
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -80,5 +109,6 @@
 </script>
 
 <script>
-    document.querySelector('#submit').addEventListener('click', uploadData);
+    document.querySelector('#submit_single_file').addEventListener('click', uploadSingleFile);
+    document.querySelector('#submit_multiple_files').addEventListener('click', uploadMultipleFiles);
 </script>

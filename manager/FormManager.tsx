@@ -203,7 +203,7 @@ class FormManager {
         },
       },
     };
-  }
+  } 
 
   objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
     for (let key in obj) {
