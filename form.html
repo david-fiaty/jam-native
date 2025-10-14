@@ -42,7 +42,7 @@
             formData.append('upload_medias', singleFileInput.files[0]);
         }
 
-        await this.sendRequest(formData);
+        await sendRequest(formData);
     }
 
     async function uploadMultipleFiles() {
@@ -54,7 +54,7 @@
             }
         }
 
-        await this.sendRequest(formData);
+        await sendRequest(formData);
     }
 
     async function sendRequest(formData) {
