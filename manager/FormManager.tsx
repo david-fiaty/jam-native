@@ -3,6 +3,7 @@ import { setFormData, setFormErrors, resetFormData } from "@/redux/slices/FormSl
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
+import MediaManager from "./MediaManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -249,11 +250,7 @@ class FormManager {
   }
 
   createFileObject(element: any) {
-    return {
-      uri: Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri,
-      name: element.fileName,
-      type: element.type,
-    };
+    return MediaManager.base64ToFile(element.base64, element.fileName, element.type);
   }
 
   /*
