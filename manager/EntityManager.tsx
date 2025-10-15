@@ -42,7 +42,7 @@ class EntityManager {
       profile_id: profileId,
       page_size: Config.paginationSize,
       page: 1,
-    }; 
+    };
 
     return await DataManager.get('listProjects', { ...defaults, ...options }, variables, search);
   }
@@ -197,6 +197,14 @@ class EntityManager {
 
   async addJam(entityData: any) {
     let payload: any = FormManager.objectToFormData(entityData);
+
+    for (let pair of payload.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    return;
+
+
     let response: any = await DataManager.post('addJam', payload);
     let success: boolean = false;
 
@@ -333,9 +341,9 @@ class EntityManager {
   getJamOwnerName(item: any) {
     let ownerName: string = item?.profile?.profile_name;
 
-    if (ownerName?.length > Config.maxUserNameLength) {  
+    if (ownerName?.length > Config.maxUserNameLength) {
       ownerName = ownerName.substring(0, Config.maxUserNameLength) + '...';
-    } 
+    }
 
     return ownerName;
   }
@@ -347,7 +355,7 @@ class EntityManager {
       label = (this.getJamTypes().find((o: any) => o.id === jamType))?.name;
     }
 
-    return label?.length > 0 ? label: i18n.t('Unavailable');
+    return label?.length > 0 ? label : i18n.t('Unavailable');
   }
 
   getJamTypes() {
