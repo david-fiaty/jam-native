@@ -3,6 +3,7 @@ import { setFormData, setFormErrors, resetFormData } from "@/redux/slices/FormSl
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
+import MediaManager from "./MediaManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -203,7 +204,7 @@ class FormManager {
         },
       },
     };
-  } 
+  }
 
   objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
     for (let key in obj) {
@@ -217,36 +218,24 @@ class FormManager {
       }
       else if (Array.isArray(value)) {
         value.forEach((element, index) => {
-          if (element && element.uri && element.type) {
-            const name = element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`;
-            const uri = Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri;
-            
-            form.append(formKey + '[]', {
-              uri: uri,
-              name: name,
-              type: element.type,
-            });
+          const tempKey = `${formKey}[${index}]`;
+
+          if (typeof element === 'object' && !this.isFileItem(element)) {
+            this.objectToFormData(element, form, tempKey);
           }
-          else if (typeof element === 'object') {
-            this.objectToFormData(element, form, `${formKey}[${index}]`);
+          else if (this.isFileItem(element)) {
+            form.append(tempKey, this.createFileObject(element));
           }
           else {
-            form.append(formKey + '[]', element);
+            form.append(tempKey, element);
           }
         });
       }
-      else if (value && value.uri && value.type) {
-        const name = value.fileName || `file.${value.type.split('/')[1] || 'jpg'}`;
-        const uri = Platform.OS === 'ios' ? value.uri.replace('file://', '') : value.uri;
-
-        form.append(formKey, {
-          uri: uri,
-          name: name,
-          type: value.type,
-        });
-      }
-      else if (typeof value === 'object') {
+      else if (typeof value === 'object' && !this.isFileItem(value)) {
         this.objectToFormData(value, form, formKey);
+      }
+      else if (this.isFileItem(value)) {
+        form.append(formKey, this.createFileObject(value));
       }
       else {
         form.append(formKey, value);
@@ -254,6 +243,14 @@ class FormManager {
     }
 
     return form;
+  }
+
+  isFileItem(element: any) {
+    return element && element?.uri && element?.type;
+  }
+
+  createFileObject(element: any) {
+    return MediaManager.base64ToFile(element.base64, element.fileName, element.mimeType);
   }
 };
 
