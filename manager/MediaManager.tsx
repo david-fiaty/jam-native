@@ -8,12 +8,24 @@ import NoImageView from '@/components/view/NoImageView';
 import ImageView from '@/components/view/ImageView';
 
 class MediaManager {
+  base64ToFile(base64String: string, filename: string, mimeType: string) {
+    const [base64Data] = base64String.split(',');
+    const binary = atob(base64Data); 
+
+    const array = [];
+    for (let i = 0; i < binary.length; i++) {
+      array.push(binary.charCodeAt(i));
+    }
+
+    return new File([new Uint8Array(array)], filename, { type: mimeType });
+  }
+
   async getBase64Data(uri: string) {
     try {
       return await FileSystem.readAsStringAsync(uri, {
         encoding: FileSystem.EncodingType.Base64,
       });
-    } 
+    }
     catch (error) {
       console.error('Error reading image file:', error);
       return null;
@@ -25,7 +37,7 @@ class MediaManager {
   }
 
   getThumbnailSize(numColumns?: number) {
-    numColumns = numColumns || 3; 
+    numColumns = numColumns || 3;
     let windowWidth: any = ScreenManager.window.width;
     let factor: number = numColumns === 2 ? numColumns : 1.7;
     let imageDim: number = windowWidth / numColumns - (Layout.space.base * factor);
@@ -47,16 +59,16 @@ class MediaManager {
         const blob = await response.blob();
         const reader = new FileReader();
         reader.onloadend = () => {
-          resolve(reader.result); 
+          resolve(reader.result);
         };
-        reader.onerror = reject; 
+        reader.onerror = reject;
         reader.readAsDataURL(blob);
       } catch (error) {
-        reject(error); 
+        reject(error);
       }
     });
   };
-  
+
   async getImageBase64(url: string) {
     try {
       return await this.fetchImageAsBase64(url);
@@ -65,7 +77,7 @@ class MediaManager {
       return null;
     }
   };
-  
+
   async openUrl(url: string) {
     let supported = await Linking.canOpenURL(url);
 
