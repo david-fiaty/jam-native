@@ -50,10 +50,9 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       content: i18n.t('Jam data successfully submitted.'),
     };
 
-    console.log(Object.keys(formData?.upload_medias?.[0]))
-
-    return;
     let result: any = await EntityManager.addJam(formData);
+
+    console.log(result)
 
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
