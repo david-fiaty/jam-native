@@ -219,23 +219,22 @@ class FormManager {
         value.forEach((element, index) => {
           const tempKey = `${formKey}[${index}]`;
 
-          if (typeof element === 'object' && !this.isFileObject(element)) {
+          if (typeof element === 'object' && !this.isFileItem(element)) {
             this.objectToFormData(element, form, tempKey);
           }
-          else if (this.isFileObject(element)) {
-            form.append(tempKey, {
-              uri: Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri,
-              name: element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`,
-              type: element.type,
-            });
+          else if (this.isFileItem(element)) {
+            form.append(tempKey, this.createFileObject(element));
           }
           else {
             form.append(tempKey, element);
           }
         });
       }
-      else if (typeof value === 'object') {
+      else if (typeof value === 'object' && !this.isFileItem(value)) {
         this.objectToFormData(value, form, formKey);
+      }
+      else if (this.isFileItem(value)) {
+        form.append(formKey, this.createFileObject(value));
       }
       else {
         form.append(formKey, value);
@@ -245,8 +244,16 @@ class FormManager {
     return form;
   }
 
-  isFileObject(element: any) {
+  isFileItem(element: any) {
     return element && element?.uri && element?.type;
+  }
+
+  createFileObject(element: any) {
+    return {
+      uri: Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri,
+      name: element.fileName,
+      type: element.type,
+    };
   }
 
   /*
