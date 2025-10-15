@@ -1,0 +1,114 @@
+<h2>Create Jam test</h2>
+
+<h4>Single file</h4>
+<input id="single_file_input" name="single_file_input" type="file" />
+<button id="submit_single_file">Submit single file</button>
+
+<br><br>
+
+<h4>Multiple files</h4>
+<input id="multiple_files_input" name="multiple_files_input[]" type="file" multiple />
+<button id="submit_multiple_files">Submit multiple files</button>
+
+<script>
+    // Django max upload error
+    //https://stackoverflow.com/questions/68392781/django-file-uploader-throwing-error-cannot-pickle-io-bufferedrandom-object
+
+    const url = 'https://dev.jammm.app/backend/api/v1/jams/';
+
+    const headers = {
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MTQwNDA2LCJpYXQiOjE3NTk1MDA0MDYsImp0aSI6IjM1YzE3ZTU1OGQ1NTQ5NWViYjAzYTk5NDY4MmVjZDJkIiwidXNlcl9pZCI6IjEyIn0.mvKTcTfOYBWfVOIB2vCG7AwV1Zi068OBJBr4mPcpsVE',
+    };
+
+    const jamData = {
+        "title": "Test " + Date.now(),
+        "caption": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "profile_id": 3,
+        "callaborators_ids": [1, 4318],
+        "period": { "start_datetime": "2018-11-20T15:58:44-06:00", "end_datetime": "2018-11-20T15:58:44-06:01" },
+        "sectors_ids": [13, 25],
+        "location_type": "online_physical",
+        "geolocation_latitude": "9",
+        "geolocation_longitude": "2",
+        "geographical_scope": "specific",
+        "scope_countries_codes": ["ng"],
+        "type": "call"
+    };
+
+    const singleFileInput = document.querySelector('#single_file_input');
+    const multipleFilesInput = document.querySelector('#multiple_files_input');
+
+    async function uploadSingleFile() {
+        const formData = objectToFormData(jamData);
+
+        if (singleFileInput.files.length > 0) {
+            formData.append('upload_medias', singleFileInput.files[0]);
+        }
+
+        await sendRequest(formData);
+    }
+
+    async function uploadMultipleFiles() {
+        const formData = objectToFormData(jamData);
+
+        if (multipleFilesInput.files.length > 0) {
+            for (var i = 0; i < multipleFilesInput.files.length; i++) {
+                formData.append('upload_medias[]', multipleFilesInput.files[i]);
+            }
+        }
+
+        await sendRequest(formData);
+    }
+
+    async function sendRequest(formData) {
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: formData,
+            });
+
+            const result = await response.json();
+
+            console.log('response: ', result);
+        } catch (error) {
+            console.error('error: ', error);
+        }
+    }
+
+    function objectToFormData(obj, form = new FormData(), namespace = '') {
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) continue;
+
+            const formKey = namespace ? `${namespace}[${key}]` : key;
+            const value = obj[key];
+
+            if (value === null || value === undefined) {
+                continue;
+            }
+            else if (Array.isArray(value)) {
+                value.forEach((element, index) => {
+                    const tempKey = `${formKey}[${index}]`;
+                    if (typeof element === 'object' && !(element instanceof File)) {
+                        objectToFormData(element, form, tempKey);
+                    } else {
+                        form.append(tempKey, element);
+                    }
+                });
+            }
+            else if (typeof value === 'object') {
+                objectToFormData(value, form, formKey);
+            }
+            else {
+                form.append(formKey, value);
+            }
+        }
+
+        return form;
+    }
+</script>
+
+<script>
+    document.querySelector('#submit_single_file').addEventListener('click', uploadSingleFile);
+    document.querySelector('#submit_multiple_files').addEventListener('click', uploadMultipleFiles);
+</script>
