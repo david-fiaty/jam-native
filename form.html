@@ -45,9 +45,11 @@
             formData.append('upload_medias', singleFileInput.files[0]);
         }
 
+        /*
         for (let pair of formData.entries()) {
            console.log(pair[0] + ': ' + pair[1]);
         }
+           */
 
         await sendRequest(formData);
     }
