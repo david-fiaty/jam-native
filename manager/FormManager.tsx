@@ -203,8 +203,53 @@ class FormManager {
         },
       },
     };
-  } 
+  }
 
+  objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
+    for (let key in obj) {
+      if (!obj.hasOwnProperty(key)) continue;
+
+      const formKey = namespace ? `${namespace}[${key}]` : key;
+      const value = obj[key];
+
+      if (value === null || value === undefined) {
+        continue;
+      }
+      else if (Array.isArray(value)) {
+        value.forEach((element, index) => {
+          const tempKey = `${formKey}[${index}]`;
+
+          if (typeof element === 'object' && !this.isFileObject(element)) {
+            this.objectToFormData(element, form, tempKey);
+          }
+          else if (this.isFileObject(element)) {
+            form.append(tempKey, {
+              uri: Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri,
+              name: element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`,
+              type: element.type,
+            });
+          }
+          else {
+            form.append(tempKey, element);
+          }
+        });
+      }
+      else if (typeof value === 'object') {
+        this.objectToFormData(value, form, formKey);
+      }
+      else {
+        form.append(formKey, value);
+      }
+    }
+
+    return form;
+  }
+
+  isFileObject(element: any) {
+    return element && element?.uri && element?.type;
+  }
+
+  /*
   objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
     for (let key in obj) {
       if (!obj.hasOwnProperty(key)) continue;
@@ -255,6 +300,7 @@ class FormManager {
 
     return form;
   }
+    */
 };
 
 export default (new FormManager());
