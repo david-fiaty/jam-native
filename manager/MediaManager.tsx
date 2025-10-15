@@ -8,17 +8,20 @@ import NoImageView from '@/components/view/NoImageView';
 import ImageView from '@/components/view/ImageView';
 
 class MediaManager {
-  base64ToFile(base64String: string, fileName: string) {
-    const [metadata, base64Data] = base64String.split(',');
-    const mime = metadata.match(/:(.*?);/)[1];
-    const binary = atob(base64Data);
-    const array = [];
+  base64ToFile(base64String: string, fileName: string, mimeType: string) {
+    const base64Data = base64String.replace(/^data:.+;base64,/, '');
+    const byteCharacters = atob(base64Data);
+    const byteNumbers = new Array(byteCharacters.length);
 
-    for (let i = 0; i < binary.length; i++) {
-      array.push(binary.charCodeAt(i));
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
     }
 
-    return new File([new Uint8Array(array)], fileName, { type: mime });
+    const byteArray = new Uint8Array(byteNumbers);
+    const blob = new Blob([byteArray], { type: mimeType });
+    const file = new File([blob], fileName, { type: mimeType });
+
+    return file;
   }
 
   async getBase64Data(uri: string) {
