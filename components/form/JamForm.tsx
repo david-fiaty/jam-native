@@ -52,7 +52,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
     let result: any = await EntityManager.addJam(formData);
 
-    console.log(result)
+    console.log('jam submit result', result);
 
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
