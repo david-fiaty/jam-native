@@ -26,7 +26,7 @@
         "profile_id": 3,
         "callaborators_ids": [1, 4318],
         "period": { "start_datetime": "2018-11-20T15:58:44-06:00", "end_datetime": "2018-11-20T15:58:44-06:01" },
-        "sectors_ids": [13, 25],
+        "sectors_ids": [20, 21, 23, 13, 14, 15, 1, 2, 3],
         "location_type": "online_physical",
         "geolocation_latitude": "9",
         "geolocation_longitude": "2",
@@ -45,7 +45,13 @@
             formData.append('upload_medias', singleFileInput.files[0]);
         }
 
-        await sendRequest(formData);
+        for (let pair of formData.entries()) {
+           console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        
+
+        //await sendRequest(formData);
     }
 
     async function uploadMultipleFiles() {
