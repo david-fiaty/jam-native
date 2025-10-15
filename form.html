@@ -49,9 +49,7 @@
            console.log(pair[0] + ': ' + pair[1]);
         }
 
-        
-
-        //await sendRequest(formData);
+        await sendRequest(formData);
     }
 
     async function uploadMultipleFiles() {
@@ -94,8 +92,7 @@
             }
             else if (Array.isArray(value)) {
                 value.forEach((element, index) => {
-                    const tempKey = `${formKey}[]`;
-                    //const tempKey = `${formKey}[${index}]`;
+                    const tempKey = `${formKey}[${index}]`;
                     if (typeof element === 'object' && !(element instanceof File)) {
                         objectToFormData(element, form, tempKey);
                     } else {
