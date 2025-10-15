@@ -11,8 +11,8 @@ class MediaManager {
   base64ToFile(base64String: string, filename: string, mimeType: string) {
     const [base64Data] = base64String.split(',');
     const binary = atob(base64Data); 
-
     const array = [];
+    
     for (let i = 0; i < binary.length; i++) {
       array.push(binary.charCodeAt(i));
     }
