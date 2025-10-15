@@ -199,8 +199,10 @@ class EntityManager {
     let payload: any = FormManager.objectToFormData(entityData);
 
     for (let pair of payload.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
+      console.log(JSON.stringify(pair[0] + ': ' + pair[1], null, 2));
     } 
+
+    return; 
 
     let response: any = await DataManager.post('addJam', payload);
     let success: boolean = false;
