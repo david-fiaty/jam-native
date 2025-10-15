@@ -222,6 +222,13 @@ class FormManager {
           if (typeof element === 'object' && !this.isFileObject(element)) {
             this.objectToFormData(element, form, tempKey);
           }
+          else if (this.isFileObject(element)) {
+            form.append(tempKey, {
+              uri: Platform.OS === 'ios' ? element.uri.replace('file://', '') : element.uri,
+              name: element.fileName || `file_${index}.${element.type.split('/')[1] || 'jpg'}`,
+              type: element.type,
+            });
+          }
           else {
             form.append(tempKey, element);
           }
