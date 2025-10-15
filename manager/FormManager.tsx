@@ -205,7 +205,7 @@ class FormManager {
     };
   }
 
-  objectToFormData(obj: any, form = new FormData(), namespace: string = '') {
+  objectToFormData(obj: any, form: any = new FormData(), namespace: string = '') {
     for (let key in obj) {
       if (!obj.hasOwnProperty(key)) continue;
 
@@ -218,9 +218,11 @@ class FormManager {
       else if (Array.isArray(value)) {
         value.forEach((element, index) => {
           const tempKey = `${formKey}[${index}]`;
-          if (typeof element === 'object' && !(element instanceof File)) {
+
+          if (typeof element === 'object' && !this.isFileObject(element)) {
             this.objectToFormData(element, form, tempKey);
-          } else {
+          }
+          else {
             form.append(tempKey, element);
           }
         });
@@ -234,6 +236,10 @@ class FormManager {
     }
 
     return form;
+  }
+
+  isFileObject(element: any) {
+    return element && element?.uri && element?.type;
   }
 
   /*
