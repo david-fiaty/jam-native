@@ -250,7 +250,7 @@ class FormManager {
   }
 
   createFileObject(element: any) {
-    return MediaManager.base64ToFile(element.base64, element.fileName);
+    return MediaManager.base64ToFile(element.base64, element.fileName, element.type);
   }
 };
 
