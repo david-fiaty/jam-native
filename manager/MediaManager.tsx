@@ -9,7 +9,7 @@ import ImageView from '@/components/view/ImageView';
 
 class MediaManager {
   base64ToFile(base64String: string, filename: string, mimeType: string) {
-    const [metadata, base64Data] = base64String.split(',');
+    const [base64Data] = base64String.split(',');
     const binary = atob(base64Data); 
 
     const array = [];
