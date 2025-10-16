@@ -196,7 +196,7 @@ class EntityManager {
   }
 
   async addJam(entityData: any) {
-    let payload: any = FormManager.objectToFormData(entityData); 
+    let payload: any = FormManager.objectToFormData(entityData);
     let response: any = await DataManager.post('addJam', payload);
     let success: boolean = false;
 
