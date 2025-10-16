@@ -62,7 +62,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   };
 
   const renderJamCategory = (row: any) => (
-    <TouchableOpacity onPress={() => FormManager.updateField(resource, 'type', row.item.id)}>
+    <TouchableOpacity onPress={() => FormManager.updateField(resource, 'type', row.item.id, ['string'])}>
       <View style={styles.categoryContainer}>
         <View
           style={[
@@ -163,8 +163,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
               resource={resource}
               placeholder={i18n.t('Select your location')}
               onChangeValue={(data: any) => {
-                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
-                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
+                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude, ['number']);
+                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude, ['number']);
               }}
               onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
                 resource: resource,
@@ -243,6 +243,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           })}
         />
         {FormManager.renderError('collaborators_ids')}
+
+        <DividerView />
 
         <View style={styles.submitButtonContainer}>
           <ButtonView
