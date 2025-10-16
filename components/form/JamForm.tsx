@@ -244,6 +244,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         />
         {FormManager.renderError('collaborators_ids')}
 
+        <DividerView />
+
         <View style={styles.submitButtonContainer}>
           <ButtonView
             label={i18n.t('Post')}
