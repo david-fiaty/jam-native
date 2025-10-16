@@ -22,32 +22,6 @@ class MediaManager {
     return Config.imageUrl + path;
   }
 
-  fetchImageAsBase64(url: string) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const response = await fetch(url);
-        const blob = await response.blob();
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          resolve(reader.result);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(blob);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  };
-
-  async getImageBase64(url: string) {
-    try {
-      return await this.fetchImageAsBase64(url);
-    } catch (error) {
-      console.error('Error fetching image:', error);
-      return null;
-    }
-  };
-
   async openUrl(url: string) {
     let supported = await Linking.canOpenURL(url);
 
