@@ -254,9 +254,7 @@ class FormManager {
       uri: element.uri,
       type: element.mimeType,
       name: element.fileName,
-    };
-
-    //return MediaManager.base64ToFile(element.base64, element.fileName, element.mimeType);
+    }; 
   }
 };
 
