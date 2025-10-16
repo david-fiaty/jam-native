@@ -22,22 +22,6 @@ class MediaManager {
     return new File([u8arr], fileName, { type: mimeType });
   }
 
-  async getBase64Data(uri: string) {
-    try {
-      return await FileSystem.readAsStringAsync(uri, {
-        encoding: FileSystem.EncodingType.Base64,
-      });
-    }
-    catch (error) {
-      console.error('Error reading image file:', error);
-      return null;
-    }
-  }
-
-  getBinaryData(base64data: string) {
-    return Uint8Array.from(atob(base64data), (char) => char.charCodeAt(0));
-  }
-
   getThumbnailSize(numColumns?: number) {
     numColumns = numColumns || 3;
     let windowWidth: any = ScreenManager.window.width;
