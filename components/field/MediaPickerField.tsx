@@ -102,26 +102,6 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
     }
   };
 
-  const createMediaObject = async (media: any) => {
-    let mediaUrl: any = MediaManager.getImageUrl(media?.url); 
-    let base64 = await MediaManager.getImageBase64(mediaUrl);
-
-    return {
-      assetId: media?.id,
-      fileName: mediaUrl,
-      uri: mediaUrl,
-      fileSize: null,
-      height: imageSize.height,
-      width: imageSize.width,
-      mimeType: null,
-      rotation: null,
-      type: 'image',
-      base64: base64,
-      duration: null,
-      exif: null,
-    };
-  }
-
   useEffect(() => {
     if (!isLoaded) {
       setIsLoaded(true);
