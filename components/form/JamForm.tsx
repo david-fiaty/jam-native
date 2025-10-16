@@ -43,7 +43,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const jamCategories: any = EntityManager.getJamTypes();
 
   const submitForm = async () => {
-    //setIsProcessing(true);
+    setIsProcessing(true);
 
     let message: any = {
       title: i18n.t('Create Jam'),
@@ -52,16 +52,13 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
     let result: any = await EntityManager.addJam(formData);
 
-    // Todo - Remove test
-    console.log('jam submit result', result);
-
     if (result.success === false) {
       message.content = i18n.t('Invalid data submission.');
       FormManager.addServerErrors(resource, result.response);
     }
 
     ScreenManager.showMessage(message);
-    //setIsProcessing(false);
+    setIsProcessing(false);
   };
 
   const renderJamCategory = (row: any) => (
