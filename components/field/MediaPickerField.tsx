@@ -122,29 +122,13 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
     };
   }
 
-  const getSelectedMedia = async () => {
-    let mediaList: any = [...selectedMedia || []];
-
-    for (const item of (value || [])) {
-      let url: string = MediaManager.getImageUrl(item?.url);
-      if (DataManager.isUrl(url)) {
-        mediaList.push(await createMediaObject(item));
-      }
-    }
-
-    return mediaList;
-  }; 
-
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-        setSelectedMedia(await getSelectedMedia());
-      }
-    })();
-  }, [isLoaded]);
+    if (!isLoaded) {
+      setIsLoaded(true);
+      setSelectedMedia(value);
+    }
+  }, [isLoaded, value]);
   
-
   return (
     <View style={styles.container}>
       { label && (
