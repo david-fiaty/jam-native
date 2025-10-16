@@ -220,11 +220,8 @@ class FormManager {
         value.forEach((element, index) => {
           const tempKey = `${formKey}[${index}]`;
 
-          if (this.isNestedObjectItem(element) && !this.isFileItem(element)) {
+          if (this.isObjectItem(element) && !this.isFileItem(element)) {
             this.objectToFormData(element, form, tempKey);
-          }
-          else if (this.isObjectItem(element) && !this.isFileItem(element)) {
-            form.append(tempKey, this.createJsonObject(element));
           }
           else if (this.isFileItem(element)) {
             form.append(tempKey, this.createFileObject(element));
@@ -234,8 +231,11 @@ class FormManager {
           }
         });
       }
-      else if (this.isObjectItem(value) && !this.isFileItem(value)) {
+      else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
         this.objectToFormData(value, form, formKey);
+      }
+      else if (this.isObjectItem(value) && !this.isFileItem(value)) {
+        form.append(formKey, this.createJsonObject(value));
       }
       else if (this.isFileItem(value)) {
         form.append(formKey, this.createFileObject(value));
