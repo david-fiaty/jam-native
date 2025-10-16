@@ -125,7 +125,7 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
   useEffect(() => {
     if (!isLoaded) {
       setIsLoaded(true);
-      setSelectedMedia(value);
+      setSelectedMedia(value || []);
     }
   }, [isLoaded, value]);
   
