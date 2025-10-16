@@ -1,9 +1,7 @@
-import { Platform } from "react-native";
 import { setFormData, setFormErrors, resetFormData } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
-import MediaManager from "./MediaManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -66,7 +64,7 @@ class FormManager {
     for (const [key, message] of Object.entries(errors)) {
       formErrors.push({
         key: key,
-        message: message[0],
+        message: message[0], 
       });
     }
 
@@ -87,9 +85,7 @@ class FormManager {
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
-
-    console.log(formErrors) 
-
+ 
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
     }
@@ -266,7 +262,7 @@ class FormManager {
 
   createFileObject(element: any) {
     return {
-      uri: element.uri,
+      uri: element.uri, // Todo - Handle IOS case?
       type: element.mimeType,
       name: element.fileName,
     };
