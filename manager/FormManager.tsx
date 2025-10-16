@@ -249,8 +249,12 @@ class FormManager {
     return element && element?.uri && element?.type;
   }
 
-  createFileObject(element: any) {
-    return MediaManager.base64ToFile(element.base64, element.fileName, element.mimeType);
+  createFileObject(element: any) { 
+    return {
+      uri: element.uri,
+      type: element.mimeType,
+      name: element.fileName,
+    }; 
   }
 };
 

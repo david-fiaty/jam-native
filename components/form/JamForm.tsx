@@ -52,6 +52,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
     let result: any = await EntityManager.addJam(formData);
 
+    // Todo - Remove test
     console.log('jam submit result', result);
 
     if (result.success === false) {
