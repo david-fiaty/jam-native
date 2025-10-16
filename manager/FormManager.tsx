@@ -232,7 +232,8 @@ class FormManager {
         });
       }
       else if (typeof value === 'object' && !this.isFileItem(value)) {
-        this.objectToFormData(value, form, formKey);
+        form.append(formKey, this.createJsonObject(value));
+        //this.objectToFormData(value, form, formKey);
       }
       else if (this.isFileItem(value)) {
         form.append(formKey, this.createFileObject(value));
@@ -255,6 +256,10 @@ class FormManager {
       type: element.mimeType,
       name: element.fileName,
     }; 
+  }
+
+  createJsonObject(element: any) { 
+    return JSON.stringify(element); 
   }
 };
 
