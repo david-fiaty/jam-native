@@ -17,7 +17,6 @@ type Props = {
   readOnly?: boolean,
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
-  onBlur?: () => void;
 };
 
 const InputTextField = ({
@@ -33,7 +32,6 @@ const InputTextField = ({
   readOnly,
   onChangeText,
   onSubmitEditing,
-  onBlur,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
@@ -75,7 +73,6 @@ const InputTextField = ({
         readOnly={readOnly}
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
-        onBlur={onBlur}
       />
     </BoxView>
   );

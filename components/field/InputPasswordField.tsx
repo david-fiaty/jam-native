@@ -18,7 +18,6 @@ type Props = {
   readOnly?: boolean,
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
-  onBlur?: () => void;
 };
 
 const InputPasswordField = ({
@@ -34,7 +33,6 @@ const InputPasswordField = ({
   readOnly,
   onChangeText,
   onSubmitEditing,
-  onBlur,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -87,7 +85,6 @@ const InputPasswordField = ({
         readOnly={readOnly}
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
-        onBlur={onBlur}
       />
     </BoxView>
   );
