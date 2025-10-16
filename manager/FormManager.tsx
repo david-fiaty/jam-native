@@ -88,6 +88,8 @@ class FormManager {
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
 
+    console.log(formErrors) 
+
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
     }
