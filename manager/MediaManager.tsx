@@ -1,27 +1,11 @@
 import { Linking, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
-import * as FileSystem from 'expo-file-system';
 import ScreenManager from "@/manager/ScreenManager";
-import DataManager from './DataManager';
 import NoImageView from '@/components/view/NoImageView';
 import ImageView from '@/components/view/ImageView';
 
 class MediaManager {
-  base64ToFile(base64String: string, fileName: string, mimeType: string) {
-    const arr = base64String.split(',');
-    const bstr = atob(arr[1]);
-
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
-
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    
-    return new File([u8arr], fileName, { type: mimeType });
-  }
-
   getThumbnailSize(numColumns?: number) {
     numColumns = numColumns || 3;
     let windowWidth: any = ScreenManager.window.width;
