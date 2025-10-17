@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
@@ -9,6 +9,7 @@ import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
   resource?: any;
@@ -29,6 +30,7 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
+  const imageSize = MediaManager.getThumbnailSize();
 
   if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
 
@@ -76,6 +78,24 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
     }));
   };
 
+  const renderItem = (row: any) => {
+    let output: any = null;
+    let imageUrl: any = row?.item?.medias?.[0]?.url;
+
+    output = MediaManager.renderImage(imageUrl, {
+      numColumns: numColumns,
+      imageSize: imageSize,
+    });
+
+    return (
+      <TouchableOpacity 
+        //onPress={() => onItemPress(row)}
+      >
+        {output}
+      </TouchableOpacity>
+    );
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -115,9 +135,8 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
         emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
-        renderItem={(row: any) => (
-          <TextView>{row?.item?.id}</TextView>
-        )}
+        renderItem={(row: any) => renderItem(row)}
+      
         /*
         renderItem={(row: any) => (
           <JamListItem 
@@ -131,6 +150,7 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
           />
         )}
           */
+    
       />
     </BoxView>
   );
