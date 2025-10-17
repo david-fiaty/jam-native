@@ -35,6 +35,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const [projectData, setProjectData] = useState<any>({});
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
 
   const updateField = (key: any, value: any) => {
@@ -64,6 +65,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
 
   const renderProjectJams = () => {
     let projectJamIds: any[] = formData?.jams || [];
+    //let projectJamIds: any[] = [...new Set([...(formData?.[field] || []), ...selectedIds])]
 
     return (
       <>
