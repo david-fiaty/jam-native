@@ -12,12 +12,11 @@ import SpinnerView from '../view/SpinnerView';
 type Props = {
   resource: string;
   field: string;
-  value?: any;
   placeholder?: any;
   onPress?: () => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [currentValue, setCurrentValue] = useState<any>([]);
@@ -25,7 +24,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
   const prevFormData: any = useRef(null);
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
+    let selectedIds: any[] = [...(formData?.[field]?.length > 0 ? formData[field] : [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
     setCurrentValue(selectedIds);
@@ -46,7 +45,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
         setIsLoaded(true);
       }
     })();    
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
@@ -57,7 +56,6 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
           onPress={onPress}
         >
           <InputTextField
-            value={value}
             readOnly={true}
             placeholder={placeholder}
             rightIcon={<IconView name="plus" theme="transparent" />}
