@@ -45,7 +45,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
   const toggleItem = (row: any) => {
     let selectedIdsList = [...selectedIds];
     
-    
+    // Todo - Implement project item selection
     console.log(row.item.id)
     
     if (multiSelect === true) {
