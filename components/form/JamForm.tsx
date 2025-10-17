@@ -131,14 +131,14 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         <TextView>{i18n.t('Title')} *</TextView>
         <InputTextField
-          value={formData?.title}
+          value={formData?.title || ''}
           onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {FormManager.renderError('title')}
 
         <TextView>{i18n.t('Description')} *</TextView>
         <InputTextareaField
-          value={formData?.caption}
+          value={formData?.caption || ''}
           onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
         {FormManager.renderError('caption')}
@@ -146,7 +146,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Select media')} *</TextView>
         <MediaPickerField
           preview={true}
-          value={formData?.upload_medias}
+          value={formData?.upload_medias || []}
           onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
           onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
         />
@@ -154,7 +154,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         <TextView>{i18n.t('Location type')} *</TextView>
         <LocationTypeField
-          value={formData?.location_type}
+          value={formData?.location_type || ''}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
         />
         {FormManager.renderError('location_type')}
@@ -195,7 +195,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
-          value={formData?.period?.start_datetime}
+          value={formData?.period?.start_datetime || ''}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ start_datetime: DataManager.toDbDate(value) },
@@ -205,7 +205,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
-          value={formData?.period?.end_datetime}
+          value={formData?.period?.end_datetime || ''}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ end_datetime: DataManager.toDbDate(value) },
@@ -219,7 +219,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           resource={resource}
           field="scope_countries_codes"
           placeholder={i18n.t('Select a country')}
-          value={formData?.scope_countries_codes}
+          value={formData?.scope_countries_codes || ''}
           onPress={() => ModalManager.toggleModal('CountriesList', {
             resource: resource,
             field: 'scope_countries_codes',
@@ -231,7 +231,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <SectorsField
           resource={resource}
           field="sectors_ids"
-          value={formData?.sectors_ids}
+          value={formData?.sectors_ids || []}
         />
 
         <TextView>{i18n.t('Select collaborators')}</TextView>
@@ -239,7 +239,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           resource={resource}
           field="collaborators_ids"
           placeholder={i18n.t('Select collaborators')}
-          value={formData?.collaborators_ids}
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
             field: "collaborators_ids",
