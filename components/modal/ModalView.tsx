@@ -15,7 +15,7 @@ import JammersList from "@/components/list/JammersList";
 import SelectLocationMapView from "@/components/view/SelectLocationMapView";
 import CollaboratorsList from "@/components/list/CollaboratorsList";
 import CountriesList from '../list/CountriesList';
-import SelectJamsForm from '../form/SelectJamsForm';
+import SelectProjectJamsForm from '../form/SelectProjectJamsForm';
 import JamCommentsList from '../list/JamCommentsList';
 import ProjectCommentsList from '../list/ProjectCommentsList';
 import VenueTypesList from '../list/VenueTypesList';
@@ -194,9 +194,9 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <ProfileLocationMapView {...params} />,
       },
       {
-        id: 'SelectJamsForm',
+        id: 'SelectProjectJamsForm',
         title: i18n.t('Select project Jams'),
-        render: (params: any) => <SelectJamsForm {...params} />,
+        render: (params: any) => <SelectProjectJamsForm {...params} />,
       },
       {
         id: 'PublicJamSection',
