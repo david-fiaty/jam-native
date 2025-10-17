@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -30,7 +29,6 @@ type Props = {
 const resource: string = 'project';
 
 const ProjectForm = ({ projectId, isPublic }: Props) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
