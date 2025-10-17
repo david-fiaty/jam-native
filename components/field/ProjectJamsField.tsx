@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, TouchableOpacity } from "react-native"
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
@@ -24,6 +25,7 @@ type Props = {
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -67,7 +69,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
         onPress={() => {
           ModalManager.toggleModal("SelectJamsForm", {
             field: 'jams_ids',
-            idArray: JSON.stringify(idArray || []),
+            idArray: JSON.stringify(userState.profileData?.profile_jams || []),
             multiSelect: true,
             resource: 'project', // Todo - Make dynamic
           })
