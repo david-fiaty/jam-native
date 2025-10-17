@@ -26,7 +26,6 @@ const resource: string = 'project';
 
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
-  const [selectedIds, setSelectedIds] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState<any>(0);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
@@ -47,8 +46,11 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   const deleteItem = (row: any) => {
     let selectedIds: any[] = [...(formData?.jams_ids || [])];
-    selectedIds = selectedIds.filter((id: number) => id != row.item.id)
-    setSelectedIds(selectedIds);
+    selectedIds = selectedIds.filter((id: number) => id != row.item.id);
+
+    // Todo - Update form state
+
+    setDeleteId(0);
   };
 
   const renderAddButton = () => {
