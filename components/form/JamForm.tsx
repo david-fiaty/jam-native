@@ -56,6 +56,9 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       message.content = i18n.t('Invalid data submission.');
       FormManager.addServerErrors(resource, result.response);
     }
+    else {
+      FormManager.resetForm(resource);
+    }
 
     ScreenManager.showMessage(message);
     setIsProcessing(false);
