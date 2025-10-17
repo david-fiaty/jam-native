@@ -19,15 +19,13 @@ type Props = {
 const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
-  const [currentValue, setCurrentValue] = useState<any>([]);
+  const [currentProfiles, setCurrentProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const prevFormData: any = useRef(null);
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(formData?.[field]?.length > 0 ? formData[field] : [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
-
-    setCurrentValue(selectedIds);
     
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -40,7 +38,7 @@ const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) =>
     (async () => {
       if (formData?.[field]?.length > 0 && prevFormData.current?.[field] !== formData?.[field]) {
         setIsLoaded(false);
-        setCurrentValue(await EntityManager.getProfiles(formData[field]));
+        setCurrentProfiles(await EntityManager.getProfiles(formData[field]));
         prevFormData.current = formData;
         setIsLoaded(true);
       }
@@ -51,7 +49,7 @@ const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) =>
 
   return (
     <>
-      { !currentValue?.length && (
+      { !currentProfiles?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
@@ -63,9 +61,9 @@ const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) =>
         </TouchableOpacity>
       )}
 
-      {currentValue?.length > 0 && (
+      {currentProfiles?.length > 0 && (
         <View style={styles.preview}> 
-          { currentValue.map((item: any) => {
+          { currentProfiles.map((item: any) => {
             return (
               <TagView
                 theme="white"
