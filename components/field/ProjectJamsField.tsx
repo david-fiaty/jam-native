@@ -26,7 +26,7 @@ const resource: string = 'project';
 
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [deleteId, setDeleteId] = useState<any>(0);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
@@ -36,31 +36,21 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
       ModalManager.toggleModal('PublicJamSection', {
         jamId: row?.item?.id,
         title: row?.item?.title,
-        itemData: JSON.stringify(row?.item),
+        itemData: JSON.stringify(row.item),
       });
     }
     else if (deletable) {
-      updateSelection(row);
+      setDeleteId(row.item.id);
     }
-  };
-
-  const updateSelection = (row: any) => {
-    let selection: any[] = [...selectedItems];
-
-    if (selection.includes(row.item.id)) {
-      selection = selection.filter((id: number) => id != row.item.id)
-    }
-    else {
-      selection.push(row.item.id);
-    }
-
-    setSelectedItems(selection);
   };
 
   const deleteItem = (row: any) => {
     let selectedIds: any[] = [...(formData?.jams_ids || [])];
-    selectedIds = selectedIds.filter((id: number) => id != row.item.id)
-    setSelectedItems(selectedIds);
+    selectedIds = selectedIds.filter((id: number) => id != row.item.id);
+
+    // Todo - Update form state
+
+    setDeleteId(0);
   };
 
   const renderAddButton = () => {
@@ -102,7 +92,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
       >
         {output}
 
-        {selectedItems.includes(row?.item?.id) && (
+        {deleteId == row?.item?.id && (
           <View style={styles.deleteIcon}>
             <IconView
               name="delete"
