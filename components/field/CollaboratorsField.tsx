@@ -12,23 +12,20 @@ import SpinnerView from '../view/SpinnerView';
 type Props = {
   resource: string;
   field: string;
-  value?: any;
   placeholder?: any;
   onPress?: () => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
-  const [currentValue, setCurrentValue] = useState<any>([]);
+  const [currentProfiles, setCurrentProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const prevFormData: any = useRef(null);
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
+    let selectedIds: any[] = [...(formData?.[field]?.length > 0 ? formData[field] : [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
-
-    setCurrentValue(selectedIds);
     
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -41,23 +38,22 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
     (async () => {
       if (formData?.[field]?.length > 0 && prevFormData.current?.[field] !== formData?.[field]) {
         setIsLoaded(false);
-        setCurrentValue(await EntityManager.getProfiles(formData[field]));
+        setCurrentProfiles(await EntityManager.getProfiles(formData[field]));
         prevFormData.current = formData;
         setIsLoaded(true);
       }
     })();    
-  }, [isLoaded, value, formData, field]);
+  }, [isLoaded, formData, field]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
-      { !currentValue?.length && (
+      { !currentProfiles?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
           <InputTextField
-            value={value}
             readOnly={true}
             placeholder={placeholder}
             rightIcon={<IconView name="plus" theme="transparent" />}
@@ -65,9 +61,9 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
         </TouchableOpacity>
       )}
 
-      {currentValue?.length > 0 && (
+      {currentProfiles?.length > 0 && (
         <View style={styles.preview}> 
-          { currentValue.map((item: any) => {
+          { currentProfiles.map((item: any) => {
             return (
               <TagView
                 theme="white"
