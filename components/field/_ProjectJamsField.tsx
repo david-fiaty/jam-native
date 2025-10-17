@@ -40,7 +40,7 @@ const ProjectJamsField = ({ resource, field, value, placeholder, onPress }: Prop
       idArray={currentValue}
       addButton={true}
       isDeletable={true}
-      onAddButtonPress={() => ModalManager.toggleModal("SelectJamsForm", {
+      onAddButtonPress={() => ModalManager.toggleModal("SelectProjectJamsForm", {
         field: 'jams_ids',
         idArray: JSON.stringify(profileData?.profile_jams || []),
         multiSelect: true,
