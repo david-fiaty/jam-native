@@ -64,16 +64,6 @@ const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMes
     }));
   };
 
-  const deleteItem = (row: any) => {
-    let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: itemIds,
-    }));
-  };
-
   const renderItem = (row: any) => {
     let selectedIds: any[] = [...(formData?.[field] || [])];
     let output: any = null;
