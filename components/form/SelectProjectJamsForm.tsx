@@ -45,6 +45,9 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
   const toggleItem = (row: any) => {
     let selectedIdsList = [...selectedIds];
     
+    
+    console.log(row.item.id)
+    
     if (multiSelect === true) {
       let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
 
@@ -88,7 +91,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
 
     return (
       <TouchableOpacity 
-        //onPress={() => onItemPress(row)}
+        onPress={() => onItemPress(row)}
       >
         {output}
       </TouchableOpacity>
