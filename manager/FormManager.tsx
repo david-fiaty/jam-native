@@ -1,11 +1,15 @@
-import { setFormData, setFormErrors, resetFormData } from "@/redux/slices/FormSlice";
+import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 
 class FormManager {
   resetForm(resource: any) {
-    Store.dispatch(resetFormData(resource));
+    Store.dispatch(setFormData<any>({
+      resource: resource,
+      key: null,
+      value: {},
+    }));
   }
 
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
@@ -64,7 +68,7 @@ class FormManager {
     for (const [key, message] of Object.entries(errors)) {
       formErrors.push({
         key: key,
-        message: message[0], 
+        message: message[0],
       });
     }
 
@@ -85,7 +89,7 @@ class FormManager {
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
- 
+
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
     }
