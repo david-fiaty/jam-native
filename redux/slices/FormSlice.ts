@@ -26,15 +26,11 @@ const FormSlice = createSlice({
         state[action.payload.resource] = {};
       }
     },
-    resetFormData: (state: any, action: any) => {
-      state[action.payload] = {};
-      state.errors = state.errors.filter((o: any) => o.resource !== action.payload);
-    },
     setFormErrors: (state: any, action: any) => {
       state.errors = action.payload;
     },
   },
 });
 
-export const { setFormData, resetFormData, setFormErrors } = FormSlice.actions;
+export const { setFormData, setFormErrors } = FormSlice.actions;
 export default FormSlice.reducer;
