@@ -22,10 +22,13 @@ type Props = {
   emptyMessage?: any;
 };
 
+const resource: string = 'project';
+
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
+  const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -55,9 +58,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   };
 
   const deleteItem = (row: any) => {
-    // Todo - Implement delete item logic
-    console.log('delete item', row.item.id);
-
+    let selectedIds: any[] = [...(formData?.jams_ids || [])];
+    selectedIds = selectedIds.filter((id: number) => id != row.item.id)
+    setSelectedItems(selectedIds);
   };
 
   const renderAddButton = () => {
@@ -67,7 +70,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
         width={imageSize.width}
         height={imageSize.height}
         onPress={() => {
-          ModalManager.toggleModal("SelectJamsForm", {
+          ModalManager.toggleModal("SelectProjectJamsForm", {
             field: 'jams_ids',
             idArray: JSON.stringify(userState.profileData?.profile_jams || []),
             multiSelect: true,
