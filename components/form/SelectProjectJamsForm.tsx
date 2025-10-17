@@ -22,8 +22,9 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
+const numColumns = 3;
+
 const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
-  const numColumns = 3;
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
