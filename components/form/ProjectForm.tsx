@@ -64,8 +64,10 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   };
 
   const renderProjectJams = () => {
-    let projectJamIds: any[] = formData?.jams || [];
-    //let projectJamIds: any[] = [...new Set([...(formData?.[field] || []), ...selectedIds])]
+    let projectJamIds: any[] = projectData?.jams || [];
+    let currentJamIds: any[] = formData?.jams_ids || [];
+
+    projectJamIds = [...new Set([...projectJamIds, ...currentJamIds])]
 
     return (
       <>
