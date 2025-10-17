@@ -27,7 +27,6 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [selectedIds, setSelectedIds] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
@@ -43,35 +42,28 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
   };
 
   const toggleItem = (row: any) => {
-    let selectedIdsList = [...selectedIds];
-    
-    // Todo - Implement project item selection
-    console.log(row.item.id)
+    let selectedIds: any[] = [...(formData?.[field] || [])];
     
     if (multiSelect === true) {
-      let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
+      let index: number = selectedIds.findIndex((id: any) => id == row.item.id);
 
-      if (index === -1) selectedIdsList.push(row.item.id);
-      else selectedIdsList.splice(index, 1);
+      if (index === -1) selectedIds.push(row.item.id);
+      else selectedIds.splice(index, 1);
 
     }
     else {
-      selectedIdsList = [row.item.id];
+      selectedIds = [row.item.id];
     }
-
-    setSelectedIds(selectedIdsList);
 
     dispatch(setFormData<any>({ 
       resource: resource,
       key: field, 
-      value: selectedIdsList, 
+      value: selectedIds, 
     }));
   };
 
   const deleteItem = (row: any) => {
-    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
-
-    setSelectedIds(itemIds);
+    let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
     
     dispatch(setFormData<any>({ 
       resource: resource,
@@ -81,8 +73,10 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
   };
 
   const renderItem = (row: any) => {
+    let selectedIds: any[] = [...(formData?.[field] || [])];
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
+    let isSelected: boolean = selectedIds.find((id: any) => id == row.item.id);
 
     output = MediaManager.renderImage(imageUrl, {
       numColumns: numColumns,
@@ -94,6 +88,8 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
         onPress={() => onItemPress(row)}
       >
         {output}
+
+        {isSelected && <TextView>xx</TextView>}
       </TouchableOpacity>
     );
   };
@@ -109,10 +105,6 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
 
         if (addButton === true) {
           jams.push({ id: "addItem" });
-        }
-
-        if (formData?.[field]) {
-          setSelectedIds(formData[field]);
         }
 
         setProfileJams(jams);
@@ -137,22 +129,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
         emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
-        renderItem={(row: any) => renderItem(row)}
-      
-        /*
-        renderItem={(row: any) => (
-          <JamListItem 
-            row={row} 
-            multiSelect={multiSelect}
-            isAddable={true}
-            onAddButtonPress={onAddButtonPress}
-            onListItemPress={(row: any) => onItemPress(row)}
-            onDeleteItemPress={deleteItem}
-            isSelected={selectedIds.includes(row.item.id)}
-          />
-        )}
-          */
-    
+        renderItem={(row: any) => renderItem(row)}    
       />
     </BoxView>
   );
