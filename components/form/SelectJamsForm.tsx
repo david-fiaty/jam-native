@@ -29,7 +29,6 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
-  const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
   if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
