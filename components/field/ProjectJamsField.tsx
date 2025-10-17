@@ -55,9 +55,12 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   };
 
   const deleteItem = (row: any) => {
-    // Todo - Implement delete item logic
-    console.log('delete item', row.item.id);
+    let selection: any[] = [...selectedItems];
 
+    console.log(selection, row.item.id)
+    //selection = selection.filter((id: number) => id != row.item.id)
+    
+    //setSelectedItems(selection);
   };
 
   const renderAddButton = () => {
