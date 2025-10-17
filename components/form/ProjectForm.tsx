@@ -65,7 +65,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const renderProjectJams = () => {
     return (
       <>
-        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+        <BoxView direction="row" align="center" justify="space-between">
           <TextView style={styles.groupTitle}>
             {i18n.t('Jams')} ({formData?.jams?.length || 0})
           </TextView>
