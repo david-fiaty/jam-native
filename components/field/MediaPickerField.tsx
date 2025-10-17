@@ -18,10 +18,9 @@ type Props = {
   onDeleteItem?: (data: any) => void,
 };
 
-const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: Props) => {  
+const MediaPickerField = ({ label, value, preview, onSelectItem, onDeleteItem }: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
@@ -103,11 +102,8 @@ const MediaPickerField = ({label, value, preview, onSelectItem, onDeleteItem}: P
   };
 
   useEffect(() => {
-    if (!isLoaded) {
-      setIsLoaded(true);
-      setSelectedMedia(value || []);
-    }
-  }, [isLoaded, value]);
+    setSelectedMedia(value || []);
+  }, [value]);
   
   return (
     <View style={styles.container}>
