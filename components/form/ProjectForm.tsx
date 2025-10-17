@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -11,7 +11,6 @@ import i18n from "@/translation/i18n";
 import ProjectJamsField from "../field/ProjectJamsField";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import SectionManager from "@/manager/SectionManager";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import SectorsField from "../field/SectorsField";
@@ -36,7 +35,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({
