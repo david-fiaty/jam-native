@@ -63,11 +63,15 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     setIsProcessing(false);
   };
 
-  const renderProjectJams = () => {
-    let projectJamIds: any[] = [...new Set([
+  const getProjectJamsIds = () => {
+    return [...new Set([
       ...(projectData?.jams || []), 
       ...(formData?.jams_ids || [])
     ])];
+  };
+
+  const renderProjectJams = () => {
+    let projectJamIds: any[] = getProjectJamsIds();
 
     return (
       <>
