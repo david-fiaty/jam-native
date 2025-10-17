@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useState, useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
@@ -10,26 +10,26 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import IconView from "../view/IconView";
 
 type Props = {
   resource?: any;
   field?: any;
   idArray?: any;
-  addButton?: boolean;
   multiSelect?: boolean;
   emptyMessage?: any;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
-  const numColumns = 3;
+const numColumns = 3;
+
+const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
+  const [currentJams, setCurrentJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [selectedIds, setSelectedIds] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
-  const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
   if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
@@ -44,43 +44,41 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
   };
 
   const toggleItem = (row: any) => {
-    let selectedIdsList = [...selectedIds];
-    
-    if (multiSelect === true) {
-      let index: number = selectedIdsList.findIndex((id: any) => id == row.item.id);
+    let selectedIds: any[] = [...(formData?.[field] || [])];
 
-      if (index === -1) selectedIdsList.push(row.item.id);
-      else selectedIdsList.splice(index, 1);
+    if (multiSelect === true) {
+      let index: number = selectedIds.findIndex((id: any) => id == row.item.id);
+
+      if (index === -1) selectedIds.push(row.item.id);
+      else selectedIds.splice(index, 1);
 
     }
     else {
-      selectedIdsList = [row.item.id];
+      selectedIds = [row.item.id];
     }
 
-    setSelectedIds(selectedIdsList);
-
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIdsList, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
   const deleteItem = (row: any) => {
-    let itemIds: any[] = [...selectedIds].filter((n: number) => n !== row.item.id);
+    let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
 
-    setSelectedIds(itemIds);
-    
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: itemIds, 
+      key: field,
+      value: itemIds,
     }));
   };
 
   const renderItem = (row: any) => {
+    let selectedIds: any[] = [...(formData?.[field] || [])];
     let output: any = null;
     let imageUrl: any = row?.item?.medias?.[0]?.url;
+    let isSelected: boolean = selectedIds.find((id: any) => id == row.item.id);
 
     output = MediaManager.renderImage(imageUrl, {
       numColumns: numColumns,
@@ -88,10 +86,16 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
     });
 
     return (
-      <TouchableOpacity 
-        //onPress={() => onItemPress(row)}
+      <TouchableOpacity
+        onPress={() => onItemPress(row)}
       >
         {output}
+
+        {isSelected &&
+          <View style={styles.selectedItem}>
+            <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+          </View> 
+        } 
       </TouchableOpacity>
     );
   };
@@ -105,24 +109,17 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
           jams = await EntityManager.getJams(idArray);
         }
 
-        if (addButton === true) {
-          jams.push({ id: "addItem" });
-        }
-
-        if (formData?.[field]) {
-          setSelectedIds(formData[field]);
-        }
-
         setProfileJams(jams);
+        setCurrentJams(jams);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray, addButton, formData, field]);
+  }, [isLoaded, idArray, formData, field]);
 
-  if (!isLoaded) return <SpinnerView />; 
+  if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView 
+    <BoxView
       direction="column"
       align="flex-start"
       justify="flex-start"
@@ -136,21 +133,6 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
         scrollEnabled={false}
         emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
         renderItem={(row: any) => renderItem(row)}
-      
-        /*
-        renderItem={(row: any) => (
-          <JamListItem 
-            row={row} 
-            multiSelect={multiSelect}
-            isAddable={true}
-            onAddButtonPress={onAddButtonPress}
-            onListItemPress={(row: any) => onItemPress(row)}
-            onDeleteItemPress={deleteItem}
-            isSelected={selectedIds.includes(row.item.id)}
-          />
-        )}
-          */
-    
       />
     </BoxView>
   );
@@ -173,6 +155,11 @@ const styles = StyleSheet.create({
   image: {
     borderRadius: Layout.space.base,
   },
+  selectedItem: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
+  },
 });
 
-export default SelectJamsForm;
+export default SelectProjectJamsForm;

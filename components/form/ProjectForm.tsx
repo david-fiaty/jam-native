@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -35,6 +35,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
+  const [projectData, setProjectData] = useState<any>({});
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
 
   const updateField = (key: any, value: any) => {
@@ -62,29 +63,26 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     setIsProcessing(false);
   };
 
+  const getProjectJamsIds = () => {
+    return [...new Set([
+      ...(projectData?.jams || []), 
+      ...(formData?.jams_ids || [])
+    ])];
+  };
+
   const renderProjectJams = () => {
+    let projectJamIds: any[] = getProjectJamsIds();
+
     return (
       <>
-        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+        <BoxView direction="row" align="center" justify="space-between">
           <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({formData?.jams?.length || 0})
+            {i18n.t('Jams')} ({projectJamIds?.length || 0})
           </TextView>
-
-          <TouchableOpacity onPress={() => {
-            // Todo - Update this
-            /*
-            SectionManager.push(router, 'project-jams', {
-              jamId: JSON.stringify(formData?.jams || []),
-              title: i18n.t('Project Jams'),
-            });
-            */
-          }}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
         </BoxView>
 
         <ProjectJamsField
-          idArray={formData?.jams || []}
+          idArray={projectJamIds}
           emptyMessage={i18n.t('No data available.')}
           isPublic={false}
           addable={true}
