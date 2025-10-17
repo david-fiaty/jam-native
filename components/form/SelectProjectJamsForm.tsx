@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useState, useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
@@ -91,9 +91,9 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
         {output}
 
         {isSelected &&
-          <TouchableOpacity style={styles.selectedItem}>
+          <View style={styles.selectedItem}>
             <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
-          </TouchableOpacity> 
+          </View> 
         } 
       </TouchableOpacity>
     );
@@ -158,11 +158,6 @@ const styles = StyleSheet.create({
     borderRadius: Layout.space.base,
   },
   selectedItem: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  deleteItem: {
     position: 'absolute',
     top: 5,
     right: 5,
