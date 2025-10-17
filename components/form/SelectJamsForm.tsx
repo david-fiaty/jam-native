@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
@@ -27,7 +27,8 @@ const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, empt
   const [profileJams, setProfileJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
+  const userState: any = useSelector((state: any) => state.user, shallowEqual);
 
   if (idArray?.length > 0 && !Array.isArray(idArray)) idArray = JSON.parse(idArray);
 
