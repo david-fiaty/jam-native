@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
