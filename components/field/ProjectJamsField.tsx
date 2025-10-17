@@ -22,10 +22,13 @@ type Props = {
   emptyMessage?: any;
 };
 
+const resource: string = 'project';
+
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [selectedItems, setSelectedItems] = useState<any[]>([]);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
+  const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -55,12 +58,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   };
 
   const deleteItem = (row: any) => {
-    let selection: any[] = [...selectedItems];
-
-    console.log(selection, row.item.id)
-    //selection = selection.filter((id: number) => id != row.item.id)
-    
-    //setSelectedItems(selection);
+    let selectedIds: any[] = [...(formData?.jams_ids || [])];
+    selectedIds = selectedIds.filter((id: number) => id != row.item.id)
+    setSelectedItems(selectedIds);
   };
 
   const renderAddButton = () => {
