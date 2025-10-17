@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
@@ -19,9 +19,10 @@ type Props = {
 
 const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const prevFormData: any = useRef(null);
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
@@ -38,6 +39,15 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
 
   useEffect(() => {
     (async () => {
+      if (formData?.[field] && prevFormData.current?.[field] !== formData?.[field]) {
+        setIsLoaded(false);
+        setCurrentValue(await EntityManager.getProfiles(formData[field]));
+        prevFormData.current = formData;
+        setIsLoaded(true);
+      }
+
+      /*
+
       if (formData?.[field]?.length > 0) {
         setCurrentValue(await EntityManager.getProfiles(formData[field]));
       }
@@ -45,6 +55,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
       if (!isLoaded) {
         setIsLoaded(true);
       }
+        */
     })();    
   }, [isLoaded, value, formData, field]);
 
