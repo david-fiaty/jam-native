@@ -91,10 +91,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
         {output}
 
         {isSelected &&
-          <TouchableOpacity
-            style={styles.deleteItem}
-            //onPress={() => deleteMedia(data)}
-          >
+          <TouchableOpacity style={styles.selectedItem}>
             <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity> 
         } 
@@ -159,6 +156,11 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  selectedItem: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
   },
   deleteItem: {
     position: 'absolute',
