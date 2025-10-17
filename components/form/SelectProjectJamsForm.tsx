@@ -10,6 +10,7 @@ import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
 import BoxView from "../view/BoxView";
 import MediaManager from "@/manager/MediaManager";
+import IconView from "../view/IconView";
 
 type Props = {
   resource?: any;
@@ -43,7 +44,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
 
   const toggleItem = (row: any) => {
     let selectedIds: any[] = [...(formData?.[field] || [])];
-    
+
     if (multiSelect === true) {
       let index: number = selectedIds.findIndex((id: any) => id == row.item.id);
 
@@ -55,20 +56,20 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
       selectedIds = [row.item.id];
     }
 
-    dispatch(setFormData<any>({ 
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: selectedIds, 
+      key: field,
+      value: selectedIds,
     }));
   };
 
   const deleteItem = (row: any) => {
     let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
-    
-    dispatch(setFormData<any>({ 
+
+    dispatch(setFormData<any>({
       resource: resource,
-      key: field, 
-      value: itemIds, 
+      key: field,
+      value: itemIds,
     }));
   };
 
@@ -84,12 +85,19 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
     });
 
     return (
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={() => onItemPress(row)}
       >
         {output}
 
-        {isSelected && <TextView>xx</TextView>}
+        {isSelected &&
+          <TouchableOpacity
+            style={styles.deleteItem}
+            //onPress={() => deleteMedia(data)}
+          >
+            <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+          </TouchableOpacity> 
+        } 
       </TouchableOpacity>
     );
   };
@@ -113,10 +121,10 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
     })();
   }, [isLoaded, idArray, addButton, formData, field]);
 
-  if (!isLoaded) return <SpinnerView />; 
+  if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView 
+    <BoxView
       direction="column"
       align="flex-start"
       justify="flex-start"
@@ -129,7 +137,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
         columnWrapperStyle={{ gap: Layout.space.base }}
         scrollEnabled={false}
         emptyMessage={<TextView>{i18n.t('No data available.')}</TextView>}
-        renderItem={(row: any) => renderItem(row)}    
+        renderItem={(row: any) => renderItem(row)}
       />
     </BoxView>
   );
@@ -151,6 +159,11 @@ const styles = StyleSheet.create({
   },
   image: {
     borderRadius: Layout.space.base,
+  },
+  deleteItem: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
   },
 });
 
