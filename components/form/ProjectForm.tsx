@@ -63,16 +63,18 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   };
 
   const renderProjectJams = () => {
+    let projectJamIds: any[] = formData?.jams || [];
+
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between">
           <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({formData?.jams?.length || 0})
+            {i18n.t('Jams')} ({projectJamIds?.length || 0})
           </TextView>
         </BoxView>
 
         <ProjectJamsField
-          idArray={formData?.jams || []}
+          idArray={projectJamIds}
           emptyMessage={i18n.t('No data available.')}
           isPublic={false}
           addable={true}
