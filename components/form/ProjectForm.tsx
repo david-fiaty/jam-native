@@ -69,18 +69,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           <TextView style={styles.groupTitle}>
             {i18n.t('Jams')} ({formData?.jams?.length || 0})
           </TextView>
-
-          <TouchableOpacity onPress={() => {
-            // Todo - Update this
-            /*
-            SectionManager.push(router, 'project-jams', {
-              jamId: JSON.stringify(formData?.jams || []),
-              title: i18n.t('Project Jams'),
-            });
-            */
-          }}>
-            <TextView underline={true}>{i18n.t("View all")}</TextView>
-          </TouchableOpacity>
         </BoxView>
 
         <ProjectJamsField
