@@ -22,7 +22,7 @@ type Props = {
   onListItemPress?: (row: any) => void;
 };
 
-const SelectJamsForm = ({ resource, field, idArray, addButton, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -174,4 +174,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SelectJamsForm;
+export default SelectProjectJamsForm;

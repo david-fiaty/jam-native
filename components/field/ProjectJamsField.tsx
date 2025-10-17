@@ -67,7 +67,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
         width={imageSize.width}
         height={imageSize.height}
         onPress={() => {
-          ModalManager.toggleModal("SelectJamsForm", {
+          ModalManager.toggleModal("SelectProjectJamsForm", {
             field: 'jams_ids',
             idArray: JSON.stringify(userState.profileData?.profile_jams || []),
             multiSelect: true,

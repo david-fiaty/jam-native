@@ -49,7 +49,7 @@ const ProjectsList = ({ idArray }: Props) => {
 
         // Todo - Implement project events
         /*
-        onAddButtonPress={() => ScreenManager.toggleModal("SelectJamsForm", {
+        onAddButtonPress={() => ScreenManager.toggleModal("SelectProjectJamsForm", {
           resource: resource,
           profileId: formData?.id,
           profileJams: profileJams,
