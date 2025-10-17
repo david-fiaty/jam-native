@@ -16,14 +16,13 @@ type Props = {
   resource?: any;
   field?: any;
   idArray?: any;
-  addButton?: boolean;
   multiSelect?: boolean;
   emptyMessage?: any;
   onAddButtonPress?: () => void;
   onListItemPress?: (row: any) => void;
 };
 
-const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
+const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const numColumns = 3;
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
@@ -108,15 +107,11 @@ const SelectProjectJamsForm = ({ resource, field, idArray, addButton, multiSelec
           jams = await EntityManager.getJams(idArray);
         }
 
-        if (addButton === true) {
-          jams.push({ id: "addItem" });
-        }
-
         setProfileJams(jams);
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, idArray, addButton, formData, field]);
+  }, [isLoaded, idArray, formData, field]);
 
   if (!isLoaded) return <SpinnerView />;
 
