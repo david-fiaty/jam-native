@@ -38,7 +38,11 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     };
 
     if (result.success === false) {
-      message.content = i18n.t('Invalid data submission');
+      message.content = i18n.t('Invalid data submission.');
+      FormManager.addServerErrors(resource, result.response);
+    }
+    else {
+      FormManager.resetForm(resource);
     }
 
     ScreenManager.showMessage(message);
