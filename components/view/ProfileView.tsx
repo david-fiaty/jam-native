@@ -319,22 +319,13 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
     );
   };
 
-  const getProfileData = async () => {
-    let profileId: any = userState.profileData.id;
-    let data: any = await UserManager.getProfileData({ profile_id: profileId });
-
-    return data;
-
-    // Todo - Enable logic or remove
-    /*
+  const getProfileData = async () => {    
     if (isPublic) {
-      return await UserManager.getProfileData({ profile_id: profileId || null });
+      return await UserManager.getProfileData({ profile_id: profileId });
     }
     else {
       return { ...userState.profileData };
     }
-    */
-
   };
 
   useEffect(() => {
