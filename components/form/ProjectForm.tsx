@@ -14,6 +14,7 @@ import InputTextareaField from "../field/InputTextareaField";
 import FormManager from "@/manager/FormManager";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import ButtonView from "../view/ButtonView";
+import SpinnerView from "../view/SpinnerView";
 
 type Props = {
   projectId?: any;
@@ -86,6 +87,8 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
       }
     })();
   }, [isLoaded]);
+
+  if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView
