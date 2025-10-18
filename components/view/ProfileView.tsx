@@ -320,22 +320,33 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
   };
 
   const getProfileData = async () => {
+    let profileId: any = userState.profileData.id;
+    let data: any = await UserManager.getProfileData({ profile_id: profileId });
+
+    return data;
+
+    // Todo - Enable logic or remove
+    /*
     if (isPublic) {
       return await UserManager.getProfileData({ profile_id: profileId || null });
     }
     else {
       return { ...userState.profileData };
     }
+    */
+
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileData(itemData || await getProfileData());
+        setProfileData(await getProfileData());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, itemData]);
+  }, [isLoaded]);
+
+  console.log(profileId, profileData?.profile_projects)
 
   return (
     <BoxView
