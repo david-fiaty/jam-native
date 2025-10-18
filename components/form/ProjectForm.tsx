@@ -34,7 +34,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [projectData, setProjectData] = useState<any>({});
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
-  const userState: any = useSelector((state: any) => state.form.user, shallowEqual);
+  const userState: any = useSelector((state: any) => state.user, shallowEqual);
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({
@@ -69,8 +69,9 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   };
 
   const renderProjectJams = () => {
-    let projectJamIds: any[] = getProjectJamsIds();
-
+    //let projectJamIds: any[] = getProjectJamsIds();
+    let projectJamIds: any[] = formData?.jams_ids || [];
+    
     return (
       <>
         <BoxView direction="row" align="center" justify="space-between">
@@ -96,6 +97,9 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
 
     if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
       data = (await EntityManager.getProjects([projectId]))?.[0];
+
+      data.jams_ids = data?.jams || [];
+      delete data.jams;
     }
 
     dispatch(setFormData<any>({
