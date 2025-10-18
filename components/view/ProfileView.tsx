@@ -17,7 +17,6 @@ import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import ModalManager from "@/manager/ModalManager";
-import EntityManager from "@/manager/EntityManager";
 
 const profileImageSize: number = 111;
 
