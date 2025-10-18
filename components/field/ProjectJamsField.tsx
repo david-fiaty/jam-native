@@ -45,10 +45,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
     }
   };
 
-  const deleteItem = (row: any) => {
+  const deleteItem = () => {
     let selectedIds: any[] = [...(formData?.jams_ids || [])];
-    console.log(selectedIds)
-    selectedIds = selectedIds.filter((id: number) => id != row.item.id);
+    selectedIds = selectedIds.filter((id: number) => id != deleteId);
 
     dispatch(setFormData<any>({
       resource: resource,
@@ -105,7 +104,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
               theme="primary"
               size={12}
               padding={3.5}
-              onPress={() => deleteItem(row)}
+              onPress={deleteItem}
             />
           </View>
         )}
@@ -125,9 +124,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   useEffect(() => {
     (async () => {
-      if (!projectJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+      
         setProjectJams(await getProjectJams(idArray));
-      }
+    
     })();
   }, [idArray, projectJams, isPublic]);
 
