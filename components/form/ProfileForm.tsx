@@ -32,7 +32,18 @@ const ProfileForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await UserManager.updateProfile(formData);
+
+    let data: any = {...formData};
+
+    // Todo - Implement image upload
+    if (data?.upload_profile_picture) {
+
+    }
+    else {
+
+    }
+
+    let result: any = await UserManager.updateProfile(data);
 
     if (result?.success === false) {
       ScreenManager.showMessage({
