@@ -46,7 +46,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     }
 
     ScreenManager.showMessage(message);
-
     setIsProcessing(false);
   };
 
