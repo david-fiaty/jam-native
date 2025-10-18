@@ -84,8 +84,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     })();
   }, [isLoaded]);
 
-  console.log(formData);
-
   return (
     <BoxView
       direction="column"
