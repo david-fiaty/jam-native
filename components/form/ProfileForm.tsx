@@ -61,6 +61,7 @@ const ProfileForm = () => {
       ...{ 
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
+        upload_profile_picture: null,
       },
     };
 
