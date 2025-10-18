@@ -24,37 +24,6 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [projectData, setProjectData] = useState<any>(null);
 
-  const renderProjectJams = () => {
-    return (
-      <>
-        <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
-          <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({ projectData?.jams?.length || 0 })
-          </TextView>
-
-          {isPublic && (
-            <TouchableOpacity onPress={() => {
-              ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
-                idArray: projectData?.jams || [],
-                title: i18n.t('Project Jams'),
-              });
-            }}>
-              <TextView underline={true}>{i18n.t("View all")}</TextView>
-            </TouchableOpacity>
-          )}
-        </BoxView>
-
-        <ProjectJamsField
-          idArray={projectData?.jams || []}
-          emptyMessage={i18n.t('No data available.')}
-          isPublic={isPublic}
-          addable={false}
-          deletable={false}
-        />
-      </>
-    );
-  };
-
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -80,15 +49,30 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
         <TextView>{projectData?.description || i18n.t('Unavailable')}</TextView>
       </ProjectViewField>
 
-      <ProjectViewField label={i18n.t('Industries')}>
-        <SectorsViewField idArray={projectData?.sectors || []} />
-      </ProjectViewField>
+      <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
+        <TextView style={styles.groupTitle}>
+          {i18n.t('Jams')} ({projectData?.jams?.length || 0})
+        </TextView>
 
-      <ProjectViewField label={i18n.t('Sub-industries')}>
-        <SubSectorsViewField idArray={projectData?.sectors || []} />
-      </ProjectViewField>
+        {isPublic && (
+          <TouchableOpacity onPress={() => {
+            ModalManager.toggleModal(isPublic ? 'PublicJamSection' : 'PrivateJamSection', {
+              idArray: projectData?.jams || [],
+              title: i18n.t('Project Jams'),
+            });
+          }}>
+            <TextView underline={true}>{i18n.t("View all")}</TextView>
+          </TouchableOpacity>
+        )}
+      </BoxView>
 
-      {renderProjectJams()}
+      <ProjectJamsField
+        idArray={projectData?.jams || []}
+        emptyMessage={i18n.t('No data available.')}
+        isPublic={isPublic}
+        addable={false}
+        deletable={false}
+      />
     </BoxView>
   );
 };
