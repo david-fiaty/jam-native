@@ -200,7 +200,10 @@ class EntityManager {
     let response: any = await DataManager.post('addJam', payload);
     let success: boolean = false;
 
-    if (response?.id > 0) success = true;
+    if (response?.id > 0) {
+      UserManager.updateProfileReference('profile_jams', response.id);
+      success = true;
+    }
 
     return {
       success: success,
