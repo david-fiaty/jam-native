@@ -61,44 +61,22 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     setIsProcessing(false);
   };
 
-  const getProjectJamsIds = () => {
-    return [...new Set([
-      ...(projectData?.jams || []),
-      ...(formData?.jams_ids || [])
-    ])];
-  };
-
-  const renderProjectJams = () => {
-    //let projectJamIds: any[] = getProjectJamsIds();
-    let projectJamIds: any[] = formData?.jams_ids || [];
-    
-    return (
-      <>
-        <BoxView direction="row" align="center" justify="space-between">
-          <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({projectJamIds?.length || 0})
-          </TextView>
-        </BoxView>
-
-        <ProjectJamsField
-          idArray={projectJamIds}
-          emptyMessage={i18n.t('No data available.')}
-          isPublic={false}
-          addable={true}
-          deletable={true}
-        />
-      </>
-    );
-  };
-
   const loadFormData = async () => {
     let data: any = {};
     let profileId: any = userState.profileData?.id || 0;
 
     if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
       data = (await EntityManager.getProjects([projectId]))?.[0];
+      data = {
+        ...data,
+        ...{
+          jams_ids: [...new Set([
+            ...(data?.jams || []),
+            ...(formData?.jams_ids || []),
+          ])],
+        },
+      };
 
-      data.jams_ids = data?.jams || [];
       delete data.jams;
     }
 
@@ -193,7 +171,18 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           value={formData?.sectors}
         />
 
-        {renderProjectJams()}
+        <BoxView direction="row" align="center" justify="space-between">
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Jams')} ({formData?.jams_ids?.length || 0})
+          </TextView>
+        </BoxView>
+        <ProjectJamsField
+          idArray={formData?.jams_ids}
+          emptyMessage={i18n.t('No data available.')}
+          isPublic={false}
+          addable={true}
+          deletable={true}
+        />
 
         <View style={styles.subtmitButton}>
           <ButtonView
@@ -203,7 +192,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           />
         </View>
       </BoxView>
-    </BoxView>
+    </BoxView >
   );
 };
 
