@@ -32,7 +32,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
   const [projectData, setProjectData] = useState<any>({});
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
 
@@ -63,7 +62,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
 
   const getProjectJamsIds = () => {
     return [...new Set([
-      ...(projectData?.jams || []), 
+      ...(projectData?.jams || []),
       ...(formData?.jams_ids || [])
     ])];
   };
@@ -90,29 +89,32 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     );
   };
 
+  const loadFormData = async () => {
+    let data: any = {};
+    let profileId: any = await UserManager.getProfileId();
+
+    if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
+      data = (await EntityManager.getProjects([projectId]))?.[0];
+    }
+
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: null,
+      value: {
+        ...data,
+        ...{ profile_id: profileId },
+      },
+    }));
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let projectData: any = {};
-        setProfileId(await UserManager.getProfileId());
-
-        if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
-          projectData = (await EntityManager.getProjects([projectId]))?.[0];
-        }
-
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          value: {
-            ...projectData,
-            ...{ profile_id: profileId },
-          },
-        }));
-
+        await loadFormData();
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, projectId]);
+  }, [isLoaded]);
 
   return (
     <BoxView
