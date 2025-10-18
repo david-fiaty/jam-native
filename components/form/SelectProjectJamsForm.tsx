@@ -111,6 +111,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMes
       direction="column"
       align="flex-start"
       justify="flex-start"
+      scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
       <ListView
@@ -130,6 +131,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
+    paddingBottom: Layout.space.base*2,
   },
   title: {
     fontWeight: "bold",
