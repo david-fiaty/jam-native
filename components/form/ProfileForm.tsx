@@ -53,17 +53,35 @@ const ProfileForm = () => {
     setIsProcessing(false);
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      dispatch(setFormData<any>({
-        resource: resource,
-        key: null,
-        value: userState.profileData,
-      }));
+  const loadFormData = async () => {
+    let data: any = {...userState.profileData};
+    let profileId: any = userState.profileData.id;
 
-      setIsLoaded(true);
-    }
-  }, [isLoaded, resource, userState]);
+    data = {
+      ...data,
+      ...{ scope_country_code: userState.profileData?.country || ''},
+    };
+
+    delete data.country;
+
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: null,
+      value: {
+        ...data,
+        ...{ profile_id: profileId },
+      },
+    }));
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        await loadFormData();
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
