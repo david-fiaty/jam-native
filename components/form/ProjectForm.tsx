@@ -29,14 +29,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
 
-  const updateField = (key: any, value: any) => {
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: key,
-      value: value,
-    }));
-  };
-
   const submitForm = async () => {
     setIsProcessing(true);
     let result: any = await EntityManager.addProject(formData);
@@ -56,7 +48,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
 
   const loadFormData = async () => {
     let data: any = {};
-    let profileId: any = userState.profileData?.id || 0;
+    let profileId: any = userState.profileData.id;
 
     if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
       data = (await EntityManager.getProjects([projectId]))?.[0];
