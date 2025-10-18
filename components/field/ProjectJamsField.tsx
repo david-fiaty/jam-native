@@ -124,11 +124,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   useEffect(() => {
     (async () => {
-      
-        setProjectJams(await getProjectJams(idArray));
-    
+      setProjectJams(await getProjectJams(idArray));
     })();
-  }, [idArray, projectJams, isPublic]);
+  }, [idArray]);
 
   if (!projectJams) return <SpinnerView size="small" />;
 
