@@ -212,7 +212,10 @@ class EntityManager {
     let response: any = await DataManager.post('addProject', entityData);
     let success: boolean = false;
 
-    if (response?.id > 0) success = true;
+    if (response?.id > 0) {
+      UserManager.updateProfileReference('profile_projects', response.id);
+      success = true;
+    } 
 
     return {
       success: success,

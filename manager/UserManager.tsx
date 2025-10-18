@@ -1,5 +1,6 @@
 import { setActiveModals } from '@/redux/slices/ModalSlice';
 import { setActiveSections } from '@/redux/slices/SectionSlice';
+import { setProfileData } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Store from '@/redux/Store';
@@ -10,7 +11,6 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import ScreenManager from './ScreenManager';
 import StaticData from '@/constants/StaticData';
-import { setProfileData } from '@/redux/slices/UserSlice';
 
 class UserManager {
   async sendSignupCode(data: any) {

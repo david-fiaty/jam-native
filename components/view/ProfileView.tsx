@@ -17,7 +17,6 @@ import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import ModalManager from "@/manager/ModalManager";
-import EntityManager from "@/manager/EntityManager";
 
 const profileImageSize: number = 111;
 
@@ -319,9 +318,9 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
     );
   };
 
-  const getProfileData = async () => {
+  const getProfileData = async () => {    
     if (isPublic) {
-      return await UserManager.getProfileData({ profile_id: profileId || null });
+      return await UserManager.getProfileData({ profile_id: profileId });
     }
     else {
       return { ...userState.profileData };
@@ -331,11 +330,11 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfileData(itemData || await getProfileData());
+        setProfileData(await getProfileData());
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, itemData]);
+  }, [isLoaded]);
 
   return (
     <BoxView
