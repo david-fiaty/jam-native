@@ -35,13 +35,7 @@ const ProfileForm = () => {
 
     let data: any = {...formData};
 
-    // Todo - Implement image upload
-    if (data?.upload_profile_picture) {
-
-    }
-    else {
-
-    }
+    delete data.profile_picture;
 
     let result: any = await UserManager.updateProfile(data);
 
