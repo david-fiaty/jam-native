@@ -111,6 +111,7 @@ const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMes
       direction="column"
       align="flex-start"
       justify="flex-start"
+      scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
       <ListView
