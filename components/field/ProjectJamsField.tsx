@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
@@ -13,6 +14,7 @@ import ModalManager from '@/manager/ModalManager';
 import IconView from '../view/IconView';
 
 const numColumns = 3;
+const resource: string = 'project';
 
 type Props = {
   idArray?: any;
@@ -22,9 +24,8 @@ type Props = {
   emptyMessage?: any;
 };
 
-const resource: string = 'project';
-
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
+  const dispatch = useDispatch();
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState<any>(0);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
@@ -44,11 +45,15 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
     }
   };
 
-  const deleteItem = (row: any) => {
+  const deleteItem = () => {
     let selectedIds: any[] = [...(formData?.jams_ids || [])];
-    selectedIds = selectedIds.filter((id: number) => id != row.item.id);
+    selectedIds = selectedIds.filter((id: number) => id != deleteId);
 
-    // Todo - Update form state
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: 'jams_ids',
+      value: selectedIds,
+    }));
 
     setDeleteId(0);
   };
@@ -99,7 +104,7 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
               theme="primary"
               size={12}
               padding={3.5}
-              onPress={() => deleteItem(row)}
+              onPress={deleteItem}
             />
           </View>
         )}
@@ -119,9 +124,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   useEffect(() => {
     (async () => {
-      if (!projectJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+      
         setProjectJams(await getProjectJams(idArray));
-      }
+    
     })();
   }, [idArray, projectJams, isPublic]);
 

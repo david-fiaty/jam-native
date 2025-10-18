@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View } from 'react-native';
-import { useRouter } from 'expo-router';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -30,13 +29,12 @@ type Props = {
 const resource: string = 'project';
 
 const ProjectForm = ({ projectId, isPublic }: Props) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [profileId, setProfileId] = useState<number>(0);
   const [projectData, setProjectData] = useState<any>({});
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
+  const userState: any = useSelector((state: any) => state.user, shallowEqual);
 
   const updateField = (key: any, value: any) => {
     dispatch(setFormData<any>({
@@ -63,58 +61,43 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
     setIsProcessing(false);
   };
 
-  const getProjectJamsIds = () => {
-    return [...new Set([
-      ...(projectData?.jams || []), 
-      ...(formData?.jams_ids || [])
-    ])];
-  };
+  const loadFormData = async () => {
+    let data: any = {};
+    let profileId: any = userState.profileData?.id || 0;
 
-  const renderProjectJams = () => {
-    let projectJamIds: any[] = getProjectJamsIds();
+    if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
+      data = (await EntityManager.getProjects([projectId]))?.[0];
+      data = {
+        ...data,
+        ...{
+          jams_ids: [...new Set([
+            ...(data?.jams || []),
+            ...(formData?.jams_ids || []),
+          ])],
+        },
+      };
 
-    return (
-      <>
-        <BoxView direction="row" align="center" justify="space-between">
-          <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({projectJamIds?.length || 0})
-          </TextView>
-        </BoxView>
+      delete data.jams;
+    }
 
-        <ProjectJamsField
-          idArray={projectJamIds}
-          emptyMessage={i18n.t('No data available.')}
-          isPublic={false}
-          addable={true}
-          deletable={true}
-        />
-      </>
-    );
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: null,
+      value: {
+        ...data,
+        ...{ profile_id: profileId },
+      },
+    }));
   };
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let projectData: any = {};
-        setProfileId(await UserManager.getProfileId());
-
-        if (!isNaN(parseInt(projectId)) && parseInt(projectId) > 0) {
-          projectData = (await EntityManager.getProjects([projectId]))?.[0];
-        }
-
-        dispatch(setFormData<any>({
-          resource: resource,
-          key: null,
-          value: {
-            ...projectData,
-            ...{ profile_id: profileId },
-          },
-        }));
-
+        await loadFormData();
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, projectId]);
+  }, [isLoaded]);
 
   return (
     <BoxView
@@ -188,7 +171,18 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           value={formData?.sectors}
         />
 
-        {renderProjectJams()}
+        <BoxView direction="row" align="center" justify="space-between">
+          <TextView style={styles.groupTitle}>
+            {i18n.t('Jams')} ({formData?.jams_ids?.length || 0})
+          </TextView>
+        </BoxView>
+        <ProjectJamsField
+          idArray={formData?.jams_ids}
+          emptyMessage={i18n.t('No data available.')}
+          isPublic={false}
+          addable={true}
+          deletable={true}
+        />
 
         <View style={styles.subtmitButton}>
           <ButtonView
@@ -198,7 +192,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           />
         </View>
       </BoxView>
-    </BoxView>
+    </BoxView >
   );
 };
 

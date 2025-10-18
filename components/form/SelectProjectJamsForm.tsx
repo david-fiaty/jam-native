@@ -27,7 +27,6 @@ const numColumns = 3;
 const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMessage, onAddButtonPress, onListItemPress }: Props) => {
   const dispatch = useDispatch();
   const [profileJams, setProfileJams] = useState<any>([]);
-  const [currentJams, setCurrentJams] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
@@ -61,16 +60,6 @@ const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMes
       resource: resource,
       key: field,
       value: selectedIds,
-    }));
-  };
-
-  const deleteItem = (row: any) => {
-    let itemIds: any[] = [...(formData?.[field] || [])].filter((n: number) => n !== row.item.id);
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: itemIds,
     }));
   };
 
@@ -110,7 +99,6 @@ const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMes
         }
 
         setProfileJams(jams);
-        setCurrentJams(jams);
         setIsLoaded(true);
       }
     })();
