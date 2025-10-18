@@ -8,9 +8,6 @@ import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
 import ProjectViewField from "../field/ProjectViewField";
 import ProjectJamsField from "../field/ProjectJamsField";
-import SectionManager from "@/manager/SectionManager";
-import SectorsViewField from "../field/SectorsViewField";
-import SubSectorsViewField from "../field/SubSectorsViewField";
 import ModalManager from "@/manager/ModalManager";
 
 type Props = {
