@@ -59,10 +59,14 @@ const ProfileForm = () => {
 
     data = {
       ...data,
-      ...{ scope_country_code: userState.profileData?.country || ''},
+      ...{ 
+        scope_country_code: userState.profileData?.country || '',
+        sectors_ids: userState.profileData?.sectors || [],
+      },
     };
 
     delete data.country;
+    delete data.sectors;
 
     dispatch(setFormData<any>({
       resource: resource,
