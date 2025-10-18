@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
@@ -13,6 +14,7 @@ import ModalManager from '@/manager/ModalManager';
 import IconView from '../view/IconView';
 
 const numColumns = 3;
+const resource: string = 'project';
 
 type Props = {
   idArray?: any;
@@ -22,11 +24,10 @@ type Props = {
   emptyMessage?: any;
 };
 
-const resource: string = 'project';
-
 const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
+  const dispatch = useDispatch();
   const [projectJams, setProjectJams] = useState<any[]>([]);
-  const [selectedItems, setSelectedItems] = useState<any[]>([]);
+  const [deleteId, setDeleteId] = useState<any>(0);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
@@ -36,31 +37,25 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
       ModalManager.toggleModal('PublicJamSection', {
         jamId: row?.item?.id,
         title: row?.item?.title,
-        itemData: JSON.stringify(row?.item),
+        itemData: JSON.stringify(row.item),
       });
     }
     else if (deletable) {
-      updateSelection(row);
+      setDeleteId(row.item.id);
     }
   };
 
-  const updateSelection = (row: any) => {
-    let selection: any[] = [...selectedItems];
-
-    if (selection.includes(row.item.id)) {
-      selection = selection.filter((id: number) => id != row.item.id)
-    }
-    else {
-      selection.push(row.item.id);
-    }
-
-    setSelectedItems(selection);
-  };
-
-  const deleteItem = (row: any) => {
+  const deleteItem = () => {
     let selectedIds: any[] = [...(formData?.jams_ids || [])];
-    selectedIds = selectedIds.filter((id: number) => id != row.item.id)
-    setSelectedItems(selectedIds);
+    selectedIds = selectedIds.filter((id: number) => id != deleteId);
+
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: 'jams_ids',
+      value: selectedIds,
+    }));
+
+    setDeleteId(0);
   };
 
   const renderAddButton = () => {
@@ -102,14 +97,14 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
       >
         {output}
 
-        {selectedItems.includes(row?.item?.id) && (
+        {deleteId == row?.item?.id && (
           <View style={styles.deleteIcon}>
             <IconView
               name="delete"
               theme="primary"
               size={12}
               padding={3.5}
-              onPress={() => deleteItem(row)}
+              onPress={deleteItem}
             />
           </View>
         )}
@@ -129,9 +124,9 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   useEffect(() => {
     (async () => {
-      if (!projectJams?.length && Array.isArray(idArray) && idArray?.length > 0) {
+      
         setProjectJams(await getProjectJams(idArray));
-      }
+    
     })();
   }, [idArray, projectJams, isPublic]);
 
