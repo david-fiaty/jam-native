@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   element: {
     width: '100%',
     paddingTop: Layout.space.base / 2,
-    height: Layout.space.base * 12,
+    height: 'auto',
   },
 });
 
