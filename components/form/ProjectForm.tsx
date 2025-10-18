@@ -8,17 +8,11 @@ import EntityManager from "@/manager/EntityManager";
 import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
 import ProjectJamsField from "../field/ProjectJamsField";
-import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
-import SectorsField from "../field/SectorsField";
 import FormManager from "@/manager/FormManager";
 import PrivacyStatusField from "../field/PrivacyStatusField";
-import DatePickerField from "../field/DatePickerField";
-import DataManager from "@/manager/DataManager";
-import CountriesField from "../field/CountriesField";
-import ModalManager from "@/manager/ModalManager";
 import ButtonView from "../view/ButtonView";
 
 type Props = {
@@ -32,7 +26,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [projectData, setProjectData] = useState<any>({});
   const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
 
@@ -128,48 +121,6 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           onChangeValue={(option: any) => FormManager.updateField(resource, 'privacy_status', option.value, ['string'])}
         />
         {FormManager.renderError('privacy_status')}
-
-        <TextView>{i18n.t('Start date')}</TextView>
-        <DatePickerField
-          value={formData?.period?.start_datetime}
-          onChangeValue={(value: any) =>
-            updateField('period', {
-              ...(formData?.period || {}),
-              ...{ start_datetime: DataManager.toDbDate(value) },
-            })
-          }
-        />
-
-        <TextView>{i18n.t('End date')}</TextView>
-        <DatePickerField
-          value={formData?.period?.end_datetime}
-          onChangeValue={(value: any) =>
-            updateField('period', {
-              ...(formData?.period || {}),
-              ...{ end_datetime: DataManager.toDbDate(value) },
-            })
-          }
-        />
-
-        <TextView>{i18n.t('Select countries')}</TextView>
-        <CountriesField
-          multiple={true}
-          resource={resource}
-          field="scope_countries_codes"
-          placeholder={i18n.t('Select countries')}
-          value={formData?.scope_countries_codes}
-          onPress={() => ModalManager.toggleModal('CountriesList', {
-            resource: resource,
-            field: 'scope_countries_codes',
-            multiple: true,
-          })}
-        />
-
-        <SectorsField
-          resource={resource}
-          field="sectors_ids"
-          value={formData?.sectors}
-        />
 
         <BoxView direction="row" align="center" justify="space-between">
           <TextView style={styles.groupTitle}>
