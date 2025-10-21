@@ -142,6 +142,7 @@ const Endpoints: any = {
     path: '/jams/',
     cacheable: false,
     dataKey: null,
+    multipart: true,
   },
   deleteJam: {
     path: '/jams/',
@@ -167,6 +168,7 @@ const Endpoints: any = {
     path: '/profiles/[profile_id]/',
     cacheable: false,
     dataKey: null,
+    multipart: true,
   },
   sendSignupCode: {
     path: '/send-registration-verification/',
