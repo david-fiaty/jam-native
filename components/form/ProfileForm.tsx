@@ -21,6 +21,7 @@ import BoxView from "@/components/view/BoxView";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
 import OrganizationTypesField from "../field/OrganizationTypesField";
+import CulturalActivityTypesField from "../field/CulturalActivityTypesField";
 
 const resource: string = 'profile';
 
@@ -74,7 +75,7 @@ const ProfileForm = () => {
         sectors_ids: userState.profileData?.sectors || [],
         upload_profile_picture: null,
       },
-    };
+    }; 
 
     delete data.country;
     delete data.sectors;
@@ -152,6 +153,23 @@ const ProfileForm = () => {
               }, ['string'])}
             />
             {FormManager.renderError('profile_personal.last_name')}
+
+            <TextView>
+              {i18n.t('Cultural activities')}*
+            </TextView>
+            <CulturalActivityTypesField
+              resource={resource}
+              field="main_cultural_activities"
+              parent="profile_personal"
+              placeholder={i18n.t('Select cultural activities')}
+              value={formData?.profile_personal?.main_cultural_activities}
+              onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
+                resource: resource,
+                field: "main_cultural_activities",
+                parent: "profile_personal",
+              })}
+            />
+            {FormManager.renderError('profile_personal.main_cultural_activities')}
           </>
         )}
 
@@ -187,6 +205,23 @@ const ProfileForm = () => {
               })}
             />
             {FormManager.renderError('profile_organization.organization_types')}
+
+            <TextView>
+              {i18n.t('Cultural activities')}*
+            </TextView>
+            <CulturalActivityTypesField
+              resource={resource}
+              field="main_cultural_activities"
+              parent="profile_organization"
+              placeholder={i18n.t('Select cultural activities')}
+              value={formData?.profile_organization?.main_cultural_activities}
+              onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
+                resource: resource,
+                field: "main_cultural_activities",
+                parent: "profile_organization",
+              })}
+            />
+            {FormManager.renderError('profile_organization.main_cultural_activities')}
 
             <TextView>
               {i18n.t('Creation year')}
@@ -236,6 +271,23 @@ const ProfileForm = () => {
               })}
             />
             {FormManager.renderError('profile_venue.venue_types')}
+
+            <TextView>
+              {i18n.t('Cultural activities')}*
+            </TextView>
+            <CulturalActivityTypesField
+              resource={resource}
+              field="main_cultural_activities"
+              parent="profile_venue"
+              placeholder={i18n.t('Select cultural activities')}
+              value={formData?.profile_venue?.main_cultural_activities}
+              onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
+                resource: resource,
+                field: "main_cultural_activities",
+                parent: "profile_venue",
+              })}
+            />
+            {FormManager.renderError('profile_venue.main_cultural_activities')}
 
             <TextView>
               {i18n.t('Creation year')}
