@@ -99,8 +99,6 @@ const ProfileForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(Object.keys(formData))
-
   return (
     <BoxView
       direction="column"
