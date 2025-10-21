@@ -12,11 +12,12 @@ import SpinnerView from '../view/SpinnerView';
 type Props = {
   resource: string;
   field: string;
+  value?: any;
   placeholder?: any;
   onPress?: () => void;
 };
 
-const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) => {
+const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [currentProfiles, setCurrentProfiles] = useState<any>([]);
@@ -34,16 +35,13 @@ const CollaboratorsField = ({ resource, field, placeholder, onPress }: Props) =>
     }));
   };
 
+
+  
   useEffect(() => {
     (async () => {
-      if (formData?.[field]?.length > 0 && prevFormData.current?.[field] !== formData?.[field]) {
-        setIsLoaded(false);
-        setCurrentProfiles(await EntityManager.getProfiles(formData[field]));
-        prevFormData.current = formData;
-        setIsLoaded(true);
-      }
+      setCurrentProfiles(await EntityManager.getProfiles(value || []));
     })();    
-  }, [isLoaded, formData, field]);
+  }, [value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
