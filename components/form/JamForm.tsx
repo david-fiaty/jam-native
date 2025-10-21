@@ -166,8 +166,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
               resource={resource}
               placeholder={i18n.t('Select your location')}
               onChangeValue={(data: any) => {
-                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude, ['string']);
-                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude, ['string']);
+                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude, ['number']);
+                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude, ['number']);
               }}
               onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
                 resource: resource,
