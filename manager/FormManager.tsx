@@ -15,20 +15,6 @@ class FormManager {
     this.clearErrors(resource);
   }
 
-  updateField(resource: string, key: any, value: any, rules: any[] = []) {
-    let errors: any[] = [];
-
-    if (rules.length > 0) {
-      errors = this.validateFied(resource, key, value, rules);
-    }
-
-    if (errors.length) {
-      this.addClientError(resource, errors);
-    }
-
-    this.addValue(resource, key, value);
-  };
-
   addValue(resource: string, key: any, value: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
@@ -104,6 +90,20 @@ class FormManager {
     }
 
     return <></>;
+  }
+
+  updateField(resource: string, key: any, value: any, rules: any[] = []) {
+    let errors: any[] = [];
+
+    if (rules.length > 0) {
+      errors = this.validateFied(resource, key, value, rules);
+    }
+
+    if (errors.length) {
+      this.addClientError(resource, errors);
+    }
+
+    this.addValue(resource, key, value);
   }
 
   validateFied(resource: string, key: string, value: any, rules: any[]) {
