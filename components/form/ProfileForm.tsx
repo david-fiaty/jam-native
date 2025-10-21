@@ -32,7 +32,15 @@ const ProfileForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await UserManager.updateProfile(formData);
+
+    let data: any = {...formData};
+
+    delete data.profile_picture;
+    if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
+      delete data.upload_profile_picture;
+    }
+
+    let result: any = await UserManager.updateProfile(data);
 
     if (result?.success === false) {
       ScreenManager.showMessage({
@@ -61,6 +69,7 @@ const ProfileForm = () => {
       ...{ 
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
+        upload_profile_picture: null,
       },
     };
 
