@@ -20,6 +20,7 @@ import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
+import OrganizationTypesField from "../field/OrganizationTypesField";
 
 const resource: string = 'profile';
 
@@ -169,6 +170,23 @@ const ProfileForm = () => {
               }, ['string'])}
             />
             {FormManager.renderError('profile_organization.organization_name')}
+
+            <TextView>
+              {i18n.t('Organization types')}*
+            </TextView>
+            <OrganizationTypesField
+              resource={resource}
+              field="organization_types"
+              parent="profile_organization"
+              placeholder={i18n.t('Select organization types')}
+              value={formData?.profile_organization?.organization_types}
+              onPress={() => ModalManager.toggleModal('OrganizationTypesList', {
+                resource: resource,
+                field: "organization_types",
+                parent: "profile_organization",
+              })}
+            />
+            {FormManager.renderError('profile_organization.organization_types')}
 
             <TextView>
               {i18n.t('Creation year')}
