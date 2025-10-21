@@ -268,7 +268,7 @@ class FormManager {
 
   isNestedObjectItem(element: any) {
     return Object.values(element).some(
-      value => typeof value === 'object' && value !== null && !Array.isArray(value)
+      value => value !== null && (typeof value === 'object' || Array.isArray(value)) 
     );
   }
 
