@@ -30,6 +30,7 @@ import ProfileFormSection from '../section/profile/ProfileFormSection';
 import ProfileLocationMapView from '../view/ProfileLocationMapView';
 import JamFormSection from '../section/jam/JamFormSection';
 import ProjectFormSection from '../section/project/ProjectFormSection';
+import OrganizationTypesList from '../list/OrganizationTypesList';
 
 type Props = {
   currentSection?: any;
@@ -177,6 +178,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'VenueTypesList',
         title: i18n.t('Venue types'),
         render: (params: any) => <VenueTypesList {...params} />,
+      },
+      {
+        id: 'OrganizationTypesList',
+        title: i18n.t('Organization types'),
+        render: (params: any) => <OrganizationTypesList {...params} />,
       },
       {
         id: 'CountriesList',
