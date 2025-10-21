@@ -20,7 +20,6 @@ import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
-import MediaManager from "@/manager/MediaManager";
 
 const resource: string = 'profile';
 
@@ -33,7 +32,15 @@ const ProfileForm = () => {
 
   const submitForm = async () => {
     setIsProcessing(true);
-    let result: any = await UserManager.updateProfile(formData);
+
+    let data: any = {...formData};
+
+    delete data.profile_picture;
+    if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
+      delete data.upload_profile_picture;
+    }
+
+    let result: any = await UserManager.updateProfile(data);
 
     if (result?.success === false) {
       ScreenManager.showMessage({
@@ -62,6 +69,7 @@ const ProfileForm = () => {
       ...{ 
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
+        upload_profile_picture: null,
       },
     };
 
@@ -92,7 +100,7 @@ const ProfileForm = () => {
   return (
     <BoxView
       direction="column"
-      align="center"
+      align="flex-start"
       justify="flex-start"
       scroll={true}
       style={[Layout.formContainer, styles.container]}
@@ -338,10 +346,9 @@ const ProfileForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: Layout.space.base,
-    paddingBottom: Layout.space.base * 2,
+    flex: 1,
     width: '100%',
-    height: '100%',
+    paddingBottom: Layout.space.base * 3,
   },
   formContainer: {
     maxWidth: '100%',

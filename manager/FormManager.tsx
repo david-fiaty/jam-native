@@ -2,6 +2,7 @@ import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
+import ScreenManager from "./ScreenManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -138,7 +139,7 @@ class FormManager {
     return {
       string: {
         run: (value: any) => {
-          return value && typeof value == 'string' && value.trim().length > 0;
+          return value && value.trim() !== '';
         },
         error: () => {
           return i18n.t('A value is required.');
@@ -154,8 +155,7 @@ class FormManager {
       },
       number: {
         run: (value: any) => {
-          let pattern: any = /^\d+$/;
-          return value && pattern.test(value);
+          return !isNaN(parseFloat(value)) && isFinite(value);
         },
         error: () => {
           return i18n.t('Invalid number value.');
@@ -265,11 +265,16 @@ class FormManager {
   }
 
   createFileObject(element: any) {
-    return {
-      uri: element.uri, // Todo - Handle IOS case?
-      type: element.mimeType,
-      name: element.fileName,
-    };
+    if (ScreenManager.isWeb()) {
+      return element.file;
+    }
+    else {
+      return {
+        uri: element.uri, // Todo - Handle IOS case?
+        type: element.mimeType,
+        name: element.fileName,
+      };
+    }
   }
 
   createJsonObject(element: any) {
