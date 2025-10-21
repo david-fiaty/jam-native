@@ -11,6 +11,8 @@ class FormManager {
       key: null,
       value: {},
     }));
+
+    this.clearErrors(resource);
   }
 
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
@@ -79,9 +81,15 @@ class FormManager {
     }]));
   }
 
-  clearErrors(resource: string, key: any) {
+  clearErrors(resource: string, key?: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
-    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+
+    if (key) {
+      formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+    }
+    else {
+      formErrors = [];
+    }
 
     Store.dispatch(setFormErrors<any>(formErrors));
   }
