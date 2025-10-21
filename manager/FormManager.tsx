@@ -155,8 +155,7 @@ class FormManager {
       },
       number: {
         run: (value: any) => {
-          let pattern: any = /^\d+$/;
-          return value && pattern.test(value);
+          return !isNaN(parseFloat(value)) && isFinite(value);
         },
         error: () => {
           return i18n.t('Invalid number value.');
