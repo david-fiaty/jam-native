@@ -5,7 +5,6 @@ import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
-import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import SpinnerView from '../view/SpinnerView';
 
