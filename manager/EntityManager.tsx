@@ -198,7 +198,7 @@ class EntityManager {
   async addJam(entityData: any) {
     let payload: any = FormManager.objectToFormData(entityData);
     let response: any = await DataManager.post('addJam', payload);
-    let success: boolean = false;
+    let success: boolean = false; 
 
     if (response?.id > 0) {
       UserManager.updateProfileReference('profile_jams', response.id);
