@@ -15,16 +15,16 @@ type Props = {
   parent?: any;
 };
 
-const OrganizationTypesList = ({ resource, field, parent }: Props) => {
+const CulturalActivityTypesList = ({ resource, field, parent }: Props) => {
   const dispatch = useDispatch();
-  const [organizationTypes, setOrganizationTypes] = useState<any>(null);
-  const [selectedOrganizations, setSelectedOrganizations] = useState<any>([]);
+  const [culturalActivityTypes, setCulturalActivityTypes] = useState<any>(null);
+  const [selectedCulturalActivities, setSelectedCulturalActivities] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const toggleItem = (entityId: number) => {
-    let selectedIds: any[] = [...selectedOrganizations];
+    let selectedIds: any[] = [...selectedCulturalActivities];
     let currentData: any = { ...formData };
 
     if (selectedIds.includes(entityId)) {
@@ -34,7 +34,7 @@ const OrganizationTypesList = ({ resource, field, parent }: Props) => {
       selectedIds.push(entityId);
     }
 
-    setSelectedOrganizations(selectedIds);
+    setSelectedCulturalActivities(selectedIds);
 
     dispatch(setFormData<any>({
       resource: resource,
@@ -47,7 +47,7 @@ const OrganizationTypesList = ({ resource, field, parent }: Props) => {
   };
 
   const renderItem = (row: any) => {
-    let selected: boolean = selectedOrganizations.includes(row.item.id);
+    let selected: boolean = selectedCulturalActivities.includes(row.item.id);
 
     return (
       <TouchableOpacity
@@ -75,21 +75,21 @@ const OrganizationTypesList = ({ resource, field, parent }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
+      if (!culturalActivityTypes) setCulturalActivityTypes(appState.culturalActivityTypesData);
 
-      setSelectedOrganizations(formData?.[parent]?.[field] || []);
+      setSelectedCulturalActivities(formData?.[parent]?.[field] || []);
       setIsLoaded(true);
     }
-  }, [organizationTypes, formData, field, parent, selectedOrganizations, appState]);
+  }, [culturalActivityTypes, formData, field, parent, selectedCulturalActivities, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        {organizationTypes?.length > 0 &&
+        {culturalActivityTypes?.length > 0 &&
           <ListView
-            data={organizationTypes}
+            data={culturalActivityTypes}
             renderItem={(row: any) => renderItem(row)}
           />
         }
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OrganizationTypesList;
+export default CulturalActivityTypesList;

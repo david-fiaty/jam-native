@@ -187,7 +187,7 @@ class EntityManager {
     return await DataManager.get('organizationTypes', options);
   }
 
-  async getCulturalActivities() {
+  async getCulturalActivitiesTypes() {
     //let language = await UserManager.getLanguage();
     let language = 'en';
     let options = { lang: language };

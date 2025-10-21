@@ -7,6 +7,7 @@ const AppSlice = createSlice({
     countriesData: [],
     venueTypesData: [],
     organizationTypesData: [],
+    culturalActivityTypesData: [],
   },
   reducers: {
     setSectorsData: (state, action) => {
@@ -21,8 +22,11 @@ const AppSlice = createSlice({
     setOrganizationTypesData: (state, action) => {
       state.organizationTypesData = action.payload;
     },
+    setCulturalActivityTypesData: (state, action) => {
+      state.culturalActivityTypesData = action.payload;
+    },
   },
 });
 
-export const { setSectorsData, setCountriesData, setVenueTypesData, setOrganizationTypesData } = AppSlice.actions;
+export const { setSectorsData, setCountriesData, setVenueTypesData, setOrganizationTypesData, setCulturalActivityTypesData } = AppSlice.actions;
 export default AppSlice.reducer;
