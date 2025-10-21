@@ -51,6 +51,8 @@ const ProfileForm = () => {
       setIsProcessing(false);
     }
     else {
+      FormManager.clearErrors(resource);
+
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
         content: i18n.t('The profile data was successfully updated.'),
@@ -96,6 +98,8 @@ const ProfileForm = () => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(Object.keys(formData))
 
   return (
     <BoxView
