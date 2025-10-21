@@ -2,6 +2,7 @@ import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
+import ScreenManager from "./ScreenManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -10,21 +11,9 @@ class FormManager {
       key: null,
       value: {},
     }));
+
+    this.clearErrors(resource);
   }
-
-  updateField(resource: string, key: any, value: any, rules: any[] = []) {
-    let errors: any[] = [];
-
-    if (rules.length > 0) {
-      errors = this.validateFied(resource, key, value, rules);
-    }
-
-    if (errors.length) {
-      this.addClientError(resource, errors);
-    }
-
-    this.addValue(resource, key, value);
-  };
 
   addValue(resource: string, key: any, value: any) {
     Store.dispatch(setFormData<any>({
@@ -32,15 +21,6 @@ class FormManager {
       key: this.getTargetKey(key),
       value: value,
     }));
-  }
-
-  addClientError(resource: string, errors: any[]) {
-    let formErrors: any[] = [...Store.getState().form.errors];
-
-    Store.dispatch(setFormErrors<any>([...formErrors, {
-      ...{ resource: resource },
-      ...errors[0],
-    }]));
   }
 
   validatePasswordMatch(resource: string, confirmationkey: string, confirmationValue: string, passwordValue: string) {
@@ -62,6 +42,15 @@ class FormManager {
     Store.dispatch(setFormErrors<any>(formErrors));
   }
 
+  addClientError(resource: string, errors: any[]) {
+    let formErrors: any[] = [...Store.getState().form.errors]; 
+
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...errors[0],
+    }]));
+  }
+
   addServerErrors(resource: string, errors: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
 
@@ -78,9 +67,15 @@ class FormManager {
     }]));
   }
 
-  clearErrors(resource: string, key: any) {
+  clearErrors(resource: string, key?: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
-    formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+
+    if (key) {
+      formErrors = formErrors.filter((o: any) => o.resource !== resource && o.key !== key);
+    }
+    else {
+      formErrors = [];
+    }
 
     Store.dispatch(setFormErrors<any>(formErrors));
   }
@@ -92,9 +87,23 @@ class FormManager {
 
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
-    }
+    } 
 
     return <></>;
+  }
+
+  updateField(resource: string, key: any, value: any, rules: any[] = []) {
+    let errors: any[] = [];
+
+    if (rules.length > 0) {
+      errors = this.validateFied(resource, key, value, rules);
+    }
+
+    if (errors.length) {
+      this.addClientError(resource, errors);
+    }
+
+    this.addValue(resource, key, value);
   }
 
   validateFied(resource: string, key: string, value: any, rules: any[]) {
@@ -138,7 +147,7 @@ class FormManager {
     return {
       string: {
         run: (value: any) => {
-          return value && typeof value == 'string' && value.trim().length > 0;
+          return value && String(value).trim() !== ''; 
         },
         error: () => {
           return i18n.t('A value is required.');
@@ -154,8 +163,7 @@ class FormManager {
       },
       number: {
         run: (value: any) => {
-          let pattern: any = /^\d+$/;
-          return value && pattern.test(value);
+          return !isNaN(parseFloat(value)) && isFinite(value);
         },
         error: () => {
           return i18n.t('Invalid number value.');
@@ -265,11 +273,16 @@ class FormManager {
   }
 
   createFileObject(element: any) {
-    return {
-      uri: element.uri, // Todo - Handle IOS case?
-      type: element.mimeType,
-      name: element.fileName,
-    };
+    if (ScreenManager.isWeb()) {
+      return element.file;
+    }
+    else {
+      return {
+        uri: element.uri, // Todo - Handle IOS case?
+        type: element.mimeType,
+        name: element.fileName,
+      };
+    }
   }
 
   createJsonObject(element: any) {

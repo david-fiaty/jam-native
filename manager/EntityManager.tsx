@@ -195,11 +195,11 @@ class EntityManager {
     return await DataManager.get('culturalActivities', options);
   }
 
-  async addJam(entityData: any) {
-    let payload: any = FormManager.objectToFormData(entityData);
+  async addJam(data: any) {
+    let payload: any = FormManager.objectToFormData(data);
     let response: any = await DataManager.post('addJam', payload);
-    let success: boolean = false;
-
+    let success: boolean = false;  
+ 
     if (response?.id > 0) {
       UserManager.updateProfileReference('profile_jams', response.id);
       success = true;
@@ -211,8 +211,8 @@ class EntityManager {
     };
   }
 
-  async addProject(entityData: any) {
-    let response: any = await DataManager.post('addProject', entityData);
+  async addProject(data: any) {
+    let response: any = await DataManager.post('addProject', data);
     let success: boolean = false;
 
     if (response?.id > 0) {
