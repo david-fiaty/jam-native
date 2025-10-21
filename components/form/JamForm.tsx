@@ -58,6 +58,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     }
     else {
       FormManager.resetForm(resource);
+      ModalManager.toggleModal('JamForm');
     }
 
     ScreenManager.showMessage(message);
