@@ -6,7 +6,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import EntityManager from '@/manager/EntityManager';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
 
