@@ -58,6 +58,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     }
     else {
       FormManager.resetForm(resource);
+      FormManager.clearErrors(resource);
     }
 
     ScreenManager.showMessage(message);
