@@ -51,6 +51,8 @@ const ProfileForm = () => {
       setIsProcessing(false);
     }
     else {
+      FormManager.clearErrors(resource);
+
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
         content: i18n.t('The profile data was successfully updated.'),
@@ -270,7 +272,7 @@ const ProfileForm = () => {
             <TextView>
               {i18n.t('Address')}
             </TextView>
-            <InputTextField
+            <InputTextareaField
               value={formData?.address}
               placeholder={i18n.t('Enter your address')}
               onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
