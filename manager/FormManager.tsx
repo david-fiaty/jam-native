@@ -15,35 +15,12 @@ class FormManager {
     this.clearErrors(resource);
   }
 
-  updateField(resource: string, key: any, value: any, rules: any[] = []) {
-    let errors: any[] = [];
-
-    if (rules.length > 0) {
-      errors = this.validateFied(resource, key, value, rules);
-    }
-
-    if (errors.length) {
-      this.addClientError(resource, errors);
-    }
-
-    this.addValue(resource, key, value);
-  };
-
   addValue(resource: string, key: any, value: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
       key: this.getTargetKey(key),
       value: value,
     }));
-  }
-
-  addClientError(resource: string, errors: any[]) {
-    let formErrors: any[] = [...Store.getState().form.errors];
-
-    Store.dispatch(setFormErrors<any>([...formErrors, {
-      ...{ resource: resource },
-      ...errors[0],
-    }]));
   }
 
   validatePasswordMatch(resource: string, confirmationkey: string, confirmationValue: string, passwordValue: string) {
@@ -63,6 +40,15 @@ class FormManager {
     }
 
     Store.dispatch(setFormErrors<any>(formErrors));
+  }
+
+  addClientError(resource: string, errors: any[]) {
+    let formErrors: any[] = [...Store.getState().form.errors]; 
+
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...errors[0],
+    }]));
   }
 
   addServerErrors(resource: string, errors: any) {
@@ -101,9 +87,23 @@ class FormManager {
 
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
-    }
+    } 
 
     return <></>;
+  }
+
+  updateField(resource: string, key: any, value: any, rules: any[] = []) {
+    let errors: any[] = [];
+
+    if (rules.length > 0) {
+      errors = this.validateFied(resource, key, value, rules);
+    }
+
+    if (errors.length) {
+      this.addClientError(resource, errors);
+    }
+
+    this.addValue(resource, key, value);
   }
 
   validateFied(resource: string, key: string, value: any, rules: any[]) {
@@ -147,7 +147,7 @@ class FormManager {
     return {
       string: {
         run: (value: any) => {
-          return value && value.trim() !== '';
+          return value && String(value).trim() !== ''; 
         },
         error: () => {
           return i18n.t('A value is required.');
