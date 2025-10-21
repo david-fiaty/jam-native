@@ -43,7 +43,7 @@ class FormManager {
   }
 
   addClientError(resource: string, errors: any[]) {
-    let formErrors: any[] = [...Store.getState().form.errors];
+    let formErrors: any[] = [...Store.getState().form.errors]; 
 
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
