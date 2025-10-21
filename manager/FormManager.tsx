@@ -87,7 +87,7 @@ class FormManager {
 
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
-    }
+    } 
 
     return <></>;
   }
