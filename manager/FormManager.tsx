@@ -11,6 +11,8 @@ class FormManager {
       key: null,
       value: {},
     }));
+
+    this.clearErrors(resource);
   }
 
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
