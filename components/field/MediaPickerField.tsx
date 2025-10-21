@@ -7,15 +7,14 @@ import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
-import DataManager from "@/manager/DataManager";
 import InputTextField from "./InputTextField";
 
 type Props = {
-  label?: JSX.Element, 
-  value?: any,
-  preview?: boolean
-  onSelectItem?: (data: any) => void,
-  onDeleteItem?: (data: any) => void,
+  label?: JSX.Element;
+  value?: any;
+  preview?: boolean;
+  onSelectItem?: (data: any) => void;
+  onDeleteItem?: (data: any) => void;
 };
 
 const MediaPickerField = ({ label, value, preview, onSelectItem, onDeleteItem }: Props) => {  

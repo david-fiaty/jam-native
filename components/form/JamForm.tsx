@@ -238,6 +238,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <CollaboratorsField
           resource={resource}
           field="collaborators_ids"
+          value={formData?.collaborators_ids || []}
           placeholder={i18n.t('Select collaborators')}
           onPress={() => ModalManager.toggleModal('CollaboratorsList', {
             resource: resource,
