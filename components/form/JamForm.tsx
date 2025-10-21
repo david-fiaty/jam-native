@@ -132,6 +132,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Title')} *</TextView>
         <InputTextField
           value={formData?.title || ''}
+          placeholder={i18n.t('Provide a title')}
           onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
         {FormManager.renderError('title')}
@@ -139,6 +140,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Description')} *</TextView>
         <InputTextareaField
           value={formData?.caption || ''}
+          placeholder={i18n.t('Provide a description')}
           onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
         {FormManager.renderError('caption')}
@@ -146,6 +148,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Select media')} *</TextView>
         <MediaPickerField
           preview={true}
+          placeholder={i18n.t('Select media files')}
           value={formData?.upload_medias || []}
           onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
           onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
@@ -196,6 +199,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
           value={formData?.period?.start_datetime || ''}
+          placeholder={i18n.t('Select the start date')}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ start_datetime: DataManager.toDbDate(value) },
@@ -206,6 +210,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
           value={formData?.period?.end_datetime || ''}
+          placeholder={i18n.t('Select the end date')}
           onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
             ...(formData?.period || {}),
             ...{ end_datetime: DataManager.toDbDate(value) },

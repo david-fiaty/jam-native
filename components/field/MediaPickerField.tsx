@@ -12,12 +12,13 @@ import InputTextField from "./InputTextField";
 type Props = {
   label?: JSX.Element;
   value?: any;
+  placeholder?: string;
   preview?: boolean;
   onSelectItem?: (data: any) => void;
   onDeleteItem?: (data: any) => void;
 };
 
-const MediaPickerField = ({ label, value, preview, onSelectItem, onDeleteItem }: Props) => {  
+const MediaPickerField = ({ label, value, placeholder, preview, onSelectItem, onDeleteItem }: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
@@ -116,6 +117,7 @@ const MediaPickerField = ({ label, value, preview, onSelectItem, onDeleteItem }:
         <TouchableOpacity onPress={pickImage}>           
           <InputTextField
             readOnly={true}
+            placeholder={placeholder}
             rightIcon={<IconView name="image" theme="transparent" />}
           />
         </TouchableOpacity>
