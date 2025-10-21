@@ -31,6 +31,7 @@ import ProfileLocationMapView from '../view/ProfileLocationMapView';
 import JamFormSection from '../section/jam/JamFormSection';
 import ProjectFormSection from '../section/project/ProjectFormSection';
 import OrganizationTypesList from '../list/OrganizationTypesList';
+import CulturalActivityTypesList from '../list/CulturalActivityTypesList';
 
 type Props = {
   currentSection?: any;
@@ -183,6 +184,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'OrganizationTypesList',
         title: i18n.t('Organization types'),
         render: (params: any) => <OrganizationTypesList {...params} />,
+      },
+      {
+        id: 'CulturalActivityTypesList',
+        title: i18n.t('Cultural activities'),
+        render: (params: any) => <CulturalActivityTypesList {...params} />,
       },
       {
         id: 'CountriesList',
