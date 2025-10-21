@@ -23,15 +23,6 @@ class FormManager {
     }));
   }
 
-  addClientError(resource: string, errors: any[]) {
-    let formErrors: any[] = [...Store.getState().form.errors];
-
-    Store.dispatch(setFormErrors<any>([...formErrors, {
-      ...{ resource: resource },
-      ...errors[0],
-    }]));
-  }
-
   validatePasswordMatch(resource: string, confirmationkey: string, confirmationValue: string, passwordValue: string) {
     let formErrors: any[] = [...Store.getState().form.errors];
 
@@ -49,6 +40,15 @@ class FormManager {
     }
 
     Store.dispatch(setFormErrors<any>(formErrors));
+  }
+
+  addClientError(resource: string, errors: any[]) {
+    let formErrors: any[] = [...Store.getState().form.errors];
+
+    Store.dispatch(setFormErrors<any>([...formErrors, {
+      ...{ resource: resource },
+      ...errors[0],
+    }]));
   }
 
   addServerErrors(resource: string, errors: any) {
