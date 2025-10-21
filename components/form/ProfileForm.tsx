@@ -74,7 +74,7 @@ const ProfileForm = () => {
         sectors_ids: userState.profileData?.sectors || [],
         upload_profile_picture: null,
       },
-    };
+    }; 
 
     delete data.country;
     delete data.sectors;
