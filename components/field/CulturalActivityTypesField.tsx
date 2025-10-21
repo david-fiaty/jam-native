@@ -17,10 +17,10 @@ type Props = {
   onPress?: () => void;
 };
 
-const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress }: Props) => {
+const CulturalActivityTypesField = ({ resource, field, parent, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [venueTypes, setVenueTypes] = useState<any>(null);
+  const [culturalActivityTypes, setCulturalActivityTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
@@ -44,7 +44,7 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!venueTypes) setVenueTypes(appState.venueTypesData);
+      if (!culturalActivityTypes) setCulturalActivityTypes(appState.culturalActivityTypesData);
       setIsLoaded(true);
     }
     
@@ -71,7 +71,7 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
       {currentValue?.length > 0 && (
         <View style={Layout.fieldSelectionPreview}> 
           { currentValue.map((id: any) => {
-            let item: any = venueTypes.find((o: any) => o.id === id);
+            let item: any = culturalActivityTypes.find((o: any) => o.id === id);
             
             return (
               <TagView
@@ -92,4 +92,4 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
   );
 };
 
-export default VenueTypesField;
+export default CulturalActivityTypesField;

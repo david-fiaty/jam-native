@@ -242,7 +242,9 @@ class FormManager {
         });
       }
       else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
-        this.objectToFormData(value, form, formKey);
+        for (const [k, v] of Object.entries(value)) {
+          form.append(`${formKey}.${k}`, v);
+        }
       }
       else if (this.isObjectItem(value) && !this.isFileItem(value)) {
         form.append(formKey, this.createJsonObject(value));
@@ -268,10 +270,10 @@ class FormManager {
 
   isNestedObjectItem(element: any) {
     return Object.values(element).some(
-      value => typeof value === 'object' && value !== null && !Array.isArray(value)
+      value => value !== null && (typeof value === 'object' || Array.isArray(value)) 
     );
   }
-
+ 
   createFileObject(element: any) {
     if (ScreenManager.isWeb()) {
       return element.file;
