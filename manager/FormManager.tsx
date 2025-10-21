@@ -139,7 +139,7 @@ class FormManager {
     return {
       string: {
         run: (value: any) => {
-          return value && typeof value == 'string' && value.trim().length > 0;
+          return value && value.trim() !=='';
         },
         error: () => {
           return i18n.t('A value is required.');
