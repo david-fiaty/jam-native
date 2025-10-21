@@ -2,6 +2,7 @@ import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
+import ScreenManager from "./ScreenManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -265,11 +266,16 @@ class FormManager {
   }
 
   createFileObject(element: any) {
-    return {
-      uri: element.uri, // Todo - Handle IOS case?
-      type: element.mimeType,
-      name: element.fileName,
-    };
+    if (ScreenManager.isWeb()) {
+      return element.file;
+    }
+    else {
+      return {
+        uri: element.uri, // Todo - Handle IOS case?
+        type: element.mimeType,
+        name: element.fileName,
+      };
+    }
   }
 
   createJsonObject(element: any) {
