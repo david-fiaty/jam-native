@@ -242,7 +242,9 @@ class FormManager {
         });
       }
       else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
-        this.objectToFormData(value, form, formKey);
+        for (const [k, v] of Object.entries(value)) {
+          form.append(`${formKey}.${k}`, v);
+        }
       }
       else if (this.isObjectItem(value) && !this.isFileItem(value)) {
         form.append(formKey, this.createJsonObject(value));
@@ -271,7 +273,7 @@ class FormManager {
       value => value !== null && (typeof value === 'object' || Array.isArray(value)) 
     );
   }
-
+ 
   createFileObject(element: any) {
     if (ScreenManager.isWeb()) {
       return element.file;
