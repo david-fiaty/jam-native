@@ -45,6 +45,8 @@ const ProfileForm = () => {
 
     let result: any = await UserManager.updateProfile(data);
 
+    console.log(result)
+
     if (result?.success === false) {
       FormManager.addServerErrors(resource, result?.data?.meta);
 
