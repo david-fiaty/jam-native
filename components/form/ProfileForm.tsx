@@ -71,12 +71,12 @@ const ProfileForm = () => {
     data = {
       ...data,
       ...{ 
+        profile_id: profileId,
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
         upload_profile_picture: null,
       },
-      ...formData,
-      ...{ profile_id: profileId },
+      ...(formData || {}),
     }; 
 
     delete data.country;
