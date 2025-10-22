@@ -22,6 +22,7 @@ import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
 import OrganizationTypesField from "../field/OrganizationTypesField";
 import CulturalActivityTypesField from "../field/CulturalActivityTypesField";
+import ProfessionsField from "../field/ProfessionsField";
 
 const resource: string = 'profile';
 
@@ -76,6 +77,7 @@ const ProfileForm = () => {
         profile_id: profileId,
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
+        professions_ids: userState.profileData?.professions || [],
         upload_profile_picture: null,
       },
       ...(formData || {}),
@@ -83,6 +85,7 @@ const ProfileForm = () => {
 
     delete data.country;
     delete data.sectors;
+    delete data.professions;
 
     dispatch(setFormData<any>({
       resource: resource,
@@ -154,6 +157,12 @@ const ProfileForm = () => {
               }, ['string'])}
             />
             {FormManager.renderError('profile_personal.last_name')}
+
+            <ProfessionsField
+              resource={resource}
+              field="professions_ids"
+              value={formData?.professions_ids}
+            />
 
             <TextView>
               {i18n.t('Main cultural activities')}*

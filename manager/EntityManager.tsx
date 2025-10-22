@@ -133,18 +133,21 @@ class EntityManager {
   }
 
   async getSectors(options?: any) {
-    //let language = await UserManager.getLanguage();
-    // Todo - Fix creates error in components
-    /*
-    let language = 'en';
-    let options = { lang: language };
-
-    return await DataManager.get('sectors', options); 
-    */
-
     options = options || {};
     let defaults = {};
     let data: any = await DataManager.get('sectors', { ...defaults, ...options });
+
+    if (options?.items_ids?.length) {
+      data = data.filter((o: any) => options.items_ids.includes(o.id));
+    }
+
+    return data;
+  }
+
+  async getProfessions(options?: any) {
+    options = options || {};
+    let defaults = {};
+    let data: any = await DataManager.get('professions', { ...defaults, ...options });
 
     if (options?.items_ids?.length) {
       data = data.filter((o: any) => options.items_ids.includes(o.id));
@@ -160,14 +163,6 @@ class EntityManager {
     let options = { lang: language };
 
     return await DataManager.get('countries', options);
-  }
-
-  async getProfessions() {
-    //let language = await UserManager.getLanguage();
-    let language = 'en';
-    let options = { lang: language };
-
-    return await DataManager.get('professions', options);
   }
 
   async getVenueTypes() {
