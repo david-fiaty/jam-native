@@ -44,6 +44,8 @@ const ProfileForm = () => {
 
     let result: any = await UserManager.updateProfile(data);
 
+    console.log(result)
+    
     if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
@@ -71,10 +73,12 @@ const ProfileForm = () => {
     data = {
       ...data,
       ...{ 
+        profile_id: profileId,
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
         upload_profile_picture: null,
       },
+      ...(formData || {}),
     }; 
 
     delete data.country;
@@ -83,10 +87,7 @@ const ProfileForm = () => {
     dispatch(setFormData<any>({
       resource: resource,
       key: null,
-      value: {
-        ...data,
-        ...{ profile_id: profileId },
-      },
+      value: data,
     }));
   };
 
@@ -155,7 +156,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_personal.last_name')}
 
             <TextView>
-              {i18n.t('Cultural activities')}*
+              {i18n.t('Main cultural activities')}*
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
@@ -207,7 +208,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_organization.organization_types')}
 
             <TextView>
-              {i18n.t('Cultural activities')}*
+              {i18n.t('Main cultural activities')}*
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
@@ -273,7 +274,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_venue.venue_types')}
 
             <TextView>
-              {i18n.t('Cultural activities')}*
+              {i18n.t('Main cultural activities')}*
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
