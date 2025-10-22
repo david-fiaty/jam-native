@@ -35,7 +35,7 @@ const CulturalActivitiesViewField = ({ idArray }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setActivitiesData(await EntityManager.getCulturalActivities());
+        setActivitiesData(await EntityManager.getCulturalActivitiesTypes());
         setIsLoaded(true);
       }
     })();
