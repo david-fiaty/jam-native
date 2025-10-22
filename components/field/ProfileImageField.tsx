@@ -31,9 +31,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   const onSelectItem = (data: any) => {
     let uri: string = getImageUrl(data[0].uri);
     setUri(uri);
-
-    // Todo - Update form data
-    //if (onChangeValue) onChangeValue(mediaList);
+    if (onChangeValue) onChangeValue(data);
   };
 
   const deleteImage = () => {
