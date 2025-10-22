@@ -63,7 +63,7 @@ const CulturalActivityTypesField = ({ resource, field, parent, value, placeholde
             value={value}
             readOnly={true}
             placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
+            rightIcon={<IconView name="down" theme="transparent" />}
           />
         </TouchableOpacity>
       )}
