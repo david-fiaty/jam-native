@@ -17,6 +17,8 @@ import SectorsViewField from "../field/SectorsViewField";
 import SubSectorsViewField from "../field/SubSectorsViewField";
 import CulturalActivitiesViewField from "../field/CulturalActivitiesViewField";
 import ModalManager from "@/manager/ModalManager";
+import ProfessionsViewField from "../field/ProfessionsViewField";
+import SubProfessionsViewField from "../field/SubProfessionsViewField";
 
 const profileImageSize: number = 111;
 
@@ -224,6 +226,14 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             <TextView>
               {profileData?.profile_personal?.last_name || i18n.t('Unavailable')}
             </TextView>
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Professions')}>
+            <ProfessionsViewField idArray={profileData?.professions || []} />
+          </ProfileViewField>
+
+          <ProfileViewField label={i18n.t('Sub professions')}>
+            <SubProfessionsViewField idArray={profileData?.professions || []} />
           </ProfileViewField>
 
           <ProfileViewField label={i18n.t('Address')}>
