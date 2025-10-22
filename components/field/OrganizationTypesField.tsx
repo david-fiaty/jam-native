@@ -63,7 +63,7 @@ const OrganizationTypesField = ({ resource, field, parent, value, placeholder, o
             value={value}
             readOnly={true}
             placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
+            rightIcon={<IconView name="down" theme="transparent" />}
           />
         </TouchableOpacity>
       )}

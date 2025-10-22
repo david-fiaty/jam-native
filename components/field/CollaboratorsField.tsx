@@ -47,7 +47,7 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
           <InputTextField
             readOnly={true}
             placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
+            rightIcon={<IconView name="down" theme="transparent" />}
           />
         </TouchableOpacity>
       )}
