@@ -200,7 +200,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_organization.organization_name')}
 
             <TextView>
-              {i18n.t('Organization types')}*
+              {i18n.t('Organization types')}
             </TextView>
             <OrganizationTypesField
               resource={resource}
