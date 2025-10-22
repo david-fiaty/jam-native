@@ -140,7 +140,7 @@ const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{i18n.t('Creative works')}*</TextView>
+        <TextView>{i18n.t('Professions')}*</TextView>
         <MultiSelect
           value={getSelectedProfessions()}
           labelField="label"
