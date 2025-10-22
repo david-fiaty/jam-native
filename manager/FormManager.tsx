@@ -252,7 +252,14 @@ class FormManager {
       }
       else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
         for (const [k, v] of Object.entries(value)) {
-          form.append(`${formKey}.${k}`, v);
+          if (Array.isArray(v)) {
+            v.forEach((id: any, i: number) => {
+              form.append(`${formKey}.${k}[${i}]`, id); 
+            });
+          }
+          else {
+            form.append(`${formKey}.${k}`, v);
+          }
         }
       }
       else if (this.isObjectItem(value) && !this.isFileItem(value)) {
@@ -281,6 +288,13 @@ class FormManager {
     return Object.values(element).some(
       value => value !== null && (typeof value === 'object' || Array.isArray(value)) 
     );
+  }
+
+  createNestedObject(element: any) { 
+
+    console.log('--->', element)
+
+    return element; 
   }
  
   createFileObject(element: any) {

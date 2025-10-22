@@ -168,7 +168,7 @@ const Endpoints: any = {
     path: '/profiles/[profile_id]/',
     cacheable: false,
     dataKey: null,
-    //multipart: true,
+    multipart: true,
   },
   sendSignupCode: {
     path: '/send-registration-verification/',
