@@ -217,7 +217,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_organization.organization_types')}
 
             <TextView>
-              {i18n.t('Main cultural activities')}*
+              {i18n.t('Main cultural activities')}
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
@@ -283,7 +283,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_venue.venue_types')}
 
             <TextView>
-              {i18n.t('Main cultural activities')}*
+              {i18n.t('Main cultural activities')}
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
