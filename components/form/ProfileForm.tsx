@@ -77,6 +77,7 @@ const ProfileForm = () => {
         profile_id: profileId,
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
+        professions_ids: userState.profileData?.professions || [],
         upload_profile_picture: null,
       },
       ...(formData || {}),
@@ -84,6 +85,7 @@ const ProfileForm = () => {
 
     delete data.country;
     delete data.sectors;
+    delete data.professions;
 
     dispatch(setFormData<any>({
       resource: resource,
@@ -155,6 +157,12 @@ const ProfileForm = () => {
               }, ['string'])}
             />
             {FormManager.renderError('profile_personal.last_name')}
+
+            <ProfessionsField
+              resource={resource}
+              field="professions_ids"
+              value={formData?.professions_ids}
+            />
 
             <TextView>
               {i18n.t('Main cultural activities')}*
@@ -350,12 +358,6 @@ const ProfileForm = () => {
               onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
             />
             {FormManager.renderError('address')}
-
-            <ProfessionsField
-              resource={resource}
-              field="professions_ids"
-              value={formData?.professions_ids}
-            />
 
             <SectorsField
               resource={resource}
