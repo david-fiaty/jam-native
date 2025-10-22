@@ -362,16 +362,16 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
         <SubSectorsViewField idArray={profileData?.sectors || []} />
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Main cultural activities')}>
+        {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
+        {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
+        {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
+      </ProfileViewField>
+
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
           {profileData?.profile_description || i18n.t('Unavailable')}
         </TextView>
-      </ProfileViewField>
-
-      <ProfileViewField label={i18n.t('Main activities')}>
-        {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
-        {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
-        {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
       </ProfileViewField>
 
       <CollapsibleView
