@@ -165,7 +165,7 @@ const ProfileForm = () => {
             />
 
             <TextView>
-              {i18n.t('Main cultural activities')}*
+              {i18n.t('Main cultural activities')}
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
