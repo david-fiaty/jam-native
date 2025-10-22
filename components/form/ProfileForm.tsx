@@ -44,6 +44,8 @@ const ProfileForm = () => {
 
     let result: any = await UserManager.updateProfile(data);
 
+    console.log(result)
+    
     if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
