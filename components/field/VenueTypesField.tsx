@@ -63,7 +63,7 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
             value={value}
             readOnly={true}
             placeholder={placeholder}
-            rightIcon={<IconView name="plus" theme="transparent" />}
+            rightIcon={<IconView name="down" theme="transparent" />}
           />
         </TouchableOpacity>
       )}

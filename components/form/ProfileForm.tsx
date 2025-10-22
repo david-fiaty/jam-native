@@ -44,12 +44,12 @@ const ProfileForm = () => {
 
     let result: any = await UserManager.updateProfile(data);
 
-    console.log(result)
-    
     if (result?.success === false) {
+      FormManager.addServerErrors(resource, result?.data?.meta);
+
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
-        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
+        content: i18n.t('Invalid data submission.'),
       });
 
       setIsProcessing(false);
@@ -225,7 +225,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_organization.main_cultural_activities')}
 
             <TextView>
-              {i18n.t('Creation year')}
+              {i18n.t('Creation year')}*
             </TextView>
             <InputTextField
               keyboardType="number-pad"
@@ -234,7 +234,7 @@ const ProfileForm = () => {
               onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
                 ...(formData?.profile_organization || {}),
                 ...{ creation_year: value },
-              })}
+              }, ['number'])}
             />
             {FormManager.renderError('profile_organization.creation_year')}
           </>
