@@ -22,6 +22,7 @@ import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
 import OrganizationTypesField from "../field/OrganizationTypesField";
 import CulturalActivityTypesField from "../field/CulturalActivityTypesField";
+import ProfessionsField from "../field/ProfessionsField";
 
 const resource: string = 'profile';
 
@@ -349,6 +350,12 @@ const ProfileForm = () => {
               onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
             />
             {FormManager.renderError('address')}
+
+            <ProfessionsField
+              resource={resource}
+              field="professions_ids"
+              value={formData?.professions_ids}
+            />
 
             <SectorsField
               resource={resource}
