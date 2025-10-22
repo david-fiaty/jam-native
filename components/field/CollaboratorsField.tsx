@@ -7,7 +7,6 @@ import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
-import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   resource: string;
@@ -19,10 +18,8 @@ type Props = {
 
 const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(true);
   const [currentProfiles, setCurrentProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const prevFormData: any = useRef(null);
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(formData?.[field]?.length > 0 ? formData[field] : [])];
@@ -34,16 +31,12 @@ const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Pr
       value: selectedIds, 
     }));
   };
-
-
   
   useEffect(() => {
     (async () => {
       setCurrentProfiles(await EntityManager.getProfiles(value || []));
     })();    
   }, [value]);
-
-  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
