@@ -76,7 +76,15 @@ class UserManager {
     let variables: any = { '[profile_id]': profileId };
     let success: boolean = false;
     
-    //let payload: any = FormManager.objectToFormData({ ...defaults, ...data });
+    let test: any = FormManager.objectToFormData({ ...defaults, ...data });
+  
+    for (let pair of test.entries()) {
+      console.log(pair[0] + ': ' + pair[1]);
+    }
+  
+
+    return;
+     
     let payload: any = { ...defaults, ...data };
       
     let response: any = await DataManager.put('updateProfile', payload, variables);
