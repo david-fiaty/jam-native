@@ -34,7 +34,7 @@ const ProfileForm = () => {
   const userState = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
-    //setIsProcessing(true);
+    setIsProcessing(true);
 
     let data: any = {...formData};
 
@@ -64,7 +64,7 @@ const ProfileForm = () => {
       });
     }
 
-    //setIsProcessing(false);
+    setIsProcessing(false);
   };
 
   const loadFormData = async () => {
