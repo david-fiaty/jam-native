@@ -54,10 +54,18 @@ class FormManager {
   addServerErrors(resource: string, errors: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
 
-    for (const [key, message] of Object.entries(errors)) {
+    for (const [key, val] of Object.entries(errors || {})) {
+      let message: any = i18n.t('Invalid field value');
+      if (Array.isArray(val) && val?.length > 0) {
+        message = val[0];
+      }
+      else if (val) {
+        message = val;
+      }
+
       formErrors.push({
         key: key,
-        message: message[0],
+        message: Array.isArray(message) ? message[0] : message,
       });
     }
 
