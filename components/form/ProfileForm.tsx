@@ -158,6 +158,12 @@ const ProfileForm = () => {
             />
             {FormManager.renderError('profile_personal.last_name')}
 
+            <ProfessionsField
+              resource={resource}
+              field="professions_ids"
+              value={formData?.professions_ids}
+            />
+
             <TextView>
               {i18n.t('Main cultural activities')}*
             </TextView>
@@ -352,12 +358,6 @@ const ProfileForm = () => {
               onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
             />
             {FormManager.renderError('address')}
-
-            <ProfessionsField
-              resource={resource}
-              field="professions_ids"
-              value={formData?.professions_ids}
-            />
 
             <SectorsField
               resource={resource}
