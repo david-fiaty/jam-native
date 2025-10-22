@@ -134,6 +134,14 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             </TextView>
           </ProfileViewField>
 
+          <ProfileViewField label={i18n.t('Organization types')}>
+            <TextView>
+              {appState.organizationTypesData
+                .filter((o: any) => (profileData?.profile_organization?.organization_types || []).includes(o.id))
+                .map((o: any) => o.name).join(', ')}
+            </TextView>
+          </ProfileViewField>
+
           <ProfileViewField label={i18n.t('Creation year')}>
             <TextView>
               {profileData?.profile_organization?.creation_year || i18n.t('Unavailable')}
