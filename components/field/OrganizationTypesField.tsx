@@ -44,12 +44,12 @@ const OrganizationTypesField = ({ resource, field, parent, value, placeholder, o
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
+      setOrganizationTypes(appState.organizationTypesData);
       setIsLoaded(true);
     }
     
-    setCurrentValue(formData?.[parent]?.[field] || []);
-  }, [isLoaded, value, formData, parent, field, appState]);
+    setCurrentValue(value || []);
+  }, [isLoaded, value, appState]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
