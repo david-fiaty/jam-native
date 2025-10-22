@@ -172,7 +172,7 @@ const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
             inside={getSelectedSubProfessions().length > 0}
             style={!getSelectedSubProfessions().length ? styles.element : styles.preview}
             iconStyle={getSelectedSubProfessions().length > 0 ? styles.iconRight : {}}
-            data={getSelectedSubProfessions()}
+            data={getSubProfessionsOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
