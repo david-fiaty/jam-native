@@ -144,9 +144,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 
 # New release
 - Finalisation profile update form
-- Ajout champ organization types pour profile organization
-- Ajout champ professions/subprofessions pour profile personal
-- Ajout champ venue types pour profile venue
+- Fix profile form image upload/update
+- Ajout champ organization types pour profile organization (view et edit)
+- Ajout champ professions/subprofessions pour profile personal (view et edit)
+- Ajout champ venue types pour profile venue (view et edit)
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
