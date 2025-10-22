@@ -45,11 +45,11 @@ const ProfileForm = () => {
     let result: any = await UserManager.updateProfile(data);
 
     console.log(result)
-    
+
     if (result?.success === false) {
       ScreenManager.showMessage({
         title: i18n.t('Profile update'),
-        content: i18n.t('There was an error with the submission. Please check your data and try again.'),
+        content: i18n.t('Invalid data submission.'),
       });
 
       setIsProcessing(false);
