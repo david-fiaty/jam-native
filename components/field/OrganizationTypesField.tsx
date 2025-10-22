@@ -19,6 +19,7 @@ type Props = {
 
 const OrganizationTypesField = ({ resource, field, parent, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -42,9 +43,15 @@ const OrganizationTypesField = ({ resource, field, parent, value, placeholder, o
   };
 
   useEffect(() => {
-      setOrganizationTypes(appState.organizationTypesData);
-      setCurrentValue(value || []);
-  }, [value, appState]);
+    if (!isLoaded) {
+      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
+      setIsLoaded(true);
+    }
+    
+    setCurrentValue(formData?.[parent]?.[field] || []);
+  }, [isLoaded, value, formData, parent, field, appState]);
+
+  if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
