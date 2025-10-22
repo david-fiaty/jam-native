@@ -56,6 +56,7 @@ class FormManager {
 
     for (const [key, val] of Object.entries(errors || {})) {
       let message: any = i18n.t('Invalid field value');
+      
       if (Array.isArray(val) && val?.length > 0) {
         message = val[0];
       }
@@ -65,7 +66,7 @@ class FormManager {
 
       formErrors.push({
         key: key,
-        message: Array.isArray(message) ? message[0] : message,
+        message: message,
       });
     }
 
