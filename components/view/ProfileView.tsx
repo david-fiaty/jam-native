@@ -134,6 +134,14 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
             </TextView>
           </ProfileViewField>
 
+          <ProfileViewField label={i18n.t('Organization types')}>
+            <TextView>
+              {appState.organizationTypesData
+                .filter((o: any) => (profileData?.profile_organization?.organization_types || []).includes(o.id))
+                .map((o: any) => o.name).join(', ')}
+            </TextView>
+          </ProfileViewField>
+
           <ProfileViewField label={i18n.t('Creation year')}>
             <TextView>
               {profileData?.profile_organization?.creation_year || i18n.t('Unavailable')}
@@ -362,16 +370,16 @@ const ProfileView = ({ profileId, itemData, isOwner, isPublic }: Props) => {
         <SubSectorsViewField idArray={profileData?.sectors || []} />
       </ProfileViewField>
 
+      <ProfileViewField label={i18n.t('Main cultural activities')}>
+        {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
+        {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
+        {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
+      </ProfileViewField>
+
       <ProfileViewField label={i18n.t('Description')}>
         <TextView>
           {profileData?.profile_description || i18n.t('Unavailable')}
         </TextView>
-      </ProfileViewField>
-
-      <ProfileViewField label={i18n.t('Main activities')}>
-        {!!profileData?.profile_organization && <CulturalActivitiesViewField idArray={profileData?.profile_organization?.main_cultural_activities || []} />}
-        {!!profileData?.profile_venue && <CulturalActivitiesViewField idArray={profileData?.profile_venue?.main_cultural_activities || []} />}
-        {!!profileData?.profile_personal && <CulturalActivitiesViewField idArray={profileData?.profile_personal?.main_cultural_activities || []} />}
       </ProfileViewField>
 
       <CollapsibleView

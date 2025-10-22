@@ -143,13 +143,11 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Trim textarea fields like input text fields?
 
 # New release
-- Finalisation pagination + filtres sur search screens
-- Finalisation profile new screens
-- Ajustement couleurs et marqueurs maps
-- Fix action device back button 
-- Fix entity views bottom scroll
-
-- Upload image error: "Multipart form parse error - Request max total header size exceeded"
+- Finalisation profile update form
+- Fix profile form image upload/update
+- Ajout champ organization types pour profile organization (view et edit)
+- Ajout champ professions/subprofessions pour profile personal (view et edit)
+- Ajout champ venue types pour profile venue (view et edit)
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
