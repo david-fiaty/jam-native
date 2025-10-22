@@ -76,7 +76,6 @@ const OrganizationTypesList = ({ resource, field, parent }: Props) => {
   useEffect(() => {
     if (!isLoaded) {
       if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
-
       setSelectedOrganizations(formData?.[parent]?.[field] || []);
       setIsLoaded(true);
     }
