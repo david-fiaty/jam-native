@@ -75,6 +75,8 @@ const ProfileForm = () => {
         sectors_ids: userState.profileData?.sectors || [],
         upload_profile_picture: null,
       },
+      ...formData,
+      ...{ profile_id: profileId },
     }; 
 
     delete data.country;
@@ -83,10 +85,7 @@ const ProfileForm = () => {
     dispatch(setFormData<any>({
       resource: resource,
       key: null,
-      value: {
-        ...data,
-        ...{ profile_id: profileId },
-      },
+      value: data,
     }));
   };
 
