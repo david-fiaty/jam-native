@@ -117,7 +117,7 @@ const ProfileForm = () => {
         <TextView>{i18n.t('Profile Image')}</TextView>
         <ProfileImageField
           value={formData?.profile_picture?.url}
-          onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
+          onChangeValue={(data: any) => FormManager.updateField(resource, 'upload_profile_picture', data)}
         />
         {FormManager.renderError('upload_profile_picture')}
 
