@@ -251,6 +251,9 @@ class FormManager {
         });
       }
       else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
+
+        console.log(value); 
+        
         for (const [k, v] of Object.entries(value)) {
           form.append(`${formKey}.${k}`, v);
         }
