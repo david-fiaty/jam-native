@@ -117,7 +117,7 @@ const ProfileForm = () => {
         <TextView>{i18n.t('Profile Image')}</TextView>
         <ProfileImageField
           value={formData?.profile_picture?.url}
-          onChangeValue={(mediaList: any) => FormManager.updateField(resource, 'upload_profile_picture', { url: mediaList[0]?.uri })}
+          onChangeValue={(data: any) => FormManager.updateField(resource, 'upload_profile_picture', data)}
         />
         {FormManager.renderError('upload_profile_picture')}
 
@@ -165,7 +165,7 @@ const ProfileForm = () => {
             />
 
             <TextView>
-              {i18n.t('Main cultural activities')}*
+              {i18n.t('Main cultural activities')}
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
@@ -200,7 +200,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_organization.organization_name')}
 
             <TextView>
-              {i18n.t('Organization types')}*
+              {i18n.t('Organization types')}
             </TextView>
             <OrganizationTypesField
               resource={resource}
@@ -217,7 +217,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_organization.organization_types')}
 
             <TextView>
-              {i18n.t('Main cultural activities')}*
+              {i18n.t('Main cultural activities')}
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
@@ -283,7 +283,7 @@ const ProfileForm = () => {
             {FormManager.renderError('profile_venue.venue_types')}
 
             <TextView>
-              {i18n.t('Main cultural activities')}*
+              {i18n.t('Main cultural activities')}
             </TextView>
             <CulturalActivityTypesField
               resource={resource}
