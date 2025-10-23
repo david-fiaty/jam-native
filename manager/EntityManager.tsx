@@ -192,6 +192,10 @@ class EntityManager {
 
   async addJam(data: any) {
     let payload: any = FormManager.objectToFormData(data);
+
+    
+    
+    /*
     let response: any = await DataManager.post('addJam', payload);
     let success: boolean = false;  
  
@@ -199,6 +203,7 @@ class EntityManager {
       UserManager.updateProfileReference('profile_jams', response.id);
       success = true;
     }
+    */
 
     return {
       success: success,
