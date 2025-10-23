@@ -287,10 +287,6 @@ class FormManager {
       value => value !== null && (typeof value === 'object' || Array.isArray(value)) 
     );
   }
-
-  createNestedObject(element: any) { 
-    return element; 
-  }
  
   createFileObject(element: any) {
     if (ScreenManager.isWeb()) {
