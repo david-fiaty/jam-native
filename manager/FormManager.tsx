@@ -253,8 +253,13 @@ class FormManager {
       else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
         for (const [k, v] of Object.entries(value)) {
           if (Array.isArray(v)) {
-            v.forEach((id: any, i: number) => {
-              form.append(`${formKey}.${k}[${i}]`, id); 
+            v.forEach((o: any, i: number) => {
+              if (this.isFileItem(o)) {
+                form.append(`${formKey}.${k}[${i}]`, this.createFileObject(o)); 
+              }
+              else {
+                form.append(`${formKey}.${k}[${i}]`, o);  
+              }
             });
           }
           else {
