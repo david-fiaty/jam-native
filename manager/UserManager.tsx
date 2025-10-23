@@ -75,7 +75,7 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let variables: any = { '[profile_id]': profileId };
     let success: boolean = false;
-    
+     
     let payload: any = FormManager.objectToFormData({ ...defaults, ...data }); 
 
     for (let pair of payload.entries()) {
