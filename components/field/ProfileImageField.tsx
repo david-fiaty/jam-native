@@ -31,7 +31,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   const onSelectItem = (data: any) => {
     let uri: string = getImageUrl(data[0].uri);
     setUri(uri);
-    if (onChangeValue) onChangeValue(data);
+    if (onChangeValue) onChangeValue(data[0]);
   };
 
   const deleteImage = () => {
