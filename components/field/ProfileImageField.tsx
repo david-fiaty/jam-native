@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
-import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import TextView from "../view/TextView";
 import MediaPickerField from './MediaPickerField';
 import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
@@ -31,7 +29,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
   const onSelectItem = (data: any) => {
     let uri: string = getImageUrl(data[0].uri);
     setUri(uri);
-    if (onChangeValue) onChangeValue(data[0]);
+    if (onChangeValue) onChangeValue(data);
   };
 
   const deleteImage = () => {

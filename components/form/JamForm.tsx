@@ -48,7 +48,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     let message: any = {
       title: i18n.t('Create Jam'),
       content: i18n.t('Jam data successfully submitted.'),
-    }; 
+    };
 
     let result: any = await EntityManager.addJam(formData);
 
