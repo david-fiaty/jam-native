@@ -54,10 +54,11 @@ const SignupForm = () => {
     })();
   }, [isLoaded, formData]);
 
-  console.log(formData)
-
   return (
-    <ProfileForm resource={resource} />
+    <ProfileForm 
+      resource={resource} 
+      onSubmit={submitForm} 
+    />
   );
 };
 
