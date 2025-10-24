@@ -11,7 +11,7 @@ const ProfileFormSection = ({ profileId }: Props) => {
     <BoxView
       direction="column"
       align="center"
-      justify="flex-start"
+      justify="center"
       style={styles.container}
       scroll={true}
     >
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: '100%',
+    backgroundColor: 'red',
   },
 });
 
