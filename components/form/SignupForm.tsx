@@ -22,6 +22,7 @@ import SectionManager from "@/manager/SectionManager";
 import VenueTypesField from "../field/VenueTypesField";
 import InputPasswordField from "../field/InputPasswordField";
 import CountriesField from "../field/CountriesField";
+import ProfileForm from "./ProfileForm";
 
 const resource: string = 'signup';
 
@@ -70,6 +71,8 @@ const SignupForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
+  return <ProfileForm />;
+  
   return (
     <View style={[Layout.formContainer, styles.container]}>
 
