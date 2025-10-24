@@ -26,9 +26,10 @@ import ProfileFormAll from "./profile-form/ProfileFormAll";
 
 type Props = {
   resource?: any;
+  onSubmit?: () => void;
 };
 
-const ProfileForm = ({ resource }: Props) => {
+const ProfileForm = ({ resource, onSubmit }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -40,44 +41,50 @@ const ProfileForm = ({ resource }: Props) => {
   const submitForm = async () => {
     setIsProcessing(true);
 
-    let data: any = {...formData};
-
-    delete data.profile_picture;
-    if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
-      delete data.upload_profile_picture;
-    }
-
-    let result: any = await UserManager.updateProfile(data);
-
-    if (result?.success === false) {
-      FormManager.addServerErrors(resource, result?.data?.meta);
-
-      ScreenManager.showMessage({
-        title: i18n.t('Profile update'),
-        content: i18n.t('Invalid data submission.'),
-      });
-
-      setIsProcessing(false);
+    if (onSubmit) {
+      onSubmit();
     }
     else {
-      FormManager.clearErrors(resource);
 
-      ScreenManager.showMessage({
-        title: i18n.t('Profile update'),
-        content: i18n.t('The profile data was successfully updated.'),
-      });
+      let data: any = { ...formData };
+
+      delete data.profile_picture;
+      if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
+        delete data.upload_profile_picture;
+      }
+
+      let result: any = await UserManager.updateProfile(data);
+
+      if (result?.success === false) {
+        FormManager.addServerErrors(resource, result?.data?.meta);
+
+        ScreenManager.showMessage({
+          title: i18n.t('Profile update'),
+          content: i18n.t('Invalid data submission.'),
+        });
+
+        setIsProcessing(false);
+      }
+      else {
+        FormManager.clearErrors(resource);
+
+        ScreenManager.showMessage({
+          title: i18n.t('Profile update'),
+          content: i18n.t('The profile data was successfully updated.'),
+        });
+      }
     }
 
     setIsProcessing(false);
   };
 
   const loadFormData = async () => {
-    let data: any = {...userState.profileData};
+    let data: any = { ...userState.profileData };
     let profileId: any = userState.profileData.id;
 
     data = {
       ...data,
-      ...{ 
+      ...{
         profile_id: profileId,
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
@@ -85,7 +92,7 @@ const ProfileForm = ({ resource }: Props) => {
         upload_profile_picture: null,
       },
       ...(formData || {}),
-    }; 
+    };
 
     delete data.country;
     delete data.sectors;
