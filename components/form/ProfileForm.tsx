@@ -125,7 +125,7 @@ const ProfileForm = () => {
         <ProfileTypeField
           value={formData?.profile_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
-          disabled={true}
+          disabled={resource == 'profile'}
         />
         {FormManager.renderError('profile_type')}
 
