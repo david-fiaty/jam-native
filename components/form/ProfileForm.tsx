@@ -10,23 +10,22 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import TextView from "@/components/view/TextView";
-import InputTextField from "@/components/field/InputTextField";
-import InputTextareaField from "@/components/field/InputTextareaField";
-import SectorsField from "@/components/field/SectorsField";
-import ModalManager from "@/manager/ModalManager";
-import LocationPickerField from "@/components/field/LocationPickerField";
 import ProfileTypeField from "@/components/field/ProfileTypeField";
 import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
-import CountriesField from "@/components/field/CountriesField";
 import ProfileFormPersonal from "./profile-form/ProfileFormPersonal";
 import ProfileFormOrganization from "./profile-form/ProfileFormOrganization";
 import ProfileFormVenue from "./profile-form/ProfileFormVenue";
 import ProfileFormAll from "./profile-form/ProfileFormAll";
 
-const resource: string = 'profile';
+type Props = {
+  resource?: any;
+  onSubmit?: () => void;
+};
 
-const ProfileForm = () => {
+const ProfileForm = ({ resource, onSubmit }: Props) => {
+  resource = resource || 'profile';
+
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -36,44 +35,50 @@ const ProfileForm = () => {
   const submitForm = async () => {
     setIsProcessing(true);
 
-    let data: any = {...formData};
-
-    delete data.profile_picture;
-    if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
-      delete data.upload_profile_picture;
-    }
-
-    let result: any = await UserManager.updateProfile(data);
-
-    if (result?.success === false) {
-      FormManager.addServerErrors(resource, result?.data?.meta);
-
-      ScreenManager.showMessage({
-        title: i18n.t('Profile update'),
-        content: i18n.t('Invalid data submission.'),
-      });
-
-      setIsProcessing(false);
+    if (onSubmit) {
+      onSubmit();
     }
     else {
-      FormManager.clearErrors(resource);
 
-      ScreenManager.showMessage({
-        title: i18n.t('Profile update'),
-        content: i18n.t('The profile data was successfully updated.'),
-      });
+      let data: any = { ...formData };
+
+      delete data.profile_picture;
+      if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
+        delete data.upload_profile_picture;
+      }
+
+      let result: any = await UserManager.updateProfile(data);
+
+      if (result?.success === false) {
+        FormManager.addServerErrors(resource, result?.data?.meta);
+
+        ScreenManager.showMessage({
+          title: i18n.t('Profile update'),
+          content: i18n.t('Invalid data submission.'),
+        });
+
+        setIsProcessing(false);
+      }
+      else {
+        FormManager.clearErrors(resource);
+
+        ScreenManager.showMessage({
+          title: i18n.t('Profile update'),
+          content: i18n.t('The profile data was successfully updated.'),
+        });
+      }
     }
 
     setIsProcessing(false);
   };
 
   const loadFormData = async () => {
-    let data: any = {...userState.profileData};
+    let data: any = { ...userState.profileData };
     let profileId: any = userState.profileData.id;
 
     data = {
       ...data,
-      ...{ 
+      ...{
         profile_id: profileId,
         scope_country_code: userState.profileData?.country || '',
         sectors_ids: userState.profileData?.sectors || [],
@@ -81,7 +86,7 @@ const ProfileForm = () => {
         upload_profile_picture: null,
       },
       ...(formData || {}),
-    }; 
+    };
 
     delete data.country;
     delete data.sectors;
@@ -125,7 +130,7 @@ const ProfileForm = () => {
         <ProfileTypeField
           value={formData?.profile_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
-          disabled={true}
+          disabled={resource == 'profile'}
         />
         {FormManager.renderError('profile_type')}
 
@@ -152,9 +157,10 @@ const ProfileForm = () => {
         {/* Submit button */}
         <View style={styles.submitButtonContainer}>
           <ButtonView
-            label={i18n.t('Update')}
+            label={i18n.t('Submit')}
             isProcessing={isProcessing}
             onPress={submitForm}
+            disabled={!formData?.profile_type?.length}
           />
         </View>
       </BoxView>
