@@ -25,7 +25,7 @@ type Props = {
 
 const ProfileForm = ({ resource, onSubmit }: Props) => {
   resource = resource || 'profile';
-  
+
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -109,8 +109,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-console.log(formData)
 
   return (
     <BoxView
