@@ -51,6 +51,9 @@ https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTT
 # Global feedback
 https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?pli=1&gid=664353314#gid=664353314
 
+# NEW FIELDS
+https://docs.google.com/spreadsheets/d/1FbsD1q_CQsFJ41HmJhYO0N1k9THLANz-r66FTy7cyYU/edit?gid=2057744703#gid=2057744703
+
 # NEW SCREENS
 https://www.figma.com/design/9gWmK7TnjDeFidQliB1mkO/JAM-MOBILE?node-id=0-1&p=f
 
