@@ -51,6 +51,9 @@ https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTT
 # Global feedback
 https://docs.google.com/spreadsheets/d/1q7osx0gzONv_ZLisLiUDJU6UqphqBvXejlyeCUTTD44/edit?pli=1&gid=664353314#gid=664353314
 
+# NEW FIELDS
+https://docs.google.com/spreadsheets/d/1FbsD1q_CQsFJ41HmJhYO0N1k9THLANz-r66FTy7cyYU/edit?gid=2057744703#gid=2057744703
+
 # NEW SCREENS
 https://www.figma.com/design/9gWmK7TnjDeFidQliB1mkO/JAM-MOBILE?node-id=0-1&p=f
 
@@ -149,6 +152,30 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Ajout champ professions/subprofessions pour profile personal (view et edit)
 - Ajout champ venue types pour profile venue (view et edit)
 
+# SIGNUP FIELDS
+Numero Whatsapp (login)
+Email address (login)
+Password
+User Profile Type
+Profil picture
+Username / Profile ID
+
+Last Name/Family name
+First name
+Venue Name
+Organization name
+Bio
+
+Industries Names
+Sub industries Names
+Venue Types Names
+
+Country name
+Latitude
+Longitude
+
+
+
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
 - Implement reverse geocoding
@@ -164,7 +191,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
     console.log(error);
   }
     */
-
 
 
 Email verification
