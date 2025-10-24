@@ -71,8 +71,8 @@ const SignupForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  return <ProfileForm />;
-  
+  return <ProfileForm resource={resource} />;
+
   return (
     <View style={[Layout.formContainer, styles.container]}>
 
