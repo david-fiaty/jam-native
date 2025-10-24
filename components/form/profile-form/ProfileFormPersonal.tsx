@@ -26,9 +26,11 @@ import ProfessionsField from "../field/ProfessionsField";
 
 const resource: string = 'profile';
 
-const ProfileFormPersonal = () => {
-  const formData = useSelector((state: any) => state.form?.[resource]);
+type Props = {
+  formData: any;
+};
 
+const ProfileFormPersonal = ({ formData }: Props) => {
   return (
     <>
       <TextView>
