@@ -23,6 +23,7 @@ import CountriesField from "@/components/field/CountriesField";
 import OrganizationTypesField from "../field/OrganizationTypesField";
 import CulturalActivityTypesField from "../field/CulturalActivityTypesField";
 import ProfessionsField from "../field/ProfessionsField";
+import DividerView from "../view/DividerView";
 
 const resource: string = 'profile';
 
@@ -113,7 +114,10 @@ const ProfileForm = () => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+      <BoxView 
+        direction="column" 
+        style={[Layout.formContainer, styles.formContainer]}
+      >
         <TextView>{i18n.t('Profile Image')}</TextView>
         <ProfileImageField
           value={formData?.profile_picture?.url}
@@ -421,6 +425,8 @@ const ProfileForm = () => {
             onPress={submitForm}
           />
         </View>
+
+        <DividerView /> 
       </BoxView>
     </BoxView>
   );
@@ -428,9 +434,8 @@ const ProfileForm = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
-    paddingBottom: Layout.space.base * 3,
+    height: '100%',
   },
   formContainer: {
     maxWidth: '100%',
