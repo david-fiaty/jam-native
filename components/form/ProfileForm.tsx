@@ -163,9 +163,10 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         {/* Submit button */}
         <View style={styles.submitButtonContainer}>
           <ButtonView
-            label={i18n.t('Update')}
+            label={i18n.t('Submit')}
             isProcessing={isProcessing}
             onPress={submitForm}
+            disabled={!formData?.profile_type?.length}
           />
         </View>
       </BoxView>
