@@ -54,7 +54,7 @@ const SignupForm = () => {
     })();
   }, [isLoaded, formData]);
 
-  if (!isLoaded) return <SpinnerView />;
+  console.log(formData)
 
   return (
     <ProfileForm resource={resource} />
