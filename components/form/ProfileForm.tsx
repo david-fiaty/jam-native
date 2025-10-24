@@ -22,6 +22,7 @@ import CountriesField from "@/components/field/CountriesField";
 import ProfileFormPersonal from "./profile-form/ProfileFormPersonal";
 import ProfileFormOrganization from "./profile-form/ProfileFormOrganization";
 import ProfileFormVenue from "./profile-form/ProfileFormVenue";
+import ProfileFormAll from "./profile-form/ProfileFormAll";
 
 const resource: string = 'profile';
 
@@ -145,100 +146,7 @@ const ProfileForm = () => {
 
         {/* All profiles */}
         {formData?.profile_type?.length && (
-          <>
-            <TextView>
-              {i18n.t('Profile name (with no spaces)')}*
-            </TextView>
-            <InputTextField
-              value={formData?.profile_name}
-              placeholder={i18n.t('Profile name')}
-              // Todo - Add nospace validation
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
-            />
-            {FormManager.renderError('profile_name')}
-
-            <TextView>
-              {i18n.t('Profile email')}
-            </TextView>
-            <InputTextField
-              value={formData?.email}
-              placeholder={i18n.t('Enter a profile email')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['email'])}
-            />
-            {FormManager.renderError('email')}
-
-            <TextView>
-              {i18n.t('About')}
-            </TextView>
-            <InputTextareaField
-              value={formData?.profile_description}
-              placeholder={i18n.t('Profile description')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
-            />
-            {FormManager.renderError('profile_description')}
-
-            <TextView>
-              {i18n.t('Address')}
-            </TextView>
-            <InputTextareaField
-              value={formData?.address}
-              placeholder={i18n.t('Enter your address')}
-              onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
-            />
-            {FormManager.renderError('address')}
-
-            <SectorsField
-              resource={resource}
-              field="sectors_ids"
-              value={formData?.sectors_ids}
-            />
-
-            <TextView>{i18n.t('Country')}</TextView>
-            <CountriesField
-              multiple={false}
-              resource={resource}
-              field="scope_country_code"
-              placeholder={i18n.t('Select a country')}
-              value={formData?.scope_country_code}
-              onPress={() => ModalManager.toggleModal('CountriesList', {
-                resource: resource,
-                field: 'scope_country_code',
-                multiple: false,
-              })}
-            />
-            {FormManager.renderError('scope_country_code')}
-
-            <TextView>
-              {i18n.t('Location')}
-            </TextView>
-            <LocationPickerField
-              resource="profile"
-              placeholder={i18n.t('Select your location')}
-              onChangeValue={(data: any) => {
-                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
-                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
-              }}
-              onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
-                resource: 'profile',
-                latitude: {
-                  field: 'geolocation_latitude',
-                  value: formData?.geolocation_latitude,
-                },
-                longitude: {
-                  field: 'geolocation_longitude',
-                  value: formData?.geolocation_longitude,
-                },
-              })}
-              latitude={{
-                field: 'geolocation_latitude',
-                value: formData?.geolocation_latitude,
-              }}
-              longitude={{
-                field: 'geolocation_longitude',
-                value: formData?.geolocation_longitude,
-              }}
-            />
-          </>
+          <ProfileFormAll resource={resource} formData={formData} />
         )}
 
         {/* Submit button */}
