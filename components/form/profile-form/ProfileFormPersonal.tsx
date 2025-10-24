@@ -20,9 +20,9 @@ import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CountriesField from "@/components/field/CountriesField";
-import OrganizationTypesField from "../field/OrganizationTypesField";
-import CulturalActivityTypesField from "../field/CulturalActivityTypesField";
-import ProfessionsField from "../field/ProfessionsField";
+import OrganizationTypesField from "@/components/field/OrganizationTypesField";
+import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
+import ProfessionsField from "@/components/field/ProfessionsField";
 
 const resource: string = 'profile';
 
