@@ -15,11 +15,16 @@ const SignupForm = () => {
   const router = useRouter();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [isPasswordMatch, setIsPasswordMatch] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
   const signupData: any = useSelector((state: any) => state.form[resource]);
 
   const submitForm = async () => {
+
+    console.log('signup submit');
+
+    return;
+    
+    setIsProcessing(true);
     let { password, password_confirmation, ...profileData } = formData;
 
     let payload: any = {
@@ -54,10 +59,11 @@ const SignupForm = () => {
     })();
   }, [isLoaded, formData]);
 
-  console.log(formData)
-
   return (
-    <ProfileForm resource={resource} />
+    <ProfileForm 
+      resource={resource} 
+      onSubmit={submitForm} 
+    />
   );
 };
 

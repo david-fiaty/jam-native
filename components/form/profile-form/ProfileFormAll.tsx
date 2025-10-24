@@ -8,6 +8,7 @@ import InputTextareaField from "@/components/field/InputTextareaField";
 import SectorsField from "@/components/field/SectorsField";
 import CountriesField from "@/components/field/CountriesField";
 import LocationPickerField from "@/components/field/LocationPickerField";
+import InputPasswordField from "@/components/field/InputPasswordField";
 
 type Props = {
   resource: any;
@@ -109,6 +110,33 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
           value: formData?.geolocation_longitude,
         }}
       />
+
+      {resource == 'signup' && (
+        <>
+          <TextView>
+            {i18n.t('Password')}*
+          </TextView>
+          <InputPasswordField
+            value={formData?.password}
+            placeholder={i18n.t('Password')}
+            onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
+          />
+          {FormManager.renderError('password')}
+
+          <TextView>
+            {i18n.t('Password confirmation')}*
+          </TextView>
+          <InputPasswordField
+            value={formData?.password_confirmation}
+            placeholder={i18n.t('Password confirmation')}
+            onChangeText={(value: string) => {
+              FormManager.updateField(resource, 'password_confirmation', value, ['string']);
+              FormManager.validatePasswordMatch(resource, 'password_confirmation', value, formData?.password);
+            }}
+          />
+          {FormManager.renderError('password_confirmation')}
+        </>
+      )}
     </>
   );
 }
