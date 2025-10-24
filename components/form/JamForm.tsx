@@ -114,7 +114,10 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
+      <BoxView 
+        direction="column" 
+        style={[Layout.formContainer, styles.formContainer]}
+      >
         <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
         <ListView
           data={jamCategories}
