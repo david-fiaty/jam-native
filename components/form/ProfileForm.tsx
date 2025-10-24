@@ -104,6 +104,19 @@ const ProfileForm = () => {
     })();
   }, [isLoaded]);
 
+  return (
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      scroll={true}
+      style={[Layout.formContainer, styles.container]}
+    >
+      <SpinnerView />
+    </BoxView>
+  );
+    
+
   if (!isLoaded) return <SpinnerView />;
 
   return (
@@ -436,6 +449,8 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
+    backgroundColor: 'red',
+
   },
   formContainer: {
     maxWidth: '100%',
