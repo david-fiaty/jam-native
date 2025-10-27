@@ -62,6 +62,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_description')}
 
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
+      />
+
       <TextView>
         {i18n.t('Address')}
       </TextView>
@@ -71,12 +77,6 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
       />
       {FormManager.renderError('address')}
-
-      <SectorsField
-        resource={resource}
-        field="sectors_ids"
-        value={formData?.sectors_ids}
-      />
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountriesField
