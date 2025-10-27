@@ -134,6 +134,19 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.is_open_24h')}
 
+      <TextView>
+        {i18n.t('Appointment only')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.is_by_appointment_only}
+        placeholder={i18n.t('Appointment only')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ is_by_appointment_only: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.is_by_appointment_only')}
+
 
     </>
   );
