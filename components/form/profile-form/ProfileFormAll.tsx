@@ -78,6 +78,37 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('address')}
 
+      <TextView>
+        {i18n.t('City')}
+      </TextView>
+      <InputTextField
+        value={formData?.town_or_locality}
+        placeholder={i18n.t('Enter your city')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'town_or_locality', value)}
+      />
+      {FormManager.renderError('town_or_locality')}
+
+      <TextView>
+        {i18n.t('Other town or locality')}
+      </TextView>
+      <InputTextField
+        value={formData?.other_town_or_locality}
+        placeholder={i18n.t('Other town or locality')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'other_town_or_locality', value)}
+      />
+      {FormManager.renderError('other_town_or_locality')}
+
+
+      <TextView>
+        {i18n.t('Region')}
+      </TextView>
+      <InputTextField
+        value={formData?.region}
+        placeholder={i18n.t('Enter your region')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'region', value)}
+      />
+      {FormManager.renderError('region')}
+
       <TextView>{i18n.t('Country')}</TextView>
       <CountriesField
         multiple={false}
