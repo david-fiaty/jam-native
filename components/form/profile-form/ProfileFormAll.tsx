@@ -173,7 +173,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
 const styles = StyleSheet.create({
   groupTitle: {
     fontWeight: 'bold',
-    marginTop: Layout.space.base*2,
+    marginTop: Layout.space.base,
   },
 });
 
