@@ -68,6 +68,10 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         value={formData?.sectors_ids}
       />
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Address and location")}
+      </TextView>
+
       <TextView>
         {i18n.t('Address')}
       </TextView>
