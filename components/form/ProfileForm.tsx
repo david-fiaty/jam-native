@@ -130,7 +130,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         <ProfileTypeField
           value={formData?.profile_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
-          disabled={resource == 'profile'}
+          //disabled={resource == 'profile'}
         />
         {FormManager.renderError('profile_type')}
 

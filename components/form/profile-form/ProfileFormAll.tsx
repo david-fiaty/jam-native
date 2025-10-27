@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -9,6 +10,7 @@ import SectorsField from "@/components/field/SectorsField";
 import CountriesField from "@/components/field/CountriesField";
 import LocationPickerField from "@/components/field/LocationPickerField";
 import InputPasswordField from "@/components/field/InputPasswordField";
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   resource: any;
@@ -40,6 +42,17 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       {FormManager.renderError('email')}
 
       <TextView>
+        {i18n.t('Phone number')}
+      </TextView>
+      <InputTextField
+        value={formData?.phone_number || ''}
+        placeholder={i18n.t('Enter your phone number')}
+        keyboardType="number-pad"
+        onChangeText={(value: string) => FormManager.updateField(resource, 'phone_number', value, ['string'])}
+      />
+      {FormManager.renderError('phone_number')}
+
+      <TextView>
         {i18n.t('About')}
       </TextView>
       <InputTextareaField
@@ -48,6 +61,16 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
       />
       {FormManager.renderError('profile_description')}
+
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
+      />
+
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Address and location")}
+      </TextView>
 
       <TextView>
         {i18n.t('Address')}
@@ -59,11 +82,36 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('address')}
 
-      <SectorsField
-        resource={resource}
-        field="sectors_ids"
-        value={formData?.sectors_ids}
+      <TextView>
+        {i18n.t('City')}
+      </TextView>
+      <InputTextField
+        value={formData?.town_or_locality}
+        placeholder={i18n.t('Enter your city')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'town_or_locality', value)}
       />
+      {FormManager.renderError('town_or_locality')}
+
+      <TextView>
+        {i18n.t('Other cities')}
+      </TextView>
+      <InputTextField
+        value={formData?.other_town_or_locality}
+        placeholder={i18n.t('Other town or locality')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'other_town_or_locality', value)}
+      />
+      {FormManager.renderError('other_town_or_locality')}
+
+
+      <TextView>
+        {i18n.t('Region')}
+      </TextView>
+      <InputTextField
+        value={formData?.region}
+        placeholder={i18n.t('Enter your region')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'region', value)}
+      />
+      {FormManager.renderError('region')}
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountriesField
@@ -111,6 +159,53 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         }}
       />
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Social networks")}
+      </TextView>
+
+      <TextView>
+        {i18n.t('Linkedin page')}
+      </TextView>
+      <InputTextField
+        value={formData?.linkedin_link || ''}
+        placeholder={i18n.t('Enter your page link')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'linkedin_link', value, ['string'])}
+      />
+      {FormManager.renderError('linkedin_link')}
+
+      <TextView>
+        {i18n.t('Facebook page')}
+      </TextView>
+      <InputTextField
+        value={formData?.facebook_link || ''}
+        placeholder={i18n.t('Enter your page link')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'facebook_link', value, ['string'])}
+      />
+      {FormManager.renderError('facebook_link')}
+
+      <TextView>
+        {i18n.t('Instagram user name')}
+      </TextView>
+      <InputTextField
+        value={formData?.instagram_username || ''}
+        placeholder={i18n.t('Enter your user name')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'instagram_username', value, ['string'])}
+      />
+      {FormManager.renderError('instagram_username')}
+
+      <TextView>
+        {i18n.t('Website link')}
+      </TextView>
+      <InputTextField
+        value={formData?.website_link || ''}
+        placeholder={i18n.t('Enter your website link')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'website_link', value, ['string'])}
+      />
+      {FormManager.renderError('website_link')}
+
+
+
+
       {resource == 'signup' && (
         <>
           <TextView>
@@ -140,5 +235,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base*1.5,
+  },
+});
 
 export default ProfileFormAll;
