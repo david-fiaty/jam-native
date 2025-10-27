@@ -46,6 +46,19 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_venue.venue_types')}
 
       <TextView>
+        {i18n.t('Other venue types')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.other_venue_types}
+        placeholder={i18n.t('Enter other venue types')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ other_venue_types: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.other_venue_types')}
+
+      <TextView>
         {i18n.t('Main cultural activities')}
       </TextView>
       <CulturalActivityTypesField
