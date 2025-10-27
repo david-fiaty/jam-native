@@ -46,6 +46,19 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_venue.venue_types')}
 
       <TextView>
+        {i18n.t('Other venue types')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.other_venue_types}
+        placeholder={i18n.t('Enter other venue types')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ other_venue_types: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.other_venue_types')}
+
+      <TextView>
         {i18n.t('Main cultural activities')}
       </TextView>
       <CulturalActivityTypesField
@@ -61,6 +74,19 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         })}
       />
       {FormManager.renderError('profile_venue.main_cultural_activities')}
+
+      <TextView>
+        {i18n.t('Other cultural activities')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.other_cultural_activities}
+        placeholder={i18n.t('Enter other cultural activities')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ other_cultural_activities: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.other_cultural_activities')}      
 
       <TextView>
         {i18n.t('Creation year')}
