@@ -129,7 +129,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       </TextView>
 
       <TextView>
-        {i18n.t('Linkedin')}
+        {i18n.t('Linkedin page')}
       </TextView>
       <InputTextField
         value={formData?.linkedin_link || ''}
@@ -137,6 +137,27 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'linkedin_link', value, ['number'])}
       />
       {FormManager.renderError('linkedin_link')}
+
+      <TextView>
+        {i18n.t('Facebook page')}
+      </TextView>
+      <InputTextField
+        value={formData?.facebook_link || ''}
+        placeholder={i18n.t('Enter your page link')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'facebook_link', value, ['number'])}
+      />
+      {FormManager.renderError('facebook_link')}
+
+      <TextView>
+        {i18n.t('Instagram user name')}
+      </TextView>
+      <InputTextField
+        value={formData?.instagram_username || ''}
+        placeholder={i18n.t('Enter your user name')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'instagram_username', value, ['number'])}
+      />
+      {FormManager.renderError('instagram_username')}
+
 
 
 
@@ -173,7 +194,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
 const styles = StyleSheet.create({
   groupTitle: {
     fontWeight: 'bold',
-    marginTop: Layout.space.base,
+    marginTop: Layout.space.base*1.5,
   },
 });
 
