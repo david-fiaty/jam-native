@@ -88,6 +88,20 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         }, ['number'])}
       />
       {FormManager.renderError('profile_organization.creation_year')}
+
+      <TextView>
+        {i18n.t('Type of management')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_organization?.type_of_management}
+        placeholder={i18n.t('Enter the type of management')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ type_of_management: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_organization.type_of_management')}
+      
     </>
   );
 }
