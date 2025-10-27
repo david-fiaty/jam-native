@@ -108,8 +108,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t("Venue details")}
       </TextView>
 
-
-
     </>
   );
 }
