@@ -1,4 +1,6 @@
 import React from "react";
+import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -101,8 +103,111 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['number'])}
       />
       {FormManager.renderError('profile_venue.creation_year')}
+
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Venue details")}
+      </TextView>
+
+      <TextView>
+        {i18n.t('Opening days')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.opening_days}
+        placeholder={i18n.t('Enter the opening days')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ opening_days: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.opening_days')}
+
+      <TextView>
+        {i18n.t('Opened everyday')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.is_open_24h}
+        placeholder={i18n.t('Opened everyday')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ is_open_24h: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.is_open_24h')}
+
+      <TextView>
+        {i18n.t('Appointment only')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.is_by_appointment_only}
+        placeholder={i18n.t('Appointment only')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ is_by_appointment_only: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.is_by_appointment_only')}
+
+      <TextView>
+        {i18n.t('Weekdays opening hour')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.opening_hour_weekdays}
+        placeholder={i18n.t('Weekdays opening hour')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ opening_hour_weekdays: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.opening_hour_weekdays')}
+
+      <TextView>
+        {i18n.t('Weekdays closing hour')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.closing_hour_weekdays}
+        placeholder={i18n.t('Weekdays closing hour')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ closing_hour_weekdays: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.closing_hour_weekdays')}
+
+      <TextView>
+        {i18n.t('Weekend opening hour')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.opening_hour_weekend}
+        placeholder={i18n.t('Weekends opening hour')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ opening_hour_weekend: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.opening_hour_weekend')}
+
+      <TextView>
+        {i18n.t('Weekend closing hour')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.closing_hour_weekend}
+        placeholder={i18n.t('Weekends closing hour')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ closing_hour_weekend: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.closing_hour_weekend')}
+
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base*1.5,
+  },
+});
 
 export default ProfileFormVenue;
