@@ -8,6 +8,7 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
+import DatePickerField from "@/components/field/DatePickerField";
 
 type Props = {
   resource: any;
@@ -88,7 +89,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
           ...{ other_cultural_activities: value },
         }, ['string'])}
       />
-      {FormManager.renderError('profile_venue.other_cultural_activities')}      
+      {FormManager.renderError('profile_venue.other_cultural_activities')}
 
       <TextView>
         {i18n.t('Creation year')}
@@ -150,52 +151,56 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Weekdays opening hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.opening_hour_weekdays}
         placeholder={i18n.t('Weekdays opening hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ opening_hour_weekdays: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekdays')}
 
       <TextView>
         {i18n.t('Weekdays closing hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.closing_hour_weekdays}
         placeholder={i18n.t('Weekdays closing hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ closing_hour_weekdays: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekdays')}
 
       <TextView>
         {i18n.t('Weekend opening hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.opening_hour_weekend}
         placeholder={i18n.t('Weekends opening hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ opening_hour_weekend: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekend')}
 
       <TextView>
         {i18n.t('Weekend closing hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.closing_hour_weekend}
         placeholder={i18n.t('Weekends closing hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ closing_hour_weekend: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekend')}
 
@@ -206,7 +211,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
 const styles = StyleSheet.create({
   groupTitle: {
     fontWeight: 'bold',
-    marginTop: Layout.space.base*1.5,
+    marginTop: Layout.space.base * 1.5,
   },
 });
 
