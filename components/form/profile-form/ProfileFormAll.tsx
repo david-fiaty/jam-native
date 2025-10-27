@@ -1,4 +1,5 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -9,6 +10,7 @@ import SectorsField from "@/components/field/SectorsField";
 import CountriesField from "@/components/field/CountriesField";
 import LocationPickerField from "@/components/field/LocationPickerField";
 import InputPasswordField from "@/components/field/InputPasswordField";
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   resource: any;
@@ -46,9 +48,9 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         value={formData?.phone_number || ''}
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone_number', value, ['number'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'phone_number', value, ['string'])}
       />
-      {FormManager.renderError('phone')}
+      {FormManager.renderError('phone_number')}
 
       <TextView>
         {i18n.t('About')}
@@ -122,6 +124,22 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         }}
       />
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Social networks")}
+      </TextView>
+
+      <TextView>
+        {i18n.t('Linkedin')}
+      </TextView>
+      <InputTextField
+        value={formData?.linkedin_link || ''}
+        placeholder={i18n.t('Enter your page link')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'linkedin_link', value, ['number'])}
+      />
+      {FormManager.renderError('linkedin_link')}
+
+
+
       {resource == 'signup' && (
         <>
           <TextView>
@@ -151,5 +169,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base*2,
+  },
+});
 
 export default ProfileFormAll;
