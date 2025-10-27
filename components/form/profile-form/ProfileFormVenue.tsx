@@ -151,7 +151,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Weekdays opening hour')}
       </TextView>
-
       <DatePickerField
         mode="time"
         value={formData?.profile_venue?.opening_hour_weekdays}
@@ -166,39 +165,42 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Weekdays closing hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.closing_hour_weekdays}
         placeholder={i18n.t('Weekdays closing hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ closing_hour_weekdays: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekdays')}
 
       <TextView>
         {i18n.t('Weekend opening hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.opening_hour_weekend}
         placeholder={i18n.t('Weekends opening hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ opening_hour_weekend: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekend')}
 
       <TextView>
         {i18n.t('Weekend closing hour')}
       </TextView>
-      <InputTextField
+      <DatePickerField
+        mode="time"
         value={formData?.profile_venue?.closing_hour_weekend}
         placeholder={i18n.t('Weekends closing hour')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ closing_hour_weekend: value },
-        }, ['string'])}
+        })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekend')}
 
