@@ -89,7 +89,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       {FormManager.renderError('town_or_locality')}
 
       <TextView>
-        {i18n.t('Other town or locality')}
+        {i18n.t('Other cities')}
       </TextView>
       <InputTextField
         value={formData?.other_town_or_locality}
