@@ -7,15 +7,18 @@ import IconView from '../view/IconView';
 import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
-  placeholder?: string,
-  value?: string,
-  onChangeValue?: (value: any) => void,
+  placeholder?: string;
+  value?: string;
+  mode?: any;
+  onChangeValue?: (value: any) => void;
 };
 
-const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
+const DatePickerField = ({placeholder, value, mode, onChangeValue}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const display = ScreenManager.isIos() ? 'spinner' : 'default';
+
+  mode = mode || 'datetime';
 
   const showDatePicker = () => {
     setShow(true);
@@ -46,7 +49,7 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
           <DateTimePickerModal
             date={date} 
             isVisible={show}
-            mode="datetime"
+            mode={mode}
             onConfirm={handleConfirm}
             onCancel={hideDatePicker}
             display={display} 
