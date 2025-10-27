@@ -1,4 +1,6 @@
 import React from "react";
+import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -101,8 +103,22 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['number'])}
       />
       {FormManager.renderError('profile_venue.creation_year')}
+
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Venue details")}
+      </TextView>
+
+
+
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base*1.5,
+  },
+});
 
 export default ProfileFormVenue;

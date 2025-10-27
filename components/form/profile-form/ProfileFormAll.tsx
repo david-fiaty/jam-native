@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -10,7 +11,6 @@ import SectorsField from "@/components/field/SectorsField";
 import CountriesField from "@/components/field/CountriesField";
 import LocationPickerField from "@/components/field/LocationPickerField";
 import InputPasswordField from "@/components/field/InputPasswordField";
-import { Layout } from "@/constants/Layout";
 
 type Props = {
   resource: any;
@@ -202,9 +202,6 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'website_link', value, ['string'])}
       />
       {FormManager.renderError('website_link')}
-
-
-
 
       {resource == 'signup' && (
         <>

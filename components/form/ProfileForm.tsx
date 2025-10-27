@@ -130,7 +130,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         <ProfileTypeField
           value={formData?.profile_type}
           onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
-          //disabled={resource == 'profile'}
+        //disabled={resource == 'profile'}
         />
         {FormManager.renderError('profile_type')}
 
@@ -151,7 +151,13 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
         {/* All profiles */}
         {formData?.profile_type?.length && (
-          <ProfileFormAll resource={resource} formData={formData} />
+          <>
+            <TextView style={styles.groupTitle}>
+              {i18n.t("Profile details")}
+            </TextView>
+
+            <ProfileFormAll resource={resource} formData={formData} />
+          </>
         )}
 
         {/* Submit button */}
@@ -186,6 +192,10 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: '100%',
     flexShrink: 1,
+  },
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base * 1.5,
   },
 });
 
