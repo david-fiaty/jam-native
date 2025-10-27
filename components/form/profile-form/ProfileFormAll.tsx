@@ -134,7 +134,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.linkedin_link || ''}
         placeholder={i18n.t('Enter your page link')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'linkedin_link', value, ['number'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'linkedin_link', value, ['string'])}
       />
       {FormManager.renderError('linkedin_link')}
 
@@ -144,7 +144,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.facebook_link || ''}
         placeholder={i18n.t('Enter your page link')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'facebook_link', value, ['number'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'facebook_link', value, ['string'])}
       />
       {FormManager.renderError('facebook_link')}
 
@@ -154,9 +154,19 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.instagram_username || ''}
         placeholder={i18n.t('Enter your user name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'instagram_username', value, ['number'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'instagram_username', value, ['string'])}
       />
       {FormManager.renderError('instagram_username')}
+
+      <TextView>
+        {i18n.t('Website link')}
+      </TextView>
+      <InputTextField
+        value={formData?.website_link || ''}
+        placeholder={i18n.t('Enter your website link')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'website_link', value, ['string'])}
+      />
+      {FormManager.renderError('website_link')}
 
 
 
