@@ -119,7 +119,21 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
           ...{ opening_days: value },
         }, ['string'])}
       />
-      {FormManager.renderError('profile_venue.creation_year')}
+      {FormManager.renderError('profile_venue.opening_days')}
+
+      <TextView>
+        {i18n.t('Opened everyday')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.is_open_24h}
+        placeholder={i18n.t('Opened everyday')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ is_open_24h: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.is_open_24h')}
+
 
     </>
   );
