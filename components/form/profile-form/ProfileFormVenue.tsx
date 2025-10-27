@@ -108,6 +108,19 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t("Venue details")}
       </TextView>
 
+      <TextView>
+        {i18n.t('Opening days')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_venue?.opening_days}
+        placeholder={i18n.t('Enter the opening days')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ opening_days: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_venue.creation_year')}
+
     </>
   );
 }
