@@ -40,6 +40,17 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       {FormManager.renderError('email')}
 
       <TextView>
+        {i18n.t('Phone number')}
+      </TextView>
+      <InputTextField
+        value={formData?.phone_number || ''}
+        placeholder={i18n.t('Enter your phone number')}
+        keyboardType="number-pad"
+        onChangeText={(value: string) => FormManager.updateField(resource, 'phone_number', value, ['number'])}
+      />
+      {FormManager.renderError('phone')}
+
+      <TextView>
         {i18n.t('About')}
       </TextView>
       <InputTextareaField
