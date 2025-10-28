@@ -123,9 +123,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.opening_days')}
 
-      <TextView>
-        {i18n.t('Opened everyday')}
-      </TextView>
       <InputSwitchField
         value={formData?.profile_venue?.is_open_24h}
         label={i18n.t('Opened everyday')}
