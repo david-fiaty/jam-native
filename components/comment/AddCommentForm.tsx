@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, JSX } from 'react';
 import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setActiveComment } from '@/redux/slices/CommentSlice';
