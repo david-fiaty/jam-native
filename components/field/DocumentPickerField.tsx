@@ -26,25 +26,25 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedDocuments];
-    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    mediaList = mediaList.filter((item: any) => item.name !== data.name);
     setSelectedDocuments(mediaList);
     if (onDeleteItem) onDeleteItem(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
     let mediaList = [...selectedPreview];
-    if (!selectedPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
+    if (!selectedPreview.includes(data.name)) {
+      mediaList.push(data.name);
       setSelectedPreview(mediaList);
     }
     else {
-      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
+      mediaList = mediaList.filter((item: any) => item.name === data.name);
       setSelectedPreview(mediaList);
     }
   };
 
   const renderDocumentPreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.fileName);
+    const isSelected = selectedPreview.includes(data.name);
     const imageStyle = {
       ...styles.mediaPreview,
       ...isSelected ? styles.selectedPreview : {},
@@ -55,7 +55,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
         key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <TextView>{data.fileName}</TextView>
+        <TextView>{data.name}</TextView>
 
         {isSelected &&
           <TouchableOpacity
@@ -89,7 +89,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedDocuments];
       for (const row of result?.assets) {
-        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
+        let mediaExists: boolean = mediaList.some((item: any) => item.name === row.name);
         if (!mediaExists) mediaList.push(row);
       }
 
