@@ -184,8 +184,6 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   );
 };
 
-export default SectorsField;
-
 const styles = StyleSheet.create({
   element: {
     ...Layout.formField,
@@ -220,3 +218,5 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
 });
+
+export default SectorsField;

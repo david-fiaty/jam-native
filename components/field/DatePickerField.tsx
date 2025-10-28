@@ -34,13 +34,22 @@ const DatePickerField = ({placeholder, value, mode, onChangeValue}: Props) => {
     hideDatePicker();
   };
 
+  const renderRightIcon = () => {
+    if (mode == 'time') {
+      return <IconView name="clock" theme="transparent" />
+    }
+    else {
+      return <IconView name="calendar" theme="transparent" />
+    }
+  };
+
   return (
       <BoxView direction="row" align="space-between">
         <TouchableOpacity onPress={showDatePicker} style={styles.fieldContainer}>
           <InputTextField 
             readOnly={true}
             placeholder={placeholder} 
-            rightIcon={<IconView name="calendar" theme="transparent" />}
+            rightIcon={renderRightIcon()}
             value={value}
           />
         </TouchableOpacity>
