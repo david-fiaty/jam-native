@@ -119,7 +119,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
           <InputTextField
             readOnly={true}
             placeholder={placeholder}
-            rightIcon={<IconView name="image" theme="transparent" />}
+            rightIcon={<IconView name="document" theme="transparent" />}
           />
         </TouchableOpacity>
       )}
