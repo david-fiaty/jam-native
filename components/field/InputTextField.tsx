@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, JSX } from "react";
 import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
