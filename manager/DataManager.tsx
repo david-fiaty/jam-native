@@ -66,12 +66,20 @@ class DataManager {
     return value;
   }
 
-  toDbDate(value: string) {
+  toDbDate(value: any) {
     if (value) {
       return moment(value).format(Config.toDbDate);
     }
 
     return value;
+  }
+
+  toDbTime(value: any) {
+    let hours: any = value.getHours();
+    let minutes: any = value.getMinutes();
+    let formattedTime: any = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+
+    return formattedTime;
   }
 
   isUrl(value: string) {
@@ -132,13 +140,13 @@ class DataManager {
   }
 
   toPositiveInt(value: any) {
-    const num = Number(value);          
+    const num = Number(value);
 
-    if (Number.isNaN(num) || num < 0) {  
+    if (Number.isNaN(num) || num < 0) {
       return 0;
     }
-    
-    return Math.floor(num);    
+
+    return Math.floor(num);
   }
 };
 
