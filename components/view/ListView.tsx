@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, JSX } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import { Config } from "@/constants/Config";
