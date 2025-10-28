@@ -57,14 +57,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
         key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <ImageView
-          key={data.uri}
-          uri={data.uri}
-          width={imageSize.width}
-          height={imageSize.height}
-          resizeMode="cover"
-          style={imageStyle}
-        />
+        <TextView>{data.fileName}</TextView>
 
         {isSelected &&
           <TouchableOpacity
