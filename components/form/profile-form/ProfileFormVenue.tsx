@@ -9,6 +9,8 @@ import FormManager from "@/manager/FormManager";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
+import InputSwitchField from "@/components/field/InputSwitchField";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   resource: any;
@@ -109,6 +111,26 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t("Venue details")}
       </TextView>
 
+      <InputSwitchField
+        value={formData?.profile_venue?.is_open_24h}
+        label={i18n.t('Is opened everyday')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ is_open_24h: value },
+        }, [])}
+      />
+      {FormManager.renderError('profile_venue.is_open_24h')}
+
+      <InputSwitchField
+        value={formData?.profile_venue?.is_by_appointment_only}
+        label={i18n.t('By appointment only')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ is_by_appointment_only: value },
+        }, [])}
+      />
+      {FormManager.renderError('profile_venue.is_by_appointment_only')}
+
       <TextView>
         {i18n.t('Opening days')}
       </TextView>
@@ -123,41 +145,15 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_venue.opening_days')}
 
       <TextView>
-        {i18n.t('Opened everyday')}
-      </TextView>
-      <InputTextField
-        value={formData?.profile_venue?.is_open_24h}
-        placeholder={i18n.t('Opened everyday')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ is_open_24h: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_venue.is_open_24h')}
-
-      <TextView>
-        {i18n.t('Appointment only')}
-      </TextView>
-      <InputTextField
-        value={formData?.profile_venue?.is_by_appointment_only}
-        placeholder={i18n.t('Appointment only')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ is_by_appointment_only: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_venue.is_by_appointment_only')}
-
-      <TextView>
         {i18n.t('Weekdays opening hour')}
       </TextView>
       <DatePickerField
         mode="time"
         value={formData?.profile_venue?.opening_hour_weekdays}
         placeholder={i18n.t('Weekdays opening hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekdays: value },
+          ...{ opening_hour_weekdays: DataManager.toDbTime(value)},
         })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekdays')}
@@ -169,9 +165,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.closing_hour_weekdays}
         placeholder={i18n.t('Weekdays closing hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ closing_hour_weekdays: value },
+          ...{ closing_hour_weekdays: DataManager.toDbTime(value) },
         })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekdays')}
@@ -183,9 +179,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.opening_hour_weekend}
         placeholder={i18n.t('Weekends opening hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekend: value },
+          ...{ opening_hour_weekend: DataManager.toDbTime(value) },
         })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekend')}
@@ -197,12 +193,46 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.closing_hour_weekend}
         placeholder={i18n.t('Weekends closing hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ closing_hour_weekend: value },
+          ...{ closing_hour_weekend: DataManager.toDbTime(value) },
         })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekend')}
+
+      <InputSwitchField
+        value={formData?.profile_venue?.has_creation_space}
+        label={i18n.t('Has creation space')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ has_creation_space: value },
+        }, [])}
+      />
+      {FormManager.renderError('profile_venue.has_creation_space')}
+
+      <InputSwitchField
+        value={formData?.profile_venue?.has_diffusion_space}
+        label={i18n.t('Has diffusion space')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ has_diffusion_space: value },
+        }, [])}
+      />
+      {FormManager.renderError('profile_venue.has_diffusion_space')}
+
+      <TextView>
+        {i18n.t('Number of spaces')}
+      </TextView>
+      <InputTextField
+        keyboardType="number-pad"
+        value={formData?.profile_venue?.total_creation_or_rehearsal_rooms}
+        placeholder={i18n.t('Enter the number of spaces')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ total_creation_or_rehearsal_rooms: value },
+        }, ['number'])}
+      />
+      {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
 
     </>
   );
