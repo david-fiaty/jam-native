@@ -25,7 +25,37 @@ const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const getWeekdaysOptions = () => {
-    return [];
+    return [
+      {
+        value: 'monday',
+        label: i18n.t('Monday'),
+      },
+      {
+        value: 'tuesday',
+        label: i18n.t('Tuesday'),
+      },
+      {
+        value: 'wednesday',
+        label: i18n.t('Wednesday'),
+      },
+      {
+        value: 'thrusday',
+        label: i18n.t('Thursday'),
+      },
+      {
+        value: 'friday',
+        label: i18n.t('Friday'),
+      },
+      {
+        value: 'saturday',
+        label: i18n.t('Saturday'),
+      },
+      {
+        value: 'sunday',
+        label: i18n.t('Sunday'),
+      },
+
+    ];
   };
 
   const getSelectedItems= () => {
@@ -41,7 +71,7 @@ const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
       value: selectedIds,
     }));
   };
-  
+
   const deleteItem = (item: any, deleteCallback: any) => {
     let selectedIds: any[] = formData?.[field] || [];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
