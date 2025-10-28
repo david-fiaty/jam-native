@@ -92,7 +92,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_organization.creation_year')}
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("Organization details")}
+        {i18n.t("Management")}
       </TextView>
 
       <TextView>
