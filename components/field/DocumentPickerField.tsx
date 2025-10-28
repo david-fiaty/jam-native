@@ -1,9 +1,7 @@
 import { useState, useEffect, JSX } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -81,6 +79,12 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
 
   const pickDocument = async () => {
     let result: any = await launchBrowser();
+
+    // Todo - Implement doc selection
+    console.log('-- pick doc', result?.assets);
+
+
+    return;
 
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedDocuments];
