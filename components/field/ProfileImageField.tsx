@@ -45,6 +45,7 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
 
   return (
     <MediaPickerField
+      mediaTypes={['images']}
       label={
         <BoxView direction="row" align="center">
           {!uri?.length && (
