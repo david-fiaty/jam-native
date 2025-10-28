@@ -58,7 +58,7 @@ const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
     ];
   };
 
-  const getSelectedItems= () => {
+  const getSelectedItems = () => {
     return [];
   };
 
@@ -126,15 +126,14 @@ const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
 
   return (
     <BoxView direction="column" align="left">
-      <TextView>{i18n.t('Activity sectors')}*</TextView>
       <MultiSelect
         value={getSelectedItems()}
         labelField="label"
         valueField="value"
-        placeholder={i18n.t('Select your sectors')}
-        //inside={getSelectedSectors().length > 0}
-        //style={!getSelectedSectors().length ? styles.element : styles.preview}
-        //iconStyle={getSelectedSectors().length > 0 ? styles.iconRight : {}}
+        placeholder={i18n.t('Select your weekdays')}
+        inside={getSelectedItems().length > 0}
+        style={!getSelectedItems().length ? styles.element : styles.preview}
+        iconStyle={getSelectedItems().length > 0 ? styles.iconRight : {}}
         placeholderStyle={styles.placeholderStyle}
         iconColor={Layout.colors.primary}
         onChange={(selectedIds: any) => updateSelection(selectedIds)}
@@ -145,8 +144,6 @@ const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
     </BoxView>
   );
 };
-
-export default WeekdaysField;
 
 const styles = StyleSheet.create({
   element: {
@@ -182,3 +179,5 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
 });
+
+export default WeekdaysField;

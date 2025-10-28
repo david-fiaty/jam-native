@@ -11,6 +11,7 @@ import CulturalActivityTypesField from "@/components/field/CulturalActivityTypes
 import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
+import WeekdaysField from "@/components/field/WeekdaysField";
 
 type Props = {
   resource: any;
@@ -134,6 +135,21 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Opening days')}
       </TextView>
+      <WeekdaysField
+        resource={resource}
+        field={'opening_days'}
+        value={formData?.profile_venue?.opening_days}
+        placeholder={i18n.t('Enter the opening days')}
+        /*
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ opening_days: value },
+        }, ['string'])}
+        */
+      />
+
+
+      {/*
       <InputTextField
         value={formData?.profile_venue?.opening_days}
         placeholder={i18n.t('Enter the opening days')}
@@ -143,6 +159,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['string'])}
       />
       {FormManager.renderError('profile_venue.opening_days')}
+      */}
 
       <TextView>
         {i18n.t('Weekdays opening hour')}
