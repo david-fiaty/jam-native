@@ -1,37 +1,21 @@
 import React, { useState, useEffect, JSX } from "react";
 import { StyleSheet } from "react-native";
-import { Input } from "@rneui/themed";
-import { Layout } from "@/constants/Layout";
+import { Switch } from "@rneui/base";
 import BoxView from "../view/BoxView";
+import TextView from "../view/TextView";
 
 type Props = {
-  keyboardType?: any;
   value?: string;
-  placeholder?: string;
-  containerStyle?: object;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
+  label?: string;
   disabled?: boolean;
-  secureTextEntry?: boolean;
-  spellCheck?: boolean;
-  readOnly?: boolean,
-  onChangeText?: (value: string) => void;
-  onSubmitEditing?: () => void;
+  onChangeValue?: (value: boolean) => void;
 };
 
-const InputTextField = ({
-  keyboardType,
+const InputSwitchField = ({
   value,
-  placeholder,
-  containerStyle,
-  leftIcon,
-  rightIcon,
+  label,
   disabled,
-  secureTextEntry,
-  spellCheck,
-  readOnly,
-  onChangeText,
-  onSubmitEditing,
+  onChangeValue
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
@@ -39,14 +23,9 @@ const InputTextField = ({
     opacity: disabled ? 0.4: 1,
   };
 
-  const changeTextEvent = (fieldValue: any) => {
-    setCurrentValue(fieldValue);
-    if (onChangeText) onChangeText(fieldValue);
-  };
-
-  const submitEditingEvent = () => {
-    if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue); 
+  const onChangeEvent = (fieldValue: any) => {
+    setCurrentValue(!fieldValue);
+    if (onChangeValue) onChangeValue(!fieldValue);
   };
 
   useEffect(() => {
@@ -55,25 +34,13 @@ const InputTextField = ({
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
-      <Input
-        keyboardType={keyboardType}
-        textAlignVertical="center"
-        numberOfLines={1}
-        leftIcon={leftIcon}
-        rightIcon={rightIcon}
-        placeholder={placeholder}
-        placeholderTextColor={Layout.colors.primary}
-        inputContainerStyle={styles.inputContainerStyle}
-        containerStyle={containerStyle ?? {}}
-        multiline={false}
-        editable={!disabled}
-        secureTextEntry={secureTextEntry}
-        spellCheck={spellCheck}
+      <Switch
         value={currentValue}
-        readOnly={readOnly}
-        onChangeText={changeTextEvent}
-        onSubmitEditing={submitEditingEvent}
+        disabled={disabled}
+        onValueChange={onChangeEvent}
       />
+
+      <TextView>{label}</TextView>
     </BoxView>
   );
 };
@@ -88,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTextField;
+export default InputSwitchField;
