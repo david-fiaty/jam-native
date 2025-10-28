@@ -199,6 +199,40 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.closing_hour_weekend')}
 
+      <InputSwitchField
+        value={formData?.profile_venue?.has_creation_space}
+        label={i18n.t('Has creation space')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ has_creation_space: value },
+        }, [])}
+      />
+      {FormManager.renderError('profile_venue.has_creation_space')}
+
+      <InputSwitchField
+        value={formData?.profile_venue?.has_diffusion_space}
+        label={i18n.t('Has diffusion space')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ has_diffusion_space: value },
+        }, [])}
+      />
+      {FormManager.renderError('profile_venue.has_diffusion_space')}
+
+      <TextView>
+        {i18n.t('Number of spaces')}
+      </TextView>
+      <InputTextField
+        keyboardType="number-pad"
+        value={formData?.profile_venue?.total_creation_or_rehearsal_rooms}
+        placeholder={i18n.t('Enter the number of spaces')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ total_creation_or_rehearsal_rooms: value },
+        }, ['number'])}
+      />
+      {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
+
     </>
   );
 }
