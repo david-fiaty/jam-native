@@ -9,6 +9,7 @@ import FormManager from "@/manager/FormManager";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
+import InputSwitchField from "@/components/field/InputSwitchField";
 
 type Props = {
   resource: any;
@@ -125,13 +126,13 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Opened everyday')}
       </TextView>
-      <InputTextField
+      <InputSwitchField
         value={formData?.profile_venue?.is_open_24h}
-        placeholder={i18n.t('Opened everyday')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        label={i18n.t('Opened everyday')}
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ is_open_24h: value },
-        }, ['string'])}
+        }, [])}
       />
       {FormManager.renderError('profile_venue.is_open_24h')}
 
