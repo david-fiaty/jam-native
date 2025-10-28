@@ -8,6 +8,7 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
+import DocumentPickerField from "@/components/field/DocumentPickerField";
 
 type Props = {
   resource: any;
@@ -92,7 +93,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_organization.creation_year')}
 
       <TextView style={styles.groupTitle}>
-        {i18n.t("Organization details")}
+        {i18n.t("Management")}
       </TextView>
 
       <TextView>
@@ -107,7 +108,30 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         }, ['string'])}
       />
       {FormManager.renderError('profile_organization.type_of_management')}
-      
+
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Documents")}
+      </TextView>
+
+      <TextView>
+        {i18n.t('Technical sheet')}
+      </TextView>
+      <DocumentPickerField
+        value={formData?.profile_organization?.upload_technical_sheet}
+        placeholder={i18n.t('Upload a technical sheet')}
+        //onChangeText={(value: any) => console.log(value) }
+          
+        /*
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ type_of_management: value },
+        }, ['string'])}
+
+        */
+      />
+      {FormManager.renderError('profile_organization.upload_technical_sheet')}
+
+
     </>
   );
 }

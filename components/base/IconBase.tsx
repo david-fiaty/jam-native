@@ -70,6 +70,8 @@ const icons: any = {
   chat: ({iconStyle, size}: IconProps) => <Ionicons name="chatbox-outline" size={size} style={iconStyle} />,
   see: ({iconStyle, size}: IconProps) => <Ionicons name="eye-outline" size={size} style={iconStyle} />,
   blind: ({iconStyle, size}: IconProps) => <Ionicons name="eye-off-outline" size={size} style={iconStyle} />,
+  clock: ({iconStyle, size}: IconProps) => <Ionicons name="time-outline" size={size} style={iconStyle} />,
+  document: ({iconStyle, size}: IconProps) => <Ionicons name="document-outline" size={size} style={iconStyle} />,
 };
 
 const IconBase = ({name, size, containerStyle, iconStyle}: Props) => {
