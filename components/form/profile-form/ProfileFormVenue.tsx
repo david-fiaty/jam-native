@@ -10,6 +10,7 @@ import VenueTypesField from "@/components/field/VenueTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   resource: any;
@@ -150,9 +151,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.opening_hour_weekdays}
         placeholder={i18n.t('Weekdays opening hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekdays: value },
+          ...{ opening_hour_weekdays: DataManager.toDbTime(value)},
         })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekdays')}
@@ -164,9 +165,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.closing_hour_weekdays}
         placeholder={i18n.t('Weekdays closing hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ closing_hour_weekdays: value },
+          ...{ closing_hour_weekdays: DataManager.toDbTime(value) },
         })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekdays')}
@@ -178,9 +179,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.opening_hour_weekend}
         placeholder={i18n.t('Weekends opening hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekend: value },
+          ...{ opening_hour_weekend: DataManager.toDbTime(value) },
         })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekend')}
@@ -192,9 +193,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         mode="time"
         value={formData?.profile_venue?.closing_hour_weekend}
         placeholder={i18n.t('Weekends closing hour')}
-        onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ closing_hour_weekend: value },
+          ...{ closing_hour_weekend: DataManager.toDbTime(value) },
         })}
       />
       {FormManager.renderError('profile_venue.closing_hour_weekend')}
