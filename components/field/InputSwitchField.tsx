@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import { Switch } from "@rneui/base";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
 type Props = {
   value?: string;
@@ -20,12 +21,14 @@ const InputSwitchField = ({
   const [currentValue, setCurrentValue] = useState<any>('');
 
   const disabledStyle: any = {
-    opacity: disabled ? 0.4: 1,
+    opacity: disabled ? 0.4 : 1,
   };
 
-  const onChangeEvent = (fieldValue: any) => {
-    setCurrentValue(!fieldValue);
-    if (onChangeValue) onChangeValue(!fieldValue);
+  const onChangeEvent = () => {
+    setCurrentValue((previousState: boolean) => {
+      if (onChangeValue) onChangeValue(!previousState);
+      return !previousState;
+    });
   };
 
   useEffect(() => {
@@ -33,14 +36,31 @@ const InputSwitchField = ({
   }, [value]);
 
   return (
-    <BoxView style={[styles.container, disabledStyle]}>
-      <Switch
-        value={currentValue}
-        disabled={disabled}
-        onValueChange={onChangeEvent}
-      />
+    <BoxView
+      direction="row"
+      align="center"
+      justify="space-between"
+      style={[styles.container, disabledStyle]}
+    >
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <TextView>{label}</TextView>
+      </BoxView>
 
-      <TextView>{label}</TextView>
+      <BoxView
+        direction="row"
+        align="center"
+      >
+        <TextView>{currentValue === true ? i18n.t('Yes') : i18n.t('No')}</TextView>
+        
+        <Switch
+          value={currentValue}
+          disabled={disabled}
+          onValueChange={onChangeEvent}
+        />
+      </BoxView>
     </BoxView>
   );
 };
