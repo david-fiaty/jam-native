@@ -120,7 +120,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         value={formData?.profile_organization?.upload_technical_sheet}
         placeholder={i18n.t('Upload a technical sheet')}
         //onChangeText={(value: any) => console.log(value) }
-        
+          
         /*
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
           ...(formData?.profile_organization || {}),
