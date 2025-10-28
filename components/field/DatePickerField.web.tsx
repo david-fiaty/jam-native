@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
@@ -7,19 +8,20 @@ import IconView from '../view/IconView';
 import Datetime from 'react-datetime';
 import ScreenManager from '@/manager/ScreenManager';
 import "react-datetime/css/react-datetime.css";
-import TextView from '../view/TextView';
-import { Layout } from '@/constants/Layout';
 
 type Props = {
-  placeholder?: string,
-  value?: string,
-  onChangeValue?: (value: any) => void,
+  placeholder?: string;
+  value?: string;
+  mode?: any;
+  onChangeValue?: (value: any) => void;
 };
 
-const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
+const DatePickerField = ({placeholder, value, mode, onChangeValue}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const display = ScreenManager.isIos() ? 'spinner' : 'default';
+
+  mode = mode || 'datetime';
 
   const showDatePicker = () => {
     setShow(!show);
