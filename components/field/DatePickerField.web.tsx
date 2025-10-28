@@ -35,6 +35,15 @@ const DatePickerField = ({ placeholder, value, mode, onChangeValue }: Props) => 
     if (onChangeValue) onChangeValue(value);
   };
 
+  const renderRightIcon = () => {
+    if (mode == 'time') {
+      return <IconView name="clock" theme="transparent" />
+    }
+    else {
+      return <IconView name="calendar" theme="transparent" />
+    }
+  };
+
   return (
     <>
       <BoxView direction="row" align="space-between">
@@ -42,7 +51,7 @@ const DatePickerField = ({ placeholder, value, mode, onChangeValue }: Props) => 
           <InputTextField
             readOnly={true}
             placeholder={placeholder}
-            rightIcon={<IconView name="calendar" theme="transparent" />}
+            rightIcon={renderRightIcon()}
             value={value}
           />
         </TouchableOpacity>
