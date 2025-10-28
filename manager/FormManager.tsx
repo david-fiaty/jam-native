@@ -154,9 +154,25 @@ class FormManager {
 
   getValidationRules() {
     return {
+      required: {
+        run: (value: any) => {
+          if (typeof value === 'string' || value instanceof String) {
+            return value && String(value).trim() !== ''; 
+          }
+          else if (Array.isArray(value)) {
+            return value?.length > 0;
+          }
+          else if (typeof value === 'object') {
+            return Object.keys(value)?.length > 0;
+          }
+        },
+        error: () => {
+          return i18n.t('A value is required.');
+        },
+      },
       string: {
         run: (value: any) => {
-          return value && String(value).trim() !== ''; 
+          return (typeof value === 'string' || value instanceof String); 
         },
         error: () => {
           return i18n.t('A value is required.');
@@ -164,7 +180,7 @@ class FormManager {
       },
       array: {
         run: (value: any) => {
-          return value && Array.isArray(value) && value.length > 0;
+          return Array.isArray(value);
         },
         error: () => {
           return i18n.t('A selection is required.');
