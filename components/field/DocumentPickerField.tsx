@@ -15,18 +15,19 @@ type Props = {
   value?: any;
   placeholder?: string;
   preview?: boolean;
+  multiple?: boolean;
   mediaTypes?: any;
   onSelectItem?: (data: any) => void;
   onDeleteItem?: (data: any) => void;
 };
 
-const DocumentPickerField = ({ label, value, placeholder, preview, mediaTypes, onSelectItem, onDeleteItem }: Props) => {  
+const DocumentPickerField = ({ label, value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
-    let mediaList = [...selectedDocuments];  
+    let mediaList = [...selectedDocuments];
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedDocuments(mediaList);
     if (onDeleteItem) onDeleteItem(mediaList);
@@ -42,9 +43,9 @@ const DocumentPickerField = ({ label, value, placeholder, preview, mediaTypes, o
       mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
       setSelectedPreview(mediaList);
     }
-  }; 
+  };
 
-  const renderImagePreview = (data: any) => {
+  const renderDocumentPreview = (data: any) => {
     const isSelected = selectedPreview.includes(data.fileName);
     const imageStyle = {
       ...styles.mediaPreview,
@@ -52,42 +53,40 @@ const DocumentPickerField = ({ label, value, placeholder, preview, mediaTypes, o
     };
 
     return (
-      <TouchableOpacity 
-        key={data.uri} 
+      <TouchableOpacity
+        key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <ImageView 
-          key={data.uri} 
-          uri={data.uri} 
-          width={imageSize.width} 
-          height={imageSize.height} 
-          resizeMode="cover" 
+        <ImageView
+          key={data.uri}
+          uri={data.uri}
+          width={imageSize.width}
+          height={imageSize.height}
+          resizeMode="cover"
           style={imageStyle}
         />
 
-        { isSelected && 
-          <TouchableOpacity 
+        {isSelected &&
+          <TouchableOpacity
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
             <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
-        } 
+        }
       </TouchableOpacity>
-    );    
+    );
   };
 
   const launchBrowser = async () => {
-    return await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: mediaTypes || [],
-      allowsEditing: false,
-      aspect: [4, 3],
-      quality: 1,
-      base64: true,
+    return await DocumentPicker.getDocumentAsync({
+      type: '*/*', 
+      copyToCacheDirectory: true,
+      multiple: (multiple === true ? true : false),
     });
   };
 
-  const pickImage = async () => {
+  const pickDocument = async () => {
     let result: any = await launchBrowser();
 
     if (!result.canceled && result?.assets?.length) {
@@ -106,17 +105,17 @@ const DocumentPickerField = ({ label, value, placeholder, preview, mediaTypes, o
   useEffect(() => {
     setSelectedDocuments(value || []);
   }, [value]);
-  
+
   return (
     <View style={styles.container}>
-      { label && (
-        <TouchableOpacity onPress={pickImage}>
+      {label && (
+        <TouchableOpacity onPress={pickDocument}>
           <TextView>{label}</TextView>
         </TouchableOpacity>
       )}
 
-      { !label && (
-        <TouchableOpacity onPress={pickImage}>           
+      {!label && (
+        <TouchableOpacity onPress={pickDocument}>
           <InputTextField
             readOnly={true}
             placeholder={placeholder}
@@ -125,10 +124,10 @@ const DocumentPickerField = ({ label, value, placeholder, preview, mediaTypes, o
         </TouchableOpacity>
       )}
 
-      { selectedDocuments?.length > 0 && preview &&
+      {selectedDocuments?.length > 0 && preview &&
         <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedDocuments.map((data: any) => {
-            if (data?.uri) return renderImagePreview(data);
+          {selectedDocuments.map((data: any) => {
+            if (data?.uri) return renderDocumentPreview(data);
           })}
         </BoxView>
       }
@@ -140,7 +139,7 @@ const styles = StyleSheet.create({
   container: {},
   previewContainer: {
     paddingVertical: Layout.space.base,
-    gap: Layout.space.base*1,
+    gap: Layout.space.base * 1,
   },
   mediaPreview: {
     borderRadius: Layout.radius.round,

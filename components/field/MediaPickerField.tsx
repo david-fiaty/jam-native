@@ -14,12 +14,13 @@ type Props = {
   value?: any;
   placeholder?: string;
   preview?: boolean;
+  multiple?: any;
   mediaTypes?: any;
   onSelectItem?: (data: any) => void;
   onDeleteItem?: (data: any) => void;
 };
 
-const MediaPickerField = ({ label, value, placeholder, preview, mediaTypes, onSelectItem, onDeleteItem }: Props) => {  
+const MediaPickerField = ({ label, value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
@@ -83,6 +84,7 @@ const MediaPickerField = ({ label, value, placeholder, preview, mediaTypes, onSe
       aspect: [4, 3],
       quality: 1,
       base64: true,
+      allowsMultipleSelection: (multiple === true ? true : false),
     });
   };
 

@@ -151,6 +151,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Select media')} *</TextView>
         <MediaPickerField
           mediaTypes={['images']}
+          multiple={true}
           preview={true}
           placeholder={i18n.t('Select media files')}
           value={formData?.upload_medias || []}
