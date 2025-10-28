@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import Datetime from 'react-datetime';
-import ScreenManager from '@/manager/ScreenManager';
+
 import "react-datetime/css/react-datetime.css";
-import TextView from '../view/TextView';
-import { Layout } from '@/constants/Layout';
 
 type Props = {
-  placeholder?: string,
-  value?: string,
-  onChangeValue?: (value: any) => void,
+  placeholder?: string;
+  value?: string;
+  mode?: any;
+  onChangeValue?: (value: any) => void;
 };
 
-const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
+const DatePickerField = ({ placeholder, value, mode, onChangeValue }: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
-  const display = ScreenManager.isIos() ? 'spinner' : 'default';
+
+  mode = mode || 'datetime';
 
   const showDatePicker = () => {
     setShow(!show);
@@ -38,9 +39,9 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
     <>
       <BoxView direction="row" align="space-between">
         <TouchableOpacity onPress={showDatePicker} style={styles.fieldContainer}>
-          <InputTextField 
+          <InputTextField
             readOnly={true}
-            placeholder={placeholder} 
+            placeholder={placeholder}
             rightIcon={<IconView name="calendar" theme="transparent" />}
             value={value}
           />
@@ -49,12 +50,24 @@ const DatePickerField = ({placeholder, value, onChangeValue}: Props) => {
 
       {show && (
         <View style={styles.calendarContainer}>
-          <Datetime 
-            input={false}
-            dateFormat={Config.uiDateFormat} 
-            value={date}
-            onChange={handleConfirm}
-          />
+          {mode == 'time' && (
+            <Datetime
+              input={false}
+              dateFormat={false}
+              timeFormat="HH:mm"
+              value={date}
+              onChange={handleConfirm}
+            />
+          )}
+
+          {mode != 'time' && (
+            <Datetime
+              input={false}
+              dateFormat={Config.uiDateFormat}
+              value={date}
+              onChange={handleConfirm}
+            />
+          )}
 
           <TouchableOpacity onPress={hideDatePicker} style={styles.closeButton}>
             <IconView name="close" theme="secondary" size={16} />
