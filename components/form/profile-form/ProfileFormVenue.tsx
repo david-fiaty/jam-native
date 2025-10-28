@@ -125,7 +125,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
 
       <InputSwitchField
         value={formData?.profile_venue?.is_open_24h}
-        label={i18n.t('Opened everyday')}
+        label={i18n.t('Is opened everyday')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ is_open_24h: value },
@@ -135,7 +135,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
 
       <InputSwitchField
         value={formData?.profile_venue?.is_by_appointment_only}
-        label={i18n.t('Appointment only')}
+        label={i18n.t('By appointment only')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ is_by_appointment_only: value },
