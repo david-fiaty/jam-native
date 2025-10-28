@@ -10,6 +10,7 @@ import VenueTypesField from "@/components/field/VenueTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   resource: any;
@@ -152,7 +153,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Weekdays opening hour')}
         onChangeValue={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekdays: value },
+          ...{ opening_hour_weekdays: DataManager.toDbTime(value)},
         })}
       />
       {FormManager.renderError('profile_venue.opening_hour_weekdays')}
