@@ -1,9 +1,7 @@
 import { useState, useEffect, JSX } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import * as ImagePicker from 'expo-image-picker';
 import * as DocumentPicker from 'expo-document-picker';
-import ImageView from '../view/ImageView';
 import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
@@ -28,25 +26,25 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedDocuments];
-    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    mediaList = mediaList.filter((item: any) => item.name !== data.name);
     setSelectedDocuments(mediaList);
     if (onDeleteItem) onDeleteItem(mediaList);
   };
 
   const updatePreviewSelection = (data: any) => {
     let mediaList = [...selectedPreview];
-    if (!selectedPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
+    if (!selectedPreview.includes(data.name)) {
+      mediaList.push(data.name);
       setSelectedPreview(mediaList);
     }
     else {
-      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
+      mediaList = mediaList.filter((item: any) => item.name === data.name);
       setSelectedPreview(mediaList);
     }
   };
 
   const renderDocumentPreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.fileName);
+    const isSelected = selectedPreview.includes(data.name);
     const imageStyle = {
       ...styles.mediaPreview,
       ...isSelected ? styles.selectedPreview : {},
@@ -57,7 +55,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
         key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <TextView>{data.fileName}</TextView>
+        <TextView>{data.name}</TextView>
 
         {isSelected &&
           <TouchableOpacity
@@ -82,10 +80,16 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
   const pickDocument = async () => {
     let result: any = await launchBrowser();
 
+    // Todo - Implement doc selection
+    console.log('-- pick doc', result?.assets);
+
+
+    return;
+
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedDocuments];
       for (const row of result?.assets) {
-        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
+        let mediaExists: boolean = mediaList.some((item: any) => item.name === row.name);
         if (!mediaExists) mediaList.push(row);
       }
 
