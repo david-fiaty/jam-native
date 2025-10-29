@@ -1,0 +1,123 @@
+import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
+import React from "react";
+import i18n from "@/translation/i18n";
+import TextView from "@/components/view/TextView";
+import InputTextField from "@/components/field/InputTextField";
+import FormManager from "@/manager/FormManager";
+import LocationPickerField from "@/components/field/LocationPickerField";
+import ModalManager from "@/manager/ModalManager";
+import CountriesField from "@/components/field/CountriesField";
+import InputTextareaField from "@/components/field/InputTextareaField";
+
+type Props = {
+  resource: any;
+  formData: any;
+};
+
+const ProfileGroupAddress = ({ resource, formData }: Props) => {
+  return (
+    <>
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Address and location")}
+      </TextView>
+
+      <TextView>
+        {i18n.t('Address')}
+      </TextView>
+      <InputTextareaField
+        value={formData?.address}
+        placeholder={i18n.t('Enter your address')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
+      />
+      {FormManager.renderError('address')}
+
+      <TextView>
+        {i18n.t('City')}
+      </TextView>
+      <InputTextField
+        value={formData?.town_or_locality}
+        placeholder={i18n.t('Enter your city')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'town_or_locality', value)}
+      />
+      {FormManager.renderError('town_or_locality')}
+
+      <TextView>
+        {i18n.t('Other cities')}
+      </TextView>
+      <InputTextField
+        value={formData?.other_town_or_locality}
+        placeholder={i18n.t('Other town or locality')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'other_town_or_locality', value)}
+      />
+      {FormManager.renderError('other_town_or_locality')}
+
+
+      <TextView>
+        {i18n.t('Region')}
+      </TextView>
+      <InputTextField
+        value={formData?.region}
+        placeholder={i18n.t('Enter your region')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'region', value)}
+      />
+      {FormManager.renderError('region')}
+
+      <TextView>{i18n.t('Country')}</TextView>
+      <CountriesField
+        multiple={false}
+        resource={resource}
+        field="scope_country_code"
+        placeholder={i18n.t('Select a country')}
+        value={formData?.scope_country_code}
+        onPress={() => ModalManager.toggleModal('CountriesList', {
+          resource: resource,
+          field: 'scope_country_code',
+          multiple: false,
+        })}
+      />
+      {FormManager.renderError('scope_country_code')}
+
+      <TextView>
+        {i18n.t('Location')}
+      </TextView>
+      <LocationPickerField
+        resource="profile"
+        placeholder={i18n.t('Select your location')}
+        onChangeValue={(data: any) => {
+          FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
+          FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
+        }}
+        onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
+          resource: 'profile',
+          latitude: {
+            field: 'geolocation_latitude',
+            value: formData?.geolocation_latitude,
+          },
+          longitude: {
+            field: 'geolocation_longitude',
+            value: formData?.geolocation_longitude,
+          },
+        })}
+        latitude={{
+          field: 'geolocation_latitude',
+          value: formData?.geolocation_latitude,
+        }}
+        longitude={{
+          field: 'geolocation_longitude',
+          value: formData?.geolocation_longitude,
+        }}
+      />
+
+    </>
+  );
+}
+
+const styles = StyleSheet.create({
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base * 1.5,
+  },
+});
+
+export default ProfileGroupAddress;
