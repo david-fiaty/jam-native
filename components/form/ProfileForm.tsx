@@ -73,8 +73,8 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   };
 
   const loadFormData = async () => {
-    let data: any = { ...userState.profileData };
-    let profileId: any = userState.profileData.id;
+    let data: any = { ...userState.profileData || {} };
+    let profileId: any = userState.profileData?.id || 0;
 
     data = {
       ...data,
