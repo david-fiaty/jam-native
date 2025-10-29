@@ -1,3 +1,5 @@
+import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
 import React from "react";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
@@ -15,6 +17,10 @@ type Props = {
 const ProfileFormPersonal = ({ resource, formData }: Props) => {
   return (
     <>
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Personal information")}
+      </TextView>
+
       <TextView>
         {i18n.t('First name')}*
       </TextView>
@@ -79,5 +85,12 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  groupTitle: {
+    fontWeight: 'bold',
+    marginTop: Layout.space.base * 1.5,
+  },
+});
 
 export default ProfileFormPersonal;
