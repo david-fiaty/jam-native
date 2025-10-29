@@ -80,9 +80,9 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       ...data,
       ...{
         profile_id: profileId,
-        scope_country_code: userState.profileData?.country || '',
-        sectors_ids: userState.profileData?.sectors || [],
-        professions_ids: userState.profileData?.professions || [],
+        scope_country_code: data?.country || '',
+        sectors_ids: data?.sectors || [],
+        professions_ids: data?.professions || [],
         upload_profile_picture: null,
       },
       ...(formData || {}),
