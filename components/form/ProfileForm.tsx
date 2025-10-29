@@ -73,16 +73,16 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   };
 
   const loadFormData = async () => {
-    let data: any = { ...userState.profileData };
-    let profileId: any = userState.profileData.id;
+    let data: any = { ...userState.profileData || {} };
+    let profileId: any = userState.profileData?.id || 0;
 
     data = {
       ...data,
       ...{
         profile_id: profileId,
-        scope_country_code: userState.profileData?.country || '',
-        sectors_ids: userState.profileData?.sectors || [],
-        professions_ids: userState.profileData?.professions || [],
+        scope_country_code: data?.country || '',
+        sectors_ids: data?.sectors || [],
+        professions_ids: data?.professions || [],
         upload_profile_picture: null,
       },
       ...(formData || {}),
