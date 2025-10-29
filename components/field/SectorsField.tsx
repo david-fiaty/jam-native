@@ -37,7 +37,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
   };
 
   const getSectorsOptions = (sectorsList: any[]) => {
-    let listOptions: any[] = sectorsList.map((o: any) => {
+    let listOptions: any[] = (sectorsList || []).map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
@@ -54,7 +54,7 @@ const SectorsField = ({ resource, field, value, placeholder }: Props) => {
       return listOptions;
     }
 
-    sectorsData
+    (sectorsData || [])
       .filter((o: any) => formData[field].includes(o.id))
       .map((x: any) => {
       (x?.sub_sectors || []).map((y: any) => {
