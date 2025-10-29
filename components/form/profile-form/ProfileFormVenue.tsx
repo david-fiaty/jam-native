@@ -12,6 +12,8 @@ import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
 import WeekdaysField from "@/components/field/WeekdaysField";
+import DocumentPickerField from "@/components/field/DocumentPickerField";
+import ProfileGroupManagement from "./groups/ProfileGroupManagement";
 
 type Props = {
   resource: any;
@@ -21,6 +23,10 @@ type Props = {
 const ProfileFormVenue = ({ resource, formData }: Props) => {
   return (
     <>
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Venue information")}
+      </TextView>
+
       <TextView>
         {i18n.t('Venue name')}*
       </TextView>
@@ -250,6 +256,30 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['number'])}
       />
       {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
+
+      <ProfileGroupManagement resource={resource} formData={formData} />
+      
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Documents")}
+      </TextView>
+
+      <TextView>
+        {i18n.t('Technical sheet')}
+      </TextView>
+      <DocumentPickerField
+        value={formData?.profile_venue?.upload_technical_sheet}
+        placeholder={i18n.t('Upload a technical sheet')}
+        //onChangeText={(value: any) => console.log(value) }
+          
+        /*
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
+          ...(formData?.profile_venue || {}),
+          ...{ type_of_management: value },
+        }, ['string'])}
+
+        */
+      />
+      {FormManager.renderError('profile_venue.upload_technical_sheet')}
 
     </>
   );

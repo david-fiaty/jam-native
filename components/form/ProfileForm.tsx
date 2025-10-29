@@ -134,6 +134,11 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         />
         {FormManager.renderError('profile_type')}
 
+        {/* All profiles */}
+        {formData?.profile_type?.length && (
+          <ProfileFormAll resource={resource} formData={formData} />
+        )}
+        
         {/* Personal profile */}
         {formData?.profile_type == 'personal' && (
           <ProfileFormPersonal resource={resource} formData={formData} />
@@ -147,11 +152,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         {/* Venue profile */}
         {formData?.profile_type == 'venue' && (
           <ProfileFormVenue resource={resource} formData={formData} />
-        )}
-
-        {/* All profiles */}
-        {formData?.profile_type?.length && (
-          <ProfileFormAll resource={resource} formData={formData} />
         )}
 
         {/* Submit button */}

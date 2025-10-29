@@ -9,6 +9,7 @@ import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DocumentPickerField from "@/components/field/DocumentPickerField";
+import ProfileGroupManagement from "./groups/ProfileGroupManagement";
 
 type Props = {
   resource: any;
@@ -18,6 +19,10 @@ type Props = {
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Organization information")}
+      </TextView>
+
       <TextView>
         {i18n.t('Organization name')}*
       </TextView>
@@ -92,22 +97,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_organization.creation_year')}
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t("Management")}
-      </TextView>
-
-      <TextView>
-        {i18n.t('Type of management')}
-      </TextView>
-      <InputTextField
-        value={formData?.profile_organization?.type_of_management}
-        placeholder={i18n.t('Enter the type of management')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_organization.type_of_management')}
+      <ProfileGroupManagement resource={resource} formData={formData} />
 
       <TextView style={styles.groupTitle}>
         {i18n.t("Documents")}
