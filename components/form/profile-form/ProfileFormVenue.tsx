@@ -71,6 +71,10 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.other_venue_types')}
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Sectors and activities")}
+      </TextView>
+
       <TextView>
         {i18n.t('Main cultural activities')}
       </TextView>

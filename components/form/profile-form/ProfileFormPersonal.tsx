@@ -48,6 +48,10 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_personal.last_name')}
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Sectors and activities")}
+      </TextView>
+
       <ProfessionsField
         resource={resource}
         field="professions_ids"
