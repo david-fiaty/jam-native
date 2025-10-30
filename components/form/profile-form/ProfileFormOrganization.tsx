@@ -18,7 +18,7 @@ type Props = {
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true} >
         {i18n.t("Organization information")}
       </TextView>
 
@@ -52,7 +52,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_organization.organization_types')}
 
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Sectors and activities")}
       </TextView>
 

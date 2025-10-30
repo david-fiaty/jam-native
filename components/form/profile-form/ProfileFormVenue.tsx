@@ -22,7 +22,7 @@ type Props = {
 const ProfileFormVenue = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Venue information")}
       </TextView>
 
@@ -69,7 +69,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.other_venue_types')}
 
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Sectors and activities")}
       </TextView>
 
@@ -123,7 +123,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         value={formData?.sectors_ids}
       />
 
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Venue details")}
       </TextView>
 

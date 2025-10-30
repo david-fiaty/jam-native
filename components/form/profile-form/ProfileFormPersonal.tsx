@@ -17,7 +17,7 @@ type Props = {
 const ProfileFormPersonal = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Personal information")}
       </TextView>
 
@@ -47,7 +47,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_personal.last_name')}
 
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Sectors and activities")}
       </TextView>
 

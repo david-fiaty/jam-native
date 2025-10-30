@@ -13,7 +13,7 @@ type Props = {
 const ProfileGroupDocuments = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle}>
+      <TextView style={Layout.groupTitle} bold={true}>
         {i18n.t("Documents")}
       </TextView>
 
