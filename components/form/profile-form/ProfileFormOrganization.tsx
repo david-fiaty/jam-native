@@ -21,7 +21,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
       <TextView style={styles.groupTitle}>
-        {i18n.t("Organization details")}
+        {i18n.t("Organization information")}
       </TextView>
 
       <TextView>
