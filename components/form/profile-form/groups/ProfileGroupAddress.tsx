@@ -42,17 +42,6 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('other_town_or_locality')}
 
-
-      <TextView>
-        {i18n.t('Region')}
-      </TextView>
-      <InputTextField
-        value={formData?.region}
-        placeholder={i18n.t('Enter your region')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'region', value)}
-      />
-      {FormManager.renderError('region')}
-
       <TextView>{i18n.t('Country')}</TextView>
       <CountriesField
         multiple={false}
