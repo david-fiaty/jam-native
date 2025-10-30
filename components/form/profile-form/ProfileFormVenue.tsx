@@ -129,26 +129,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t("Venue details")}
       </TextView>
 
-      <InputSwitchField
-        value={formData?.profile_venue?.is_open_24h}
-        label={i18n.t('Is opened everyday')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ is_open_24h: value },
-        }, [])}
-      />
-      {FormManager.renderError('profile_venue.is_open_24h')}
-
-      <InputSwitchField
-        value={formData?.profile_venue?.is_by_appointment_only}
-        label={i18n.t('By appointment only')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ is_by_appointment_only: value },
-        }, [])}
-      />
-      {FormManager.renderError('profile_venue.is_by_appointment_only')}
-
       <TextView>
         {i18n.t('Opening days')}
       </TextView>
@@ -253,20 +233,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, [])}
       />
       {FormManager.renderError('profile_venue.has_diffusion_space')}
-
-      <TextView>
-        {i18n.t('Number of spaces')}
-      </TextView>
-      <InputTextField
-        keyboardType="number-pad"
-        value={formData?.profile_venue?.total_creation_or_rehearsal_rooms}
-        placeholder={i18n.t('Enter the number of spaces')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ total_creation_or_rehearsal_rooms: value },
-        }, ['number'])}
-      />
-      {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
 
       <ProfileGroupDocuments resource={resource} formData={formData} />
     </>
