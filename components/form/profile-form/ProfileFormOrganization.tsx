@@ -54,6 +54,10 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_organization.organization_types')}
 
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Sectors and activities")}
+      </TextView>
+
       <TextView>
         {i18n.t('Main cultural activities')}
       </TextView>
