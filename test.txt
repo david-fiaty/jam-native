@@ -21,15 +21,15 @@ Content-Type: application/json
     "geolocation_longitude": "2",
 
     "profile_id": 1,
-    "callaborators_ids": [1, 4318],
-    "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
+    "collaborators_ids": [2, 3],
+    "period": {"start_datetime":"2026-11-20T15:58:44-06:00", "end_datetime":"2027-11-20T15:58:44-06:01" },
     "projects": [1, 2]
 }
 
 ###  Update Jam
 # To send files in 'upload_medias', you should use formdata and not json payload
 #TBR --> strange return when in this case "You do not have permission to update this Jam. The profile ID must match the Jam creator's profile id."
-PUT http://0.0.0.0:8000/api/v1/jams/1/
+PUT http://0.0.0.0:8000/api/v1/jams/27/
 Content-Type: application/json
 
 {
@@ -47,8 +47,8 @@ Content-Type: application/json
     "geolocation_latitude": "9",
     "geolocation_longitude": "2",
     
-    "profile_id": 4318,
-    "callaborators_ids" : [1, 4318],
+    "profile_id": 1,
+    "collaborators_ids" : [1, 2, 3, 4],
     "period": {"start_datetime":"2018-11-20T15:58:44-06:00", "end_datetime":"2018-11-20T15:58:44-06:01" },
     "projects": [1, 2],
 
@@ -60,6 +60,10 @@ Content-Type: application/json
 
 ### Get list of all jams
 GET http://0.0.0.0:8000/api/v1/jams/
+Content-Type: application/json
+
+### Get list of all jams for map display
+GET http://0.0.0.0:8000/api/v1/jams/for-map-display/?num_days_ahead=10
 Content-Type: application/json
 
 ### Get specific list of jams
@@ -331,6 +335,10 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/profiles/
 Content-Type: application/json
 
+### Get all profiles for map display
+GET http://0.0.0.0:8000/api/v1/profiles/for-map-display/
+Content-Type: application/json
+
 ### Get specific list of profiles
 GET http://0.0.0.0:8000/api/v1/profiles/?items_ids=1,2
 Content-Type: application/json
@@ -470,7 +478,7 @@ Content-Type: application/json
         "manager_role": "manager",
         "manager_phone": "1234",
         "manager_email": "test@test.com",
-        "main_cultural_activities": [2, 3],
+        "main_cultural_activities": [2, 3, 4],
         "other_cultural_activities": "movie screening",
         "indoor_or_outdoor": "indoor_outdoor",
         "upload_indoor_images": null,
@@ -588,13 +596,11 @@ Content-Type: application/json
 GET http://0.0.0.0:8000/api/v1/cultural-activities/?lang=en
 Content-Type: application/json
 
+
 ##### FEED #####
 
-### Get jams feed MOBILE
-GET http://0.0.0.0:8000/api/v1/jams/mobile-feed/?profile_id=1&jam_type=all&page_size=10&page=1
-
-### Get jams feed MOBILE with page 2
-GET http://0.0.0.0:8000/api/v1/jams/mobile-feed/?profile_id=1&jam_type=all&page_size=10&page=2
+### Get jams feed MOBILE (in query text replace spaces by a +)
+GET http://0.0.0.0:8000/api/v1/jams/mobile-feed/?page_size=10&profile_id=1&jam_type=all&timing_status=past&location_type=online_physical&query_countries_codes=tg,ng&query_sectors_ids=20,13&query_text=test
 
 ### Get jams feed
 GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_items_ids=1,2&nbr_items_to_return=10
@@ -604,11 +610,9 @@ GET http://0.0.0.0:8000/api/v1/jams/feed/?profile_id=1&jam_type=all&displayed_it
 #&query_countries_codes=tg
 
 
-### Get projects feed MOBILE
-GET http://0.0.0.0:8000/api/v1/projects/mobile-feed/?profile_id=1&page_size=10&page=1
 
-### Get projects feed MOBILE with page 2
-GET http://0.0.0.0:8000/api/v1/projects/mobile-feed/?profile_id=1&page_size=10&page=2
+### Get projects feed MOBILE (in query text replace spaces by a +)
+GET http://0.0.0.0:8000/api/v1/projects/mobile-feed/?page_size=60&profile_id=1&query_sectors_ids=1,2&query_countries_codes=tg,ng&query_text=a
 
 ### Get projects feed
 GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1,2&nbr_items_to_return=10
@@ -617,17 +621,16 @@ GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1
 GET http://0.0.0.0:8000/api/v1/projects/feed/?profile_id=1&displayed_items_ids=1,2&nbr_items_to_return=10&query_countries_codes=tg&query_text=Project
 
 
-### Get profiles feed MOBILE
-GET http://0.0.0.0:8000/api/v1/profiles/mobile-feed/?profile_id=1&profile_type=all&page_size=10&page=1
 
-### Get profiles feed MOBILE with page 2
-GET http://0.0.0.0:8000/api/v1/profiles/mobile-feed/?profile_id=1&profile_type=all&page_size=10&page=2
+### Get profiles feed MOBILE (in query text replace spaces by a +)
+GET http://0.0.0.0:8000/api/v1/profiles/mobile-feed/?page_size=60&profile_id=1&profile_type=all&query_sectors_ids=1,2&query_countries_codes=gh,tg&query_text=a
 
 ### Get profiles feed
 GET http://0.0.0.0:8000/api/v1/profiles/feed/?profile_id=1&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10
 
 ### Get profiles feed with search text
 GET http://0.0.0.0:8000/api/v1/profiles/feed/?profile_id=1&profile_type=all&displayed_items_ids=1,2&nbr_items_to_return=10&query_text=Krys
+
 
 ##### ADMIN #####
 
