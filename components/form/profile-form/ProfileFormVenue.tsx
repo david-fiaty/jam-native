@@ -268,8 +268,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
 
-      <ProfileGroupManagement resource={resource} formData={formData} />
-
       <ProfileGroupDocuments resource={resource} formData={formData} />
 
     </>
