@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
@@ -8,7 +7,6 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
-import ProfileGroupManagement from "./groups/ProfileGroupManagement";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import SectorsField from "@/components/field/SectorsField";
 
@@ -20,7 +18,7 @@ type Props = {
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={styles.groupTitle}>
+      <TextView style={Layout.groupTitle}>
         {i18n.t("Organization information")}
       </TextView>
 
@@ -54,7 +52,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_organization.organization_types')}
 
-      <TextView style={styles.groupTitle}>
+      <TextView style={Layout.groupTitle}>
         {i18n.t("Sectors and activities")}
       </TextView>
 
@@ -112,12 +110,5 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  groupTitle: {
-    fontWeight: 'bold',
-    marginTop: Layout.space.base*1.5,
-  },
-});
 
 export default ProfileFormOrganization;
