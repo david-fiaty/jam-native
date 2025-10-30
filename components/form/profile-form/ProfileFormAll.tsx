@@ -4,12 +4,8 @@ import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
-import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import InputTextareaField from "@/components/field/InputTextareaField";
-import SectorsField from "@/components/field/SectorsField";
-import CountriesField from "@/components/field/CountriesField";
-import LocationPickerField from "@/components/field/LocationPickerField";
 import InputPasswordField from "@/components/field/InputPasswordField";
 import ProfileGroupNetworks from "./groups/ProfileGroupNetworks";
 import ProfileGroupAddress from "./groups/ProfileGroupAddress";
@@ -63,12 +59,6 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
       />
       {FormManager.renderError('profile_description')}
-
-      <SectorsField
-        resource={resource}
-        field="sectors_ids"
-        value={formData?.sectors_ids}
-      />
 
       <ProfileGroupAddress resource={resource} formData={formData} />
 
