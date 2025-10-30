@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
@@ -18,7 +17,7 @@ type Props = {
 const ProfileGroupAddress = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={styles.groupTitle}>
+      <TextView style={Layout.groupTitle}>
         {i18n.t("Address and location")}
       </TextView>
 
@@ -90,12 +89,5 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  groupTitle: {
-    fontWeight: 'bold',
-    marginTop: Layout.space.base * 1.5,
-  },
-});
 
 export default ProfileGroupAddress;
