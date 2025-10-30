@@ -33,6 +33,71 @@ const ProfileGroupManagement = ({ resource, formData }: Props) => {
         }, ['string'])}
       />
       {FormManager.renderError('profile_organization.type_of_management')}
+
+      <TextView>
+        {i18n.t('Managing organization')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_organization?.organization_name_that_manages_organization}
+        placeholder={i18n.t('Enter the managing organization name')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ organization_name_that_manages_organization: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_organization.organization_name_that_manages_organization')}
+
+      <TextView>
+        {i18n.t('Manager name')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_organization?.manager_name}
+        placeholder={i18n.t('Enter the manager name')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ manager_name: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_organization.manager_name')}
+
+      <TextView>
+        {i18n.t('Manager role')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_organization?.manager_role}
+        placeholder={i18n.t('Enter the manager role')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ manager_role: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_organization.manager_role')}
+
+      <TextView>
+        {i18n.t('Manager email')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_organization?.manager_email}
+        placeholder={i18n.t('Enter the manager email')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ manager_email: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_organization.manager_email')}
+
+      <TextView>
+        {i18n.t('Manager phone')}
+      </TextView>
+      <InputTextField
+        value={formData?.profile_organization?.manager_phone}
+        placeholder={i18n.t('Enter the manager phone')}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ manager_phone: value },
+        }, ['string'])}
+      />
+      {FormManager.renderError('profile_organization.manager_phone')}
     </>
   );
 }
