@@ -108,8 +108,6 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         value={formData?.sectors_ids}
       />
 
-      <ProfileGroupManagement resource={resource} formData={formData} />
-
       <ProfileGroupDocuments resource={resource} formData={formData} />
     </>
   );
