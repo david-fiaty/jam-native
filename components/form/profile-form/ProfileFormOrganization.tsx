@@ -20,6 +20,10 @@ type Props = {
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Organization details")}
+      </TextView>
+
       <TextView>
         {i18n.t('Organization name')}*
       </TextView>
