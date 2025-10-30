@@ -9,6 +9,8 @@ import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DocumentPickerField from "@/components/field/DocumentPickerField";
+import ProfileGroupManagement from "./groups/ProfileGroupManagement";
+import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 
 type Props = {
   resource: any;
@@ -92,46 +94,9 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_organization.creation_year')}
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t("Management")}
-      </TextView>
+      <ProfileGroupManagement resource={resource} formData={formData} />
 
-      <TextView>
-        {i18n.t('Type of management')}
-      </TextView>
-      <InputTextField
-        value={formData?.profile_organization?.type_of_management}
-        placeholder={i18n.t('Enter the type of management')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_organization.type_of_management')}
-
-      <TextView style={styles.groupTitle}>
-        {i18n.t("Documents")}
-      </TextView>
-
-      <TextView>
-        {i18n.t('Technical sheet')}
-      </TextView>
-      <DocumentPickerField
-        value={formData?.profile_organization?.upload_technical_sheet}
-        placeholder={i18n.t('Upload a technical sheet')}
-        //onChangeText={(value: any) => console.log(value) }
-          
-        /*
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
-
-        */
-      />
-      {FormManager.renderError('profile_organization.upload_technical_sheet')}
-
-
+      <ProfileGroupDocuments resource={resource} formData={formData} />
     </>
   );
 }

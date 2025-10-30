@@ -12,6 +12,8 @@ import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
 import WeekdaysField from "@/components/field/WeekdaysField";
+import ProfileGroupManagement from "./groups/ProfileGroupManagement";
+import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 
 type Props = {
   resource: any;
@@ -250,6 +252,10 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['number'])}
       />
       {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
+
+      <ProfileGroupManagement resource={resource} formData={formData} />
+
+      <ProfileGroupDocuments resource={resource} formData={formData} />
 
     </>
   );
