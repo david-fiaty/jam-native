@@ -23,6 +23,10 @@ type Props = {
 const ProfileFormVenue = ({ resource, formData }: Props) => {
   return (
     <>
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Venue details")}
+      </TextView>
+
       <TextView>
         {i18n.t('Venue name')}*
       </TextView>
