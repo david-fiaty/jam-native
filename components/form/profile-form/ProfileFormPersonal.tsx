@@ -8,6 +8,7 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import ProfessionsField from "@/components/field/ProfessionsField";
+import SectorsField from "@/components/field/SectorsField";
 
 type Props = {
   resource: any;
@@ -81,7 +82,13 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
           ...{ other_cultural_activities: value },
         }, ['string'])}
       />
-      {FormManager.renderError('profile_personal.other_cultural_activities')}      
+      {FormManager.renderError('profile_personal.other_cultural_activities')}     
+
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
+      /> 
     </>
   );
 }
