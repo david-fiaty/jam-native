@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
@@ -12,7 +11,6 @@ import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
 import WeekdaysField from "@/components/field/WeekdaysField";
-import ProfileGroupManagement from "./groups/ProfileGroupManagement";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import SectorsField from "@/components/field/SectorsField";
 
@@ -24,7 +22,7 @@ type Props = {
 const ProfileFormVenue = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={styles.groupTitle}>
+      <TextView style={Layout.groupTitle}>
         {i18n.t("Venue information")}
       </TextView>
 
@@ -71,7 +69,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.other_venue_types')}
 
-      <TextView style={styles.groupTitle}>
+      <TextView style={Layout.groupTitle}>
         {i18n.t("Sectors and activities")}
       </TextView>
 
@@ -125,7 +123,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         value={formData?.sectors_ids}
       />
 
-      <TextView style={styles.groupTitle}>
+      <TextView style={Layout.groupTitle}>
         {i18n.t("Venue details")}
       </TextView>
 
@@ -238,12 +236,5 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  groupTitle: {
-    fontWeight: 'bold',
-    marginTop: Layout.space.base * 1.5,
-  },
-});
 
 export default ProfileFormVenue;
