@@ -6,8 +6,6 @@ import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
-import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
-import ProfessionsField from "@/components/field/ProfessionsField";
 import LocationPickerField from "@/components/field/LocationPickerField";
 import CountriesField from "@/components/field/CountriesField";
 import InputTextareaField from "@/components/field/InputTextareaField";
