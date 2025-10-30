@@ -8,9 +8,9 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
-import DocumentPickerField from "@/components/field/DocumentPickerField";
 import ProfileGroupManagement from "./groups/ProfileGroupManagement";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
+import SectorsField from "@/components/field/SectorsField";
 
 type Props = {
   resource: any;
@@ -53,6 +53,10 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         })}
       />
       {FormManager.renderError('profile_organization.organization_types')}
+
+      <TextView style={styles.groupTitle}>
+        {i18n.t("Sectors and activities")}
+      </TextView>
 
       <TextView>
         {i18n.t('Main cultural activities')}
@@ -97,6 +101,12 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         }, ['number'])}
       />
       {FormManager.renderError('profile_organization.creation_year')}
+
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
+      />
 
       <ProfileGroupManagement resource={resource} formData={formData} />
 
