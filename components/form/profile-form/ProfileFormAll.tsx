@@ -53,7 +53,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextareaField
         value={formData?.profile_description}
         placeholder={i18n.t('Profile description')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value, ['required', 'string'])}
       />
       {FormManager.renderError('profile_description')}
 
