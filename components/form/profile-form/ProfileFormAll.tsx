@@ -20,30 +20,34 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Profile name (with no spaces)')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="profile_name"
         value={formData?.profile_name || ''}
         placeholder={i18n.t('Profile name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['required', 'nospace', 'string'])}
+        rules={['required', 'nospace', 'string']}
       />
-      {FormManager.renderError('profile_name')}
 
       <TextView>
         {i18n.t('Profile email')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="email"
         value={formData?.email || ''}
         placeholder={i18n.t('Enter a profile email')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
+        rules={['string', 'email']}
       />
-      {FormManager.renderError('email')}
 
       <TextView>
         {i18n.t('Phone number')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="phone_number"
         value={formData?.phone_number || ''}
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone_number', value, ['string'])}
+        rules={['string']}
       />
       {FormManager.renderError('phone_number')}
 
@@ -51,11 +55,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Description')}*
       </TextView>
       <InputTextareaField
+        resource={resource}
+        fieldKey="profile_description"
         value={formData?.profile_description || ''}
         placeholder={i18n.t('Profile description')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value, ['required', 'string'])}
+        rules={['required', 'string']}
       />
-      {FormManager.renderError('profile_description')}
 
       <ProfileGroupAddress resource={resource} formData={formData} />
 

@@ -3,8 +3,13 @@ import { StyleSheet } from 'react-native';
 import { Input } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
+import FormManager from "@/manager/FormManager";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: string;
   placeholder?: string;
   containerStyle?: object;
@@ -15,6 +20,10 @@ type Props = {
 };
 
 const InputTextareaField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
   value,
   placeholder,
   containerStyle,
@@ -27,7 +36,12 @@ const InputTextareaField = ({
 
   const changeTextEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
-    if (onChangeText) onChangeText(fieldValue);
+    if (onChangeText) {
+      onChangeText(fieldValue)
+    }
+    else if (resource && fieldKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
   };
 
   const submitEditingEvent = () => {
@@ -55,6 +69,8 @@ const InputTextareaField = ({
         onSubmitEditing={submitEditingEvent}
         readOnly={readOnly}
       />
+
+      {fieldKey && FormManager.renderError(fieldKey)}
     </BoxView>
   );
 };
