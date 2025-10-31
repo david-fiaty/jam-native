@@ -55,11 +55,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Description')}*
       </TextView>
       <InputTextareaField
+        resource={resource}
+        fieldKey="profile_description"
         value={formData?.profile_description || ''}
         placeholder={i18n.t('Profile description')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value, ['required', 'string'])}
+        rules={['required', 'string']}
       />
-      {FormManager.renderError('profile_description')}
 
       <ProfileGroupAddress resource={resource} formData={formData} />
 
