@@ -124,7 +124,7 @@ class FormManager {
     if (this.isPathKey(key)) {
       targetKey = this.getTargetKey(key);
       fieldValue = fieldValue[targetKey];
-    }
+    } 
 
     for (const rule of rules) {
       if (!fieldRules[rule].run(fieldValue)) {
