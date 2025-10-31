@@ -99,13 +99,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
 
   return (
     <View style={styles.container}>
-      {label && (
-        <TouchableOpacity onPress={pickDocument}>
-          <TextView>{label}</TextView>
-        </TouchableOpacity>
-      )}
-
-      {!label && (
+      {!selectedDocuments?.length && (
         <TouchableOpacity onPress={pickDocument}>
           <InputTextField
             readOnly={true}
