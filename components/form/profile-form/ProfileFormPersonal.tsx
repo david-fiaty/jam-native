@@ -26,10 +26,10 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.profile_personal?.first_name}
         placeholder={i18n.t('Enter your first name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
           ...(formData?.profile_personal || {}),
           ...{ first_name: value },
-        }, ['string'])}
+        }, ['required', 'string'])}
       />
       {FormManager.renderError('profile_personal.first_name')}
 
@@ -39,10 +39,10 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.profile_personal?.last_name}
         placeholder={i18n.t('Enter your last name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
           ...(formData?.profile_personal || {}),
           ...{ last_name: value },
-        }, ['string'])}
+        }, ['required', 'string'])}
       />
       {FormManager.renderError('profile_personal.last_name')}
 

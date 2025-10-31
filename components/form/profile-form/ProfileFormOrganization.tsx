@@ -27,10 +27,10 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.profile_organization?.organization_name}
         placeholder={i18n.t('Enter your organization name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
           ...(formData?.profile_organization || {}),
           ...{ organization_name: value },
-        }, ['string'])}
+        }, ['required', 'string'])}
       />
       {FormManager.renderError('profile_organization.organization_name')}
 
@@ -76,7 +76,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.profile_organization?.other_cultural_activities}
         placeholder={i18n.t('Enter other cultural activities')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.other_cultural_activities', {
           ...(formData?.profile_organization || {}),
           ...{ other_cultural_activities: value },
         }, ['string'])}
@@ -90,10 +90,10 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         keyboardType="number-pad"
         value={formData?.profile_organization?.creation_year}
         placeholder={i18n.t('Enter the creation year')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
           ...(formData?.profile_organization || {}),
           ...{ creation_year: value },
-        }, ['number'])}
+        }, ['required', 'number'])}
       />
       {FormManager.renderError('profile_organization.creation_year')}
 
