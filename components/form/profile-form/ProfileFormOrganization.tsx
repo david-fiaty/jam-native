@@ -9,6 +9,7 @@ import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import SectorsField from "@/components/field/SectorsField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -18,9 +19,7 @@ type Props = {
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle} bold={true} >
-        {i18n.t("Organization information")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Organization information")} />
 
       <TextView>
         {i18n.t('Organization name')}*
