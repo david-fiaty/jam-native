@@ -9,6 +9,7 @@ import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
 import { isLoaded } from "expo-font";
 import TagView from "../view/TagView";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   label?: JSX.Element;
@@ -47,12 +48,6 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
   };
 
   const renderDocumentPreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.name);
-    const imageStyle = {
-      ...styles.mediaPreview,
-      ...isSelected ? styles.selectedPreview : {},
-    };
-
     return (
       <TouchableOpacity
         key={data.uri}
@@ -65,7 +60,7 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
           containerStyle={styles.tagItem}
           onDeleteButtonPress={() => deleteMedia(data)}
         >
-          {data.name}
+          {DataManager.truncateText(data.name, 18)}
         </TagView>
       </TouchableOpacity>
     );
@@ -121,11 +116,13 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
       )}
 
       {selectedDocuments?.length > 0 && preview &&
-        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
+        <View style={Layout.fieldSelectionPreview}>
           {selectedDocuments.map((data: any) => {
             if (data?.uri) return renderDocumentPreview(data);
           })}
-        </BoxView>
+
+          <IconView name="plus" theme="transparent" onPress={pickDocument} />
+        </View>
       }
     </View>
   );
@@ -136,6 +133,7 @@ const styles = StyleSheet.create({
   previewContainer: {
     paddingVertical: Layout.space.base,
     gap: Layout.space.base * 1,
+    backgroundColor: 'gray',
   },
   mediaPreview: {
     borderRadius: Layout.radius.round,
