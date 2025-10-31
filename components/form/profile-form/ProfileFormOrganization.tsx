@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
@@ -8,7 +7,9 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
-import DocumentPickerField from "@/components/field/DocumentPickerField";
+import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
+import SectorsField from "@/components/field/SectorsField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -18,6 +19,8 @@ type Props = {
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
   return (
     <>
+      <GroupTitleView label={i18n.t("Organization information")} />
+
       <TextView>
         {i18n.t('Organization name')}*
       </TextView>
@@ -47,6 +50,8 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         })}
       />
       {FormManager.renderError('profile_organization.organization_types')}
+
+      <GroupTitleView label={i18n.t("Sectors and activities")} />
 
       <TextView>
         {i18n.t('Main cultural activities')}
@@ -92,55 +97,15 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_organization.creation_year')}
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t("Management")}
-      </TextView>
-
-      <TextView>
-        {i18n.t('Type of management')}
-      </TextView>
-      <InputTextField
-        value={formData?.profile_organization?.type_of_management}
-        placeholder={i18n.t('Enter the type of management')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
       />
-      {FormManager.renderError('profile_organization.type_of_management')}
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t("Documents")}
-      </TextView>
-
-      <TextView>
-        {i18n.t('Technical sheet')}
-      </TextView>
-      <DocumentPickerField
-        value={formData?.profile_organization?.upload_technical_sheet}
-        placeholder={i18n.t('Upload a technical sheet')}
-        //onChangeText={(value: any) => console.log(value) }
-          
-        /*
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
-
-        */
-      />
-      {FormManager.renderError('profile_organization.upload_technical_sheet')}
-
-
+      <ProfileGroupDocuments resource={resource} formData={formData} />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  groupTitle: {
-    fontWeight: 'bold',
-    marginTop: Layout.space.base*1.5,
-  },
-});
 
 export default ProfileFormOrganization;
