@@ -22,8 +22,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.profile_name}
         placeholder={i18n.t('Profile name')}
-        // Todo - Add nospace validation
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['string'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['required', 'nospace', 'string'])}
       />
       {FormManager.renderError('profile_name')}
 
@@ -33,7 +32,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.email}
         placeholder={i18n.t('Enter a profile email')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['email'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
       {FormManager.renderError('email')}
 
@@ -54,7 +53,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextareaField
         value={formData?.profile_description}
         placeholder={i18n.t('Profile description')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value)}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value, ['required', 'string'])}
       />
       {FormManager.renderError('profile_description')}
 
