@@ -2,12 +2,8 @@ import { useState, useEffect, JSX } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import * as DocumentPicker from 'expo-document-picker';
-import TextView from '../view/TextView';
-import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
-import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
-import { isLoaded } from "expo-font";
 import TagView from "../view/TagView";
 import DataManager from "@/manager/DataManager";
 
@@ -25,7 +21,6 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
-  const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedDocuments];
