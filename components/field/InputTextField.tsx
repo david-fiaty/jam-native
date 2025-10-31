@@ -44,8 +44,6 @@ const InputTextField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
-  console.log('--', fieldKey)
-
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
   };
