@@ -20,9 +20,10 @@ const ProfileGroupDocuments = ({ resource, formData }: Props) => {
         {i18n.t('Technical sheet')}
       </TextView>
       <DocumentPickerField
+        preview={true}
+        multiple={false}
         value={formData?.profile_organization?.upload_technical_sheet}
         placeholder={i18n.t('Upload a technical sheet')}
-        preview={true}
         //onChangeText={(value: any) => console.log(value) }
           
         /*
@@ -34,6 +35,26 @@ const ProfileGroupDocuments = ({ resource, formData }: Props) => {
         */
       />
       {FormManager.renderError('profile_organization.upload_technical_sheet')}
+
+      <TextView>
+        {i18n.t('Other documents')}
+      </TextView>
+      <DocumentPickerField
+        preview={true}
+        multiple={true}
+        value={formData?.profile_organization?.upload_other_docs}
+        placeholder={i18n.t('Upload other documents')}
+        //onChangeText={(value: any) => console.log(value) }
+          
+        /*
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+          ...(formData?.profile_organization || {}),
+          ...{ type_of_management: value },
+        }, ['string'])}
+
+        */
+      />
+      {FormManager.renderError('profile_organization.upload_other_docs')}
     </>
   );
 }
