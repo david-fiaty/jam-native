@@ -32,7 +32,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.email}
         placeholder={i18n.t('Enter a profile email')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['email'])}
+        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
       {FormManager.renderError('email')}
 
