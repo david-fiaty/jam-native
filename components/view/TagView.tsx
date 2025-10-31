@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     paddingVertical: Layout.space.base/2.5,
     paddingHorizontal: Layout.space.base/2,
     alignSelf: 'flex-start',
+    maxWidth: '100%',
   },
   primary: Layout.theme.primary,
   secondary: Layout.theme.secondary,
