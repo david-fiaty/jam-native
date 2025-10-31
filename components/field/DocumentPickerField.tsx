@@ -20,7 +20,6 @@ type Props = {
 const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
-  const [selectedPreview, setSelectedPreview] = useState<any>([]);
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedDocuments];
@@ -29,34 +28,17 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
     if (onDeleteItem) onDeleteItem(mediaList);
   };
 
-  const updatePreviewSelection = (data: any) => {
-    let mediaList = [...selectedPreview];
-    if (!selectedPreview.includes(data.name)) {
-      mediaList.push(data.name);
-      setSelectedPreview(mediaList);
-    }
-    else {
-      mediaList = mediaList.filter((item: any) => item.name === data.name);
-      setSelectedPreview(mediaList);
-    }
-  };
-
   const renderDocumentPreview = (data: any) => {
     return (
-      <TouchableOpacity
-        key={data.uri}
-        onPress={() => updatePreviewSelection(data)}
+      <TagView
+        key={data.name}
+        theme="white"
+        canEdit={true}
+        containerStyle={styles.tagItem}
+        onDeleteButtonPress={() => deleteMedia(data)}
       >
-        <TagView
-          key={data.name}
-          theme="white"
-          canEdit={true}
-          containerStyle={styles.tagItem}
-          onDeleteButtonPress={() => deleteMedia(data)}
-        >
-          {DataManager.truncateText(data.name, 18)}
-        </TagView>
-      </TouchableOpacity>
+        {DataManager.truncateText(data.name, 18)}
+      </TagView>
     );
   };
 
@@ -79,7 +61,6 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
       }
 
       setSelectedDocuments(mediaList);
-      setSelectedPreview([]);
       if (onSelectItem) onSelectItem(mediaList);
     }
   };
