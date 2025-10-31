@@ -96,7 +96,7 @@ class FormManager {
 
     if (fieldError) {
       return <FieldErrorView message={message || fieldError.message} />;
-    } 
+    }  
 
     return <></>;
   }
@@ -124,7 +124,7 @@ class FormManager {
     if (this.isPathKey(key)) {
       targetKey = this.getTargetKey(key);
       fieldValue = fieldValue[targetKey];
-    }
+    } 
 
     for (const rule of rules) {
       if (!fieldRules[rule].run(fieldValue)) {
@@ -168,6 +168,14 @@ class FormManager {
         },
         error: () => {
           return i18n.t('A value is required.');
+        },
+      },
+      nospace: {
+        run: (value: any) => {
+          return !/\s/.test(value);
+        },
+        error: () => {
+          return i18n.t('Spaces are not allowed.');
         },
       },
       string: {

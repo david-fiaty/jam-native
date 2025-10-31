@@ -34,7 +34,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
           ...{ venue_name: value },
-        }, ['string'])}
+        }, ['required', 'string'])}
       />
       {FormManager.renderError('profile_venue.venue_name')}
 
