@@ -20,7 +20,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Profile name (with no spaces)')}*
       </TextView>
       <InputTextField
-        value={formData?.profile_name}
+        value={formData?.profile_name || ''}
         placeholder={i18n.t('Profile name')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['required', 'nospace', 'string'])}
       />
@@ -30,7 +30,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Profile email')}
       </TextView>
       <InputTextField
-        value={formData?.email}
+        value={formData?.email || ''}
         placeholder={i18n.t('Enter a profile email')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
@@ -51,7 +51,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Description')}*
       </TextView>
       <InputTextareaField
-        value={formData?.profile_description}
+        value={formData?.profile_description || ''}
         placeholder={i18n.t('Profile description')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_description', value, ['required', 'string'])}
       />
@@ -67,7 +67,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
             {i18n.t('Password')}*
           </TextView>
           <InputPasswordField
-            value={formData?.password}
+            value={formData?.password || ''}
             placeholder={i18n.t('Password')}
             onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
           />
@@ -77,7 +77,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
             {i18n.t('Password confirmation')}*
           </TextView>
           <InputPasswordField
-            value={formData?.password_confirmation}
+            value={formData?.password_confirmation || ''}
             placeholder={i18n.t('Password confirmation')}
             onChangeText={(value: string) => {
               FormManager.updateField(resource, 'password_confirmation', value, ['string']);
