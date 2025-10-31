@@ -7,6 +7,7 @@ import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
+import { isLoaded } from "expo-font";
 
 type Props = {
   label?: JSX.Element;
@@ -20,6 +21,7 @@ type Props = {
 };
 
 const DocumentPickerField = ({ label, value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
@@ -80,12 +82,6 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
   const pickDocument = async () => {
     let result: any = await launchBrowser();
 
-    // Todo - Implement doc selection
-    console.log('-- pick doc', result?.assets);
-
-
-    return;
-
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedDocuments];
       for (const row of result?.assets) {
@@ -100,7 +96,10 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
   };
 
   useEffect(() => {
-    setSelectedDocuments(value || []);
+    if (!isLoaded) {
+      setSelectedDocuments(value || []);
+      setIsLoaded(true);
+    }
   }, [value]);
 
   return (
