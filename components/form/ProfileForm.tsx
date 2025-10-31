@@ -33,6 +33,10 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   const userState = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
+
+    return;
+    
+    /*
     setIsProcessing(true);
 
     if (onSubmit) {
@@ -70,6 +74,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     }
 
     setIsProcessing(false);
+    */
   };
 
   const loadFormData = async () => {
