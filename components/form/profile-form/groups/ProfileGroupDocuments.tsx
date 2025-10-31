@@ -22,6 +22,7 @@ const ProfileGroupDocuments = ({ resource, formData }: Props) => {
       <DocumentPickerField
         value={formData?.profile_organization?.upload_technical_sheet}
         placeholder={i18n.t('Upload a technical sheet')}
+        preview={true}
         //onChangeText={(value: any) => console.log(value) }
           
         /*
