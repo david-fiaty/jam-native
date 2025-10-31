@@ -49,7 +49,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       {FormManager.renderError('phone_number')}
 
       <TextView>
-        {i18n.t('About')}
+        {i18n.t('Description')}*
       </TextView>
       <InputTextareaField
         value={formData?.profile_description}
