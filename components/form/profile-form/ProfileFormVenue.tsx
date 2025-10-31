@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -29,7 +28,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Venue name')}*
       </TextView>
       <InputTextField
-        value={formData?.profile_venue?.venue_name}
+        value={formData?.profile_venue?.venue_name || ''}
         placeholder={i18n.t('Enter the venue name')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -46,7 +45,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         field="venue_types"
         parent="profile_venue"
         placeholder={i18n.t('Select venue types')}
-        value={formData?.profile_venue?.venue_types}
+        value={formData?.profile_venue?.venue_types || []}
         onPress={() => ModalManager.toggleModal('VenueTypesList', {
           resource: resource,
           field: "venue_types",
@@ -59,7 +58,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Other venue types')}
       </TextView>
       <InputTextField
-        value={formData?.profile_venue?.other_venue_types}
+        value={formData?.profile_venue?.other_venue_types || ''}
         placeholder={i18n.t('Enter other venue types')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -78,7 +77,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         field="main_cultural_activities"
         parent="profile_venue"
         placeholder={i18n.t('Select cultural activities')}
-        value={formData?.profile_venue?.main_cultural_activities}
+        value={formData?.profile_venue?.main_cultural_activities || []}
         onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
           resource: resource,
           field: "main_cultural_activities",
@@ -91,7 +90,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Other cultural activities')}
       </TextView>
       <InputTextField
-        value={formData?.profile_venue?.other_cultural_activities}
+        value={formData?.profile_venue?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -105,7 +104,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <InputTextField
         keyboardType="number-pad"
-        value={formData?.profile_venue?.creation_year}
+        value={formData?.profile_venue?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -117,7 +116,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <SectorsField
         resource={resource}
         field="sectors_ids"
-        value={formData?.sectors_ids}
+        value={formData?.sectors_ids || []}
       />
 
       <GroupTitleView label={i18n.t("Venue details")} />
@@ -128,7 +127,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <WeekdaysField
         resource={resource}
         field={'opening_days'}
-        value={formData?.profile_venue?.opening_days}
+        value={formData?.profile_venue?.opening_days || ''}
         placeholder={i18n.t('Enter the opening days')}
         /*
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
@@ -156,7 +155,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <DatePickerField
         mode="time"
-        value={formData?.profile_venue?.opening_hour_weekdays}
+        value={formData?.profile_venue?.opening_hour_weekdays || ''}
         placeholder={i18n.t('Weekdays opening hour')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -170,7 +169,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <DatePickerField
         mode="time"
-        value={formData?.profile_venue?.closing_hour_weekdays}
+        value={formData?.profile_venue?.closing_hour_weekdays || ''}
         placeholder={i18n.t('Weekdays closing hour')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -184,7 +183,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <DatePickerField
         mode="time"
-        value={formData?.profile_venue?.opening_hour_weekend}
+        value={formData?.profile_venue?.opening_hour_weekend || ''}
         placeholder={i18n.t('Weekends opening hour')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -198,7 +197,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <DatePickerField
         mode="time"
-        value={formData?.profile_venue?.closing_hour_weekend}
+        value={formData?.profile_venue?.closing_hour_weekend || ''}
         placeholder={i18n.t('Weekends closing hour')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -208,7 +207,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_venue.closing_hour_weekend')}
 
       <InputSwitchField
-        value={formData?.profile_venue?.has_creation_space}
+        value={formData?.profile_venue?.has_creation_space || false}
         label={i18n.t('Has creation space')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
@@ -218,7 +217,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_venue.has_creation_space')}
 
       <InputSwitchField
-        value={formData?.profile_venue?.has_diffusion_space}
+        value={formData?.profile_venue?.has_diffusion_space || false}
         label={i18n.t('Has diffusion space')}
         onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
           ...(formData?.profile_venue || {}),
