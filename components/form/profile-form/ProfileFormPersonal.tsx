@@ -1,4 +1,5 @@
 import React from "react";
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -6,6 +7,8 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import ProfessionsField from "@/components/field/ProfessionsField";
+import SectorsField from "@/components/field/SectorsField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -15,6 +18,8 @@ type Props = {
 const ProfileFormPersonal = ({ resource, formData }: Props) => {
   return (
     <>
+      <GroupTitleView label={i18n.t("Personal information")} />
+
       <TextView>
         {i18n.t('First name')}*
       </TextView>
@@ -29,7 +34,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_personal.first_name')}
 
       <TextView>
-        {i18n.t('Last name')}
+        {i18n.t('Last name')}*
       </TextView>
       <InputTextField
         value={formData?.profile_personal?.last_name}
@@ -40,6 +45,8 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         }, ['string'])}
       />
       {FormManager.renderError('profile_personal.last_name')}
+
+      <GroupTitleView label={i18n.t("Sectors and activities")} />
 
       <ProfessionsField
         resource={resource}
@@ -75,7 +82,13 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
           ...{ other_cultural_activities: value },
         }, ['string'])}
       />
-      {FormManager.renderError('profile_personal.other_cultural_activities')}      
+      {FormManager.renderError('profile_personal.other_cultural_activities')}     
+
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
+      /> 
     </>
   );
 }

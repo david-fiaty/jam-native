@@ -1,5 +1,4 @@
 import React from "react";
-import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
@@ -12,6 +11,9 @@ import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
 import WeekdaysField from "@/components/field/WeekdaysField";
+import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
+import SectorsField from "@/components/field/SectorsField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -21,6 +23,8 @@ type Props = {
 const ProfileFormVenue = ({ resource, formData }: Props) => {
   return (
     <>
+      <GroupTitleView label={i18n.t("Venue information")} />
+
       <TextView>
         {i18n.t('Venue name')}*
       </TextView>
@@ -63,6 +67,8 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['string'])}
       />
       {FormManager.renderError('profile_venue.other_venue_types')}
+
+      <GroupTitleView label={i18n.t("Sectors and activities")} />
 
       <TextView>
         {i18n.t('Main cultural activities')}
@@ -108,29 +114,13 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.creation_year')}
 
-      <TextView style={styles.groupTitle}>
-        {i18n.t("Venue details")}
-      </TextView>
-
-      <InputSwitchField
-        value={formData?.profile_venue?.is_open_24h}
-        label={i18n.t('Is opened everyday')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ is_open_24h: value },
-        }, [])}
+      <SectorsField
+        resource={resource}
+        field="sectors_ids"
+        value={formData?.sectors_ids}
       />
-      {FormManager.renderError('profile_venue.is_open_24h')}
 
-      <InputSwitchField
-        value={formData?.profile_venue?.is_by_appointment_only}
-        label={i18n.t('By appointment only')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ is_by_appointment_only: value },
-        }, [])}
-      />
-      {FormManager.renderError('profile_venue.is_by_appointment_only')}
+      <GroupTitleView label={i18n.t("Venue details")} />
 
       <TextView>
         {i18n.t('Opening days')}
@@ -237,29 +227,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.has_diffusion_space')}
 
-      <TextView>
-        {i18n.t('Number of spaces')}
-      </TextView>
-      <InputTextField
-        keyboardType="number-pad"
-        value={formData?.profile_venue?.total_creation_or_rehearsal_rooms}
-        placeholder={i18n.t('Enter the number of spaces')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ total_creation_or_rehearsal_rooms: value },
-        }, ['number'])}
-      />
-      {FormManager.renderError('profile_venue.total_creation_or_rehearsal_rooms')}
-
+      <ProfileGroupDocuments resource={resource} formData={formData} />
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  groupTitle: {
-    fontWeight: 'bold',
-    marginTop: Layout.space.base * 1.5,
-  },
-});
 
 export default ProfileFormVenue;
