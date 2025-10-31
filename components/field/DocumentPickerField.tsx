@@ -8,6 +8,7 @@ import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
 import { isLoaded } from "expo-font";
+import TagView from "../view/TagView";
 
 type Props = {
   label?: JSX.Element;
@@ -57,23 +58,22 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
         key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <TextView>{data.name}</TextView>
-
-        {isSelected &&
-          <TouchableOpacity
-            style={styles.deleteMedia}
-            onPress={() => deleteMedia(data)}
-          >
-            <IconView name="delete" theme="primary" size={12} padding={3.5} />
-          </TouchableOpacity>
-        }
+        <TagView
+          key={data.name}
+          theme="white"
+          canEdit={true}
+          containerStyle={styles.tagItem}
+          onDeleteButtonPress={() => deleteMedia(data)}
+        >
+          {data.name}
+        </TagView>
       </TouchableOpacity>
     );
   };
 
   const launchBrowser = async () => {
     return await DocumentPicker.getDocumentAsync({
-      type: '*/*', 
+      type: '*/*',
       copyToCacheDirectory: true,
       multiple: (multiple === true ? true : false),
     });
@@ -147,6 +147,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 5,
     right: 5,
+  },
+  tagItem: {
+    marginRight: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 
