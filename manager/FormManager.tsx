@@ -170,6 +170,14 @@ class FormManager {
           return i18n.t('A value is required.');
         },
       },
+      nospace: {
+        run: (value: any) => {
+          return !/\s/.test(value);
+        },
+        error: () => {
+          return i18n.t('Spaces are not allowed.');
+        },
+      },
       string: {
         run: (value: any) => {
           return (typeof value === 'string' || value instanceof String); 
