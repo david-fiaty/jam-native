@@ -2,14 +2,12 @@ import { useState, useEffect, JSX } from "react";
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import * as DocumentPicker from 'expo-document-picker';
-import TextView from '../view/TextView';
-import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
-import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
+import TagView from "../view/TagView";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
-  label?: JSX.Element;
   value?: any;
   placeholder?: string;
   preview?: boolean;
@@ -19,10 +17,10 @@ type Props = {
   onDeleteItem?: (data: any) => void;
 };
 
-const DocumentPickerField = ({ label, value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
+const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
-  const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
     let mediaList = [...selectedDocuments];
@@ -44,34 +42,27 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
   };
 
   const renderDocumentPreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.name);
-    const imageStyle = {
-      ...styles.mediaPreview,
-      ...isSelected ? styles.selectedPreview : {},
-    };
-
     return (
       <TouchableOpacity
         key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <TextView>{data.name}</TextView>
-
-        {isSelected &&
-          <TouchableOpacity
-            style={styles.deleteMedia}
-            onPress={() => deleteMedia(data)}
-          >
-            <IconView name="delete" theme="primary" size={12} padding={3.5} />
-          </TouchableOpacity>
-        }
+        <TagView
+          key={data.name}
+          theme="white"
+          canEdit={true}
+          containerStyle={styles.tagItem}
+          onDeleteButtonPress={() => deleteMedia(data)}
+        >
+          {DataManager.truncateText(data.name, 18)}
+        </TagView>
       </TouchableOpacity>
     );
   };
 
   const launchBrowser = async () => {
     return await DocumentPicker.getDocumentAsync({
-      type: '*/*', 
+      type: '*/*',
       copyToCacheDirectory: true,
       multiple: (multiple === true ? true : false),
     });
@@ -79,12 +70,6 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
 
   const pickDocument = async () => {
     let result: any = await launchBrowser();
-
-    // Todo - Implement doc selection
-    console.log('-- pick doc', result?.assets);
-
-
-    return;
 
     if (!result.canceled && result?.assets?.length) {
       let mediaList: any = [...selectedDocuments];
@@ -100,18 +85,15 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
   };
 
   useEffect(() => {
-    setSelectedDocuments(value || []);
+    if (!isLoaded) {
+      setSelectedDocuments(value || []);
+      setIsLoaded(true);
+    }
   }, [value]);
 
   return (
     <View style={styles.container}>
-      {label && (
-        <TouchableOpacity onPress={pickDocument}>
-          <TextView>{label}</TextView>
-        </TouchableOpacity>
-      )}
-
-      {!label && (
+      {!selectedDocuments?.length && (
         <TouchableOpacity onPress={pickDocument}>
           <InputTextField
             readOnly={true}
@@ -122,11 +104,13 @@ const DocumentPickerField = ({ label, value, placeholder, preview, multiple, med
       )}
 
       {selectedDocuments?.length > 0 && preview &&
-        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
+        <View style={Layout.fieldSelectionPreview}>
           {selectedDocuments.map((data: any) => {
             if (data?.uri) return renderDocumentPreview(data);
           })}
-        </BoxView>
+
+          <IconView name="plus" theme="transparent" onPress={pickDocument} />
+        </View>
       }
     </View>
   );
@@ -137,6 +121,7 @@ const styles = StyleSheet.create({
   previewContainer: {
     paddingVertical: Layout.space.base,
     gap: Layout.space.base * 1,
+    backgroundColor: 'gray',
   },
   mediaPreview: {
     borderRadius: Layout.radius.round,
@@ -148,6 +133,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 5,
     right: 5,
+  },
+  tagItem: {
+    marginRight: Layout.space.base,
+    marginBottom: Layout.space.base,
   },
 });
 
