@@ -5,9 +5,6 @@ import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 
 type Props = {
-  resource?: any;
-  fieldKey?: any;
-  parentKey?: any;
   keyboardType?: any;
   value?: string;
   placeholder?: string;
@@ -23,9 +20,6 @@ type Props = {
 };
 
 const InputTextField = ({
-  resource,
-  fieldKey,
-  parentKey,
   keyboardType,
   value,
   placeholder,
