@@ -22,9 +22,9 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="profile_name"
-        rules={['required', 'nospace', 'string']}
         value={formData?.profile_name || ''}
         placeholder={i18n.t('Profile name')}
+        rules={['required', 'nospace', 'string']}
       />
 
       <TextView>
