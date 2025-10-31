@@ -33,6 +33,10 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   const userState = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
+
+    return;
+    
+    /*
     setIsProcessing(true);
 
     if (onSubmit) {
@@ -70,6 +74,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     }
 
     setIsProcessing(false);
+    */
   };
 
   const loadFormData = async () => {
@@ -119,7 +124,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('Profile Image')}</TextView>
+        <TextView>{i18n.t('Profile Image')}*</TextView>
         <ProfileImageField
           value={formData?.profile_picture?.url}
           onChangeValue={(data: any) => FormManager.updateField(resource, 'upload_profile_picture', data)}
@@ -134,6 +139,11 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         />
         {FormManager.renderError('profile_type')}
 
+        {/* All profiles */}
+        {formData?.profile_type?.length && (
+          <ProfileFormAll resource={resource} formData={formData} />
+        )}
+
         {/* Personal profile */}
         {formData?.profile_type == 'personal' && (
           <ProfileFormPersonal resource={resource} formData={formData} />
@@ -147,11 +157,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         {/* Venue profile */}
         {formData?.profile_type == 'venue' && (
           <ProfileFormVenue resource={resource} formData={formData} />
-        )}
-
-        {/* All profiles */}
-        {formData?.profile_type?.length && (
-          <ProfileFormAll resource={resource} formData={formData} />
         )}
 
         {/* Submit button */}
