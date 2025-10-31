@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -24,19 +23,22 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
         {i18n.t('Address')}
       </TextView>
       <InputTextareaField
+        resource={resource}
+        fieldKey="address"
         value={formData?.address || ''}
         placeholder={i18n.t('Enter your address')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
+        rules={['string']}
       />
-      {FormManager.renderError('address')}
 
       <TextView>
         {i18n.t('City')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="other_town_or_locality"
         value={formData?.other_town_or_locality || ''}
         placeholder={i18n.t('Other town or locality')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'other_town_or_locality', value)}
+        rules={['string']}
       />
       {FormManager.renderError('other_town_or_locality')}
 
