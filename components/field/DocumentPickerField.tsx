@@ -1,11 +1,10 @@
-import { useState, useEffect, JSX } from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import * as DocumentPicker from 'expo-document-picker';
 import IconView from '../view/IconView';
 import InputTextField from "./InputTextField";
 import TagView from "../view/TagView";
-import DataManager from "@/manager/DataManager";
 
 type Props = {
   value?: any;
@@ -34,7 +33,6 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
         key={data.name}
         theme="white"
         canEdit={true}
-        containerStyle={styles.tagItem}
         onDeleteButtonPress={() => deleteMedia(data)}
       >
         {data.name}
@@ -73,7 +71,7 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
   }, [value]);
 
   return (
-    <View style={styles.container}>
+    <>
       {!selectedDocuments?.length && (
         <TouchableOpacity onPress={pickDocument}>
           <InputTextField
@@ -93,32 +91,8 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
           <IconView name="plus" theme="transparent" onPress={pickDocument} />
         </View>
       }
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-  previewContainer: {
-    paddingVertical: Layout.space.base,
-    gap: Layout.space.base * 1,
-    backgroundColor: 'gray',
-  },
-  mediaPreview: {
-    borderRadius: Layout.radius.round,
-  },
-  selectedPreview: {
-    opacity: 0.7,
-  },
-  deleteMedia: {
-    position: 'absolute',
-    top: 5,
-    right: 5,
-  },
-  tagItem: {
-    marginRight: Layout.space.base,
-    marginBottom: Layout.space.base,
-  },
-});
 
 export default DocumentPickerField;
