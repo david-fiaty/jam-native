@@ -30,7 +30,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
           ...(formData?.profile_organization || {}),
           ...{ organization_name: value },
-        }, ['string'])}
+        }, ['required', 'string'])}
       />
       {FormManager.renderError('profile_organization.organization_name')}
 
