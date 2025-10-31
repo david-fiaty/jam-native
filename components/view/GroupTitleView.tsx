@@ -17,7 +17,7 @@ const GroupTitleView = ({ label }: Props) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Layout.space.base * 1.3,
+    marginTop: Layout.space.base * 1.5,
     fontSize: 15,
   },
 });
