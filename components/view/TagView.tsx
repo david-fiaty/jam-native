@@ -19,13 +19,21 @@ const TagView = ({ theme, canEdit, containerStyle, children, onDeleteButtonPress
   };
 
   return (
-    <BoxView direction="row" align="center" justify="between" style={[styles.container, tagStyle]}>
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="space-around" 
+      style={[styles.container, tagStyle]}
+    >
       <TextView style={styles.text}>
         {children}
       </TextView>
 
       {canEdit === true && (
-        <TouchableOpacity onPress={onDeleteButtonPress}>
+        <TouchableOpacity   
+          onPress={onDeleteButtonPress} 
+          style={styles.deleteButton}
+        >
           <IconView name="delete" theme="secondary" size={12} />
         </TouchableOpacity>
       )}
@@ -41,6 +49,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base/2,
     alignSelf: 'flex-start',
     maxWidth: '100%',
+    position: 'relative',
+  },
+  deleteButton: {
+    position: 'absolute',
+    right: Layout.space.base/2,
   },
   primary: Layout.theme.primary,
   secondary: Layout.theme.secondary,
