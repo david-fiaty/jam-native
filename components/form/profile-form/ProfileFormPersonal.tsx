@@ -35,7 +35,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       {FormManager.renderError('profile_personal.first_name')}
 
       <TextView>
-        {i18n.t('Last name')}
+        {i18n.t('Last name')}*
       </TextView>
       <InputTextField
         value={formData?.profile_personal?.last_name}
