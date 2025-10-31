@@ -4,6 +4,7 @@ import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import FormManager from "@/manager/FormManager";
 import DocumentPickerField from "@/components/field/DocumentPickerField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -13,9 +14,7 @@ type Props = {
 const ProfileGroupDocuments = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Documents")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Documents")} />
 
       <TextView>
         {i18n.t('Technical sheet')}

@@ -8,6 +8,7 @@ import FormManager from "@/manager/FormManager";
 import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import ProfessionsField from "@/components/field/ProfessionsField";
 import SectorsField from "@/components/field/SectorsField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -17,9 +18,7 @@ type Props = {
 const ProfileFormPersonal = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Personal information")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Personal information")} />
 
       <TextView>
         {i18n.t('First name')}*
@@ -47,9 +46,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_personal.last_name')}
 
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Sectors and activities")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Sectors and activities")} />
 
       <ProfessionsField
         resource={resource}

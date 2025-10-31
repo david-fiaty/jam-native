@@ -4,6 +4,7 @@ import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import FormManager from "@/manager/FormManager";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -13,9 +14,7 @@ type Props = {
 const ProfileGroupNetworks = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Social networks")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Social networks")} />
 
       <TextView>
         {i18n.t('Linkedin page')}

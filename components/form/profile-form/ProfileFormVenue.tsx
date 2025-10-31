@@ -13,6 +13,7 @@ import DataManager from "@/manager/DataManager";
 import WeekdaysField from "@/components/field/WeekdaysField";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import SectorsField from "@/components/field/SectorsField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -22,9 +23,7 @@ type Props = {
 const ProfileFormVenue = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Venue information")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Venue information")} />
 
       <TextView>
         {i18n.t('Venue name')}*
@@ -69,9 +68,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('profile_venue.other_venue_types')}
 
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Sectors and activities")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Sectors and activities")} />
 
       <TextView>
         {i18n.t('Main cultural activities')}
@@ -123,9 +120,7 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         value={formData?.sectors_ids}
       />
 
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Venue details")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Venue details")} />
 
       <TextView>
         {i18n.t('Opening days')}

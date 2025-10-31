@@ -8,6 +8,7 @@ import FormManager from "@/manager/FormManager";
 import LocationPickerField from "@/components/field/LocationPickerField";
 import CountriesField from "@/components/field/CountriesField";
 import InputTextareaField from "@/components/field/InputTextareaField";
+import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
   resource: any;
@@ -17,9 +18,7 @@ type Props = {
 const ProfileGroupAddress = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView style={Layout.groupTitle} bold={true}>
-        {i18n.t("Address and location")}
-      </TextView>
+      <GroupTitleView label={i18n.t("Address and location")} />
 
       <TextView>
         {i18n.t('Address')}
