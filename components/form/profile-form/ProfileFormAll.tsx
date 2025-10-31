@@ -42,10 +42,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Phone number')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="phone_number"
         value={formData?.phone_number || ''}
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone_number', value, ['string'])}
+        rules={['string']}
       />
       {FormManager.renderError('phone_number')}
 
