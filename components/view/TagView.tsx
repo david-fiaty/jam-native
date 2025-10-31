@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: Layout.radius.round,
     paddingVertical: Layout.space.base/2.5,
     paddingHorizontal: Layout.space.base/2,
-    paddingRight: Layout.space.base*2.8,
+    paddingRight: Layout.space.base*2.7,
     alignSelf: 'flex-start',
     maxWidth: '100%',
     position: 'relative',
