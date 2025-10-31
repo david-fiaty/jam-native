@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
@@ -25,7 +24,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         {i18n.t('Organization name')}*
       </TextView>
       <InputTextField
-        value={formData?.profile_organization?.organization_name}
+        value={formData?.profile_organization?.organization_name || ''}
         placeholder={i18n.t('Enter your organization name')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
           ...(formData?.profile_organization || {}),
@@ -42,7 +41,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         field="organization_types"
         parent="profile_organization"
         placeholder={i18n.t('Select organization types')}
-        value={formData?.profile_organization?.organization_types}
+        value={formData?.profile_organization?.organization_types || []}
         onPress={() => ModalManager.toggleModal('OrganizationTypesList', {
           resource: resource,
           field: "organization_types",
@@ -61,7 +60,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         field="main_cultural_activities"
         parent="profile_organization"
         placeholder={i18n.t('Select cultural activities')}
-        value={formData?.profile_organization?.main_cultural_activities}
+        value={formData?.profile_organization?.main_cultural_activities || []}
         onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
           resource: resource,
           field: "main_cultural_activities",
@@ -74,7 +73,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         {i18n.t('Other cultural activities')}
       </TextView>
       <InputTextField
-        value={formData?.profile_organization?.other_cultural_activities}
+        value={formData?.profile_organization?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.other_cultural_activities', {
           ...(formData?.profile_organization || {}),
@@ -88,7 +87,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       </TextView>
       <InputTextField
         keyboardType="number-pad"
-        value={formData?.profile_organization?.creation_year}
+        value={formData?.profile_organization?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
           ...(formData?.profile_organization || {}),
@@ -100,7 +99,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <SectorsField
         resource={resource}
         field="sectors_ids"
-        value={formData?.sectors_ids}
+        value={formData?.sectors_ids || []}
       />
 
       <ProfileGroupDocuments resource={resource} formData={formData} />

@@ -24,7 +24,7 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
         {i18n.t('Address')}
       </TextView>
       <InputTextareaField
-        value={formData?.address}
+        value={formData?.address || ''}
         placeholder={i18n.t('Enter your address')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'address', value)}
       />
@@ -34,7 +34,7 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
         {i18n.t('City')}
       </TextView>
       <InputTextField
-        value={formData?.other_town_or_locality}
+        value={formData?.other_town_or_locality || ''}
         placeholder={i18n.t('Other town or locality')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'other_town_or_locality', value)}
       />
@@ -46,7 +46,7 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
         resource={resource}
         field="scope_country_code"
         placeholder={i18n.t('Select a country')}
-        value={formData?.scope_country_code}
+        value={formData?.scope_country_code || ''}
         onPress={() => ModalManager.toggleModal('CountriesList', {
           resource: resource,
           field: 'scope_country_code',
