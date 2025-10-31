@@ -6,7 +6,7 @@ import BoxView from "../view/BoxView";
 
 type Props = {
   resource?: any;
-  key?: any;
+  fieldKey?: any;
   parentKey?: any;
   keyboardType?: any;
   value?: string;
@@ -24,7 +24,7 @@ type Props = {
 
 const InputTextField = ({
   resource,
-  key,
+  fieldKey,
   parentKey,
   keyboardType,
   value,
