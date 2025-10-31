@@ -3,8 +3,13 @@ import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   keyboardType?: any;
   value?: string;
   placeholder?: string;
@@ -20,6 +25,10 @@ type Props = {
 };
 
 const InputTextField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
   keyboardType,
   value,
   placeholder,
@@ -35,13 +44,20 @@ const InputTextField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
+  console.log('--', fieldKey)
+
   const disabledStyle: any = {
     opacity: disabled ? 0.4: 1,
   };
 
   const changeTextEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
-    if (onChangeText) onChangeText(fieldValue);
+    if (onChangeText) {
+      onChangeText(fieldValue)
+    }
+    else if (resource && fieldKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
   };
 
   const submitEditingEvent = () => {
@@ -74,6 +90,8 @@ const InputTextField = ({
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
+
+      {fieldKey && FormManager.renderError(fieldKey)}
     </BoxView>
   );
 };
