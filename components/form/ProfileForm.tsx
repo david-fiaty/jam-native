@@ -119,7 +119,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('Profile Image')}</TextView>
+        <TextView>{i18n.t('Profile Image')}*</TextView>
         <ProfileImageField
           value={formData?.profile_picture?.url}
           onChangeValue={(data: any) => FormManager.updateField(resource, 'upload_profile_picture', data)}
