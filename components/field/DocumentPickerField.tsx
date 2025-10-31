@@ -37,7 +37,7 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
         containerStyle={styles.tagItem}
         onDeleteButtonPress={() => deleteMedia(data)}
       >
-        {DataManager.truncateText(data.name, 60)}
+        {data.name}
       </TagView>
     );
   };
