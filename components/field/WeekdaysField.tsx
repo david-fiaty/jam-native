@@ -54,12 +54,14 @@ const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
         value: 'sunday',
         label: i18n.t('Sunday'),
       },
-
     ];
   };
 
   const getSelectedItems = () => {
-    return [];
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = (weekdaysData || []).map((o: any) => o.value);
+
+    return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const updateSelection = (selectedIds: any[]) => {
