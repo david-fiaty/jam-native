@@ -146,11 +146,11 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Trim textarea fields like input text fields?
 
 # New release
-- Finalisation profile update form
-- Fix profile form image upload/update
-- Ajout champ organization types pour profile organization (view et edit)
-- Ajout champ professions/subprofessions pour profile personal (view et edit)
-- Ajout champ venue types pour profile venue (view et edit)
+
+Commentaires
+1- Sauf erreurs/bugs, toutes les specs excel sont integrees pour profile update form et profile types
+2- Pour faciliter testing/validation ui, le champ profile type est switchable dans le profile form
+3- Le submit bouton est desactive pour eviter soumisions accidentelles apres switch profile type => corruption donnes profil
 
 # SIGNUP FIELDS
 Numero Whatsapp (login)
