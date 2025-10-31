@@ -27,7 +27,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <InputTextField
         value={formData?.profile_organization?.organization_name}
         placeholder={i18n.t('Enter your organization name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
+        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
           ...(formData?.profile_organization || {}),
           ...{ organization_name: value },
         }, ['required', 'string'])}
