@@ -31,11 +31,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Profile email')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="email"
         value={formData?.email || ''}
         placeholder={i18n.t('Enter a profile email')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
+        rules={['string', 'email']}
       />
-      {FormManager.renderError('email')}
 
       <TextView>
         {i18n.t('Phone number')}
