@@ -20,6 +20,8 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         {i18n.t('Profile name (with no spaces)')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="profile_name"
         value={formData?.profile_name || ''}
         placeholder={i18n.t('Profile name')}
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_name', value, ['required', 'nospace', 'string'])}
