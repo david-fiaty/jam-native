@@ -12,7 +12,6 @@ import TagView from "../view/TagView";
 import DataManager from "@/manager/DataManager";
 
 type Props = {
-  label?: JSX.Element;
   value?: any;
   placeholder?: string;
   preview?: boolean;
@@ -22,7 +21,7 @@ type Props = {
   onDeleteItem?: (data: any) => void;
 };
 
-const DocumentPickerField = ({ label, value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
+const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
