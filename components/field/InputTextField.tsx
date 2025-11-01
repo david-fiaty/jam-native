@@ -10,6 +10,7 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
+  formData?: any;
   keyboardType?: any;
   value?: string;
   placeholder?: string;
@@ -29,6 +30,7 @@ const InputTextField = ({
   fieldKey,
   parentKey,
   rules,
+  formData,
   keyboardType,
   value,
   placeholder,
@@ -45,7 +47,7 @@ const InputTextField = ({
   const [currentValue, setCurrentValue] = useState<any>('');
 
   const disabledStyle: any = {
-    opacity: disabled ? 0.4: 1,
+    opacity: disabled ? 0.4 : 1,
   };
 
   const changeTextEvent = (fieldValue: any) => {
@@ -53,14 +55,20 @@ const InputTextField = ({
     if (onChangeText) {
       onChangeText(fieldValue)
     }
-    else if (resource && fieldKey) {
+    else if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, {
+        ...(formData?.[parentKey] || {}),
+        ...{ fieldKey: fieldValue },
+      }, rules);
     }
   };
 
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue); 
+    else if (onChangeText) onChangeText(currentValue);
   };
 
   useEffect(() => {
@@ -89,7 +97,7 @@ const InputTextField = ({
         onSubmitEditing={submitEditingEvent}
       />
 
-      {fieldKey && FormManager.renderError(fieldKey)}
+      {FormManager.renderError(parentKey ? `${parentKey}.${fieldKey}` : fieldKey)}
     </BoxView>
   );
 };

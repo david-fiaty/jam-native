@@ -20,41 +20,45 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
         {i18n.t('Linkedin page')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="linkedin_link"
         value={formData?.linkedin_link || ''}
         placeholder={i18n.t('Enter your page link')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'linkedin_link', value, ['string', 'url'])}
+        rules={['string', 'url']}
       />
-      {FormManager.renderError('linkedin_link')}
 
       <TextView>
         {i18n.t('Facebook page')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="facebook_link"
         value={formData?.facebook_link || ''}
         placeholder={i18n.t('Enter your page link')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'facebook_link', value, ['string', 'url'])}
+        rules={['string', 'url']}
       />
-      {FormManager.renderError('facebook_link')}
 
       <TextView>
         {i18n.t('Instagram user name')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="instagram_username"
         value={formData?.instagram_username || ''}
         placeholder={i18n.t('Enter your user name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'instagram_username', value, ['string'])}
+        rules={['string']}
       />
-      {FormManager.renderError('instagram_username')}
 
       <TextView>
         {i18n.t('Website link')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="website_link"
         value={formData?.website_link || ''}
         placeholder={i18n.t('Enter your website link')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'website_link', value, ['string', 'url'])}
+        rules={['string', 'url']}
       />
-      {FormManager.renderError('website_link')}
     </>
   );
 }
