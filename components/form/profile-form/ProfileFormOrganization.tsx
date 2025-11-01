@@ -40,6 +40,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         resource={resource}
         fieldKey="organization_types"
         parentKey="profile_organization"
+        formData={formData}
         rules={['required']}
         placeholder={i18n.t('Select organization types')}
         value={formData?.profile_organization?.organization_types || []}
