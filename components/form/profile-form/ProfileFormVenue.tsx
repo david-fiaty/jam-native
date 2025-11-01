@@ -28,14 +28,14 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Venue name')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="venue_name"
+        parentKey="profile_venue"
+        rules={['required', 'string']}
+        formData={formData}
         value={formData?.profile_venue?.venue_name || ''}
         placeholder={i18n.t('Enter the venue name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ venue_name: value },
-        }, ['required', 'string'])}
       />
-      {FormManager.renderError('profile_venue.venue_name')}
 
       <TextView>
         {i18n.t('Venue types')}*
@@ -58,14 +58,14 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Other venue types')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="other_venue_types"
+        parentKey="profile_venue"
+        rules={['string']}
+        formData={formData}
         value={formData?.profile_venue?.other_venue_types || ''}
         placeholder={i18n.t('Enter other venue types')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ other_venue_types: value },
-        }, ['string'])}
       />
-      {FormManager.renderError('profile_venue.other_venue_types')}
 
       <GroupTitleView label={i18n.t("Sectors and activities")} />
 
