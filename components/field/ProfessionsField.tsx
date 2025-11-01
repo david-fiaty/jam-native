@@ -38,7 +38,6 @@ const ProfessionsField = ({
   const [professionsData, setProfessionsData] = useState<any[]>([]);
   const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  //const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
