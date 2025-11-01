@@ -91,11 +91,13 @@ class FormManager {
 
   renderError(key: string, parentKey?: any) {
     if (!key) return <></>;
-    
+
     key = parentKey ? `${parentKey}.${key}` : key;
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
+
+    console.log(fieldError) 
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;
