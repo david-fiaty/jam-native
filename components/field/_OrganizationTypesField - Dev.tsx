@@ -62,10 +62,9 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
   useEffect(() => {
     if (!isLoaded) {
       if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
+      setCurrentValue(value);
       setIsLoaded(true);
     }
-
-    setCurrentValue(value);
   }, [isLoaded, appState, value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
