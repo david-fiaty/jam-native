@@ -8,6 +8,7 @@ import CulturalActivityTypesField from "@/components/field/CulturalActivityTypes
 import ProfessionsField from "@/components/field/ProfessionsField";
 import SectorsField from "@/components/field/SectorsField";
 import GroupTitleView from "@/components/view/GroupTitleView";
+import ProfileGroupActivities from "./groups/ProfileGroupActivities";
 
 type Props = {
   resource: any;
@@ -53,41 +54,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         value={formData?.professions_ids || []}
       />
 
-      <TextView>
-        {i18n.t('Main cultural activities')}
-      </TextView>
-      <CulturalActivityTypesField
-        resource={resource}
-        field="main_cultural_activities"
-        parent="profile_personal"
-        placeholder={i18n.t('Select cultural activities')}
-        value={formData?.profile_personal?.main_cultural_activities || []}
-        onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
-          resource: resource,
-          field: "main_cultural_activities",
-          parent: "profile_personal",
-        })}
-      />
-      {FormManager.renderError('profile_personal.main_cultural_activities')}
-
-      <TextView>
-        {i18n.t('Other cultural activities')}
-      </TextView>
-      <InputTextField
-        resource={resource}
-        fieldKey="other_cultural_activities"
-        parentKey="profile_personal"
-        rules={['string']}
-        formData={formData}
-        value={formData?.profile_personal?.other_cultural_activities || []}
-        placeholder={i18n.t('Enter other cultural activities')}
-      />
-
-      <SectorsField
-        resource={resource}
-        field="sectors_ids"
-        value={formData?.sectors_ids || []}
-      /> 
+      <ProfileGroupActivities resource={resource} formData={formData} />
     </>
   );
 }
