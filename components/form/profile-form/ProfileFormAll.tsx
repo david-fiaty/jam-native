@@ -22,9 +22,9 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="profile_name"
+        rules={['required', 'nospace', 'string']}
         value={formData?.profile_name || ''}
         placeholder={i18n.t('Profile name')}
-        rules={['required', 'nospace', 'string']}
       />
 
       <TextView>
@@ -33,9 +33,9 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="email"
+        rules={['string', 'email']}
         value={formData?.email || ''}
         placeholder={i18n.t('Enter a profile email')}
-        rules={['string', 'email']}
       />
 
       <TextView>
@@ -44,10 +44,10 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="phone_number"
+        rules={['string']}
         value={formData?.phone_number || ''}
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
-        rules={['string']}
       />
       {FormManager.renderError('phone_number')}
 
@@ -57,9 +57,9 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
       <InputTextareaField
         resource={resource}
         fieldKey="profile_description"
+        rules={['required', 'string']}
         value={formData?.profile_description || ''}
         placeholder={i18n.t('Profile description')}
-        rules={['required', 'string']}
       />
 
       <ProfileGroupAddress resource={resource} formData={formData} />
