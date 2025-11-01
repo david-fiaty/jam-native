@@ -7,6 +7,7 @@ import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import InputTextField from './InputTextField';
 import SpinnerView from '../view/SpinnerView';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
@@ -27,36 +28,46 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
   const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const deleteItem = (item: any) => {
-    let currentData: any = {...formData};
-    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
+    let selectedIds: any[] = [...(currentValue || []).filter((n: number) => n !== item.id)];
+    let fieldValue: any = {
+        ...(formData?.[parentKey] || {}),
+        ...{ [fieldKey]: selectedIds },
+    };
 
     setCurrentValue(selectedIds);
 
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+    }
+
+    /*
     dispatch(setFormData<any>({
       resource: resource,
       key: parentKey,
       value: {
-        ...(currentData?.[parentKey] || {}),
-        ...{ [fieldKey]: selectedIds},
+        ...(formData?.[parentKey] || {}),
+        ...{ [fieldKey]: selectedIds },
       },
-    }));  
+    }));
+  */
   };
 
   useEffect(() => {
     if (!isLoaded) {
       if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
+      setCurrentValue(value);
       setIsLoaded(true);
     }
-    
-    setCurrentValue(value);
-  }, [isLoaded, appState]);
+  }, [isLoaded, appState, value]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
-      { !currentValue?.length && (
+      {!currentValue?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
@@ -70,16 +81,16 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
       )}
 
       {currentValue?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}> 
-          { currentValue.map((id: any) => {
+        <View style={Layout.fieldSelectionPreview}>
+          {currentValue.map((id: any) => {
             let item: any = organizationTypes.find((o: any) => o.id === id);
-            
+
             return (
               <TagView
                 theme="white"
                 key={item.id}
                 canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}  
+                onDeleteButtonPress={() => deleteItem(item)}
               >
                 {item?.name}
               </TagView>
