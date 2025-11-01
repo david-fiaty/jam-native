@@ -25,9 +25,9 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
       <InputTextareaField
         resource={resource}
         fieldKey="address"
+        rules={['string']}
         value={formData?.address || ''}
         placeholder={i18n.t('Enter your address')}
-        rules={['string']}
       />
 
       <TextView>
@@ -36,9 +36,9 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="other_town_or_locality"
+        rules={['string']}
         value={formData?.other_town_or_locality || ''}
         placeholder={i18n.t('Other town or locality')}
-        rules={['string']}
       />
       {FormManager.renderError('other_town_or_locality')}
 

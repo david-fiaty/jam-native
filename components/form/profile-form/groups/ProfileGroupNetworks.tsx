@@ -1,9 +1,7 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
-import FormManager from "@/manager/FormManager";
 import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
@@ -22,9 +20,9 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="linkedin_link"
+        rules={['string', 'url']}
         value={formData?.linkedin_link || ''}
         placeholder={i18n.t('Enter your page link')}
-        rules={['string', 'url']}
       />
 
       <TextView>
@@ -33,9 +31,9 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="facebook_link"
+        rules={['string', 'url']}
         value={formData?.facebook_link || ''}
         placeholder={i18n.t('Enter your page link')}
-        rules={['string', 'url']}
       />
 
       <TextView>
@@ -44,9 +42,9 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="instagram_username"
+        rules={['string']}
         value={formData?.instagram_username || ''}
         placeholder={i18n.t('Enter your user name')}
-        rules={['string']}
       />
 
       <TextView>
@@ -55,9 +53,9 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="website_link"
+        rules={['string', 'url']}
         value={formData?.website_link || ''}
         placeholder={i18n.t('Enter your website link')}
-        rules={['string', 'url']}
       />
     </>
   );
