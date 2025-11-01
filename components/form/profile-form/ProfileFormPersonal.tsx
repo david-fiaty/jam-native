@@ -45,6 +45,8 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <ProfessionsField
         resource={resource}
         field="professions_ids"
+        formData={formData}
+        rules={['required']}
         value={formData?.professions_ids || []}
       />
 
