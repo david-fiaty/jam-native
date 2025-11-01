@@ -42,8 +42,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter your last name')}
       />
 
-      <GroupTitleView label={i18n.t("Sectors and activities")} />
-
       <ProfessionsField
         resource={resource}
         field="professions_ids"
