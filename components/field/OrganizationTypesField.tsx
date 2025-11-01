@@ -8,6 +8,7 @@ import TagView from '../view/TagView';
 import InputTextField from './InputTextField';
 import SpinnerView from '../view/SpinnerView';
 import FormManager from '@/manager/FormManager';
+import ModalManager from '@/manager/ModalManager';
 
 type Props = {
   resource: string;
@@ -17,15 +18,22 @@ type Props = {
   rules?: any
   value?: any;
   placeholder?: any;
-  onPress?: () => void;
 };
 
-const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder, onPress }: Props) => {
+const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
+
+  const onPress = () => {
+    ModalManager.toggleModal('OrganizationTypesList', {
+      resource: resource,
+      field: fieldKey,
+      parent: parentKey,
+    });
+  };
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(currentValue || []).filter((n: number) => n !== item.id)];
