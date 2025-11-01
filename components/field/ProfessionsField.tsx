@@ -12,19 +12,32 @@ import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
-  resource: string;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
+  formData?: any;
+
   field: string;
   value?: any;
   placeholder?: any;
 };
 
-const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
+const ProfessionsField = ({   
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  formData, 
+  field, 
+  value, 
+  placeholder 
+}: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [professionsData, setProfessionsData] = useState<any[]>([]);
   const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
@@ -68,14 +81,14 @@ const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
     return listOptions;
   };
 
-  const getSelectedProfessions = () => {
+  const getSelectedOptions = () => {
     let selectedIds: any[] = formData?.[field] || [];
     let optionsIds: any[] = professionsOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
-  const getSelectedSubProfessions = () => {
+  const getSelectedSubOptions = () => {
     let selectedIds: any[] = formData?.[field] || [];
     let optionsIds: any[] = getSubProfessionsOptions().map((o: any) => o.value);
 
@@ -142,13 +155,13 @@ const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
       <BoxView direction="column" align="left">
         <TextView>{i18n.t('Professions')}*</TextView>
         <MultiSelect
-          value={getSelectedProfessions()}
+          value={getSelectedOptions()}
           labelField="label"
           valueField="value"
           placeholder={i18n.t('Select your professions')}
-          inside={getSelectedProfessions().length > 0}
-          style={!getSelectedProfessions().length ? styles.element : styles.preview}
-          iconStyle={getSelectedProfessions().length > 0 ? styles.iconRight : {}}
+          inside={getSelectedOptions().length > 0}
+          style={!getSelectedOptions().length ? styles.element : styles.preview}
+          iconStyle={getSelectedOptions().length > 0 ? styles.iconRight : {}}
           placeholderStyle={styles.placeholderStyle}
           iconColor={Layout.colors.primary}
           onChange={(selectedIds: any) => updateSelection(selectedIds)}
@@ -168,10 +181,10 @@ const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
             placeholder={i18n.t('Select your sub professions')}
-            value={getSelectedSubProfessions()}
-            inside={getSelectedSubProfessions().length > 0}
-            style={!getSelectedSubProfessions().length ? styles.element : styles.preview}
-            iconStyle={getSelectedSubProfessions().length > 0 ? styles.iconRight : {}}
+            value={getSelectedSubOptions()}
+            inside={getSelectedSubOptions().length > 0}
+            style={!getSelectedSubOptions().length ? styles.element : styles.preview}
+            iconStyle={getSelectedSubOptions().length > 0 ? styles.iconRight : {}}
             data={getSubProfessionsOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
