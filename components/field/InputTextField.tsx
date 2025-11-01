@@ -45,7 +45,7 @@ const InputTextField = ({
   const [currentValue, setCurrentValue] = useState<any>('');
 
   const disabledStyle: any = {
-    opacity: disabled ? 0.4: 1,
+    opacity: disabled ? 0.4 : 1,
   };
 
   const changeTextEvent = (fieldValue: any) => {
@@ -53,14 +53,20 @@ const InputTextField = ({
     if (onChangeText) {
       onChangeText(fieldValue)
     }
-    else if (resource && fieldKey) {
+    else if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, {
+        ...(formData?.[parentKey] || {}),
+        ...{ fieldKey: value },
+      }, rules)
     }
   };
 
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue); 
+    else if (onChangeText) onChangeText(currentValue);
   };
 
   useEffect(() => {
