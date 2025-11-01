@@ -16,7 +16,7 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
-  //formData?: any;
+  formData?: any;
 
   field: string;
   value?: any;
@@ -28,7 +28,7 @@ const ProfessionsField = ({
   fieldKey,
   parentKey,
   rules,
-  //formData, 
+  formData, 
   field, 
   value, 
   placeholder 
@@ -38,7 +38,7 @@ const ProfessionsField = ({
   const [professionsData, setProfessionsData] = useState<any[]>([]);
   const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+  //const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
