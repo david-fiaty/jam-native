@@ -3,8 +3,14 @@ import { StyleSheet } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
+  formData?: any;
   keyboardType?: any;
   value?: string;
   placeholder?: string;
@@ -20,6 +26,11 @@ type Props = {
 };
 
 const InputTextField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  formData,
   keyboardType,
   value,
   placeholder,
@@ -36,17 +47,28 @@ const InputTextField = ({
   const [currentValue, setCurrentValue] = useState<any>('');
 
   const disabledStyle: any = {
-    opacity: disabled ? 0.4: 1,
+    opacity: disabled ? 0.4 : 1,
   };
 
   const changeTextEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
-    if (onChangeText) onChangeText(fieldValue);
+    if (onChangeText) {
+      onChangeText(fieldValue)
+    }
+    else if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, {
+        ...(formData?.[parentKey] || {}),
+        ...{ [fieldKey]: fieldValue },
+      }, rules);
+    }
   };
 
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue); 
+    else if (onChangeText) onChangeText(currentValue);
   };
 
   useEffect(() => {
@@ -74,6 +96,8 @@ const InputTextField = ({
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
