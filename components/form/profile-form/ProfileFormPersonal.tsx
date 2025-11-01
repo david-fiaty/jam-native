@@ -82,7 +82,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         value={formData?.profile_personal?.other_cultural_activities || []}
         placeholder={i18n.t('Enter other cultural activities')}
       />
-      {FormManager.renderError('profile_personal.other_cultural_activities')}     
 
       <SectorsField
         resource={resource}
