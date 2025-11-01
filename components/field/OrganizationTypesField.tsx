@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { setFormData } from '@/redux/slices/FormSlice';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
@@ -21,7 +20,6 @@ type Props = {
 };
 
 const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder }: Props) => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
@@ -46,17 +44,6 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
     else if (resource && fieldKey && parentKey) {
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
     }
-
-    /*
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: parentKey,
-      value: {
-        ...(formData?.[parentKey] || {}),
-        ...{ [fieldKey]: selectedIds },
-      },
-    }));
-  */
   };
 
   useEffect(() => {
