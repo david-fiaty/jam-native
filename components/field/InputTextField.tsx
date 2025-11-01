@@ -59,10 +59,7 @@ const InputTextField = ({
       FormManager.updateField(resource, fieldKey, fieldValue, rules);
     }
     else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, {
-        ...(formData?.[parentKey] || {}),
-        ...{ [fieldKey]: fieldValue },
-      }, rules);
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
     }
   };
 
