@@ -12,13 +12,27 @@ import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
-  resource: string;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
+  //formData?: any;
+
   field: string;
   value?: any;
   placeholder?: any;
 };
 
-const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
+const ProfessionsField = ({   
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  //formData, 
+  field, 
+  value, 
+  placeholder 
+}: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [professionsData, setProfessionsData] = useState<any[]>([]);
