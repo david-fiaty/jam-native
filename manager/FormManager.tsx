@@ -35,7 +35,7 @@ class FormManager {
   }
 
   addClientError(resource: string, errors: any[]) {
-    let formErrors: any[] = [...Store.getState().form.errors]; 
+    let formErrors: any[] = [...Store.getState().form.errors];
 
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
@@ -48,7 +48,7 @@ class FormManager {
 
     for (const [key, val] of Object.entries(errors || {})) {
       let message: any = i18n.t('Invalid field value');
-      
+
       if (Array.isArray(val) && val?.length > 0) {
         message = val[0];
       }
@@ -91,7 +91,7 @@ class FormManager {
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;
-    }  
+    }
 
     return <></>;
   }
@@ -114,23 +114,15 @@ class FormManager {
     Store.dispatch(setFormData<any>({
       resource: resource,
       key: this.getTargetKey(key),
-      value: value, 
+      value: value,
     }));
   }
 
   validateFied(resource: string, key: string, value: any, rules: any[]) {
     let fieldValue: any = value;
     let fieldRules: any = this.getValidationRules();
-    let targetKey: string = key;
+    let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
-
-    if (this.isPathKey(key)) {
-      targetKey = this.getTargetKey(key);  
-
-      console.log(key, targetKey, fieldValue)
-
-      //fieldValue = fieldValue[targetKey];  
-    } 
 
     for (const rule of rules) {
       if (!fieldRules[rule].run(fieldValue)) {
@@ -148,10 +140,12 @@ class FormManager {
   }
 
   getTargetKey(key: string) {
-    let keyParts: any[] = key.split('.');
-    let targetKey = keyParts[keyParts.length - 1];
+    if (this.isPathKey(key)) {
+      let keyParts: any[] = key.split('.');
+      key = keyParts[keyParts.length - 1];
+    }
 
-    return targetKey;
+    return key; 
   }
 
   isPathKey(key: string) {
@@ -163,7 +157,7 @@ class FormManager {
       required: {
         run: (value: any) => {
           if (typeof value === 'string' || value instanceof String) {
-            return value && String(value).trim() !== ''; 
+            return value && String(value).trim() !== '';
           }
           else if (Array.isArray(value)) {
             return value?.length > 0;
@@ -186,7 +180,7 @@ class FormManager {
       },
       string: {
         run: (value: any) => {
-          return (typeof value === 'string' || value instanceof String); 
+          return (typeof value === 'string' || value instanceof String);
         },
         error: () => {
           return i18n.t('A value is required.');
@@ -280,11 +274,11 @@ class FormManager {
           }
         });
       }
-      else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {    
+      else if (this.isNestedObjectItem(value) && !this.isFileItem(value)) {
         for (const [k, v] of Object.entries(value)) {
           if (Array.isArray(v)) {
             v.forEach((item, i) => form.append(`${formKey}.${k}[${i}]`, item));
-          }   
+          }
           else {
             form.append(`${formKey}.${k}`, v);
           }
@@ -314,10 +308,10 @@ class FormManager {
 
   isNestedObjectItem(element: any) {
     return Object.values(element).some(
-      value => value !== null && (typeof value === 'object' || Array.isArray(value)) 
+      value => value !== null && (typeof value === 'object' || Array.isArray(value))
     );
   }
- 
+
   createFileObject(element: any) {
     if (ScreenManager.isWeb()) {
       return element.file;
