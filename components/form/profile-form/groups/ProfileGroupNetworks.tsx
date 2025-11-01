@@ -58,7 +58,6 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
         rules={['string', 'url']}
         value={formData?.website_link || ''}
         placeholder={i18n.t('Enter your website link')}
-
       />
     </>
   );
