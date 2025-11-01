@@ -29,18 +29,14 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(currentValue || []).filter((n: number) => n !== item.id)];
-    let fieldValue: any = {
-        ...(formData?.[parentKey] || {}),
-        ...{ [fieldKey]: selectedIds },
-    };
 
     setCurrentValue(selectedIds);
 
     if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
     }
     else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
     }
 
     /*
