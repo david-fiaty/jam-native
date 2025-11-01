@@ -43,11 +43,6 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         rules={['required']}
         placeholder={i18n.t('Select organization types')}
         value={formData?.profile_organization?.organization_types || []}
-        onPress={() => ModalManager.toggleModal('OrganizationTypesList', {
-          resource: resource,
-          field: "organization_types",
-          parent: "profile_organization",
-        })}
       />
       {FormManager.renderError('profile_organization.organization_types')}
 
