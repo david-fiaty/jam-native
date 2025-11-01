@@ -95,7 +95,7 @@ const InputTextField = ({
         onSubmitEditing={submitEditingEvent}
       />
 
-      {fieldKey && FormManager.renderError(fieldKey)}
+      {FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
