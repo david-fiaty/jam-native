@@ -43,7 +43,6 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Select organization types')}
         value={formData?.profile_organization?.organization_types || []}
       />
-      {FormManager.renderError('profile_organization.organization_types')}
 
       <TextView>
         {i18n.t('Creation year')}*
