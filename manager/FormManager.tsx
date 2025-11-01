@@ -15,14 +15,6 @@ class FormManager {
     this.clearErrors(resource);
   }
 
-  addValue(resource: string, key: any, value: any) {
-    Store.dispatch(setFormData<any>({
-      resource: resource,
-      key: this.getTargetKey(key),
-      value: value,
-    }));
-  }
-
   validatePasswordMatch(resource: string, confirmationkey: string, confirmationValue: string, passwordValue: string) {
     let formErrors: any[] = [...Store.getState().form.errors];
 
@@ -116,6 +108,14 @@ class FormManager {
     }
 
     this.addValue(resource, key, value);
+  }
+
+  addValue(resource: string, key: any, value: any) {
+    Store.dispatch(setFormData<any>({
+      resource: resource,
+      key: this.getTargetKey(key),
+      value: value, 
+    }));
   }
 
   validateFied(resource: string, key: string, value: any, rules: any[]) {
