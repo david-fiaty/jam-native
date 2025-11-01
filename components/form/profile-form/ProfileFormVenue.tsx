@@ -5,13 +5,11 @@ import InputTextField from "@/components/field/InputTextField";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import VenueTypesField from "@/components/field/VenueTypesField";
-import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
 import WeekdaysField from "@/components/field/WeekdaysField";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
-import SectorsField from "@/components/field/SectorsField";
 import GroupTitleView from "@/components/view/GroupTitleView";
 import ProfileGroupActivities from "./groups/ProfileGroupActivities";
 
@@ -81,7 +79,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         value={formData?.profile_venue?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
       />
-      {FormManager.renderError('profile_venue.creation_year')}
 
       <GroupTitleView label={i18n.t("Venue details")} />
 
@@ -100,19 +97,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, ['string'])}
         */
       />
-
-
-      {/*
-      <InputTextField
-        value={formData?.profile_venue?.opening_days}
-        placeholder={i18n.t('Enter the opening days')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ opening_days: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_venue.opening_days')}
-      */}
 
       <TextView>
         {i18n.t('Weekdays opening hour')}
