@@ -125,8 +125,11 @@ class FormManager {
     let errors: any = [];
 
     if (this.isPathKey(key)) {
-      targetKey = this.getTargetKey(key);
-      fieldValue = fieldValue[targetKey];
+      targetKey = this.getTargetKey(key);  
+
+      console.log(key, targetKey, fieldValue)
+
+      //fieldValue = fieldValue[targetKey];  
     } 
 
     for (const rule of rules) {
