@@ -61,7 +61,7 @@ const InputTextField = ({
     else if (resource && fieldKey && parentKey) {
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, {
         ...(formData?.[parentKey] || {}),
-        ...{ fieldKey: value },
+        ...{ fieldKey: fieldValue },
       }, rules);
     }
   };
@@ -97,7 +97,7 @@ const InputTextField = ({
         onSubmitEditing={submitEditingEvent}
       />
 
-      {fieldKey && FormManager.renderError(fieldKey)}
+      {FormManager.renderError(parentKey ? `${parentKey}.${fieldKey}` : fieldKey)}
     </BoxView>
   );
 };
