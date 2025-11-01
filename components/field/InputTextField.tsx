@@ -62,7 +62,7 @@ const InputTextField = ({
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, {
         ...(formData?.[parentKey] || {}),
         ...{ fieldKey: value },
-      }, rules)
+      }, rules);
     }
   };
 
