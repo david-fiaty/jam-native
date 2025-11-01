@@ -10,19 +10,20 @@ import SpinnerView from '../view/SpinnerView';
 
 type Props = {
   resource: string;
-  field: string;
-  parent: string;
+  fieldKey: string;
+  parentKey: string;
+  formData?: any;
+  rules?: any
   value?: any;
   placeholder?: any;
   onPress?: () => void;
 };
 
-const OrganizationTypesField = ({ resource, field, parent, value, placeholder, onPress }: Props) => {
+const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [currentValue, setCurrentValue] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const deleteItem = (item: any) => {
@@ -34,10 +35,10 @@ const OrganizationTypesField = ({ resource, field, parent, value, placeholder, o
 
     dispatch(setFormData<any>({
       resource: resource,
-      key: parent,
+      key: parentKey,
       value: {
-        ...(currentData?.[parent] || {}),
-        ...{ [field]: selectedIds},
+        ...(currentData?.[parentKey] || {}),
+        ...{ [fieldKey]: selectedIds},
       },
     }));  
   };
@@ -48,8 +49,8 @@ const OrganizationTypesField = ({ resource, field, parent, value, placeholder, o
       setIsLoaded(true);
     }
     
-    setCurrentValue(formData?.[parent]?.[field] || []);
-  }, [isLoaded, value, formData, parent, field, appState]);
+    setCurrentValue(value);
+  }, [isLoaded, appState]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
