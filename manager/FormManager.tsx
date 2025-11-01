@@ -90,6 +90,8 @@ class FormManager {
   }
 
   renderError(key: string, parentKey?: any) {
+    if (!key) return <></>;
+    
     key = parentKey ? `${parentKey}.${key}` : key;
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
