@@ -89,13 +89,15 @@ class FormManager {
     Store.dispatch(setFormErrors<any>(formErrors));
   }
 
-  renderError(key: string, message?: any) {
-    let targetKey: string = this.getTargetKey(key);
+  renderError(fieldKey: string) {
+    if (!fieldKey) return <></>;
+
+    let targetKey: string = this.getTargetKey(fieldKey);
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
 
     if (fieldError) {
-      return <FieldErrorView message={message || fieldError.message} />;
+      return <FieldErrorView message={fieldError.message} />;
     }  
 
     return <></>;

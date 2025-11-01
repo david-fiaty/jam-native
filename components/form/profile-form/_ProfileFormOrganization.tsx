@@ -24,20 +24,14 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         {i18n.t('Organization name')}*
       </TextView>
       <InputTextField
-        resource={resource}
-        fieldKey="organization_name"
-        parentKey="profile_organization"
-        formData={formData}
         value={formData?.profile_organization?.organization_name || ''}
         placeholder={i18n.t('Enter your organization name')}
-        rules={['required', 'string']}
-        /*
         onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.organization_name', {
           ...(formData?.profile_organization || {}),
           ...{ organization_name: value },
         }, ['required', 'string'])}
-        */
       />
+      {FormManager.renderError('profile_organization.organization_name')}
 
       <TextView>
         {i18n.t('Organization types')}
