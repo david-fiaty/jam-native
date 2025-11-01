@@ -73,14 +73,14 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         {i18n.t('Other cultural activities')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="other_cultural_activities"
+        parentKey="profile_organization"
+        rules={['string']}
+        formData={formData}
         value={formData?.profile_organization?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.other_cultural_activities', {
-          ...(formData?.profile_organization || {}),
-          ...{ other_cultural_activities: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_organization.other_cultural_activities')}      
+      />   
 
       <TextView>
         {i18n.t('Creation year')}*
