@@ -12,36 +12,26 @@ import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
-  resource?: any;
-  fieldKey?: any;
-  parentKey?: any;
-  rules?: any;
-  formData?: any;
+  resource: string;
+  field: string;
   value?: any;
   placeholder?: any;
 };
 
-const ProfessionsField = ({
-  resource,
-  fieldKey,
-  parentKey,
-  rules,
-  formData,
-  value,
-  placeholder
-}: Props) => {
+const ProfessionsField = ({ resource, field, value, placeholder }: Props) => {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [professionsData, setProfessionsData] = useState<any[]>([]);
   const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
+  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const updateSelection = (selectedIds: any[]) => {
-    selectedIds = [...new Set([...(formData?.[fieldKey] || []), ...selectedIds])];
-
+    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
+    
     dispatch(setFormData<any>({
       resource: resource,
-      key: fieldKey,
+      key: field,
       value: selectedIds,
     }));
   };
@@ -60,40 +50,40 @@ const ProfessionsField = ({
   const getSubProfessionsOptions = () => {
     let listOptions: any[] = [];
 
-    if (!Array.isArray(formData?.[fieldKey]) || !formData?.[fieldKey]?.length) {
+    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) {
       return listOptions;
     }
 
     professionsData
-      .filter((o: any) => formData[fieldKey].includes(o.id))
+      .filter((o: any) => formData[field].includes(o.id))
       .map((x: any) => {
-        (x?.sub_professions || []).map((y: any) => {
-          listOptions.push({
-            value: y?.id,
-            label: y?.name,
-          });
+      (x?.sub_professions || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
         });
       });
+    });
 
     return listOptions;
   };
 
   const getSelectedProfessions = () => {
-    let selectedIds: any[] = formData?.[fieldKey] || [];
+    let selectedIds: any[] = formData?.[field] || [];
     let optionsIds: any[] = professionsOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const getSelectedSubProfessions = () => {
-    let selectedIds: any[] = formData?.[fieldKey] || [];
+    let selectedIds: any[] = formData?.[field] || [];
     let optionsIds: any[] = getSubProfessionsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = formData?.[fieldKey] || [];
+    let selectedIds: any[] = formData?.[field] || [];
     selectedIds = selectedIds.filter((id: any) => id != item?.value);
 
     deleteCallback(item);
@@ -106,7 +96,7 @@ const ProfessionsField = ({
   };
 
   const renderItem = (item: any) => {
-    let isSelected: boolean = (formData?.[fieldKey] || []).includes(item?.value);
+    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
 
     return (
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
@@ -169,7 +159,7 @@ const ProfessionsField = ({
         {FormManager.renderError('professions_ids')}
       </BoxView>
 
-      {formData?.[fieldKey]?.length > 0 && (
+      {formData?.[field]?.length > 0 && (
         <BoxView direction="column" align="left">
           <TextView>{i18n.t('Sub professions')}*</TextView>
           <MultiSelect
