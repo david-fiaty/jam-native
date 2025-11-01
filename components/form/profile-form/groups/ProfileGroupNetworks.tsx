@@ -1,9 +1,7 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
-import FormManager from "@/manager/FormManager";
 import GroupTitleView from "@/components/view/GroupTitleView";
 
 type Props = {
