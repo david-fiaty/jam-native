@@ -37,7 +37,6 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter your page link')}
         rules={['string', 'url']}
       />
-      {FormManager.renderError('facebook_link')}
 
       <TextView>
         {i18n.t('Instagram user name')}
@@ -49,7 +48,6 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter your user name')}
         rules={['string']}
       />
-      {FormManager.renderError('instagram_username')}
 
       <TextView>
         {i18n.t('Website link')}
@@ -61,7 +59,6 @@ const ProfileGroupNetworks = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter your website link')}
         rules={['string', 'url']}
       />
-      {FormManager.renderError('website_link')}
     </>
   );
 }
