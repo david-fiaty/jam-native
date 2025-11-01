@@ -90,12 +90,13 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Other cultural activities')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="other_cultural_activities"
+        parentKey="profile_venue"
+        rules={['string']}
+        formData={formData}
         value={formData?.profile_venue?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ other_cultural_activities: value },
-        }, ['string'])}
       />
       {FormManager.renderError('profile_venue.other_cultural_activities')}
 
@@ -103,13 +104,14 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Creation year')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="creation_year"
+        parentKey="profile_venue"
+        rules={['number']}
+        formData={formData}
         keyboardType="number-pad"
         value={formData?.profile_venue?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ creation_year: value },
-        }, ['number'])}
       />
       {FormManager.renderError('profile_venue.creation_year')}
 
