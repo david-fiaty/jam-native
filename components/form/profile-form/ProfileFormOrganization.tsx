@@ -86,15 +86,15 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         {i18n.t('Creation year')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="creation_year"
+        parentKey="profile_organization"
+        rules={['required', 'number']}
+        formData={formData}
         keyboardType="number-pad"
         value={formData?.profile_organization?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
-          ...(formData?.profile_organization || {}),
-          ...{ creation_year: value },
-        }, ['required', 'number'])}
       />
-      {FormManager.renderError('profile_organization.creation_year')}
 
       <SectorsField
         resource={resource}
