@@ -13,6 +13,7 @@ import WeekdaysField from "@/components/field/WeekdaysField";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import SectorsField from "@/components/field/SectorsField";
 import GroupTitleView from "@/components/view/GroupTitleView";
+import ProfileGroupActivities from "./groups/ProfileGroupActivities";
 
 type Props = {
   resource: any;
@@ -67,39 +68,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter other venue types')}
       />
 
-      <GroupTitleView label={i18n.t("Sectors and activities")} />
-
-      <TextView>
-        {i18n.t('Main cultural activities')}
-      </TextView>
-      <CulturalActivityTypesField
-        resource={resource}
-        field="main_cultural_activities"
-        parent="profile_venue"
-        placeholder={i18n.t('Select cultural activities')}
-        value={formData?.profile_venue?.main_cultural_activities || []}
-        onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
-          resource: resource,
-          field: "main_cultural_activities",
-          parent: "profile_venue",
-        })}
-      />
-      {FormManager.renderError('profile_venue.main_cultural_activities')}
-
-      <TextView>
-        {i18n.t('Other cultural activities')}
-      </TextView>
-      <InputTextField
-        resource={resource}
-        fieldKey="other_cultural_activities"
-        parentKey="profile_venue"
-        rules={['string']}
-        formData={formData}
-        value={formData?.profile_venue?.other_cultural_activities || ''}
-        placeholder={i18n.t('Enter other cultural activities')}
-      />
-      {FormManager.renderError('profile_venue.other_cultural_activities')}
-
       <TextView>
         {i18n.t('Creation year')}
       </TextView>
@@ -114,12 +82,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter the creation year')}
       />
       {FormManager.renderError('profile_venue.creation_year')}
-
-      <SectorsField
-        resource={resource}
-        field="sectors_ids"
-        value={formData?.sectors_ids || []}
-      />
 
       <GroupTitleView label={i18n.t("Venue details")} />
 
@@ -227,6 +189,8 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         }, [])}
       />
       {FormManager.renderError('profile_venue.has_diffusion_space')}
+
+      <ProfileGroupActivities resource={resource} formData={formData} />
 
       <ProfileGroupDocuments resource={resource} formData={formData} />
     </>
