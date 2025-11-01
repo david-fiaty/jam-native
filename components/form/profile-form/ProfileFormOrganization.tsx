@@ -28,9 +28,9 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         fieldKey="organization_name"
         parentKey="profile_organization"
         formData={formData}
+        rules={['required', 'string']}
         value={formData?.profile_organization?.organization_name || ''}
         placeholder={i18n.t('Enter your organization name')}
-        rules={['required', 'string']}
       />
 
       <TextView>
