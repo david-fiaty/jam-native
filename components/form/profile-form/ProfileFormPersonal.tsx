@@ -45,6 +45,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <ProfessionsField
         resource={resource}
         field="professions_ids"
+        formData={formData}
         value={formData?.professions_ids || []}
       />
 
