@@ -92,6 +92,8 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
           <IconView name="plus" theme="transparent" onPress={onPress} />
         </View>
       )}
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
