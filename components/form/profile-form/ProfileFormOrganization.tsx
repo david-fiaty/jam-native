@@ -28,9 +28,9 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         fieldKey="organization_name"
         parentKey="profile_organization"
         formData={formData}
+        rules={['required', 'string']}
         value={formData?.profile_organization?.organization_name || ''}
         placeholder={i18n.t('Enter your organization name')}
-        rules={['required', 'string']}
       />
 
       <TextView>
@@ -73,28 +73,28 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         {i18n.t('Other cultural activities')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="other_cultural_activities"
+        parentKey="profile_organization"
+        rules={['string']}
+        formData={formData}
         value={formData?.profile_organization?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.other_cultural_activities', {
-          ...(formData?.profile_organization || {}),
-          ...{ other_cultural_activities: value },
-        }, ['string'])}
-      />
-      {FormManager.renderError('profile_organization.other_cultural_activities')}      
+      />   
 
       <TextView>
         {i18n.t('Creation year')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="creation_year"
+        parentKey="profile_organization"
+        rules={['required', 'number']}
+        formData={formData}
         keyboardType="number-pad"
         value={formData?.profile_organization?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization.creation_year', {
-          ...(formData?.profile_organization || {}),
-          ...{ creation_year: value },
-        }, ['required', 'number'])}
       />
-      {FormManager.renderError('profile_organization.creation_year')}
 
       <SectorsField
         resource={resource}

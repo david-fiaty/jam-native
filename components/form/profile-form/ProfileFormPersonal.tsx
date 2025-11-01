@@ -23,27 +23,27 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         {i18n.t('First name')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="first_name"
+        parentKey="profile_personal"
+        rules={['required', 'string']}
+        formData={formData}
         value={formData?.profile_personal?.first_name || ''}
         placeholder={i18n.t('Enter your first name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.first_name', {
-          ...(formData?.profile_personal || {}),
-          ...{ first_name: value },
-        }, ['required', 'string'])}
       />
-      {FormManager.renderError('profile_personal.first_name')}
 
       <TextView>
         {i18n.t('Last name')}*
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="last_name"
+        parentKey="profile_personal"
+        rules={['required', 'string']}
+        formData={formData}
         value={formData?.profile_personal?.last_name || ''}
         placeholder={i18n.t('Enter your last name')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal.last_name', {
-          ...(formData?.profile_personal || {}),
-          ...{ last_name: value },
-        }, ['required', 'string'])}
       />
-      {FormManager.renderError('profile_personal.last_name')}
 
       <GroupTitleView label={i18n.t("Sectors and activities")} />
 
@@ -74,14 +74,14 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         {i18n.t('Other cultural activities')}
       </TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="other_cultural_activities"
+        parentKey="profile_personal"
+        rules={['string']}
+        formData={formData}
         value={formData?.profile_personal?.other_cultural_activities || []}
         placeholder={i18n.t('Enter other cultural activities')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_personal', {
-          ...(formData?.profile_personal || {}),
-          ...{ other_cultural_activities: value },
-        }, ['string'])}
       />
-      {FormManager.renderError('profile_personal.other_cultural_activities')}     
 
       <SectorsField
         resource={resource}
