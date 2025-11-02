@@ -13,7 +13,7 @@ type Props = {
   formData: any;
 };
 
-const ProfileFormOrganization = ({ resource, formData }: Props) => {
+const ProfileFormOrganization = ({ resource, formData }: Props) => {  
   return (
     <>
       <GroupTitleView label={i18n.t("Organization information")} />
@@ -25,7 +25,6 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         resource={resource}
         fieldKey="organization_name"
         parentKey="profile_organization"
-        formData={formData}
         rules={['required', 'string']}
         value={formData?.profile_organization?.organization_name || ''}
         placeholder={i18n.t('Enter your organization name')}
@@ -38,7 +37,6 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         resource={resource}
         fieldKey="organization_types"
         parentKey="profile_organization"
-        formData={formData}
         rules={['required']}
         placeholder={i18n.t('Select organization types')}
         value={formData?.profile_organization?.organization_types || []}
@@ -52,7 +50,6 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         fieldKey="creation_year"
         parentKey="profile_organization"
         rules={['required', 'number']}
-        formData={formData}
         keyboardType="number-pad"
         value={formData?.profile_organization?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}

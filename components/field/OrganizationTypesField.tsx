@@ -1,42 +1,36 @@
-import { useState, useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import InputTextField from './InputTextField';
-import SpinnerView from '../view/SpinnerView';
 import FormManager from '@/manager/FormManager';
 import ModalManager from '@/manager/ModalManager';
+import BoxView from '../view/BoxView';
 
 type Props = {
   resource: string;
   fieldKey: string;
   parentKey: string;
-  formData?: any;
   rules?: any
   value?: any;
   placeholder?: any;
 };
 
-const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder }: Props) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [organizationTypes, setOrganizationTypes] = useState<any>(null);
-  const [currentValue, setCurrentValue] = useState<any>([]);
+const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
+  const listData: any[] = appState.organizationTypesData;
 
   const onPress = () => {
     ModalManager.toggleModal('OrganizationTypesList', {
       resource: resource,
-      field: fieldKey,
-      parent: parentKey,
+      fieldKey: fieldKey,
+      parentKey: parentKey,
     });
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(currentValue || []).filter((n: number) => n !== item.id)];
-
-    setCurrentValue(selectedIds);
+    let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
 
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds, rules);
@@ -46,20 +40,9 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
     }
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
-      setIsLoaded(true);
-    }
-
-    setCurrentValue(value);
-  }, [isLoaded, appState, value]);
-
-  if (!isLoaded) return <SpinnerView size="small" />;
-
   return (
     <>
-      {!currentValue?.length && (
+      {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
@@ -72,10 +55,14 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
         </TouchableOpacity>
       )}
 
-      {currentValue?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}>
-          {currentValue.map((id: any) => {
-            let item: any = organizationTypes.find((o: any) => o.id === id);
+      {value?.length > 0 && (
+        <BoxView 
+          direction="row" 
+          align="center" 
+          style={Layout.fieldSelectionPreview}
+        >
+          {value.map((id: any) => {
+            let item: any = listData.find((o: any) => o.id === id);
 
             return (
               <TagView
@@ -90,7 +77,7 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
           })}
 
           <IconView name="plus" theme="transparent" onPress={onPress} />
-        </View>
+        </BoxView>
       )}
 
       {FormManager.renderError(fieldKey, parentKey)}
