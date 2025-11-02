@@ -1,185 +1,88 @@
-import { useState, useEffect } from 'react';
-import { StyleSheet } from 'react-native';
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { setFormData } from '@/redux/slices/FormSlice';
+import { TouchableOpacity } from 'react-native';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
-import { MultiSelect } from 'react-native-element-dropdown';
+import IconView from "../view/IconView";
 import TagView from '../view/TagView';
-import BoxView from '../view/BoxView';
-import TextView from '../view/TextView';
-import IconView from '../view/IconView';
-import i18n from '@/translation/i18n';
+import InputTextField from './InputTextField';
 import FormManager from '@/manager/FormManager';
+import ModalManager from '@/manager/ModalManager';
+import BoxView from '../view/BoxView';
 
 type Props = {
   resource: string;
-  field: string;
+  fieldKey: string;
+  parentKey: string;
+  rules?: any
   value?: any;
   placeholder?: any;
 };
 
-const WeekdaysField = ({ resource, field, value, placeholder }: Props) => {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [weekdaysData, setWeekdaysData] = useState<any[]>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+const WeekdaysField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
+  const appState = useSelector((state: any) => state.app, shallowEqual);
+  const listData: any[] = appState.organizationTypesData;
 
-  const getWeekdaysOptions = () => {
-    return [
-      {
-        value: 'monday',
-        label: i18n.t('Monday'),
-      },
-      {
-        value: 'tuesday',
-        label: i18n.t('Tuesday'),
-      },
-      {
-        value: 'wednesday',
-        label: i18n.t('Wednesday'),
-      },
-      {
-        value: 'thrusday',
-        label: i18n.t('Thursday'),
-      },
-      {
-        value: 'friday',
-        label: i18n.t('Friday'),
-      },
-      {
-        value: 'saturday',
-        label: i18n.t('Saturday'),
-      },
-      {
-        value: 'sunday',
-        label: i18n.t('Sunday'),
-      },
-    ];
-  };
-
-  const getSelectedItems = () => {
-    let selectedIds: any[] = formData?.[field] || [];
-    let optionsIds: any[] = (weekdaysData || []).map((o: any) => o.value);
-
-    return selectedIds.filter((id: any) => optionsIds.includes(id));
-  };
-
-  const updateSelection = (selectedIds: any[]) => {
-    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
-    
-    dispatch(setFormData<any>({
+  const onPress = () => {
+    ModalManager.toggleModal('WeekdaysList', {
       resource: resource,
-      key: field,
-      value: selectedIds,
-    }));
+      fieldKey: fieldKey,
+      parentKey: parentKey,
+    });
   };
 
-  const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = formData?.[field] || [];
-    selectedIds = selectedIds.filter((id: any) => id != item?.value);
+  const deleteItem = (item: any) => {
+    let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
 
-    deleteCallback(item);
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: selectedIds,
-    }));
-  };
-
-  const renderItem = (item: any) => {
-    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
-
-    return (
-      <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
-        <TextView style={isSelected ? styles.selectedItem : {}}>{item?.label}</TextView>
-        {isSelected && (
-          <IconView
-            name="checkmark"
-            theme="clear"
-            size={13}
-            padding={0}
-          />
-        )}
-      </BoxView>
-    );
-  };
-
-  const renderSelectedItem = (item: any, deleteCallback: any) => {
-    return (
-      <TagView
-        key={item?.value}
-        theme="white"
-        canEdit={true}
-        containerStyle={styles.tagItem}
-        onDeleteButtonPress={() => deleteItem(item, deleteCallback)}
-      >
-        {item?.label}
-      </TagView>
-    );
-  };
-
-  useEffect(() => {
-    if (!isLoaded) {
-      setWeekdaysData(getWeekdaysOptions());
-      setIsLoaded(true);
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
     }
-  }, [isLoaded]);
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
+  };
 
   return (
-    <BoxView direction="column" align="left">
-      <MultiSelect
-        value={getSelectedItems()}
-        labelField="label"
-        valueField="value"
-        placeholder={i18n.t('Select your weekdays')}
-        inside={getSelectedItems().length > 0}
-        style={!getSelectedItems().length ? styles.element : styles.preview}
-        iconStyle={getSelectedItems().length > 0 ? styles.iconRight : {}}
-        placeholderStyle={styles.placeholderStyle}
-        iconColor={Layout.colors.primary}
-        onChange={(selectedIds: any) => updateSelection(selectedIds)}
-        data={weekdaysData}
-        renderItem={(o: any) => renderItem(o)}
-        renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
-      />
-    </BoxView>
+    <>
+      {!value?.length && (
+        <TouchableOpacity
+          onPress={onPress}
+        >
+          <InputTextField
+            value={value}
+            readOnly={true}
+            placeholder={placeholder}
+            rightIcon={<IconView name="down" theme="transparent" />}
+          />
+        </TouchableOpacity>
+      )}
+
+      {value?.length > 0 && (
+        <BoxView 
+          direction="row" 
+          align="center" 
+          style={Layout.fieldSelectionPreview}
+        >
+          {value.map((id: any) => {
+            let item: any = listData.find((o: any) => o.id === id);
+
+            return (
+              <TagView
+                theme="white"
+                key={item.id}
+                canEdit={true}
+                onDeleteButtonPress={() => deleteItem(item)}
+              >
+                {item?.name}
+              </TagView>
+            );
+          })}
+
+          <IconView name="plus" theme="transparent" onPress={onPress} />
+        </BoxView>
+      )}
+
+      {FormManager.renderError(fieldKey, parentKey)}
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  element: {
-    ...Layout.formField,
-    ...{ padding: Layout.space.base },
-  },
-  preview: {
-    position: 'relative',
-    backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Layout.colors.secondary,
-    borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
-    paddingBottom: -Layout.space.base,
-  },
-  listItem: {
-    paddingHorizontal: Layout.space.base,
-    paddingVertical: Layout.space.base * 1.35,
-    backgroundColor: Layout.colors.white,
-  },
-  placeholderStyle: {
-    color: Layout.colors.primary,
-    fontSize: Layout.fontSize.base,
-  },
-  tagItem: {
-    marginRight: Layout.space.base,
-    marginBottom: Layout.space.base,
-  },
-  selectedItem: {
-    fontWeight: 'bold',
-  },
-  iconRight: {
-    alignSelf: 'flex-start',
-  },
-});
 
 export default WeekdaysField;
