@@ -3,6 +3,7 @@ import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 import ScreenManager from "./ScreenManager";
+import DataManager from "./DataManager";
 
 class FormManager {
   resetForm(resource: any) {
@@ -111,20 +112,15 @@ class FormManager {
   }
 
   addValue(resource: string, key: any, value: any) {
-
+    let formState: any = Store.getState().form;
+    let formData: any = { ...formState[resource] };
     
-    console.log({
-      resource: resource,
-      key: key,
-      tartgetKey: this.getTargetKey(key),
-      value: value,
-      //rules: rules, 
-    })
+    formData = DataManager.updateNestedProperty(formData, key, value);
 
     Store.dispatch(setFormData<any>({
       resource: resource,
-      key: this.getTargetKey(key),
-      value: value,
+      key: key,
+      value: value, 
     }));
   }
 
