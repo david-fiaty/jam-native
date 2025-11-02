@@ -37,25 +37,12 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
 
     setSelectedOrganizations(selectedIds);
 
-
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds);
     }
     else if (resource && fieldKey && parentKey) {
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds);
     }
-
-    /*
-
-dispatch(setFormData<any>({
-  resource: resource,
-  key: parentKey,
-  value: {
-    ...(currentData?.[parentKey] || {}),
-    ...{ [fieldKey]: selectedIds },
-  },
-}));
-*/
   };
 
   const renderItem = (row: any) => {
