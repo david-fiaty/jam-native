@@ -49,9 +49,7 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
         fieldKey="scope_country_code"
         multiple={false}
         placeholder={i18n.t('Select a country')}
-
-        // Todo- Fix value handling (multiple or single)
-        //value={formData?.scope_country_code || []} 
+        value={formData?.scope_country_code || ''} 
       />
 
         {/*
