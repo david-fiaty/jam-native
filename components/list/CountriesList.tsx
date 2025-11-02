@@ -1,113 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import IconView from "../view/IconView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
-import EntityManager from '@/manager/EntityManager';
-import InputTextField from '../field/InputTextField';
+import TextView from '../view/TextView';
+import IconView from '../view/IconView';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
-  field?: any;
-  multiple?: boolean;
+  fieldKey?: any;
+  parentKey?: any;
 };
 
-const CountriesList = ({ resource, field, multiple }: Props) => {
-  const dispatch = useDispatch();
-  const [profiles, setProfiles] = useState<any>(null);
-  const [countriesData, setCountriesData] = useState<any[]>([]);
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [selectedCountries, setSelectedCountries] = useState<any>([]);
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [isSearching, setIsSearching] = useState<boolean>(false);
+const CountriesList = ({ resource, fieldKey, parentKey }: Props) => {
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const appState: any = useSelector((state: any) => state.app, shallowEqual);
+  const listData: any[] = appState.countriesData;
 
-  const clearSearch = () => {
-    setSearchResults(countriesData);
-    setSearchValue('');
-  };
+  const toggleItem = (entityId: number) => {
+    let idArray: any[] = [...selectedIds];
 
-  const renderSearchIcon = () => {
-    if (!isSearching && searchValue) {
-      return (
-        <IconView
-          name="delete"
-          theme="clear"
-          onPress={clearSearch}
-        />
-      );
-    }
-    else if (isSearching) {
-      return <SpinnerView size="small" />;
-    }
-
-    return <></>;
-  };
-
-  const triggerSearch = (value?: any) => {
-    let results: any = countriesData;
-    let needle: string = value || searchValue || null;
-
-    setSearchValue(needle);
-
-    if (needle) {
-      setIsSearching(true);
-      
-      results = countriesData.filter((o: any) => {
-        return o.name.replace(/\s+/g, '').toLowerCase().includes(needle.replace(/\s+/g, '').toLowerCase()); 
-      });
-
-      setIsSearching(false);
-    } 
-    
-    setSearchResults(results);
-  };
-
-  const toggleItem = (row: any) => {
-    let idArray = [...selectedCountries];
-
-    if (multiple === true) {
-      if (idArray.includes(row.item.code)) {
-        idArray = idArray.filter((value: number) => value !== row.item.code);
-      }
-      else {
-        idArray.push(row.item.code);
-      }
+    if (idArray.includes(entityId)) {
+      idArray = idArray.filter((value: number) => value !== entityId);
     }
     else {
-      idArray = [row.item.code];
+      idArray.push(entityId);
     }
 
-    setSelectedCountries(idArray);
+    setSelectedIds(idArray);
 
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: multiple === true ? idArray : idArray[0],
-    }));
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, idArray);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
+    }
   };
 
   const renderItem = (row: any) => {
+    let isSelected: boolean = selectedIds.includes(row.item.id);
+
     return (
       <TouchableOpacity
-        style={styles.listItem}
-        onPress={() => toggleItem(row)}
+        key={row?.item?.id}
+        onPress={() => toggleItem(row?.item?.id)}
       >
-        <BoxView direction="row" align="center" justify="flex-start">
-          <TextView>{row.item.name}</TextView>
-          {selectedCountries.includes(row.item.code) &&
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.container}
+        >
+          <TextView>{row?.item?.name}</TextView>
+          {isSelected &&
             <IconView
               name="checkmark"
               theme="clear"
               size={14}
-              padding={0}
             />
           }
         </BoxView>
@@ -116,36 +70,20 @@ const CountriesList = ({ resource, field, multiple }: Props) => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        let countries: any = await EntityManager.getCountries(); 
-        setCountriesData(countries);
-        setSearchResults(countries);
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded]);
-
-  useEffect(() => {
-    if (formData?.[field]?.length) setSelectedCountries(formData[field]);
-  }, [formData, field]);
+    if (!isLoaded) {
+      setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
+      setIsLoaded(true);
+    }
+  }, [formData, fieldKey, parentKey, selectedIds, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
-      <InputTextField
-        value={searchValue}
-        containerStyle={styles.searchFieldContainer}
-        placeholder={i18n.t('Search...')}
-        onChangeText={(text: string) => triggerSearch(text)}
-        rightIcon={renderSearchIcon()}
-      />
-
       <View style={Layout.borderedListContainer}>
-        {searchResults?.length > 0 &&
+        {listData?.length > 0 &&
           <ListView
-            data={searchResults}
+            data={listData}
             renderItem={(row: any) => renderItem(row)}
           />
         }
@@ -155,15 +93,12 @@ const CountriesList = ({ resource, field, multiple }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  searchFieldContainer: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
+  container: {
+    ...Layout.listItem,
+    ...{
+      padding: Layout.space.base,
+    },
   },
-  listItem: {
-    padding: Layout.space.base / 1.2,
-  }
 });
 
 export default CountriesList;
