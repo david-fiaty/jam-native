@@ -149,9 +149,17 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         label={i18n.t('Has diffusion space')}
       />
 
-      <ProfileGroupActivities resource={resource} formData={formData} />
+      <ProfileGroupActivities 
+        resource={resource} 
+        formData={formData} 
+        parentKey="profile_venue" 
+      />
 
-      <ProfileGroupDocuments resource={resource} formData={formData} />
+      <ProfileGroupDocuments 
+        resource={resource} 
+        formData={formData} 
+        parentKey="profile_venue" 
+      />
     </>
   );
 }

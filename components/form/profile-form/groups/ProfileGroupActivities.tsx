@@ -25,7 +25,7 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
       <CulturalActivitiesField
         resource={resource}
         fieldKey="main_cultural_activities"
-        parentKey="profile_organization"
+        parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select cultural activities')}
         value={formData?.profile_organization?.main_cultural_activities || []}
@@ -37,7 +37,7 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="other_cultural_activities"
-        parentKey="profile_organization"
+        parentKey={parentKey}
         rules={['string']}
         value={formData?.profile_organization?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
