@@ -1,4 +1,4 @@
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
@@ -7,6 +7,8 @@ import InputTextField from './InputTextField';
 import FormManager from '@/manager/FormManager';
 import ModalManager from '@/manager/ModalManager';
 import BoxView from '../view/BoxView';
+import SelectListBase from '../base/SelectListBase';
+import i18n from '@/translation/i18n';
 
 type Props = {
   resource: string;
@@ -41,49 +43,86 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value,
     }
   };
 
-  return (
-    <>
-      {!value?.length && (
-        <TouchableOpacity
-          onPress={onPress}
-        >
-          <InputTextField
-            value={value}
-            readOnly={true}
-            placeholder={placeholder}
-            rightIcon={<IconView name="down" theme="transparent" />}
-          />
-        </TouchableOpacity>
-      )}
+  const buildOptions = () => {
+    return (listData || []).map((item: any) => {
+      return {
+        value: item?.code?.toLowerCase(),
+        label: item?.name,
+      }
+    });
+  };
 
-      {value?.length > 0 && (
-        <BoxView 
-          direction="row" 
-          align="center" 
-          style={Layout.fieldSelectionPreview}
-        >
-          {value.map((id: any) => {
-            let item: any = listData.find((o: any) => o.id === id);
+  const renderSingleSelectList = () => {
+    return (
+      <BoxView direction="row" align="space-between" style={styles.container}>
+        <SelectListBase
+          value={value}
+          data={buildOptions()} 
+          //onChangeValue={onChangeValue}
+          placeholder={i18n.t('Select a country')}
+        />
+      </BoxView>
+    );
+  };
 
-            return (
-              <TagView
-                theme="white"
-                key={item.id}
-                canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}
-              >
-                {item?.name}
-              </TagView>
-            );
-          })}
+  const renderMultiSelectList = () => {
+    return (
+      <>
+        {!value?.length && (
+          <TouchableOpacity
+            onPress={onPress}
+          >
+            <InputTextField
+              value={value}
+              readOnly={true}
+              placeholder={placeholder}
+              rightIcon={<IconView name="down" theme="transparent" />}
+            />
+          </TouchableOpacity>
+        )}
 
-          <IconView name="plus" theme="transparent" onPress={onPress} />
-        </BoxView>
-      )}
+        {value?.length > 0 && (
+          <BoxView
+            direction="row"
+            align="center"
+            style={Layout.fieldSelectionPreview}
+          >
+            {value.map((id: any) => {
+              let item: any = listData.find((o: any) => o.id === id);
 
-      {FormManager.renderError(fieldKey, parentKey)}
-    </>
-  );
+              return (
+                <TagView
+                  theme="white"
+                  key={item.id}
+                  canEdit={true}
+                  onDeleteButtonPress={() => deleteItem(item)}
+                >
+                  {item?.name}
+                </TagView>
+              );
+            })}
+
+            <IconView name="plus" theme="transparent" onPress={onPress} />
+          </BoxView>
+        )}
+
+        {FormManager.renderError(fieldKey, parentKey)}
+      </>
+    );
+  };
+
+  if (multiple) {
+    return renderMultiSelectList();
+  }
+  else {
+    return renderSingleSelectList();
+  }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+});
 
 export default CountriesField;
