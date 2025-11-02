@@ -43,6 +43,17 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value,
     }
   };
 
+  const onChangeValue = (item: any) => {
+    let fieldValue: string = item?.value;
+  
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+    }
+  };
+
   const buildOptions = () => {
     return (listData || []).map((item: any) => {
       return {
@@ -58,7 +69,7 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value,
         <SelectListBase
           value={value}
           data={buildOptions()} 
-          //onChangeValue={onChangeValue}
+          onChangeValue={onChangeValue}
           placeholder={i18n.t('Select a country')}
         />
       </BoxView>
