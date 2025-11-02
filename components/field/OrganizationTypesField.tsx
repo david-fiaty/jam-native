@@ -22,7 +22,6 @@ type Props = {
 const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
-  const [currentValue, setCurrentValue] = useState<any>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const onPress = () => {
