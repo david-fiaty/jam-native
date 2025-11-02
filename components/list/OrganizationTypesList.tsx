@@ -8,14 +8,15 @@ import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
-  field?: any;
-  parent?: any;
+  fieldKey?: any;
+  parentKey?: any;
 };
 
-const OrganizationTypesList = ({ resource, field, parent }: Props) => {
+const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
   const dispatch = useDispatch();
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [selectedOrganizations, setSelectedOrganizations] = useState<any>([]);
@@ -36,14 +37,25 @@ const OrganizationTypesList = ({ resource, field, parent }: Props) => {
 
     setSelectedOrganizations(selectedIds);
 
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: parent,
-      value: {
-        ...(currentData?.[parent] || {}),
-        ...{ [field]: selectedIds },
-      },
-    }));
+
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds);
+    }
+
+    /*
+
+dispatch(setFormData<any>({
+  resource: resource,
+  key: parentKey,
+  value: {
+    ...(currentData?.[parentKey] || {}),
+    ...{ [fieldKey]: selectedIds },
+  },
+}));
+*/
   };
 
   const renderItem = (row: any) => {
@@ -76,10 +88,10 @@ const OrganizationTypesList = ({ resource, field, parent }: Props) => {
   useEffect(() => {
     if (!isLoaded) {
       if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
-      setSelectedOrganizations(formData?.[parent]?.[field] || []);
+      setSelectedOrganizations(formData?.[parentKey]?.[fieldKey] || []);
       setIsLoaded(true);
     }
-  }, [organizationTypes, formData, field, parent, selectedOrganizations, appState]);
+  }, [organizationTypes, formData, fieldKey, parentKey, selectedOrganizations, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
