@@ -99,6 +99,13 @@ class FormManager {
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
+    console.log({
+      resource: resource,
+      key: key,
+      value: value,
+      rules: rules, 
+    })
+
     if (rules.length > 0) {
       errors = this.validateFied(resource, key, value, rules);
     }
