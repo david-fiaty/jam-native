@@ -28,7 +28,7 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
         parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select cultural activities')}
-        value={formData?.profile_organization?.main_cultural_activities || []}
+        value={formData?.[parentKey]?.main_cultural_activities || []}
       />
 
       <TextView>
@@ -39,7 +39,7 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
         fieldKey="other_cultural_activities"
         parentKey={parentKey}
         rules={['string']}
-        value={formData?.profile_organization?.other_cultural_activities || ''}
+        value={formData?.[parentKey]?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
       />   
 
