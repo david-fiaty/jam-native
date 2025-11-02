@@ -7,9 +7,10 @@ import GroupTitleView from "@/components/view/GroupTitleView";
 type Props = {
   resource: any;
   formData: any;
+  parentKey?: any;
 };
 
-const ProfileGroupNetworks = ({ resource, formData }: Props) => {
+const ProfileGroupNetworks = ({ resource, formData, parentKey }: Props) => {
   return (
     <>
       <GroupTitleView label={i18n.t("Social networks")} />
