@@ -14,6 +14,8 @@ type Props = {
 };
 
 const ProfileFormOrganization = ({ resource, formData }: Props) => {
+
+  console.log(formData?.profile_organization?.organization_types)
   return (
     <>
       <GroupTitleView label={i18n.t("Organization information")} />
