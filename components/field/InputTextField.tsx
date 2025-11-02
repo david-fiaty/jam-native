@@ -52,6 +52,7 @@ const InputTextField = ({
 
   const changeTextEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
+    
     if (onChangeText) {
       onChangeText(fieldValue)
     }
