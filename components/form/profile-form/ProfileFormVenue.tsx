@@ -2,16 +2,15 @@ import React from "react";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
-import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
 import InputSwitchField from "@/components/field/InputSwitchField";
 import DataManager from "@/manager/DataManager";
-import WeekdaysField from "@/components/field/WeekdaysField";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import GroupTitleView from "@/components/view/GroupTitleView";
 import ProfileGroupActivities from "./groups/ProfileGroupActivities";
+import WeekDaysField from "@/components/field/WeekdaysField";
 
 type Props = {
   resource: any;
@@ -77,17 +76,13 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Opening days')}
       </TextView>
-      <WeekdaysField
+      <WeekDaysField
         resource={resource}
-        field={'opening_days'}
-        value={formData?.profile_venue?.opening_days || ''}
+        fieldKey="opening_days"
+        parentKey="profile_venue"
+        rules={['required']}
         placeholder={i18n.t('Enter the opening days')}
-        /*
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ opening_days: value },
-        }, ['string'])}
-        */
+        value={formData?.profile_venue?.opening_days || []}
       />
 
       <TextView>
