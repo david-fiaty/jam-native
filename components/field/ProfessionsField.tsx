@@ -43,6 +43,13 @@ const ProfessionsField = ({
     }
   };
 
+  const deleteItem = (item: any, deleteCallback: any) => {
+    let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
+
+    deleteCallback(item);
+    updateSelection(selectedIds);
+  };
+
   const getProfessionsOptions = (professionsList: any[]) => {
     let listOptions: any[] = professionsList.map((o: any) => {
       return {
@@ -87,13 +94,6 @@ const ProfessionsField = ({
     let optionsIds: any[] = getSubProfessionsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
-  };
-
-  const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = (value || []).filter((id: any) => id != item?.value);
-
-    deleteCallback(item);
-    updateSelection(selectedIds);
   };
 
   const renderItem = (item: any) => {
