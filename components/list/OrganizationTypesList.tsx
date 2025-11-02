@@ -20,7 +20,7 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const appState: any = useSelector((state: any) => state.app, shallowEqual);
-  const organizationTypes: any = appState.organizationTypesData;
+  const listData: any[] = appState.organizationTypesData;
 
   const toggleItem = (entityId: number) => {
     let idArray: any[] = [...selectedIds];
@@ -74,16 +74,16 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
       setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
       setIsLoaded(true);
     }
-  }, [organizationTypes, formData, fieldKey, parentKey, selectedIds, appState]);
+  }, [formData, fieldKey, parentKey, selectedIds, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        {organizationTypes?.length > 0 &&
+        {listData?.length > 0 &&
           <ListView
-            data={organizationTypes}
+            data={listData}
             renderItem={(row: any) => renderItem(row)}
           />
         }
