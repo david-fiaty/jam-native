@@ -11,6 +11,8 @@ type Props = {
   formData: any;
 };
 
+const parentKey: string = 'profile_personal';
+
 const ProfileFormPersonal = ({ resource, formData }: Props) => {
   return (
     <>
@@ -22,9 +24,9 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="first_name"
-        parentKey="profile_personal"
+        parentKey={parentKey}
         rules={['required', 'string']}
-        value={formData?.profile_personal?.first_name || ''}
+        value={formData?.[parentKey]?.first_name || ''}
         placeholder={i18n.t('Enter your first name')}
       />
 
@@ -34,24 +36,24 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="last_name"
-        parentKey="profile_personal"
+        parentKey={parentKey}
         rules={['required', 'string']}
-        value={formData?.profile_personal?.last_name || ''}
+        value={formData?.[parentKey]?.last_name || ''}
         placeholder={i18n.t('Enter your last name')}
       />
 
       <ProfessionsField
         resource={resource}
         fieldKey="professions_ids"
-        parentKey="profile_personal"
+        parentKey={parentKey}
         rules={['required']}
-        value={formData?.profile_personal?.professions_ids || []}
+        value={formData?.[parentKey]?.professions_ids || []}
       />
 
       <ProfileGroupActivities 
         resource={resource} 
         formData={formData} 
-        parentKey="profile_personal" 
+        parentKey={parentKey}
       />
     </>
   );
