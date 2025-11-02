@@ -48,7 +48,11 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         value={formData?.profile_personal?.professions_ids || []}
       />
 
-      <ProfileGroupActivities resource={resource} formData={formData} />
+      <ProfileGroupActivities 
+        resource={resource} 
+        formData={formData} 
+        parentKey="profile_personal" 
+      />
     </>
   );
 }

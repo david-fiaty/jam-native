@@ -4,16 +4,15 @@ import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import GroupTitleView from "@/components/view/GroupTitleView";
 import SectorsField from "@/components/field/SectorsField";
-import FormManager from "@/manager/FormManager";
-import ModalManager from "@/manager/ModalManager";
-import CulturalActivityTypesField from "@/components/field/CulturalActivityTypesField";
+import CulturalActivitiesField from "@/components/field/CulturalActivitiesField";
 
 type Props = {
   resource: any;
   formData: any;
+  parentKey?: any;
 };
 
-const ProfileGroupActivities = ({ resource, formData }: Props) => {
+const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
   return (
     <>
       <GroupTitleView label={i18n.t("Sectors and activities")} />
@@ -21,19 +20,14 @@ const ProfileGroupActivities = ({ resource, formData }: Props) => {
       <TextView>
         {i18n.t('Main cultural activities')}
       </TextView>
-      <CulturalActivityTypesField
+      <CulturalActivitiesField
         resource={resource}
-        field="main_cultural_activities"
-        parent="profile_organization"
+        fieldKey="main_cultural_activities"
+        parentKey={parentKey}
+        rules={['required']}
         placeholder={i18n.t('Select cultural activities')}
-        value={formData?.profile_organization?.main_cultural_activities || []}
-        onPress={() => ModalManager.toggleModal('CulturalActivityTypesList', {
-          resource: resource,
-          field: "main_cultural_activities",
-          parent: "profile_organization",
-        })}
+        value={formData?.[parentKey]?.main_cultural_activities || []}
       />
-      {FormManager.renderError('profile_organization.main_cultural_activities')}
 
       <TextView>
         {i18n.t('Other cultural activities')}
@@ -41,9 +35,9 @@ const ProfileGroupActivities = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="other_cultural_activities"
-        parentKey="profile_organization"
+        parentKey={parentKey}
         rules={['string']}
-        value={formData?.profile_organization?.other_cultural_activities || ''}
+        value={formData?.[parentKey]?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
       />   
 
