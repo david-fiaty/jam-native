@@ -7,6 +7,7 @@ import InputTextField from './InputTextField';
 import FormManager from '@/manager/FormManager';
 import ModalManager from '@/manager/ModalManager';
 import BoxView from '../view/BoxView';
+import StaticData from '@/constants/StaticData';
 
 type Props = {
   resource: string;
@@ -17,12 +18,12 @@ type Props = {
   placeholder?: any;
 };
 
-const VenueTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
+const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  const listData: any[] = appState.venueTypesData;
+  const listData: any[] = StaticData.weekDays;
 
   const onPress = () => {
-    ModalManager.toggleModal('VenueTypesList', {
+    ModalManager.toggleModal('WeekDaysList', {
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
@@ -85,4 +86,4 @@ const VenueTypesField = ({ resource, fieldKey, parentKey, rules, value, placehol
   );
 };
 
-export default VenueTypesField;
+export default WeekDaysField;
