@@ -28,8 +28,8 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
   const onPress = () => {
     ModalManager.toggleModal('OrganizationTypesList', {
       resource: resource,
-      field: fieldKey,
-      parent: parentKey,
+      fieldKey: fieldKey,
+      parentKey: parentKey,
     });
   };
 
