@@ -2,7 +2,6 @@ import React from "react";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
-import FormManager from "@/manager/FormManager";
 import OrganizationTypesField from "@/components/field/OrganizationTypesField";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import GroupTitleView from "@/components/view/GroupTitleView";
@@ -12,6 +11,8 @@ type Props = {
   resource: any;
   formData: any;
 };
+
+const parentKey: string = 'profile_organization';
 
 const ProfileFormOrganization = ({ resource, formData }: Props) => {  
   return (
@@ -24,9 +25,9 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="organization_name"
-        parentKey="profile_organization"
+        parentKey={parentKey}
         rules={['required', 'string']}
-        value={formData?.profile_organization?.organization_name || ''}
+        value={formData?.[parentKey]?.organization_name || ''}
         placeholder={i18n.t('Enter your organization name')}
       />
 
@@ -36,10 +37,10 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <OrganizationTypesField
         resource={resource}
         fieldKey="organization_types"
-        parentKey="profile_organization"
+        parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select organization types')}
-        value={formData?.profile_organization?.organization_types || []}
+        value={formData?.[parentKey]?.organization_types || []}
       />
 
       <TextView>
@@ -48,23 +49,23 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
       <InputTextField
         resource={resource}
         fieldKey="creation_year"
-        parentKey="profile_organization"
+        parentKey={parentKey}
         rules={['required', 'number']}
         keyboardType="number-pad"
-        value={formData?.profile_organization?.creation_year || ''}
+        value={formData?.[parentKey]?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
       />
 
       <ProfileGroupActivities 
         resource={resource} 
         formData={formData} 
-        parentKey="profile_organization" 
+        parentKey={parentKey}
       />
 
       <ProfileGroupDocuments 
         resource={resource} 
         formData={formData} 
-        parentKey="profile_organization" 
+        parentKey={parentKey}
       />
     </>
   );
