@@ -31,8 +31,8 @@ import ProfileLocationMapView from '../view/ProfileLocationMapView';
 import JamFormSection from '../section/jam/JamFormSection';
 import ProjectFormSection from '../section/project/ProjectFormSection';
 import OrganizationTypesList from '../list/OrganizationTypesList';
-import CulturalActivityTypesList from '../list/CulturalActivityTypesList';
 import WeekDaysList from '../list/WeekDaysList';
+import CulturalActivitiesList from '../list/CulturalActivitiesList';
 
 type Props = {
   currentSection?: any;
@@ -192,9 +192,9 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <WeekDaysList {...params} />,
       },
       {
-        id: 'CulturalActivityTypesList',
+        id: 'CulturalActivitiesList',
         title: i18n.t('Cultural activities'),
-        render: (params: any) => <CulturalActivityTypesList {...params} />,
+        render: (params: any) => <CulturalActivitiesList {...params} />,
       },
       {
         id: 'CountriesList',

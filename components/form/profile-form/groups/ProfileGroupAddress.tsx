@@ -12,9 +12,10 @@ import GroupTitleView from "@/components/view/GroupTitleView";
 type Props = {
   resource: any;
   formData: any;
+  parentKey?: any;
 };
 
-const ProfileGroupAddress = ({ resource, formData }: Props) => {
+const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
   return (
     <>
       <GroupTitleView label={i18n.t("Address and location")} />
