@@ -4,8 +4,13 @@ import { Switch } from "@rneui/base";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: string;
   label?: string;
   disabled?: boolean;
@@ -13,6 +18,10 @@ type Props = {
 };
 
 const InputSwitchField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
   value,
   label,
   disabled,
@@ -26,8 +35,19 @@ const InputSwitchField = ({
 
   const onChangeEvent = () => {
     setCurrentValue((previousState: boolean) => {
-      if (onChangeValue) onChangeValue(!previousState);
-      return !previousState;
+      let fieldValue: boolean = !previousState;
+
+      if (onChangeValue) {
+        onChangeValue(fieldValue);
+      }
+      else if (resource && fieldKey && !parentKey) {
+        FormManager.updateField(resource, fieldKey, fieldValue, rules);
+      }
+      else if (resource && fieldKey && parentKey) {
+        FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+      }
+
+      return fieldValue;
     });
   };
 
@@ -54,13 +74,15 @@ const InputSwitchField = ({
         align="center"
       >
         <TextView>{currentValue === true ? i18n.t('Yes') : i18n.t('No')}</TextView>
-        
+
         <Switch
           value={currentValue}
           disabled={disabled}
           onValueChange={onChangeEvent}
         />
       </BoxView>
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
