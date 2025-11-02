@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { setFormData } from '@/redux/slices/FormSlice';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import { MultiSelect } from 'react-native-element-dropdown';
 import TagView from '../view/TagView';
@@ -16,37 +15,43 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
-  formData?: any;
-
-  field: string;
   value?: any;
-  placeholder?: any;
 };
 
-const ProfessionsField = ({   
+const ProfessionsField = ({
   resource,
   fieldKey,
   parentKey,
   rules,
-  formData, 
-  field, 
-  value, 
-  placeholder 
+  value,
 }: Props) => {
-  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [professionsData, setProfessionsData] = useState<any[]>([]);
   const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const updateSelection = (selectedIds: any[]) => {
-    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
+    selectedIds = [...new Set([...(value || []), ...selectedIds])];
+
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
+  };
+
+  const deleteItem = (item: any, deleteCallback: any) => {
+    let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
+
+    deleteCallback(item);
     
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: selectedIds,
-    }));
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
   };
 
   const getProfessionsOptions = (professionsList: any[]) => {
@@ -63,53 +68,40 @@ const ProfessionsField = ({
   const getSubProfessionsOptions = () => {
     let listOptions: any[] = [];
 
-    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) {
+    if (!Array.isArray(value) || !value?.length) {
       return listOptions;
     }
 
     professionsData
-      .filter((o: any) => formData[field].includes(o.id))
+      .filter((o: any) => (value || []).includes(o.id))
       .map((x: any) => {
-      (x?.sub_professions || []).map((y: any) => {
-        listOptions.push({
-          value: y?.id,
-          label: y?.name,
+        (x?.sub_professions || []).map((y: any) => {
+          listOptions.push({
+            value: y?.id,
+            label: y?.name,
+          });
         });
       });
-    });
 
     return listOptions;
   };
 
   const getSelectedOptions = () => {
-    let selectedIds: any[] = formData?.[field] || [];
+    let selectedIds: any[] = value || [];
     let optionsIds: any[] = professionsOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const getSelectedSubOptions = () => {
-    let selectedIds: any[] = formData?.[field] || [];
+    let selectedIds: any[] = value || [];
     let optionsIds: any[] = getSubProfessionsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
-  const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = formData?.[field] || [];
-    selectedIds = selectedIds.filter((id: any) => id != item?.value);
-
-    deleteCallback(item);
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: selectedIds,
-    }));
-  };
-
   const renderItem = (item: any) => {
-    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
+    let isSelected: boolean = (value || []).includes(item?.value);
 
     return (
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
@@ -172,7 +164,7 @@ const ProfessionsField = ({
         {FormManager.renderError('professions_ids')}
       </BoxView>
 
-      {formData?.[field]?.length > 0 && (
+      {value?.length > 0 && (
         <BoxView direction="column" align="left">
           <TextView>{i18n.t('Sub professions')}*</TextView>
           <MultiSelect
@@ -196,8 +188,6 @@ const ProfessionsField = ({
     </>
   );
 };
-
-export default ProfessionsField;
 
 const styles = StyleSheet.create({
   element: {
@@ -233,3 +223,5 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
 });
+
+export default ProfessionsField;
