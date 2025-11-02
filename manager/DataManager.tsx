@@ -148,6 +148,27 @@ class DataManager {
 
     return Math.floor(num);
   }
+
+  setObjectProperty(obj: any, path: string, value: any) {
+    const clone = JSON.parse(JSON.stringify(obj));
+    const keys = path.split('.');
+    let current = clone;
+
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
+
+      if (i === keys.length - 1) {
+        current[key] = value;
+      } else {
+        if (typeof current[key] !== 'object' || current[key] === null) {
+          current[key] = {};
+        }
+        current = current[key];
+      }
+    }
+
+    return clone;
+  }
 };
 
 export default (new DataManager());
