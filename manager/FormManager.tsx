@@ -99,13 +99,6 @@ class FormManager {
   updateField(resource: string, key: any, value: any, rules: any[] = []) {
     let errors: any[] = [];
 
-    console.log({
-      resource: resource,
-      key: key,
-      value: value,
-      rules: rules, 
-    })
-
     if (rules.length > 0) {
       errors = this.validateFied(resource, key, value, rules);
     }
@@ -118,6 +111,16 @@ class FormManager {
   }
 
   addValue(resource: string, key: any, value: any) {
+
+    
+    console.log({
+      resource: resource,
+      key: key,
+      tartgetKey: this.getTargetKey(key),
+      value: value,
+      //rules: rules, 
+    })
+
     Store.dispatch(setFormData<any>({
       resource: resource,
       key: this.getTargetKey(key),

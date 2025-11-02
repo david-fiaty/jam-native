@@ -53,6 +53,8 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
+console.log(value, formData?.[parentKey]?.[fieldKey])
+
   return (
     <>
       {!value?.length && (

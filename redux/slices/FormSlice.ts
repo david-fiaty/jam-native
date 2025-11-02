@@ -14,6 +14,9 @@ const FormSlice = createSlice({
   },
   reducers: {
     setFormData: (state: any, action: any) => {
+
+      //state.sectorsData = action.payload;
+ 
       if (action.payload.key) {
         state[action.payload.resource][action.payload.key] = action.payload.value;
       }

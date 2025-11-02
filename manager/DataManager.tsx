@@ -148,6 +148,25 @@ class DataManager {
 
     return Math.floor(num);
   }
+
+  updateNestedProperty(obj: any, path: string, value: any) {
+    if (typeof path !== 'string' || !path) return; 
+
+    const keys = path.split('.');
+    let current = obj;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+      const key = keys[i];
+
+      if (typeof current[key] !== 'object' || current[key] === null) {
+        current[key] = {};
+      }
+
+      current = current[key];
+    }
+
+    current[keys[keys.length - 1]] = value;
+  }
 };
 
 export default (new DataManager());
