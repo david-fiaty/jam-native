@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
-import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
-  fieldKey?: any;
-  parentKey?: any;
+  field?: any;
+  parent?: any;
 };
 
-const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
+const OrganizationTypesList = ({ resource, field, parent }: Props) => {
+  const dispatch = useDispatch();
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [selectedOrganizations, setSelectedOrganizations] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -24,6 +25,7 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
 
   const toggleItem = (entityId: number) => {
     let selectedIds: any[] = [...selectedOrganizations];
+    let currentData: any = { ...formData };
 
     if (selectedIds.includes(entityId)) {
       selectedIds = selectedIds.filter((value: number) => value !== entityId);
@@ -34,12 +36,14 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
 
     setSelectedOrganizations(selectedIds);
 
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds);
-    }
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: parent,
+      value: {
+        ...(currentData?.[parent] || {}),
+        ...{ [field]: selectedIds },
+      },
+    }));
   };
 
   const renderItem = (row: any) => {
@@ -72,10 +76,10 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
   useEffect(() => {
     if (!isLoaded) {
       if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
-      setSelectedOrganizations(formData?.[parentKey]?.[fieldKey] || []);
+      setSelectedOrganizations(formData?.[parent]?.[field] || []);
       setIsLoaded(true);
     }
-  }, [organizationTypes, formData, fieldKey, parentKey, selectedOrganizations, appState]);
+  }, [organizationTypes, formData, field, parent, selectedOrganizations, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
