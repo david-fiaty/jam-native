@@ -90,56 +90,48 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <DatePickerField
         mode="time"
+        resource={resource}
+        fieldKey="opening_hour_weekdays"
+        parentKey="profile_venue"
         value={formData?.profile_venue?.opening_hour_weekdays || ''}
         placeholder={i18n.t('Weekdays opening hour')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekdays: DataManager.toDbTime(value)},
-        })}
       />
-      {FormManager.renderError('profile_venue.opening_hour_weekdays')}
 
       <TextView>
         {i18n.t('Weekdays closing hour')}
       </TextView>
       <DatePickerField
         mode="time"
+        resource={resource}
+        fieldKey="closing_hour_weekdays"
+        parentKey="profile_venue"
         value={formData?.profile_venue?.closing_hour_weekdays || ''}
         placeholder={i18n.t('Weekdays closing hour')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ closing_hour_weekdays: DataManager.toDbTime(value) },
-        })}
       />
-      {FormManager.renderError('profile_venue.closing_hour_weekdays')}
 
       <TextView>
         {i18n.t('Weekend opening hour')}
       </TextView>
       <DatePickerField
         mode="time"
+        resource={resource}
+        fieldKey="opening_hour_weekend"
+        parentKey="profile_venue"
         value={formData?.profile_venue?.opening_hour_weekend || ''}
         placeholder={i18n.t('Weekends opening hour')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ opening_hour_weekend: DataManager.toDbTime(value) },
-        })}
       />
-      {FormManager.renderError('profile_venue.opening_hour_weekend')}
 
       <TextView>
         {i18n.t('Weekend closing hour')}
       </TextView>
       <DatePickerField
         mode="time"
+        resource={resource}
+        fieldKey="closing_hour_weekend"
+        parentKey="profile_venue"
         value={formData?.profile_venue?.closing_hour_weekend || ''}
         placeholder={i18n.t('Weekends closing hour')}
-        onChangeValue={(value: any) => FormManager.updateField(resource, 'profile_venue', {
-          ...(formData?.profile_venue || {}),
-          ...{ closing_hour_weekend: DataManager.toDbTime(value) },
-        })}
       />
-      {FormManager.renderError('profile_venue.closing_hour_weekend')}
 
       <InputSwitchField
         value={formData?.profile_venue?.has_creation_space || false}
