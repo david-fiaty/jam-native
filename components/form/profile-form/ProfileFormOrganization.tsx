@@ -55,9 +55,17 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter the creation year')}
       />
 
-      <ProfileGroupActivities resource={resource} formData={formData} />
+      <ProfileGroupActivities 
+        resource={resource} 
+        formData={formData} 
+        parentKey="profile_organization" 
+      />
 
-      <ProfileGroupDocuments resource={resource} formData={formData} />
+      <ProfileGroupDocuments 
+        resource={resource} 
+        formData={formData} 
+        parentKey="profile_organization" 
+      />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import FormManager from "@/manager/FormManager";
@@ -9,9 +8,10 @@ import GroupTitleView from "@/components/view/GroupTitleView";
 type Props = {
   resource: any;
   formData: any;
+  parentKey?: any;
 };
 
-const ProfileGroupDocuments = ({ resource, formData }: Props) => {
+const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
   return (
     <>
       <GroupTitleView label={i18n.t("Documents")} />
