@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
 import FormManager from '@/manager/FormManager';
+import StaticData from '@/constants/StaticData';
 
 type Props = {
   resource: string;
@@ -20,7 +21,7 @@ const WeekDaysList = ({ resource, fieldKey, parentKey }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const appState: any = useSelector((state: any) => state.app, shallowEqual);
-  const listData: any[] = appState.organizationTypesData;
+  const listData: any[] = StaticData.weekDays;
 
   const toggleItem = (entityId: number) => {
     let idArray: any[] = [...selectedIds];
