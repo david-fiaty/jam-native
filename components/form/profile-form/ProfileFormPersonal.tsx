@@ -42,10 +42,10 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
 
       <ProfessionsField
         resource={resource}
-        field="professions_ids"
+        fieldKey="professions_ids"
+        parentKey="profile_personal"
         rules={['required']}
-        formData={formData} // Todo - Remove this in component, use value instead
-        value={formData?.professions_ids || []}
+        value={formData?.profile_personal?.professions_ids || []}
       />
 
       <ProfileGroupActivities resource={resource} formData={formData} />
