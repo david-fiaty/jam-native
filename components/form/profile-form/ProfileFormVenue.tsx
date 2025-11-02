@@ -40,17 +40,12 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
       </TextView>
       <VenueTypesField
         resource={resource}
-        field="venue_types"
-        parent="profile_venue"
+        fieldKey="venue_types"
+        parentKey="profile_venue"
+        rules={['required']}
         placeholder={i18n.t('Select venue types')}
         value={formData?.profile_venue?.venue_types || []}
-        onPress={() => ModalManager.toggleModal('VenueTypesList', {
-          resource: resource,
-          field: "venue_types",
-          parent: "profile_venue",
-        })}
       />
-      {FormManager.renderError('profile_venue.venue_types')}
 
       <TextView>
         {i18n.t('Other venue types')}
