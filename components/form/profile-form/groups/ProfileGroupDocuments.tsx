@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import FormManager from "@/manager/FormManager";
