@@ -112,13 +112,13 @@ class FormManager {
   }
 
   addValue(resource: string, key: any, value: any) {
-    let formState: any = Store.getState().form;
+    let formState: any = {...Store.getState().form }; 
     let formData: any = { ...formState[resource] };
-    
-    formData = DataManager.updateNestedProperty(formData, key, value);
- 
+
+    formData = DataManager.setObjectProperty(formData, key, value);    
+  
     Store.dispatch(setFormData<any>({
-      resource: resource,
+      resource: resource, 
       value: formData, 
     }));
   }

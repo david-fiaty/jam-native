@@ -149,23 +149,25 @@ class DataManager {
     return Math.floor(num);
   }
 
-  updateNestedProperty(obj: any, path: string, value: any) {
-    if (typeof path !== 'string' || !path) return; 
-
+  setObjectProperty(obj: any, path: string, value: any) {
+    const clone = JSON.parse(JSON.stringify(obj));
     const keys = path.split('.');
-    let current = obj;
+    let current = clone;
 
-    for (let i = 0; i < keys.length - 1; i++) {
+    for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
 
-      if (typeof current[key] !== 'object' || current[key] === null) {
-        current[key] = {};
+      if (i === keys.length - 1) {
+        current[key] = value;
+      } else {
+        if (typeof current[key] !== 'object' || current[key] === null) {
+          current[key] = {};
+        }
+        current = current[key];
       }
-
-      current = current[key];
     }
 
-    current[keys[keys.length - 1]] = value;
+    return clone;
   }
 };
 
