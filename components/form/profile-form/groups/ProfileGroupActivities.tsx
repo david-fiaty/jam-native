@@ -4,8 +4,6 @@ import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import GroupTitleView from "@/components/view/GroupTitleView";
 import SectorsField from "@/components/field/SectorsField";
-import FormManager from "@/manager/FormManager";
-import ModalManager from "@/manager/ModalManager";
 import CulturalActivitiesField from "@/components/field/CulturalActivitiesField";
 
 type Props = {
