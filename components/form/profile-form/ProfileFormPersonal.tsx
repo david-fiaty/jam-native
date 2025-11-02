@@ -42,7 +42,8 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
 
       <ProfessionsField
         resource={resource}
-        field="professions_ids"
+        fieldKey="professions_ids"
+        parentKey="profile_personal"
         rules={['required']}
         value={formData?.professions_ids || []}
       />
