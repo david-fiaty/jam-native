@@ -89,6 +89,9 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         {i18n.t('Weekdays opening hour')}
       </TextView>
       <DatePickerField
+        resource={resource}
+        fieldKey="opening_hour_weekdays"
+        parentKey="profile_venue"
         mode="time"
         value={formData?.profile_venue?.opening_hour_weekdays || ''}
         placeholder={i18n.t('Weekdays opening hour')}
