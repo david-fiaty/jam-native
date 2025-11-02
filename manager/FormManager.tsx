@@ -119,7 +119,7 @@ class FormManager {
 
     Store.dispatch(setFormData<any>({
       resource: resource,
-      value: value, 
+      value: formData, 
     }));
   }
 
