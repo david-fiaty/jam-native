@@ -22,7 +22,7 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
       <DocumentPickerField
         preview={true}
         multiple={false}
-        value={formData?.profile_organization?.upload_technical_sheet || null}
+        value={formData?.[parentKey]?.upload_technical_sheet || null}
         placeholder={i18n.t('Upload a technical sheet')}
         //onChangeText={(value: any) => console.log(value) }
           
@@ -42,7 +42,7 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
       <DocumentPickerField
         preview={true}
         multiple={true}
-        value={formData?.profile_organization?.upload_other_docs || null}
+        value={formData?.[parentKey]?.upload_other_docs || null}
         placeholder={i18n.t('Upload other documents')}
         //onChangeText={(value: any) => console.log(value) }
           
