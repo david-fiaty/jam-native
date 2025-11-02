@@ -51,7 +51,7 @@ const DatePickerField = ({
     if (mode == 'time') {
       fieldValue = DataManager.toDbTime(fieldValue);
     } 
-    
+
     if (onChangeValue) {
       onChangeValue(fieldValue);
     }
@@ -103,7 +103,7 @@ const DatePickerField = ({
 
 const styles = StyleSheet.create({
   fieldContainer: {
-    width: '100%'
+    width: '100%',
   },
 });
 
