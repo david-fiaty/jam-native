@@ -1,6 +1,36 @@
 import i18n from "@/translation/i18n";
 
 const StaticData = {
+  weekDays: [
+    {
+      id: 'monday',
+      name: i18n.t('Monday'),
+    },
+    {
+      id: 'tuesday',
+      name: i18n.t('Tuesday'), 
+    },
+    {
+      id: 'wednesday',
+      name: i18n.t('Wednesday'),
+    },
+    {
+      id: 'thrusday',
+      name: i18n.t('Thursday'),
+    },
+    {
+      id: 'friday',
+      name: i18n.t('Friday'),
+    },
+    {
+      id: 'saturday',
+      name: i18n.t('Saturday'),
+    },
+    {
+      id: 'sunday',
+      name: i18n.t('Sunday'),
+    },
+  ], 
   profileTypes: [
     {
       id: null,
