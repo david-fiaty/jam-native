@@ -1,49 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
-import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
-  fieldKey?: any;
-  parentKey?: any;
+  field?: any;
+  parent?: any;
 };
 
-const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
-  const [selectedIds, setSelectedIds] = useState<any>([]);
+const OrganizationTypesList = ({ resource, field, parent }: Props) => {
+  const dispatch = useDispatch();
+  const [organizationTypes, setOrganizationTypes] = useState<any>(null);
+  const [selectedOrganizations, setSelectedOrganizations] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const appState: any = useSelector((state: any) => state.app, shallowEqual);
-  const listData: any[] = appState.organizationTypesData;
+  const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const toggleItem = (entityId: number) => {
-    let idArray: any[] = [...selectedIds];
+    let selectedIds: any[] = [...selectedOrganizations];
+    let currentData: any = { ...formData };
 
-    if (idArray.includes(entityId)) {
-      idArray = idArray.filter((value: number) => value !== entityId);
+    if (selectedIds.includes(entityId)) {
+      selectedIds = selectedIds.filter((value: number) => value !== entityId);
     }
     else {
-      idArray.push(entityId);
+      selectedIds.push(entityId);
     }
 
-    setSelectedIds(idArray);
+    setSelectedOrganizations(selectedIds);
 
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, idArray);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
-    }
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: parent,
+      value: {
+        ...(currentData?.[parent] || {}),
+        ...{ [field]: selectedIds },
+      },
+    }));
   };
 
   const renderItem = (row: any) => {
-    let isSelected: boolean = selectedIds.includes(row.item.id);
+    let selected: boolean = selectedOrganizations.includes(row.item.id);
 
     return (
       <TouchableOpacity
@@ -57,7 +61,7 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
           style={styles.container}
         >
           <TextView>{row?.item?.name}</TextView>
-          {isSelected &&
+          {selected &&
             <IconView
               name="checkmark"
               theme="clear"
@@ -71,19 +75,20 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
+      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
+      setSelectedOrganizations(formData?.[parent]?.[field] || []);
       setIsLoaded(true);
     }
-  }, [formData, fieldKey, parentKey, selectedIds, appState]);
+  }, [organizationTypes, formData, field, parent, selectedOrganizations, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        {listData?.length > 0 &&
+        {organizationTypes?.length > 0 &&
           <ListView
-            data={listData}
+            data={organizationTypes}
             renderItem={(row: any) => renderItem(row)}
           />
         }
