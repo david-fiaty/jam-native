@@ -7,6 +7,10 @@ import InputTextField from "./InputTextField";
 import TagView from "../view/TagView";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: any;
   placeholder?: string;
   preview?: boolean;
@@ -16,7 +20,19 @@ type Props = {
   onDeleteItem?: (data: any) => void;
 };
 
-const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
+const DocumentPickerField = ({ 
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  value, 
+  placeholder, 
+  preview, 
+  multiple, 
+  mediaTypes, 
+  onSelectItem, 
+  onDeleteItem 
+}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
 
