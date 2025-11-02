@@ -43,7 +43,6 @@ const ProfileGroupActivities = ({ resource, formData }: Props) => {
         fieldKey="other_cultural_activities"
         parentKey="profile_organization"
         rules={['string']}
-        formData={formData}
         value={formData?.profile_organization?.other_cultural_activities || ''}
         placeholder={i18n.t('Enter other cultural activities')}
       />   
