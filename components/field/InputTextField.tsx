@@ -10,7 +10,6 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
-  formData?: any;
   keyboardType?: any;
   value?: string;
   placeholder?: string;
@@ -30,7 +29,6 @@ const InputTextField = ({
   fieldKey,
   parentKey,
   rules,
-  formData,
   keyboardType,
   value,
   placeholder,
