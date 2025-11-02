@@ -81,6 +81,8 @@ const InputSwitchField = ({
           onValueChange={onChangeEvent}
         />
       </BoxView>
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
