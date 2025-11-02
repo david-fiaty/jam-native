@@ -31,7 +31,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         fieldKey="venue_name"
         parentKey="profile_venue"
         rules={['required', 'string']}
-        formData={formData}
         value={formData?.profile_venue?.venue_name || ''}
         placeholder={i18n.t('Enter the venue name')}
       />
@@ -61,7 +60,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         fieldKey="other_venue_types"
         parentKey="profile_venue"
         rules={['string']}
-        formData={formData}
         value={formData?.profile_venue?.other_venue_types || ''}
         placeholder={i18n.t('Enter other venue types')}
       />
@@ -74,7 +72,6 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         fieldKey="creation_year"
         parentKey="profile_venue"
         rules={['number']}
-        formData={formData}
         keyboardType="number-pad"
         value={formData?.profile_venue?.creation_year || ''}
         placeholder={i18n.t('Enter the creation year')}
