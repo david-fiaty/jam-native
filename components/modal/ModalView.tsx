@@ -32,7 +32,6 @@ import JamFormSection from '../section/jam/JamFormSection';
 import ProjectFormSection from '../section/project/ProjectFormSection';
 import OrganizationTypesList from '../list/OrganizationTypesList';
 import CulturalActivityTypesList from '../list/CulturalActivityTypesList';
-import WeekDaysList from '../list/WeekdaysList';
 
 type Props = {
   currentSection?: any;
