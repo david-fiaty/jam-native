@@ -45,6 +45,7 @@ const ProfessionsField = ({
     let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
 
     deleteCallback(item);
+    
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds, rules);
     }
