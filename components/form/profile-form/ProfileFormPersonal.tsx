@@ -44,7 +44,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         resource={resource}
         field="professions_ids"
         rules={['required']}
-        formData={formData} // Todo - Remove this in component, use value instead
         value={formData?.professions_ids || []}
       />
 
