@@ -32,7 +32,7 @@ import JamFormSection from '../section/jam/JamFormSection';
 import ProjectFormSection from '../section/project/ProjectFormSection';
 import OrganizationTypesList from '../list/OrganizationTypesList';
 import CulturalActivityTypesList from '../list/CulturalActivityTypesList';
-import WeekdaysList from '../list/WeekdaysList';
+import WeekDaysList from '../list/WeekdaysList';
 
 type Props = {
   currentSection?: any;
@@ -187,9 +187,9 @@ const ModalView = ({ currentSection, style }: Props) => {
         render: (params: any) => <OrganizationTypesList {...params} />,
       },
       {
-        id: 'WeekdaysList',
+        id: 'WeekDaysList',
         title: i18n.t('Week days'),
-        render: (params: any) => <WeekdaysList {...params} />,
+        render: (params: any) => <WeekDaysList {...params} />,
       },
       {
         id: 'CulturalActivityTypesList',

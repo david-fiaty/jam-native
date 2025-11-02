@@ -15,7 +15,7 @@ type Props = {
   parentKey?: any;
 };
 
-const WeekdaysList = ({ resource, fieldKey, parentKey }: Props) => {
+const WeekDaysList = ({ resource, fieldKey, parentKey }: Props) => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -101,4 +101,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WeekdaysList;
+export default WeekDaysList;

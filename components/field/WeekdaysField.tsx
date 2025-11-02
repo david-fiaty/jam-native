@@ -17,12 +17,12 @@ type Props = {
   placeholder?: any;
 };
 
-const WeekdaysField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
+const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
   const listData: any[] = appState.organizationTypesData;
 
   const onPress = () => {
-    ModalManager.toggleModal('WeekdaysList', {
+    ModalManager.toggleModal('WeekDaysList', {
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
@@ -85,4 +85,4 @@ const WeekdaysField = ({ resource, fieldKey, parentKey, rules, value, placeholde
   );
 };
 
-export default WeekdaysField;
+export default WeekDaysField;
