@@ -1,53 +1,49 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource: string;
-  field?: any;
-  parent?: any;
+  fieldKey?: any;
+  parentKey?: any;
 };
 
-const VenueTypesList = ({ resource, field, parent }: Props) => {
-  const dispatch = useDispatch();
-  const [venueTypes, setVenueTypes] = useState<any>(null);
-  const [selectedVenues, setSelectedVenues] = useState<any>([]);
+const VenueTypesList = ({ resource, fieldKey, parentKey }: Props) => {
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const appState = useSelector((state: any) => state.app, shallowEqual);
+  const appState: any = useSelector((state: any) => state.app, shallowEqual);
+  const listData: any[] = appState.venueTypesData;
 
   const toggleItem = (entityId: number) => {
-    let selectedIds: any[] = [...selectedVenues];
-    let currentData: any = { ...formData };
+    let idArray: any[] = [...selectedIds];
 
-    if (selectedIds.includes(entityId)) {
-      selectedIds = selectedIds.filter((value: number) => value !== entityId);
+    if (idArray.includes(entityId)) {
+      idArray = idArray.filter((value: number) => value !== entityId);
     }
     else {
-      selectedIds.push(entityId);
+      idArray.push(entityId);
     }
 
-    setSelectedVenues(selectedIds);
+    setSelectedIds(idArray);
 
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: parent,
-      value: {
-        ...(currentData?.[parent] || {}),
-        ...{ [field]: selectedIds },
-      },
-    }));
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, idArray);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
+    }
   };
 
   const renderItem = (row: any) => {
-    let selected: boolean = selectedVenues.includes(row.item.id);
+    let isSelected: boolean = selectedIds.includes(row.item.id);
 
     return (
       <TouchableOpacity
@@ -61,7 +57,7 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
           style={styles.container}
         >
           <TextView>{row?.item?.name}</TextView>
-          {selected &&
+          {isSelected &&
             <IconView
               name="checkmark"
               theme="clear"
@@ -75,21 +71,19 @@ const VenueTypesList = ({ resource, field, parent }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!venueTypes) setVenueTypes(appState.venueTypesData);
-
-      setSelectedVenues(formData?.[parent]?.[field] || []);
+      setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
       setIsLoaded(true);
     }
-  }, [venueTypes, formData, field, parent, selectedVenues, appState]);
+  }, [formData, fieldKey, parentKey, selectedIds, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
   return (
     <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
       <View style={Layout.borderedListContainer}>
-        {venueTypes?.length > 0 &&
+        {listData?.length > 0 &&
           <ListView
-            data={venueTypes}
+            data={listData}
             renderItem={(row: any) => renderItem(row)}
           />
         }
