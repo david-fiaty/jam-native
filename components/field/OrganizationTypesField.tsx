@@ -34,9 +34,7 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(currentValue || []).filter((n: number) => n !== item.id)];
-
-    setCurrentValue(selectedIds);
+    let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
 
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds, rules);
@@ -51,15 +49,13 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
       if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
       setIsLoaded(true);
     }
-
-    setCurrentValue(value);
-  }, [isLoaded, appState, value]);
+  }, [isLoaded, appState]);
 
   if (!isLoaded) return <SpinnerView size="small" />;
 
   return (
     <>
-      {!currentValue?.length && (
+      {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
@@ -72,9 +68,9 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules
         </TouchableOpacity>
       )}
 
-      {currentValue?.length > 0 && (
+      {value?.length > 0 && (
         <View style={Layout.fieldSelectionPreview}>
-          {currentValue.map((id: any) => {
+          {value.map((id: any) => {
             let item: any = organizationTypes.find((o: any) => o.id === id);
 
             return (
