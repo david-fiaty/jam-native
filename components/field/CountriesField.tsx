@@ -43,12 +43,21 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value,
     }
   };
 
+  const buildOptions = () => {
+    return (listData || []).map((item: any) => {
+      return {
+        value: item?.code?.toLowerCase(),
+        label: item?.name,
+      }
+    });
+  };
+
   const renderSingleSelectList = () => {
     return (
       <BoxView direction="row" align="space-between" style={styles.container}>
         <SelectListBase
           value={value}
-          //data={buildOptions(countriesData)} 
+          data={buildOptions()} 
           //onChangeValue={onChangeValue}
           placeholder={i18n.t('Select a country')}
         />
