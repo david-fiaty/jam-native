@@ -18,12 +18,12 @@ type Props = {
   value?: any;
 };
 
-const ProfessionsField = ({   
+const ProfessionsField = ({
   resource,
   fieldKey,
   parentKey,
   rules,
-  value, 
+  value,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [professionsData, setProfessionsData] = useState<any[]>([]);
@@ -32,7 +32,7 @@ const ProfessionsField = ({
 
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(value || []), ...selectedIds])];
-    
+
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds, rules);
     }
@@ -45,7 +45,12 @@ const ProfessionsField = ({
     let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
 
     deleteCallback(item);
-    updateSelection(selectedIds);
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
   };
 
   const getProfessionsOptions = (professionsList: any[]) => {
@@ -69,19 +74,19 @@ const ProfessionsField = ({
     professionsData
       .filter((o: any) => (value || []).includes(o.id))
       .map((x: any) => {
-      (x?.sub_professions || []).map((y: any) => {
-        listOptions.push({
-          value: y?.id,
-          label: y?.name,
+        (x?.sub_professions || []).map((y: any) => {
+          listOptions.push({
+            value: y?.id,
+            label: y?.name,
+          });
         });
       });
-    });
 
     return listOptions;
   };
 
   const getSelectedOptions = () => {
-    let selectedIds: any[] =  value || [];
+    let selectedIds: any[] = value || [];
     let optionsIds: any[] = professionsOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
