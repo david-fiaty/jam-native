@@ -45,7 +45,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         fieldKey="professions_ids"
         parentKey="profile_personal"
         rules={['required']}
-        value={formData?.professions_ids || []}
+        value={formData?.profile_personal?.professions_ids || []}
       />
 
       <ProfileGroupActivities resource={resource} formData={formData} />
