@@ -27,15 +27,6 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
         multiple={false}
         value={formData?.[parentKey]?.upload_technical_sheet || null}
         placeholder={i18n.t('Upload a technical sheet')}
-        //onChangeText={(value: any) => console.log(value) }
-          
-        /*
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
-
-        */
       />
       {FormManager.renderError('profile_organization.upload_technical_sheet')}
 
@@ -50,15 +41,6 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
         multiple={true}
         value={formData?.[parentKey]?.upload_other_docs || null}
         placeholder={i18n.t('Upload other documents')}
-        //onChangeText={(value: any) => console.log(value) }
-          
-        /*
-        onChangeText={(value: string) => FormManager.updateField(resource, 'profile_organization', {
-          ...(formData?.profile_organization || {}),
-          ...{ type_of_management: value },
-        }, ['string'])}
-
-        */
       />
       {FormManager.renderError('profile_organization.upload_other_docs')}
     </>
