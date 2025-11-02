@@ -13,13 +13,12 @@ type Props = {
   resource: string;
   fieldKey: string;
   parentKey: string;
-  formData?: any;
   rules?: any
   value?: any;
   placeholder?: any;
 };
 
-const OrganizationTypesField = ({ resource, fieldKey, parentKey, formData, rules, value, placeholder }: Props) => {
+const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const appState = useSelector((state: any) => state.app, shallowEqual);
