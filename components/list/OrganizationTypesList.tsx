@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
@@ -17,7 +16,6 @@ type Props = {
 };
 
 const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
-  const dispatch = useDispatch();
   const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const [selectedOrganizations, setSelectedOrganizations] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -26,7 +24,6 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
 
   const toggleItem = (entityId: number) => {
     let selectedIds: any[] = [...selectedOrganizations];
-    let currentData: any = { ...formData };
 
     if (selectedIds.includes(entityId)) {
       selectedIds = selectedIds.filter((value: number) => value !== entityId);
