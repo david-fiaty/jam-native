@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import InputTextField from './InputTextField';
-import SpinnerView from '../view/SpinnerView';
 import FormManager from '@/manager/FormManager';
 import ModalManager from '@/manager/ModalManager';
+import BoxView from '../view/BoxView';
 
 type Props = {
   resource: string;
@@ -19,9 +18,8 @@ type Props = {
 };
 
 const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [organizationTypes, setOrganizationTypes] = useState<any>(null);
   const appState = useSelector((state: any) => state.app, shallowEqual);
+  const listData: any[] = appState.organizationTypesData;
 
   const onPress = () => {
     ModalManager.toggleModal('OrganizationTypesList', {
@@ -42,15 +40,6 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, p
     }
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
-      setIsLoaded(true);
-    }
-  }, [isLoaded, appState]);
-
-  if (!isLoaded) return <SpinnerView size="small" />;
-
   return (
     <>
       {!value?.length && (
@@ -67,9 +56,13 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, p
       )}
 
       {value?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}>
+        <BoxView 
+          direction="row" 
+          align="center" 
+          style={Layout.fieldSelectionPreview}
+        >
           {value.map((id: any) => {
-            let item: any = organizationTypes.find((o: any) => o.id === id);
+            let item: any = listData.find((o: any) => o.id === id);
 
             return (
               <TagView
@@ -84,7 +77,7 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, p
           })}
 
           <IconView name="plus" theme="transparent" onPress={onPress} />
-        </View>
+        </BoxView>
       )}
 
       {FormManager.renderError(fieldKey, parentKey)}
