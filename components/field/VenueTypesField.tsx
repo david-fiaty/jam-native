@@ -22,7 +22,7 @@ const VenueTypesField = ({ resource, fieldKey, parentKey, rules, value, placehol
   const listData: any[] = appState.venueTypesData;
 
   const onPress = () => {
-    ModalManager.toggleModal('OrganizationTypesList', {
+    ModalManager.toggleModal('VenueTypesList', {
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
