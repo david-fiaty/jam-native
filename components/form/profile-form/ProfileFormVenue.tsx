@@ -10,6 +10,7 @@ import DataManager from "@/manager/DataManager";
 import ProfileGroupDocuments from "./groups/ProfileGroupDocuments";
 import GroupTitleView from "@/components/view/GroupTitleView";
 import ProfileGroupActivities from "./groups/ProfileGroupActivities";
+import WeekDaysField from "@/components/field/WeekDaysField";
 
 type Props = {
   resource: any;
