@@ -1,7 +1,6 @@
 import React from "react";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
-import FormManager from "@/manager/FormManager";
 import DocumentPickerField from "@/components/field/DocumentPickerField";
 import GroupTitleView from "@/components/view/GroupTitleView";
 
@@ -28,7 +27,6 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
         value={formData?.[parentKey]?.upload_technical_sheet || null}
         placeholder={i18n.t('Upload a technical sheet')}
       />
-      {FormManager.renderError('profile_organization.upload_technical_sheet')}
 
       <TextView>
         {i18n.t('Other documents')}
@@ -42,7 +40,6 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
         value={formData?.[parentKey]?.upload_other_docs || null}
         placeholder={i18n.t('Upload other documents')}
       />
-      {FormManager.renderError('profile_organization.upload_other_docs')}
     </>
   );
 }
