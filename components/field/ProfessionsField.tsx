@@ -16,7 +16,6 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
-  placeholder?: any;
 };
 
 const ProfessionsField = ({   
@@ -25,7 +24,6 @@ const ProfessionsField = ({
   parentKey,
   rules,
   value, 
-  placeholder 
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [professionsData, setProfessionsData] = useState<any[]>([]);
