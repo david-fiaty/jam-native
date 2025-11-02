@@ -15,8 +15,15 @@ const FormSlice = createSlice({
   reducers: {
     setFormData: (state: any, action: any) => {
 
+      if (action.payload.key) { 
+        state[action.payload.resource][action.payload.key] = action.payload.value;
+      }
+      else {
+        state[action.payload.resource] = {};
+      }
+      
       //state.sectorsData = action.payload;
- 
+ /*
       if (action.payload.key) {
         state[action.payload.resource][action.payload.key] = action.payload.value;
       }
@@ -28,6 +35,8 @@ const FormSlice = createSlice({
       else {
         state[action.payload.resource] = {};
       }
+
+*/
     },
     setFormErrors: (state: any, action: any) => {
       state.errors = action.payload;
