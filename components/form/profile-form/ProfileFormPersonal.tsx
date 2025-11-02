@@ -24,7 +24,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         fieldKey="first_name"
         parentKey="profile_personal"
         rules={['required', 'string']}
-        formData={formData}
         value={formData?.profile_personal?.first_name || ''}
         placeholder={i18n.t('Enter your first name')}
       />
@@ -37,7 +36,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         fieldKey="last_name"
         parentKey="profile_personal"
         rules={['required', 'string']}
-        formData={formData}
         value={formData?.profile_personal?.last_name || ''}
         placeholder={i18n.t('Enter your last name')}
       />
@@ -45,7 +43,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
       <ProfessionsField
         resource={resource}
         field="professions_ids"
-        formData={formData}
         rules={['required']}
         value={formData?.professions_ids || []}
       />
