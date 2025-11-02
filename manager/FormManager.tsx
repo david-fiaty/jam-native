@@ -116,7 +116,7 @@ class FormManager {
     let formData: any = { ...formState[resource] };
     
     formData = DataManager.updateNestedProperty(formData, key, value);
-
+ 
     Store.dispatch(setFormData<any>({
       resource: resource,
       value: formData, 
