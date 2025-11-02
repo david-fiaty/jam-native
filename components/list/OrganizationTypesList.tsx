@@ -16,34 +16,34 @@ type Props = {
 };
 
 const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
-  const [organizationTypes, setOrganizationTypes] = useState<any>(null);
-  const [selectedOrganizations, setSelectedOrganizations] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-  const appState = useSelector((state: any) => state.app, shallowEqual);
+  const appState: any = useSelector((state: any) => state.app, shallowEqual);
+  const organizationTypes: any = appState.organizationTypesData;
 
   const toggleItem = (entityId: number) => {
-    let selectedIds: any[] = [...selectedOrganizations];
+    let idArray: any[] = [...selectedIds];
 
-    if (selectedIds.includes(entityId)) {
-      selectedIds = selectedIds.filter((value: number) => value !== entityId);
+    if (idArray.includes(entityId)) {
+      idArray = idArray.filter((value: number) => value !== entityId);
     }
     else {
-      selectedIds.push(entityId);
+      idArray.push(entityId);
     }
 
-    setSelectedOrganizations(selectedIds);
+    setSelectedIds(idArray);
 
     if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds);
+      FormManager.updateField(resource, fieldKey, idArray);
     }
     else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds);
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
     }
   };
 
   const renderItem = (row: any) => {
-    let selected: boolean = selectedOrganizations.includes(row.item.id);
+    let isSelected: boolean = selectedIds.includes(row.item.id);
 
     return (
       <TouchableOpacity
@@ -57,7 +57,7 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
           style={styles.container}
         >
           <TextView>{row?.item?.name}</TextView>
-          {selected &&
+          {isSelected &&
             <IconView
               name="checkmark"
               theme="clear"
@@ -71,11 +71,10 @@ const OrganizationTypesList = ({ resource, fieldKey, parentKey }: Props) => {
 
   useEffect(() => {
     if (!isLoaded) {
-      if (!organizationTypes) setOrganizationTypes(appState.organizationTypesData);
-      setSelectedOrganizations(formData?.[parentKey]?.[fieldKey] || []);
+      setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
       setIsLoaded(true);
     }
-  }, [organizationTypes, formData, fieldKey, parentKey, selectedOrganizations, appState]);
+  }, [organizationTypes, formData, fieldKey, parentKey, selectedIds, appState]);
 
   if (!isLoaded) return <SpinnerView />;
 
