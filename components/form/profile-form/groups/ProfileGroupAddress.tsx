@@ -57,6 +57,7 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
       />
       {FormManager.renderError('scope_country_code')}
 
+        {/*
       <TextView>
         {i18n.t('Location')}*
       </TextView>
@@ -87,6 +88,8 @@ const ProfileGroupAddress = ({ resource, formData }: Props) => {
           value: formData?.geolocation_longitude,
         }}
       />
+
+      */}
     </>
   );
 }
