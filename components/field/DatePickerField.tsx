@@ -7,13 +7,26 @@ import IconView from '../view/IconView';
 import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   placeholder?: string;
   value?: string;
   mode?: any;
   onChangeValue?: (value: any) => void;
 };
 
-const DatePickerField = ({placeholder, value, mode, onChangeValue}: Props) => {
+const DatePickerField = ({  
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  placeholder, 
+  value, 
+  mode, 
+  onChangeValue
+}: Props) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const display = ScreenManager.isIos() ? 'spinner' : 'default';
