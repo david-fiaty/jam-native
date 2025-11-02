@@ -5,6 +5,8 @@ import InputTextField from '../field/InputTextField';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import ScreenManager from '@/manager/ScreenManager';
+import FormManager from '@/manager/FormManager';
+import DataManager from '@/manager/DataManager';
 
 type Props = {
   resource?: any;
@@ -43,7 +45,23 @@ const DatePickerField = ({
 
   const handleConfirm = (value: any) => {
     if (value) setDate(value);
-    if (onChangeValue) onChangeValue(value);
+
+    let fieldValue: any = {...value};
+    
+    if (mode == 'time') {
+      fieldValue = DataManager.toDbTime(fieldValue);
+    } 
+    
+    if (onChangeValue) {
+      onChangeValue(fieldValue);
+    }
+    else if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+    }
+
     hideDatePicker();
   };
 
@@ -77,6 +95,8 @@ const DatePickerField = ({
             display={display} 
           />
         )}
+
+        {FormManager.renderError(fieldKey, parentKey)}
       </BoxView>
   );
 };
