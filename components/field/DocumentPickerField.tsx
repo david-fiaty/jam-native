@@ -5,8 +5,13 @@ import * as DocumentPicker from 'expo-document-picker';
 import IconView from '../view/IconView';
 import InputTextField from "./InputTextField";
 import TagView from "../view/TagView";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: any;
   placeholder?: string;
   preview?: boolean;
@@ -16,7 +21,19 @@ type Props = {
   onDeleteItem?: (data: any) => void;
 };
 
-const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {
+const DocumentPickerField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  value,
+  placeholder,
+  preview,
+  multiple,
+  mediaTypes,
+  onSelectItem,
+  onDeleteItem
+}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
 
@@ -24,7 +41,16 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
     let mediaList = [...selectedDocuments];
     mediaList = mediaList.filter((item: any) => item.name !== data.name);
     setSelectedDocuments(mediaList);
-    if (onDeleteItem) onDeleteItem(mediaList);
+
+    if (onDeleteItem) {
+      onDeleteItem(mediaList);
+    }
+    else if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, mediaList, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, mediaList, rules);
+    }
   };
 
   const renderDocumentPreview = (data: any) => {
@@ -59,7 +85,15 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
       }
 
       setSelectedDocuments(mediaList);
-      if (onSelectItem) onSelectItem(mediaList);
+      if (onSelectItem) {
+        onSelectItem(mediaList);
+      }
+      else if (resource && fieldKey && !parentKey) {
+        FormManager.updateField(resource, fieldKey, mediaList, rules);
+      }
+      else if (resource && fieldKey && parentKey) {
+        FormManager.updateField(resource, `${parentKey}.${fieldKey}`, mediaList, rules);
+      }
     }
   };
 
@@ -91,6 +125,8 @@ const DocumentPickerField = ({ value, placeholder, preview, multiple, mediaTypes
           <IconView name="plus" theme="transparent" onPress={pickDocument} />
         </View>
       }
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
