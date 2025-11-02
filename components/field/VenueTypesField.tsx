@@ -1,61 +1,48 @@
-import { useState, useEffect } from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { setFormData } from '@/redux/slices/FormSlice';
+import { TouchableOpacity } from 'react-native';
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import InputTextField from './InputTextField';
-import SpinnerView from '../view/SpinnerView';
+import FormManager from '@/manager/FormManager';
+import ModalManager from '@/manager/ModalManager';
+import BoxView from '../view/BoxView';
 
 type Props = {
   resource: string;
-  field: string;
-  parent: string;
+  fieldKey: string;
+  parentKey: string;
+  rules?: any
   value?: any;
   placeholder?: any;
-  onPress?: () => void;
 };
 
-const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress }: Props) => {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [venueTypes, setVenueTypes] = useState<any>(null);
-  const [currentValue, setCurrentValue] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
+const VenueTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
+  const listData: any[] = appState.venueTypesData;
 
-  const deleteItem = (item: any) => {
-    let currentData: any = {...formData};
-    let selectedIds: any[] = [...(value?.length > 0 ? value : [])];
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
-
-    setCurrentValue(selectedIds);
-
-    dispatch(setFormData<any>({
+  const onPress = () => {
+    ModalManager.toggleModal('OrganizationTypesList', {
       resource: resource,
-      key: parent,
-      value: {
-        ...(currentData?.[parent] || {}),
-        ...{ [field]: selectedIds},
-      },
-    }));  
+      fieldKey: fieldKey,
+      parentKey: parentKey,
+    });
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      if (!venueTypes) setVenueTypes(appState.venueTypesData);
-      setIsLoaded(true);
-    }
-    
-    setCurrentValue(formData?.[parent]?.[field] || []);
-  }, [isLoaded, value, formData, parent, field, appState]);
+  const deleteItem = (item: any) => {
+    let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
 
-  if (!isLoaded) return <SpinnerView size="small" />;
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
+  };
 
   return (
     <>
-      { !currentValue?.length && (
+      {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
         >
@@ -68,17 +55,21 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
         </TouchableOpacity>
       )}
 
-      {currentValue?.length > 0 && (
-        <View style={Layout.fieldSelectionPreview}> 
-          { currentValue.map((id: any) => {
-            let item: any = venueTypes.find((o: any) => o.id === id);
-            
+      {value?.length > 0 && (
+        <BoxView 
+          direction="row" 
+          align="center" 
+          style={Layout.fieldSelectionPreview}
+        >
+          {value.map((id: any) => {
+            let item: any = listData.find((o: any) => o.id === id);
+
             return (
               <TagView
                 theme="white"
                 key={item.id}
                 canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}  
+                onDeleteButtonPress={() => deleteItem(item)}
               >
                 {item?.name}
               </TagView>
@@ -86,8 +77,10 @@ const VenueTypesField = ({ resource, field, parent, value, placeholder, onPress 
           })}
 
           <IconView name="plus" theme="transparent" onPress={onPress} />
-        </View>
+        </BoxView>
       )}
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
