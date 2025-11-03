@@ -28,14 +28,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
     let lat: any = selectedLocation?.latitude;
     let lng: any = selectedLocation?.longitude;
 
-    if (resource && lat && lng && !parentKey) {
-      FormManager.updateField(resource, latitude.key, lat, rules);
-      FormManager.updateField(resource, longitude.key, lng, rules);
-    }
-    else if (resource && lat && lng && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
-      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
-    }
+    updateCoordinates(lat, lng);
 
     ModalManager.toggleModal('SelectLocationMapView');
   };
@@ -45,7 +38,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
     let lat: any = event.nativeEvent.coordinate.latitude;
     let lng: any = event.nativeEvent.coordinate.longitude;
+    
+    updateCoordinates(lat, lng);
+  };
 
+  const updateCoordinates = (lat: any, lng: any) => {
     if (resource && lat && lng && !parentKey) {
       FormManager.updateField(resource, latitude.key, lat, rules);
       FormManager.updateField(resource, longitude.key, lng, rules);
