@@ -24,21 +24,28 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const updateSelectedLocation = () => {
-    if (resource && latitude?.key && longitude?.key && !parentKey) {
-      FormManager.updateField(resource, latitude.key, latitude.value, rules);
-      FormManager.updateField(resource, longitude.key, longitude.value, rules);
+  const updateSelectedLocation = (lat: any, lng: any, closeModal?: boolean) => {
+    if (resource && lat && lng && !parentKey) {
+      FormManager.updateField(resource, latitude.key, lat, rules);
+      FormManager.updateField(resource, longitude.key, lng, rules);
     }
-    else if (resource && latitude?.key && longitude?.key && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, latitude.value, rules);
-      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, longitude.value, rules);
+    else if (resource && lat && lng && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
+      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
     }
 
-    ModalManager.toggleModal('SelectLocationMapView');
+    if (closeModal) {
+      ModalManager.toggleModal('SelectLocationMapView');
+    }
   };
 
   const onMapPress = async (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
+    let coord: any = event.nativeEvent.coordinate;
+
+    console.log(coord);
+    
+    setSelectedLocation(coord);
+    updateSelectedLocation(coord.latitude, coord.longitude);
   };
 
   const getSelectedLocation = async () => {
@@ -109,7 +116,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
       <ButtonView
         label={i18n.t('Submit')}
-        onPress={() => updateSelectedLocation()}
+        onPress={() => updateSelectedLocation(latitude?.value, longitude?.value, true)}
         containerStyle={styles.confirmButton}
       />
     </BoxView>
