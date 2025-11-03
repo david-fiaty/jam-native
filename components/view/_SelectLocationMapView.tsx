@@ -1,6 +1,8 @@
 import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { useDispatch } from 'react-redux';
+import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import SpinnerView from "./SpinnerView";
@@ -9,75 +11,99 @@ import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 import ButtonView from "./ButtonView";
 import ModalManager from "@/manager/ModalManager";
-import FormManager from "@/manager/FormManager";
 
 type Props = {
-  resource?: string;
-  parentKey?: string;
+  resource: string,
   latitude?: any;
   longitude?: any;
-  rules?: any;
 };
 
-const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules }: Props) => {
+const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
+  const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelectedLocation = () => {
-    let lat: any = selectedLocation?.latitude;
-    let lng: any = selectedLocation?.longitude;
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: latitude.field, 
+      value: selectedLocation.latitude, 
+    }));
 
-    if (resource && lat && lng && !parentKey) {
-      FormManager.updateField(resource, latitude.key, lat, rules);
-      FormManager.updateField(resource, longitude.key, lng, rules);
-    }
-    else if (resource && lat && lng && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
-      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
-    }
+    dispatch(setFormData<any>({ 
+      resource: resource,
+      key: longitude.field, 
+      value: selectedLocation.longitude, 
+    }));
 
     ModalManager.toggleModal('SelectLocationMapView');
   };
 
-  const onMapPress = (event: MapPressEvent) => {
+  const onMapPress = async (event: MapPressEvent) => {
     setSelectedLocation(event.nativeEvent.coordinate);
+  };
 
-    let lat: any = event.nativeEvent.coordinate.latitude;
-    let lng: any = event.nativeEvent.coordinate.longitude;
+  const getSelectedLocation = async () => {
+    let deviceLocation: any = await UserManager.getLocation();
 
-    if (resource && lat && lng && !parentKey) {
-      FormManager.updateField(resource, latitude.key, lat, rules);
-      FormManager.updateField(resource, longitude.key, lng, rules);
+    if (latitude?.value && longitude?.value) {
+      return {
+        latitude: latitude.value,
+        longitude: longitude.value,
+      };
+    } 
+    else if (deviceLocation?.latitude && deviceLocation?.longitude) {
+      return deviceLocation;
     }
-    else if (resource && lat && lng && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
-      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
+    
+    return {
+      latitude: Config.defaultLocation.latitude,
+      longitude: Config.defaultLocation.longitude,
+    };
+  };
+
+  const getInitialRegion = () => {
+    let latitude: any = Config.defaultLocation.latitude;
+    let longitude: any = Config.defaultLocation.longitude;
+    let latitudeDelta: any = 0.2;
+    let longitudeDelta: any = 0.2;
+
+    if (selectedLocation?.latitude && selectedLocation?.longitude) {
+      latitude = selectedLocation.latitude;
+      longitude = selectedLocation.longitude; 
     }
+    else if (currentLocation?.latitude && currentLocation?.longitude) {
+      latitude = currentLocation.latitude;
+      longitude = currentLocation.longitude; 
+    }
+
+    return {
+      latitude: latitude,
+      longitude: longitude,
+      latitudeDelta: latitudeDelta,
+      longitudeDelta: longitudeDelta,
+    };
   };
 
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
-      setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
-    })();
-  }, []);
+      setSelectedLocation(await getSelectedLocation());
 
-  useEffect(() => {
-    (async () => {
       if (!isLoaded) {
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded, latitude, longitude]);
+  }, [isLoaded]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-
+  
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      justify="flex-start"
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
       style={[Layout.screenContent, styles.container]}
     >
       <TouchableWithoutFeedback>
@@ -89,6 +115,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
             showsUserLocation={true}
             showsMyLocationButton={true}
             onPress={onMapPress}
+            initialRegion={getInitialRegion()}
           >
             <Marker
               pinColor={Layout.colors.tertiary}
@@ -102,11 +129,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
           </MapView>
         </View>
       </TouchableWithoutFeedback>
-
+  
       <ButtonView
         label={i18n.t('Submit')}
-        onPress={updateSelectedLocation}
-        containerStyle={styles.confirmButton}
+        onPress={() => updateSelectedLocation()} 
+        containerStyle={styles.confirmButton}  
       />
     </BoxView>
   );
@@ -115,7 +142,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    paddingTop: Layout.space.base * 1.5,
+    paddingTop: Layout.space.base*1.5,
     position: 'relative',
   },
   confirmButton: {
