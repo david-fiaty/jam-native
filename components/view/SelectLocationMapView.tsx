@@ -25,17 +25,12 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelectedLocation = () => {
-    let lat: any = selectedLocation?.latitude;
-    let lng: any = selectedLocation?.longitude;
-
-    updateCoordinates(lat, lng);
-
+    updateCoordinates(selectedLocation?.latitude, selectedLocation?.longitude);
     ModalManager.toggleModal('SelectLocationMapView');
   };
 
   const onMapPress = (event: MapPressEvent) => {
     let coord: any = event.nativeEvent.coordinate;
-
     setSelectedLocation(coord);   
     updateCoordinates(coord.latitude, coord.longitude);
   };
@@ -57,16 +52,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
       setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
     })();
   }, []);
-
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, latitude, longitude]);
-
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <BoxView
