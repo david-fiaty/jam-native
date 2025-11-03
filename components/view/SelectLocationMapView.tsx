@@ -25,27 +25,17 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelectedLocation = () => {
-    let lat: any = selectedLocation?.latitude;
-    let lng: any = selectedLocation?.longitude;
-
-    if (resource && lat && lng && !parentKey) {
-      FormManager.updateField(resource, latitude.key, lat, rules);
-      FormManager.updateField(resource, longitude.key, lng, rules);
-    }
-    else if (resource && lat && lng && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
-      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
-    }
-
+    updateCoordinates(selectedLocation?.latitude, selectedLocation?.longitude);
     ModalManager.toggleModal('SelectLocationMapView');
   };
 
   const onMapPress = (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
+    let coord: any = event.nativeEvent.coordinate;
+    setSelectedLocation(coord);   
+    updateCoordinates(coord.latitude, coord.longitude);
+  };
 
-    let lat: any = event.nativeEvent.coordinate.latitude;
-    let lng: any = event.nativeEvent.coordinate.longitude;
-
+  const updateCoordinates = (lat: any, lng: any) => {
     if (resource && lat && lng && !parentKey) {
       FormManager.updateField(resource, latitude.key, lat, rules);
       FormManager.updateField(resource, longitude.key, lng, rules);
@@ -62,16 +52,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
       setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
     })();
   }, []);
-
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, latitude, longitude]);
-
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
     <BoxView
