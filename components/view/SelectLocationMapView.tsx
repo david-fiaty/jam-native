@@ -62,23 +62,23 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   };
 
   const getInitialRegion = () => {
-    let latitude: any = Config.defaultLocation.latitude;
-    let longitude: any = Config.defaultLocation.longitude;
+    let lat: any = Config.defaultLocation.latitude;
+    let lng: any = Config.defaultLocation.longitude;
     let latitudeDelta: any = 0.2;
     let longitudeDelta: any = 0.2;
 
     if (selectedLocation?.latitude && selectedLocation?.longitude) {
-      latitude = selectedLocation.latitude;
-      longitude = selectedLocation.longitude;
+      lat = selectedLocation.latitude;
+      lng = selectedLocation.longitude;
     }
     else if (currentLocation?.latitude && currentLocation?.longitude) {
-      latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude;
+      lat = currentLocation.latitude;
+      lng = currentLocation.longitude;
     }
 
     return {
-      latitude: latitude,
-      longitude: longitude,
+      latitude: lat,
+      longitude: lng,
       latitudeDelta: latitudeDelta,
       longitudeDelta: longitudeDelta,
     };
@@ -97,9 +97,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
-  console.log(resource, latitude, longitude);
-  
-  return <TextView>MAP</TextView>;
+  //console.log(resource, latitude, longitude);
+  //console.log(selectedLocation)
+  //console.log(getInitialRegion());
+
+  //return <TextView>MAP</TextView>;
 
   return (
     <BoxView 
@@ -117,7 +119,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
             showsUserLocation={true}
             showsMyLocationButton={true}
             onPress={onMapPress}
-            initialRegion={getInitialRegion()}
+            //initialRegion={getInitialRegion()}
           >
             <Marker
               pinColor={Layout.colors.tertiary}
