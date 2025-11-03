@@ -59,13 +59,13 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
+      setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
         setIsLoaded(true);
       }
     })();
@@ -90,17 +90,15 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
             showsMyLocationButton={true}
             onPress={onMapPress}
           >
-            {selectedLocation?.latitude && selectedLocation?.longitude && (
-              <Marker
-                pinColor={Layout.colors.tertiary}
-                title={i18n.t("Selected location")}
-                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
-                coordinate={{
-                  latitude: parseFloat(selectedLocation.latitude),
-                  longitude: parseFloat(selectedLocation.longitude),
-                }}
-              />
-            )}
+            <Marker
+              pinColor={Layout.colors.tertiary}
+              title={i18n.t("Selected location")}
+              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
+              coordinate={{
+                latitude: parseFloat(selectedLocation?.latitude),
+                longitude: parseFloat(selectedLocation?.longitude),
+              }}
+            />
           </MapView>
         </View>
       </TouchableWithoutFeedback>
