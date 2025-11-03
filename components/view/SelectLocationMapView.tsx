@@ -93,7 +93,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
             showsUserLocation={true}
             showsMyLocationButton={true}
             onPress={onMapPress}
-          //initialRegion={getInitialRegion()}
           >
             <Marker
               pinColor={Layout.colors.tertiary}
