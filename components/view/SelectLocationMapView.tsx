@@ -2,11 +2,8 @@ import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } fro
 import { useState, useEffect } from "react";
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import { Layout } from "@/constants/Layout";
-import { Config } from "@/constants/Config";
-import SpinnerView from "./SpinnerView";
 import i18n from "@/translation/i18n";
 import BoxView from "./BoxView";
-import UserManager from "@/manager/UserManager";
 import ButtonView from "./ButtonView";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
@@ -20,9 +17,7 @@ type Props = {
 };
 
 const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules }: Props) => {
-  const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelectedLocation = () => {
     updateCoordinates(selectedLocation?.latitude, selectedLocation?.longitude);
@@ -48,7 +43,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
   useEffect(() => {
     (async () => {
-      setCurrentLocation(await UserManager.getLocation());
       setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
     })();
   }, []);
