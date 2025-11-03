@@ -5,7 +5,15 @@ import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
 
 type Props = {
-  resource: string,
+  resource?: any;
+  latitudeKey?: string;
+  longitudeKey?: string;
+  latitudeValue?: any;
+  longitudeValue?: any;
+  parentKey?: any;
+  rules?: any;
+
+
   placeholder?: any;
   latitude?: any;
   longitude?: any;
@@ -13,9 +21,32 @@ type Props = {
   onChangeValue: (data: any) => void;
 };
 
-const LocationPickerField = ({ resource, placeholder, latitude, longitude, onPress, onChangeValue}: Props) => {
+const LocationPickerField = ({ 
+  resource,
+  latitudeKey,
+  longitudeKey,
+  latitudeValue,
+  longitudeValue,
+  rules,
+
+  placeholder, 
+  latitude, 
+  longitude, 
+  onPress, 
+  onChangeValue
+}: Props) => {
   const value = latitude?.value && longitude?.value ? `${latitude.value},${longitude.value}` : '';
   const formData: any = useSelector((state: any) => state.form[resource]);
+
+
+  const onPressEvent = () => {
+     
+  };
+
+  const onChangeEvent = () => {
+     
+  };
+
 
   useEffect(() => {
     onChangeValue(formData);
