@@ -42,10 +42,8 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   };
 
   useEffect(() => {
-    (async () => {
-      setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
-    })();
-  }, []);
+    setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
+  }, [latitude, longitude]);
 
   return (
     <BoxView
