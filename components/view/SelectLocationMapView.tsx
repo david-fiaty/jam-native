@@ -42,8 +42,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   const onMapPress = async (event: MapPressEvent) => {
     let coord: any = event.nativeEvent.coordinate;
 
-    console.log(coord);
-    
     setSelectedLocation(coord);
     updateSelectedLocation(coord.latitude, coord.longitude);
   };
@@ -76,11 +74,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setSelectedLocation(await getSelectedLocation());
+        setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
         setIsLoaded(true);
       }
     })();
-  }, [isLoaded]);
+  }, [isLoaded, latitude, longitude]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
@@ -101,15 +99,17 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
             showsMyLocationButton={true}
             onPress={onMapPress}
           >
-            <Marker
-              pinColor={Layout.colors.tertiary}
-              title={i18n.t("Selected location")}
-              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
-              coordinate={{
-                latitude: parseFloat(selectedLocation?.latitude),
-                longitude: parseFloat(selectedLocation?.longitude),
-              }}
-            />
+            {selectedLocation?.latitude && selectedLocation?.longitude && (
+              <Marker
+                pinColor={Layout.colors.tertiary}
+                title={i18n.t("Selected location")}
+                description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
+                coordinate={{
+                  latitude: parseFloat(selectedLocation.latitude),
+                  longitude: parseFloat(selectedLocation.longitude),
+                }}
+              />
+            )}
           </MapView>
         </View>
       </TouchableWithoutFeedback>
