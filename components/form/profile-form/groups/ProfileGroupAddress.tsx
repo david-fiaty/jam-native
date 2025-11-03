@@ -61,13 +61,7 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
         longitudeKey="geolocation_latitude"
         latitudeValue={formData?.geolocation_latitude}
         longitudeValue={formData?.geolocation_longitude}
-
-
         placeholder={i18n.t('Select your location')}
-        onChangeValue={(data: any) => {
-          FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
-          FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
-        }}
       />
     </>
   );
