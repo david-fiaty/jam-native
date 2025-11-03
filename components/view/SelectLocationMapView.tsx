@@ -9,7 +9,6 @@ import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 import ButtonView from "./ButtonView";
 import ModalManager from "@/manager/ModalManager";
-import TextView from "./TextView";
 import FormManager from "@/manager/FormManager";
 
 type Props = {
@@ -61,29 +60,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
     };
   };
 
-  const getInitialRegion = () => {
-    let lat: any = Config.defaultLocation.latitude;
-    let lng: any = Config.defaultLocation.longitude;
-    let latitudeDelta: any = 0.2;
-    let longitudeDelta: any = 0.2;
-
-    if (selectedLocation?.latitude && selectedLocation?.longitude) {
-      lat = selectedLocation.latitude;
-      lng = selectedLocation.longitude;
-    }
-    else if (currentLocation?.latitude && currentLocation?.longitude) {
-      lat = currentLocation.latitude;
-      lng = currentLocation.longitude;
-    }
-
-    return {
-      latitude: lat,
-      longitude: lng,
-      latitudeDelta: latitudeDelta,
-      longitudeDelta: longitudeDelta,
-    };
-  };
-
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
@@ -96,12 +72,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   }, [isLoaded]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-
-  //console.log(resource, latitude, longitude);
-  //console.log(selectedLocation)
-  //console.log(getInitialRegion());
-
-  //return <TextView>MAP</TextView>;
 
   return (
     <BoxView 
