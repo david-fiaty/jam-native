@@ -24,7 +24,10 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const updateSelectedLocation = (lat: any, lng: any) => {
+  const updateSelectedLocation = () => {
+    let lat: any = selectedLocation?.latitude;
+    let lng: any = selectedLocation?.longitude;
+
     if (resource && lat && lng && !parentKey) {
       FormManager.updateField(resource, latitude.key, lat, rules);
       FormManager.updateField(resource, longitude.key, lng, rules);
@@ -104,7 +107,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
       <ButtonView
         label={i18n.t('Submit')}
-        onPress={() => updateSelectedLocation(selectedLocation?.latitude, selectedLocation?.longitude)}
+        onPress={updateSelectedLocation}
         containerStyle={styles.confirmButton}
       />
     </BoxView>
