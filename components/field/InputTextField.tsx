@@ -7,8 +7,8 @@ import FormManager from "@/manager/FormManager";
 
 type Props = {
   resource?: any;
-  fieldKey?: any;
-  parentKey?: any;
+  fieldKey?: string;
+  parentKey?: string;
   rules?: any;
   keyboardType?: any;
   value?: string;
