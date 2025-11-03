@@ -161,15 +161,17 @@ class FormManager {
     return {
       required: {
         run: (value: any) => {
-          if (typeof value === 'string' || value instanceof String) {
+          if (value && typeof value === 'string' || value instanceof String) {
             return value && String(value).trim() !== '';
           }
-          else if (Array.isArray(value)) {
+          else if (value && Array.isArray(value)) {
             return value?.length > 0;
           }
-          else if (typeof value === 'object') {
+          else if (value && typeof value === 'object') {
             return Object.keys(value)?.length > 0;
           }
+
+          return false; 
         },
         error: () => {
           return i18n.t('A value is required.');
