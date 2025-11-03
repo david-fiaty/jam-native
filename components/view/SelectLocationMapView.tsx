@@ -97,12 +97,10 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
-    console.log(resource, latitude, longitude);
-
+  console.log(resource, latitude, longitude);
+  
   return <TextView>MAP</TextView>;
 
-
-  /*
   return (
     <BoxView 
       direction="column" 
@@ -141,7 +139,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
       />
     </BoxView>
   );
-  */
 };
 
 const styles = StyleSheet.create({
