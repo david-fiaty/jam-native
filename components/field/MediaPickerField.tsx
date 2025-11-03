@@ -8,6 +8,7 @@ import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
   resource?: any;
@@ -30,7 +31,7 @@ const MediaPickerField = ({
   fieldKey,
   parentKey,
   rules,
-  
+
   label, 
   value, 
   placeholder, 
@@ -40,6 +41,7 @@ const MediaPickerField = ({
   onSelectItem, 
   onDeleteItem 
 }: Props) => {  
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
@@ -48,7 +50,16 @@ const MediaPickerField = ({
     let mediaList = [...selectedMedia];  
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
-    if (onDeleteItem) onDeleteItem(mediaList);
+    
+    if (onDeleteItem) {
+      onDeleteItem(mediaList);
+    }
+    else if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, mediaList, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, mediaList, rules);
+    }
   };
 
   const updatePreviewSelection = (data: any) => {
@@ -119,14 +130,26 @@ const MediaPickerField = ({
 
       setSelectedMedia(mediaList);
       setSelectedPreview([]);
-      if (onSelectItem) onSelectItem(mediaList);
+      
+      if (onSelectItem) {
+        onSelectItem(mediaList);
+      }
+      else if (resource && fieldKey && !parentKey) {
+        FormManager.updateField(resource, fieldKey, mediaList, rules);
+      }
+      else if (resource && fieldKey && parentKey) {
+        FormManager.updateField(resource, `${parentKey}.${fieldKey}`, mediaList, rules);
+      }
     }
   };
 
   useEffect(() => {
-    setSelectedMedia(value || []);
-  }, [value]);
-  
+    if (!isLoaded) {
+      setSelectedMedia(value || []);
+      setIsLoaded(true);
+    }
+  }, [isLoaded, value]);
+
   return (
     <View style={styles.container}>
       { label && (
