@@ -63,9 +63,13 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   useEffect(() => {
     (async () => {
       setCurrentLocation(await UserManager.getLocation());
-      setSelectedLocation(await getSelectedLocation());
+    })();
+  }, []);
 
+  useEffect(() => {
+    (async () => {
       if (!isLoaded) {
+        setSelectedLocation(await getSelectedLocation());
         setIsLoaded(true);
       }
     })();
@@ -74,10 +78,10 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
 
   return (
-    <BoxView 
-      direction="column" 
-      align="flex-start" 
-      justify="flex-start" 
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
       style={[Layout.screenContent, styles.container]}
     >
       <TouchableWithoutFeedback>
@@ -89,7 +93,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
             showsUserLocation={true}
             showsMyLocationButton={true}
             onPress={onMapPress}
-            //initialRegion={getInitialRegion()}
+          //initialRegion={getInitialRegion()}
           >
             <Marker
               pinColor={Layout.colors.tertiary}
@@ -103,11 +107,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
           </MapView>
         </View>
       </TouchableWithoutFeedback>
-  
+
       <ButtonView
         label={i18n.t('Submit')}
-        onPress={() => updateSelectedLocation()} 
-        containerStyle={styles.confirmButton}  
+        onPress={() => updateSelectedLocation()}
+        containerStyle={styles.confirmButton}
       />
     </BoxView>
   );
