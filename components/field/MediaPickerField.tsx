@@ -173,6 +173,8 @@ const MediaPickerField = ({
           })}
         </BoxView>
       }
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </View>
   );
 };
