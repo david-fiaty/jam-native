@@ -37,7 +37,7 @@ const DocumentPickerField = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedDocuments, setSelectedDocuments] = useState<any>([]);
 
-  const deleteMedia = (data: any) => {
+  const deleteDocument = (data: any) => {
     let mediaList = [...selectedDocuments];
     mediaList = mediaList.filter((item: any) => item.name !== data.name);
     setSelectedDocuments(mediaList);
@@ -59,7 +59,7 @@ const DocumentPickerField = ({
         key={data.name}
         theme="white"
         canEdit={true}
-        onDeleteButtonPress={() => deleteMedia(data)}
+        onDeleteButtonPress={() => deleteDocument(data)}
       >
         {data.name}
       </TagView>
@@ -85,6 +85,7 @@ const DocumentPickerField = ({
       }
 
       setSelectedDocuments(mediaList);
+
       if (onSelectItem) {
         onSelectItem(mediaList);
       }
@@ -102,7 +103,7 @@ const DocumentPickerField = ({
       setSelectedDocuments(value || []);
       setIsLoaded(true);
     }
-  }, [value]);
+  }, [isLoaded, value]);
 
   return (
     <>
