@@ -139,7 +139,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
           value={formData?.profile_type}
           //disabled={resource == 'profile'}
         />
-        {FormManager.renderError('profile_type')}
 
         {/* All profiles */}
         {formData?.profile_type?.length && (
