@@ -39,8 +39,11 @@ const ProfileTypeField = ({
     if (onChangeValue) {
       onChangeValue(option);
     }
-    else {
+    else if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, option.value, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, option.value, rules);
     }
   };
   
@@ -48,11 +51,13 @@ const ProfileTypeField = ({
     <BoxView direction="column" align="left" style={styles.container}>
       <SelectListBase 
         placeholder={i18n.t('Select a profile type')}
-        value={value}
+        value={value || ''}
         data={buildOptions(profileTypes)}  
         onChangeValue={onChangeEvent}
         disabled={disabled}
       />
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
