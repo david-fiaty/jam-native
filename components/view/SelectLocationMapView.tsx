@@ -12,38 +12,31 @@ import UserManager from "@/manager/UserManager";
 import ButtonView from "./ButtonView";
 import ModalManager from "@/manager/ModalManager";
 import TextView from "./TextView";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
-  resource: string,
+  resource?: string;
+  parentKey?: string;
   latitude?: any;
   longitude?: any;
+  rules?: any;
 };
 
-const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
-
-  console.log(resource, latitude, longitude);
-
-  return <TextView>MAP</TextView>;
-
-
-  /*
+const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules }: Props) => {
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
   const updateSelectedLocation = () => {
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: latitude.field, 
-      value: selectedLocation.latitude, 
-    }));
-
-    dispatch(setFormData<any>({ 
-      resource: resource,
-      key: longitude.field, 
-      value: selectedLocation.longitude, 
-    }));
+    if (resource && latitude?.key && longitude?.key && !parentKey) {
+      FormManager.updateField(resource, latitude.key, latitude.value, rules);
+      FormManager.updateField(resource, longitude.key, longitude.value, rules);
+    }
+    else if (resource && latitude?.key && longitude?.key && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, latitude.value, rules);
+      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, longitude.value, rules);
+    }
 
     ModalManager.toggleModal('SelectLocationMapView');
   };
@@ -93,6 +86,18 @@ const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
       longitudeDelta: longitudeDelta,
     };
   };
+
+
+
+  console.log(resource, latitude, longitude);
+
+  return <TextView>MAP</TextView>;
+
+
+  /*
+
+
+
 
   useEffect(() => {
     (async () => {
