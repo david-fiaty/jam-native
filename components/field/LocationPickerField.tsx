@@ -2,11 +2,12 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
 import ModalManager from '@/manager/ModalManager';
+import FormManager from "@/manager/FormManager";
 
 type Props = {
   resource?: any;
-  latitudeKey?: string;
-  longitudeKey?: string;
+  latitudeKey?: any;
+  longitudeKey?: any;
   latitudeValue?: any;
   longitudeValue?: any;
   parentKey?: any;
@@ -57,6 +58,8 @@ const LocationPickerField = ({
           rightIcon={<IconView name="location" theme="transparent" />}
         />
       </TouchableOpacity>
+
+      {/*FormManager.renderError(latitudeKey, parentKey)*/}
     </>
   );
 };

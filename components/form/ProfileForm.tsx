@@ -133,11 +133,12 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
         <TextView>{i18n.t('Profile type')}*</TextView>
         <ProfileTypeField
+          resource={resource}
+          fieldKey="profile_type"
+          rules={['required']}
           value={formData?.profile_type}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'profile_type', option.value, ['string'])}
           //disabled={resource == 'profile'}
         />
-        {FormManager.renderError('profile_type')}
 
         {/* All profiles */}
         {formData?.profile_type?.length && (
