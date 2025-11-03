@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
 import ModalManager from '@/manager/ModalManager';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource?: any;
@@ -33,39 +34,23 @@ const LocationPickerField = ({
   placeholder,
   latitude,
   longitude,
-  onPress,
-  onChangeValue
 }: Props) => {
   const value = latitude?.value && longitude?.value ? `${latitude.value},${longitude.value}` : '';
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const onPressEvent = () => {
-    if (onPress) {
-      onPress();
-    }
-    else {
-      ModalManager.toggleModal('SelectLocationMapView', {
-        resource: resource,
-        latitude: {
-          field: latitudeKey,
-          value: latitudeValue,
-        },
-        longitude: {
-          field: longitudeKey,
-          value: longitudeValue,
-        },
-      });
-    }
+    ModalManager.toggleModal('SelectLocationMapView', {
+      resource: resource,
+      latitude: {
+        field: latitudeKey,
+        value: latitudeValue,
+      },
+      longitude: {
+        field: longitudeKey,
+        value: longitudeValue,
+      },
+    });
   };
-
-  const onChangeEvent = () => {
-
-  };
-
-
-  useEffect(() => {
-    onChangeValue(formData);
-  }, [formData]);
 
   return (
     <>
