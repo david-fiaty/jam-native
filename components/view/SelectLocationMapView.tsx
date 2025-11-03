@@ -24,7 +24,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
-  const updateSelectedLocation = (lat: any, lng: any, closeModal?: boolean) => {
+  const updateSelectedLocation = (lat: any, lng: any) => {
     if (resource && lat && lng && !parentKey) {
       FormManager.updateField(resource, latitude.key, lat, rules);
       FormManager.updateField(resource, longitude.key, lng, rules);
@@ -34,35 +34,23 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
       FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
     }
 
-    if (closeModal) {
-      ModalManager.toggleModal('SelectLocationMapView');
-    }
+    ModalManager.toggleModal('SelectLocationMapView');
   };
 
-  const onMapPress = async (event: MapPressEvent) => {
-    let coord: any = event.nativeEvent.coordinate;
+  const onMapPress = (event: MapPressEvent) => {
+    setSelectedLocation(event.nativeEvent.coordinate);
 
-    setSelectedLocation(coord);
-    updateSelectedLocation(coord.latitude, coord.longitude);
-  };
+    let lat: any = event.nativeEvent.coordinate.latitude;
+    let lng: any = event.nativeEvent.coordinate.longitude;
 
-  const getSelectedLocation = async () => {
-    let deviceLocation: any = await UserManager.getLocation();
-
-    if (latitude?.value && longitude?.value) {
-      return {
-        latitude: latitude.value,
-        longitude: longitude.value,
-      };
+    if (resource && lat && lng && !parentKey) {
+      FormManager.updateField(resource, latitude.key, lat, rules);
+      FormManager.updateField(resource, longitude.key, lng, rules);
     }
-    else if (deviceLocation?.latitude && deviceLocation?.longitude) {
-      return deviceLocation;
+    else if (resource && lat && lng && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
+      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
     }
-
-    return {
-      latitude: Config.defaultLocation.latitude,
-      longitude: Config.defaultLocation.longitude,
-    };
   };
 
   useEffect(() => {
@@ -116,7 +104,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
       <ButtonView
         label={i18n.t('Submit')}
-        onPress={() => updateSelectedLocation(latitude?.value, longitude?.value, true)}
+        onPress={() => updateSelectedLocation(selectedLocation?.latitude, selectedLocation?.longitude)}
         containerStyle={styles.confirmButton}
       />
     </BoxView>
