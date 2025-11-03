@@ -68,25 +68,6 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
           FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
           FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
         }}
-        onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
-          resource: 'profile',
-          latitude: {
-            field: 'geolocation_latitude',
-            value: formData?.geolocation_latitude,
-          },
-          longitude: {
-            field: 'geolocation_longitude',
-            value: formData?.geolocation_longitude,
-          },
-        })}
-        latitude={{
-          field: 'geolocation_latitude',
-          value: formData?.geolocation_latitude,
-        }}
-        longitude={{
-          field: 'geolocation_longitude',
-          value: formData?.geolocation_longitude,
-        }}
       />
     </>
   );
