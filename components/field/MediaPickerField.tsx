@@ -10,6 +10,11 @@ import MediaManager from '@/manager/MediaManager';
 import InputTextField from "./InputTextField";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
+
   label?: JSX.Element;
   value?: any;
   placeholder?: string;
@@ -20,7 +25,21 @@ type Props = {
   onDeleteItem?: (data: any) => void;
 };
 
-const MediaPickerField = ({ label, value, placeholder, preview, multiple, mediaTypes, onSelectItem, onDeleteItem }: Props) => {  
+const MediaPickerField = ({ 
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  
+  label, 
+  value, 
+  placeholder, 
+  preview, 
+  multiple, 
+  mediaTypes, 
+  onSelectItem, 
+  onDeleteItem 
+}: Props) => {  
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
