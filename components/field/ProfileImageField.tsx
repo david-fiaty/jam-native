@@ -8,12 +8,15 @@ import IconView from "../view/IconView";
 import MediaManager from '@/manager/MediaManager';
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: any;
-  storage?: any,
   onChangeValue?: (data: any) => void;
 };
 
-const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
+const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [uri, setUri] = useState<any>('');
 
@@ -45,6 +48,10 @@ const ProfileImageField = ({ value, storage, onChangeValue }: Props) => {
 
   return (
     <MediaPickerField
+      resource={resource}
+      fieldKey={fieldKey}
+      parentKey={parentKey}
+      rules={rules}
       mediaTypes={['images']}
       multiple={false}
       label={
