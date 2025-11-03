@@ -34,12 +34,10 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   };
 
   const onMapPress = (event: MapPressEvent) => {
-    setSelectedLocation(event.nativeEvent.coordinate);
+    let coord: any = event.nativeEvent.coordinate;
 
-    let lat: any = event.nativeEvent.coordinate.latitude;
-    let lng: any = event.nativeEvent.coordinate.longitude;
-    
-    updateCoordinates(lat, lng);
+    setSelectedLocation(coord);   
+    updateCoordinates(coord.latitude, coord.longitude);
   };
 
   const updateCoordinates = (lat: any, lng: any) => {
