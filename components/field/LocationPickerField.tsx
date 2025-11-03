@@ -24,18 +24,18 @@ const LocationPickerField = ({
   rules,
   placeholder
 }: Props) => {
-  const onPressEvent = () => {
+  const onPressEvent = (lat: any, lng: any) => {
     ModalManager.toggleModal('SelectLocationMapView', {
       resource: resource,
       parentKey: parentKey,
       rules: rules,
       latitude: {
         key: latitudeKey,
-        value: latitudeValue,
+        value: lat,
       },
       longitude: {
         key: longitudeKey,
-        value: longitudeValue,
+        value: lng,
       },
     });
   };
@@ -48,7 +48,7 @@ const LocationPickerField = ({
     <>
       <TouchableOpacity
         style={styles.container}
-        onPress={onPressEvent}
+        onPress={() => onPressEvent(latitudeValue, longitudeValue)}
       >
         <InputTextField
           value={getValue()}
