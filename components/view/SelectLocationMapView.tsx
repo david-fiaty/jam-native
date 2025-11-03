@@ -11,6 +11,7 @@ import BoxView from "./BoxView";
 import UserManager from "@/manager/UserManager";
 import ButtonView from "./ButtonView";
 import ModalManager from "@/manager/ModalManager";
+import TextView from "./TextView";
 
 type Props = {
   resource: string,
@@ -19,6 +20,13 @@ type Props = {
 };
 
 const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
+
+  console.log(resource, latitude, longitude);
+
+  return <TextView>MAP</TextView>;
+
+
+  /*
   const dispatch = useDispatch();
   const [currentLocation, setCurrentLocation] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState<any>(null);
@@ -137,6 +145,7 @@ const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
       />
     </BoxView>
   );
+  */
 };
 
 const styles = StyleSheet.create({
