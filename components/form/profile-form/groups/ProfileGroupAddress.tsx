@@ -45,18 +45,12 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
 
       <TextView>{i18n.t('Country')}</TextView>
       <CountriesField
-        multiple={false}
         resource={resource}
-        field="scope_country_code"
+        fieldKey="scope_country_code"
+        multiple={false}
         placeholder={i18n.t('Select a country')}
-        value={formData?.scope_country_code || ''}
-        onPress={() => ModalManager.toggleModal('CountriesList', {
-          resource: resource,
-          field: 'scope_country_code',
-          multiple: false,
-        })}
+        value={formData?.scope_country_code || ''} 
       />
-      {FormManager.renderError('scope_country_code')}
 
         {/*
       <TextView>
