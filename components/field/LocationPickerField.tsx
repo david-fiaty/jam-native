@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react';
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector } from "react-redux";
 import InputTextField from "../field/InputTextField";
 import IconView from "../view/IconView";
 import ModalManager from '@/manager/ModalManager';
-import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource?: any;
@@ -14,13 +11,7 @@ type Props = {
   longitudeValue?: any;
   parentKey?: any;
   rules?: any;
-
-
   placeholder?: any;
-  latitude?: any;
-  longitude?: any;
-  onPress: () => void;
-  onChangeValue: (data: any) => void;
 };
 
 const LocationPickerField = ({
@@ -30,14 +21,8 @@ const LocationPickerField = ({
   latitudeValue,
   longitudeValue,
   rules,
-
-  placeholder,
-  latitude,
-  longitude,
+  placeholder
 }: Props) => {
-  const value = latitude?.value && longitude?.value ? `${latitude.value},${longitude.value}` : '';
-  const formData: any = useSelector((state: any) => state.form[resource]);
-
   const onPressEvent = () => {
     ModalManager.toggleModal('SelectLocationMapView', {
       resource: resource,
@@ -52,6 +37,10 @@ const LocationPickerField = ({
     });
   };
 
+  const getValue = () => {
+    return latitudeValue && longitudeValue ? `${latitudeValue},${longitudeValue}` : '';
+  };
+
   return (
     <>
       <TouchableOpacity
@@ -59,7 +48,7 @@ const LocationPickerField = ({
         onPress={onPressEvent}
       >
         <InputTextField
-          value={value}
+          value={getValue()}
           readOnly={true}
           placeholder={placeholder}
           rightIcon={<IconView name="location" theme="transparent" />}
