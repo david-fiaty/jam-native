@@ -126,10 +126,11 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
         <TextView>{i18n.t('Profile Image')}*</TextView>
         <ProfileImageField
+          resource={resource}
+          fieldKey="upload_profile_picture"
+          rules={['required']}
           value={formData?.profile_picture?.url}
-          onChangeValue={(data: any) => FormManager.updateField(resource, 'upload_profile_picture', data)}
         />
-        {FormManager.renderError('upload_profile_picture')}
 
         <TextView>{i18n.t('Profile type')}*</TextView>
         <ProfileTypeField
