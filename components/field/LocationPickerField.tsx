@@ -20,18 +20,21 @@ const LocationPickerField = ({
   longitudeKey,
   latitudeValue,
   longitudeValue,
+  parentKey,
   rules,
   placeholder
 }: Props) => {
   const onPressEvent = () => {
     ModalManager.toggleModal('SelectLocationMapView', {
       resource: resource,
+      parentKey: parentKey,
+      rules: rules,
       latitude: {
-        field: latitudeKey,
+        key: latitudeKey,
         value: latitudeValue,
       },
       longitude: {
-        field: longitudeKey,
+        key: longitudeKey,
         value: longitudeValue,
       },
     });
