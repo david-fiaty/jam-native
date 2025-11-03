@@ -15,7 +15,6 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
-
   label?: JSX.Element;
   value?: any;
   placeholder?: string;
@@ -31,7 +30,6 @@ const MediaPickerField = ({
   fieldKey,
   parentKey,
   rules,
-
   label, 
   value, 
   placeholder, 
