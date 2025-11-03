@@ -3,14 +3,27 @@ import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import i18n from '@/translation/i18n';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: any;
   disabled?: any;
   onChangeValue?: (option: any) => void;
 };
 
-const ProfileTypeField = ({value, disabled, onChangeValue}: Props) => {
+const ProfileTypeField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  value, 
+  disabled, 
+  onChangeValue
+}: Props) => {
   const profileTypes = StaticData.profileTypes;
 
   const buildOptions = (optionsData: any) => {    
@@ -21,6 +34,15 @@ const ProfileTypeField = ({value, disabled, onChangeValue}: Props) => {
       }
     });
   };
+
+  const onChangeEvent = (option: any) => {
+    if (onChangeValue) {
+      onChangeValue(option);
+    }
+    else {
+      FormManager.updateField(resource, fieldKey, option.value, rules);
+    }
+  };
   
   return (
     <BoxView direction="column" align="left" style={styles.container}>
@@ -28,7 +50,7 @@ const ProfileTypeField = ({value, disabled, onChangeValue}: Props) => {
         placeholder={i18n.t('Select a profile type')}
         value={value}
         data={buildOptions(profileTypes)}  
-        onChangeValue={onChangeValue}
+        onChangeValue={onChangeEvent}
         disabled={disabled}
       />
     </BoxView>
