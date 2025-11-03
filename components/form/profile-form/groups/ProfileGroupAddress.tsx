@@ -52,39 +52,18 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
         value={formData?.scope_country_code || ''} 
       />
 
-        {/*
       <TextView>
         {i18n.t('Location')}*
       </TextView>
       <LocationPickerField
-        resource="profile"
+        resource={resource}
+        latitudeKey="geolocation_latitude"
+        longitudeKey="geolocation_latitude"
+        latitudeValue={formData?.geolocation_latitude}
+        longitudeValue={formData?.geolocation_longitude}
+        rules={['required']}
         placeholder={i18n.t('Select your location')}
-        onChangeValue={(data: any) => {
-          FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude);
-          FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude);
-        }}
-        onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
-          resource: 'profile',
-          latitude: {
-            field: 'geolocation_latitude',
-            value: formData?.geolocation_latitude,
-          },
-          longitude: {
-            field: 'geolocation_longitude',
-            value: formData?.geolocation_longitude,
-          },
-        })}
-        latitude={{
-          field: 'geolocation_latitude',
-          value: formData?.geolocation_latitude,
-        }}
-        longitude={{
-          field: 'geolocation_longitude',
-          value: formData?.geolocation_longitude,
-        }}
       />
-
-      */}
     </>
   );
 }
