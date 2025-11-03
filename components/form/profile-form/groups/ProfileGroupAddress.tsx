@@ -2,7 +2,6 @@ import React from "react";
 import i18n from "@/translation/i18n";
 import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
-import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import LocationPickerField from "@/components/field/LocationPickerField";
 import CountriesField from "@/components/field/CountriesField";
