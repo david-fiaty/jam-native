@@ -53,11 +53,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
         latitude: latitude.value,
         longitude: longitude.value,
       };
-    } 
+    }
     else if (deviceLocation?.latitude && deviceLocation?.longitude) {
       return deviceLocation;
     }
-    
+
     return {
       latitude: Config.defaultLocation.latitude,
       longitude: Config.defaultLocation.longitude,
@@ -72,11 +72,11 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 
     if (selectedLocation?.latitude && selectedLocation?.longitude) {
       latitude = selectedLocation.latitude;
-      longitude = selectedLocation.longitude; 
+      longitude = selectedLocation.longitude;
     }
     else if (currentLocation?.latitude && currentLocation?.longitude) {
       latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude; 
+      longitude = currentLocation.longitude;
     }
 
     return {
@@ -86,18 +86,6 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
       longitudeDelta: longitudeDelta,
     };
   };
-
-
-
-  console.log(resource, latitude, longitude);
-
-  return <TextView>MAP</TextView>;
-
-
-  /*
-
-
-
 
   useEffect(() => {
     (async () => {
@@ -111,7 +99,13 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   }, [isLoaded]);
 
   if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
-  
+
+    console.log(resource, latitude, longitude);
+
+  return <TextView>MAP</TextView>;
+
+
+  /*
   return (
     <BoxView 
       direction="column" 
@@ -156,7 +150,7 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
 const styles = StyleSheet.create({
   container: {
     padding: 0,
-    paddingTop: Layout.space.base*1.5,
+    paddingTop: Layout.space.base * 1.5,
     position: 'relative',
   },
   confirmButton: {
