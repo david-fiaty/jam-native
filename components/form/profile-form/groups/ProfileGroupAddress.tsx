@@ -58,8 +58,8 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
         resource={resource}
         latitudeKey="geolocation_latitude"
         longitudeKey="geolocation_longitude"
-        latitudeValue={formData?.geolocation_latitude}
-        longitudeValue={formData?.geolocation_longitude}
+        latitudeValue={formData?.geolocation_latitude || ''}
+        longitudeValue={formData?.geolocation_longitude || ''}
         rules={['required']}
         placeholder={i18n.t('Select your location')}
       />
