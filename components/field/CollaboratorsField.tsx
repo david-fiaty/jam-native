@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from '@/redux/slices/FormSlice';
@@ -12,11 +12,12 @@ type Props = {
   resource: string;
   field: string;
   value?: any;
+  label?: any;
   placeholder?: any;
   onPress?: () => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, placeholder, onPress }: Props) => {
+const CollaboratorsField = ({ resource, field, value, label, placeholder, onPress }: Props) => {
   const dispatch = useDispatch();
   const [currentProfiles, setCurrentProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
