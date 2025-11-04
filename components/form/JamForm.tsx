@@ -114,8 +114,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-      <BoxView 
-        direction="column" 
+      <BoxView
+        direction="column"
         style={[Layout.formContainer, styles.formContainer]}
       >
         <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
@@ -138,7 +138,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           rules={['required', 'string']}
           value={formData?.title || ''}
           label={i18n.t('Title')}
-          placeholder={i18n.t('Provide a title')}         
+          placeholder={i18n.t('Provide a title')}
         />
 
         <InputTextareaField
@@ -162,12 +162,14 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         />
         {FormManager.renderError('upload_medias')}
 
-        <TextView>{i18n.t('Location type')} *</TextView>
         <LocationTypeField
+          resource={resource}
+          fieldKey="location_type"
+          rules={['required', 'string']}
           value={formData?.location_type || ''}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
+          label={i18n.t('Location type')}
+          placeholder={i18n.t('Select a location type')}
         />
-        {FormManager.renderError('location_type')}
 
         {['physical', 'online_physical'].includes(formData?.location_type) && (
           <>
