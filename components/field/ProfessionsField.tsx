@@ -7,7 +7,6 @@ import TagView from '../view/TagView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
-import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
@@ -16,6 +15,11 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
+  listLabel?: any;
+  listPlaceholder?: any;
+  subListLabel?: any;
+  subListPlaceholder?: any;
+  childrenKey?: any;
 };
 
 const ProfessionsField = ({
@@ -24,12 +28,17 @@ const ProfessionsField = ({
   parentKey,
   rules,
   value,
+  listLabel,
+  listPlaceholder,
+  subListLabel,
+  subListPlaceholder,
+  childrenKey,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [professionsData, setProfessionsData] = useState<any[]>([]);
-  const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
+  const [listOptions, setListOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
-
+  const listData: any[] = appState.professionsData;
+  
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(value || []), ...selectedIds])];
 
@@ -54,8 +63,8 @@ const ProfessionsField = ({
     }
   };
 
-  const getProfessionsOptions = (professionsList: any[]) => {
-    let listOptions: any[] = professionsList.map((o: any) => {
+  const getListOptions = () => {
+    let listOptions: any[] = (listData || []).map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
@@ -65,17 +74,17 @@ const ProfessionsField = ({
     return listOptions;
   };
 
-  const getSubProfessionsOptions = () => {
+  const getSubListOptions = () => {
     let listOptions: any[] = [];
 
     if (!Array.isArray(value) || !value?.length) {
       return listOptions;
     }
 
-    professionsData
+    listData
       .filter((o: any) => (value || []).includes(o.id))
       .map((x: any) => {
-        (x?.sub_professions || []).map((y: any) => {
+        (x?.[childrenKey] || []).map((y: any) => {
           listOptions.push({
             value: y?.id,
             label: y?.name,
@@ -88,14 +97,14 @@ const ProfessionsField = ({
 
   const getSelectedOptions = () => {
     let selectedIds: any[] = value || [];
-    let optionsIds: any[] = professionsOptions.map((o: any) => o.value);
+    let optionsIds: any[] = listOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
   const getSelectedSubOptions = () => {
     let selectedIds: any[] = value || [];
-    let optionsIds: any[] = getSubProfessionsOptions().map((o: any) => o.value);
+    let optionsIds: any[] = getSubListOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
@@ -135,8 +144,7 @@ const ProfessionsField = ({
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfessionsData(appState.professionsData);
-        setProfessionsOptions(getProfessionsOptions(appState.professionsData));
+        setListOptions(getListOptions());
         setIsLoaded(true);
       }
     })();
@@ -145,44 +153,44 @@ const ProfessionsField = ({
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{i18n.t('Professions')}*</TextView>
+        <TextView>{listLabel}*</TextView>
         <MultiSelect
           value={getSelectedOptions()}
           labelField="label"
           valueField="value"
-          placeholder={i18n.t('Select your professions')}
+          placeholder={listPlaceholder}
           inside={getSelectedOptions().length > 0}
           style={!getSelectedOptions().length ? styles.element : styles.preview}
           iconStyle={getSelectedOptions().length > 0 ? styles.iconRight : {}}
           placeholderStyle={styles.placeholderStyle}
           iconColor={Layout.colors.primary}
           onChange={(selectedIds: any) => updateSelection(selectedIds)}
-          data={professionsOptions}
+          data={listOptions}
           renderItem={(o: any) => renderItem(o)}
           renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
         />
-        {FormManager.renderError('professions_ids')}
+        {FormManager.renderError(fieldKey, parentKey)}
       </BoxView>
 
       {value?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{i18n.t('Sub professions')}*</TextView>
+          <TextView>{subListLabel}*</TextView>
           <MultiSelect
             labelField="label"
             valueField="value"
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
-            placeholder={i18n.t('Select your sub professions')}
+            placeholder={subListPlaceholder}
             value={getSelectedSubOptions()}
             inside={getSelectedSubOptions().length > 0}
             style={!getSelectedSubOptions().length ? styles.element : styles.preview}
             iconStyle={getSelectedSubOptions().length > 0 ? styles.iconRight : {}}
-            data={getSubProfessionsOptions()}
+            data={getSubListOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
           />
-          {FormManager.renderError('professions_ids')}
+          {FormManager.renderError(fieldKey, parentKey)}
         </BoxView>
       )}
     </>

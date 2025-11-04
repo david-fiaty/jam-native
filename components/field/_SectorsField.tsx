@@ -1,70 +1,43 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
-import { useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { setFormData } from '@/redux/slices/FormSlice';
 import { Layout } from '@/constants/Layout';
 import { MultiSelect } from 'react-native-element-dropdown';
 import TagView from '../view/TagView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
+import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
-  resource?: any;
-  fieldKey?: any;
-  parentKey?: any;
-  rules?: any;
+  resource: string;
+  field: string;
   value?: any;
-  listLabel?: any;
-  listPlaceholder?: any;
-  subListLabel?: any;
-  subListPlaceholder?: any;
-  childrenKey?: any;
+  placeholder?: any;
 };
 
-const SectorsField = ({
-  resource,
-  fieldKey,
-  parentKey,
-  rules,
-  value,
-  listLabel,
-  listPlaceholder,
-  subListLabel,
-  subListPlaceholder,
-  childrenKey,
-}: Props) => {
+const SectorsField = ({ resource, field, value, placeholder }: Props) => {
+  const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [listOptions, setListOptions] = useState<any[]>([]);
+  const [sectorsData, setSectorsData] = useState<any[]>([]);
+  const [sectorsOptions, setSectorsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
-  const listData: any[] = appState.sectorsData;
-  
+  const formData: any = useSelector((state: any) => state.form[resource]);
+
   const updateSelection = (selectedIds: any[]) => {
-    selectedIds = [...new Set([...(value || []), ...selectedIds])];
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
-  };
-
-  const deleteItem = (item: any, deleteCallback: any) => {
-    let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
-
-    deleteCallback(item);
+    selectedIds = [...new Set([...(formData?.[field] || []), ...selectedIds])];
     
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: field,
+      value: selectedIds,
+    }));
   };
 
-  const getListOptions = () => {
-    let listOptions: any[] = (listData || []).map((o: any) => {
+  const getSectorsOptions = (sectorsList: any[]) => {
+    let listOptions: any[] = (sectorsList || []).map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
@@ -74,43 +47,56 @@ const SectorsField = ({
     return listOptions;
   };
 
-  const getSubListOptions = () => {
+  const getSubSectorsOptions = () => {
     let listOptions: any[] = [];
 
-    if (!Array.isArray(value) || !value?.length) {
+    if (!Array.isArray(formData?.[field]) || !formData?.[field]?.length) {
       return listOptions;
     }
 
-    listData
-      .filter((o: any) => (value || []).includes(o.id))
+    (sectorsData || [])
+      .filter((o: any) => formData[field].includes(o.id))
       .map((x: any) => {
-        (x?.[childrenKey] || []).map((y: any) => {
-          listOptions.push({
-            value: y?.id,
-            label: y?.name,
-          });
+      (x?.sub_sectors || []).map((y: any) => {
+        listOptions.push({
+          value: y?.id,
+          label: y?.name,
         });
       });
+    });
 
     return listOptions;
   };
 
-  const getSelectedOptions = () => {
-    let selectedIds: any[] = value || [];
-    let optionsIds: any[] = listOptions.map((o: any) => o.value);
+  const getSelectedSectors = () => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = sectorsOptions.map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
   };
 
-  const getSelectedSubOptions = () => {
-    let selectedIds: any[] = value || [];
-    let optionsIds: any[] = getSubListOptions().map((o: any) => o.value);
+  const getSelectedSubSectors = () => {
+    let selectedIds: any[] = formData?.[field] || [];
+    let optionsIds: any[] = getSubSectorsOptions().map((o: any) => o.value);
 
     return selectedIds.filter((id: any) => optionsIds.includes(id));
+  };
+
+  const deleteItem = (item: any, deleteCallback: any) => {
+    let selectedIds: any[] = formData?.[field] || [];
+    selectedIds = selectedIds.filter((id: any) => id != item?.value);
+
+    deleteCallback(item);
+
+    dispatch(setFormData<any>({
+      resource: resource,
+      key: field,
+      value: selectedIds,
+    }));
   };
 
   const renderItem = (item: any) => {
-    let isSelected: boolean = (value || []).includes(item?.value);
+    let isSelected: boolean = (formData?.[field] || []).includes(item?.value);
 
     return (
       <BoxView direction="row" align="center" justify="space-between" style={styles.listItem}>
@@ -144,7 +130,8 @@ const SectorsField = ({
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setListOptions(getListOptions());
+        setSectorsData(appState.sectorsData);
+        setSectorsOptions(getSectorsOptions(appState.sectorsData));
         setIsLoaded(true);
       }
     })();
@@ -153,44 +140,44 @@ const SectorsField = ({
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{listLabel}*</TextView>
+        <TextView>{i18n.t('Activity sectors')}*</TextView>
         <MultiSelect
-          value={getSelectedOptions()}
+          value={getSelectedSectors()}
           labelField="label"
           valueField="value"
-          placeholder={listPlaceholder}
-          inside={getSelectedOptions().length > 0}
-          style={!getSelectedOptions().length ? styles.element : styles.preview}
-          iconStyle={getSelectedOptions().length > 0 ? styles.iconRight : {}}
+          placeholder={i18n.t('Select your sectors')}
+          inside={getSelectedSectors().length > 0}
+          style={!getSelectedSectors().length ? styles.element : styles.preview}
+          iconStyle={getSelectedSectors().length > 0 ? styles.iconRight : {}}
           placeholderStyle={styles.placeholderStyle}
           iconColor={Layout.colors.primary}
           onChange={(selectedIds: any) => updateSelection(selectedIds)}
-          data={listOptions}
+          data={sectorsOptions}
           renderItem={(o: any) => renderItem(o)}
           renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
         />
-        {FormManager.renderError(fieldKey, parentKey)}
+        {FormManager.renderError('sectors_ids')}
       </BoxView>
 
-      {value?.length > 0 && (
+      {formData?.[field]?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{subListLabel}*</TextView>
+          <TextView>{i18n.t('Activity sub sectors')}*</TextView>
           <MultiSelect
             labelField="label"
             valueField="value"
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
-            placeholder={subListPlaceholder}
-            value={getSelectedSubOptions()}
-            inside={getSelectedSubOptions().length > 0}
-            style={!getSelectedSubOptions().length ? styles.element : styles.preview}
-            iconStyle={getSelectedSubOptions().length > 0 ? styles.iconRight : {}}
-            data={getSubListOptions()}
+            placeholder={i18n.t('Select your sub sectors')}
+            value={getSelectedSubSectors()}
+            inside={getSelectedSubSectors().length > 0}
+            style={!getSelectedSubSectors().length ? styles.element : styles.preview}
+            iconStyle={getSelectedSubSectors().length > 0 ? styles.iconRight : {}}
+            data={getSubSectorsOptions()}
             renderItem={(o: any) => renderItem(o)}
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
           />
-          {FormManager.renderError(fieldKey, parentKey)}
+          {FormManager.renderError('sectors_ids')}
         </BoxView>
       )}
     </>
