@@ -186,27 +186,26 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           </>
         )}
 
-        <TextView>{i18n.t('Start date')}</TextView>
-        <DatePickerField
-          value={formData?.period?.start_datetime || ''}
-          placeholder={i18n.t('Select the start date')}
-          onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
-            ...(formData?.period || {}),
-            ...{ start_datetime: DataManager.toDbDate(value) },
-          }, ['date'])}
-        />
-        {FormManager.renderError('period')}
 
-        <TextView>{i18n.t('End date')}</TextView>
         <DatePickerField
-          value={formData?.period?.end_datetime || ''}
-          placeholder={i18n.t('Select the end date')}
-          onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
-            ...(formData?.period || {}),
-            ...{ end_datetime: DataManager.toDbDate(value) },
-          }, ['date'])}
+          resource={resource}
+          fieldKey="start_datetime"
+          parentKey="period"
+          rules={['date']}
+          value={formData?.period?.start_datetime || ''}
+          label={i18n.t('Start date')}
+          placeholder={i18n.t('Select the start date')}
         />
-        {FormManager.renderError('period')}
+        
+        <DatePickerField
+          resource={resource}
+          fieldKey="end_datetime"
+          parentKey="period"
+          rules={['date']}
+          value={formData?.period?.end_datetime || ''}
+          label={i18n.t('End date')}
+          placeholder={i18n.t('Select the end date')}
+        />
 
         <TextView>{i18n.t('Country')}</TextView>
         <CountriesField
