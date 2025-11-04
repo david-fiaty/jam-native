@@ -11,6 +11,8 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
+  label?: any;
+  placeholder?: any;
   disabled?: any;
   onChangeValue?: (option: any) => void;
 };
@@ -20,13 +22,15 @@ const ProfileTypeField = ({
   fieldKey,
   parentKey,
   rules,
-  value, 
-  disabled, 
+  value,
+  label,
+  placeholder,
+  disabled,
   onChangeValue
 }: Props) => {
   const profileTypes = StaticData.profileTypes;
 
-  const buildOptions = (optionsData: any) => {    
+  const buildOptions = (optionsData: any) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
@@ -46,19 +50,22 @@ const ProfileTypeField = ({
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, option.value, rules);
     }
   };
-  
-  return (
-    <BoxView direction="column" align="left" style={styles.container}>
-      <SelectListBase 
-        placeholder={i18n.t('Select a profile type')}
-        value={value || ''}
-        data={buildOptions(profileTypes)}  
-        onChangeValue={onChangeEvent}
-        disabled={disabled}
-      />
 
-      {FormManager.renderError(fieldKey, parentKey)}
-    </BoxView>
+  return (
+    <>
+      {FormManager.renderLabel(label, rules)}
+      <BoxView direction="column" align="left" style={styles.container}>
+        <SelectListBase
+          placeholder={placeholder}
+          value={value || ''}
+          data={buildOptions(profileTypes)}
+          onChangeValue={onChangeEvent}
+          disabled={disabled}
+        />
+
+        {FormManager.renderError(fieldKey, parentKey)}
+      </BoxView>
+    </>
   );
 };
 
