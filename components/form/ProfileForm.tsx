@@ -9,7 +9,6 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
-import TextView from "@/components/view/TextView";
 import ProfileTypeField from "@/components/field/ProfileTypeField";
 import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
