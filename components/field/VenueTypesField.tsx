@@ -12,12 +12,13 @@ type Props = {
   resource: string;
   fieldKey: string;
   parentKey: string;
-  rules?: any
+  rules?: any;
+  label?: any;
   value?: any;
   placeholder?: any;
 };
 
-const VenueTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
+const VenueTypesField = ({ resource, fieldKey, parentKey, rules, label, value, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
   const listData: any[] = appState.venueTypesData;
 
@@ -42,6 +43,8 @@ const VenueTypesField = ({ resource, fieldKey, parentKey, rules, value, placehol
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+
       {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
