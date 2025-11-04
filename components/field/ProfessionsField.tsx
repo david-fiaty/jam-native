@@ -20,6 +20,7 @@ type Props = {
   listPlaceholder?: any;
   subListLabel?: any;
   subListPlaceholder?: any;
+  childrenKey?: any;
 };
 
 const ProfessionsField = ({
@@ -31,7 +32,8 @@ const ProfessionsField = ({
   listLabel,
   listPlaceholder,
   subListLabel,
-  subListPlaceholder
+  subListPlaceholder,
+  childrenKey,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [listOptions, setListOptions] = useState<any[]>([]);
@@ -83,7 +85,7 @@ const ProfessionsField = ({
     listData
       .filter((o: any) => (value || []).includes(o.id))
       .map((x: any) => {
-        (x?.sub_professions || []).map((y: any) => {
+        (x?.[childrenKey] || []).map((y: any) => {
           listOptions.push({
             value: y?.id,
             label: y?.name,
