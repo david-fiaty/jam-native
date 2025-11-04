@@ -16,6 +16,10 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
+  listLabel?: any;
+  listPlaceholder?: any;
+  subListLabel?: any;
+  subListPlaceholder?: any;
 };
 
 const ProfessionsField = ({
@@ -24,6 +28,10 @@ const ProfessionsField = ({
   parentKey,
   rules,
   value,
+  listLabel,
+  listPlaceholder,
+  subListLabel,
+  subListPlaceholder
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [listOptions, setListOptions] = useState<any[]>([]);
@@ -144,12 +152,12 @@ const ProfessionsField = ({
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{i18n.t('Professions')}*</TextView>
+        <TextView>{listLabel}*</TextView>
         <MultiSelect
           value={getSelectedOptions()}
           labelField="label"
           valueField="value"
-          placeholder={i18n.t('Select your professions')}
+          placeholder={listPlaceholder}
           inside={getSelectedOptions().length > 0}
           style={!getSelectedOptions().length ? styles.element : styles.preview}
           iconStyle={getSelectedOptions().length > 0 ? styles.iconRight : {}}
@@ -165,13 +173,13 @@ const ProfessionsField = ({
 
       {value?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{i18n.t('Sub professions')}*</TextView>
+          <TextView>{subListLabel}*</TextView>
           <MultiSelect
             labelField="label"
             valueField="value"
             placeholderStyle={styles.placeholderStyle}
             iconColor={Layout.colors.primary}
-            placeholder={i18n.t('Select your sub professions')}
+            placeholder={subListPlaceholder}
             value={getSelectedSubOptions()}
             inside={getSelectedSubOptions().length > 0}
             style={!getSelectedSubOptions().length ? styles.element : styles.preview}
