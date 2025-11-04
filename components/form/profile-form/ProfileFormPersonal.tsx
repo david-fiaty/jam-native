@@ -42,9 +42,6 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter your last name')}
       />
 
-      <TextView>
-        {i18n.t('Professions')}*
-      </TextView>
       <ProfessionsField
         resource={resource}
         fieldKey="professions_ids"
