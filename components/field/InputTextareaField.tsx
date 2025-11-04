@@ -11,6 +11,7 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: string;
+  label?: string;
   placeholder?: string;
   containerStyle?: object;
   disabled?: boolean;
@@ -25,6 +26,7 @@ const InputTextareaField = ({
   parentKey,
   rules,
   value,
+  label,
   placeholder,
   containerStyle,
   disabled,
@@ -55,6 +57,8 @@ const InputTextareaField = ({
 
   return (
     <BoxView style={styles.container}>
+      {FormManager.renderLabel(label, rules)}
+      
       <Input
         style={styles.element}
         containerStyle={[Layout.formField, styles.element]}

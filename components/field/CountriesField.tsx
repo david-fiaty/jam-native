@@ -16,11 +16,12 @@ type Props = {
   parentKey?: string;
   rules?: any;
   multiple?: boolean;
+  label?: any;
   value?: any;
   placeholder?: any;
 };
 
-const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value, placeholder }: Props) => {
+const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, label, value, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
   const listData: any[] = appState.countriesData;
 
@@ -45,7 +46,7 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value,
 
   const onChangeValue = (item: any) => {
     let fieldValue: string = item?.value;
-  
+
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, fieldValue, rules);
     }
@@ -65,14 +66,18 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, value,
 
   const renderSingleSelectList = () => {
     return (
-      <BoxView direction="row" align="space-between" style={styles.container}>
-        <SelectListBase
-          value={value}
-          data={buildOptions()} 
-          onChangeValue={onChangeValue}
-          placeholder={i18n.t('Select a country')}
-        />
-      </BoxView>
+      <>
+        {FormManager.renderLabel(label, rules)}
+        
+        <BoxView direction="row" align="space-between" style={styles.container}>
+          <SelectListBase
+            value={value}
+            data={buildOptions()}
+            onChangeValue={onChangeValue}
+            placeholder={i18n.t('Select a country')}
+          />
+        </BoxView>
+      </>
     );
   };
 

@@ -15,47 +15,39 @@ const ProfileGroupNetworks = ({ resource, formData, parentKey }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Social networks")} />
 
-      <TextView>
-        {i18n.t('Linkedin page')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="linkedin_link"
         rules={['string', 'url']}
         value={formData?.linkedin_link || ''}
+        label={i18n.t('Linkedin page')}
         placeholder={i18n.t('Enter your page link')}
       />
 
-      <TextView>
-        {i18n.t('Facebook page')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="facebook_link"
         rules={['string', 'url']}
         value={formData?.facebook_link || ''}
+        label={i18n.t('Facebook page')}
         placeholder={i18n.t('Enter your page link')}
       />
 
-      <TextView>
-        {i18n.t('Instagram user name')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="instagram_username"
         rules={['string']}
         value={formData?.instagram_username || ''}
+        label={i18n.t('Instagram user name')}
         placeholder={i18n.t('Enter your user name')}
       />
 
-      <TextView>
-        {i18n.t('Website link')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="website_link"
         rules={['string', 'url']}
         value={formData?.website_link || ''}
+        label={i18n.t('Website link')}
         placeholder={i18n.t('Enter your website link')}
       />
     </>
