@@ -124,11 +124,11 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('Profile Image')}*</TextView>
         <ProfileImageField
           resource={resource}
           fieldKey="upload_profile_picture"
           rules={['required']}
+          label={i18n.t('Profile Image')}
           value={formData?.profile_picture?.url}
         />
 
