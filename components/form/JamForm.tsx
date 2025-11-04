@@ -22,7 +22,6 @@ import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
-import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
@@ -185,7 +184,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
             />
           </>
         )}
-
 
         <DatePickerField
           resource={resource}
