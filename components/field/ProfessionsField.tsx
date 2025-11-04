@@ -31,14 +31,12 @@ const ProfessionsField = ({
   const appState = useSelector((state: any) => state.app, shallowEqual);
 
   const updateSelection = (selectedIds: any[]) => {
-    selectedIds = [...new Set([...(value || []), ...selectedIds])].filter(Boolean);
+    selectedIds = [...new Set([...(value || []), ...selectedIds])];
 
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds, rules);
     }
     else if (resource && fieldKey && parentKey) {
-
-
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
     }
   };
@@ -47,7 +45,7 @@ const ProfessionsField = ({
     let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
 
     deleteCallback(item);
-
+    
     if (resource && fieldKey && !parentKey) {
       FormManager.updateField(resource, fieldKey, selectedIds, rules);
     }
@@ -143,33 +141,6 @@ const ProfessionsField = ({
       }
     })();
   }, [isLoaded, appState]);
-
-  return (
-    <>
-      <BoxView direction="column" align="left">
-        <TextView>{i18n.t('Professions')}*</TextView>
-        <MultiSelect
-          //value={getSelectedOptions()}
-          value={value}
-          labelField="name"
-          valueField="id"
-          placeholder={i18n.t('Select your professions')}
-          //inside={getSelectedOptions().length > 0}
-          //style={!getSelectedOptions().length ? styles.element : styles.preview}
-          //iconStyle={getSelectedOptions().length > 0 ? styles.iconRight : {}}
-          //placeholderStyle={styles.placeholderStyle}
-          //iconColor={Layout.colors.primary}
-          onChange={(selectedIds: any) => updateSelection(selectedIds)}
-          data={professionsOptions}
-          renderItem={(o: any) => renderItem(o)}
-          renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
-        />
-        {FormManager.renderError('professions_ids')}
-      </BoxView>
-
-    </>
-
-  );
 
   return (
     <>
