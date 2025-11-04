@@ -46,6 +46,7 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         resource={resource}
         fieldKey="professions_ids"
         parentKey={parentKey}
+        childrenKey="sub_professions"
         rules={['required']}
         value={formData?.[parentKey]?.professions_ids || []}
         listLabel={i18n.t('Professions')}
