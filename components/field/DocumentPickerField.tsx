@@ -13,6 +13,7 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
+  label?: any;
   placeholder?: string;
   preview?: boolean;
   multiple?: boolean;
@@ -27,6 +28,7 @@ const DocumentPickerField = ({
   parentKey,
   rules,
   value,
+  label,
   placeholder,
   preview,
   multiple,
@@ -107,6 +109,8 @@ const DocumentPickerField = ({
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+      
       {!selectedDocuments?.length && (
         <TouchableOpacity onPress={pickDocument}>
           <InputTextField
