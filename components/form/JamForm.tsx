@@ -173,35 +173,16 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         {['physical', 'online_physical'].includes(formData?.location_type) && (
           <>
-            <TextView>{i18n.t('Location')} *</TextView>
             <LocationPickerField
               resource={resource}
-              placeholder={i18n.t('Select your location')}
-              onChangeValue={(data: any) => {
-                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude, ['number']);
-                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude, ['number']);
-              }}
-              onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
-                resource: resource,
-                latitude: {
-                  field: 'geolocation_latitude',
-                  value: formData?.geolocation_latitude,
-                },
-                longitude: {
-                  field: 'geolocation_longitude',
-                  value: formData?.geolocation_longitude,
-                },
-              })}
-              latitude={{
-                field: 'geolocation_latitude',
-                value: formData?.geolocation_latitude,
-              }}
-              longitude={{
-                field: 'geolocation_longitude',
-                value: formData?.geolocation_longitude,
-              }}
+              latitudeKey="geolocation_latitude"
+              longitudeKey="geolocation_longitude"
+              latitudeValue={formData?.geolocation_latitude || ''}
+              longitudeValue={formData?.geolocation_longitude || ''}
+              rules={['required']}
+              label={i18n.t('Location')}
+              placeholder={i18n.t('Select a location')}
             />
-            {FormManager.renderError('geolocation_latitude')}
           </>
         )}
 
