@@ -4,6 +4,8 @@ import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
+import TextView from "../view/TextView";
+import i18n from "@/translation/i18n";
 
 type Props = {
   resource?: any;
@@ -11,6 +13,7 @@ type Props = {
   parentKey?: any;
   rules?: any;
   keyboardType?: any;
+  label?: any;
   value?: string;
   placeholder?: string;
   containerStyle?: object;
@@ -31,6 +34,7 @@ const InputTextField = ({
   rules,
   keyboardType,
   value,
+  label,
   placeholder,
   containerStyle,
   leftIcon,
@@ -50,7 +54,7 @@ const InputTextField = ({
 
   const changeTextEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
-    
+
     if (onChangeText) {
       onChangeText(fieldValue)
     }
@@ -67,12 +71,26 @@ const InputTextField = ({
     else if (onChangeText) onChangeText(currentValue);
   };
 
+  const renderLabel = () => {
+    if (label) {
+      return (
+        <TextView>
+          {label} 
+        </TextView>
+      );
+    }
+
+    return <></>;
+  };
+
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
+      {renderLabel()}
+
       <Input
         keyboardType={keyboardType}
         textAlignVertical="center"
