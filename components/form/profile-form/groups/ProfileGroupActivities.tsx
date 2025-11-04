@@ -17,15 +17,13 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Sectors and activities")} />
 
-      <TextView>
-        {i18n.t('Main cultural activities')}
-      </TextView>
       <CulturalActivitiesField
         resource={resource}
         fieldKey="main_cultural_activities"
         parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select cultural activities')}
+        label={i18n.t('Main cultural activities')}
         value={formData?.[parentKey]?.main_cultural_activities || []}
       />
 
