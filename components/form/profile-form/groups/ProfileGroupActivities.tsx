@@ -44,7 +44,6 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
       <SectorsField
         resource={resource}
         fieldKey="sectors_ids"
-        parentKey={parentKey}
         childrenKey="sub_sectors"
         rules={['required']}
         value={formData?.sectors_ids || []}
