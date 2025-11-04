@@ -12,6 +12,7 @@ type Props = {
   longitudeValue?: any;
   parentKey?: any;
   rules?: any;
+  label?: any;
   placeholder?: any;
 };
 
@@ -23,6 +24,7 @@ const LocationPickerField = ({
   longitudeValue,
   parentKey,
   rules,
+  label,
   placeholder
 }: Props) => {
   const onPressEvent = () => {
@@ -47,6 +49,8 @@ const LocationPickerField = ({
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+      
       <TouchableOpacity
         style={styles.container}
         onPress={onPressEvent}
