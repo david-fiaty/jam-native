@@ -1,5 +1,4 @@
 import { TouchableOpacity } from 'react-native';
-import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
@@ -15,11 +14,11 @@ type Props = {
   parentKey: string;
   rules?: any
   value?: any;
+  label?: any;
   placeholder?: any;
 };
 
-const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
-  const appState = useSelector((state: any) => state.app, shallowEqual);
+const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder }: Props) => {
   const listData: any[] = StaticData.weekDays;
 
   const onPress = () => {
@@ -43,6 +42,8 @@ const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, placeholde
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+      
       {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
