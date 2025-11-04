@@ -34,9 +34,6 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter a profile email')}
       />
 
-      <TextView>
-        {i18n.t('Phone number')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="phone_number"
