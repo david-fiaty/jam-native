@@ -196,7 +196,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           label={i18n.t('Start date')}
           placeholder={i18n.t('Select the start date')}
         />
-        
+
         <DatePickerField
           resource={resource}
           fieldKey="end_datetime"
@@ -207,25 +207,25 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           placeholder={i18n.t('Select the end date')}
         />
 
-        <TextView>{i18n.t('Country')}</TextView>
         <CountriesField
-          multiple={false}
           resource={resource}
-          field="scope_countries_codes"
-          placeholder={i18n.t('Select a country')}
+          fieldKey="scope_countries_codes"
+          multiple={false}
           value={formData?.scope_countries_codes || ''}
-          onPress={() => ModalManager.toggleModal('CountriesList', {
-            resource: resource,
-            field: 'scope_countries_codes',
-            multiple: false,
-          })}
+          label={i18n.t('Country')}
+          placeholder={i18n.t('Select a country')}
         />
-        {FormManager.renderError('scope_countries_codes')}
 
         <SectorsField
           resource={resource}
-          field="sectors_ids"
+          fieldKey="sectors_ids"
+          childrenKey="sub_sectors"
+          rules={['required']}
           value={formData?.sectors_ids || []}
+          listLabel={i18n.t('Activity sectors')}
+          listPlaceholder={i18n.t('Select your sectors')}
+          subListLabel={i18n.t('Activity sub sectors')}
+          subListPlaceholder={i18n.t('Select your sub sectors')}
         />
 
         <TextView>{i18n.t('Select collaborators')}</TextView>
