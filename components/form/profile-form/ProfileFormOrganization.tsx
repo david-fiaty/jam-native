@@ -19,33 +19,26 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Organization information")} />
 
-      <TextView>
-        {i18n.t('Organization name')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="organization_name"
         parentKey={parentKey}
         rules={['required', 'string']}
         value={formData?.[parentKey]?.organization_name || ''}
+        label={i18n.t('Organization name')}
         placeholder={i18n.t('Enter your organization name')}
       />
 
-      <TextView>
-        {i18n.t('Organization types')}
-      </TextView>
       <OrganizationTypesField
         resource={resource}
         fieldKey="organization_types"
         parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select organization types')}
+        label={i18n.t('Organization types')}
         value={formData?.[parentKey]?.organization_types || []}
       />
 
-      <TextView>
-        {i18n.t('Creation year')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="creation_year"
@@ -53,6 +46,7 @@ const ProfileFormOrganization = ({ resource, formData }: Props) => {
         rules={['required', 'number']}
         keyboardType="number-pad"
         value={formData?.[parentKey]?.creation_year || ''}
+        label={i18n.t('Creation year')}
         placeholder={i18n.t('Enter the creation year')}
       />
 
