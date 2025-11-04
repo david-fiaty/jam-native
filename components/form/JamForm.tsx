@@ -22,7 +22,6 @@ import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
-import DataManager from "@/manager/DataManager";
 import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
@@ -114,8 +113,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
       scroll={true}
       style={[Layout.formContainer, styles.container]}
     >
-      <BoxView 
-        direction="column" 
+      <BoxView
+        direction="column"
         style={[Layout.formContainer, styles.formContainer]}
       >
         <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
@@ -132,21 +131,23 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         <DividerView theme="white" />
 
-        <TextView>{i18n.t('Title')} *</TextView>
         <InputTextField
+          resource={resource}
+          fieldKey="title"
+          rules={['required', 'string']}
           value={formData?.title || ''}
+          label={i18n.t('Title')}
           placeholder={i18n.t('Provide a title')}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
         />
-        {FormManager.renderError('title')}
 
-        <TextView>{i18n.t('Description')} *</TextView>
         <InputTextareaField
+          resource={resource}
+          fieldKey="caption"
+          rules={['required', 'string']}
           value={formData?.caption || ''}
+          label={i18n.t('Description')}
           placeholder={i18n.t('Provide a description')}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
-        {FormManager.renderError('caption')}
 
         <TextView>{i18n.t('Select media')} *</TextView>
         <MediaPickerField
@@ -160,88 +161,69 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         />
         {FormManager.renderError('upload_medias')}
 
-        <TextView>{i18n.t('Location type')} *</TextView>
         <LocationTypeField
+          resource={resource}
+          fieldKey="location_type"
+          rules={['required', 'string']}
           value={formData?.location_type || ''}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'location_type', option.value, ['string'])}
+          label={i18n.t('Location type')}
+          placeholder={i18n.t('Select a location type')}
         />
-        {FormManager.renderError('location_type')}
 
         {['physical', 'online_physical'].includes(formData?.location_type) && (
           <>
-            <TextView>{i18n.t('Location')} *</TextView>
             <LocationPickerField
               resource={resource}
-              placeholder={i18n.t('Select your location')}
-              onChangeValue={(data: any) => {
-                FormManager.updateField(resource, 'geolocation_latitude', data?.geolocation_latitude, ['number']);
-                FormManager.updateField(resource, 'geolocation_longitude', data?.geolocation_longitude, ['number']);
-              }}
-              onPress={() => ModalManager.toggleModal('SelectLocationMapView', {
-                resource: resource,
-                latitude: {
-                  field: 'geolocation_latitude',
-                  value: formData?.geolocation_latitude,
-                },
-                longitude: {
-                  field: 'geolocation_longitude',
-                  value: formData?.geolocation_longitude,
-                },
-              })}
-              latitude={{
-                field: 'geolocation_latitude',
-                value: formData?.geolocation_latitude,
-              }}
-              longitude={{
-                field: 'geolocation_longitude',
-                value: formData?.geolocation_longitude,
-              }}
+              latitudeKey="geolocation_latitude"
+              longitudeKey="geolocation_longitude"
+              latitudeValue={formData?.geolocation_latitude || ''}
+              longitudeValue={formData?.geolocation_longitude || ''}
+              rules={['required']}
+              label={i18n.t('Location')}
+              placeholder={i18n.t('Select a location')}
             />
-            {FormManager.renderError('geolocation_latitude')}
           </>
         )}
 
-        <TextView>{i18n.t('Start date')}</TextView>
         <DatePickerField
-          value={formData?.period?.start_datetime || ''}
-          placeholder={i18n.t('Select the start date')}
-          onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
-            ...(formData?.period || {}),
-            ...{ start_datetime: DataManager.toDbDate(value) },
-          }, ['date'])}
-        />
-        {FormManager.renderError('period')}
-
-        <TextView>{i18n.t('End date')}</TextView>
-        <DatePickerField
-          value={formData?.period?.end_datetime || ''}
-          placeholder={i18n.t('Select the end date')}
-          onChangeValue={(value: any) => FormManager.updateField(resource, 'period', {
-            ...(formData?.period || {}),
-            ...{ end_datetime: DataManager.toDbDate(value) },
-          }, ['date'])}
-        />
-        {FormManager.renderError('period')}
-
-        <TextView>{i18n.t('Country')}</TextView>
-        <CountriesField
-          multiple={false}
           resource={resource}
-          field="scope_countries_codes"
-          placeholder={i18n.t('Select a country')}
-          value={formData?.scope_countries_codes || ''}
-          onPress={() => ModalManager.toggleModal('CountriesList', {
-            resource: resource,
-            field: 'scope_countries_codes',
-            multiple: false,
-          })}
+          fieldKey="start_datetime"
+          parentKey="period"
+          rules={['date']}
+          value={formData?.period?.start_datetime || ''}
+          label={i18n.t('Start date')}
+          placeholder={i18n.t('Select the start date')}
         />
-        {FormManager.renderError('scope_countries_codes')}
+
+        <DatePickerField
+          resource={resource}
+          fieldKey="end_datetime"
+          parentKey="period"
+          rules={['date']}
+          value={formData?.period?.end_datetime || ''}
+          label={i18n.t('End date')}
+          placeholder={i18n.t('Select the end date')}
+        />
+
+        <CountriesField
+          resource={resource}
+          fieldKey="scope_countries_codes"
+          multiple={false}
+          value={formData?.scope_countries_codes || ''}
+          label={i18n.t('Country')}
+          placeholder={i18n.t('Select a country')}
+        />
 
         <SectorsField
           resource={resource}
-          field="sectors_ids"
+          fieldKey="sectors_ids"
+          childrenKey="sub_sectors"
+          rules={['required']}
           value={formData?.sectors_ids || []}
+          listLabel={i18n.t('Activity sectors')}
+          listPlaceholder={i18n.t('Select your sectors')}
+          subListLabel={i18n.t('Activity sub sectors')}
+          subListPlaceholder={i18n.t('Select your sub sectors')}
         />
 
         <TextView>{i18n.t('Select collaborators')}</TextView>
