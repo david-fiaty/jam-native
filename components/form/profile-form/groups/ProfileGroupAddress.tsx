@@ -19,36 +19,31 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Address and location")} />
 
-      <TextView>
-        {i18n.t('Address')}
-      </TextView>
       <InputTextareaField
         resource={resource}
         fieldKey="address"
         rules={['string']}
         value={formData?.address || ''}
+        label={i18n.t('Address')}
         placeholder={i18n.t('Enter your address')}
       />
 
-      <TextView>
-        {i18n.t('City')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="other_town_or_locality"
         rules={['string']}
         value={formData?.other_town_or_locality || ''}
+        label={i18n.t('City')}
         placeholder={i18n.t('Other town or locality')}
       />
-      {FormManager.renderError('other_town_or_locality')}
 
-      <TextView>{i18n.t('Country')}</TextView>
       <CountriesField
         resource={resource}
         fieldKey="scope_country_code"
         multiple={false}
-        placeholder={i18n.t('Select a country')}
         value={formData?.scope_country_code || ''} 
+        label={i18n.t('Country')}
+        placeholder={i18n.t('Select a country')}
       />
 
       <TextView>
