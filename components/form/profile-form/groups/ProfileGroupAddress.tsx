@@ -46,9 +46,6 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
         placeholder={i18n.t('Select a country')}
       />
 
-      <TextView>
-        {i18n.t('Location')}*
-      </TextView>
       <LocationPickerField
         resource={resource}
         latitudeKey="geolocation_latitude"
@@ -56,6 +53,7 @@ const ProfileGroupAddress = ({ resource, formData, parentKey }: Props) => {
         latitudeValue={formData?.geolocation_latitude || ''}
         longitudeValue={formData?.geolocation_longitude || ''}
         rules={['required']}
+        label={i18n.t('Location')}
         placeholder={i18n.t('Select your location')}
       />
     </>
