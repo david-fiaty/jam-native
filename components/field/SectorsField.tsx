@@ -153,7 +153,8 @@ const SectorsField = ({
   return (
     <>
       <BoxView direction="column" align="left">
-        <TextView>{listLabel}*</TextView>
+        {FormManager.renderLabel(listLabel, rules)}
+
         <MultiSelect
           value={getSelectedOptions()}
           labelField="label"
@@ -174,7 +175,8 @@ const SectorsField = ({
 
       {value?.length > 0 && (
         <BoxView direction="column" align="left">
-          <TextView>{subListLabel}*</TextView>
+          {FormManager.renderLabel(subListLabel, rules)}
+
           <MultiSelect
             labelField="label"
             valueField="value"

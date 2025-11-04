@@ -14,10 +14,11 @@ type Props = {
   parentKey: string;
   rules?: any
   value?: any;
+  label?: any;
   placeholder?: any;
 };
 
-const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
+const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
   const listData: any[] = appState.organizationTypesData;
 
@@ -42,6 +43,8 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, p
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+      
       {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
