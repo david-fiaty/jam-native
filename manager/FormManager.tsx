@@ -4,8 +4,23 @@ import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 import ScreenManager from "./ScreenManager";
 import DataManager from "./DataManager";
+import TextView from "@/components/view/TextView";
 
 class FormManager {
+  renderLabel(label: any, rules?: any) {
+    let isRequired: boolean = (rules || []).includes('required');
+
+    if (label) {
+      return (
+        <TextView> 
+          {label}{isRequired ? `*` : ''}
+        </TextView>
+      );
+    }
+
+    return <></>;
+  } 
+
   resetForm(resource: any) {
     Store.dispatch(setFormData<any>({
       resource: resource,
