@@ -48,6 +48,10 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         parentKey={parentKey}
         rules={['required']}
         value={formData?.[parentKey]?.professions_ids || []}
+        listLabel={i18n.t('Professions')}
+        listPlaceholder={i18n.t('Select your professions')}
+        subListLabel={i18n.t('Sub professions')}
+        subListPlaceholder={i18n.t('Select your sub professions')}
       />
 
       <ProfileGroupActivities 
