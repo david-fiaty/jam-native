@@ -1,6 +1,5 @@
 import React from "react";
 import i18n from "@/translation/i18n";
-import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import GroupTitleView from "@/components/view/GroupTitleView";
 import SectorsField from "@/components/field/SectorsField";
@@ -17,27 +16,23 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Sectors and activities")} />
 
-      <TextView>
-        {i18n.t('Main cultural activities')}
-      </TextView>
       <CulturalActivitiesField
         resource={resource}
         fieldKey="main_cultural_activities"
         parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select cultural activities')}
+        label={i18n.t('Main cultural activities')}
         value={formData?.[parentKey]?.main_cultural_activities || []}
       />
 
-      <TextView>
-        {i18n.t('Other cultural activities')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="other_cultural_activities"
         parentKey={parentKey}
         rules={['string']}
         value={formData?.[parentKey]?.other_cultural_activities || ''}
+        label={i18n.t('Other cultural activities')}
         placeholder={i18n.t('Enter other cultural activities')}
       />   
 
