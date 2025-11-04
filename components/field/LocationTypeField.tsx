@@ -27,6 +27,19 @@ const LocationTypeField = ({
   placeholder,
   onChangeValue
 }: Props) => {
+
+  const onChangeEvent = (fieldValue: any) => {
+    if (onChangeValue) {
+      onChangeValue(fieldValue);
+    }
+    else if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+    }
+  };
+
   const buildOptions = (optionsData: any) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
@@ -44,7 +57,7 @@ const LocationTypeField = ({
         <SelectListBase
           value={value}
           data={buildOptions(EntityManager.getLocationTypes())}
-          onChangeValue={onChangeValue}
+          onChangeValue={onChangeEvent}
           placeholder={placeholder}
         />
       </BoxView>
