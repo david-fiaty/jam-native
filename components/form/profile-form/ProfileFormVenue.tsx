@@ -22,27 +22,23 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Venue information")} />
 
-      <TextView>
-        {i18n.t('Venue name')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="venue_name"
         parentKey={parentKey}
         rules={['required', 'string']}
         value={formData?.[parentKey]?.venue_name || ''}
+        label={i18n.t('Venue name')}
         placeholder={i18n.t('Enter the venue name')}
       />
 
-      <TextView>
-        {i18n.t('Venue types')}*
-      </TextView>
       <VenueTypesField
         resource={resource}
         fieldKey="venue_types"
         parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Select venue types')}
+        label={i18n.t('Venue types')}
         value={formData?.[parentKey]?.venue_types || []}
       />
 
