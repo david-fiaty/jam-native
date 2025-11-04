@@ -14,10 +14,11 @@ type Props = {
   parentKey: string;
   rules?: any
   value?: any;
+  label?: any;
   placeholder?: any;
 };
 
-const CulturalActivitiesField = ({ resource, fieldKey, parentKey, rules, value, placeholder }: Props) => {
+const CulturalActivitiesField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder }: Props) => {
   const appState = useSelector((state: any) => state.app, shallowEqual);
   const listData: any[] = appState.culturalActivityTypesData;
 
@@ -42,6 +43,8 @@ const CulturalActivitiesField = ({ resource, fieldKey, parentKey, rules, value, 
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+      
       {!value?.length && (
         <TouchableOpacity
           onPress={onPress}
