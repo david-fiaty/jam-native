@@ -43,8 +43,14 @@ const ProfileGroupActivities = ({ resource, formData, parentKey }: Props) => {
 
       <SectorsField
         resource={resource}
-        field="sectors_ids"
+        fieldKey="sectors_ids"
+        childrenKey="sub_sectors"
+        rules={['required']}
         value={formData?.sectors_ids || []}
+        listLabel={i18n.t('Industries')}
+        listPlaceholder={i18n.t('Select your industries')}
+        subListLabel={i18n.t('Sub industries')}
+        subListPlaceholder={i18n.t('Select your sub industries')}
       />
     </>
   );
