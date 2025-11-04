@@ -132,13 +132,14 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
         <DividerView theme="white" />
 
-        <TextView>{i18n.t('Title')} *</TextView>
         <InputTextField
+          resource={resource}
+          fieldKey="title"
+          rules={['required', 'string']}
           value={formData?.title || ''}
-          placeholder={i18n.t('Provide a title')}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'title', value, ['string'])}
+          label={i18n.t('Title')}
+          placeholder={i18n.t('Provide a title')}         
         />
-        {FormManager.renderError('title')}
 
         <TextView>{i18n.t('Description')} *</TextView>
         <InputTextareaField
