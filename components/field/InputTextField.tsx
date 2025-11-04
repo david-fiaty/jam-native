@@ -71,25 +71,13 @@ const InputTextField = ({
     else if (onChangeText) onChangeText(currentValue);
   };
 
-  const renderLabel = () => {
-    if (label) {
-      return (
-        <TextView>
-          {label} 
-        </TextView>
-      );
-    }
-
-    return <></>;
-  };
-
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
-      {renderLabel()}
+      {FormManager.renderLabel(label, rules)}
 
       <Input
         keyboardType={keyboardType}
