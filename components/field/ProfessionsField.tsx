@@ -26,10 +26,10 @@ const ProfessionsField = ({
   value,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [professionsData, setProfessionsData] = useState<any[]>([]);
   const [professionsOptions, setProfessionsOptions] = useState<any[]>([]);
   const appState = useSelector((state: any) => state.app, shallowEqual);
-
+  const listData: any[] = appState.professionsData;
+  
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(value || []), ...selectedIds])];
 
@@ -54,8 +54,8 @@ const ProfessionsField = ({
     }
   };
 
-  const getProfessionsOptions = (professionsList: any[]) => {
-    let listOptions: any[] = professionsList.map((o: any) => {
+  const getProfessionsOptions = () => {
+    let listOptions: any[] = (listData || []).map((o: any) => {
       return {
         value: o?.id,
         label: o?.name,
@@ -72,7 +72,7 @@ const ProfessionsField = ({
       return listOptions;
     }
 
-    professionsData
+    listData
       .filter((o: any) => (value || []).includes(o.id))
       .map((x: any) => {
         (x?.sub_professions || []).map((y: any) => {
@@ -135,8 +135,7 @@ const ProfessionsField = ({
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setProfessionsData(appState.professionsData);
-        setProfessionsOptions(getProfessionsOptions(appState.professionsData));
+        setProfessionsOptions(getProfessionsOptions());
         setIsLoaded(true);
       }
     })();
@@ -161,7 +160,7 @@ const ProfessionsField = ({
           renderItem={(o: any) => renderItem(o)}
           renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
         />
-        {FormManager.renderError('professions_ids')}
+        {FormManager.renderError(fieldKey, parentKey)}
       </BoxView>
 
       {value?.length > 0 && (
@@ -182,7 +181,7 @@ const ProfessionsField = ({
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
           />
-          {FormManager.renderError('professions_ids')}
+          {FormManager.renderError(fieldKey, parentKey)}
         </BoxView>
       )}
     </>
