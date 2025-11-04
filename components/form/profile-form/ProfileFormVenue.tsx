@@ -1,6 +1,5 @@
 import React from "react";
 import i18n from "@/translation/i18n";
-import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import VenueTypesField from "@/components/field/VenueTypesField";
 import DatePickerField from "@/components/field/DatePickerField";
@@ -42,21 +41,16 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         value={formData?.[parentKey]?.venue_types || []}
       />
 
-      <TextView>
-        {i18n.t('Other venue types')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="other_venue_types"
         parentKey={parentKey}
         rules={['string']}
         value={formData?.[parentKey]?.other_venue_types || ''}
+        label={i18n.t('Other venue types')}
         placeholder={i18n.t('Enter other venue types')}
       />
 
-      <TextView>
-        {i18n.t('Creation year')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="creation_year"
@@ -64,68 +58,59 @@ const ProfileFormVenue = ({ resource, formData }: Props) => {
         rules={['number']}
         keyboardType="number-pad"
         value={formData?.[parentKey]?.creation_year || ''}
+        label={i18n.t('Creation year')}
         placeholder={i18n.t('Enter the creation year')}
       />
 
       <GroupTitleView label={i18n.t("Venue details")} />
 
-      <TextView>
-        {i18n.t('Opening days')}
-      </TextView>
       <WeekDaysField
         resource={resource}
         fieldKey="opening_days"
         parentKey={parentKey}
         rules={['required']}
         placeholder={i18n.t('Enter the opening days')}
+        label={i18n.t('Opening days')}
         value={formData?.[parentKey]?.opening_days || []}
       />
 
-      <TextView>
-        {i18n.t('Weekdays opening hour')}
-      </TextView>
       <DatePickerField
         mode="time"
         resource={resource}
         fieldKey="opening_hour_weekdays"
         parentKey={parentKey}
         value={formData?.[parentKey]?.opening_hour_weekdays || ''}
+        label={i18n.t('Weekdays opening hour')}
         placeholder={i18n.t('Weekdays opening hour')}
       />
 
-      <TextView>
-        {i18n.t('Weekdays closing hour')}
-      </TextView>
       <DatePickerField
         mode="time"
         resource={resource}
         fieldKey="closing_hour_weekdays"
         parentKey={parentKey}
         value={formData?.[parentKey]?.closing_hour_weekdays || ''}
+        label={i18n.t('Weekdays closing hour')}
         placeholder={i18n.t('Weekdays closing hour')}
       />
 
-      <TextView>
-        {i18n.t('Weekend opening hour')}
-      </TextView>
       <DatePickerField
         mode="time"
         resource={resource}
         fieldKey="opening_hour_weekend"
         parentKey={parentKey}
         value={formData?.[parentKey]?.opening_hour_weekend || ''}
+        label={i18n.t('Weekend opening hour')}
         placeholder={i18n.t('Weekends opening hour')}
       />
 
-      <TextView>
-        {i18n.t('Weekend closing hour')}
-      </TextView>
       <DatePickerField
         mode="time"
         resource={resource}
         fieldKey="closing_hour_weekend"
         parentKey={parentKey}
         value={formData?.[parentKey]?.closing_hour_weekend || ''}
+        label={i18n.t('Weekend closing hour')}
         placeholder={i18n.t('Weekends closing hour')}
       />
 
