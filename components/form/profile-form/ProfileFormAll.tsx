@@ -25,14 +25,12 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Profile name')}
       />
 
-      <TextView>
-        {i18n.t('Profile email')}
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="email"
         rules={['string', 'email']}
         value={formData?.email || ''}
+        label={i18n.t('Profile email')}
         placeholder={i18n.t('Enter a profile email')}
       />
 
@@ -44,19 +42,18 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         fieldKey="phone_number"
         rules={['string']}
         value={formData?.phone_number || ''}
+        label={i18n.t('Phone number')}
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
       />
       {FormManager.renderError('phone_number')}
 
-      <TextView>
-        {i18n.t('Description')}*
-      </TextView>
       <InputTextareaField
         resource={resource}
         fieldKey="profile_description"
         rules={['required', 'string']}
         value={formData?.profile_description || ''}
+        label={i18n.t('Description')}
         placeholder={i18n.t('Profile description')}
       />
 
