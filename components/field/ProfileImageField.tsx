@@ -6,6 +6,7 @@ import MediaPickerField from './MediaPickerField';
 import ImageView from "../view/ImageView";
 import IconView from "../view/IconView";
 import MediaManager from '@/manager/MediaManager';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource?: any;
@@ -13,10 +14,12 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
+  label?: any;
+  placeholder?: any;
   onChangeValue?: (data: any) => void;
 };
 
-const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, onChangeValue }: Props) => {
+const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [uri, setUri] = useState<any>('');
 
@@ -47,47 +50,51 @@ const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, onChan
   }, [value, isLoaded]);
 
   return (
-    <MediaPickerField
-      resource={resource}
-      fieldKey={fieldKey}
-      parentKey={parentKey}
-      rules={rules}
-      mediaTypes={['images']}
-      multiple={false}
-      label={
-        <BoxView direction="row" align="center">
-          {!uri?.length && (
-            <BoxView direction="row" align="center" justify="flex-start" style={styles.iconContainer}>
-              <IconView name="image" theme="secondary" size={26} padding={48} radius="round" />
-            </BoxView>
-          )}
+    <>
+      {FormManager.renderLabel(label, rules)}
 
-          {uri?.length > 0 && (
-            <BoxView
-              direction="row"
-              align="center"
-              justify="space-between"
-            >
-              <ImageView
-                uri={uri}
-                width={132}
-                height={132}
-                resizeMode="cover"
-                style={styles.imagePreview}
-              />
+      <MediaPickerField
+        resource={resource}
+        fieldKey={fieldKey}
+        parentKey={parentKey}
+        rules={rules}
+        mediaTypes={['images']}
+        multiple={false}
+        label={
+          <BoxView direction="row" align="center">
+            {!uri?.length && (
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.iconContainer}>
+                <IconView name="image" theme="secondary" size={26} padding={48} radius="round" />
+              </BoxView>
+            )}
 
-              <TouchableOpacity
-                style={styles.deleteImage}
-                onPress={deleteImage}
+            {uri?.length > 0 && (
+              <BoxView
+                direction="row"
+                align="center"
+                justify="space-between"
               >
-                <IconView name="delete" theme="primary" size={12} padding={3.5} />
-              </TouchableOpacity>
-            </BoxView>
-          )}
-        </BoxView>
-      }
-      onSelectItem={onSelectItem}
-    />
+                <ImageView
+                  uri={uri}
+                  width={132}
+                  height={132}
+                  resizeMode="cover"
+                  style={styles.imagePreview}
+                />
+
+                <TouchableOpacity
+                  style={styles.deleteImage}
+                  onPress={deleteImage}
+                >
+                  <IconView name="delete" theme="primary" size={12} padding={3.5} />
+                </TouchableOpacity>
+              </BoxView>
+            )}
+          </BoxView>
+        }
+        onSelectItem={onSelectItem}
+      />
+    </>
   );
 };
 

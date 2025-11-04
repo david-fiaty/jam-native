@@ -9,7 +9,6 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
-import TextView from "@/components/view/TextView";
 import ProfileTypeField from "@/components/field/ProfileTypeField";
 import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
@@ -124,20 +123,21 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t('Profile Image')}*</TextView>
         <ProfileImageField
           resource={resource}
           fieldKey="upload_profile_picture"
           rules={['required']}
+          label={i18n.t('Profile Image')}
           value={formData?.profile_picture?.url}
         />
 
-        <TextView>{i18n.t('Profile type')}*</TextView>
         <ProfileTypeField
           resource={resource}
           fieldKey="profile_type"
           rules={['required']}
           value={formData?.profile_type}
+          label={i18n.t('Profile type')}
+          placeholder={i18n.t('Select a profile type')}
           //disabled={resource == 'profile'}
         />
 
