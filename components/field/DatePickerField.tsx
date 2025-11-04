@@ -13,20 +13,22 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
+  label?: any;
   placeholder?: string;
   value?: string;
   mode?: any;
   onChangeValue?: (value: any) => void;
 };
 
-const DatePickerField = ({  
+const DatePickerField = ({
   resource,
   fieldKey,
   parentKey,
   rules,
-  placeholder, 
-  value, 
-  mode, 
+  label,
+  placeholder,
+  value,
+  mode,
   onChangeValue
 }: Props) => {
   const [date, setDate] = useState(new Date());
@@ -45,12 +47,12 @@ const DatePickerField = ({
 
   const handleConfirm = (value: any) => {
     if (value) setDate(value);
-    
+
     let fieldValue: any = value;
-    
+
     if (mode == 'time') {
       fieldValue = DataManager.toDbTime(fieldValue);
-    } 
+    }
 
     if (onChangeValue) {
       onChangeValue(fieldValue);
@@ -75,11 +77,14 @@ const DatePickerField = ({
   };
 
   return (
+    <>
+      {FormManager.renderLabel(label, rules)}
+      
       <BoxView direction="row" align="space-between">
         <TouchableOpacity onPress={showDatePicker} style={styles.fieldContainer}>
-          <InputTextField 
+          <InputTextField
             readOnly={true}
-            placeholder={placeholder} 
+            placeholder={placeholder}
             rightIcon={renderRightIcon()}
             value={value}
           />
@@ -87,17 +92,18 @@ const DatePickerField = ({
 
         {show && (
           <DateTimePickerModal
-            date={date} 
+            date={date}
             isVisible={show}
             mode={mode}
             onConfirm={handleConfirm}
             onCancel={hideDatePicker}
-            display={display} 
+            display={display}
           />
         )}
 
         {FormManager.renderError(fieldKey, parentKey)}
       </BoxView>
+    </>
   );
 };
 
