@@ -15,9 +15,6 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Documents")} />
 
-      <TextView>
-        {i18n.t('Technical sheet')}
-      </TextView>
       <DocumentPickerField
         resource={resource}
         fieldKey="upload_technical_sheet"
@@ -25,6 +22,7 @@ const ProfileGroupDocuments = ({ resource, formData, parentKey }: Props) => {
         preview={true}
         multiple={false}
         value={formData?.[parentKey]?.upload_technical_sheet || null}
+        label={i18n.t('Technical sheet')}
         placeholder={i18n.t('Upload a technical sheet')}
       />
 
