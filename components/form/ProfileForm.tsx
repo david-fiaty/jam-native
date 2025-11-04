@@ -132,12 +132,13 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
           value={formData?.profile_picture?.url}
         />
 
-        <TextView>{i18n.t('Profile type')}*</TextView>
         <ProfileTypeField
           resource={resource}
           fieldKey="profile_type"
           rules={['required']}
           value={formData?.profile_type}
+          label={i18n.t('Profile type')}
+          placeholder={i18n.t('Select a profile type')}
           //disabled={resource == 'profile'}
         />
 
