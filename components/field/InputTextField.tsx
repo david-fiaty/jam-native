@@ -4,8 +4,6 @@ import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
-import TextView from "../view/TextView";
-import i18n from "@/translation/i18n";
 
 type Props = {
   resource?: any;
