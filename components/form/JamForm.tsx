@@ -141,13 +141,14 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           placeholder={i18n.t('Provide a title')}         
         />
 
-        <TextView>{i18n.t('Description')} *</TextView>
         <InputTextareaField
+          resource={resource}
+          fieldKey="caption"
+          rules={['required', 'string']}
           value={formData?.caption || ''}
+          label={i18n.t('Description')}
           placeholder={i18n.t('Provide a description')}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'caption', value, ['string'])}
         />
-        {FormManager.renderError('caption')}
 
         <TextView>{i18n.t('Select media')} *</TextView>
         <MediaPickerField
