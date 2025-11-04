@@ -16,14 +16,12 @@ type Props = {
 const ProfileFormAll = ({ resource, formData }: Props) => {
   return (
     <>
-      <TextView>
-        {i18n.t('Profile name (with no spaces)')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="profile_name"
         rules={['required', 'nospace', 'string']}
         value={formData?.profile_name || ''}
+        label={i18n.t('Profile name (with no spaces)')}
         placeholder={i18n.t('Profile name')}
       />
 
