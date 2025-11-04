@@ -143,6 +143,11 @@ const ProfessionsField = ({
   }, [isLoaded, appState]);
 
   return (
+    <TextView>XXX</TextView>
+
+  );
+
+  return (
     <>
       <BoxView direction="column" align="left">
         <TextView>{i18n.t('Professions')}*</TextView>
