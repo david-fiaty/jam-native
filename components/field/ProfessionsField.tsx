@@ -7,7 +7,6 @@ import TagView from '../view/TagView';
 import BoxView from '../view/BoxView';
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
-import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
