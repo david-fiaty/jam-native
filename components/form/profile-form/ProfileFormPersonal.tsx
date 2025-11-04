@@ -18,27 +18,23 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Personal information")} />
 
-      <TextView>
-        {i18n.t('First name')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="first_name"
         parentKey={parentKey}
         rules={['required', 'string']}
         value={formData?.[parentKey]?.first_name || ''}
+        label={i18n.t('First name')}
         placeholder={i18n.t('Enter your first name')}
       />
 
-      <TextView>
-        {i18n.t('Last name')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="last_name"
         parentKey={parentKey}
         rules={['required', 'string']}
         value={formData?.[parentKey]?.last_name || ''}
+        label={i18n.t('Last name')}
         placeholder={i18n.t('Enter your last name')}
       />
 
