@@ -1,6 +1,5 @@
 import React from "react";
 import i18n from "@/translation/i18n";
-import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import ProfessionsField from "@/components/field/ProfessionsField";
 import GroupTitleView from "@/components/view/GroupTitleView";
@@ -18,27 +17,23 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
     <>
       <GroupTitleView label={i18n.t("Personal information")} />
 
-      <TextView>
-        {i18n.t('First name')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="first_name"
         parentKey={parentKey}
         rules={['required', 'string']}
         value={formData?.[parentKey]?.first_name || ''}
+        label={i18n.t('First name')}
         placeholder={i18n.t('Enter your first name')}
       />
 
-      <TextView>
-        {i18n.t('Last name')}*
-      </TextView>
       <InputTextField
         resource={resource}
         fieldKey="last_name"
         parentKey={parentKey}
         rules={['required', 'string']}
         value={formData?.[parentKey]?.last_name || ''}
+        label={i18n.t('Last name')}
         placeholder={i18n.t('Enter your last name')}
       />
 
@@ -46,8 +41,13 @@ const ProfileFormPersonal = ({ resource, formData }: Props) => {
         resource={resource}
         fieldKey="professions_ids"
         parentKey={parentKey}
+        childrenKey="sub_professions"
         rules={['required']}
         value={formData?.[parentKey]?.professions_ids || []}
+        listLabel={i18n.t('Professions')}
+        listPlaceholder={i18n.t('Select your professions')}
+        subListLabel={i18n.t('Sub professions')}
+        subListPlaceholder={i18n.t('Select your sub professions')}
       />
 
       <ProfileGroupActivities 
