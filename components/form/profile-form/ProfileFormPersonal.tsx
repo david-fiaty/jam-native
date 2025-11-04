@@ -1,6 +1,5 @@
 import React from "react";
 import i18n from "@/translation/i18n";
-import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import ProfessionsField from "@/components/field/ProfessionsField";
 import GroupTitleView from "@/components/view/GroupTitleView";
