@@ -112,8 +112,9 @@ class FormManager {
     return <></>;
   }
 
-  updateField(resource: string, key: any, value: any, rules: any[] = []) {
+  updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any) {
     let errors: any[] = [];
+    let key: any = parentKey ? `${parentKey}.${fieldKey}` : fieldKey;
 
     if (rules.length > 0) {
       errors = this.validateFied(resource, key, value, rules);
