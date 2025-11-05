@@ -43,12 +43,14 @@ const SignupEmailCodeForm = () => {
 
   return (
     <>
-      <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
-        keyboardType="number-pad"
+        resource={resource}
+        fieldKey="code"
+        rules={['required', 'number']}
         value={formData?.code || ''}
+        label={i18n.t('Verification sent, check your email inbox')}
         placeholder={i18n.t('Verification code')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'code', value)}
+        keyboardType="number-pad"
       />
 
       <ButtonView
