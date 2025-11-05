@@ -48,11 +48,7 @@ const DatePickerField = ({
   const handleConfirm = (value: any) => {
     if (value) setDate(value);
 
-    let fieldValue: any = value;
-
-    if (mode == 'time') {
-      fieldValue = DataManager.toDbTime(fieldValue);
-    }
+    let fieldValue: any = mode == 'time' ? DataManager.toDbTime(value) : DataManager.toDbDate(value);
 
     if (onChangeValue) {
       onChangeValue(fieldValue);
