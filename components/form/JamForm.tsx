@@ -22,6 +22,7 @@ import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
+import JamCategoryField from "../field/JamCategoryField";
 
 type Props = {
   jamId?: any;
@@ -104,8 +105,13 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         direction="column"
         style={[Layout.formContainer, styles.formContainer]}
       >
-        <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
-  
+        <JamCategoryField
+          resource={resource}
+          fieldKey="type"
+          value={formData?.type}
+          label={i18n.t('What kind of Jam is it?')}
+          rules={['required']}
+        />
 
         <DividerView theme="white" />
 
