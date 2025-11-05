@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
+import PhoneInput from '@linhnguyen96114/react-native-phone-input';
 
 type Props = {
   resource?: any;
@@ -54,7 +55,13 @@ const InputPhoneField = ({
         direction="row"
         style={styles.container}
       >
-        <TextView>Phone field</TextView>
+        <PhoneInput
+          defaultValue={value}
+          defaultCode="US"
+          onChangeText={onChangeEvent}
+          withShadow={true}
+          autoFocus={true}
+        />
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
