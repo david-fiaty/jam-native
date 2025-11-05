@@ -8,6 +8,7 @@ import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import ModalManager from '@/manager/ModalManager';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource?: any;
@@ -58,6 +59,8 @@ const CollaboratorsField = ({
 
   return (
     <>
+      {FormManager.renderLabel(label, rules)}
+      
       {!currentProfiles?.length && (
         <TouchableOpacity
           onPress={onPressEvent}
@@ -87,10 +90,12 @@ const CollaboratorsField = ({
           })}
 
           <View style={styles.iconRight}>
-            <IconView name="down" theme="transparent" onPress={onPress} />
+            <IconView name="down" theme="transparent" onPress={onPressEvent} />
           </View>
         </View>
       )}
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
