@@ -117,12 +117,14 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           placeholder={i18n.t('Your project description')}
         />
 
-        <TextView>{i18n.t("Privacy status")}*</TextView>
         <PrivacyStatusField
-          value={formData?.privacy_status}
-          onChangeValue={(option: any) => FormManager.updateField(resource, 'privacy_status', option.value, ['string'])}
+          resource={resource}
+          fieldKey="privacy_status"
+          rules={['required']}
+          value={formData?.privacy_status || ''}
+          label={i18n.t("Privacy status")}
+          placeholder={i18n.t("Select a privacy status")}
         />
-        {FormManager.renderError('privacy_status')}
 
         <BoxView direction="row" align="center" justify="space-between">
           <TextView style={styles.groupTitle}>
