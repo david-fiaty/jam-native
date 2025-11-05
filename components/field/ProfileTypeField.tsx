@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
 import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
-import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
 
 type Props = {
@@ -43,11 +42,8 @@ const ProfileTypeField = ({
     if (onChangeValue) {
       onChangeValue(option);
     }
-    else if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, option.value, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, option.value, rules);
+    else {
+      FormManager.updateField(resource, fieldKey, option.value, rules, parentKey);
     }
   };
 
@@ -63,9 +59,9 @@ const ProfileTypeField = ({
           onChangeValue={onChangeEvent}
           disabled={disabled}
         />
-
-        {FormManager.renderError(fieldKey, parentKey)}
       </BoxView>
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
