@@ -76,23 +76,25 @@ const LoginPhoneForm = () => {
       />
       {FormManager.renderError('country')}
 
-      <TextView style={styles.label}>{i18n.t('Phone number')}</TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="phone"
+        rules={['required', 'phone']}
         value={formData?.phone || ''}
+        label={i18n.t('Phone number')}
         placeholder={i18n.t('Enter your phone number')}
         keyboardType="number-pad"
-        containerStyle={styles.inputTextFieldContainer} // Todo - Fix styles not working
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
-      />
-      {FormManager.renderError('phone')}
-
-      <TextView style={styles.label}>{i18n.t('Password')}</TextView>
-      <InputPasswordField
-        placeholder={i18n.t('Password')}
         containerStyle={styles.inputTextFieldContainer}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
-      {FormManager.renderError('password')}
+
+      <InputPasswordField
+        resource={resource}
+        fieldKey="password"
+        rules={['required', 'string']}
+        label={i18n.t('Password')}
+        placeholder={i18n.t('Enter your password')}
+        containerStyle={styles.inputTextFieldContainer}
+      />
 
       {!isEmailFieldDisabled() && (
         <ButtonView
