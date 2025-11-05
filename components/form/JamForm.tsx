@@ -110,7 +110,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     })();
   }, [isLoaded, profileId, jamId, resource]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded && !hasLoadedOnce) return <SpinnerView />;
 
   return (
     <BoxView
