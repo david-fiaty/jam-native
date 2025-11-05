@@ -14,8 +14,6 @@ type Props = {
   rules?: any;
   value?: any;
   label?: any;
-  placeholder?: any;
-  disabled?: any;
   onChangeValue?: (option: any) => void;
 };
 
