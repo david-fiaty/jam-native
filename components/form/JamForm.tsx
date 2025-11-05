@@ -147,7 +147,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <LocationTypeField
           resource={resource}
           fieldKey="location_type"
-          rules={['required', 'string']}
+          rules={['required']}
           value={formData?.location_type || ''}
           label={i18n.t('Location type')}
           placeholder={i18n.t('Select a location type')}
