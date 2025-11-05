@@ -113,6 +113,8 @@ class FormManager {
   }
 
   updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any) {
+    if (!resource || !fieldKey) return;  
+
     let errors: any[] = [];
     let key: any = parentKey ? `${parentKey}.${fieldKey}` : fieldKey;
 
