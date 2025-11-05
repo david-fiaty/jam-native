@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
@@ -12,7 +11,6 @@ const resource: string = 'signup';
 
 const SignupForm = () => {
   const router = useRouter();
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData = useSelector((state: any) => state.form[resource]);
   const signupData: any = useSelector((state: any) => state.form[resource]);
 
@@ -40,14 +38,6 @@ const SignupForm = () => {
       SectionManager.push(router, Config.mainSection);
     }
   };
-
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, formData]);
 
   return (
     <ProfileForm 
