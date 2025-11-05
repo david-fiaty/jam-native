@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from '@/redux/slices/FormSlice';
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
@@ -29,14 +28,14 @@ const CollaboratorsField = ({
   label,
   placeholder,
 }: Props) => {
-  const dispatch = useDispatch();
   const [currentProfiles, setCurrentProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const onPressEvent = () => {
     ModalManager.toggleModal('CollaboratorsList', {
       resource: resource,
-      field: fieldKey,
+      fieldKey: fieldKey,
+      parentKey: parentKey,
     })
   };
 
