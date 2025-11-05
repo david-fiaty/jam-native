@@ -236,8 +236,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           resource={resource}
           fieldKey="collaborators_ids"
           value={formData?.collaborators_ids || []}
-          label={i18n.t('Select collaborators')}
-          placeholder={i18n.t('Select collaborators')}
+          label={i18n.t('Collaborators')}
+          placeholder={i18n.t('Select your collaborators')}
         />
 
         <DividerView />
