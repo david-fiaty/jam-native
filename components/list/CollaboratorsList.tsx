@@ -12,18 +12,19 @@ import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 import ProfileListItemView from '../view/ProfileListItemView';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
-  resource: string;
-  field?: any;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
 };
 
 const pageSize: number = 9;
 
-const CollaboratorsList = ({ resource, field }: Props) => {
-  const dispatch = useDispatch();
+const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
   const [profilesData, setProfilesData] = useState<any>(null);
-  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -74,21 +75,23 @@ const CollaboratorsList = ({ resource, field }: Props) => {
   };
 
   const toggleItem = (entityId: number) => {
-    let profileList = [...selectedProfiles];
-    if (profileList.includes(entityId)) {
-      profileList = profileList.filter((value: number) => value !== entityId);
+    let idArray: any[] = [...selectedIds];
+
+    if (idArray.includes(entityId)) {
+      idArray = idArray.filter((value: number) => value !== entityId);
     }
     else {
-      profileList.push(entityId);
+      idArray.push(entityId);
     }
 
-    setSelectedProfiles(profileList);
+    setSelectedIds(idArray);
 
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: field,
-      value: profileList,
-    }));
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, idArray);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
+    }
   };
 
   const getProfilesData = async () => {
@@ -103,14 +106,11 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     (async () => {
       if (!isLoaded) {
         if (!profilesData) setProfilesData(await getProfilesData());
-        if (formData?.[field]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[field]);
-        }
-
+        setSelectedIds(formData?.[fieldKey] || []);
         setIsLoaded(true);
       }
     })();
-  }, [profilesData, formData, field, selectedProfiles]);
+  }, [profilesData, formData, fieldKey]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -133,7 +133,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
             renderItem={(row: any) => (
               <ProfileListItemView
                 row={row}
-                selected={selectedProfiles.includes(row.item.id)}
+                selected={selectedIds.includes(row.item.id)}
                 onListItemPress={(o: any) => toggleItem(o.item.id)}
               />
             )}
