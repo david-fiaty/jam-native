@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
@@ -12,9 +12,7 @@ import DividerView from "../view/DividerView";
 import SpinnerView from "../view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import ButtonView from "../view/ButtonView";
-import IconView from "../view/IconView";
 import TextView from "../view/TextView";
-import ListView from "../view/ListView";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
@@ -39,7 +37,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
   const formData = useSelector((state: any) => state.form[resource]);
-  const jamCategories: any = EntityManager.getJamTypes();
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -62,22 +59,6 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     ScreenManager.showMessage(message);
     setIsProcessing(false);
   };
-
-  const renderJamCategory = (row: any) => (
-    <TouchableOpacity onPress={() => FormManager.updateField(resource, 'type', row.item.id, ['string'])}>
-      <View style={styles.categoryContainer}>
-        <View
-          style={[
-            styles.categoryItem,
-            formData?.type == row.item.id ? styles.categoryItemSelected : {},
-          ]}
-        >
-          <IconView name={row.item.icon} theme="secondary" />
-        </View>
-        <TextView>{row.item.name}</TextView>
-      </View>
-    </TouchableOpacity>
-  );
 
   useEffect(() => {
     if (!hasLoadedOnce.current) {
@@ -124,16 +105,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         style={[Layout.formContainer, styles.formContainer]}
       >
         <TextView>{i18n.t('What kind of Jam is it?')} *</TextView>
-        <ListView
-          data={jamCategories}
-          numColumns={4}
-          horizontal={false}
-          scrollEnabled={false}
-          contentContainerStyle={Layout.listContainer}
-          columnWrapperStyle={Layout.listColumnWrapper}
-          renderItem={(row: any) => renderJamCategory(row)}
-        />
-        {FormManager.renderError('type')}
+  
 
         <DividerView theme="white" />
 
@@ -265,25 +237,6 @@ const styles = StyleSheet.create({
     maxWidth: '100%',
     flexShrink: 1,
     paddingTop: Layout.space.base,
-  },
-  categoryContainer: {
-    flexDirection: 'column',
-    gap: Layout.space.small,
-  },
-  categoryItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Layout.colors.secondary,
-    padding: Layout.space.base,
-    borderWidth: Layout.borderWidth.big,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.secondary,
-    width: Layout.space.base * 7,
-    height: Layout.space.base * 7,
-  },
-  categoryItemSelected: {
-    borderColor: Layout.colors.primary,
   },
   fieldContainer: {
     maxWidth: '100%',
