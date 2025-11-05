@@ -7,6 +7,7 @@ import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
 import ModalManager from '@/manager/ModalManager';
 import FormManager from '@/manager/FormManager';
+import BoxView from '../view/BoxView';
 
 type Props = {
   resource?: any;
@@ -72,7 +73,11 @@ const CollaboratorsField = ({
       )}
 
       {currentProfiles?.length > 0 && (
-        <View style={styles.preview}>
+        <BoxView
+          direction="row" 
+          align="center" 
+          style={Layout.fieldSelectionPreview}
+        >
           {currentProfiles.map((item: any) => {
             return (
               <TagView
@@ -80,17 +85,14 @@ const CollaboratorsField = ({
                 key={item.id}
                 canEdit={true}
                 onDeleteButtonPress={() => deleteItem(item)}
-                containerStyle={styles.tagItem}
               >
                 {item?.profile_name}
               </TagView>
             );
           })}
 
-          <View style={styles.iconRight}>
-            <IconView name="down" theme="transparent" onPress={onPressEvent} />
-          </View>
-        </View>
+          <IconView name="plus" theme="transparent" onPress={onPressEvent} />
+        </BoxView>
       )}
 
       {FormManager.renderError(fieldKey, parentKey)}
@@ -102,24 +104,6 @@ const styles = StyleSheet.create({
   element: {
     ...Layout.formField,
     ...{ padding: Layout.space.base },
-  },
-  preview: {
-    position: 'relative',
-    backgroundColor: Layout.colors.secondary,
-    borderWidth: Layout.borderWidth.base,
-    borderColor: Layout.colors.secondary,
-    borderRadius: Layout.radius.round,
-    padding: Layout.space.base,
-    paddingBottom: -Layout.space.base,
-  },
-  iconRight: {
-    position: 'absolute',
-    top: '50%',
-    right: Layout.space.base,
-  },
-  tagItem: {
-    marginRight: Layout.space.base,
-    marginBottom: Layout.space.base,
   },
 });
 
