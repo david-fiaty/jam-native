@@ -32,13 +32,7 @@ const VenueTypesField = ({ resource, fieldKey, parentKey, rules, label, value, p
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
   };
 
   return (

@@ -35,24 +35,12 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, label,
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
   };
 
   const onChangeValue = (item: any) => {
-    let fieldValue: string = item?.value;
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, fieldValue, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
-    }
+    let fieldValue: string = item?.value
+    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
   const buildOptions = () => {

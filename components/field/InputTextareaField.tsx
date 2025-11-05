@@ -41,8 +41,8 @@ const InputTextareaField = ({
     if (onChangeText) {
       onChangeText(fieldValue)
     }
-    else if (resource && fieldKey) {
-      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    else {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
     }
   };
 

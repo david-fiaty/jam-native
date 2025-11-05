@@ -32,13 +32,7 @@ const CulturalActivitiesField = ({ resource, fieldKey, parentKey, rules, value, 
 
   const deleteItem = (item: any) => {
     let selectedIds: any[] = [...(value || []).filter((n: number) => n !== item.id)];
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
   };
 
   return (
