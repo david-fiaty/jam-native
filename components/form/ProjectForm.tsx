@@ -129,7 +129,7 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
         <ProjectJamsField
           resource={resource}
           fieldKey="jams_ids"
-          value={formData?.jams_ids}
+          value={formData?.jams_ids || []}
           rules={['required', 'array']}
           label={`${i18n.t('Jams')} (${formData?.jams_ids?.length || 0})`}
           emptyMessage={i18n.t('No data available.')}
