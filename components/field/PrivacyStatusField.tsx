@@ -58,6 +58,7 @@ const PrivacyStatusField = ({ resource, fieldKey, parentKey, rules, value, label
           value={value}
           data={buildOptions(privacyStatuses)}
           onChangeValue={onChangeEvent}
+          placeholder={placeholder}
         />
       </BoxView>
 
