@@ -39,15 +39,8 @@ const CollaboratorsField = ({
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(value || [])];
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    let selectedIds: any[] = [...(value || [])].filter((n: number) => n !== item.id);
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
   };
 
   useEffect(() => {
