@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity } from "react-native";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { setFormData } from "@/redux/slices/FormSlice";
+import { useSelector, shallowEqual } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import ListView from '../view/ListView';
 import TextView from '../view/TextView';
@@ -12,24 +11,38 @@ import SpinnerView from '../view/SpinnerView';
 import EntityManager from '@/manager/EntityManager';
 import ModalManager from '@/manager/ModalManager';
 import IconView from '../view/IconView';
+import FormManager from '@/manager/FormManager';
 
 const numColumns = 3;
-const resource: string = 'project';
 
 type Props = {
-  idArray?: any;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
+  value?: any;
+  label?: any;
   isPublic?: boolean;
   addable?: boolean;
   deletable?: boolean;
   emptyMessage?: any;
 };
 
-const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable }: Props) => {
-  const dispatch = useDispatch();
+const ProjectJamsField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  value,
+  label,
+  isPublic,
+  emptyMessage,
+  addable,
+  deletable
+}: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState<any>(0);
   const userState: any = useSelector((state: any) => state.user, shallowEqual);
-  const formData: any = useSelector((state: any) => state.form[resource], shallowEqual);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onItemPress = (row: any) => {
@@ -46,15 +59,8 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
   };
 
   const deleteItem = () => {
-    let selectedIds: any[] = [...(formData?.jams_ids || [])];
-    selectedIds = selectedIds.filter((id: number) => id != deleteId);
-
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: 'jams_ids',
-      value: selectedIds,
-    }));
-
+    let selectedIds: any[] = [...(value || [])].filter((id: number) => id != deleteId);
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
     setDeleteId(0);
   };
 
@@ -66,10 +72,10 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
         height={imageSize.height}
         onPress={() => {
           ModalManager.toggleModal("SelectProjectJamsForm", {
-            field: 'jams_ids',
+            field: fieldKey,
             idArray: JSON.stringify(userState.profileData?.profile_jams || []),
             multiSelect: true,
-            resource: 'project', // Todo - Make dynamic
+            resource: resource,
           })
         }}
       />
@@ -124,28 +130,34 @@ const ProjectJamsField = ({ idArray, isPublic, emptyMessage, addable, deletable 
 
   useEffect(() => {
     (async () => {
-      setProjectJams(await getProjectJams(idArray));
+      setProjectJams(await getProjectJams(value || []));
     })();
-  }, [idArray]);
+  }, [value]);
 
   if (!projectJams) return <SpinnerView size="small" />;
 
   return (
-    <View style={styles.container}>
-      {projectJams?.length > 0 && (
-        <ListView
-          data={projectJams}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          emptyMessage={<TextView>{emptyMessage}</TextView>}
-          renderItem={(row: any) => renderItem(row)}
-        />
-      )}
+    <>
+      {FormManager.renderLabel(label, rules)}
 
-      {!projectJams?.length && !isPublic && (renderAddButton())}
-    </View>
+      <View style={styles.container}>
+        {projectJams?.length > 0 && (
+          <ListView
+            data={projectJams}
+            numColumns={numColumns}
+            contentContainerStyle={{ gap: Layout.space.base }}
+            columnWrapperStyle={{ gap: Layout.space.base }}
+            scrollEnabled={false}
+            emptyMessage={<TextView>{emptyMessage}</TextView>}
+            renderItem={(row: any) => renderItem(row)}
+          />
+        )}
+
+        {!projectJams?.length && !isPublic && (renderAddButton())}
+      </View>
+
+      {FormManager.renderError(fieldKey, parentKey)}
+    </>
   );
 };
 
