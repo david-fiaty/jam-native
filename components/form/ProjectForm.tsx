@@ -132,7 +132,10 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           </TextView>
         </BoxView>
         <ProjectJamsField
-          idArray={formData?.jams_ids}
+          resource={resource}
+          fieldKey="jams_ids"
+          value={formData?.jams_ids}
+          rules={['required', 'array']}
           emptyMessage={i18n.t('No data available.')}
           isPublic={false}
           addable={true}
