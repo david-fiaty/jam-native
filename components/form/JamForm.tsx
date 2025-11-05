@@ -229,13 +229,9 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
           resource={resource}
-          field="collaborators_ids"
+          fieldKey="collaborators_ids"
           value={formData?.collaborators_ids || []}
           placeholder={i18n.t('Select collaborators')}
-          onPress={() => ModalManager.toggleModal('CollaboratorsList', {
-            resource: resource,
-            field: "collaborators_ids",
-          })}
         />
         {FormManager.renderError('collaborators_ids')}
 
