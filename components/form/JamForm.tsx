@@ -88,7 +88,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let jamData: any = {};
+        let jamData: any = hasLoadedOnce ? formData : {};
         let profileId: number = await UserManager.getProfileId();
         setProfileId(profileId);
 
