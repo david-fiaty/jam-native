@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
-import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
 import BoxView from "@/components/view/BoxView";
@@ -17,7 +16,6 @@ import FormManager from "@/manager/FormManager";
 const resource: string = 'signup';
 
 const SignupEmailCodeForm = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -43,12 +41,14 @@ const SignupEmailCodeForm = () => {
 
   return (
     <>
-      <TextView style={styles.label}>{i18n.t('Verification sent, check your email inbox')}</TextView>
       <InputTextField
-        keyboardType="number-pad"
+        resource={resource}
+        fieldKey="code"
+        rules={['required', 'number']}
         value={formData?.code || ''}
+        label={i18n.t('Verification sent, check your email inbox')}
         placeholder={i18n.t('Verification code')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'code', value)}
+        keyboardType="number-pad"
       />
 
       <ButtonView
