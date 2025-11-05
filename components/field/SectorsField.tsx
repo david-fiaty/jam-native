@@ -157,6 +157,7 @@ const SectorsField = ({
           renderItem={(o: any) => renderItem(o)}
           renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
         />
+
         {FormManager.renderError(fieldKey, parentKey)}
       </BoxView>
 
@@ -179,6 +180,7 @@ const SectorsField = ({
             renderSelectedItem={(o, unSelect) => renderSelectedItem(o, unSelect)}
             onChange={(selectedIds: any) => updateSelection(selectedIds)}
           />
+          
           {FormManager.renderError(fieldKey, parentKey)}
         </BoxView>
       )}
