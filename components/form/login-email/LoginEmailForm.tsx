@@ -9,10 +9,8 @@ import InputTextField from '@/components/field/InputTextField';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
-import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import TextView from "@/components/view/TextView";
 import InputPasswordField from "@/components/field/InputPasswordField";
 
 const resource: string = 'login';
@@ -56,21 +54,23 @@ const LoginEmailForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
-        containerStyle={styles.inputTextFieldContainer}
+        resource={resource}
+        fieldKey="email"
+        rules={['required', 'email']}
+        label={i18n.t('Email')}
         placeholder={i18n.t('Enter your email address')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
-      />
-      {FormManager.renderError('email')}
-
-      <TextView style={styles.label}>{i18n.t('Password')}</TextView>
-      <InputPasswordField
         containerStyle={styles.inputTextFieldContainer}
-        placeholder={i18n.t('Enter your password')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
       />
-      {FormManager.renderError('password')}
+
+      <InputPasswordField
+        resource={resource}
+        fieldKey="password"
+        rules={['required', 'string']}
+        label={i18n.t('Password')}
+        placeholder={i18n.t('Enter your password')}
+        containerStyle={styles.inputTextFieldContainer}
+      />
 
       <ButtonView
         label={i18n.t('Continue')}
