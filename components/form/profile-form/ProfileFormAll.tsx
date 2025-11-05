@@ -60,15 +60,14 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
 
       {resource == 'signup' && (
         <>
-          <TextView>
-            {i18n.t('Password')}*
-          </TextView>
           <InputPasswordField
+            resource={resource}
+            fieldKey="password"
+            rules={['required', 'string']}
             value={formData?.password || ''}
-            placeholder={i18n.t('Password')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
+            label={i18n.t('Password')}
+            placeholder={i18n.t('Your password')}
           />
-          {FormManager.renderError('password')}
 
           <TextView>
             {i18n.t('Password confirmation')}*
