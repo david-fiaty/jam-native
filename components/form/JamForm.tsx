@@ -108,7 +108,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
         <JamCategoryField
           resource={resource}
           fieldKey="type"
-          value={formData?.type}
+          value={formData?.type || ''}
           label={i18n.t('What kind of Jam is it?')}
           rules={['required']}
         />
