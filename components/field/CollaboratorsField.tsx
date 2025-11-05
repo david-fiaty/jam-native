@@ -44,11 +44,12 @@ const CollaboratorsField = ({
     let selectedIds: any[] = [...(formData?.[fieldKey]?.length > 0 ? formData[fieldKey] : [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: fieldKey,
-      value: selectedIds,
-    }));
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
   };
 
   useEffect(() => {
