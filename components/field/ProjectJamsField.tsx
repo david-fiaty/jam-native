@@ -21,22 +21,24 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
+  label?: any;
   isPublic?: boolean;
   addable?: boolean;
   deletable?: boolean;
   emptyMessage?: any;
 };
 
-const ProjectJamsField = ({ 
+const ProjectJamsField = ({
   resource,
   fieldKey,
   parentKey,
   rules,
-  value, 
-  isPublic, 
-  emptyMessage, 
-  addable, 
-  deletable 
+  value,
+  label,
+  isPublic,
+  emptyMessage,
+  addable,
+  deletable
 }: Props) => {
   const [projectJams, setProjectJams] = useState<any[]>([]);
   const [deleteId, setDeleteId] = useState<any>(0);
@@ -135,21 +137,27 @@ const ProjectJamsField = ({
   if (!projectJams) return <SpinnerView size="small" />;
 
   return (
-    <View style={styles.container}>
-      {projectJams?.length > 0 && (
-        <ListView
-          data={projectJams}
-          numColumns={numColumns}
-          contentContainerStyle={{ gap: Layout.space.base }}
-          columnWrapperStyle={{ gap: Layout.space.base }}
-          scrollEnabled={false}
-          emptyMessage={<TextView>{emptyMessage}</TextView>}
-          renderItem={(row: any) => renderItem(row)}
-        />
-      )}
+    <>
+      {FormManager.renderLabel(label, rules)}
 
-      {!projectJams?.length && !isPublic && (renderAddButton())}
-    </View>
+      <View style={styles.container}>
+        {projectJams?.length > 0 && (
+          <ListView
+            data={projectJams}
+            numColumns={numColumns}
+            contentContainerStyle={{ gap: Layout.space.base }}
+            columnWrapperStyle={{ gap: Layout.space.base }}
+            scrollEnabled={false}
+            emptyMessage={<TextView>{emptyMessage}</TextView>}
+            renderItem={(row: any) => renderItem(row)}
+          />
+        )}
+
+        {!projectJams?.length && !isPublic && (renderAddButton())}
+      </View>
+
+      {FormManager.renderError(fieldKey, parentKey)}
+    </>
   );
 };
 
