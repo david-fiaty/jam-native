@@ -69,18 +69,18 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
             placeholder={i18n.t('Your password')}
           />
 
-          <TextView>
-            {i18n.t('Password confirmation')}*
-          </TextView>
           <InputPasswordField
+            resource={resource}
+            fieldKey="password_confirmation"
+            rules={['required', 'string']}
             value={formData?.password_confirmation || ''}
+            label={i18n.t('Confirmation')}
             placeholder={i18n.t('Password confirmation')}
             onChangeText={(value: string) => {
               FormManager.updateField(resource, 'password_confirmation', value, ['string']);
               FormManager.validatePasswordMatch(resource, 'password_confirmation', value, formData?.password);
             }}
           />
-          {FormManager.renderError('password_confirmation')}
         </>
       )}
     </>
