@@ -226,14 +226,13 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           subListPlaceholder={i18n.t('Select your sub sectors')}
         />
 
-        <TextView>{i18n.t('Select collaborators')}</TextView>
         <CollaboratorsField
           resource={resource}
           fieldKey="collaborators_ids"
           value={formData?.collaborators_ids || []}
+          label={i18n.t('Select collaborators')}
           placeholder={i18n.t('Select collaborators')}
         />
-        {FormManager.renderError('collaborators_ids')}
 
         <DividerView />
 
