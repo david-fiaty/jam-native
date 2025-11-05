@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
+    "@linhnguyen96114/react-native-phone-input": "^3.5.0",
     "@react-google-maps/api": "^2.20.6",
     "@react-native-async-storage/async-storage": "2.1.2",
     "@react-native-community/datetimepicker": "8.4.1",
@@ -33,6 +34,7 @@
     "expo-blur": "~14.1.5",
     "expo-constants": "~17.1.7",
     "expo-device": "~7.1.4",
+    "expo-document-picker": "~13.1.6",
     "expo-file-system": "^18.0.12",
     "expo-font": "~13.3.2",
     "expo-haptics": "~14.1.4",
@@ -71,8 +73,7 @@
     "react-native-web": "^0.20.0",
     "react-native-webview": "13.13.5",
     "react-redux": "^9.1.2",
-    "react-share": "^5.2.2",
-    "expo-document-picker": "~13.1.6"
+    "react-share": "^5.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
