@@ -1,6 +1,5 @@
 import React from "react";
 import i18n from "@/translation/i18n";
-import TextView from "@/components/view/TextView";
 import InputTextField from "@/components/field/InputTextField";
 import FormManager from "@/manager/FormManager";
 import InputTextareaField from "@/components/field/InputTextareaField";
@@ -60,28 +59,27 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
 
       {resource == 'signup' && (
         <>
-          <TextView>
-            {i18n.t('Password')}*
-          </TextView>
           <InputPasswordField
+            resource={resource}
+            fieldKey="password"
+            rules={['required', 'string']}
             value={formData?.password || ''}
-            placeholder={i18n.t('Password')}
-            onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
+            label={i18n.t('Password')}
+            placeholder={i18n.t('Your password')}
           />
-          {FormManager.renderError('password')}
 
-          <TextView>
-            {i18n.t('Password confirmation')}*
-          </TextView>
           <InputPasswordField
+            resource={resource}
+            fieldKey="password_confirmation"
+            rules={['required', 'string']}
             value={formData?.password_confirmation || ''}
+            label={i18n.t('Confirmation')}
             placeholder={i18n.t('Password confirmation')}
             onChangeText={(value: string) => {
               FormManager.updateField(resource, 'password_confirmation', value, ['string']);
               FormManager.validatePasswordMatch(resource, 'password_confirmation', value, formData?.password);
             }}
           />
-          {FormManager.renderError('password_confirmation')}
         </>
       )}
     </>
