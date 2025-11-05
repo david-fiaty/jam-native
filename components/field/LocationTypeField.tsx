@@ -28,12 +28,12 @@ const LocationTypeField = ({
   onChangeValue
 }: Props) => {
 
-  const onChangeEvent = (fieldValue: any) => {
+  const onChangeEvent = (option: any) => {
     if (onChangeValue) {
-      onChangeValue(fieldValue);
+      onChangeValue(option);
     }
     else {
-      FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
+      FormManager.updateField(resource, fieldKey, option.value, rules, parentKey);
     }
   };
 
