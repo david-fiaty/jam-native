@@ -1,49 +1,69 @@
 import { useState, useEffect } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from "react-redux";
-import { setFormData } from '@/redux/slices/FormSlice';
+import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from './InputTextField';
+import ModalManager from '@/manager/ModalManager';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
-  resource: string;
-  field: string;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: any;
   label?: any;
   placeholder?: any;
-  onPress?: () => void;
 };
 
-const CollaboratorsField = ({ resource, field, value, label, placeholder, onPress }: Props) => {
-  const dispatch = useDispatch();
+const CollaboratorsField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  value,
+  label,
+  placeholder,
+}: Props) => {
   const [currentProfiles, setCurrentProfiles] = useState<any>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
-  const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(formData?.[field]?.length > 0 ? formData[field] : [])];
-    selectedIds = selectedIds.filter((n: number) => n !== item.id);
-    
-    dispatch(setFormData<any>({ 
+  const onPressEvent = () => {
+    ModalManager.toggleModal('CollaboratorsList', {
       resource: resource,
-      key: field, 
-      value: selectedIds, 
-    }));
+      fieldKey: fieldKey,
+      parentKey: parentKey,
+    })
   };
-  
+
+  const deleteItem = (item: any) => {
+    let selectedIds: any[] = [...(formData?.[fieldKey]?.length > 0 ? formData[fieldKey] : [])];
+    selectedIds = selectedIds.filter((n: number) => n !== item.id);
+
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, selectedIds, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       setCurrentProfiles(await EntityManager.getProfiles(value || []));
-    })();    
+    })();
   }, [value]);
 
   return (
     <>
-      { !currentProfiles?.length && (
+      {FormManager.renderLabel(label, rules)}
+      
+      {!currentProfiles?.length && (
         <TouchableOpacity
-          onPress={onPress}
+          onPress={onPressEvent}
         >
           <InputTextField
             readOnly={true}
@@ -54,14 +74,14 @@ const CollaboratorsField = ({ resource, field, value, label, placeholder, onPres
       )}
 
       {currentProfiles?.length > 0 && (
-        <View style={styles.preview}> 
-          { currentProfiles.map((item: any) => {
+        <View style={styles.preview}>
+          {currentProfiles.map((item: any) => {
             return (
               <TagView
                 theme="white"
                 key={item.id}
                 canEdit={true}
-                onDeleteButtonPress={() => deleteItem(item)}  
+                onDeleteButtonPress={() => deleteItem(item)}
                 containerStyle={styles.tagItem}
               >
                 {item?.profile_name}
@@ -70,10 +90,12 @@ const CollaboratorsField = ({ resource, field, value, label, placeholder, onPres
           })}
 
           <View style={styles.iconRight}>
-            <IconView name="down" theme="transparent" onPress={onPress} />
+            <IconView name="down" theme="transparent" onPress={onPressEvent} />
           </View>
         </View>
       )}
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
