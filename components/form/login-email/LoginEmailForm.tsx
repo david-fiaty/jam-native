@@ -9,10 +9,8 @@ import InputTextField from '@/components/field/InputTextField';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
 import SectionManager from "@/manager/SectionManager";
-import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import TextView from "@/components/view/TextView";
 import InputPasswordField from "@/components/field/InputPasswordField";
 
 const resource: string = 'login';
