@@ -4,9 +4,15 @@ import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   keyboardType?: any;
+  label?: any;
   value?: string;
   placeholder?: string;
   containerStyle?: object;
@@ -21,7 +27,12 @@ type Props = {
 };
 
 const InputPasswordField = ({
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
   keyboardType,
+  label,
   value,
   placeholder,
   containerStyle,
@@ -43,9 +54,18 @@ const InputPasswordField = ({
 
   const changeTextEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
-    if (onChangeText) onChangeText(fieldValue);
-  };
 
+    if (onChangeText) {
+      onChangeText(fieldValue)
+    }
+    else if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+    }
+  };
+  
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
     else if (onChangeText) onChangeText(currentValue); 
@@ -67,6 +87,8 @@ const InputPasswordField = ({
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
+      {FormManager.renderLabel(label, rules)}
+
       <Input
         keyboardType={keyboardType}
         textAlignVertical="center"
@@ -86,6 +108,8 @@ const InputPasswordField = ({
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
