@@ -61,14 +61,15 @@ const SignupEmailForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Email address')}</TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="email"
+        rules={['required', 'email']}
         value={formData?.email || ''}
+        label={i18n.t('Email address')}
         placeholder={i18n.t('Enter your email address')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
         disabled={isEmailDisabled()}
       />
-      {FormManager.renderError('email')}
 
       {!isEmailDisabled() && (
         <ButtonView
