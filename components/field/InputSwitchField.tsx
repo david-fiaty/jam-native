@@ -40,11 +40,8 @@ const InputSwitchField = ({
       if (onChangeValue) {
         onChangeValue(fieldValue);
       }
-      else if (resource && fieldKey && !parentKey) {
-        FormManager.updateField(resource, fieldKey, fieldValue, rules);
-      }
-      else if (resource && fieldKey && parentKey) {
-        FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
+      else {
+        FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
       }
 
       return fieldValue;
