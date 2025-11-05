@@ -47,11 +47,8 @@ const DocumentPickerField = ({
     if (onDeleteItem) {
       onDeleteItem(mediaList);
     }
-    else if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, mediaList, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, mediaList, rules);
+    else {
+      FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
     }
   };
 
@@ -91,11 +88,8 @@ const DocumentPickerField = ({
       if (onSelectItem) {
         onSelectItem(mediaList);
       }
-      else if (resource && fieldKey && !parentKey) {
-        FormManager.updateField(resource, fieldKey, mediaList, rules);
-      }
-      else if (resource && fieldKey && parentKey) {
-        FormManager.updateField(resource, `${parentKey}.${fieldKey}`, mediaList, rules);
+      else {
+        FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
       }
     }
   };

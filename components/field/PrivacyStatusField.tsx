@@ -31,11 +31,8 @@ const PrivacyStatusField = ({ resource, fieldKey, parentKey, rules, value, label
     if (onChangeValue) {
       onChangeValue(option);
     }
-    else if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, option.value, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, option.value, rules);
+    else {
+      FormManager.updateField(resource, fieldKey, option.value, rules, parentKey);
     }
   };
 
