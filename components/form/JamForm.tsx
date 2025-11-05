@@ -133,17 +133,17 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           placeholder={i18n.t('Provide a description')}
         />
 
-        <TextView>{i18n.t('Select media')} *</TextView>
         <MediaPickerField
+          resource={resource}
+          fieldKey="upload_medias"
+          rules={['required', 'array']}
+          value={formData?.upload_medias || []}
+          label={i18n.t('Select media')}
+          placeholder={i18n.t('Select media files')}
           mediaTypes={['images']}
           multiple={true}
           preview={true}
-          placeholder={i18n.t('Select media files')}
-          value={formData?.upload_medias || []}
-          onSelectItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
-          onDeleteItem={(data: any) => FormManager.updateField(resource, 'upload_medias', data, ['array'])}
         />
-        {FormManager.renderError('upload_medias')}
 
         <LocationTypeField
           resource={resource}
