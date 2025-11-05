@@ -56,13 +56,14 @@ const LoginEmailForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Email')}</TextView>
       <InputTextField
+        resource={resource}
+        fieldKey="email"
+        rules={['required', 'email']}
         containerStyle={styles.inputTextFieldContainer}
+        label={i18n.t('Email')}
         placeholder={i18n.t('Enter your email address')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'email', value, ['string', 'email'])}
       />
-      {FormManager.renderError('email')}
 
       <TextView style={styles.label}>{i18n.t('Password')}</TextView>
       <InputPasswordField
