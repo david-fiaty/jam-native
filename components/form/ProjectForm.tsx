@@ -99,19 +99,23 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
       style={[Layout.formContainer, styles.container]}
     >
       <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <TextView>{i18n.t("Name")}*</TextView>
         <InputTextField
-          value={formData?.name}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'name', value, ['string'])}
+          resource={resource}
+          fieldKey="name"
+          rules={['required', 'string']}
+          value={formData?.name || ''}
+          label={i18n.t('Name')}
+          placeholder={i18n.t('Your project name')}
         />
-        {FormManager.renderError('name')}
 
-        <TextView>{i18n.t("Description")}*</TextView>
         <InputTextareaField
-          value={formData?.description}
-          onChangeText={(value: string) => FormManager.updateField(resource, 'description', value, ['string'])}
+          resource={resource}
+          fieldKey="description"
+          rules={['required', 'string']}
+          value={formData?.description || ''}
+          label={i18n.t('Description')}
+          placeholder={i18n.t('Your project description')}
         />
-        {FormManager.renderError('description')}
 
         <TextView>{i18n.t("Privacy status")}*</TextView>
         <PrivacyStatusField
