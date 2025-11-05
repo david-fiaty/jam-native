@@ -18,14 +18,13 @@ type Props = {
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
-  rules?: any;
 };
 
 const pageSize: number = 9;
 
-const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
+const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
   const [profilesData, setProfilesData] = useState<any>(null);
-  const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
+  const [selectedIds, setSelectedIds] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -76,21 +75,22 @@ const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   };
 
   const toggleItem = (entityId: number) => {
-    let profileList = [...selectedProfiles];
-    if (profileList.includes(entityId)) {
-      profileList = profileList.filter((value: number) => value !== entityId);
+    let idArray: any[] = [...selectedIds];
+
+    if (idArray.includes(entityId)) {
+      idArray = idArray.filter((value: number) => value !== entityId);
     }
     else {
-      profileList.push(entityId);
+      idArray.push(entityId);
     }
 
-    setSelectedProfiles(profileList);
+    setSelectedIds(idArray);
 
     if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, profileList, rules);
+      FormManager.updateField(resource, fieldKey, idArray);
     }
     else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, profileList, rules);
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
     }
   };
 
@@ -106,14 +106,11 @@ const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
     (async () => {
       if (!isLoaded) {
         if (!profilesData) setProfilesData(await getProfilesData());
-        if (formData?.[fieldKey]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[fieldKey]);
-        }
-
+        setSelectedIds(formData?.[fieldKey] || []);
         setIsLoaded(true);
       }
     })();
-  }, [profilesData, formData, fieldKey, selectedProfiles]);
+  }, [profilesData, formData, fieldKey]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -136,7 +133,7 @@ const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
             renderItem={(row: any) => (
               <ProfileListItemView
                 row={row}
-                selected={selectedProfiles.includes(row.item.id)}
+                selected={selectedIds.includes(row.item.id)}
                 onListItemPress={(o: any) => toggleItem(o.item.id)}
               />
             )}

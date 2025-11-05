@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useSelector } from "react-redux";
 import { Layout } from '@/constants/Layout';
 import IconView from "../view/IconView";
 import TagView from '../view/TagView';
@@ -29,7 +28,6 @@ const CollaboratorsField = ({
   placeholder,
 }: Props) => {
   const [currentProfiles, setCurrentProfiles] = useState<any>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
 
   const onPressEvent = () => {
     ModalManager.toggleModal('CollaboratorsList', {
@@ -40,7 +38,7 @@ const CollaboratorsField = ({
   };
 
   const deleteItem = (item: any) => {
-    let selectedIds: any[] = [...(formData?.[fieldKey]?.length > 0 ? formData[fieldKey] : [])];
+    let selectedIds: any[] = [...(value || [])];
     selectedIds = selectedIds.filter((n: number) => n !== item.id);
 
     if (resource && fieldKey && !parentKey) {

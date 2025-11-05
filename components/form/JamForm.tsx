@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
@@ -22,7 +22,6 @@ import DatePickerField from "../field/DatePickerField";
 import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
-import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
 
@@ -35,6 +34,7 @@ const resource: string = 'jam';
 
 const JamForm = ({ jamId, isPublic }: Props) => {
   const dispatch = useDispatch();
+  const hasLoadedOnce = useRef(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [profileId, setProfileId] = useState<number>(0);
@@ -80,9 +80,15 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   );
 
   useEffect(() => {
+    if (!hasLoadedOnce.current) {
+      hasLoadedOnce.current = true;
+    } 
+  }, []);
+
+  useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        let jamData: any = {};
+        let jamData: any = hasLoadedOnce ? formData : {};
         let profileId: number = await UserManager.getProfileId();
         setProfileId(profileId);
 
@@ -104,7 +110,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     })();
   }, [isLoaded, profileId, jamId, resource]);
 
-  if (!isLoaded) return <SpinnerView />;
+  if (!isLoaded && !hasLoadedOnce) return <SpinnerView />;
 
   return (
     <BoxView
