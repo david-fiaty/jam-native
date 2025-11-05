@@ -21,7 +21,7 @@ type Props = {
   disabled?: boolean;
   secureTextEntry?: boolean;
   spellCheck?: boolean;
-  readOnly?: boolean,
+  readOnly?: boolean;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
 };
@@ -65,7 +65,7 @@ const InputPasswordField = ({
       FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
     }
   };
-  
+
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
     else if (onChangeText) onChangeText(currentValue); 
