@@ -91,9 +91,7 @@ const CollaboratorsField = ({
             );
           })}
 
-          <View style={styles.iconRight}>
-            <IconView name="down" theme="transparent" onPress={onPressEvent} />
-          </View>
+          <IconView name="plus" theme="transparent" onPress={onPressEvent} />
         </BoxView>
       )}
 
