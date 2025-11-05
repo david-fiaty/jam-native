@@ -105,11 +105,6 @@ const styles = StyleSheet.create({
     ...Layout.formField,
     ...{ padding: Layout.space.base },
   },
-  iconRight: {
-    position: 'absolute',
-    top: '50%',
-    right: Layout.space.base,
-  },
 });
 
 export default CollaboratorsField;
