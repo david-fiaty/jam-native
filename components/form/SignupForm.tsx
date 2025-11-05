@@ -5,7 +5,6 @@ import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import SpinnerView from "../view/SpinnerView";
 import SectionManager from "@/manager/SectionManager";
 import ProfileForm from "./ProfileForm";
 
