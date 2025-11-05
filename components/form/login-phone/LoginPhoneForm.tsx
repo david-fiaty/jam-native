@@ -15,6 +15,7 @@ import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import StaticData from "@/constants/StaticData";
 import IconView from "@/components/view/IconView";
 import InputPasswordField from "@/components/field/InputPasswordField";
+import InputPhoneField from "@/components/field/InputPhoneField";
 
 const resource: string = 'login';
 
@@ -86,6 +87,18 @@ const LoginPhoneForm = () => {
         keyboardType="number-pad"
         containerStyle={styles.inputTextFieldContainer}
       />
+      
+      <InputPhoneField
+        resource={resource}
+        fieldKey="phone"
+        rules={['required', 'phone']}
+        value={formData?.phone || ''}
+        label={i18n.t('Phone number')}
+        placeholder={i18n.t('Enter your phone number')}
+        containerStyle={styles.inputTextFieldContainer}
+      />
+
+
 
       <InputPasswordField
         resource={resource}
