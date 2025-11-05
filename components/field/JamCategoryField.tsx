@@ -1,8 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
-import StaticData from '@/constants/StaticData';
 import FormManager from '@/manager/FormManager';
+import ListView from '../view/ListView';
+import IconView from '../view/IconView';
+import TextView from '../view/TextView';
+import EntityManager from '@/manager/EntityManager';
 
 type Props = {
   resource?: any;
@@ -23,44 +26,51 @@ const JamCategoryField = ({
   rules,
   value,
   label,
-  placeholder,
-  disabled,
   onChangeValue
 }: Props) => {
-  const profileTypes = StaticData.profileTypes;
-
-  const buildOptions = (optionsData: any) => {
-    return [...(optionsData || [])].map((item: any) => {
-      return {
-        value: item?.id,
-        label: item?.label,
-      }
-    });
-  };
-
-  const onChangeEvent = (option: any) => {
+  const jamCategories: any = EntityManager.getJamTypes();
+  
+  const onChangeEvent = (fieldValue: any) => {
     if (onChangeValue) {
-      onChangeValue(option);
+      onChangeValue(fieldValue);
     }
     else if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, option.value, rules);
+      FormManager.updateField(resource, fieldKey, fieldValue, rules);
     }
     else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, option.value, rules);
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, fieldValue, rules);
     }
   };
+
+  const renderJamCategory = (row: any) => (
+    <TouchableOpacity onPress={() => onChangeEvent(row.item.id)}>
+      <View style={styles.categoryContainer}>
+        <View
+          style={[
+            styles.categoryItem,
+            value == row.item.id ? styles.categoryItemSelected : {},
+          ]}
+        >
+          <IconView name={row.item.icon} theme="secondary" />
+        </View>
+        <TextView>{row.item.name}</TextView>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
     <>
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="column" align="left" style={styles.container}>
-        <SelectListBase
-          placeholder={placeholder}
-          value={value || ''}
-          data={buildOptions(profileTypes)}
-          onChangeValue={onChangeEvent}
-          disabled={disabled}
+        <ListView
+          data={jamCategories}
+          numColumns={4}
+          horizontal={false}
+          scrollEnabled={false}
+          contentContainerStyle={Layout.listContainer}
+          columnWrapperStyle={Layout.listColumnWrapper}
+          renderItem={(row: any) => renderJamCategory(row)}
         />
 
         {FormManager.renderError(fieldKey, parentKey)}
@@ -72,6 +82,25 @@ const JamCategoryField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  categoryContainer: {
+    flexDirection: 'column',
+    gap: Layout.space.small,
+  },
+  categoryItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Layout.colors.secondary,
+    padding: Layout.space.base,
+    borderWidth: Layout.borderWidth.big,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.secondary,
+    width: Layout.space.base * 7,
+    height: Layout.space.base * 7,
+  },
+  categoryItemSelected: {
+    borderColor: Layout.colors.primary,
   },
 });
 
