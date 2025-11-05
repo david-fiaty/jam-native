@@ -14,13 +14,14 @@ import InputTextField from '../field/InputTextField';
 import ProfileListItemView from '../view/ProfileListItemView';
 
 type Props = {
-  resource: string;
-  field?: any;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
 };
 
 const pageSize: number = 9;
 
-const CollaboratorsList = ({ resource, field }: Props) => {
+const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
   const dispatch = useDispatch();
   const [profilesData, setProfilesData] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
@@ -86,7 +87,7 @@ const CollaboratorsList = ({ resource, field }: Props) => {
 
     dispatch(setFormData<any>({
       resource: resource,
-      key: field,
+      key: fieldKey,
       value: profileList,
     }));
   };
@@ -103,14 +104,14 @@ const CollaboratorsList = ({ resource, field }: Props) => {
     (async () => {
       if (!isLoaded) {
         if (!profilesData) setProfilesData(await getProfilesData());
-        if (formData?.[field]?.length && !selectedProfiles.length) {
-          setSelectedProfiles(formData[field]);
+        if (formData?.[fieldKey]?.length && !selectedProfiles.length) {
+          setSelectedProfiles(formData[fieldKey]);
         }
 
         setIsLoaded(true);
       }
     })();
-  }, [profilesData, formData, field, selectedProfiles]);
+  }, [profilesData, formData, fieldKey, selectedProfiles]);
 
   if (!isLoaded) return <SpinnerView />;
 
