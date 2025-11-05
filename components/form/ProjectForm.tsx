@@ -126,16 +126,12 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           placeholder={i18n.t("Select a privacy status")}
         />
 
-        <BoxView direction="row" align="center" justify="space-between">
-          <TextView style={styles.groupTitle}>
-            {i18n.t('Jams')} ({formData?.jams_ids?.length || 0})
-          </TextView>
-        </BoxView>
         <ProjectJamsField
           resource={resource}
           fieldKey="jams_ids"
           value={formData?.jams_ids}
           rules={['required', 'array']}
+          label={`${i18n.t('Jams')} (${formData?.jams_ids?.length || 0})`}
           emptyMessage={i18n.t('No data available.')}
           isPublic={false}
           addable={true}
