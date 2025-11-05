@@ -9,8 +9,8 @@ import ModalManager from "@/manager/ModalManager";
 import FormManager from "@/manager/FormManager";
 
 type Props = {
-  resource?: string;
-  parentKey?: string;
+  resource?: any;
+  parentKey?: any;
   latitude?: any;
   longitude?: any;
   rules?: any;
@@ -31,14 +31,8 @@ const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules
   };
 
   const updateCoordinates = (lat: any, lng: any) => {
-    if (resource && lat && lng && !parentKey) {
-      FormManager.updateField(resource, latitude.key, lat, rules);
-      FormManager.updateField(resource, longitude.key, lng, rules);
-    }
-    else if (resource && lat && lng && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${latitude.key}`, lat, rules);
-      FormManager.updateField(resource, `${parentKey}.${longitude.key}`, lng, rules);
-    }
+    FormManager.updateField(resource, latitude.key, lat, rules, parentKey);
+    FormManager.updateField(resource, longitude.key, lng, rules, parentKey);
   };
 
   useEffect(() => {
