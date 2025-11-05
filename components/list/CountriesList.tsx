@@ -33,13 +33,7 @@ const CountriesList = ({ resource, fieldKey, parentKey }: Props) => {
     }
 
     setSelectedIds(idArray);
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, idArray);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, idArray);
-    }
+    FormManager.updateField(resource, fieldKey, idArray, parentKey);
   };
 
   const renderItem = (row: any) => {
