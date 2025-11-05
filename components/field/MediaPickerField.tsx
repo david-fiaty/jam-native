@@ -25,30 +25,30 @@ type Props = {
   onDeleteItem?: (data: any) => void;
 };
 
-const MediaPickerField = ({ 
+const MediaPickerField = ({
   resource,
   fieldKey,
   parentKey,
   rules,
-  label, 
-  value, 
-  placeholder, 
-  preview, 
-  multiple, 
-  mediaTypes, 
-  onSelectItem, 
-  onDeleteItem 
-}: Props) => {  
+  label,
+  value,
+  placeholder,
+  preview,
+  multiple,
+  mediaTypes,
+  onSelectItem,
+  onDeleteItem
+}: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
-    let mediaList = [...selectedMedia];  
+    let mediaList = [...selectedMedia];
     mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
     setSelectedMedia(mediaList);
-    
+
     if (onDeleteItem) {
       onDeleteItem(mediaList);
     }
@@ -70,7 +70,7 @@ const MediaPickerField = ({
       mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
       setSelectedPreview(mediaList);
     }
-  }; 
+  };
 
   const renderImagePreview = (data: any) => {
     const isSelected = selectedPreview.includes(data.fileName);
@@ -80,29 +80,29 @@ const MediaPickerField = ({
     };
 
     return (
-      <TouchableOpacity 
-        key={data.uri} 
+      <TouchableOpacity
+        key={data.uri}
         onPress={() => updatePreviewSelection(data)}
       >
-        <ImageView 
-          key={data.uri} 
-          uri={data.uri} 
-          width={imageSize.width} 
-          height={imageSize.height} 
-          resizeMode="cover" 
+        <ImageView
+          key={data.uri}
+          uri={data.uri}
+          width={imageSize.width}
+          height={imageSize.height}
+          resizeMode="cover"
           style={imageStyle}
         />
 
-        { isSelected && 
-          <TouchableOpacity 
+        {isSelected &&
+          <TouchableOpacity
             style={styles.deleteMedia}
             onPress={() => deleteMedia(data)}
           >
             <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
-        } 
+        }
       </TouchableOpacity>
-    );    
+    );
   };
 
   const launchBrowser = async () => {
@@ -128,7 +128,7 @@ const MediaPickerField = ({
 
       setSelectedMedia(mediaList);
       setSelectedPreview([]);
-      
+
       if (onSelectItem) {
         onSelectItem(mediaList);
       }
@@ -149,33 +149,29 @@ const MediaPickerField = ({
   }, [isLoaded, value]);
 
   return (
-    <View style={styles.container}>
-      { label && (
+    <>
+      {FormManager.renderLabel(label, rules)}
+      
+      <View style={styles.container}>
         <TouchableOpacity onPress={pickImage}>
-          <TextView>{label}</TextView>
-        </TouchableOpacity>
-      )}
-
-      { !label && (
-        <TouchableOpacity onPress={pickImage}>           
           <InputTextField
             readOnly={true}
             placeholder={placeholder}
             rightIcon={<IconView name="image" theme="transparent" />}
           />
         </TouchableOpacity>
-      )}
 
-      { selectedMedia?.length > 0 && preview &&
-        <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-          { selectedMedia.map((data: any) => {
-            if (data?.uri) return renderImagePreview(data);
-          })}
-        </BoxView>
-      }
+        {selectedMedia?.length > 0 && preview &&
+          <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
+            {selectedMedia.map((data: any) => {
+              if (data?.uri) return renderImagePreview(data);
+            })}
+          </BoxView>
+        }
+      </View>
 
       {FormManager.renderError(fieldKey, parentKey)}
-    </View>
+    </>
   );
 };
 
@@ -183,7 +179,7 @@ const styles = StyleSheet.create({
   container: {},
   previewContainer: {
     paddingVertical: Layout.space.base,
-    gap: Layout.space.base*1,
+    gap: Layout.space.base * 1,
   },
   mediaPreview: {
     borderRadius: Layout.radius.round,
