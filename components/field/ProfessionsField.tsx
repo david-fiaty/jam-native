@@ -41,26 +41,13 @@ const ProfessionsField = ({
   
   const updateSelection = (selectedIds: any[]) => {
     selectedIds = [...new Set([...(value || []), ...selectedIds])];
-
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
   };
 
   const deleteItem = (item: any, deleteCallback: any) => {
     let selectedIds: any[] = (value || []).filter((id: any) => id != item.value);
-
     deleteCallback(item);
-    
-    if (resource && fieldKey && !parentKey) {
-      FormManager.updateField(resource, fieldKey, selectedIds, rules);
-    }
-    else if (resource && fieldKey && parentKey) {
-      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, selectedIds, rules);
-    }
+    FormManager.updateField(resource, fieldKey, selectedIds, rules, parentKey);
   };
 
   const getListOptions = () => {
