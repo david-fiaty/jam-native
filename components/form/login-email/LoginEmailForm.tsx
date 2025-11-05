@@ -60,18 +60,19 @@ const LoginEmailForm = () => {
         resource={resource}
         fieldKey="email"
         rules={['required', 'email']}
-        containerStyle={styles.inputTextFieldContainer}
         label={i18n.t('Email')}
         placeholder={i18n.t('Enter your email address')}
+        containerStyle={styles.inputTextFieldContainer}
       />
 
-      <TextView style={styles.label}>{i18n.t('Password')}</TextView>
       <InputPasswordField
-        containerStyle={styles.inputTextFieldContainer}
+        resource={resource}
+        fieldKey="password"
+        rules={['required', 'string']}
+        label={i18n.t('Password')}
         placeholder={i18n.t('Enter your password')}
-        onChangeText={(value: string) => FormManager.updateField(resource, 'password', value, ['string'])}
+        containerStyle={styles.inputTextFieldContainer}
       />
-      {FormManager.renderError('password')}
 
       <ButtonView
         label={i18n.t('Continue')}
