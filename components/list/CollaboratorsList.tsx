@@ -12,17 +12,18 @@ import SpinnerView from "../view/SpinnerView";
 import EntityManager from '@/manager/EntityManager';
 import InputTextField from '../field/InputTextField';
 import ProfileListItemView from '../view/ProfileListItemView';
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
+  rules?: any;
 };
 
 const pageSize: number = 9;
 
-const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
-  const dispatch = useDispatch();
+const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   const [profilesData, setProfilesData] = useState<any>(null);
   const [selectedProfiles, setSelectedProfiles] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -85,11 +86,12 @@ const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
 
     setSelectedProfiles(profileList);
 
-    dispatch(setFormData<any>({
-      resource: resource,
-      key: fieldKey,
-      value: profileList,
-    }));
+    if (resource && fieldKey && !parentKey) {
+      FormManager.updateField(resource, fieldKey, profileList, rules);
+    }
+    else if (resource && fieldKey && parentKey) {
+      FormManager.updateField(resource, `${parentKey}.${fieldKey}`, profileList, rules);
+    }
   };
 
   const getProfilesData = async () => {
