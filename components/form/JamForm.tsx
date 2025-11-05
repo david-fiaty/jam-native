@@ -94,6 +94,8 @@ const JamForm = ({ jamId, isPublic }: Props) => {
 
   if (!isLoaded && !hasLoadedOnce) return <SpinnerView />;
 
+  console.log(formData?.type)
+
   return (
     <BoxView
       align="flex-start"
