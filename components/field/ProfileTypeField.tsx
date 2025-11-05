@@ -54,6 +54,7 @@ const ProfileTypeField = ({
   return (
     <>
       {FormManager.renderLabel(label, rules)}
+      
       <BoxView direction="column" align="left" style={styles.container}>
         <SelectListBase
           placeholder={placeholder}
