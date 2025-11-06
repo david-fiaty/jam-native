@@ -12,6 +12,7 @@ import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
 import SelectListBase from "../base/SelectListBase";
 import StaticData from "@/constants/StaticData";
+import { Config } from "@/constants/Config";
 
 type Props = {
   resource?: any;
@@ -44,13 +45,19 @@ const InputPhoneField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
-  const countryCodes = StaticData.countryPhoneCodes;
+  const getCountryCodes = () => {
+    let countries: any[] = StaticData.countryPhoneCodes;
 
-  const buildOptions = (optionsData: any) => {    
-    return [...(optionsData || [])].map((item: any) => {
+    if (Config.allowedCountries.phone.length > 0) {
+      countries = countries.filter((o: any) => {
+        return Config.allowedCountries.phone.includes(o.code);
+      });
+    }
+
+    return countries.map((o: any) => {
       return {
-        value: item.code,
-        label: `${item.name} (${item.prefix})`,
+        value: o.code,
+        label: `${o.name} (${o.prefix})`,
       }
     });
   };
@@ -73,11 +80,11 @@ const InputPhoneField = ({
   return (
     <>
       {FormManager.renderLabel(selectLabel, rules)}
-      
+
       <SelectListBase
         placeholder={selectPlaceholder}
         value={value}
-        data={buildOptions(countryCodes)}
+        data={getCountryCodes()}
         //onChangeValue={onChangeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
