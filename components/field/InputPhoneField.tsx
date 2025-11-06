@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
+import { isValidPhoneNumber } from 'libphonenumber-js';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import PhoneInput from '@linhnguyen96114/react-native-phone-input';
-import { Layout } from "@/constants/Layout";
 
 type Props = {
   resource?: any;
