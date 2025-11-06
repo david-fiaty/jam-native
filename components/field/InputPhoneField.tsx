@@ -42,7 +42,6 @@ const InputPhoneField = ({
   onChangeValue
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
-  const [phonePrefix, setPhonePrefix] = useState<string>('');
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
@@ -110,7 +109,7 @@ const InputPhoneField = ({
         resource={resource}
         fieldKey={fieldKey}
         rules={rules}
-        value={value || ''}
+        value={selectedCountry?.prefix || ''}
         label={inputlabel}
         placeholder={inputPlaceholder}
         keyboardType="number-pad"
