@@ -55,6 +55,7 @@ const InputPhoneField = ({
 
   return (
     <>
+      <TextView>{i18n.t('Country')}</TextView>
       <CountryPhoneCodeField
         value={value || ''}
         elementStyle={styles.selectListField}
