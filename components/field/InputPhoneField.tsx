@@ -44,6 +44,8 @@ const InputPhoneField = ({
   onChangeValue
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
+  const [countryCode, setCountryCode] = useState<string>('');
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const getCountryCodes = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
@@ -70,15 +72,12 @@ const InputPhoneField = ({
     );
   };
 
-  const onChangeEvent = (fieldValue: any) => {
-    setCurrentValue(fieldValue);
+  const onChangeCodeValue = (item: any) => {
+    console.log('country code', item);
+  };
 
-    if (onChangeValue) {
-      onChangeValue(fieldValue)
-    }
-    else {
-      FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
-    }
+  const onChangePhoneValue = (value: any) => {
+    console.log('phone number', value);
   };
 
   useEffect(() => {
@@ -93,7 +92,7 @@ const InputPhoneField = ({
         placeholder={selectPlaceholder}
         value={value}
         data={getCountryCodes()}
-        //onChangeValue={onChangeValue}
+        onChangeValue={onChangeCodeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
         containerStyle={containerStyle}
@@ -109,6 +108,7 @@ const InputPhoneField = ({
         placeholder={inputPlaceholder}
         keyboardType="number-pad"
         containerStyle={containerStyle}
+        onChangeText={onChangePhoneValue}
       />
     </>
   );
