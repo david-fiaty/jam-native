@@ -57,10 +57,12 @@ const InputPhoneField = ({
       >
         <PhoneInput
           defaultValue={value}
-          defaultCode="US"
+          defaultCode="FR"
           onChangeText={onChangeEvent}
           containerStyle={[styles.inputContainerStyle, containerStyle]}
-        />
+          layout="first"
+          placeholder={placeholder}
+        /> 
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
