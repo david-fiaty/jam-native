@@ -67,15 +67,19 @@ const InputPhoneField = ({
   const renderItem = (item: any, selected: boolean) => {
     return (
       <View style={styles.listItem}>
-        <TextView>{getUnicodeFlagIcon(item.value.toUpperCase())} {item?.label}</TextView>
+        <TextView>{renderFlag(item.value)} {item?.label}</TextView>
       </View>
     );
+  };
+
+  const renderFlag = (code: string) => {
+    return getUnicodeFlagIcon(code.toUpperCase());
   };
 
   const onChangeCodeValue = (item: any) => {
     let countries: any[] = StaticData.countryPhoneCodes;
     let prefix: any = countries.find((o: any) => o.code == item.value).prefix;
-    
+
     setPhonePrefix(prefix);
   };
 
