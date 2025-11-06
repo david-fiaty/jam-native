@@ -58,11 +58,14 @@ const InputPhoneField = ({
         <PhoneInput
           defaultValue={value}
           defaultCode="FR"
-          onChangeText={onChangeEvent}
           containerStyle={[styles.inputContainerStyle, containerStyle]}
           layout="first"
           placeholder={placeholder}
-        /> 
+          onChangeText={onChangeEvent}
+          countryPickerProps={{
+            countryCodes: ['US', 'FR', 'TG'],
+          }}
+        />
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
