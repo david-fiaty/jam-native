@@ -15,6 +15,7 @@ import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import StaticData from "@/constants/StaticData";
 import IconView from "@/components/view/IconView";
 import InputPasswordField from "@/components/field/InputPasswordField";
+import InputPhoneField from "@/components/field/InputPhoneField";
 
 const resource: string = 'login';
 
@@ -68,23 +69,17 @@ const LoginPhoneForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Country')}</TextView>
-      <CountryPhoneCodeField
-        value={formData?.country || ''}
-        elementStyle={styles.selectListField}
-        onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
-      />
-      {FormManager.renderError('country')}
-
-      <InputTextField
+      
+      <InputPhoneField
         resource={resource}
         fieldKey="phone"
         rules={['required', 'phone']}
         value={formData?.phone || ''}
-        label={i18n.t('Phone number')}
-        placeholder={i18n.t('Enter your phone number')}
-        keyboardType="number-pad"
-        containerStyle={styles.inputTextFieldContainer}
+        inputlabel={i18n.t('Phone number')}
+        selectLabel={i18n.t('Country')}
+        inputPlaceholder={i18n.t('Enter your phone number')}
+        selectPlaceholder={i18n.t('Select your country')}
+        containerStyle={styles.fieldContainer}
       />
 
       <InputPasswordField
@@ -93,7 +88,7 @@ const LoginPhoneForm = () => {
         rules={['required', 'string']}
         label={i18n.t('Password')}
         placeholder={i18n.t('Enter your password')}
-        containerStyle={styles.inputTextFieldContainer}
+        containerStyle={styles.fieldContainer}
       />
 
       {!isEmailFieldDisabled() && (
@@ -112,17 +107,10 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  label: {
-    alignSelf: 'flex-start',
-  },
-  inputTextFieldContainer: {
+  fieldContainer: {
     backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
-  selectListField: {
-    backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
 });
