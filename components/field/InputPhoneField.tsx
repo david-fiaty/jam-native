@@ -7,7 +7,6 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
-import CountryPhoneCodeField from "./CountryPhoneCodeField";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
 import SelectListBase from "../base/SelectListBase";
@@ -116,6 +115,8 @@ const InputPhoneField = ({
         containerStyle={containerStyle}
         onChangeText={onChangePhoneValue}
       />
+
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
