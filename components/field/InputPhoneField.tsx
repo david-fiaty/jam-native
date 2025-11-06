@@ -114,6 +114,7 @@ const InputPhoneField = ({
         placeholder={inputPlaceholder}
         keyboardType="number-pad"
         containerStyle={containerStyle}
+        inputContainerStyle={{paddingLeft: 50}}
         onChangeText={onChangePhoneValue}
       />
 
