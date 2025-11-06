@@ -19,8 +19,10 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: string;
-  label?: any;
-  placeholder?: any;
+  inputlabel?: any;
+  selectLabel?: any;
+  inputPlaceholder?: any;
+  selectPlaceholder?: any;
   disabled?: boolean;
   containerStyle?: any;
   onChangeValue?: (value: boolean) => void;
@@ -32,8 +34,10 @@ const InputPhoneField = ({
   parentKey,
   rules,
   value,
-  label,
-  placeholder,
+  inputlabel,
+  selectLabel,
+  inputPlaceholder,
+  selectPlaceholder,
   disabled,
   containerStyle,
   onChangeValue
@@ -68,9 +72,10 @@ const InputPhoneField = ({
 
   return (
     <>
-      <TextView>{i18n.t('Country')}</TextView>
+      {FormManager.renderLabel(selectLabel, rules)}
+      
       <SelectListBase
-        placeholder={i18n.t('Select your country')}
+        placeholder={selectPlaceholder}
         value={value}
         data={buildOptions(countryCodes)}
         //onChangeValue={onChangeValue}
@@ -84,8 +89,8 @@ const InputPhoneField = ({
         fieldKey={fieldKey}
         rules={rules}
         value={value || ''}
-        label={label}
-        placeholder={placeholder}
+        label={inputlabel}
+        placeholder={inputPlaceholder}
         keyboardType="number-pad"
         containerStyle={containerStyle}
       />
