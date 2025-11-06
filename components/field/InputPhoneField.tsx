@@ -57,10 +57,14 @@ const InputPhoneField = ({
       >
         <PhoneInput
           defaultValue={value}
-          defaultCode="US"
+          defaultCode="FR"
+          containerStyle={[styles.inputContainerStyle, containerStyle]}
+          layout="first"
+          placeholder={placeholder}
           onChangeText={onChangeEvent}
-          withShadow={true}
-          autoFocus={true}
+          countryPickerProps={{
+            countryCodes: ['US', 'FR', 'TG'],
+          }}
         />
       </BoxView>
 
