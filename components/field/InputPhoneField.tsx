@@ -75,6 +75,7 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let countries: any[] = StaticData.countryPhoneCodes;
     let prefix: any = countries.find((o: any) => o.code == item.value).prefix;
+    
     setPhonePrefix(prefix);
   };
 
