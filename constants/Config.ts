@@ -20,6 +20,10 @@ export const Config: any = {
   notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,
   searchDebounceDuration: 1000,
+  allowedCountries: {
+    phone: [],
+    jam: ['bj', 'bf', 'gh', 'ci', 'ke', 'ng', 'sn', 'tg'], 
+  },
   defaultLocation: {
     latitude: 8.6195,
     longitude: 0.8248,

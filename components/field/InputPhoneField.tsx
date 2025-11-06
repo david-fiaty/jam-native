@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import { hasFlag } from 'country-flag-icons';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
@@ -44,15 +45,29 @@ const InputPhoneField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
-  const countryCodes = StaticData.countryPhoneCodes;
+  const getCountryCodes = () => {
+    let countries: any[] = StaticData.countryPhoneCodes;
 
-  const buildOptions = (optionsData: any) => {    
-    return [...(optionsData || [])].map((item: any) => {
+    if (Config.allowedCountries.phone.length > 0) {
+      countries = countries.filter((o: any) => {
+        return Config.allowedCountries.phone.includes(o.code);
+      });
+    }
+
+    return countries.map((o: any) => {
       return {
-        value: item.code,
-        label: `${item.name} (${item.prefix})`,
+        value: o.code,
+        label: `${o.name} (${o.prefix})`,
       }
     });
+  };
+
+  const renderItem = (item: any, selected: boolean) => {
+    return (
+      <View style={styles.listItem}>
+        <TextView>{getUnicodeFlagIcon(item.value.toUpperCase())} {item?.label}</TextView>
+      </View>
+    );
   };
 
   const onChangeEvent = (fieldValue: any) => {
@@ -73,15 +88,16 @@ const InputPhoneField = ({
   return (
     <>
       {FormManager.renderLabel(selectLabel, rules)}
-      
+
       <SelectListBase
         placeholder={selectPlaceholder}
         value={value}
-        data={buildOptions(countryCodes)}
+        data={getCountryCodes()}
         //onChangeValue={onChangeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
         containerStyle={containerStyle}
+        renderItem={renderItem}
       />
 
       <InputTextField
@@ -134,6 +150,10 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     color: Layout.colors.primary,
+  },
+  listItem: {
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
 });
 
