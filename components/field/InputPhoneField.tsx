@@ -72,7 +72,11 @@ const InputPhoneField = ({
   };
 
   const renderFlag = (code: string) => {
-    return getUnicodeFlagIcon(code.toUpperCase());
+    if (code) { 
+      return getUnicodeFlagIcon(code.toUpperCase());
+    }
+
+    return <></>;
   };
 
   const onChangeCodeValue = (item: any) => {
@@ -86,8 +90,6 @@ const InputPhoneField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
-
-  console.log(selectedCountry)
 
   return (
     <>
@@ -128,9 +130,6 @@ const styles = StyleSheet.create({
   selectListField: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
-  },
-  textInputStyle: {
-    color: Layout.colors.primary,
   },
   listItem: {
     paddingVertical: Layout.space.base,
