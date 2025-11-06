@@ -70,23 +70,6 @@ const LoginPhoneForm = () => {
   return (
     <View style={[Layout.formContainer, styles.container]}>
       <TextView style={styles.label}>{i18n.t('Country')}</TextView>
-      <CountryPhoneCodeField
-        value={formData?.country || ''}
-        elementStyle={styles.selectListField}
-        onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
-      />
-      {FormManager.renderError('country')}
-
-      <InputTextField
-        resource={resource}
-        fieldKey="phone"
-        rules={['required', 'phone']}
-        value={formData?.phone || ''}
-        label={i18n.t('Phone number')}
-        placeholder={i18n.t('Enter your phone number')}
-        keyboardType="number-pad"
-        containerStyle={styles.inputTextFieldContainer}
-      />
       
       <InputPhoneField
         resource={resource}
@@ -132,10 +115,6 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
-  selectListField: {
-    backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
 });
