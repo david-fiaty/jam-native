@@ -45,6 +45,7 @@ const InputPhoneField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
   const [phonePrefix, setPhonePrefix] = useState<string>('');
+  const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const getCountryCodes = () => {
@@ -67,7 +68,7 @@ const InputPhoneField = ({
   const renderItem = (item: any, selected: boolean) => {
     return (
       <View style={styles.listItem}>
-        <TextView>{renderFlag(item.value)} {item?.label}</TextView>
+        <TextView>{item?.label}</TextView>
       </View>
     );
   };
@@ -77,10 +78,7 @@ const InputPhoneField = ({
   };
 
   const onChangeCodeValue = (item: any) => {
-    let countries: any[] = StaticData.countryPhoneCodes;
-    let prefix: any = countries.find((o: any) => o.code == item.value).prefix;
-
-    setPhonePrefix(prefix);
+    setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == item.value));
   };
 
   const onChangePhoneValue = (value: any) => {
@@ -90,6 +88,8 @@ const InputPhoneField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
+
+  console.log(selectedCountry)
 
   return (
     <>
