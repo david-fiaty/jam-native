@@ -75,8 +75,10 @@ const LoginPhoneForm = () => {
         fieldKey="phone"
         rules={['required', 'phone']}
         value={formData?.phone || ''}
-        label={i18n.t('Phone number')}
-        placeholder={i18n.t('Enter your phone number')}
+        inputlabel={i18n.t('Phone number')}
+        selectLabel={i18n.t('Country')}
+        inputPlaceholder={i18n.t('Enter your phone number')}
+        selectPlaceholder={i18n.t('Select your country')}
         containerStyle={styles.fieldContainer}
       />
 
