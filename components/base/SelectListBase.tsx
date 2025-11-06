@@ -39,7 +39,7 @@ const SelectListBase = ({ value, data, placeholder, disabled, elementStyle, cont
     }
     else {
       return (
-        <View style={styles.item}>
+        <View style={styles.listItem}>
           <TextView>{item?.label}</TextView>
         </View>
       );
@@ -55,7 +55,7 @@ const SelectListBase = ({ value, data, placeholder, disabled, elementStyle, cont
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
-        itemTextStyle={styles.itemTextStyle}
+        itemTextStyle={styles.listItemTextStyle}
         containerStyle={containerStyle}
         search={false}
         disable={disabled}
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   disabled: {
     opacity: 0.5,
   },
-  item: {
+  listItem: {
     paddingVertical: Layout.space.base,
     paddingHorizontal: Layout.space.base,
   },
