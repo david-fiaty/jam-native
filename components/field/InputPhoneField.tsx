@@ -4,6 +4,7 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import PhoneInput from '@linhnguyen96114/react-native-phone-input';
+import { Layout } from "@/constants/Layout";
 
 type Props = {
   resource?: any;
@@ -58,10 +59,11 @@ const InputPhoneField = ({
         <PhoneInput
           defaultValue={value}
           defaultCode="FR"
-          containerStyle={[styles.inputContainerStyle, containerStyle]}
+          containerStyle={[containerStyle, styles.container]}
+          textInputStyle={styles.textInputStyle}
           layout="first"
           placeholder={placeholder}
-          onChangeText={onChangeEvent}
+          //onChangeText={onChangeEvent}
           countryPickerProps={{
             countryCodes: ['US', 'FR', 'TG'],
           }}
@@ -77,9 +79,8 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  inputContainerStyle: {
-    width: '100%',
-    height: '100%',
+  textInputStyle: {
+    color: Layout.colors.primary,
   },
 });
 
