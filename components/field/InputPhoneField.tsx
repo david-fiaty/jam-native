@@ -7,6 +7,9 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import PhoneInput from '@linhnguyen96114/react-native-phone-input';
+import CountryPhoneCodeField from "./CountryPhoneCodeField";
+import InputTextField from "./InputTextField";
+import i18n from "@/translation/i18n";
 
 type Props = {
   resource?: any;
@@ -50,7 +53,26 @@ const InputPhoneField = ({
     setCurrentValue(value);
   }, [value]);
 
-  
+  return (
+    <>
+      <CountryPhoneCodeField
+        value={value || ''}
+        elementStyle={styles.selectListField}
+        //onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
+      />
+
+      <InputTextField
+        resource={resource}
+        fieldKey={fieldKey}
+        rules={rules}
+        value={value || ''}
+        label={label}
+        placeholder={placeholder}
+        keyboardType="number-pad"
+        containerStyle={containerStyle}
+      />
+    </>
+  );
 
   return (
     <>
@@ -82,6 +104,10 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+  },
+  selectListField: {
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
   },
   textInputStyle: {
     color: Layout.colors.primary,
