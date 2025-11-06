@@ -59,8 +59,7 @@ const InputPhoneField = ({
           defaultValue={value}
           defaultCode="US"
           onChangeText={onChangeEvent}
-          withShadow={true}
-          autoFocus={true}
+          containerStyle={[styles.inputContainerStyle, containerStyle]}
         />
       </BoxView>
 
