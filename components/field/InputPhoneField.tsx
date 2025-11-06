@@ -7,7 +7,6 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
-import PhoneInput from '@linhnguyen96114/react-native-phone-input';
 import CountryPhoneCodeField from "./CountryPhoneCodeField";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
@@ -117,32 +116,6 @@ const InputPhoneField = ({
         containerStyle={containerStyle}
         onChangeText={onChangePhoneValue}
       />
-    </>
-  );
-
-  return (
-    <>
-      {FormManager.renderLabel(label, rules)}
-
-      <BoxView
-        direction="row"
-        style={styles.container}
-      >
-        <PhoneInput
-          defaultValue={value}
-          defaultCode="FR"
-          containerStyle={[containerStyle, styles.container]}
-          textInputStyle={styles.textInputStyle}
-          layout="first"
-          placeholder={placeholder}
-          //onChangeText={onChangeEvent}
-          countryPickerProps={{
-            countryCodes: ['US', 'FR', 'TG'],
-          }}
-        />
-      </BoxView>
-
-      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
