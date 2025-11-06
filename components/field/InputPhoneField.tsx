@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import { hasFlag } from 'country-flag-icons';
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
@@ -12,7 +13,6 @@ import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
 import SelectListBase from "../base/SelectListBase";
 import StaticData from "@/constants/StaticData";
-import { Config } from "@/constants/Config";
 
 type Props = {
   resource?: any;
@@ -65,7 +65,7 @@ const InputPhoneField = ({
   const renderItem = (item: any, selected: boolean) => {
     return (
       <View style={styles.listItem}>
-        <TextView>{item?.label}</TextView>
+        <TextView>{getUnicodeFlagIcon(item.value.toUpperCase())} {item?.label}</TextView>
       </View>
     );
   };
