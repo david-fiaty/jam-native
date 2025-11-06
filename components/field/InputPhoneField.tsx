@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
+import { Layout } from "@/constants/Layout";
+import { isValidPhoneNumber } from 'libphonenumber-js';
+import { hasFlag } from 'country-flag-icons';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import PhoneInput from '@linhnguyen96114/react-native-phone-input';
+import CountryPhoneCodeField from "./CountryPhoneCodeField";
+import InputTextField from "./InputTextField";
+import i18n from "@/translation/i18n";
 
 type Props = {
   resource?: any;
@@ -49,6 +55,28 @@ const InputPhoneField = ({
 
   return (
     <>
+      <TextView>{i18n.t('Country')}</TextView>
+      <CountryPhoneCodeField
+        value={value || ''}
+        elementStyle={styles.selectListField}
+        //onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
+      />
+
+      <InputTextField
+        resource={resource}
+        fieldKey={fieldKey}
+        rules={rules}
+        value={value || ''}
+        label={label}
+        placeholder={placeholder}
+        keyboardType="number-pad"
+        containerStyle={containerStyle}
+      />
+    </>
+  );
+
+  return (
+    <>
       {FormManager.renderLabel(label, rules)}
 
       <BoxView
@@ -58,10 +86,11 @@ const InputPhoneField = ({
         <PhoneInput
           defaultValue={value}
           defaultCode="FR"
-          containerStyle={[styles.inputContainerStyle, containerStyle]}
+          containerStyle={[containerStyle, styles.container]}
+          textInputStyle={styles.textInputStyle}
           layout="first"
           placeholder={placeholder}
-          onChangeText={onChangeEvent}
+          //onChangeText={onChangeEvent}
           countryPickerProps={{
             countryCodes: ['US', 'FR', 'TG'],
           }}
@@ -77,9 +106,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  inputContainerStyle: {
-    width: '100%',
-    height: '100%',
+  selectListField: {
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+  },
+  textInputStyle: {
+    color: Layout.colors.primary,
   },
 });
 
