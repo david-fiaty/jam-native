@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { isValidPhoneNumber } from 'libphonenumber-js';
+import { hasFlag } from 'country-flag-icons';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
@@ -48,6 +49,8 @@ const InputPhoneField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
+
+  
 
   return (
     <>
