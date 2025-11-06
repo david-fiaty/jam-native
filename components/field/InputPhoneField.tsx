@@ -10,6 +10,8 @@ import PhoneInput from '@linhnguyen96114/react-native-phone-input';
 import CountryPhoneCodeField from "./CountryPhoneCodeField";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
+import SelectListBase from "../base/SelectListBase";
+import StaticData from "@/constants/StaticData";
 
 type Props = {
   resource?: any;
@@ -17,8 +19,10 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: string;
-  label?: any;
-  placeholder?: any;
+  inputlabel?: any;
+  selectLabel?: any;
+  inputPlaceholder?: any;
+  selectPlaceholder?: any;
   disabled?: boolean;
   containerStyle?: any;
   onChangeValue?: (value: boolean) => void;
@@ -30,13 +34,26 @@ const InputPhoneField = ({
   parentKey,
   rules,
   value,
-  label,
-  placeholder,
+  inputlabel,
+  selectLabel,
+  inputPlaceholder,
+  selectPlaceholder,
   disabled,
   containerStyle,
   onChangeValue
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
+
+  const countryCodes = StaticData.countryPhoneCodes;
+
+  const buildOptions = (optionsData: any) => {    
+    return [...(optionsData || [])].map((item: any) => {
+      return {
+        value: item.code,
+        label: `${item.name} (${item.prefix})`,
+      }
+    });
+  };
 
   const onChangeEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
@@ -55,11 +72,16 @@ const InputPhoneField = ({
 
   return (
     <>
-      <TextView>{i18n.t('Country')}</TextView>
-      <CountryPhoneCodeField
-        value={value || ''}
+      {FormManager.renderLabel(selectLabel, rules)}
+      
+      <SelectListBase
+        placeholder={selectPlaceholder}
+        value={value}
+        data={buildOptions(countryCodes)}
+        //onChangeValue={onChangeValue}
+        disabled={disabled}
         elementStyle={styles.selectListField}
-        //onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
+        containerStyle={containerStyle}
       />
 
       <InputTextField
@@ -67,8 +89,8 @@ const InputPhoneField = ({
         fieldKey={fieldKey}
         rules={rules}
         value={value || ''}
-        label={label}
-        placeholder={placeholder}
+        label={inputlabel}
+        placeholder={inputPlaceholder}
         keyboardType="number-pad"
         containerStyle={containerStyle}
       />
