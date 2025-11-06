@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import { hasFlag } from 'country-flag-icons';
@@ -62,6 +62,14 @@ const InputPhoneField = ({
     });
   };
 
+  const renderItem = (item: any, selected: boolean) => {
+    return (
+      <View style={styles.listItem}>
+        <TextView>{item?.label}</TextView>
+      </View>
+    );
+  };
+
   const onChangeEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
 
@@ -89,6 +97,7 @@ const InputPhoneField = ({
         disabled={disabled}
         elementStyle={styles.selectListField}
         containerStyle={containerStyle}
+        renderItem={renderItem}
       />
 
       <InputTextField
@@ -141,6 +150,10 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     color: Layout.colors.primary,
+  },
+  listItem: {
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
   },
 });
 
