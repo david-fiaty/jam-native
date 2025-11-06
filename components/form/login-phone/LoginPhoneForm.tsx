@@ -69,7 +69,6 @@ const LoginPhoneForm = () => {
 
   return (
     <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Country')}</TextView>
       
       <InputPhoneField
         resource={resource}
@@ -80,8 +79,6 @@ const LoginPhoneForm = () => {
         placeholder={i18n.t('Enter your phone number')}
         containerStyle={styles.inputTextFieldContainer}
       />
-
-
 
       <InputPasswordField
         resource={resource}
@@ -107,9 +104,6 @@ const LoginPhoneForm = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-  },
-  label: {
-    alignSelf: 'flex-start',
   },
   inputTextFieldContainer: {
     backgroundColor: Layout.colors.white,
