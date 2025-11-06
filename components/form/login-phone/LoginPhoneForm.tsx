@@ -77,7 +77,7 @@ const LoginPhoneForm = () => {
         value={formData?.phone || ''}
         label={i18n.t('Phone number')}
         placeholder={i18n.t('Enter your phone number')}
-        containerStyle={styles.inputTextFieldContainer}
+        containerStyle={styles.fieldContainer}
       />
 
       <InputPasswordField
@@ -86,7 +86,7 @@ const LoginPhoneForm = () => {
         rules={['required', 'string']}
         label={i18n.t('Password')}
         placeholder={i18n.t('Enter your password')}
-        containerStyle={styles.inputTextFieldContainer}
+        containerStyle={styles.fieldContainer}
       />
 
       {!isEmailFieldDisabled() && (
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
   },
-  inputTextFieldContainer: {
+  fieldContainer: {
     backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
