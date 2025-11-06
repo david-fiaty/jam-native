@@ -44,7 +44,7 @@ const InputPhoneField = ({
   onChangeValue
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
-  const [countryCode, setCountryCode] = useState<string>('');
+  const [phonePrefix, setPhonePrefix] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const getCountryCodes = () => {
@@ -73,11 +73,13 @@ const InputPhoneField = ({
   };
 
   const onChangeCodeValue = (item: any) => {
-    console.log('country code', item);
+    let countries: any[] = StaticData.countryPhoneCodes;
+    let prefix: any = countries.find((o: any) => o.code == item.value).prefix;
+    setPhonePrefix(prefix);
   };
 
   const onChangePhoneValue = (value: any) => {
-    console.log('phone number', value);
+    setPhoneNumber(value);
   };
 
   useEffect(() => {
