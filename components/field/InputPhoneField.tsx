@@ -7,8 +7,6 @@ import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
-import PhoneInput from '@linhnguyen96114/react-native-phone-input';
-import CountryPhoneCodeField from "./CountryPhoneCodeField";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
 import SelectListBase from "../base/SelectListBase";
@@ -45,6 +43,7 @@ const InputPhoneField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
   const [phonePrefix, setPhonePrefix] = useState<string>('');
+  const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const getCountryCodes = () => {
@@ -67,16 +66,17 @@ const InputPhoneField = ({
   const renderItem = (item: any, selected: boolean) => {
     return (
       <View style={styles.listItem}>
-        <TextView>{getUnicodeFlagIcon(item.value.toUpperCase())} {item?.label}</TextView>
+        <TextView>{item?.label}</TextView>
       </View>
     );
   };
 
+  const renderFlag = (code: string) => {
+    return getUnicodeFlagIcon(code.toUpperCase());
+  };
+
   const onChangeCodeValue = (item: any) => {
-    let countries: any[] = StaticData.countryPhoneCodes;
-    let prefix: any = countries.find((o: any) => o.code == item.value).prefix;
-    
-    setPhonePrefix(prefix);
+    setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == item.value));
   };
 
   const onChangePhoneValue = (value: any) => {
@@ -86,6 +86,8 @@ const InputPhoneField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
+
+  console.log(selectedCountry)
 
   return (
     <>
@@ -113,30 +115,6 @@ const InputPhoneField = ({
         containerStyle={containerStyle}
         onChangeText={onChangePhoneValue}
       />
-    </>
-  );
-
-  return (
-    <>
-      {FormManager.renderLabel(label, rules)}
-
-      <BoxView
-        direction="row"
-        style={styles.container}
-      >
-        <PhoneInput
-          defaultValue={value}
-          defaultCode="FR"
-          containerStyle={[containerStyle, styles.container]}
-          textInputStyle={styles.textInputStyle}
-          layout="first"
-          placeholder={placeholder}
-          //onChangeText={onChangeEvent}
-          countryPickerProps={{
-            countryCodes: ['US', 'FR', 'TG'],
-          }}
-        />
-      </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
     </>
