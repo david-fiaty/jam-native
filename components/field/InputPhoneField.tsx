@@ -10,6 +10,8 @@ import PhoneInput from '@linhnguyen96114/react-native-phone-input';
 import CountryPhoneCodeField from "./CountryPhoneCodeField";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
+import SelectListBase from "../base/SelectListBase";
+import StaticData from "@/constants/StaticData";
 
 type Props = {
   resource?: any;
@@ -38,6 +40,17 @@ const InputPhoneField = ({
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
 
+  const countryCodes = StaticData.countryPhoneCodes;
+
+  const buildOptions = (optionsData: any) => {    
+    return [...(optionsData || [])].map((item: any) => {
+      return {
+        value: item.code,
+        label: `${item.name} (${item.prefix})`,
+      }
+    });
+  };
+
   const onChangeEvent = (fieldValue: any) => {
     setCurrentValue(fieldValue);
 
@@ -56,10 +69,14 @@ const InputPhoneField = ({
   return (
     <>
       <TextView>{i18n.t('Country')}</TextView>
-      <CountryPhoneCodeField
-        value={value || ''}
+      <SelectListBase
+        placeholder={i18n.t('Select your country')}
+        value={value}
+        data={buildOptions(countryCodes)}
+        //onChangeValue={onChangeValue}
+        disabled={disabled}
         elementStyle={styles.selectListField}
-        //onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
+        containerStyle={containerStyle}
       />
 
       <InputTextField
