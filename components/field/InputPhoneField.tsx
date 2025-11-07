@@ -17,7 +17,9 @@ type Props = {
   resource?: any;
   fieldKey?: any;
   phoneNumberFieldKey?: any;
+  phoneNumberFieldValue?: any;
   phonePrefixFieldKey?: any;
+  phonePrefixFielValue?: any;
   parentKey?: any;
   rules?: any;
   value?: string;
@@ -34,7 +36,9 @@ const InputPhoneField = ({
   resource,
   fieldKey,
   phoneNumberFieldKey,
+  phoneNumberFieldValue,
   phonePrefixFieldKey,
+  phonePrefixFielValue,
   parentKey,
   rules,
   value,
