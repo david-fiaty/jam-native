@@ -136,19 +136,18 @@ const InputPhoneField = ({
         style={[containerStyle, styles.inputContainer]}
       >
 
-          <TextView size={18}>
-            {renderFlag(selectedCountry?.code)}
-          </TextView>
-      
+      <TextView size={18}>
+        {renderFlag(selectedCountry?.code)}
+      </TextView>
+  
+      <TextView>{selectedCountry?.prefix}</TextView>
 
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          value={getCurrentValue()}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
-          containerStyle={{ width: '50%' }}
           onChangeText={onChangePhoneValue}
         />
       </BoxView>
@@ -171,6 +170,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     padding: Layout.space.base,
+    width: '100%',
   },
   flagContainer: {
     position: 'absolute',
