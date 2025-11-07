@@ -102,12 +102,12 @@ const InputPhoneField = ({
     if (!isLoaded) {
       if (!countryOptions?.length) {
         setCountryOptions(getCountryOptions());
-      } 
+      }
 
       if (!selectedCountry) {
         setSelectedCountry(defaultCountry);
         setPhoneNumber(`${defaultCountry.prefix} `);
-      } 
+      }
 
       setIsLoaded(true);
     }
@@ -128,36 +128,29 @@ const InputPhoneField = ({
         renderItem={renderItem}
       />
 
+      {FormManager.renderLabel(inputlabel, rules)}
       <BoxView
         direction="row"
         align="center"
-        justify="flex-start"
-        style={styles.fieldContainer}
+        justify="space-around"
+        style={[containerStyle, styles.inputContainer]}
       >
+
+          <TextView size={18}>
+            {renderFlag(selectedCountry?.code)}
+          </TextView>
+      
+
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
           value={getCurrentValue()}
-          label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
-          containerStyle={containerStyle}
-          inputContainerStyle={styles.inputContainer}
+          containerStyle={{ width: '50%' }}
           onChangeText={onChangePhoneValue}
         />
-
-        <BoxView
-          direction="row"
-          align="center"
-          justify="flex-start"
-          style={styles.flagContainer}
-        >
-          <TextView size={18}>
-            {renderFlag(selectedCountry?.code)}
-          </TextView>
-        </BoxView>
-
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
@@ -177,7 +170,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   inputContainer: {
-    paddingLeft: 30,
+    padding: Layout.space.base,
   },
   flagContainer: {
     position: 'absolute',
