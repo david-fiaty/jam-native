@@ -103,7 +103,7 @@ const InputTextField = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    flexGrow: 1,
   },
   inputContainerStyle: {
     width: '100%',
