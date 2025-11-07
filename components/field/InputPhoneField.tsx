@@ -76,6 +76,14 @@ const InputPhoneField = ({
     }
   };
 
+  const renderCurrentValue = () => {
+    if (selectedCountry?.prefix || '') {
+      return `${selectedCountry.prefix} `;
+    }
+    
+    return '';
+  };
+
   const onChangeCodeValue = (item: any) => {
     setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == item.value));
   };
@@ -113,7 +121,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          value={selectedCountry?.prefix || ''}
+          value={renderCurrentValue()}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
