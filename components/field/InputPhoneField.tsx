@@ -16,6 +16,8 @@ import StaticData from "@/constants/StaticData";
 type Props = {
   resource?: any;
   fieldKey?: any;
+  phoneNumberFieldKey?: any;
+  phonePrefixFieldKey?: any;
   parentKey?: any;
   rules?: any;
   value?: string;
@@ -31,6 +33,8 @@ type Props = {
 const InputPhoneField = ({
   resource,
   fieldKey,
+  phoneNumberFieldKey,
+  phonePrefixFieldKey,
   parentKey,
   rules,
   value,
