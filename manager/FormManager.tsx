@@ -147,8 +147,6 @@ class FormManager {
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
  
-    //console.log(rules)   
- 
     for (const rule of rules) {
       if (!fieldRules[rule].run(fieldValue)) {
         errors.push({
@@ -180,7 +178,7 @@ class FormManager {
   getValidationRules() {
     return {
       phone: {
-        run: (value: any) => { 
+        run: (value: any, params?: any) => { 
           return false;
         },
         error: () => {
@@ -188,7 +186,7 @@ class FormManager {
         },
       },
       required: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           if (value && typeof value === 'string' || value instanceof String) {
             return value && String(value).trim() !== '';
           }
@@ -206,7 +204,7 @@ class FormManager {
         },
       },
       nospace: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return !/\s/.test(value);
         },
         error: () => {
@@ -214,7 +212,7 @@ class FormManager {
         },
       },
       string: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return (typeof value === 'string' || value instanceof String);
         },
         error: () => {
@@ -222,7 +220,7 @@ class FormManager {
         },
       },
       array: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return Array.isArray(value);
         },
         error: () => {
@@ -230,7 +228,7 @@ class FormManager {
         },
       },
       number: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return !isNaN(parseFloat(value)) && isFinite(value);
         },
         error: () => {
@@ -238,7 +236,7 @@ class FormManager {
         },
       },
       email: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           let pattern: any = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
           return value && typeof value == 'string' && pattern.test(value);
         },
@@ -247,7 +245,7 @@ class FormManager {
         },
       },
       date: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           try {
             new Date(value);
             return true;
@@ -260,7 +258,7 @@ class FormManager {
         },
       },
       url: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           try {
             new URL(value);
             return true;
@@ -273,7 +271,7 @@ class FormManager {
         },
       },
       domain: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           let pattern: any = /^((?!-)[A-Za-z0-9-]{1, 63}(?<!-)\\.)+[A-Za-z]{2, 6}$/;
           return value && typeof value == 'string' && pattern.test(value);
         },
