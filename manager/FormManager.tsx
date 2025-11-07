@@ -1,4 +1,6 @@
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
+import { isValidPhoneNumber } from 'libphonenumber-js';
+import parsePhoneNumber from 'libphonenumber-js'
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -12,14 +14,14 @@ class FormManager {
 
     if (label) {
       return (
-        <TextView> 
+        <TextView>
           {label}{isRequired ? `*` : ''}
         </TextView>
       );
     }
 
     return <></>;
-  } 
+  }
 
   resetForm(resource: any) {
     Store.dispatch(setFormData<any>({
@@ -113,7 +115,7 @@ class FormManager {
   }
 
   updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any, params?: any) {
-    if (!resource || !fieldKey) return;  
+    if (!resource || !fieldKey) return;
 
     let errors: any[] = [];
     let key: any = parentKey ? `${parentKey}.${fieldKey}` : fieldKey;
@@ -130,14 +132,14 @@ class FormManager {
   }
 
   addValue(resource: string, key: any, value: any) {
-    let formState: any = {...Store.getState().form }; 
+    let formState: any = { ...Store.getState().form };
     let formData: any = { ...formState[resource] };
 
-    formData = DataManager.setObjectProperty(formData, key, value);    
-  
+    formData = DataManager.setObjectProperty(formData, key, value);
+
     Store.dispatch(setFormData<any>({
-      resource: resource, 
-      value: formData, 
+      resource: resource,
+      value: formData,
     }));
   }
 
@@ -146,7 +148,7 @@ class FormManager {
     let fieldRules: any = this.getValidationRules();
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
- 
+
     for (const rule of rules) {
       if (!fieldRules[rule].run(fieldValue, params)) {
         errors.push({
@@ -168,7 +170,7 @@ class FormManager {
       key = keyParts[keyParts.length - 1];
     }
 
-    return key; 
+    return key;
   }
 
   isPathKey(key: string) {
@@ -178,13 +180,16 @@ class FormManager {
   getValidationRules() {
     return {
       phone: {
-        run: (value: any, params?: any) => { 
+        run: (value: any, params?: any) => {
+          if (params?.countryCode) {
+            let parsedNumber: any = parsePhoneNumber(value, params.countryCode.toUpperCase());
+            return parsedNumber && parsedNumber.isValid();
+          }
 
-          console.log(value, params);
-          return false;
+          return true;
         },
         error: () => {
-          return i18n.t('Invalid phone number.'); 
+          return i18n.t('Invalid phone number.');
         },
       },
       required: {
@@ -199,7 +204,7 @@ class FormManager {
             return Object.keys(value)?.length > 0;
           }
 
-          return false; 
+          return false;
         },
         error: () => {
           return i18n.t('A value is required.');
