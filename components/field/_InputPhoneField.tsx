@@ -3,7 +3,6 @@ import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import parsePhoneNumber from 'libphonenumber-js'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
@@ -16,10 +15,6 @@ import StaticData from "@/constants/StaticData";
 type Props = {
   resource?: any;
   fieldKey?: any;
-  phoneNumberFieldKey?: any;
-  phoneNumberFieldValue?: any;
-  phonePrefixFieldKey?: any;
-  phonePrefixFielValue?: any;
   parentKey?: any;
   rules?: any;
   value?: string;
@@ -29,15 +24,12 @@ type Props = {
   selectPlaceholder?: any;
   disabled?: boolean;
   containerStyle?: any;
+  onChangeValue?: (value: boolean) => void;
 };
 
 const InputPhoneField = ({
   resource,
   fieldKey,
-  phoneNumberFieldKey,
-  phoneNumberFieldValue,
-  phonePrefixFieldKey,
-  phonePrefixFielValue,
   parentKey,
   rules,
   value,
@@ -47,11 +39,13 @@ const InputPhoneField = ({
   selectPlaceholder,
   disabled,
   containerStyle,
+  onChangeValue
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
   const getCountryOptions = () => {
@@ -88,38 +82,32 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
+    setPhoneNumber(`${targetCountry.prefix} `);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    /*
-    if (selectedCountry?.code) {
-      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
-
-      if (parsedNumber && parsedNumber.isValid()) {
-        // Todo - Update form data
-        console.log(phoneNumber)
-        console.log(selectedCountry)
-        //console.log(parsedNumber);
-      }
+    if (fieldValue.startsWith(`${selectedCountry.prefix} `)) {
+      setPhoneNumber(fieldValue);
     }
-      */
+    else {
+      setPhoneNumber(`${selectedCountry.prefix} `);
+    }
+  };
 
-    setPhoneNumber(fieldValue);
-
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
-
+  const getCurrentValue = () => {
+    return phoneNumber;
   };
 
   useEffect(() => {
     if (!isLoaded) {
       if (!countryOptions?.length) {
         setCountryOptions(getCountryOptions());
-      }
+      } 
 
       if (!selectedCountry) {
         setSelectedCountry(defaultCountry);
-      }
+        setPhoneNumber(`${defaultCountry.prefix} `);
+      } 
 
       setIsLoaded(true);
     }
@@ -128,7 +116,7 @@ const InputPhoneField = ({
   return (
     <>
       {FormManager.renderLabel(selectLabel, rules)}
-      {/* Select list */}
+
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
@@ -140,37 +128,39 @@ const InputPhoneField = ({
         renderItem={renderItem}
       />
 
-      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
-
-      {/* Input text */}
-      {FormManager.renderLabel(inputlabel, rules)}
-
       <BoxView
         direction="row"
         align="center"
         justify="flex-start"
-        style={[containerStyle, styles.container]}
-        gap={Layout.space.base / 1.6}
+        style={styles.fieldContainer}
       >
-        <TextView size={18}>
-          {renderFlag(selectedCountry?.code)}
-        </TextView>
-
-        <TextView>{selectedCountry?.prefix}</TextView>
-
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
-          value={phoneNumber || ''}
           rules={rules}
+          value={getCurrentValue()}
+          label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
+          containerStyle={containerStyle}
+          inputContainerStyle={styles.inputContainer}
           onChangeText={onChangePhoneValue}
-          containerStyle={styles.inputTextField}
         />
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.flagContainer}
+        >
+          <TextView size={18}>
+            {renderFlag(selectedCountry?.code)}
+          </TextView>
+        </BoxView>
+
       </BoxView>
 
-      {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+      {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
@@ -178,16 +168,21 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingLeft: Layout.space.base,
   },
   selectListField: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
-  inputTextField: {
-    backgroundColor: 'transparent',
-    borderWidth: 0,
-    paddingLeft: 0,
+  fieldContainer: {
+    position: 'relative',
+  },
+  inputContainer: {
+    paddingLeft: 30,
+  },
+  flagContainer: {
+    position: 'absolute',
+    top: '57%',
+    left: Layout.space.base,
   },
   listItem: {
     paddingVertical: Layout.space.base,

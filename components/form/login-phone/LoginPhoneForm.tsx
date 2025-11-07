@@ -73,8 +73,11 @@ const LoginPhoneForm = () => {
       <InputPhoneField
         resource={resource}
         fieldKey="phone"
-        rules={['required', 'phone']}
-        value={formData?.phone || ''}
+        phoneNumberFieldKey="phone_without_country_code"
+        phonePrefixFieldKey="country_code"
+        phoneNumberFieldValue={formData?.phone_without_country_code || ''}
+        phonePrefixFielValue={formData?.country_code || ''}
+        rules={['required']}
         inputlabel={i18n.t('Phone number')}
         selectLabel={i18n.t('Country')}
         inputPlaceholder={i18n.t('Enter your phone number')}
