@@ -78,7 +78,6 @@ const InputPhoneField = ({
   };
 
   const renderCurrentValue = () => {
-    
     if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
       return `${selectedCountry.prefix} ${value}`;
     }
