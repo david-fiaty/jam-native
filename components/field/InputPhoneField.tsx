@@ -76,6 +76,10 @@ const InputPhoneField = ({
     }
   };
 
+  const getDefaultCountry = () => {
+    return StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
+  };
+
   const getCurrentValue = () => {
     if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
       return `${selectedCountry.prefix} ${value}`;
@@ -96,14 +100,10 @@ const InputPhoneField = ({
     setPhoneNumber(value);
   };
 
-  const getDefaultValue = () => {
-    return StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
-  };
-
   useEffect(() => {
     if (!isLoaded) {
       if (!selectedCountry) {
-        setSelectedCountry(getDefaultValue());
+        setSelectedCountry(getDefaultCountry());
       } 
     }
   }, [isLoaded, value, selectedCountry]);
