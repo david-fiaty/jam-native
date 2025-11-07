@@ -122,7 +122,7 @@ const InputPhoneField = ({
         direction="row"
         align="center"
         justify="flex-start"
-        style={containerStyle}
+        style={[containerStyle, styles.container]}
       >
         <TextView size={18}>
           {renderFlag(selectedCountry?.code)}
@@ -150,13 +150,15 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    paddingLeft: Layout.space.base,
   },
   selectListField: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
   inputTextField: {
-    backgroundColor: Layout.colors.white,
+    backgroundColor: 'red',
+    //backgroundColor: Layout.colors.white,
     borderWidth: 0,
   },
   listItem: {
