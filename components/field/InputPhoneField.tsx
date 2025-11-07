@@ -77,8 +77,14 @@ const InputPhoneField = ({
   };
 
   const renderCurrentValue = () => {
-    if (selectedCountry?.prefix || '') {
+    if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
       return `${selectedCountry.prefix} ${value}`;
+    }
+    else if (selectedCountry?.prefix || '') {
+      return `${selectedCountry.prefix} `;
+    }
+    else {
+      return 'xx';
     }
     
     return '';
