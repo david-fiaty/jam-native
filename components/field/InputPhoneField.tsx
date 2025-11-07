@@ -72,14 +72,8 @@ const InputPhoneField = ({
 
   const renderFlag = (code: string) => {
     if (code) {
-      return (
-        <TextView>
-          {getUnicodeFlagIcon(code.toUpperCase())}
-        </TextView>
-      );
+      return getUnicodeFlagIcon(code.toUpperCase());
     }
-
-    return <></>;
   };
 
   const onChangeCodeValue = (item: any) => {
@@ -113,24 +107,34 @@ const InputPhoneField = ({
         direction="row"
         align="center"
         justify="flex-start"
-        style={styles.inputContainer}
+        style={styles.fieldContainer}
       >
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          value={selectedCountry?.prefix || ''}
+          //value={selectedCountry?.prefix || ''}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           containerStyle={containerStyle}
-          inputContainerStyle={{ paddingLeft: 50 }}
+          inputContainerStyle={styles.inputContainer}
           onChangeText={onChangePhoneValue}
         />
 
-        <View style={styles.flagContainer}>
-          {renderFlag('us')}
-        </View>
+        <BoxView 
+          direction="row" 
+          align="center"
+          justify="flex-start"
+          style={styles.flagContainer}
+        >
+          <TextView size={18}>
+            {renderFlag(selectedCountry?.code)}
+          </TextView>
+          <TextView>
+            {selectedCountry?.prefix || ''}
+          </TextView>
+        </BoxView>
 
       </BoxView>
 
@@ -147,12 +151,15 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
-  inputContainer: {
+  fieldContainer: {
     position: 'relative',
+  },
+  inputContainer: {
+    paddingLeft: 73,
   },
   flagContainer: {
     position: 'absolute',
-    top: '55%',
+    top: '57%',
     left: Layout.space.base,
   },
   listItem: {
