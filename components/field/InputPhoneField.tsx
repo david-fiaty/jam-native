@@ -50,7 +50,6 @@ const InputPhoneField = ({
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
   const getCountryOptions = () => {
