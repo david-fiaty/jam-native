@@ -17,7 +17,7 @@ type Props = {
   phoneNumberFieldKey?: any;
   phoneNumberFieldValue?: any;
   phonePrefixFieldKey?: any;
-  phonePrefixFiedlValue?: any;
+  phonePrefixFieldValue?: any;
   parentKey?: any;
   rules?: any;
   value?: string;
@@ -35,7 +35,7 @@ const InputPhoneField = ({
   phoneNumberFieldKey,
   phoneNumberFieldValue,
   phonePrefixFieldKey,
-  phonePrefixFiedlValue,
+  phonePrefixFieldValue,
   parentKey,
   rules,
   value,
@@ -124,7 +124,7 @@ const InputPhoneField = ({
 
       <SelectListBase
         placeholder={selectPlaceholder}
-        value={phonePrefixFiedlValue || selectedCountry?.code || ''}
+        value={phonePrefixFieldValue || selectedCountry?.code || ''}
         data={countryOptions}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
