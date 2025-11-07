@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import { isValidPhoneNumber } from 'libphonenumber-js';
+import parsePhoneNumber from 'libphonenumber-js'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
@@ -15,6 +16,10 @@ import StaticData from "@/constants/StaticData";
 type Props = {
   resource?: any;
   fieldKey?: any;
+  phoneNumberFieldKey?: any;
+  phoneNumberFieldValue?: any;
+  phonePrefixFieldKey?: any;
+  phonePrefixFielValue?: any;
   parentKey?: any;
   rules?: any;
   value?: string;
@@ -24,12 +29,15 @@ type Props = {
   selectPlaceholder?: any;
   disabled?: boolean;
   containerStyle?: any;
-  onChangeValue?: (value: boolean) => void;
 };
 
 const InputPhoneField = ({
   resource,
   fieldKey,
+  phoneNumberFieldKey,
+  phoneNumberFieldValue,
+  phonePrefixFieldKey,
+  phonePrefixFielValue,
   parentKey,
   rules,
   value,
@@ -39,13 +47,11 @@ const InputPhoneField = ({
   selectPlaceholder,
   disabled,
   containerStyle,
-  onChangeValue
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
-
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
   const getCountryOptions = () => {
@@ -82,10 +88,27 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
+    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
+    /*
+    if (selectedCountry?.code) {
+      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
+
+      if (parsedNumber && parsedNumber.isValid()) {
+        // Todo - Update form data
+        console.log(phoneNumber)
+        console.log(selectedCountry)
+        //console.log(parsedNumber);
+      }
+    }
+      */
+
     setPhoneNumber(fieldValue);
+
+    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
+
   };
 
   useEffect(() => {
@@ -105,7 +128,7 @@ const InputPhoneField = ({
   return (
     <>
       {FormManager.renderLabel(selectLabel, rules)}
-
+      {/* Select list */}
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
@@ -117,19 +140,24 @@ const InputPhoneField = ({
         renderItem={renderItem}
       />
 
+      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
+
+      {/* Input text */}
       {FormManager.renderLabel(inputlabel, rules)}
+
       <BoxView
         direction="row"
         align="center"
         justify="flex-start"
         style={[containerStyle, styles.container]}
+        gap={Layout.space.base / 1.6}
       >
         <TextView size={18}>
           {renderFlag(selectedCountry?.code)}
         </TextView>
 
         <TextView>{selectedCountry?.prefix}</TextView>
-        
+
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
@@ -142,7 +170,7 @@ const InputPhoneField = ({
         />
       </BoxView>
 
-      {FormManager.renderError(fieldKey, parentKey)}
+      {FormManager.renderError(phoneNumberFieldKey, parentKey)}
     </>
   );
 };
@@ -157,9 +185,9 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.primary,
   },
   inputTextField: {
-    backgroundColor: 'red',
-    //backgroundColor: Layout.colors.white,
+    backgroundColor: 'transparent',
     borderWidth: 0,
+    paddingLeft: 0,
   },
   listItem: {
     paddingVertical: Layout.space.base,
