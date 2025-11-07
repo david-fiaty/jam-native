@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { AsYouType } from 'libphonenumber-js'
+import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
@@ -91,8 +91,11 @@ const InputPhoneField = ({
 
   const onChangePhoneValue = (fieldValue: any) => {
     if (fieldValue) {
-      fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
-      fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
+      if (parsedNumber && parsedNumber.isValid()) {
+        fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
+        fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+      }
 
       FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
         countryCode: selectedCountry.code,

@@ -1,12 +1,12 @@
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
-import parsePhoneNumber from 'libphonenumber-js'
+import parsePhoneNumber from 'libphonenumber-js';
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
 import ScreenManager from "./ScreenManager";
 import DataManager from "./DataManager";
 import TextView from "@/components/view/TextView";
-
+ 
 class FormManager {
   renderLabel(label: any, rules?: any) {
     let isRequired: boolean = (rules || []).includes('required');
