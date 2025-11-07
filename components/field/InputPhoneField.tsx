@@ -45,6 +45,8 @@ const InputPhoneField = ({
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
+  const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
+
   const getCountryCodes = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
 
@@ -74,10 +76,6 @@ const InputPhoneField = ({
     if (code) {
       return getUnicodeFlagIcon(code.toUpperCase());
     }
-  };
-
-  const getDefaultCountry = () => {
-    return StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
   };
 
   const getCurrentValue = () => {
@@ -116,14 +114,13 @@ const InputPhoneField = ({
   useEffect(() => {
     if (!isLoaded) {
       if (!selectedCountry) {
-        let defaultCountry: any = getDefaultCountry();
         setSelectedCountry(defaultCountry);
         setPhoneNumber(defaultCountry.prefix);
       } 
 
       setIsLoaded(true);
     }
-  }, [isLoaded, value, selectedCountry]);
+  }, [isLoaded, value, selectedCountry, defaultCountry]);
 
   return (
     <>
