@@ -1,4 +1,5 @@
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
+import parsePhoneNumber from 'libphonenumber-js'
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
 import i18n from "@/translation/i18n";
@@ -12,14 +13,14 @@ class FormManager {
 
     if (label) {
       return (
-        <TextView> 
+        <TextView>
           {label}{isRequired ? `*` : ''}
         </TextView>
       );
     }
 
     return <></>;
-  } 
+  }
 
   resetForm(resource: any) {
     Store.dispatch(setFormData<any>({
@@ -112,14 +113,14 @@ class FormManager {
     return <></>;
   }
 
-  updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any) {
-    if (!resource || !fieldKey) return;  
+  updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any, params?: any) {
+    if (!resource || !fieldKey) return;
 
     let errors: any[] = [];
     let key: any = parentKey ? `${parentKey}.${fieldKey}` : fieldKey;
 
     if (rules.length > 0) {
-      errors = this.validateFied(resource, key, value, rules);
+      errors = this.validateFied(resource, key, value, rules, params);
     }
 
     if (errors.length) {
@@ -130,25 +131,25 @@ class FormManager {
   }
 
   addValue(resource: string, key: any, value: any) {
-    let formState: any = {...Store.getState().form }; 
+    let formState: any = { ...Store.getState().form };
     let formData: any = { ...formState[resource] };
 
-    formData = DataManager.setObjectProperty(formData, key, value);    
-  
+    formData = DataManager.setObjectProperty(formData, key, value);
+
     Store.dispatch(setFormData<any>({
-      resource: resource, 
-      value: formData, 
+      resource: resource,
+      value: formData,
     }));
   }
 
-  validateFied(resource: string, key: string, value: any, rules: any[]) {
+  validateFied(resource: string, key: string, value: any, rules: any[], params?: any) {
     let fieldValue: any = value;
     let fieldRules: any = this.getValidationRules();
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
 
     for (const rule of rules) {
-      if (!fieldRules[rule].run(fieldValue)) {
+      if (!fieldRules[rule].run(fieldValue, params)) {
         errors.push({
           key: targetKey,
           message: fieldRules[rule].error(),
@@ -168,7 +169,7 @@ class FormManager {
       key = keyParts[keyParts.length - 1];
     }
 
-    return key; 
+    return key;
   }
 
   isPathKey(key: string) {
@@ -177,8 +178,23 @@ class FormManager {
 
   getValidationRules() {
     return {
+      phone: {
+        run: (value: any, params?: any) => {
+          if (value && params?.countryCode) {
+            let parsedNumber: any = parsePhoneNumber(value, params.countryCode.toUpperCase());
+            let isValid: boolean = parsedNumber && parsedNumber.isValid();
+             
+            return isValid;
+          }
+
+          return true;
+        },
+        error: () => {
+          return i18n.t('Invalid phone number.');
+        },
+      },
       required: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           if (value && typeof value === 'string' || value instanceof String) {
             return value && String(value).trim() !== '';
           }
@@ -189,14 +205,14 @@ class FormManager {
             return Object.keys(value)?.length > 0;
           }
 
-          return false; 
+          return false;
         },
         error: () => {
           return i18n.t('A value is required.');
         },
       },
       nospace: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return !/\s/.test(value);
         },
         error: () => {
@@ -204,7 +220,7 @@ class FormManager {
         },
       },
       string: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return (typeof value === 'string' || value instanceof String);
         },
         error: () => {
@@ -212,7 +228,7 @@ class FormManager {
         },
       },
       array: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return Array.isArray(value);
         },
         error: () => {
@@ -220,7 +236,7 @@ class FormManager {
         },
       },
       number: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           return !isNaN(parseFloat(value)) && isFinite(value);
         },
         error: () => {
@@ -228,7 +244,7 @@ class FormManager {
         },
       },
       email: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           let pattern: any = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
           return value && typeof value == 'string' && pattern.test(value);
         },
@@ -237,7 +253,7 @@ class FormManager {
         },
       },
       date: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           try {
             new Date(value);
             return true;
@@ -250,7 +266,7 @@ class FormManager {
         },
       },
       url: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           try {
             new URL(value);
             return true;
@@ -263,7 +279,7 @@ class FormManager {
         },
       },
       domain: {
-        run: (value: any) => {
+        run: (value: any, params?: any) => {
           let pattern: any = /^((?!-)[A-Za-z0-9-]{1, 63}(?<!-)\\.)+[A-Za-z]{2, 6}$/;
           return value && typeof value == 'string' && pattern.test(value);
         },
