@@ -29,7 +29,6 @@ type Props = {
   selectPlaceholder?: any;
   disabled?: boolean;
   containerStyle?: any;
-  onChangeValue?: (value: boolean) => void;
 };
 
 const InputPhoneField = ({
@@ -48,7 +47,6 @@ const InputPhoneField = ({
   selectPlaceholder,
   disabled,
   containerStyle,
-  onChangeValue
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
@@ -90,14 +88,14 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
+    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    setPhoneNumber(fieldValue);
-
+    /*
     if (selectedCountry?.code) {
       let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
-      
+
       if (parsedNumber && parsedNumber.isValid()) {
         // Todo - Update form data
         console.log(phoneNumber)
@@ -105,6 +103,12 @@ const InputPhoneField = ({
         //console.log(parsedNumber);
       }
     }
+      */
+
+    setPhoneNumber(fieldValue);
+
+    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
+
   };
 
   useEffect(() => {
@@ -136,7 +140,7 @@ const InputPhoneField = ({
         renderItem={renderItem}
       />
 
-      {FormManager.renderError(fieldKey, parentKey)}
+      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
 
       {/* Input text */}
       {FormManager.renderLabel(inputlabel, rules)}
@@ -146,14 +150,14 @@ const InputPhoneField = ({
         align="center"
         justify="flex-start"
         style={[containerStyle, styles.container]}
-        gap={Layout.space.base/1.6}
+        gap={Layout.space.base / 1.6}
       >
         <TextView size={18}>
           {renderFlag(selectedCountry?.code)}
         </TextView>
 
         <TextView>{selectedCountry?.prefix}</TextView>
-        
+
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
@@ -166,7 +170,7 @@ const InputPhoneField = ({
         />
       </BoxView>
 
-      {FormManager.renderError(fieldKey, parentKey)}
+      {FormManager.renderError(phoneNumberFieldKey, parentKey)}
     </>
   );
 };
