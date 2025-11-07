@@ -81,8 +81,7 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
-    setPhoneNumber(targetCountry.prefix);
-
+    setPhoneNumber(`${targetCountry.prefix} `);
   };
 
   const onChangePhoneValue = (value: any) => {
@@ -102,7 +101,7 @@ const InputPhoneField = ({
     if (!isLoaded) {
       if (!selectedCountry) {
         setSelectedCountry(defaultCountry);
-        setPhoneNumber(defaultCountry.prefix);
+        setPhoneNumber(`${defaultCountry.prefix} `);
       } 
 
       setIsLoaded(true);
