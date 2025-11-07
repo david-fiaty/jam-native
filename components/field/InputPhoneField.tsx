@@ -85,7 +85,7 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
-    
+
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
   };
 
@@ -113,8 +113,9 @@ const InputPhoneField = ({
 
   return (
     <>
-      {FormManager.renderLabel(selectLabel, rules)}
       {/* Select list */}
+      {FormManager.renderLabel(selectLabel, rules)}
+      
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
