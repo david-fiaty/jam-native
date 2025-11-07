@@ -155,16 +155,11 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.primary,
   },
   fieldContainer: {
-    position: 'relative',
+    flex: 1,
   },
   inputContainer: {
+    flex: 1,
     padding: Layout.space.base,
-    width: '100%',
-  },
-  flagContainer: {
-    position: 'absolute',
-    top: '57%',
-    left: Layout.space.base,
   },
   listItem: {
     paddingVertical: Layout.space.base,
