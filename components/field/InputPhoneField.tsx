@@ -121,8 +121,8 @@ const InputPhoneField = ({
       <BoxView
         direction="row"
         align="center"
-        justify="space-around"
-        style={[containerStyle, styles.inputContainer]}
+        justify="flex-start"
+        style={[containerStyle, styles.container]}
       >
         <TextView size={18}>
           {renderFlag(selectedCountry?.code)}
@@ -138,6 +138,7 @@ const InputPhoneField = ({
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
+          containerStyle={styles.inputTextField}
         />
       </BoxView>
 
@@ -149,22 +150,16 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    paddingLeft: Layout.space.base,
   },
   selectListField: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
-  fieldContainer: {
-    position: 'relative',
-  },
-  inputContainer: {
-    padding: Layout.space.base,
-    width: '100%',
-  },
-  flagContainer: {
-    position: 'absolute',
-    top: '57%',
-    left: Layout.space.base,
+  inputTextField: {
+    backgroundColor: 'red',
+    //backgroundColor: Layout.colors.white,
+    borderWidth: 0,
   },
   listItem: {
     paddingVertical: Layout.space.base,
