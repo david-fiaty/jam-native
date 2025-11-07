@@ -99,10 +99,14 @@ const InputPhoneField = ({
     setPhoneNumber(value);
   };
 
+  const getDefaultValue = () => {
+    return StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!selectedCountry) {
-        setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg'));
+        setSelectedCountry(getDefaultValue());
       } 
     }
 
