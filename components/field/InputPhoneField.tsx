@@ -138,7 +138,7 @@ const InputPhoneField = ({
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
-          containerStyle={ {backgroundColor: 'red'}}
+          containerStyle={styles.inputTextField}
         />
       </BoxView>
 
@@ -154,6 +154,9 @@ const styles = StyleSheet.create({
   selectListField: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
+  },
+  inputTextField: {
+    backgroundColor: Layout.colors.white,
   },
   listItem: {
     paddingVertical: Layout.space.base,
