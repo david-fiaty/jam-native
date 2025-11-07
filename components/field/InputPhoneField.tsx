@@ -113,7 +113,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          //value={selectedCountry?.prefix || ''}
+          value={selectedCountry?.prefix || ''}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
@@ -130,9 +130,6 @@ const InputPhoneField = ({
         >
           <TextView size={18}>
             {renderFlag(selectedCountry?.code)}
-          </TextView>
-          <TextView>
-            {selectedCountry?.prefix || ''}
           </TextView>
         </BoxView>
 
@@ -155,7 +152,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   inputContainer: {
-    paddingLeft: 73,
+    paddingLeft: 30,
   },
   flagContainer: {
     position: 'absolute',
