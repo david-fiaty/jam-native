@@ -41,6 +41,7 @@ const InputPhoneField = ({
   containerStyle,
   onChangeValue
 }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [currentValue, setCurrentValue] = useState<any>('');
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -86,7 +87,7 @@ const InputPhoneField = ({
     else {
       return 'xx';
     }
-    
+
     return '';
   };
 
@@ -99,8 +100,14 @@ const InputPhoneField = ({
   };
 
   useEffect(() => {
+    if (!isLoaded) {
+      if (!selectedCountry) {
+        setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg'));
+      } 
+    }
+
     setCurrentValue(value);
-  }, [value]);
+  }, [isLoaded, value, selectedCountry]);
 
   return (
     <>
@@ -108,7 +115,7 @@ const InputPhoneField = ({
 
       <SelectListBase
         placeholder={selectPlaceholder}
-        value={value}
+        value={selectedCountry?.code || ''}
         data={getCountryCodes()}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
@@ -136,8 +143,8 @@ const InputPhoneField = ({
           onChangeText={onChangePhoneValue}
         />
 
-        <BoxView 
-          direction="row" 
+        <BoxView
+          direction="row"
           align="center"
           justify="flex-start"
           style={styles.flagContainer}
