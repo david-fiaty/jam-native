@@ -152,8 +152,8 @@ const styles = StyleSheet.create({
   },
   flagContainer: {
     position: 'absolute',
-    top: 30,
-    left: 0,
+    top: '55%',
+    left: Layout.space.base,
   },
   listItem: {
     paddingVertical: Layout.space.base,
