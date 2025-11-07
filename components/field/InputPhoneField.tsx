@@ -81,8 +81,12 @@ const InputPhoneField = ({
   };
 
   const getCurrentValue = () => {
-    if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
-      return `${selectedCountry.prefix} ${value}`;
+
+    return `${selectedCountry?.prefix} ${phoneNumber}`;
+    // && phoneNumber.startsWith(selectedCountry.prefix)
+    
+    if (selectedCountry && phoneNumber) {
+      return `${selectedCountry.prefix} ${phoneNumber}`;
     }
     else if (selectedCountry?.prefix || '') {
       return `${selectedCountry.prefix} `;
@@ -97,14 +101,27 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (value: any) => {
-    setPhoneNumber(value);
+    //console.log(value)
+    //setPhoneNumber('000')
+    /*
+    if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
+      setPhoneNumber(value);
+    }
+    else {
+      setPhoneNumber('000');
+    }
+      */
   };
 
   useEffect(() => {
     if (!isLoaded) {
       if (!selectedCountry) {
-        setSelectedCountry(getDefaultCountry());
+        let defaultCountry: any = getDefaultCountry();
+        setSelectedCountry(defaultCountry);
+        setPhoneNumber(defaultCountry.prefix);
       } 
+
+      setIsLoaded(true);
     }
   }, [isLoaded, value, selectedCountry]);
 
@@ -133,7 +150,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          value={getCurrentValue()}
+          value={phoneNumber}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
