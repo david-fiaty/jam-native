@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.primary,
   },
   inputTextField: {
-    backgroundColor: 'red',
-    //backgroundColor: Layout.colors.white,
+    backgroundColor: 'transparent',
     borderWidth: 0,
   },
   listItem: {
