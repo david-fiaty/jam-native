@@ -106,9 +106,7 @@ const InputPhoneField = ({
       */
 
     setPhoneNumber(fieldValue);
-
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
-
   };
 
   useEffect(() => {
