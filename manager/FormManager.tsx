@@ -146,13 +146,18 @@ class FormManager {
     let fieldRules: any = this.getValidationRules();
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
+ 
+    console.log(rules)  
 
     for (const rule of rules) {
-      if (!fieldRules[rule].run(fieldValue)) {
+      if (typeof rule === 'string' && !fieldRules[rule].run(fieldValue)) {
         errors.push({
           key: targetKey,
           message: fieldRules[rule].error(),
         });
+      }
+      else if (typeof rule === 'function') {
+
       }
       else {
         this.clearErrors(resource, targetKey);
