@@ -82,21 +82,32 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
+    setPhoneNumber(`${targetCountry.prefix} `);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    setPhoneNumber(fieldValue);
+    if (fieldValue.startsWith(`${selectedCountry.prefix} `)) {
+      setPhoneNumber(fieldValue);
+    }
+    else {
+      setPhoneNumber(`${selectedCountry.prefix} `);
+    }
+  };
+
+  const getCurrentValue = () => {
+    return phoneNumber;
   };
 
   useEffect(() => {
     if (!isLoaded) {
       if (!countryOptions?.length) {
         setCountryOptions(getCountryOptions());
-      }
+      } 
 
       if (!selectedCountry) {
         setSelectedCountry(defaultCountry);
-      }
+        setPhoneNumber(`${defaultCountry.prefix} `);
+      } 
 
       setIsLoaded(true);
     }
@@ -117,28 +128,36 @@ const InputPhoneField = ({
         renderItem={renderItem}
       />
 
-      {FormManager.renderLabel(inputlabel, rules)}
       <BoxView
         direction="row"
         align="center"
-        justify="space-around"
-        style={[containerStyle, styles.inputContainer]}
+        justify="flex-start"
+        style={styles.fieldContainer}
       >
-        <TextView size={18}>
-          {renderFlag(selectedCountry?.code)}
-        </TextView>
-
-        <TextView>{selectedCountry?.prefix}</TextView>
-        
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
-          value={phoneNumber || ''}
           rules={rules}
+          value={getCurrentValue()}
+          label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
+          containerStyle={containerStyle}
+          inputContainerStyle={styles.inputContainer}
           onChangeText={onChangePhoneValue}
         />
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.flagContainer}
+        >
+          <TextView size={18}>
+            {renderFlag(selectedCountry?.code)}
+          </TextView>
+        </BoxView>
+
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
@@ -158,8 +177,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   inputContainer: {
-    padding: Layout.space.base,
-    width: '100%',
+    paddingLeft: 30,
   },
   flagContainer: {
     position: 'absolute',
