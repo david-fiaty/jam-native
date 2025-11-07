@@ -95,7 +95,10 @@ const InputPhoneField = ({
   };
 
   const onChangeCodeValue = (item: any) => {
-    setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == item.value));
+    let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
+    setSelectedCountry(targetCountry);
+    setPhoneNumber(targetCountry.prefix);
+
   };
 
   const onChangePhoneValue = (value: any) => {
