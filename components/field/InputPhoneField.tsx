@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import { isValidPhoneNumber } from 'libphonenumber-js';
+import parsePhoneNumber from 'libphonenumber-js'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
@@ -86,6 +87,14 @@ const InputPhoneField = ({
 
   const onChangePhoneValue = (fieldValue: any) => {
     setPhoneNumber(fieldValue);
+
+    if (selectedCountry?.code) {
+      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
+      
+      if (parsedNumber && parsedNumber.isValid()) {
+        console.log(parsedNumber);
+      }
+    }
   };
 
   useEffect(() => {
