@@ -41,9 +41,11 @@ const InputPhoneField = ({
   containerStyle,
   onChangeValue
 }: Props) => {
-  const [currentValue, setCurrentValue] = useState<any>('');
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
+
+  const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
   const getCountryCodes = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
@@ -77,16 +79,34 @@ const InputPhoneField = ({
   };
 
   const onChangeCodeValue = (item: any) => {
-    setSelectedCountry(StaticData.countryPhoneCodes.find((o: any) => o.code == item.value));
+    let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
+    setSelectedCountry(targetCountry);
+    setPhoneNumber(`${targetCountry.prefix} `);
   };
 
-  const onChangePhoneValue = (value: any) => {
-    setPhoneNumber(value);
+  const onChangePhoneValue = (fieldValue: any) => {
+    if (fieldValue.startsWith(`${selectedCountry.prefix} `)) {
+      setPhoneNumber(fieldValue);
+    }
+    else {
+      setPhoneNumber(`${selectedCountry.prefix} `);
+    }
+  };
+
+  const getCurrentValue = () => {
+    return phoneNumber;
   };
 
   useEffect(() => {
-    setCurrentValue(value);
-  }, [value]);
+    if (!isLoaded) {
+      if (!selectedCountry) {
+        setSelectedCountry(defaultCountry);
+        setPhoneNumber(`${defaultCountry.prefix} `);
+      } 
+
+      setIsLoaded(true);
+    }
+  }, [isLoaded, value, selectedCountry, defaultCountry]);
 
   return (
     <>
@@ -94,7 +114,7 @@ const InputPhoneField = ({
 
       <SelectListBase
         placeholder={selectPlaceholder}
-        value={value}
+        value={selectedCountry?.code || ''}
         data={getCountryCodes()}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
@@ -113,7 +133,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          //value={selectedCountry?.prefix || ''}
+          value={getCurrentValue()}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
@@ -122,17 +142,14 @@ const InputPhoneField = ({
           onChangeText={onChangePhoneValue}
         />
 
-        <BoxView 
-          direction="row" 
+        <BoxView
+          direction="row"
           align="center"
           justify="flex-start"
           style={styles.flagContainer}
         >
           <TextView size={18}>
             {renderFlag(selectedCountry?.code)}
-          </TextView>
-          <TextView>
-            {selectedCountry?.prefix || ''}
           </TextView>
         </BoxView>
 
@@ -155,7 +172,7 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   inputContainer: {
-    paddingLeft: 73,
+    paddingLeft: 30,
   },
   flagContainer: {
     position: 'absolute',
