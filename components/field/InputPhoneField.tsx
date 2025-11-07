@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
   inputTextField: {
     backgroundColor: 'transparent',
     borderWidth: 0,
+    paddingLeft: 0,
   },
   listItem: {
     paddingVertical: Layout.space.base,
