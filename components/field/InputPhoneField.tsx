@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
+import { AsYouType } from 'libphonenumber-js'
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
@@ -89,9 +90,14 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: selectedCountry.code,
-    });
+    if (fieldValue) {
+      fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
+      fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: selectedCountry.code,
+      });
+    }
   };
 
   useEffect(() => {
@@ -112,7 +118,7 @@ const InputPhoneField = ({
     <>
       {/* Select list */}
       {FormManager.renderLabel(selectLabel, rules)}
-      
+
       <SelectListBase
         placeholder={selectPlaceholder}
         value={phonePrefixFiedlValue || selectedCountry?.code || ''}
