@@ -86,10 +86,8 @@ const InputPhoneField = ({
       return `${selectedCountry.prefix} `;
     }
     else {
-      return 'xx';
+      return '';
     }
-
-    return '';
   };
 
   const onChangeCodeValue = (item: any) => {
