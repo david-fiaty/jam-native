@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
-import { isValidPhoneNumber } from 'libphonenumber-js';
-import parsePhoneNumber from 'libphonenumber-js'
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
-import i18n from "@/translation/i18n";
 import SelectListBase from "../base/SelectListBase";
 import StaticData from "@/constants/StaticData";
 
@@ -88,25 +85,16 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
+
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    /*
-    if (selectedCountry?.code) {
-      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
-
-      if (parsedNumber && parsedNumber.isValid()) {
-        // Todo - Update form data
-        console.log(phoneNumber)
-        console.log(selectedCountry)
-        //console.log(parsedNumber);
-      }
-    }
-      */
-
     setPhoneNumber(fieldValue);
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
+
+    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+      countryCode: selectedCountry.code,
+    });
   };
 
   useEffect(() => {
@@ -125,8 +113,9 @@ const InputPhoneField = ({
 
   return (
     <>
-      {FormManager.renderLabel(selectLabel, rules)}
       {/* Select list */}
+      {FormManager.renderLabel(selectLabel, rules)}
+      
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
