@@ -139,7 +139,7 @@ const InputPhoneField = ({
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-        <TextView size={18}>
+        <TextView size={14}>
           {renderFlag(selectedCountry?.code)}
         </TextView>
 
