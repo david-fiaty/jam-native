@@ -78,22 +78,6 @@ const InputPhoneField = ({
     }
   };
 
-  const getCurrentValue = () => {
-
-    return `${selectedCountry?.prefix} ${phoneNumber}`;
-    // && phoneNumber.startsWith(selectedCountry.prefix)
-    
-    if (selectedCountry && phoneNumber) {
-      return `${selectedCountry.prefix} ${phoneNumber}`;
-    }
-    else if (selectedCountry?.prefix || '') {
-      return `${selectedCountry.prefix} `;
-    }
-    else {
-      return '';
-    }
-  };
-
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
