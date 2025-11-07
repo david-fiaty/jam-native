@@ -93,6 +93,10 @@ const InputPhoneField = ({
     }
   };
 
+  const getCurrentValue = () => {
+    return phoneNumber;
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!selectedCountry) {
@@ -129,7 +133,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          value={phoneNumber}
+          value={getCurrentValue()}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
