@@ -90,12 +90,14 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
-    fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+    if (fieldValue) {
+      fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
+      fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
 
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: selectedCountry.code,
-    });
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: selectedCountry.code,
+      });
+    }
   };
 
   useEffect(() => {
@@ -116,7 +118,7 @@ const InputPhoneField = ({
     <>
       {/* Select list */}
       {FormManager.renderLabel(selectLabel, rules)}
-      
+
       <SelectListBase
         placeholder={selectPlaceholder}
         value={phonePrefixFiedlValue || selectedCountry?.code || ''}
