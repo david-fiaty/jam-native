@@ -91,8 +91,9 @@ const InputPhoneField = ({
 
   const onChangePhoneValue = (fieldValue: any) => {
     if (fieldValue) {
-      fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
-      fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+      // Todo - Implement value formatter or remove
+      //fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
+      //fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
 
       FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
         countryCode: selectedCountry.code,
