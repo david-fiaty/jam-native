@@ -84,9 +84,20 @@ const InputPhoneField = ({
     setPhoneNumber(`${targetCountry.prefix} `);
   };
 
-  const onChangePhoneValue = (value: any) => {
+  const onChangePhoneValue = (fieldValue: any) => {
+    if (fieldValue.startsWith(`${selectedCountry.prefix} `)) {
+      
+    }
+    
+
+   
+
+    //fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+    //setPhoneNumber(`${selectedCountry.prefix} ${fieldValue}`);
+    
+
     //console.log(value)
-    //setPhoneNumber('000')
+    //
     /*
     if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
       setPhoneNumber(value);
