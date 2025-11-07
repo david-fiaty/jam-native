@@ -124,7 +124,7 @@ const InputPhoneField = ({
 
       <SelectListBase
         placeholder={selectPlaceholder}
-        value={phonePrefixFieldValue || selectedCountry?.code || ''}
+        value={selectedCountry?.code || ''}
         data={countryOptions}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
