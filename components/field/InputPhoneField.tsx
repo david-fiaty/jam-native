@@ -16,7 +16,7 @@ type Props = {
   phoneNumberFieldKey?: any;
   phoneNumberFieldValue?: any;
   phonePrefixFieldKey?: any;
-  phonePrefixFielValue?: any;
+  phonePrefixFiedlValue?: any;
   parentKey?: any;
   rules?: any;
   value?: string;
@@ -34,7 +34,7 @@ const InputPhoneField = ({
   phoneNumberFieldKey,
   phoneNumberFieldValue,
   phonePrefixFieldKey,
-  phonePrefixFielValue,
+  phonePrefixFiedlValue,
   parentKey,
   rules,
   value,
@@ -48,7 +48,6 @@ const InputPhoneField = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
   const getCountryOptions = () => {
@@ -90,8 +89,6 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    setPhoneNumber(fieldValue);
-
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: selectedCountry.code,
     });
@@ -118,7 +115,7 @@ const InputPhoneField = ({
       
       <SelectListBase
         placeholder={selectPlaceholder}
-        value={selectedCountry?.code || ''}
+        value={phonePrefixFiedlValue || selectedCountry?.code || ''}
         data={countryOptions}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
@@ -139,7 +136,7 @@ const InputPhoneField = ({
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-        <TextView size={18}>
+        <TextView size={15}>
           {renderFlag(selectedCountry?.code)}
         </TextView>
 
@@ -148,7 +145,7 @@ const InputPhoneField = ({
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
-          value={phoneNumber || ''}
+          value={phoneNumberFieldValue || ''}
           rules={rules}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
