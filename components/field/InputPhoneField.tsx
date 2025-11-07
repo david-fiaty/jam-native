@@ -47,7 +47,7 @@ const InputPhoneField = ({
 
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
-  const getCountryCodes = () => {
+  const getCountryList = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
 
     if (Config.allowedCountries.phone.length > 0) {
@@ -115,7 +115,7 @@ const InputPhoneField = ({
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
-        data={getCountryCodes()}
+        data={getCountryList()}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
