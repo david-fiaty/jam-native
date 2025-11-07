@@ -92,7 +92,10 @@ const InputPhoneField = ({
       let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
       
       if (parsedNumber && parsedNumber.isValid()) {
-        console.log(parsedNumber);
+        // Todo - Update form data
+        console.log(phoneNumber)
+        console.log(selectedCountry)
+        //console.log(parsedNumber);
       }
     }
   };
