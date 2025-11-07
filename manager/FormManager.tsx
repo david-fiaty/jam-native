@@ -112,14 +112,14 @@ class FormManager {
     return <></>;
   }
 
-  updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any) {
+  updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any, params?: any) {
     if (!resource || !fieldKey) return;  
 
     let errors: any[] = [];
     let key: any = parentKey ? `${parentKey}.${fieldKey}` : fieldKey;
 
     if (rules.length > 0) {
-      errors = this.validateFied(resource, key, value, rules);
+      errors = this.validateFied(resource, key, value, rules, params);
     }
 
     if (errors.length) {
@@ -141,14 +141,14 @@ class FormManager {
     }));
   }
 
-  validateFied(resource: string, key: string, value: any, rules: any[]) {
+  validateFied(resource: string, key: string, value: any, rules: any[], params?: any) {
     let fieldValue: any = value;
     let fieldRules: any = this.getValidationRules();
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
  
     for (const rule of rules) {
-      if (!fieldRules[rule].run(fieldValue)) {
+      if (!fieldRules[rule].run(fieldValue, params)) {
         errors.push({
           key: targetKey,
           message: fieldRules[rule].error(),
@@ -179,6 +179,8 @@ class FormManager {
     return {
       phone: {
         run: (value: any, params?: any) => { 
+
+          console.log(value, params);
           return false;
         },
         error: () => {
