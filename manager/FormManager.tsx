@@ -157,7 +157,7 @@ class FormManager {
         });
       }
       else if (typeof rule === 'function') {
-
+        rule();     
       }
       else {
         this.clearErrors(resource, targetKey);
