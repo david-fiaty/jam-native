@@ -136,12 +136,12 @@ const InputPhoneField = ({
         style={[containerStyle, styles.inputContainer]}
       >
 
-      <TextView size={18}>
-        {renderFlag(selectedCountry?.code)}
-      </TextView>
-  
-      <TextView>{selectedCountry?.prefix}</TextView>
+        <TextView size={18}>
+          {renderFlag(selectedCountry?.code)}
+        </TextView>
 
+        <TextView>{selectedCountry?.prefix}</TextView>
+        
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
