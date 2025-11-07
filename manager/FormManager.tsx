@@ -147,18 +147,14 @@ class FormManager {
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
  
-    console.log(rules)   
-
+    //console.log(rules)   
+ 
     for (const rule of rules) {
-      if (typeof rule === 'string' && !fieldRules[rule].run(fieldValue)) {
+      if (!fieldRules[rule].run(fieldValue)) {
         errors.push({
           key: targetKey,
           message: fieldRules[rule].error(),
         });
-      }
-      else if (typeof rule === 'function') {
-        console.log(rule);
-        //rule();      
       }
       else {
         this.clearErrors(resource, targetKey);
@@ -183,6 +179,14 @@ class FormManager {
 
   getValidationRules() {
     return {
+      phone: {
+        run: (value: any) => { 
+          return false;
+        },
+        error: () => {
+          return i18n.t('Invalid phone number.'); 
+        },
+      },
       required: {
         run: (value: any) => {
           if (value && typeof value === 'string' || value instanceof String) {
