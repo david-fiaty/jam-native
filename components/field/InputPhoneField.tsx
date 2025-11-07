@@ -42,7 +42,6 @@ const InputPhoneField = ({
   onChangeValue
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [currentValue, setCurrentValue] = useState<any>('');
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
@@ -77,7 +76,7 @@ const InputPhoneField = ({
     }
   };
 
-  const renderCurrentValue = () => {
+  const getCurrentValue = () => {
     if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
       return `${selectedCountry.prefix} ${value}`;
     }
@@ -107,8 +106,6 @@ const InputPhoneField = ({
         setSelectedCountry(getDefaultValue());
       } 
     }
-
-    setCurrentValue(value);
   }, [isLoaded, value, selectedCountry]);
 
   return (
@@ -136,7 +133,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={fieldKey}
           rules={rules}
-          value={renderCurrentValue()}
+          value={getCurrentValue()}
           label={inputlabel}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
