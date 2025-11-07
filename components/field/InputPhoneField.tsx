@@ -86,26 +86,11 @@ const InputPhoneField = ({
 
   const onChangePhoneValue = (fieldValue: any) => {
     if (fieldValue.startsWith(`${selectedCountry.prefix} `)) {
-      
-    }
-    
-
-   
-
-    //fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
-    //setPhoneNumber(`${selectedCountry.prefix} ${fieldValue}`);
-    
-
-    //console.log(value)
-    //
-    /*
-    if (selectedCountry && value && value.startsWith(selectedCountry.prefix)) {
-      setPhoneNumber(value);
+      setPhoneNumber(fieldValue);
     }
     else {
-      setPhoneNumber('000');
+      setPhoneNumber(`${selectedCountry.prefix} `);
     }
-      */
   };
 
   useEffect(() => {
