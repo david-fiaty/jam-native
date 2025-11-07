@@ -15,6 +15,7 @@ type Props = {
   value?: string;
   placeholder?: string;
   containerStyle?: object;
+  inputContainerStyle?: object;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
@@ -35,6 +36,7 @@ const InputTextField = ({
   label,
   placeholder,
   containerStyle,
+  inputContainerStyle,
   leftIcon,
   rightIcon,
   disabled,
@@ -82,7 +84,7 @@ const InputTextField = ({
         rightIcon={rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}
-        inputContainerStyle={styles.inputContainerStyle}
+        inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
         containerStyle={containerStyle ?? {}}
         multiline={false}
         editable={!disabled}
