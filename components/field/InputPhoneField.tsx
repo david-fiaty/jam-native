@@ -71,8 +71,12 @@ const InputPhoneField = ({
   };
 
   const renderFlag = (code: string) => {
-    if (code) { 
-      return getUnicodeFlagIcon(code.toUpperCase());
+    if (code) {
+      return (
+        <TextView>
+          {getUnicodeFlagIcon(code.toUpperCase())}
+        </TextView>
+      );
     }
 
     return <></>;
@@ -105,18 +109,30 @@ const InputPhoneField = ({
         renderItem={renderItem}
       />
 
-      <InputTextField
-        resource={resource}
-        fieldKey={fieldKey}
-        rules={rules}
-        value={selectedCountry?.prefix || ''}
-        label={inputlabel}
-        placeholder={inputPlaceholder}
-        keyboardType="number-pad"
-        containerStyle={containerStyle}
-        inputContainerStyle={{paddingLeft: 50}}
-        onChangeText={onChangePhoneValue}
-      />
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.inputContainer}
+      >
+        <InputTextField
+          resource={resource}
+          fieldKey={fieldKey}
+          rules={rules}
+          value={selectedCountry?.prefix || ''}
+          label={inputlabel}
+          placeholder={inputPlaceholder}
+          keyboardType="number-pad"
+          containerStyle={containerStyle}
+          inputContainerStyle={{ paddingLeft: 50 }}
+          onChangeText={onChangePhoneValue}
+        />
+
+        <View style={styles.flagContainer}>
+          {renderFlag('us')}
+        </View>
+
+      </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
     </>
@@ -130,6 +146,14 @@ const styles = StyleSheet.create({
   selectListField: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
+  },
+  inputContainer: {
+    position: 'relative',
+  },
+  flagContainer: {
+    position: 'absolute',
+    top: 30,
+    left: 0,
   },
   listItem: {
     paddingVertical: Layout.space.base,
