@@ -121,8 +121,8 @@ const InputPhoneField = ({
       <BoxView
         direction="row"
         align="center"
-        justify="space-around"
-        style={[containerStyle]}
+        justify="flex-start"
+        style={containerStyle}
       >
         <TextView size={18}>
           {renderFlag(selectedCountry?.code)}
@@ -138,6 +138,7 @@ const InputPhoneField = ({
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
+          containerStyle={ {backgroundColor: 'red'}}
         />
       </BoxView>
 
