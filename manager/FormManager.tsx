@@ -1,5 +1,4 @@
 import { setFormData, setFormErrors } from "@/redux/slices/FormSlice";
-import { isValidPhoneNumber } from 'libphonenumber-js';
 import parsePhoneNumber from 'libphonenumber-js'
 import FieldErrorView from "@/components/view/FieldErrorView";
 import Store from "@/redux/Store";
@@ -181,9 +180,11 @@ class FormManager {
     return {
       phone: {
         run: (value: any, params?: any) => {
-          if (params?.countryCode) {
+          if (value && params?.countryCode) {
             let parsedNumber: any = parsePhoneNumber(value, params.countryCode.toUpperCase());
-            return parsedNumber && parsedNumber.isValid();
+            let isValid: boolean = parsedNumber && parsedNumber.isValid();
+             
+            return isValid;
           }
 
           return true;
