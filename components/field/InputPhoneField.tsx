@@ -155,11 +155,10 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.primary,
   },
   fieldContainer: {
-    flex: 1,
+    
   },
   inputContainer: {
-    flex: 1,
-    padding: Layout.space.base,
+  
   },
   listItem: {
     paddingVertical: Layout.space.base,
