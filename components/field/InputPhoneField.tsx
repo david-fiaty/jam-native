@@ -105,6 +105,7 @@ const InputPhoneField = ({
   return (
     <>
       {FormManager.renderLabel(selectLabel, rules)}
+      {/* Select list */}
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
@@ -115,9 +116,12 @@ const InputPhoneField = ({
         containerStyle={containerStyle}
         renderItem={renderItem}
       />
+
       {FormManager.renderError(fieldKey, parentKey)}
 
+      {/* Input text */}
       {FormManager.renderLabel(inputlabel, rules)}
+
       <BoxView
         direction="row"
         align="center"
@@ -142,6 +146,7 @@ const InputPhoneField = ({
           containerStyle={styles.inputTextField}
         />
       </BoxView>
+
       {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
