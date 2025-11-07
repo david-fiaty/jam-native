@@ -82,20 +82,10 @@ const InputPhoneField = ({
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
-    setPhoneNumber(`${targetCountry.prefix} `);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    if (fieldValue.startsWith(`${selectedCountry.prefix} `)) {
-      setPhoneNumber(fieldValue);
-    }
-    else {
-      setPhoneNumber(`${selectedCountry.prefix} `);
-    }
-  };
-
-  const getCurrentValue = () => {
-    return phoneNumber;
+    setPhoneNumber(fieldValue);
   };
 
   useEffect(() => {
@@ -106,7 +96,6 @@ const InputPhoneField = ({
 
       if (!selectedCountry) {
         setSelectedCountry(defaultCountry);
-        setPhoneNumber(`${defaultCountry.prefix} `);
       }
 
       setIsLoaded(true);
@@ -135,7 +124,6 @@ const InputPhoneField = ({
         justify="space-around"
         style={[containerStyle, styles.inputContainer]}
       >
-
         <TextView size={18}>
           {renderFlag(selectedCountry?.code)}
         </TextView>
@@ -145,6 +133,7 @@ const InputPhoneField = ({
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
+          value={phoneNumber || ''}
           rules={rules}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
