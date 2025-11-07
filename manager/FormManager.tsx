@@ -147,7 +147,7 @@ class FormManager {
     let targetKey: string = this.getTargetKey(key);
     let errors: any = [];
  
-    console.log(rules)  
+    console.log(rules)   
 
     for (const rule of rules) {
       if (typeof rule === 'string' && !fieldRules[rule].run(fieldValue)) {
@@ -157,7 +157,8 @@ class FormManager {
         });
       }
       else if (typeof rule === 'function') {
-        rule();     
+        console.log(rule);
+        //rule();      
       }
       else {
         this.clearErrors(resource, targetKey);
