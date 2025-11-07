@@ -105,8 +105,6 @@ const InputPhoneField = ({
     }
       */
 
-    //rules = [...(rules || [])].push(() => console.log('validation rule'))
-
     setPhoneNumber(fieldValue);
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
   };
