@@ -43,11 +43,12 @@ const InputPhoneField = ({
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
+  const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
-  const getCountryList = () => {
+  const getCountryOptions = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
 
     if (Config.allowedCountries.phone.length > 0) {
@@ -99,6 +100,10 @@ const InputPhoneField = ({
 
   useEffect(() => {
     if (!isLoaded) {
+      if (!countryOptions?.length) {
+        setCountryOptions(getCountryOptions());
+      } 
+
       if (!selectedCountry) {
         setSelectedCountry(defaultCountry);
         setPhoneNumber(`${defaultCountry.prefix} `);
@@ -106,7 +111,7 @@ const InputPhoneField = ({
 
       setIsLoaded(true);
     }
-  }, [isLoaded, value, selectedCountry, defaultCountry]);
+  }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
 
   return (
     <>
@@ -115,7 +120,7 @@ const InputPhoneField = ({
       <SelectListBase
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
-        data={getCountryList()}
+        data={countryOptions}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
