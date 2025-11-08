@@ -1,9 +1,5 @@
-import React, { useState } from "react";
 import { StyleSheet } from 'react-native';
-import { Input } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
-import BoxView from '../view/BoxView';
-import FormManager from "@/manager/FormManager";
 import InputTextField from "./InputTextField";
 
 type Props = {
@@ -50,7 +46,7 @@ const InputTextareaField = ({
       numberOfLines={10}
       disabled={disabled}
       readOnly={readOnly}
-      containerStyle={[Layout.formField, styles.element]}
+      containerStyle={[Layout.formField, styles.element, containerStyle]}
       onChangeText={onChangeText}
       onSubmitEditing={onSubmitEditing}
     />
