@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
@@ -74,11 +73,5 @@ const SignupEmailCodeForm = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  label: {
-    alignSelf: 'flex-start',
-  },
-});
 
 export default SignupEmailCodeForm;
