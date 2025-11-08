@@ -1,5 +1,5 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
@@ -58,6 +58,7 @@ const InputTextField = ({
       ...(containerStyle || {}),
       ...styles.containerStyle,
       ...styles.containerStyleWhite,
+      ...{ paddingRight: (rightIcon ? Layout.space.base*3.5 : Layout.space.base) }
     };
   }
 
@@ -86,39 +87,50 @@ const InputTextField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
-  
 
   return (
-    <BoxView style={[styles.container, disabledStyle]}>
+    <>
       {FormManager.renderLabel(label, rules)}
 
-      <TextInput
-        keyboardType={keyboardType}
-        textAlignVertical={textAlignVertical}
-        numberOfLines={numberOfLines}
-        //leftIcon={leftIcon}
-        //rightIcon={rightIcon}
-        placeholder={placeholder}
-        placeholderTextColor={Layout.colors.primary}      
-        style={[Layout.formField, styles.containerStyle, containerStyle || {}]}
-        multiline={multiline}
-        editable={!disabled}
-        secureTextEntry={secureTextEntry}
-        spellCheck={spellCheck}
-        value={currentValue}
-        readOnly={readOnly}
-        onChangeText={changeTextEvent}
-        onSubmitEditing={submitEditingEvent}
-      />
+      <BoxView 
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={[styles.container, disabledStyle]}
+      >
+        <TextInput
+          keyboardType={keyboardType}
+          textAlignVertical={textAlignVertical}
+          numberOfLines={numberOfLines}
+          placeholder={placeholder}
+          placeholderTextColor={Layout.colors.primary}
+          style={[Layout.formField, styles.containerStyle, containerStyle || {}]}
+          multiline={multiline}
+          editable={!disabled}
+          secureTextEntry={secureTextEntry}
+          spellCheck={spellCheck}
+          value={currentValue}
+          readOnly={readOnly}
+          onChangeText={changeTextEvent}
+          onSubmitEditing={submitEditingEvent}
+        />
+
+        {rightIcon && (
+          <View style={styles.rightIcon}>
+            {rightIcon}
+          </View>
+        )}
+      </BoxView>
 
       {!!rules?.length && FormManager.renderError(fieldKey, parentKey)}
-    </BoxView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+    position: 'relative',
   },
   containerStyle: {
     paddingLeft: Layout.space.base,
@@ -129,6 +141,11 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Layout.colors.primary,
+    width: '100%',
+  },
+  rightIcon: {
+    position: 'absolute',
+    right: Layout.space.base,
   },
 });
 

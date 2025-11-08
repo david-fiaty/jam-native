@@ -14,8 +14,6 @@ type Props = {
   value?: string;
   placeholder?: string;
   containerStyle?: object;
-  inputStyle?: any;
-  inputContainerStyle?: any;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
@@ -37,8 +35,6 @@ const InputPasswordField = ({
   value,
   placeholder,
   containerStyle,
-  inputStyle,
-  inputContainerStyle,
   leftIcon,
   disabled,
   readOnly,
@@ -70,8 +66,6 @@ const InputPasswordField = ({
       rightIcon={renderRightIcon()}
       containerStyle={containerStyle}
       keyboardType={keyboardType}
-      inputStyle={inputStyle}
-      inputContainerStyle={inputContainerStyle}
       leftIcon={leftIcon}
       disabled={disabled}
       readOnly={readOnly}
