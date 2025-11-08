@@ -100,12 +100,6 @@ const LoginSection = () => {
 };
 
 const styles = StyleSheet.create({
-  inputTextFieldContainer: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
   linkContainer: {
     width: '100%',
   },
