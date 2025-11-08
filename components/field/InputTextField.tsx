@@ -4,6 +4,7 @@ import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
+import { TextInput } from "react-native";
 
 type Props = {
   theme?: string;
@@ -15,9 +16,7 @@ type Props = {
   label?: any;
   value?: string;
   placeholder?: string;
-  inputStyle?: object;
   containerStyle?: object;
-  inputContainerStyle?: object;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
@@ -42,8 +41,6 @@ const InputTextField = ({
   label,
   placeholder,
   containerStyle,
-  inputStyle,
-  inputContainerStyle,
   leftIcon,
   rightIcon,
   disabled,
@@ -96,24 +93,22 @@ const InputTextField = ({
     <BoxView style={[styles.container, disabledStyle]}>
       {FormManager.renderLabel(label, rules)}
 
-      <Input
+      <TextInput
         keyboardType={keyboardType}
         textAlignVertical={textAlignVertical}
         numberOfLines={numberOfLines}
-        leftIcon={leftIcon}
-        rightIcon={rightIcon}
+        //leftIcon={leftIcon}
+        //rightIcon={rightIcon}
         placeholder={placeholder}
-        placeholderTextColor={Layout.colors.primary}
-        inputStyle={[styles.inputStyle, inputStyle]}
-        inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
-        containerStyle={[Layout.formField, containerStyle ?? {}]}
+        placeholderTextColor={Layout.colors.primary}      
+        style={[Layout.formField, containerStyle ?? {}]}
         multiline={multiline}
         editable={!disabled}
         secureTextEntry={secureTextEntry}
         spellCheck={spellCheck}
         value={currentValue}
         readOnly={readOnly}
-        disabled={disabled}
+        //disabled={disabled}
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
@@ -132,16 +127,6 @@ const styles = StyleSheet.create({
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Layout.colors.primary,
-  },
-  inputContainerStyle: {
-    width: '100%',
-    borderBottomWidth: 0,
-  },
-  inputStyle: {
-    padding: 0,
-    margin: 0,
-    color: Layout.colors.primary,
-    fontSize: Layout.fontSize.base,
   },
 });
 
