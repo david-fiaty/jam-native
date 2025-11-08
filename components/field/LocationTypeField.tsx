@@ -1,9 +1,4 @@
-import { StyleSheet } from 'react-native';
-import BoxView from '../view/BoxView';
-import StaticData from '@/constants/StaticData';
-import i18n from '@/translation/i18n';
 import EntityManager from '@/manager/EntityManager';
-import FormManager from '@/manager/FormManager';
 import SelectListField from './SelectListField';
 
 type Props = {
@@ -14,7 +9,6 @@ type Props = {
   value?: any;
   label?: any;
   placeholder?: any;
-  onChangeValue?: (option: any) => void,
 };
 
 const LocationTypeField = ({
@@ -24,19 +18,8 @@ const LocationTypeField = ({
   rules,
   value,
   label,
-  placeholder,
-  onChangeValue
+  placeholder
 }: Props) => {
-
-  const onChangeEvent = (option: any) => {
-    if (onChangeValue) {
-      onChangeValue(option);
-    }
-    else {
-      FormManager.updateField(resource, fieldKey, option.value, rules, parentKey);
-    }
-  };
-
   const buildOptions = (optionsData: any) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
@@ -47,27 +30,17 @@ const LocationTypeField = ({
   };
 
   return (
-    <>
-      {FormManager.renderLabel(label, rules)}
-      
-      <BoxView direction="column" align="center" style={styles.container}>
-        <SelectListField
-          value={value}
-          data={buildOptions(EntityManager.getLocationTypes())}
-          onChangeValue={onChangeEvent}
-          placeholder={placeholder}
-        />
-      </BoxView>
-
-      {FormManager.renderError(fieldKey, parentKey)}
-    </>
+    <SelectListField
+      resource={resource}
+      fieldKey={fieldKey}
+      parentKey={parentKey}
+      rules={rules}
+      value={value}
+      data={buildOptions(EntityManager.getLocationTypes())}
+      label={label}
+      placeholder={placeholder}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-});
 
 export default LocationTypeField;

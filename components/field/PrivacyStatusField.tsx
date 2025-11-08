@@ -1,7 +1,4 @@
-import { StyleSheet } from 'react-native';
-import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
-import FormManager from '@/manager/FormManager';
 import SelectListField from './SelectListField';
 
 type Props = {
@@ -12,7 +9,6 @@ type Props = {
   value?: any;
   label?: any;
   placeholder?: string;
-  onChangeValue?: (option: any) => void,
 };
 
 const PrivacyStatusField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder, onChangeValue }: Props) => {
@@ -27,15 +23,6 @@ const PrivacyStatusField = ({ resource, fieldKey, parentKey, rules, value, label
     },
   ];
 
-  const onChangeEvent = (option: any) => {
-    if (onChangeValue) {
-      onChangeValue(option);
-    }
-    else {
-      FormManager.updateField(resource, fieldKey, option.value, rules, parentKey);
-    }
-  };
-
   const buildOptions = (optionsData: any) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
@@ -46,27 +33,17 @@ const PrivacyStatusField = ({ resource, fieldKey, parentKey, rules, value, label
   };
 
   return (
-    <>
-      {FormManager.renderLabel(label, rules)}
-
-      <BoxView direction="column" align="center" style={styles.container}>
-        <SelectListField
-          value={value}
-          data={buildOptions(privacyStatuses)}
-          onChangeValue={onChangeEvent}
-          placeholder={placeholder}
-        />
-      </BoxView>
-
-      {FormManager.renderError(fieldKey, parentKey)}
-    </>
+    <SelectListField
+      resource={resource}
+      fieldKey={fieldKey}
+      parentKey={parentKey}
+      rules={rules}
+      value={value}
+      data={buildOptions(privacyStatuses)}
+      label={label}
+      placeholder={placeholder}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-});
 
 export default PrivacyStatusField;

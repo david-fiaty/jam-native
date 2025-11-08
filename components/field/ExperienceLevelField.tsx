@@ -1,15 +1,17 @@
-import { StyleSheet } from 'react-native';
-import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import SelectListField from './SelectListField';
 
 type Props = {
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   label?: any;
+  placeholder?: any;
   value?: any;
-  onChangeValue?: (option: any) => void;
 };
 
-const ExperienceLevelField = ({label, value, onChangeValue}: Props) => {
+const ExperienceLevelField = ({ resource, fieldKey, parentKey, rules, label, placeholder, value }: Props) => {
   const experienceLevels: any[] = [
     {
       id: null,
@@ -21,7 +23,7 @@ const ExperienceLevelField = ({label, value, onChangeValue}: Props) => {
     },
   ];
 
-  const buildOptions = (optionsData: any) => {    
+  const buildOptions = (optionsData: any) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
         value: item?.id,
@@ -29,24 +31,19 @@ const ExperienceLevelField = ({label, value, onChangeValue}: Props) => {
       }
     });
   };
-  
+
   return (
-    <BoxView direction="column" align="left" style={styles.container}>
-      {label}
-      <SelectListField
-        placeholder={i18n.t('Select a level of experience')}
-        value={value}
-        data={buildOptions(experienceLevels)}  
-        onChangeValue={onChangeValue}
-      />
-    </BoxView>
+    <SelectListField
+      resource={resource}
+      fieldKey={fieldKey}
+      parentKey={parentKey}
+      rules={rules}
+      label={label}
+      placeholder={placeholder}
+      value={value}
+      data={buildOptions(experienceLevels)}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-});
 
 export default ExperienceLevelField;

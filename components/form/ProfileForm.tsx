@@ -34,7 +34,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   const submitForm = async () => {
 
     return;
-    
+
     /*
     setIsProcessing(true);
 
@@ -115,77 +115,59 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      align="flex-start"
-      justify="flex-start"
-      scroll={true}
-      style={[Layout.formContainer, styles.container]}
-    >
-      <BoxView direction="column" style={[Layout.formContainer, styles.formContainer]}>
-        <ProfileImageField
-          resource={resource}
-          fieldKey="upload_profile_picture"
-          rules={['required']}
-          label={i18n.t('Profile Image')}
-          value={formData?.profile_picture?.url}
+    <View style={[Layout.formContainer]}>
+      <ProfileImageField
+        resource={resource}
+        fieldKey="upload_profile_picture"
+        rules={['required']}
+        label={i18n.t('Profile Image')}
+        value={formData?.profile_picture?.url || ''}
+      />
+
+      <ProfileTypeField
+        resource={resource}
+        fieldKey="profile_type"
+        rules={['required']}
+        value={formData?.profile_type || ''}
+        label={i18n.t('Profile type')}
+        placeholder={i18n.t('Select a profile type')}
+      //disabled={resource == 'profile'}
+      />
+
+      {/* All profiles */}
+      {formData?.profile_type?.length && (
+        <ProfileFormAll resource={resource} formData={formData} />
+      )}
+
+      {/* Personal profile */}
+      {formData?.profile_type == 'personal' && (
+        <ProfileFormPersonal resource={resource} formData={formData} />
+      )}
+
+      {/* Organization profile */}
+      {formData?.profile_type == 'organization' && (
+        <ProfileFormOrganization resource={resource} formData={formData} />
+      )}
+
+      {/* Venue profile */}
+      {formData?.profile_type == 'venue' && (
+        <ProfileFormVenue resource={resource} formData={formData} />
+      )}
+
+      {/* Submit button */}
+      <View style={styles.submitButtonContainer}>
+        <ButtonView
+          label={i18n.t('Submit')}
+          isProcessing={isProcessing}
+          onPress={submitForm}
+          disabled={!formData?.profile_type?.length}
         />
-
-        <ProfileTypeField
-          resource={resource}
-          fieldKey="profile_type"
-          rules={['required']}
-          value={formData?.profile_type}
-          label={i18n.t('Profile type')}
-          placeholder={i18n.t('Select a profile type')}
-          //disabled={resource == 'profile'}
-        />
-
-        {/* All profiles */}
-        {formData?.profile_type?.length && (
-          <ProfileFormAll resource={resource} formData={formData} />
-        )}
-
-        {/* Personal profile */}
-        {formData?.profile_type == 'personal' && (
-          <ProfileFormPersonal resource={resource} formData={formData} />
-        )}
-
-        {/* Organization profile */}
-        {formData?.profile_type == 'organization' && (
-          <ProfileFormOrganization resource={resource} formData={formData} />
-        )}
-
-        {/* Venue profile */}
-        {formData?.profile_type == 'venue' && (
-          <ProfileFormVenue resource={resource} formData={formData} />
-        )}
-
-        {/* Submit button */}
-        <View style={styles.submitButtonContainer}>
-          <ButtonView
-            label={i18n.t('Submit')}
-            isProcessing={isProcessing}
-            onPress={submitForm}
-            disabled={!formData?.profile_type?.length}
-          />
-        </View>
-      </BoxView>
-    </BoxView>
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    paddingBottom: Layout.space.base * 3,
-  },
-  formContainer: {
-    maxWidth: '100%',
-    flexShrink: 1,
-    paddingTop: Layout.space.base,
-  },
   submitButtonContainer: {
     marginTop: Layout.space.base,
   },
