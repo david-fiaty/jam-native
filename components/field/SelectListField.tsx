@@ -3,9 +3,14 @@ import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
+import FormManager from "@/manager/FormManager";
 
 type Props = {
   theme?: string;
+  resource?: any;
+  fieldKey?: any;
+  parentKey?: any;
+  rules?: any;
   value?: any;
   data?: object;
   placeholder?: string;
@@ -16,16 +21,20 @@ type Props = {
   renderItem?: (item: any, selected: boolean) => JSX.Element;
 };
 
-const SelectListField = ({ 
+const SelectListField = ({
   theme,
-  value, 
-  data, 
-  placeholder, 
-  disabled, 
-  elementStyle, 
-  containerStyle, 
-  onChangeValue, 
-  renderItem 
+  resource,
+  fieldKey,
+  parentKey,
+  rules,
+  value,
+  data,
+  placeholder,
+  disabled,
+  elementStyle,
+  containerStyle,
+  onChangeValue,
+  renderItem
 }: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -46,7 +55,13 @@ const SelectListField = ({
   const onChange = (option: any) => {
     setSelectedValue(option.value);
     setIsFocus(false);
-    if (onChangeValue) onChangeValue(option);
+
+    if (onChangeValue) {
+      if (onChangeValue) onChangeValue(option);
+    }
+    else {
+      FormManager.updateField(resource, fieldKey, option.value, rules, parentKey);
+    }
   };
 
   const renderOption = (item: any, selected: boolean) => {
@@ -71,7 +86,7 @@ const SelectListField = ({
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
-        //itemTextStyle={styles.listItemTextStyle}
+        itemTextStyle={styles.itemTextStyle}
         containerStyle={containerStyle}
         search={false}
         disable={disabled}
