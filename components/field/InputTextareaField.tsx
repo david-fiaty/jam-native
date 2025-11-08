@@ -4,6 +4,7 @@ import { Input } from '@rneui/themed';
 import { Layout } from '@/constants/Layout';
 import BoxView from '../view/BoxView';
 import FormManager from "@/manager/FormManager";
+import InputTextField from "./InputTextField";
 
 type Props = {
   resource?: any;
@@ -58,7 +59,27 @@ const InputTextareaField = ({
   return (
     <BoxView style={styles.container}>
       {FormManager.renderLabel(label, rules)}
-      
+
+
+      <InputTextField
+        resource={resource}
+        fieldKey={fieldKey}
+        parentKey={parentKey}
+        //value={phoneNumberFieldValue || ''}
+        rules={[]}
+
+        multiline={true}
+        textAlignVertical="top"
+        numberOfLines={10}
+        disabled={disabled}
+        placeholder={placeholder}
+        readOnly={readOnly}
+      //placeholder={inputPlaceholder}
+
+      //onChangeText={onChangePhoneValue}
+      //containerStyle={styles.inputTextField}
+      />
+
       <Input
         style={styles.element}
         containerStyle={[Layout.formField, styles.element]}
