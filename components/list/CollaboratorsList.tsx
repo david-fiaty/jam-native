@@ -18,11 +18,12 @@ type Props = {
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
+  rules?: any;
 };
 
 const pageSize: number = 9;
 
-const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
+const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   const [profilesData, setProfilesData] = useState<any>(null);
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -85,7 +86,7 @@ const CollaboratorsList = ({ resource, fieldKey, parentKey }: Props) => {
     }
 
     setSelectedIds(idArray);
-    FormManager.updateField(resource, fieldKey, idArray, parentKey);
+    FormManager.updateField(resource, fieldKey, idArray, rules, parentKey);
   };
 
   const getProfilesData = async () => {
