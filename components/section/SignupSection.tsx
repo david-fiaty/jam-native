@@ -68,12 +68,14 @@ const SignupSection = ({ reset }: Props) => {
         direction="column"
         align="center"
         justify="center"
-        style={[styles.container, containerStyle]}
+        style={Layout.screenContent}
         scroll={formData?.success === true}
       >
         <LogoView size={80} />
         <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView>
 
+        <DividerView />
+        
         {isTabsVisible() === true && (
           <TabsView
             tabs={tabsData}
