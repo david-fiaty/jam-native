@@ -58,6 +58,7 @@ const InputTextField = ({
   if (theme == 'white') {
     containerStyle = {
       ...(containerStyle || {}),
+      ...styles.containerStyle,
       ...styles.containerStyleWhite,
     };
   }
@@ -121,6 +122,9 @@ const InputTextField = ({
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
+  },
+  containerStyle: {
+    paddingLeft: Layout.space.base,
   },
   containerStyleWhite: {
     backgroundColor: Layout.colors.white,
