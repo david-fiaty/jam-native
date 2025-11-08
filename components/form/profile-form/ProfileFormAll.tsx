@@ -31,6 +31,7 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         value={formData?.email || ''}
         label={i18n.t('Profile email')}
         placeholder={i18n.t('Enter a profile email')}
+        trim={true}
       />
 
       <InputTextField
