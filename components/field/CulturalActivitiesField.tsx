@@ -27,6 +27,7 @@ const CulturalActivitiesField = ({ resource, fieldKey, parentKey, rules, value, 
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
+      rules: rules,
     });
   };
 

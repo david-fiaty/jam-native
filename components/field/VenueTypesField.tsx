@@ -27,6 +27,7 @@ const VenueTypesField = ({ resource, fieldKey, parentKey, rules, label, value, p
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
+      rules: rules,
     });
   };
 

@@ -35,6 +35,7 @@ const CollaboratorsField = ({
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
+      rules,
     })
   };
 

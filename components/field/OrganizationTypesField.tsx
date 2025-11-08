@@ -27,6 +27,7 @@ const OrganizationTypesField = ({ resource, fieldKey, parentKey, rules, value, l
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
+      rules: rules,
     });
   };
 
