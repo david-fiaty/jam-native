@@ -49,7 +49,7 @@ const SignupSection = ({ reset }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        //if (reset) FormManager.resetForm(resource); // Todo - Fix form reset on web
+        if (reset) FormManager.resetForm(resource); // Todo - Fix form reset on web
         setCurrentTab((tabsData.find((o: any) => o?.default === true))?.id);
         setIsLoaded(true);
       }
