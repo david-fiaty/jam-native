@@ -53,6 +53,11 @@ const InputPhoneField = ({
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
 
+  containerStyle = {
+    ...(containerStyle || {}),
+    ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+  };
+
   const getCountryOptions = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
 
@@ -154,7 +159,7 @@ const InputPhoneField = ({
         <TextView>{selectedCountry?.prefix}</TextView>
 
         <InputTextField
-          theme={theme}
+          //theme="white"
           resource={resource}
           fieldKey={fieldKey}
           value={phoneNumberFieldValue || ''}
@@ -162,6 +167,7 @@ const InputPhoneField = ({
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
+          containerStyle={styles.inputTextField}
         />
       </BoxView>
 
@@ -174,6 +180,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingLeft: Layout.space.base,
+  },
+  containerStyleWhite: {
+    backgroundColor: Layout.colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
   },
   selectListField: {
     backgroundColor: Layout.colors.white,
