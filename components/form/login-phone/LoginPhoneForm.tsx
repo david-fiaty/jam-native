@@ -66,7 +66,6 @@ const LoginPhoneForm = () => {
       
       <InputPhoneField
         resource={resource}
-        fieldKey="phone"
         phoneNumberFieldKey="phone_without_country_code"
         phonePrefixFieldKey="country_code"
         phoneNumberFieldValue={formData?.phone_without_country_code || ''}
