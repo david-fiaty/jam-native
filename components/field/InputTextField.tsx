@@ -100,14 +100,13 @@ const InputTextField = ({
         //rightIcon={rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}      
-        style={[Layout.formField, containerStyle ?? {}]}
+        style={[Layout.formField, styles.containerStyle, containerStyle || {}]}
         multiline={multiline}
         editable={!disabled}
         secureTextEntry={secureTextEntry}
         spellCheck={spellCheck}
         value={currentValue}
         readOnly={readOnly}
-        //disabled={disabled}
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
