@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
-import InputTextField from '@/components/field/InputTextField';
 import TextView from '@/components/view/TextView';
 import ButtonView from '@/components/view/ButtonView';
 import UserManager from "@/manager/UserManager";
@@ -16,8 +15,8 @@ import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
 import StaticData from "@/constants/StaticData";
+import InputPhoneField from "@/components/field/InputPhoneField";
 
 const resource: string = 'signup';
 
@@ -81,22 +80,21 @@ const SignupPhoneForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={[Layout.formContainer, styles.container]}>
-      <TextView style={styles.label}>{i18n.t('Country')}</TextView>
-      <CountryPhoneCodeField
-        value={formData?.country || ''}
-        onChangeValue={(option: any) => FormManager.updateField(resource, 'country', option.value, ['string'])}
-      />
-      {FormManager.renderError('country')}
+    <View style={Layout.formContainer}>
 
-      <TextView style={styles.label}>{i18n.t('Phone number')}</TextView>
-      <InputTextField
-        value={formData?.phone || ''}
-        placeholder={i18n.t('Enter your phone number')}
-        keyboardType="number-pad"
-        onChangeText={(value: string) => FormManager.updateField(resource, 'phone', value, ['number'])}
+      <InputPhoneField
+        resource={resource}
+        phoneNumberFieldKey="phone"
+        phonePrefixFieldKey="country"
+        phoneNumberFieldValue={formData?.phone || ''}
+        phonePrefixFieldValue={formData?.country || ''}
+        rules={['required', 'phone']}
+        inputlabel={i18n.t('Phone number')}
+        selectLabel={i18n.t('Country')}
+        inputPlaceholder={i18n.t('Enter your phone number')}
+        selectPlaceholder={i18n.t('Select your country')}
+        theme="white"
       />
-      {FormManager.renderError('phone')}
 
       <ButtonView
         label={i18n.t('Continue')}
@@ -123,14 +121,5 @@ const SignupPhoneForm = () => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  label: {
-    alignSelf: 'flex-start',
-  },
-});
 
 export default SignupPhoneForm;
