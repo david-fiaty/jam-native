@@ -12,7 +12,7 @@ type Props = {
   parentKey?: any;
   rules?: any;
   value?: any;
-  data?: object;
+  data?: any;
   placeholder?: string;
   disabled?: any;
   containerStyle?: any;
