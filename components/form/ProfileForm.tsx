@@ -115,7 +115,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={Layout.formContainer}>
+    <View style={[Layout.formContainer]}>
       <ProfileImageField
         resource={resource}
         fieldKey="upload_profile_picture"
@@ -168,16 +168,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: '100%',
-    paddingBottom: Layout.space.base * 3,
-  },
-  formContainer: {
-    maxWidth: '100%',
-    flexShrink: 1,
-    paddingTop: Layout.space.base,
-  },
   submitButtonContainer: {
     marginTop: Layout.space.base,
   },
