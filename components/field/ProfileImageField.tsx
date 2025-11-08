@@ -59,6 +59,7 @@ const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, label,
         mediaTypes={['images']}
         multiple={false}
         label={label}
+        preview={true}
         /*
         label={
           <BoxView direction="row" align="center">
