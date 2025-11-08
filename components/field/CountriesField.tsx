@@ -30,6 +30,7 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, label,
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
+      rules: rules,
     });
   };
 

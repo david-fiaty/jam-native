@@ -13,9 +13,10 @@ type Props = {
   resource: string;
   fieldKey?: any;
   parentKey?: any;
+  rules?: any;
 };
 
-const VenueTypesList = ({ resource, fieldKey, parentKey }: Props) => {
+const VenueTypesList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -33,7 +34,7 @@ const VenueTypesList = ({ resource, fieldKey, parentKey }: Props) => {
     }
 
     setSelectedIds(idArray);
-    FormManager.updateField(resource, fieldKey, idArray, parentKey);
+    FormManager.updateField(resource, fieldKey, idArray, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
