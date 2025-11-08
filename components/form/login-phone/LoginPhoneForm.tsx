@@ -76,7 +76,7 @@ const LoginPhoneForm = () => {
         selectLabel={i18n.t('Country')}
         inputPlaceholder={i18n.t('Enter your phone number')}
         selectPlaceholder={i18n.t('Select your country')}
-        //containerStyle={styles.fieldContainer}
+        theme="white"
       />
 
       <InputPasswordField
