@@ -60,7 +60,7 @@ const SignupEmailForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={[Layout.formContainer, styles.container]}>
+    <View style={Layout.formContainer}>
       <InputTextField
         resource={resource}
         fieldKey="email"
@@ -102,9 +102,6 @@ const SignupEmailForm = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
   label: {
     alignSelf: 'flex-start',
   },
