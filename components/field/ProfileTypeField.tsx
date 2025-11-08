@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native';
-import BoxView from '../view/BoxView';
 import StaticData from '@/constants/StaticData';
 import FormManager from '@/manager/FormManager';
 import SelectListField from './SelectListField';
@@ -48,21 +47,14 @@ const ProfileTypeField = ({
   };
 
   return (
-    <>
-      {FormManager.renderLabel(label, rules)}
-      
-      <BoxView direction="column" align="left" style={styles.container}>
-        <SelectListField
-          placeholder={placeholder}
-          value={value || ''}
-          data={buildOptions(profileTypes)}
-          onChangeValue={onChangeEvent}
-          disabled={disabled}
-        />
-      </BoxView>
-
-      {FormManager.renderError(fieldKey, parentKey)}
-    </>
+    <SelectListField
+      placeholder={placeholder}
+      value={value || ''}
+      data={buildOptions(profileTypes)}
+      onChangeValue={onChangeEvent}
+      label={label}
+      disabled={disabled}
+    />
   );
 };
 
