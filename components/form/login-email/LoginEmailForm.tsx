@@ -61,6 +61,7 @@ const LoginEmailForm = () => {
         label={i18n.t('Email')}
         placeholder={i18n.t('Enter your email address')}
         theme="white"
+        trim={true}
       />
 
       <InputPasswordField
