@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
@@ -6,6 +7,7 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SectionManager from "@/manager/SectionManager";
 import ProfileForm from "./ProfileForm";
+import FormManager from '@/manager/FormManager';
 
 const resource: string = 'signup';
 
@@ -38,6 +40,12 @@ const SignupForm = () => {
       SectionManager.push(router, Config.mainSection);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      FormManager.resetForm(resource);
+    };
+  }, [resource]);
 
   return (
     <ProfileForm 

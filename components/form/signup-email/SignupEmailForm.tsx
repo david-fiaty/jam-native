@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
@@ -14,7 +14,6 @@ import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
-import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 
 const resource: string = 'signup';
@@ -22,7 +21,6 @@ const resource: string = 'signup';
 const SignupEmailForm = () => {
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
   const submitData = async () => {
@@ -51,14 +49,6 @@ const SignupEmailForm = () => {
     return !formData?.email?.length;
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      setIsLoaded(true);
-    }
-  }, [isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />;
-
   return (
     <View style={Layout.formContainer}>
       <InputTextField
@@ -70,6 +60,7 @@ const SignupEmailForm = () => {
         placeholder={i18n.t('Enter your email address')}
         disabled={isEmailDisabled()}
         containerStyle={styles.inputTextFieldContainer}
+        trim={true}
       />
 
       {!isEmailDisabled() && (
