@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -53,7 +53,7 @@ const LoginEmailForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={[Layout.formContainer, styles.container]}>
+    <View style={Layout.formContainer}>
       <InputTextField
         resource={resource}
         fieldKey="email"
@@ -81,20 +81,5 @@ const LoginEmailForm = () => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  label: {
-    alignSelf: 'flex-start',
-  },
-  inputTextFieldContainer: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
-});
 
 export default LoginEmailForm;
