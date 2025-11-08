@@ -26,6 +26,7 @@ const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, label, pla
       resource: resource,
       fieldKey: fieldKey,
       parentKey: parentKey,
+      rules: rules,
     });
   };
 

@@ -14,9 +14,10 @@ type Props = {
   resource: string;
   fieldKey?: any;
   parentKey?: any;
+  rules?: any;
 };
 
-const WeekDaysList = ({ resource, fieldKey, parentKey }: Props) => {
+const WeekDaysList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -34,7 +35,7 @@ const WeekDaysList = ({ resource, fieldKey, parentKey }: Props) => {
     }
 
     setSelectedIds(idArray);
-    FormManager.updateField(resource, fieldKey, idArray, parentKey);
+    FormManager.updateField(resource, fieldKey, idArray, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
