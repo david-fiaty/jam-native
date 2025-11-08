@@ -42,10 +42,6 @@ const SignupSection = ({ reset }: Props) => {
     },
   ];
 
-  const containerStyle: any = {
-    paddingTop: formData?.success === true ? Layout.space.base * 4 : 0,
-  };
-
   const isTabsVisible = () => {
     return !formData?.success === true && !formData?.session?.length;
   };
