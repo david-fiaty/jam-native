@@ -42,9 +42,11 @@ const SignupPhoneCodeForm = () => {
 
   useEffect(() => {
     return () => {
-      FormManager.resetForm(resource);
+      if (!formData?.success) {
+        FormManager.resetForm(resource);
+      }
     };
-  }, [resource]);
+  }, [resource, formData]);
 
   return (
     <View style={Layout.formContainer}>
