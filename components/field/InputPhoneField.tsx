@@ -132,11 +132,11 @@ const InputPhoneField = ({
       <SelectListField
         theme={theme}
         resource={resource}
-        fieldKey={fieldKey}
+        fieldKey={phonePrefixFieldKey}
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={selectedCountry?.code || ''}
+        value={selectedCountry?.code}
         data={countryOptions}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
