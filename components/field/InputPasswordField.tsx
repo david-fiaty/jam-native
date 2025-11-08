@@ -1,8 +1,6 @@
-import React, { useState, useEffect, JSX } from "react";
+import React, { useState, JSX } from "react";
 import { TouchableOpacity } from "react-native";
-import { Layout } from "@/constants/Layout";
 import IconView from "../view/IconView";
-import FormManager from "@/manager/FormManager";
 import InputTextField from "./InputTextField";
 
 type Props = {
