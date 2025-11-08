@@ -69,6 +69,7 @@ const SignupEmailForm = () => {
         label={i18n.t('Email address')}
         placeholder={i18n.t('Enter your email address')}
         disabled={isEmailDisabled()}
+        containerStyle={styles.inputTextFieldContainer}
       />
 
       {!isEmailDisabled() && (
@@ -106,6 +107,12 @@ const styles = StyleSheet.create({
   },
   label: {
     alignSelf: 'flex-start',
+  },
+  inputTextFieldContainer: {
+    backgroundColor: Layout.colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
   },
 });
 
