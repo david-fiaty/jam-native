@@ -1,10 +1,8 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet } from "react-native";
-import { Input } from "@rneui/themed";
+import { StyleSheet, TextInput } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
-import { TextInput } from "react-native";
 
 type Props = {
   theme?: string;
