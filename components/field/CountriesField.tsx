@@ -59,10 +59,14 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, label,
         
         <BoxView direction="row" align="space-between" style={styles.container}>
           <SelectListField
+            resource={resource}
+            fieldKey={fieldKey}
+            parentKey={parentKey}
+            placeholder={placeholder}
+            rules={rules}
             value={value}
             data={buildOptions()}
             onChangeValue={onChangeValue}
-            placeholder={i18n.t('Select a country')}
           />
         </BoxView>
       </>
