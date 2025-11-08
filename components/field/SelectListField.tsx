@@ -15,7 +15,7 @@ type Props = {
   renderItem?: (item: any, selected: boolean) => JSX.Element;
 };
 
-const SelectListBase = ({ value, data, placeholder, disabled, elementStyle, containerStyle, onChangeValue, renderItem }: Props) => {
+const SelectListField = ({ value, data, placeholder, disabled, elementStyle, containerStyle, onChangeValue, renderItem }: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   iconStyle: {},
 });
 
-export default SelectListBase;
+export default SelectListField;

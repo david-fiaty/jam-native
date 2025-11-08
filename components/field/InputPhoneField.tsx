@@ -8,8 +8,8 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
-import SelectListBase from "../base/SelectListBase";
 import StaticData from "@/constants/StaticData";
+import SelectListField from "./SelectListField";
 
 type Props = {
   theme?: string;
@@ -129,7 +129,7 @@ const InputPhoneField = ({
       {/* Select list */}
       {FormManager.renderLabel(selectLabel, rules)}
 
-      <SelectListBase
+      <SelectListField
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
         data={countryOptions}
