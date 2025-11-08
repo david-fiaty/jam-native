@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
@@ -38,6 +39,13 @@ const SignupForm = () => {
       SectionManager.push(router, Config.mainSection);
     }
   };
+
+  useEffect(() => {
+    return () => {
+      console.log('Component will unmount');
+      //myCleanupFunction();
+    };
+  }, []);
 
   return (
     <ProfileForm 
