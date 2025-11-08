@@ -135,6 +135,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     paddingLeft: Layout.space.base,
     color: Layout.colors.primary,
+    width: '100%',
   },
   containerStyleWhite: {
     backgroundColor: Layout.colors.white,
