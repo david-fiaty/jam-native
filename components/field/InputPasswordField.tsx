@@ -96,6 +96,12 @@ const InputPasswordField = ({
       spellCheck={false}
       rightIcon={renderRightIcon()}
       containerStyle={containerStyle}
+      keyboardType={keyboardType}
+      inputStyle={inputStyle}
+      inputContainerStyle={inputContainerStyle}
+      leftIcon={leftIcon}
+      disabled={disabled}
+      readOnly={readOnly}
     />
   );
 };
