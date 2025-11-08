@@ -12,6 +12,7 @@ import SelectListBase from "../base/SelectListBase";
 import StaticData from "@/constants/StaticData";
 
 type Props = {
+  theme?: string;
   resource?: any;
   fieldKey?: any;
   phoneNumberFieldKey?: any;
@@ -30,6 +31,7 @@ type Props = {
 };
 
 const InputPhoneField = ({
+  theme,
   resource,
   fieldKey,
   phoneNumberFieldKey,
@@ -152,6 +154,7 @@ const InputPhoneField = ({
         <TextView>{selectedCountry?.prefix}</TextView>
 
         <InputTextField
+          theme={theme}
           resource={resource}
           fieldKey={fieldKey}
           value={phoneNumberFieldValue || ''}
@@ -159,7 +162,6 @@ const InputPhoneField = ({
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
-          containerStyle={styles.inputTextField}
         />
       </BoxView>
 
