@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
 import ButtonView from '@/components/view/ButtonView';
@@ -11,8 +13,6 @@ import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
-import { Layout } from "@/constants/Layout";
-import { View } from "react-native";
 
 const resource: string = 'signup';
 
