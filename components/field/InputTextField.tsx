@@ -15,7 +15,6 @@ type Props = {
   value?: string;
   placeholder?: string;
   containerStyle?: object;
-  leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
   secureTextEntry?: boolean;
@@ -24,6 +23,7 @@ type Props = {
   multiline?: boolean;
   numberOfLines?: any;
   textAlignVertical?: any;
+  trim?: boolean;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
 };
@@ -39,7 +39,6 @@ const InputTextField = ({
   label,
   placeholder,
   containerStyle,
-  leftIcon,
   rightIcon,
   disabled,
   secureTextEntry,
@@ -48,6 +47,7 @@ const InputTextField = ({
   multiline,
   numberOfLines,
   textAlignVertical,
+  trim,
   onChangeText,
   onSubmitEditing,
 }: Props) => {
@@ -69,6 +69,10 @@ const InputTextField = ({
   };
 
   const changeTextEvent = (fieldValue: any) => {
+    if (trim === true) {
+      fieldValue = (fieldValue || '').trim();
+    }
+
     setCurrentValue(fieldValue);
 
     if (onChangeText) {
@@ -80,8 +84,18 @@ const InputTextField = ({
   };
 
   const submitEditingEvent = () => {
-    if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue);
+    let fieldValue: any = currentValue;
+
+    if (trim === true) {
+      fieldValue = (fieldValue || '').trim();
+    }
+
+    if (onSubmitEditing) {
+      onSubmitEditing();
+    }
+    else if (onChangeText) {
+      onChangeText(fieldValue);
+    }
   };
 
   useEffect(() => {
@@ -135,6 +149,7 @@ const styles = StyleSheet.create({
   containerStyle: {
     paddingLeft: Layout.space.base,
     color: Layout.colors.primary,
+    width: '100%',
   },
   containerStyleWhite: {
     backgroundColor: Layout.colors.white,

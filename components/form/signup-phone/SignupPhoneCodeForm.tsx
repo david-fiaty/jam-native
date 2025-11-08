@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { View } from "react-native";
+import { Layout } from "@/constants/Layout";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
@@ -11,8 +13,6 @@ import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
-import { View } from "react-native";
-import { Layout } from "@/constants/Layout";
 
 const resource: string = 'signup';
 
