@@ -11,6 +11,8 @@ import LinkView from "@/components/view/LinkView";
 import SkipButton from "@/components/button/SkipButton";
 import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
+import { View } from "react-native";
+import { Layout } from "@/constants/Layout";
 
 const resource: string = 'signup';
 
@@ -39,7 +41,7 @@ const SignupPhoneCodeForm = () => {
   };
 
   return (
-    <>
+    <View style={Layout.formContainer}>
       <InputTextField
         resource={resource}
         fieldKey="code"
@@ -70,7 +72,7 @@ const SignupPhoneCodeForm = () => {
         </BoxView>
         <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
       </BoxView>
-    </>
+    </View>
   );
 };
 
