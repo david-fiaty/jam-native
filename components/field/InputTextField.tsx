@@ -6,6 +6,7 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 
 type Props = {
+  theme?: string;
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
@@ -28,6 +29,7 @@ type Props = {
 };
 
 const InputTextField = ({
+  theme,
   resource,
   fieldKey,
   parentKey,
@@ -49,6 +51,13 @@ const InputTextField = ({
   onSubmitEditing,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
+
+  if (theme == 'white') {
+    containerStyle = {
+      ...(containerStyle || {}),
+      ...styles.containerStyleWhite,
+    };
+  }
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4 : 1,
@@ -108,9 +117,14 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
   },
+  containerStyleWhite: {
+    backgroundColor: Layout.colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
+  },
   inputContainerStyle: {
     width: '100%',
-    //height: 0,
     borderBottomWidth: 0,
   },
   inputStyle: {
