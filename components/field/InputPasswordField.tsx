@@ -16,6 +16,8 @@ type Props = {
   value?: string;
   placeholder?: string;
   containerStyle?: object;
+  inputStyle?: any;
+  inputContainerStyle?: any;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
@@ -36,6 +38,8 @@ const InputPasswordField = ({
   value,
   placeholder,
   containerStyle,
+  inputStyle,
+  inputContainerStyle,
   leftIcon,
   rightIcon,
   disabled,
@@ -94,8 +98,9 @@ const InputPasswordField = ({
         rightIcon={renderRightIcon()}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}
-        inputContainerStyle={styles.inputContainerStyle}
-        containerStyle={containerStyle ?? {}}
+        inputStyle={[styles.inputStyle, inputStyle]}
+        inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
+        containerStyle={[Layout.formField, containerStyle ?? {}]}
         multiline={false}
         editable={!disabled}
         secureTextEntry={!isVisible}
@@ -113,11 +118,18 @@ const InputPasswordField = ({
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    flexGrow: 1,
   },
   inputContainerStyle: {
     width: '100%',
-    height: '100%',
+    //height: 30,
+    borderBottomWidth: 0,
+  },
+  inputStyle: {
+    padding: 0,
+    margin: 0,
+    color: Layout.colors.primary,
+    fontSize: Layout.fontSize.base,
   },
 });
 
