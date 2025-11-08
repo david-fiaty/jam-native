@@ -1,10 +1,9 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Input } from "@rneui/themed";
+import { TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
-import BoxView from "../view/BoxView";
 import IconView from "../view/IconView";
 import FormManager from "@/manager/FormManager";
+import InputTextField from "./InputTextField";
 
 type Props = {
   resource?: any;
@@ -53,7 +52,7 @@ const InputPasswordField = ({
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const disabledStyle: any = {
-    opacity: disabled ? 0.4: 1,
+    opacity: disabled ? 0.4 : 1,
   };
 
   const changeTextEvent = (fieldValue: any) => {
@@ -69,7 +68,7 @@ const InputPasswordField = ({
 
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue); 
+    else if (onChangeText) onChangeText(currentValue);
   };
 
   const renderRightIcon = () => {
@@ -87,50 +86,18 @@ const InputPasswordField = ({
   }, [value]);
 
   return (
-    <BoxView style={[styles.container, disabledStyle]}>
-      {FormManager.renderLabel(label, rules)}
-
-      <Input
-        keyboardType={keyboardType}
-        textAlignVertical="center"
-        numberOfLines={1}
-        leftIcon={leftIcon}
-        rightIcon={renderRightIcon()}
-        placeholder={placeholder}
-        placeholderTextColor={Layout.colors.primary}
-        inputStyle={[styles.inputStyle, inputStyle]}
-        inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
-        containerStyle={[Layout.formField, containerStyle ?? {}]}
-        multiline={false}
-        editable={!disabled}
-        secureTextEntry={!isVisible}
-        spellCheck={false}
-        value={currentValue}
-        readOnly={readOnly}
-        onChangeText={changeTextEvent}
-        onSubmitEditing={submitEditingEvent}
-      />
-
-      {FormManager.renderError(fieldKey, parentKey)}
-    </BoxView>
+    <InputTextField
+      resource={resource}
+      fieldKey={fieldKey}
+      rules={rules}
+      label={label}
+      placeholder={placeholder}
+      secureTextEntry={!isVisible}
+      spellCheck={false}
+      rightIcon={renderRightIcon()}
+      containerStyle={containerStyle}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-  },
-  inputContainerStyle: {
-    width: '100%',
-    //height: 30,
-    borderBottomWidth: 0,
-  },
-  inputStyle: {
-    padding: 0,
-    margin: 0,
-    color: Layout.colors.primary,
-    fontSize: Layout.fontSize.base,
-  },
-});
 
 export default InputPasswordField;
