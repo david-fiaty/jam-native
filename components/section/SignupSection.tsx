@@ -111,9 +111,6 @@ const SignupSection = ({ reset }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
   slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,
