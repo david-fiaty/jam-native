@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native';
-import { Divider } from '@rneui/base';
 import LoginSignupButton from '../button/LoginSignupButton';
 import LogoView from '../view/LogoView';
 import TextSlideshow from '../slideshow/TextSlideshow';
@@ -39,7 +38,6 @@ const WelcomeSection = () => {
 
       <LoginSignupButton />
 
-      <Divider /><Divider />
       <BottomLinks />
     </BoxView>
   );
