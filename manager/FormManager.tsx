@@ -149,8 +149,8 @@ class FormManager {
     let errors: any = [];
 
     for (const rule of rules) {
-      if (!fieldRules[rule].run(fieldValue, params)) {
-        errors.push({
+      if (fieldRules?.[rule] && !fieldRules[rule].run(fieldValue, params)) {
+        errors.push({ 
           key: targetKey,
           message: fieldRules[rule].error(),
         });
