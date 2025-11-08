@@ -43,7 +43,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     return () => {
-      //FormManager.resetForm(resource);
+      FormManager.resetForm(resource);
     };
   }, [resource]);
 
