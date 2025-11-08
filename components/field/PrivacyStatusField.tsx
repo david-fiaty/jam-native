@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import i18n from '@/translation/i18n';
 import FormManager from '@/manager/FormManager';
+import SelectListField from './SelectListField';
 
 type Props = {
   resource?: any;
@@ -50,7 +50,7 @@ const PrivacyStatusField = ({ resource, fieldKey, parentKey, rules, value, label
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="column" align="center" style={styles.container}>
-        <SelectListBase
+        <SelectListField
           value={value}
           data={buildOptions(privacyStatuses)}
           onChangeValue={onChangeEvent}

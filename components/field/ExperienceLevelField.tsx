@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import i18n from '@/translation/i18n';
+import SelectListField from './SelectListField';
 
 type Props = {
   label?: any;
@@ -33,7 +33,7 @@ const ExperienceLevelField = ({label, value, onChangeValue}: Props) => {
   return (
     <BoxView direction="column" align="left" style={styles.container}>
       {label}
-      <SelectListBase 
+      <SelectListField
         placeholder={i18n.t('Select a level of experience')}
         value={value}
         data={buildOptions(experienceLevels)}  
