@@ -131,6 +131,10 @@ const InputPhoneField = ({
 
       <SelectListField
         theme={theme}
+        resource={resource}
+        fieldKey={fieldKey}
+        parentKey={parentKey}
+        rules={[]}
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
         data={countryOptions}
@@ -162,8 +166,9 @@ const InputPhoneField = ({
         <InputTextField
           resource={resource}
           fieldKey={fieldKey}
+          parentKey={parentKey}
           value={phoneNumberFieldValue || ''}
-          rules={rules}
+          rules={[]}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
