@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     paddingLeft: Layout.space.base,
+    color: Layout.colors.primary,
   },
   containerStyleWhite: {
     backgroundColor: Layout.colors.white,
