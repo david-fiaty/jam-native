@@ -1,6 +1,5 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet } from "react-native";
-import { Input } from "@rneui/themed";
+import { StyleSheet, TextInput } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
@@ -15,15 +14,16 @@ type Props = {
   label?: any;
   value?: string;
   placeholder?: string;
-  inputStyle?: object;
   containerStyle?: object;
-  inputContainerStyle?: object;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
   secureTextEntry?: boolean;
   spellCheck?: boolean;
-  readOnly?: boolean,
+  readOnly?: boolean;
+  multiline?: boolean;
+  numberOfLines?: any;
+  textAlignVertical?: any;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
 };
@@ -39,14 +39,15 @@ const InputTextField = ({
   label,
   placeholder,
   containerStyle,
-  inputStyle,
-  inputContainerStyle,
   leftIcon,
   rightIcon,
   disabled,
   secureTextEntry,
   spellCheck,
   readOnly,
+  multiline,
+  numberOfLines,
+  textAlignVertical,
   onChangeText,
   onSubmitEditing,
 }: Props) => {
@@ -55,9 +56,12 @@ const InputTextField = ({
   if (theme == 'white') {
     containerStyle = {
       ...(containerStyle || {}),
+      ...styles.containerStyle,
       ...styles.containerStyleWhite,
     };
   }
+
+  textAlignVertical = textAlignVertical ? textAlignVertical : 'top';
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4 : 1,
@@ -82,33 +86,33 @@ const InputTextField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
+  
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
       {FormManager.renderLabel(label, rules)}
 
-      <Input
+      <TextInput
         keyboardType={keyboardType}
-        textAlignVertical="center"
-        numberOfLines={1}
-        leftIcon={leftIcon}
-        rightIcon={rightIcon}
+        textAlignVertical={textAlignVertical}
+        numberOfLines={numberOfLines}
+        //leftIcon={leftIcon}
+        //rightIcon={rightIcon}
         placeholder={placeholder}
-        placeholderTextColor={Layout.colors.primary}
-        inputStyle={[styles.inputStyle, inputStyle]}
-        inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
-        containerStyle={[Layout.formField, containerStyle ?? {}]}
-        multiline={false}
+        placeholderTextColor={Layout.colors.primary}      
+        style={[Layout.formField, containerStyle ?? {}]}
+        multiline={multiline}
         editable={!disabled}
         secureTextEntry={secureTextEntry}
         spellCheck={spellCheck}
         value={currentValue}
         readOnly={readOnly}
+        //disabled={disabled}
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
 
-      {FormManager.renderError(fieldKey, parentKey)}
+      {!!rules?.length && FormManager.renderError(fieldKey, parentKey)}
     </BoxView>
   );
 };
@@ -117,21 +121,15 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
   },
+  containerStyle: {
+    paddingLeft: Layout.space.base,
+    color: Layout.colors.primary,
+  },
   containerStyleWhite: {
     backgroundColor: Layout.colors.white,
     borderWidth: Layout.borderWidth.base,
     borderRadius: Layout.radius.round,
     borderColor: Layout.colors.primary,
-  },
-  inputContainerStyle: {
-    width: '100%',
-    borderBottomWidth: 0,
-  },
-  inputStyle: {
-    padding: 0,
-    margin: 0,
-    color: Layout.colors.primary,
-    fontSize: Layout.fontSize.base,
   },
 });
 

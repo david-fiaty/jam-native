@@ -14,7 +14,6 @@ import SelectListField from "./SelectListField";
 type Props = {
   theme?: string;
   resource?: any;
-  fieldKey?: any;
   phoneNumberFieldKey?: any;
   phoneNumberFieldValue?: any;
   phonePrefixFieldKey?: any;
@@ -33,7 +32,6 @@ type Props = {
 const InputPhoneField = ({
   theme,
   resource,
-  fieldKey,
   phoneNumberFieldKey,
   phoneNumberFieldValue,
   phonePrefixFieldKey,
@@ -131,8 +129,12 @@ const InputPhoneField = ({
 
       <SelectListField
         theme={theme}
+        resource={resource}
+        fieldKey={phonePrefixFieldKey}
+        parentKey={parentKey}
+        rules={[]}
         placeholder={selectPlaceholder}
-        value={selectedCountry?.code || ''}
+        value={selectedCountry?.code}
         data={countryOptions}
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
@@ -161,9 +163,10 @@ const InputPhoneField = ({
 
         <InputTextField
           resource={resource}
-          fieldKey={fieldKey}
+          fieldKey={phoneNumberFieldKey}
+          parentKey={parentKey}
           value={phoneNumberFieldValue || ''}
-          rules={rules}
+          rules={[]}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
@@ -194,7 +197,7 @@ const styles = StyleSheet.create({
   inputTextField: {
     backgroundColor: 'transparent',
     borderWidth: 0,
-    paddingLeft: 0,
+    paddingLeft: Layout.space.base/2,
   },
   listItem: {
     paddingVertical: Layout.space.base,
