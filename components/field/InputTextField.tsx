@@ -14,6 +14,7 @@ type Props = {
   label?: any;
   value?: string;
   placeholder?: string;
+  inputStyle?: object;
   containerStyle?: object;
   inputContainerStyle?: object;
   leftIcon?: JSX.Element;
@@ -36,6 +37,7 @@ const InputTextField = ({
   label,
   placeholder,
   containerStyle,
+  inputStyle,
   inputContainerStyle,
   leftIcon,
   rightIcon,
@@ -84,8 +86,9 @@ const InputTextField = ({
         rightIcon={rightIcon}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}
+        inputStyle={[styles.inputStyle, inputStyle]}
         inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
-        containerStyle={containerStyle ?? {}}
+        containerStyle={[Layout.formField, containerStyle ?? {}]}
         multiline={false}
         editable={!disabled}
         secureTextEntry={secureTextEntry}
@@ -107,7 +110,14 @@ const styles = StyleSheet.create({
   },
   inputContainerStyle: {
     width: '100%',
-    height: '100%',
+    // /height: 0,
+    borderBottomWidth: 0,
+  },
+  inputStyle: {
+    padding: 0,
+    margin: 0,
+    color: Layout.colors.primary,
+    fontSize: Layout.fontSize.base,
   },
 });
 
