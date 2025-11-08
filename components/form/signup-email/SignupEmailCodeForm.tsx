@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet } from 'react-native';
+import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Config } from "@/constants/Config";
+import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
 import InputTextField from '@/components/field/InputTextField';
 import ButtonView from '@/components/view/ButtonView';
@@ -40,7 +41,7 @@ const SignupEmailCodeForm = () => {
   };
 
   return (
-    <>
+    <View style={Layout.formContainer}>
       <InputTextField
         resource={resource}
         fieldKey="code"
@@ -71,14 +72,8 @@ const SignupEmailCodeForm = () => {
         </BoxView>
         <SkipButton onPress={() => SectionManager.push(router, Config.mainSection)} />
       </BoxView>
-    </>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  label: {
-    alignSelf: 'flex-start',
-  },
-});
 
 export default SignupEmailCodeForm;
