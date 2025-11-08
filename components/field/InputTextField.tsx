@@ -65,7 +65,7 @@ const InputTextField = ({
     };
   }
 
-  textAlignVertical = textAlignVertical ? textAlignVertical : 'center';
+  textAlignVertical = textAlignVertical ? textAlignVertical : 'top';
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4 : 1,
