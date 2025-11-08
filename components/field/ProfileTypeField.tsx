@@ -48,6 +48,10 @@ const ProfileTypeField = ({
 
   return (
     <SelectListField
+      resource={resource}
+      fieldKey={fieldKey}
+      parentKey={parentKey}
+      rules={rules}
       placeholder={placeholder}
       value={value || ''}
       data={buildOptions(profileTypes)}
