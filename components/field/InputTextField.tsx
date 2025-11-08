@@ -58,6 +58,7 @@ const InputTextField = ({
       ...(containerStyle || {}),
       ...styles.containerStyle,
       ...styles.containerStyleWhite,
+      ...{ paddingRight: (rightIcon ? Layout.space.base*4 : Layout.space.base) }
     };
   }
 
@@ -129,7 +130,6 @@ const InputTextField = ({
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    
     position: 'relative',
   },
   containerStyle: {
