@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
 import i18n from "@/translation/i18n";
@@ -62,7 +62,7 @@ const LoginPhoneForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={[Layout.formContainer, styles.container]}>
+    <View style={Layout.formContainer}>
       
       <InputPhoneField
         resource={resource}
@@ -76,7 +76,7 @@ const LoginPhoneForm = () => {
         selectLabel={i18n.t('Country')}
         inputPlaceholder={i18n.t('Enter your phone number')}
         selectPlaceholder={i18n.t('Select your country')}
-        containerStyle={styles.fieldContainer}
+        //containerStyle={styles.fieldContainer}
       />
 
       <InputPasswordField
@@ -85,7 +85,7 @@ const LoginPhoneForm = () => {
         rules={['required', 'string']}
         label={i18n.t('Password')}
         placeholder={i18n.t('Enter your password')}
-        containerStyle={styles.fieldContainer}
+        theme="white"
       />
 
       {!isEmailFieldDisabled() && (
@@ -99,17 +99,5 @@ const LoginPhoneForm = () => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  fieldContainer: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
-});
 
 export default LoginPhoneForm;
