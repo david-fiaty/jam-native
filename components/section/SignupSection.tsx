@@ -30,6 +30,10 @@ const SignupSection = ({ reset }: Props) => {
   const [currentTab, setCurrentTab] = useState<any>(null);
   const formData: any = useSelector((state: any) => state.form[resource]);
 
+  const containerStyle: any = {
+    marginTop: formData?.success === true ? Layout.space.base * 2 : 0,
+  };
+
   const tabsData: any = [
     {
       id: 'email',
@@ -63,7 +67,7 @@ const SignupSection = ({ reset }: Props) => {
       direction="column"
       align="center"
       justify="center"
-      style={Layout.screenContent}
+      style={[Layout.screenContent, containerStyle]}
       scroll={formData?.success === true}
     >
       <LogoView size={80} />
