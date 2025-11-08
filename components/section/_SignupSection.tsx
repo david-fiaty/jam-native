@@ -42,6 +42,10 @@ const SignupSection = ({ reset }: Props) => {
     },
   ];
 
+  const containerStyle: any = {
+    paddingTop: formData?.success === true ? Layout.space.base * 4 : 0,
+  };
+
   const isTabsVisible = () => {
     return !formData?.success === true && !formData?.session?.length;
   };
@@ -59,53 +63,55 @@ const SignupSection = ({ reset }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView
-      direction="column"
-      align="center"
-      justify="center"
-      style={Layout.screenContent}
-      scroll={formData?.success === true}
-    >
-      <LogoView size={80} />
-      <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView>
+    <>
+      <BoxView
+        direction="column"
+        align="center"
+        justify="center"
+        style={[styles.container, containerStyle]}
+        scroll={formData?.success === true}
+      >
+        <LogoView size={80} />
+        <TextView style={styles.slogan}>{i18n.t('Create your JAM account')}</TextView>
 
-      <DividerView />
+        {isTabsVisible() === true && (
+          <TabsView
+            tabs={tabsData}
+            currentTab={currentTab}
+            onItemPress={(tabId: string) => setCurrentTab(tabId)}
+          />
+        )}
 
-      {isTabsVisible() === true && (
-        <TabsView
-          tabs={tabsData}
-          currentTab={currentTab}
-          onItemPress={(tabId: string) => setCurrentTab(tabId)}
-        />
-      )}
+        {currentTab === 'email' && (
+          <>
+            {formData?.success !== true && <SignupEmailForm />}
+            {formData?.success !== true && formData?.session?.length > 0 && <SignupEmailCodeForm />}
+            {formData?.success === true && <SignupForm />}
+          </>
+        )}
 
-      {currentTab === 'email' && (
-        <>
-          {formData?.success !== true && <SignupEmailForm />}
-          {formData?.success !== true && formData?.session?.length > 0 && <SignupEmailCodeForm />}
-          {formData?.success === true && <SignupForm />}
-        </>
-      )}
-
-      {currentTab === 'phone' && (
-        <>
-          {formData?.success !== true && <SignupPhoneForm />}
-          {formData?.success !== true && formData?.session?.length > 0 && <SignupPhoneCodeForm />}
-          {formData?.success === true && <SignupForm />}
-        </>
-      )}
+        {currentTab === 'phone' && (
+          <>
+            {formData?.success !== true && <SignupPhoneForm />}
+            {formData?.success !== true && formData?.session?.length > 0 && <SignupPhoneCodeForm />}
+            {formData?.success === true && <SignupForm />}
+          </>
+        )}
+      </BoxView>
 
       <DividerView />
 
       <GoogleLoginButton />
       { /*<FacebookLoginButton />*/}
       { /*<InstagramLoginButton />*/}
-      
-    </BoxView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
   slogan: {
     textTransform: 'uppercase',
     fontSize: Layout.fontSize.base,

@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import FormManager from '@/manager/FormManager';
+import SelectListField from './SelectListField';
 
 type Props = {
   resource?: any;
@@ -52,7 +52,7 @@ const ProfileTypeField = ({
       {FormManager.renderLabel(label, rules)}
       
       <BoxView direction="column" align="left" style={styles.container}>
-        <SelectListBase
+        <SelectListField
           placeholder={placeholder}
           value={value || ''}
           data={buildOptions(profileTypes)}

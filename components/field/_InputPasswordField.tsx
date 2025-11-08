@@ -1,12 +1,12 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { Input } from "@rneui/themed";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
+import IconView from "../view/IconView";
 import FormManager from "@/manager/FormManager";
 
 type Props = {
-  theme?: string;
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
@@ -15,28 +15,27 @@ type Props = {
   label?: any;
   value?: string;
   placeholder?: string;
-  inputStyle?: object;
   containerStyle?: object;
-  inputContainerStyle?: object;
+  inputStyle?: any;
+  inputContainerStyle?: any;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
   secureTextEntry?: boolean;
   spellCheck?: boolean;
-  readOnly?: boolean,
+  readOnly?: boolean;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
 };
 
-const InputTextField = ({
-  theme,
+const InputPasswordField = ({
   resource,
   fieldKey,
   parentKey,
   rules,
   keyboardType,
-  value,
   label,
+  value,
   placeholder,
   containerStyle,
   inputStyle,
@@ -51,16 +50,10 @@ const InputTextField = ({
   onSubmitEditing,
 }: Props) => {
   const [currentValue, setCurrentValue] = useState<any>('');
-
-  if (theme == 'white') {
-    containerStyle = {
-      ...(containerStyle || {}),
-      ...styles.containerStyleWhite,
-    };
-  }
+  const [isVisible, setIsVisible] = useState<boolean>(false);
 
   const disabledStyle: any = {
-    opacity: disabled ? 0.4 : 1,
+    opacity: disabled ? 0.4: 1,
   };
 
   const changeTextEvent = (fieldValue: any) => {
@@ -76,7 +69,17 @@ const InputTextField = ({
 
   const submitEditingEvent = () => {
     if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue);
+    else if (onChangeText) onChangeText(currentValue); 
+  };
+
+  const renderRightIcon = () => {
+    let iconName: string = isVisible ? 'blind' : 'see';
+
+    return (
+      <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+        <IconView name={iconName} theme="transparent" />
+      </TouchableOpacity>
+    );
   };
 
   useEffect(() => {
@@ -92,7 +95,7 @@ const InputTextField = ({
         textAlignVertical="center"
         numberOfLines={1}
         leftIcon={leftIcon}
-        rightIcon={rightIcon}
+        rightIcon={renderRightIcon()}
         placeholder={placeholder}
         placeholderTextColor={Layout.colors.primary}
         inputStyle={[styles.inputStyle, inputStyle]}
@@ -100,8 +103,8 @@ const InputTextField = ({
         containerStyle={[Layout.formField, containerStyle ?? {}]}
         multiline={false}
         editable={!disabled}
-        secureTextEntry={secureTextEntry}
-        spellCheck={spellCheck}
+        secureTextEntry={!isVisible}
+        spellCheck={false}
         value={currentValue}
         readOnly={readOnly}
         onChangeText={changeTextEvent}
@@ -117,14 +120,9 @@ const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
   },
-  containerStyleWhite: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
   inputContainerStyle: {
     width: '100%',
+    //height: 30,
     borderBottomWidth: 0,
   },
   inputStyle: {
@@ -135,4 +133,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InputTextField;
+export default InputPasswordField;

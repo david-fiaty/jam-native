@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
 import { Layout } from "@/constants/Layout";
@@ -53,14 +53,14 @@ const LoginEmailForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={[Layout.formContainer, styles.container]}>
+    <View style={Layout.formContainer}>
       <InputTextField
         resource={resource}
         fieldKey="email"
         rules={['required', 'email']}
         label={i18n.t('Email')}
         placeholder={i18n.t('Enter your email address')}
-        containerStyle={styles.inputTextFieldContainer}
+        theme="white"
       />
 
       <InputPasswordField
@@ -69,7 +69,7 @@ const LoginEmailForm = () => {
         rules={['required', 'string']}
         label={i18n.t('Password')}
         placeholder={i18n.t('Enter your password')}
-        containerStyle={styles.inputTextFieldContainer}
+        theme="white"
       />
 
       <ButtonView
@@ -81,20 +81,5 @@ const LoginEmailForm = () => {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  label: {
-    alignSelf: 'flex-start',
-  },
-  inputTextFieldContainer: {
-    backgroundColor: Layout.colors.white,
-    borderWidth: Layout.borderWidth.base,
-    borderRadius: Layout.radius.round,
-    borderColor: Layout.colors.primary,
-  },
-});
 
 export default LoginEmailForm;

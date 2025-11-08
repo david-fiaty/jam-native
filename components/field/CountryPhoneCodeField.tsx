@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import i18n from '@/translation/i18n';
+import SelectListField from './SelectListField';
 
 type Props = {
   value?: any;
@@ -26,7 +26,7 @@ const CountryPhoneCodeField = ({value, disabled, containerStyle, elementStyle, o
   
   return (
     <BoxView direction="column" align="left" style={styles.container}>
-      <SelectListBase 
+      <SelectListField
         placeholder={i18n.t('Select your country')}
         value={value}
         data={buildOptions(countryCodes)}  

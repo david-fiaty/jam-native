@@ -1,12 +1,10 @@
-import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { Input } from "@rneui/themed";
-import { Layout } from "@/constants/Layout";
-import BoxView from "../view/BoxView";
+import React, { useState, JSX } from "react";
+import { TouchableOpacity } from "react-native";
 import IconView from "../view/IconView";
-import FormManager from "@/manager/FormManager";
+import InputTextField from "./InputTextField";
 
 type Props = {
+  theme?: string;
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
@@ -16,6 +14,8 @@ type Props = {
   value?: string;
   placeholder?: string;
   containerStyle?: object;
+  inputStyle?: any;
+  inputContainerStyle?: any;
   leftIcon?: JSX.Element;
   rightIcon?: JSX.Element;
   disabled?: boolean;
@@ -27,6 +27,7 @@ type Props = {
 };
 
 const InputPasswordField = ({
+  theme,
   resource,
   fieldKey,
   parentKey,
@@ -36,37 +37,13 @@ const InputPasswordField = ({
   value,
   placeholder,
   containerStyle,
+  inputStyle,
+  inputContainerStyle,
   leftIcon,
-  rightIcon,
   disabled,
-  secureTextEntry,
-  spellCheck,
   readOnly,
-  onChangeText,
-  onSubmitEditing,
 }: Props) => {
-  const [currentValue, setCurrentValue] = useState<any>('');
   const [isVisible, setIsVisible] = useState<boolean>(false);
-
-  const disabledStyle: any = {
-    opacity: disabled ? 0.4: 1,
-  };
-
-  const changeTextEvent = (fieldValue: any) => {
-    setCurrentValue(fieldValue);
-
-    if (onChangeText) {
-      onChangeText(fieldValue)
-    }
-    else {
-      FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
-    }
-  };
-
-  const submitEditingEvent = () => {
-    if (onSubmitEditing) onSubmitEditing()
-    else if (onChangeText) onChangeText(currentValue); 
-  };
 
   const renderRightIcon = () => {
     let iconName: string = isVisible ? 'blind' : 'see';
@@ -78,47 +55,28 @@ const InputPasswordField = ({
     );
   };
 
-  useEffect(() => {
-    setCurrentValue(value);
-  }, [value]);
-
   return (
-    <BoxView style={[styles.container, disabledStyle]}>
-      {FormManager.renderLabel(label, rules)}
-
-      <Input
-        keyboardType={keyboardType}
-        textAlignVertical="center"
-        numberOfLines={1}
-        leftIcon={leftIcon}
-        rightIcon={renderRightIcon()}
-        placeholder={placeholder}
-        placeholderTextColor={Layout.colors.primary}
-        inputContainerStyle={styles.inputContainerStyle}
-        containerStyle={containerStyle ?? {}}
-        multiline={false}
-        editable={!disabled}
-        secureTextEntry={!isVisible}
-        spellCheck={false}
-        value={currentValue}
-        readOnly={readOnly}
-        onChangeText={changeTextEvent}
-        onSubmitEditing={submitEditingEvent}
-      />
-
-      {FormManager.renderError(fieldKey, parentKey)}
-    </BoxView>
+    <InputTextField
+      theme={theme}
+      resource={resource}
+      fieldKey={fieldKey}
+      parentKey={parentKey}
+      rules={rules}
+      label={label}
+      value={value}
+      placeholder={placeholder}
+      secureTextEntry={!isVisible}
+      spellCheck={false}
+      rightIcon={renderRightIcon()}
+      containerStyle={containerStyle}
+      keyboardType={keyboardType}
+      inputStyle={inputStyle}
+      inputContainerStyle={inputContainerStyle}
+      leftIcon={leftIcon}
+      disabled={disabled}
+      readOnly={readOnly}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  inputContainerStyle: {
-    width: '100%',
-    height: '100%',
-  },
-});
 
 export default InputPasswordField;
