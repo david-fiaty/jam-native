@@ -23,7 +23,10 @@ type Props = {
   disabled?: boolean;
   secureTextEntry?: boolean;
   spellCheck?: boolean;
-  readOnly?: boolean,
+  readOnly?: boolean;
+  multiline?: boolean;
+  numberOfLines?: any;
+  textAlignVertical?: any;
   onChangeText?: (value: string) => void;
   onSubmitEditing?: () => void;
 };
@@ -47,6 +50,9 @@ const InputTextField = ({
   secureTextEntry,
   spellCheck,
   readOnly,
+  multiline,
+  numberOfLines,
+  textAlignVertical,
   onChangeText,
   onSubmitEditing,
 }: Props) => {
@@ -58,6 +64,8 @@ const InputTextField = ({
       ...styles.containerStyleWhite,
     };
   }
+
+  textAlignVertical = textAlignVertical ? textAlignVertical : 'center';
 
   const disabledStyle: any = {
     opacity: disabled ? 0.4 : 1,
@@ -82,6 +90,7 @@ const InputTextField = ({
   useEffect(() => {
     setCurrentValue(value);
   }, [value]);
+  
 
   return (
     <BoxView style={[styles.container, disabledStyle]}>
@@ -89,8 +98,8 @@ const InputTextField = ({
 
       <Input
         keyboardType={keyboardType}
-        textAlignVertical="center"
-        numberOfLines={1}
+        textAlignVertical={textAlignVertical}
+        numberOfLines={numberOfLines}
         leftIcon={leftIcon}
         rightIcon={rightIcon}
         placeholder={placeholder}
@@ -98,12 +107,13 @@ const InputTextField = ({
         inputStyle={[styles.inputStyle, inputStyle]}
         inputContainerStyle={[styles.inputContainerStyle, inputContainerStyle]}
         containerStyle={[Layout.formField, containerStyle ?? {}]}
-        multiline={false}
+        multiline={multiline}
         editable={!disabled}
         secureTextEntry={secureTextEntry}
         spellCheck={spellCheck}
         value={currentValue}
         readOnly={readOnly}
+        disabled={disabled}
         onChangeText={changeTextEvent}
         onSubmitEditing={submitEditingEvent}
       />
