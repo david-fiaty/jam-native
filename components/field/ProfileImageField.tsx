@@ -51,8 +51,6 @@ const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, label,
 
   return (
     <>
-      {FormManager.renderLabel(label, rules)}
-
       <MediaPickerField
         resource={resource}
         fieldKey={fieldKey}
@@ -60,6 +58,8 @@ const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, label,
         rules={rules}
         mediaTypes={['images']}
         multiple={false}
+        label={label}
+        /*
         label={
           <BoxView direction="row" align="center">
             {!uri?.length && (
@@ -92,6 +92,7 @@ const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, label,
             )}
           </BoxView>
         }
+          */
         onSelectItem={onSelectItem}
       />
     </>
