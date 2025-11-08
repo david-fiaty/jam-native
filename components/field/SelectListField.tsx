@@ -5,6 +5,7 @@ import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 
 type Props = {
+  theme?: string;
   value?: any;
   data?: object;
   placeholder?: string;
@@ -15,7 +16,17 @@ type Props = {
   renderItem?: (item: any, selected: boolean) => JSX.Element;
 };
 
-const SelectListBase = ({ value, data, placeholder, disabled, elementStyle, containerStyle, onChangeValue, renderItem }: Props) => {
+const SelectListField = ({ 
+  theme,
+  value, 
+  data, 
+  placeholder, 
+  disabled, 
+  elementStyle, 
+  containerStyle, 
+  onChangeValue, 
+  renderItem 
+}: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
@@ -23,6 +34,11 @@ const SelectListBase = ({ value, data, placeholder, disabled, elementStyle, cont
     ...styles.element,
     ...(disabled === true ? styles.disabled : {}),
     ...(elementStyle || {}),
+    ...(theme == 'white' ? {} : Layout.formField),
+  };
+
+  containerStyle = {
+    ...(containerStyle || {}),
   };
 
   if (value && !selectedValue) setSelectedValue(value);
@@ -55,7 +71,7 @@ const SelectListBase = ({ value, data, placeholder, disabled, elementStyle, cont
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         iconStyle={styles.iconStyle}
-        itemTextStyle={styles.listItemTextStyle}
+        //itemTextStyle={styles.listItemTextStyle}
         containerStyle={containerStyle}
         search={false}
         disable={disabled}
@@ -102,4 +118,4 @@ const styles = StyleSheet.create({
   iconStyle: {},
 });
 
-export default SelectListBase;
+export default SelectListField;
