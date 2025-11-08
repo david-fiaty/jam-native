@@ -7,8 +7,8 @@ import InputTextField from './InputTextField';
 import FormManager from '@/manager/FormManager';
 import ModalManager from '@/manager/ModalManager';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import i18n from '@/translation/i18n';
+import SelectListField from './SelectListField';
 
 type Props = {
   resource: string;
@@ -58,7 +58,7 @@ const CountriesField = ({ resource, fieldKey, parentKey, rules, multiple, label,
         {FormManager.renderLabel(label, rules)}
         
         <BoxView direction="row" align="space-between" style={styles.container}>
-          <SelectListBase
+          <SelectListField
             value={value}
             data={buildOptions()}
             onChangeValue={onChangeValue}

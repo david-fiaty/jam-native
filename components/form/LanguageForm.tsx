@@ -6,11 +6,11 @@ import { Layout } from '@/constants/Layout';
 import { Config } from "@/constants/Config";
 import i18n from "@/translation/i18n";
 import BoxView from "../view/BoxView";
-import SelectListBase from '../base/SelectListBase';
 import ScreenManager from "@/manager/ScreenManager";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import i18next from 'i18next';
 import SectionManager from "@/manager/SectionManager";
+import SelectListField from "../field/SelectListField";
 
 const LanguageForm = () => {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const LanguageForm = () => {
 
   return (
     <BoxView align="flex-start" justify="flex-start" scroll={true} style={Layout.formContainer}>
-      <SelectListBase
+      <SelectListField
         value={userState.currentLanguage}
         data={getLanguages()}
         placeholder={i18n.t('Select a language')}

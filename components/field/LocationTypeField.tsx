@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 import BoxView from '../view/BoxView';
-import SelectListBase from '../base/SelectListBase';
 import StaticData from '@/constants/StaticData';
 import i18n from '@/translation/i18n';
 import EntityManager from '@/manager/EntityManager';
 import FormManager from '@/manager/FormManager';
+import SelectListField from './SelectListField';
 
 type Props = {
   resource?: any;
@@ -51,7 +51,7 @@ const LocationTypeField = ({
       {FormManager.renderLabel(label, rules)}
       
       <BoxView direction="column" align="center" style={styles.container}>
-        <SelectListBase
+        <SelectListField
           value={value}
           data={buildOptions(EntityManager.getLocationTypes())}
           onChangeValue={onChangeEvent}

@@ -9,7 +9,7 @@ import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
 import i18n from "@/translation/i18n";
-import SelectListBase from "../base/SelectListBase";
+import SelectListField from "./SelectListField";
 import StaticData from "@/constants/StaticData";
 
 type Props = {
@@ -117,7 +117,7 @@ const InputPhoneField = ({
     <>
       {FormManager.renderLabel(selectLabel, rules)}
 
-      <SelectListBase
+      <SelectListField
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
         data={countryOptions}

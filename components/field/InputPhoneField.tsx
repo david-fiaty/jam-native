@@ -8,10 +8,11 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
-import SelectListBase from "../base/SelectListBase";
 import StaticData from "@/constants/StaticData";
+import SelectListField from "./SelectListField";
 
 type Props = {
+  theme?: string;
   resource?: any;
   fieldKey?: any;
   phoneNumberFieldKey?: any;
@@ -30,6 +31,7 @@ type Props = {
 };
 
 const InputPhoneField = ({
+  theme,
   resource,
   fieldKey,
   phoneNumberFieldKey,
@@ -50,6 +52,11 @@ const InputPhoneField = ({
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
+
+  containerStyle = {
+    ...(containerStyle || {}),
+    ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+  };
 
   const getCountryOptions = () => {
     let countries: any[] = StaticData.countryPhoneCodes;
@@ -122,7 +129,8 @@ const InputPhoneField = ({
       {/* Select list */}
       {FormManager.renderLabel(selectLabel, rules)}
 
-      <SelectListBase
+      <SelectListField
+        theme={theme}
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
         data={countryOptions}
@@ -172,6 +180,12 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingLeft: Layout.space.base,
+  },
+  containerStyleWhite: {
+    backgroundColor: Layout.colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
   },
   selectListField: {
     backgroundColor: Layout.colors.white,
