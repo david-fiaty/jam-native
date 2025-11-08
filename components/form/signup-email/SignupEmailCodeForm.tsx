@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useSelector } from "react-redux";
@@ -39,6 +39,12 @@ const SignupEmailCodeForm = () => {
   const isSubmitButtonDisabled = () => {
     return !formData?.code?.length;
   };
+
+  useEffect(() => {
+    return () => {
+      FormManager.resetForm(resource);
+    };
+  }, [resource]);
 
   return (
     <View style={Layout.formContainer}>
