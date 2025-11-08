@@ -130,6 +130,7 @@ const InputPhoneField = ({
       {FormManager.renderLabel(selectLabel, rules)}
 
       <SelectListField
+        theme={theme}
         placeholder={selectPlaceholder}
         value={selectedCountry?.code || ''}
         data={countryOptions}
@@ -159,7 +160,6 @@ const InputPhoneField = ({
         <TextView>{selectedCountry?.prefix}</TextView>
 
         <InputTextField
-          //theme="white"
           resource={resource}
           fieldKey={fieldKey}
           value={phoneNumberFieldValue || ''}
