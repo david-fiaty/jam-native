@@ -7,6 +7,7 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SectionManager from "@/manager/SectionManager";
 import ProfileForm from "./ProfileForm";
+import FormManager from '@/manager/FormManager';
 
 const resource: string = 'signup';
 
@@ -42,10 +43,9 @@ const SignupForm = () => {
 
   useEffect(() => {
     return () => {
-      console.log('Component will unmount');
-      //myCleanupFunction();
+      FormManager.resetForm(resource);
     };
-  }, []);
+  }, [resource]);
 
   return (
     <ProfileForm 
