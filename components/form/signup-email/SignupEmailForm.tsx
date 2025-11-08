@@ -60,6 +60,7 @@ const SignupEmailForm = () => {
         placeholder={i18n.t('Enter your email address')}
         disabled={isEmailDisabled()}
         containerStyle={styles.inputTextFieldContainer}
+        trim={true}
       />
 
       {!isEmailDisabled() && (
