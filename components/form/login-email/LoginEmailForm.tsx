@@ -60,7 +60,7 @@ const LoginEmailForm = () => {
         rules={['required', 'email']}
         label={i18n.t('Email')}
         placeholder={i18n.t('Enter your email address')}
-        containerStyle={styles.inputTextFieldContainer}
+        theme="white"
       />
 
       <InputPasswordField
@@ -69,7 +69,7 @@ const LoginEmailForm = () => {
         rules={['required', 'string']}
         label={i18n.t('Password')}
         placeholder={i18n.t('Enter your password')}
-        containerStyle={styles.inputTextFieldContainer}
+        theme="white"
       />
 
       <ButtonView
