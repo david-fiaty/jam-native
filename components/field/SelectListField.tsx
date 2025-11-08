@@ -13,6 +13,7 @@ type Props = {
   rules?: any;
   value?: any;
   data?: any;
+  label?: any;
   placeholder?: string;
   disabled?: any;
   containerStyle?: any;
@@ -29,6 +30,7 @@ const SelectListField = ({
   rules,
   value,
   data,
+  label,
   placeholder,
   disabled,
   elementStyle,
@@ -37,7 +39,6 @@ const SelectListField = ({
   renderItem
 }: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
-  const [isFocus, setIsFocus] = useState<boolean>(false);
 
   elementStyle = {
     ...styles.element,
@@ -54,7 +55,6 @@ const SelectListField = ({
 
   const onChange = (option: any) => {
     setSelectedValue(option.value);
-    setIsFocus(false);
 
     if (onChangeValue) {
       if (onChangeValue) onChangeValue(option);
@@ -78,29 +78,33 @@ const SelectListField = ({
   };
 
   return (
-    <View style={styles.container}>
-      <Dropdown
-        value={selectedValue}
-        data={data}
-        style={elementStyle}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        iconStyle={styles.iconStyle}
-        itemTextStyle={styles.itemTextStyle}
-        containerStyle={containerStyle}
-        search={false}
-        disable={disabled}
-        maxHeight={300}
-        labelField="label"
-        valueField="value"
-        placeholder={placeholder}
-        iconColor={Layout.colors.primary}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
-        onChange={onChange}
-        renderItem={renderOption}
-      />
-    </View>
+    <>
+      {FormManager.renderLabel(label, rules)}
+
+      <View style={styles.container}>
+        <Dropdown
+          value={selectedValue}
+          data={data}
+          style={elementStyle}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          iconStyle={styles.iconStyle}
+          itemTextStyle={styles.itemTextStyle}
+          containerStyle={containerStyle}
+          search={false}
+          disable={disabled}
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={placeholder}
+          iconColor={Layout.colors.primary}
+          onChange={onChange}
+          renderItem={renderOption}
+        />
+      </View>
+
+      {FormManager.renderError(fieldKey, parentKey)}
+    </>
   );
 };
 
