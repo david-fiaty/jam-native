@@ -17,9 +17,7 @@ import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
 import CountryPhoneCodeField from "@/components/field/CountryPhoneCodeField";
-import PhoneServiceField from "@/components/field/PhoneServiceField";
 import StaticData from "@/constants/StaticData";
-import IconView from "@/components/view/IconView";
 
 const resource: string = 'signup';
 
@@ -73,6 +71,8 @@ const SignupPhoneForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
+      // Todo - Set phone_service = 'whatsapp' in form data
+
       FormManager.updateField(resource, 'phone_service', (phoneServices.find((o: any) => o.default === true))?.id);
       setIsLoaded(true);
     }
@@ -98,12 +98,6 @@ const SignupPhoneForm = () => {
       />
       {FormManager.renderError('phone')}
 
-      <TextView style={styles.label}>{i18n.t('Phone service')}</TextView>
-      <PhoneServiceField 
-        value={formData?.phone_service || ''}
-        onChangeValue={((option: any) => FormManager.updateField(resource, 'phone_service', option.id, ['string']))}
-      />
-  
       <ButtonView
         label={i18n.t('Continue')}
         isProcessing={isProcessing}
