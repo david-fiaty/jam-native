@@ -5,7 +5,7 @@ import FormManager from '@/manager/FormManager';
 import ListView from '../view/ListView';
 import IconView from '../view/IconView';
 import TextView from '../view/TextView';
-import EntityManager from '@/manager/EntityManager';
+import ContentManager from '@/manager/ContentManager';
 
 type Props = {
   resource?: any;
@@ -26,7 +26,7 @@ const JamCategoryField = ({
   label,
   onChangeValue
 }: Props) => {
-  const jamCategories: any = EntityManager.getJamTypes();
+  const jamCategories: any = ContentManager.getJamTypes();
   
   const onChangeEvent = (fieldValue: any) => {
     if (onChangeValue) {
