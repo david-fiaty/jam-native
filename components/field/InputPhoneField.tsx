@@ -95,9 +95,16 @@ const InputPhoneField = ({
         fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
       }
 
-      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-        countryCode: selectedCountry.code,
-      });
+      if (fieldKey) {
+        FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
+          countryCode: selectedCountry.code,
+        });
+      }
+      else if (phoneNumberFieldKey) {
+        FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+          countryCode: selectedCountry.code,
+        });
+      }
     }
   };
 
