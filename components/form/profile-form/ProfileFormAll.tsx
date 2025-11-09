@@ -6,6 +6,7 @@ import InputTextareaField from "@/components/field/InputTextareaField";
 import InputPasswordField from "@/components/field/InputPasswordField";
 import ProfileGroupNetworks from "./groups/ProfileGroupNetworks";
 import ProfileGroupAddress from "./groups/ProfileGroupAddress";
+import InputPhoneField from "@/components/field/InputPhoneField";
 
 type Props = {
   resource: any;
@@ -33,6 +34,17 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         placeholder={i18n.t('Enter a profile email')}
         disabled={resource == 'signup'}
         trim={true}
+      />
+
+      <InputPhoneField
+        resource={resource}
+        fieldKey="phone_number"
+        rules={['string']}
+        value={formData?.phone_number || ''}
+        inputlabel={i18n.t('Phone number')}
+        inputPlaceholder={i18n.t('Enter your phone number')}
+        theme="white"
+        compact={true}
       />
 
       <InputTextField
