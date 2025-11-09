@@ -119,6 +119,20 @@ class ContentManager {
     ];
   }
 
+  getPhoneServices() {
+    return [
+      {
+        id: 'sms',
+        label: i18n.t('SMS'),
+        default: true,
+      },
+      {
+        id: 'whatsapp',
+        label: i18n.t('Whatsapp'),
+      },
+    ];
+  }
+
   getCountryPhoneCodes() {
     return [
       {
