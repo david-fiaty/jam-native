@@ -26,18 +26,7 @@ const SignupPhoneForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const countryList: any[] = ContentManager.getCountryPhoneCodes();
-
-  const phoneServices: any[] = [
-    {
-      id: 'sms',
-      label: i18n.t('SMS'),
-      default: true,
-    },
-    {
-      id: 'whatsapp',
-      label: i18n.t('Whatsapp'),
-    },
-  ];
+  const phoneServices: any[] = ContentManager.getPhoneServices();
 
   const submitForm = async () => {
     setIsProcessing(true);
