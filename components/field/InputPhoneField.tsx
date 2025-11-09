@@ -246,11 +246,10 @@ const InputPhoneField = ({
     if (!isLoaded) {
       if (!countryOptions?.length) {
         setCountryOptions(getCountryOptions());
+        setSelectedCountry(getSelectedCountry());
       }
       setIsLoaded(true);
     }
-
-    setSelectedCountry(getSelectedCountry());
   }, [isLoaded, value, countryOptions]);
 
   return renderComponent();
