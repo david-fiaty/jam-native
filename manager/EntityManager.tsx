@@ -343,7 +343,7 @@ class EntityManager {
   }
 
   getJamTypeLabel(jamType: string) {
-    let label: any = '';
+    let label: any = ''; 
 
     if (jamType?.length > 0) {
       label = (ContentManager.getJamTypes().find((o: any) => o.id === jamType))?.name;
