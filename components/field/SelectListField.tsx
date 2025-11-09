@@ -1,4 +1,4 @@
-import React, { JSX, useState } from "react";
+import React, { JSX, useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Layout } from "@/constants/Layout";
@@ -18,6 +18,8 @@ type Props = {
   disabled?: any;
   containerStyle?: any;
   elementStyle?: any;
+  optionValueKey?: any;
+  optionLabelKey?: any;
   onChangeValue?: (option: any) => void;
   renderItem?: (item: any, selected: boolean) => JSX.Element;
 };
@@ -33,13 +35,17 @@ const SelectListField = ({
   label,
   placeholder,
   disabled,
-  elementStyle,
   containerStyle,
+  elementStyle,
+  optionValueKey,
+  optionLabelKey,
   onChangeValue,
   renderItem
 }: Props) => {
   const [selectedValue, setSelectedValue] = useState<any>(null);
-
+  const [listData, setListData] = useState<any[]>([]);
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  
   elementStyle = {
     ...styles.element,
     ...(disabled === true ? styles.disabled : {}),
@@ -52,6 +58,15 @@ const SelectListField = ({
   };
 
   if (value && !selectedValue) setSelectedValue(value);
+
+  const buildOptions = (optionsData: any) => {
+    return [...(optionsData || [])].map((item: any) => {
+      return {
+        value: item?.[optionValueKey],
+        label: item?.[optionLabelKey],
+      }
+    });
+  };
 
   const onChange = (option: any) => {
     setSelectedValue(option.value);
@@ -76,6 +91,13 @@ const SelectListField = ({
       );
     }
   };
+
+  useEffect(() => {
+    if (!isLoaded) {
+      setListData(buildOptions(data));
+      setIsLoaded(true);
+    }
+  }, [isLoaded, data]);
 
   return (
     <>
