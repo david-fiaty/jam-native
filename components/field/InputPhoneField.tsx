@@ -28,7 +28,7 @@ type Props = {
   inputPlaceholder?: any;
   selectPlaceholder?: any;
   disabled?: boolean;
-  inline?: boolean;
+  compact?: boolean;
   containerStyle?: any;
 };
 
@@ -48,7 +48,7 @@ const InputPhoneField = ({
   inputPlaceholder,
   selectPlaceholder,
   disabled,
-  inline,
+  compact,
   containerStyle,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -117,7 +117,7 @@ const InputPhoneField = ({
       </BoxView>
     );
 
-    if (inline === true) {
+    if (compact === true) {
       flagComponent = (
         <TouchableOpacity
           onPress={() => {
@@ -186,7 +186,7 @@ const InputPhoneField = ({
   };
 
   const renderComponent = () => {
-    if (inline === true) {
+    if (compact === true) {
       return (
         <>
           {FormManager.renderLabel(inputlabel, rules)}
