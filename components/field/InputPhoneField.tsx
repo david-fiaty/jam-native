@@ -108,6 +108,68 @@ const InputPhoneField = ({
     }
   };
 
+  const renderSelectList = () => {
+    return (
+      <>
+        {FormManager.renderLabel(selectLabel, rules)}
+
+        <SelectListField
+          theme={theme}
+          resource={resource}
+          fieldKey={phonePrefixFieldKey}
+          parentKey={parentKey}
+          rules={[]}
+          placeholder={selectPlaceholder}
+          value={selectedCountry?.code}
+          data={countryOptions}
+          onChangeValue={onChangeCodeValue}
+          disabled={disabled}
+          elementStyle={styles.selectListField}
+          containerStyle={containerStyle}
+          renderItem={renderItem}
+        />
+
+        {FormManager.renderError(phonePrefixFieldKey, parentKey)}
+      </>
+    );
+  };
+
+  const renderInputText = () => {
+    return (
+      <>
+        {FormManager.renderLabel(inputlabel, rules)}
+
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={[containerStyle, styles.container]}
+          gap={Layout.space.base / 1.6}
+        >
+          <TextView size={15}>
+            {renderFlag(selectedCountry?.code)}
+          </TextView>
+
+          <TextView>{selectedCountry?.prefix}</TextView>
+
+          <InputTextField
+            resource={resource}
+            fieldKey={phoneNumberFieldKey}
+            parentKey={parentKey}
+            value={phoneNumberFieldValue || ''}
+            rules={[]}
+            placeholder={inputPlaceholder}
+            keyboardType="number-pad"
+            onChangeText={onChangePhoneValue}
+            containerStyle={styles.inputTextField}
+          />
+        </BoxView>
+
+        {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+      </>
+    );
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!countryOptions?.length) {
@@ -124,57 +186,9 @@ const InputPhoneField = ({
 
   return (
     <>
-      {/* Select list */}
-      {FormManager.renderLabel(selectLabel, rules)}
+      {renderSelectList()}
 
-      <SelectListField
-        theme={theme}
-        resource={resource}
-        fieldKey={phonePrefixFieldKey}
-        parentKey={parentKey}
-        rules={[]}
-        placeholder={selectPlaceholder}
-        value={selectedCountry?.code}
-        data={countryOptions}
-        onChangeValue={onChangeCodeValue}
-        disabled={disabled}
-        elementStyle={styles.selectListField}
-        containerStyle={containerStyle}
-        renderItem={renderItem}
-      />
-
-      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
-
-      {/* Input text */}
-      {FormManager.renderLabel(inputlabel, rules)}
-
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={[containerStyle, styles.container]}
-        gap={Layout.space.base / 1.6}
-      >
-        <TextView size={15}>
-          {renderFlag(selectedCountry?.code)}
-        </TextView>
-
-        <TextView>{selectedCountry?.prefix}</TextView>
-
-        <InputTextField
-          resource={resource}
-          fieldKey={phoneNumberFieldKey}
-          parentKey={parentKey}
-          value={phoneNumberFieldValue || ''}
-          rules={[]}
-          placeholder={inputPlaceholder}
-          keyboardType="number-pad"
-          onChangeText={onChangePhoneValue}
-          containerStyle={styles.inputTextField}
-        />
-      </BoxView>
-
-      {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+      {renderInputText()}
     </>
   );
 };
@@ -197,7 +211,7 @@ const styles = StyleSheet.create({
   inputTextField: {
     backgroundColor: 'transparent',
     borderWidth: 0,
-    paddingLeft: Layout.space.base/2,
+    paddingLeft: Layout.space.base / 2,
   },
   listItem: {
     paddingVertical: Layout.space.base,
