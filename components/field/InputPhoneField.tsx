@@ -216,8 +216,11 @@ const InputPhoneField = ({
         return targetCountry;
       }
     }
+    else if (selectedCountry) {
+      return selectedCountry;
+    }
     else {
-      return selectedCountry?.code || '';
+      return defaultCountry;
     }
   };
 
@@ -238,13 +241,10 @@ const InputPhoneField = ({
         setCountryOptions(getCountryOptions());
       }
 
-      if (!selectedCountry) {
-        setSelectedCountry(defaultCountry);
-      }
-
+      setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
-  }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
+  }, [isLoaded, value, countryOptions]);
 
   return renderComponent();
 };
