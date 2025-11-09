@@ -1,6 +1,19 @@
 import i18n from "@/translation/i18n";
- 
+
 class ContentManager {
+  getExperienceLevels() {
+    return [
+      {
+        id: null,
+        label: i18n.t('Select a level of experience'),
+      },
+      {
+        id: 'less_than_1_year',
+        label: i18n.t('Less than 1 year'),
+      },
+    ]; 
+  }
+
   getJamTypes() {
     return [
       {
@@ -44,7 +57,7 @@ class ContentManager {
   }
 
   getProfileTypes() {
-    return [ 
+    return [
       {
         id: 'personal',
         label: i18n.t('Personal'),
