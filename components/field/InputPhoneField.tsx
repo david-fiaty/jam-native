@@ -8,8 +8,8 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
-import StaticData from "@/constants/StaticData";
 import SelectListField from "./SelectListField";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   theme?: string;
@@ -49,7 +49,8 @@ const InputPhoneField = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
-  const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
+  const countryList: any[] = ContentManager.getCountryPhoneCodes();
+  const defaultCountry: any = countryList.find((o: any) => o.code == 'tg');
 
   containerStyle = {
     ...(containerStyle || {}),
@@ -57,7 +58,7 @@ const InputPhoneField = ({
   };
 
   const getCountryOptions = () => {
-    let countries: any[] = StaticData.countryPhoneCodes;
+    let countries: any[] = [...countryList];
 
     if (Config.allowedCountries.phone.length > 0) {
       countries = countries.filter((o: any) => {
@@ -88,7 +89,7 @@ const InputPhoneField = ({
   };
 
   const onChangeCodeValue = (item: any) => {
-    let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
+    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
@@ -108,25 +109,8 @@ const InputPhoneField = ({
     }
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      if (!countryOptions?.length) {
-        setCountryOptions(getCountryOptions());
-      }
-
-      if (!selectedCountry) {
-        setSelectedCountry(defaultCountry);
-      }
-
-      setIsLoaded(true);
-    }
-  }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
-
-  return (
-    <>
-      {/* Select list */}
-      {FormManager.renderLabel(selectLabel, rules)}
-
+  const renderSelectList = () => {
+    return (
       <SelectListField
         theme={theme}
         resource={resource}
@@ -142,12 +126,11 @@ const InputPhoneField = ({
         containerStyle={containerStyle}
         renderItem={renderItem}
       />
+    );
+  };
 
-      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
-
-      {/* Input text */}
-      {FormManager.renderLabel(inputlabel, rules)}
-
+  const renderInputText = () => {
+    return (
       <BoxView
         direction="row"
         align="center"
@@ -173,7 +156,31 @@ const InputPhoneField = ({
           containerStyle={styles.inputTextField}
         />
       </BoxView>
+    );
+  };
 
+  useEffect(() => {
+    if (!isLoaded) {
+      if (!countryOptions?.length) {
+        setCountryOptions(getCountryOptions());
+      }
+
+      if (!selectedCountry) {
+        setSelectedCountry(defaultCountry);
+      }
+
+      setIsLoaded(true);
+    }
+  }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
+
+  return (
+    <>
+      {FormManager.renderLabel(selectLabel, rules)}
+      {renderSelectList()}
+      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
+
+      {FormManager.renderLabel(inputlabel, rules)}
+      {renderInputText()}
       {FormManager.renderError(phoneNumberFieldKey, parentKey)}
     </>
   );
@@ -197,7 +204,7 @@ const styles = StyleSheet.create({
   inputTextField: {
     backgroundColor: 'transparent',
     borderWidth: 0,
-    paddingLeft: Layout.space.base/2,
+    paddingLeft: Layout.space.base / 2,
   },
   listItem: {
     paddingVertical: Layout.space.base,
