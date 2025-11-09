@@ -66,20 +66,7 @@ const InputPhoneField = ({
       });
     }
 
-    return countries.map((o: any) => {
-      return {
-        value: o.code,
-        label: `${o.name} (${o.prefix})`,
-      }
-    });
-  };
-
-  const renderItem = (item: any, selected: boolean) => {
-    return (
-      <View style={styles.listItem}>
-        <TextView>{item?.label}</TextView>
-      </View>
-    );
+    return countries;
   };
 
   const renderFlag = (code: string) => {
@@ -118,13 +105,15 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={selectedCountry?.code}
+        value={selectedCountry?.code || ''}
         data={countryOptions}
+        optionLabelKey="name"
+        optionValueKey="code"
         onChangeValue={onChangeCodeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
         containerStyle={containerStyle}
-        renderItem={renderItem}
+        search={true}
       />
     );
   };
