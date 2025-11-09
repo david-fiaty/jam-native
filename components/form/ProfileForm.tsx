@@ -10,13 +10,13 @@ import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import FormManager from "@/manager/FormManager";
-import BoxView from "@/components/view/BoxView";
 import ProfileFormPersonal from "./profile-form/ProfileFormPersonal";
 import ProfileFormOrganization from "./profile-form/ProfileFormOrganization";
 import ProfileFormVenue from "./profile-form/ProfileFormVenue";
 import ProfileFormAll from "./profile-form/ProfileFormAll";
 import SelectListField from "../field/SelectListField";
-import StaticData from "@/constants/StaticData";
+import EntityManager from "@/manager/EntityManager";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   resource?: any;
@@ -134,7 +134,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         placeholder={i18n.t('Select a profile type')}
         optionLabelKey="label"
         optionValueKey="id"
-        data={StaticData.profileTypes}
+        data={ContentManager.getProfileTypes()}
         //disabled={resource == 'profile'}
       />
 
