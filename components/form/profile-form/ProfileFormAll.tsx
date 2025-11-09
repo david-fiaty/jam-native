@@ -46,7 +46,6 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         rules={['phone']}
         inputlabel={i18n.t('Phone number')}
         inputPlaceholder={i18n.t('Enter your phone number')}
-        theme="white"
         compact={true}
       />
 
