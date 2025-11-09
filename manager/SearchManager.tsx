@@ -2,6 +2,7 @@ import { setTabResults } from "@/redux/slices/SearchSlice";
 import EntityManager from "./EntityManager";
 import Store from '@/redux/Store';
 import i18n from "@/translation/i18n";
+import ContentManager from "./ContentManager";
 
 class SearchManager {
   async loadResults(tabId: string, currentPage: number, pageSize?: any, applyFilters?: boolean) {
@@ -133,7 +134,7 @@ class SearchManager {
       countries: appState.countriesData.map((o: any) => { return { id: o.code, name: o.name } }),
       sectors: appState.sectorsData,
       subSectors: ([...appState.sectorsData].map((sector: any) => sector.sub_sectors)).flat(),
-      locationTypes: EntityManager.getLocationTypes(),
+      locationTypes: ContentManager.getLocationTypes(),
     };
   }
 

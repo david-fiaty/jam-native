@@ -8,9 +8,9 @@ import UserManager from "@/manager/UserManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import StaticData from "@/constants/StaticData";
 import InputPasswordField from "@/components/field/InputPasswordField";
 import InputPhoneField from "@/components/field/InputPhoneField";
+import ContentManager from "@/manager/ContentManager";
 
 const resource: string = 'login';
 
@@ -18,12 +18,13 @@ const LoginPhoneForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
+  const countryList: any[] = ContentManager.getCountryPhoneCodes();
 
   const submitData = async () => {
     setIsProcessing(true);
     
     let payload: any = {
-      country_code: (StaticData.countryPhoneCodes.find((o: any) => o.code === formData?.country))?.prefix,
+      country_code: (countryList.find((o: any) => o.code === formData?.country))?.prefix,
       phone_without_country_code: formData?.phone,
       phone_service: formData?.phone_service,
     };
