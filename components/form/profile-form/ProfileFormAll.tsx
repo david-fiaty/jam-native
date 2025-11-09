@@ -14,6 +14,9 @@ type Props = {
 };
 
 const ProfileFormAll = ({ resource, formData }: Props) => {
+
+  console.log(formData?.phone_number)
+
   return (
     <>
       <InputTextField
