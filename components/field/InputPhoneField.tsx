@@ -225,6 +225,9 @@ const InputPhoneField = ({
     else {
       return phoneNumberFieldValue;
     }
+
+    //console.log(phoneNumberFieldValue)
+    //console.log(parsePhoneNumber('+228' + phoneNumberFieldValue))
   };
 
   useEffect(() => {
@@ -240,9 +243,6 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
-
-console.log(phoneNumberFieldValue)
-console.log(parsePhoneNumber(phoneNumberFieldValue))
 
   return renderComponent();
 };
