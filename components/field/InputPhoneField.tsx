@@ -8,7 +8,6 @@ import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
 import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
-import StaticData from "@/constants/StaticData";
 import SelectListField from "./SelectListField";
 import ContentManager from "@/manager/ContentManager";
 
@@ -90,7 +89,7 @@ const InputPhoneField = ({
   };
 
   const onChangeCodeValue = (item: any) => {
-    let targetCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == item.value);
+    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
