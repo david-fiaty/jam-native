@@ -33,6 +33,7 @@ import ProjectFormSection from '../section/project/ProjectFormSection';
 import OrganizationTypesList from '../list/OrganizationTypesList';
 import WeekDaysList from '../list/WeekDaysList';
 import CulturalActivitiesList from '../list/CulturalActivitiesList';
+import CountryPhoneCodesList from '../list/CountryPhoneCodesList';
 
 type Props = {
   currentSection?: any;
@@ -200,6 +201,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'CountriesList',
         title: i18n.t('Countries'),
         render: (params: any) => <CountriesList {...params} />,
+      },
+      {
+        id: 'CountryPhoneCodesList',
+        title: i18n.t('Countries'),
+        render: (params: any) => <CountryPhoneCodesList {...params} />,
       },
       {
         id: 'SelectLocationMapView',

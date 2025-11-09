@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
@@ -10,6 +10,7 @@ import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
 import SelectListField from "./SelectListField";
 import ContentManager from "@/manager/ContentManager";
+import ModalManager from "@/manager/ModalManager";
 
 type Props = {
   theme?: string;
@@ -26,6 +27,7 @@ type Props = {
   inputPlaceholder?: any;
   selectPlaceholder?: any;
   disabled?: boolean;
+  inline?: boolean;
   containerStyle?: any;
 };
 
@@ -44,6 +46,7 @@ const InputPhoneField = ({
   inputPlaceholder,
   selectPlaceholder,
   disabled,
+  inline,
   containerStyle,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -127,11 +130,24 @@ const InputPhoneField = ({
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-        <TextView size={15}>
-          {renderFlag(selectedCountry?.code)}
-        </TextView>
 
-        <TextView>{selectedCountry?.prefix}</TextView>
+        <TouchableOpacity
+          onPress={() => {
+            ModalManager.toggleModal('CountryPhoneCodesList', {
+              resource: resource,
+              fieldKey: phoneNumberFieldKey,
+              parentKey: parentKey,
+              rules: rules,
+            });
+          }}
+        >
+          <TextView size={15}
+          >
+            {renderFlag(selectedCountry?.code)}
+          </TextView>
+
+          <TextView>{selectedCountry?.prefix}</TextView>
+        </TouchableOpacity>
 
         <InputTextField
           resource={resource}
@@ -148,6 +164,44 @@ const InputPhoneField = ({
     );
   };
 
+  const renderComponent = () => {
+    if (inline === true) {
+      return (
+        <>
+          {FormManager.renderLabel(inputlabel, rules)}
+
+          <BoxView
+            direction="row"
+            align="center"
+            justify="flex-start"
+          >
+            <View>
+              {renderSelectList()}
+            </View>
+            <View style={{ flexShrink: 1 }}>
+              {renderInputText()}
+            </View>
+          </BoxView>
+
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+        </>
+      );
+    }
+    else {
+      return (
+        <>
+          {FormManager.renderLabel(selectLabel, rules)}
+          {renderSelectList()}
+          {FormManager.renderError(phonePrefixFieldKey, parentKey)}
+
+          {FormManager.renderLabel(inputlabel, rules)}
+          {renderInputText()}
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+        </>
+      );
+    }
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       if (!countryOptions?.length) {
@@ -162,17 +216,7 @@ const InputPhoneField = ({
     }
   }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
 
-  return (
-    <>
-      {FormManager.renderLabel(selectLabel, rules)}
-      {renderSelectList()}
-      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
-
-      {FormManager.renderLabel(inputlabel, rules)}
-      {renderInputText()}
-      {FormManager.renderError(phoneNumberFieldKey, parentKey)}
-    </>
-  );
+  return renderComponent();
 };
 
 const styles = StyleSheet.create({
