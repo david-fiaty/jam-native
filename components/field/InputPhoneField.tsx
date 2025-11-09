@@ -124,6 +124,7 @@ const InputPhoneField = ({
               fieldKey: phoneNumberFieldKey,
               parentKey: parentKey,
               rules: rules,
+              value: phoneNumberFieldValue,
             });
           }}
         >
