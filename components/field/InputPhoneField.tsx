@@ -86,15 +86,21 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
+    //let targetCountry: any = getSelectedCountry();
+    //console.log(fieldValue);
+    //console.log(targetCountry);
+    //console.log(phoneNumberFieldValue);
+    return;
+
     if (fieldValue) {
-      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
+      let parsedNumber: any = parsePhoneNumber(fieldValue, targetCountry.code.toUpperCase());
       if (parsedNumber && parsedNumber.isValid()) {
-        fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
-        fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
+        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
       }
 
       FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-        countryCode: selectedCountry.code,
+        countryCode: targetCountry.code,
       });
     }
   };
