@@ -15,6 +15,7 @@ import ModalManager from "@/manager/ModalManager";
 type Props = {
   theme?: string;
   resource?: any;
+  fieldKey?: any;
   phoneNumberFieldKey?: any;
   phoneNumberFieldValue?: any;
   phonePrefixFieldKey?: any;
@@ -34,6 +35,7 @@ type Props = {
 const InputPhoneField = ({
   theme,
   resource,
+  fieldKey,
   phoneNumberFieldKey,
   phoneNumberFieldValue,
   phonePrefixFieldKey,
@@ -121,7 +123,7 @@ const InputPhoneField = ({
           onPress={() => {
             ModalManager.toggleModal('CountryPhoneCodesList', {
               resource: resource,
-              fieldKey: phoneNumberFieldKey,
+              fieldKey: fieldKey,
               parentKey: parentKey,
               rules: rules,
             });
