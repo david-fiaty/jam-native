@@ -220,7 +220,6 @@ const InputPhoneField = ({
     if (compact) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
-        setSelectedCountry(targetCountry);
         return targetCountry;
       }
     }
