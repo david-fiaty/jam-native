@@ -108,10 +108,10 @@ const InputPhoneField = ({
       >
         <TextView size={15}
         >
-          {renderFlag(selectedCountry?.code)}
+          {renderFlag(getSelectedCountry().code)}
         </TextView>
 
-        <TextView>{selectedCountry?.prefix}</TextView>
+        <TextView>{getSelectedCountry()?.prefix}</TextView>
       </BoxView>
     );
 
@@ -145,7 +145,7 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={getCurrentPhonePrefixValue()}
+        value={getSelectedCountry()?.prefix}
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
@@ -209,31 +209,28 @@ const InputPhoneField = ({
     }
   };
 
-  const getCurrentPhonePrefixValue = () => {
-    if (!compact) {
-      return selectedCountry?.code || '';
+  const getSelectedCountry = () => {
+    if (compact) {
+      return {
+        prefix: '+33',
+        code: 'fr',
+      };
     }
-    else {
-      return selectedCountry?.code || '';
-    }
+    
+    
+    return selectedCountry?.code || '';
   };
 
   const getCurrentPhoneNumberValue = () => {
-    if (!compact) {
-      return phoneNumberFieldValue;
+    if (compact) {
+      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+      
+      if (targetCountry) {
+        phoneNumberFieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
+      }
     }
-    else {
-      let targetCountry: any = countryList.find((o: any) => o.prefix == phoneNumberFieldValue);
 
-
-      console.log(targetCountry)
-
-
-      //console.log(phoneNumberFieldValue);
-      //console.log(parsePhoneNumber('+228' + phoneNumberFieldValue))
-
-      return phoneNumberFieldValue;
-    }
+    return phoneNumberFieldValue;
   };
 
   useEffect(() => {
@@ -249,9 +246,6 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
-
-  //console.log('----')
-  //console.log(parsePhoneNumber(phoneNumberFieldValue))
 
   return renderComponent();
 };
