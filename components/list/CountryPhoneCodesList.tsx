@@ -25,15 +25,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules }: Props) 
   const listData: any[] = ContentManager.getCountryPhoneCodes();
 
   const toggleItem = (entityId: number) => {
-    let idArray: any[] = [...selectedIds];
-
-    if (idArray.includes(entityId)) {
-      idArray = idArray.filter((value: number) => value !== entityId);
-    }
-    else {
-      idArray.push(entityId);
-    }
-
+    let idArray: any[] = [entityId];
     setSelectedIds(idArray);
     //FormManager.updateField(resource, fieldKey, idArray, rules, parentKey);
   };
