@@ -241,6 +241,9 @@ const InputPhoneField = ({
     }
   }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
 
+console.log(phoneNumberFieldValue)
+console.log(parsePhoneNumber(phoneNumberFieldValue))
+
   return renderComponent();
 };
 
