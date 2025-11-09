@@ -86,11 +86,11 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    //let targetCountry: any = getSelectedCountry();
-    //console.log(selectedCountry);
-    //console.log(targetCountry);
+    let targetCountry: any = getSelectedCountry();
+    
+    console.log(targetCountry);
 
-    console.log(phoneNumberFieldValue)
+    //console.log(phoneNumberFieldValue)
     return;
 
     if (fieldValue) {
