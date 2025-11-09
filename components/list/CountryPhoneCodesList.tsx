@@ -29,7 +29,9 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     let idArray: any[] = [entityId];
     let targetCountry: any = listData.find((o: any) => o.code == idArray[0]);
 
-    let fieldValue: string = targetCountry.prefix + (value || '').replaceAll(' ', '');
+    let fieldValue: string = targetCountry.prefix;
+
+    console.log(value)
     setSelectedIds(idArray);
 
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
