@@ -244,6 +244,9 @@ const InputPhoneField = ({
     }
   }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
 
+  console.log('----')
+  console.log(parsePhoneNumber('+228'))
+
   return renderComponent();
 };
 
