@@ -9,13 +9,14 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
-import ProfileTypeField from "@/components/field/ProfileTypeField";
 import FormManager from "@/manager/FormManager";
-import BoxView from "@/components/view/BoxView";
 import ProfileFormPersonal from "./profile-form/ProfileFormPersonal";
 import ProfileFormOrganization from "./profile-form/ProfileFormOrganization";
 import ProfileFormVenue from "./profile-form/ProfileFormVenue";
 import ProfileFormAll from "./profile-form/ProfileFormAll";
+import SelectListField from "../field/SelectListField";
+import EntityManager from "@/manager/EntityManager";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   resource?: any;
@@ -124,14 +125,17 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         value={formData?.profile_picture?.url || ''}
       />
 
-      <ProfileTypeField
+      <SelectListField
         resource={resource}
         fieldKey="profile_type"
         rules={['required']}
         value={formData?.profile_type || ''}
         label={i18n.t('Profile type')}
         placeholder={i18n.t('Select a profile type')}
-      //disabled={resource == 'profile'}
+        optionLabelKey="label"
+        optionValueKey="id"
+        data={ContentManager.getProfileTypes()}
+        //disabled={resource == 'profile'}
       />
 
       {/* All profiles */}

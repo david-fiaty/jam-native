@@ -10,8 +10,7 @@ import * as Location from 'expo-location';
 import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import ScreenManager from './ScreenManager';
-import StaticData from '@/constants/StaticData';
-import FormManager from './FormManager';
+import ContentManager from './ContentManager';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -119,7 +118,7 @@ class UserManager {
     let label: any = '';
 
     if (profileType?.length > 0) {
-      label = (StaticData.profileTypes.find((o: any) => o.id === profileType))?.label;
+      label = (ContentManager.getProfileTypes().find((o: any) => o.id === profileType))?.label;
     }
 
     return label?.length > 0 ? label: i18n.t('Unavailable');

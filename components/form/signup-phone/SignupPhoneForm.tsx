@@ -15,8 +15,8 @@ import SectionManager from "@/manager/SectionManager";
 import FormManager from "@/manager/FormManager";
 import SpinnerView from "@/components/view/SpinnerView";
 import ScreenManager from "@/manager/ScreenManager";
-import StaticData from "@/constants/StaticData";
 import InputPhoneField from "@/components/field/InputPhoneField";
+import ContentManager from "@/manager/ContentManager";
 
 const resource: string = 'signup';
 
@@ -25,24 +25,14 @@ const SignupPhoneForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
-
-  const phoneServices: any[] = [
-    {
-      id: 'sms',
-      label: i18n.t('SMS'),
-      default: true,
-    },
-    {
-      id: 'whatsapp',
-      label: i18n.t('Whatsapp'),
-    },
-  ];
+  const countryList: any[] = ContentManager.getCountryPhoneCodes();
+  const phoneServices: any[] = ContentManager.getPhoneServices();
 
   const submitForm = async () => {
     setIsProcessing(true);
     
     let payload: any = {
-      country_code: (StaticData.countryPhoneCodes.find((o: any) => o.code === formData?.country))?.prefix,
+      country_code: (countryList.find((o: any) => o.code === formData?.country))?.prefix,
       phone_without_country_code: formData?.phone,
       phone_service: formData?.phone_service,
     };

@@ -22,6 +22,8 @@ import CollaboratorsField from "../field/CollaboratorsField";
 import FormManager from "@/manager/FormManager";
 import CountriesField from "../field/CountriesField";
 import JamCategoryField from "../field/JamCategoryField";
+import SelectListField from "../field/SelectListField";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   jamId?: any;
@@ -63,7 +65,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   useEffect(() => {
     if (!hasLoadedOnce.current) {
       hasLoadedOnce.current = true;
-    } 
+    }
   }, []);
 
   useEffect(() => {
@@ -144,13 +146,16 @@ const JamForm = ({ jamId, isPublic }: Props) => {
           preview={true}
         />
 
-        <LocationTypeField
+        <SelectListField
           resource={resource}
           fieldKey="location_type"
           rules={['required', 'string']}
           value={formData?.location_type || ''}
           label={i18n.t('Location type')}
           placeholder={i18n.t('Select a location type')}
+          optionLabelKey="name"
+          optionValueKey="id"
+          data={ContentManager.getLocationTypes()}
         />
 
         {['physical', 'online_physical'].includes(formData?.location_type) && (

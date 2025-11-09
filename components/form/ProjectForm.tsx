@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { setFormData } from "@/redux/slices/FormSlice";
 import { Layout } from "@/constants/Layout";
-import TextView from "../view/TextView";
 import EntityManager from "@/manager/EntityManager";
 import BoxView from "../view/BoxView";
 import i18n from "@/translation/i18n";
@@ -15,6 +14,8 @@ import FormManager from "@/manager/FormManager";
 import PrivacyStatusField from "../field/PrivacyStatusField";
 import ButtonView from "../view/ButtonView";
 import SpinnerView from "../view/SpinnerView";
+import SelectListField from "../field/SelectListField";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   projectId?: any;
@@ -117,13 +118,16 @@ const ProjectForm = ({ projectId, isPublic }: Props) => {
           placeholder={i18n.t('Your project description')}
         />
 
-        <PrivacyStatusField
+        <SelectListField
           resource={resource}
           fieldKey="privacy_status"
           rules={['required']}
           value={formData?.privacy_status || ''}
           label={i18n.t("Privacy status")}
           placeholder={i18n.t("Select a privacy status")}
+          optionLabelKey="label"
+          optionValueKey="id"
+          data={ContentManager.getPrivacyStatusTypes()}
         />
 
         <ProjectJamsField
