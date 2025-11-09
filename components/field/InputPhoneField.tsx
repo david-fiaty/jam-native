@@ -223,11 +223,11 @@ const InputPhoneField = ({
       return phoneNumberFieldValue;
     }
     else {
+      console.log(phoneNumberFieldValue);
+      console.log(parsePhoneNumber('+228' + phoneNumberFieldValue))
+      
       return phoneNumberFieldValue;
     }
-
-    //console.log(phoneNumberFieldValue)
-    //console.log(parsePhoneNumber('+228' + phoneNumberFieldValue))
   };
 
   useEffect(() => {
@@ -244,8 +244,8 @@ const InputPhoneField = ({
     }
   }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
 
-  console.log('----')
-  console.log(parsePhoneNumber('+228'))
+  //console.log('----')
+  //console.log(parsePhoneNumber(phoneNumberFieldValue))
 
   return renderComponent();
 };
