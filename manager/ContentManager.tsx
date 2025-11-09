@@ -1,6 +1,31 @@
 import i18n from "@/translation/i18n";
  
 class ContentManager {
+  getJamTypes() {
+    return [
+      {
+        id: 'call',
+        name: i18n.t('Call'),
+        icon: 'megaphone',
+      },
+      {
+        id: 'looking',
+        name: i18n.t('Looking'),
+        icon: 'link',
+      },
+      {
+        id: 'event',
+        name: i18n.t('Event'),
+        icon: 'users',
+      },
+      {
+        id: 'random',
+        name: i18n.t('Random'),
+        icon: 'infinite',
+      },
+    ];
+  }
+
   getLocationTypes() {
     return [
       {
