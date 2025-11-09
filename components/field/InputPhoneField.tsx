@@ -145,7 +145,7 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={selectedCountry?.code || ''}
+        value={getCurrentPhonePrefixValue()}
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
@@ -173,7 +173,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={phoneNumberFieldKey}
           parentKey={parentKey}
-          value={phoneNumberFieldValue}
+          value={getCurrentPhoneNumberValue()}
           rules={[]}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
@@ -208,6 +208,16 @@ const InputPhoneField = ({
       );
     }
   };
+
+  const getCurrentPhonePrefixValue = () => {
+    return selectedCountry?.code || '';
+  };
+
+  const getCurrentPhoneNumberValue = () => {
+    return phoneNumberFieldValue;
+  };
+
+
 
   useEffect(() => {
     if (!isLoaded) {
