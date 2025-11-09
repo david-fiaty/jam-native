@@ -4,6 +4,7 @@ import DataManager from './DataManager';
 import UserManager from './UserManager';
 import i18n from '@/translation/i18n';
 import FormManager from './FormManager';
+import ContentManager from './ContentManager';
 
 class EntityManager {
   async listJams(options?: any, search?: boolean) {
@@ -345,35 +346,10 @@ class EntityManager {
     let label: any = '';
 
     if (jamType?.length > 0) {
-      label = (this.getJamTypes().find((o: any) => o.id === jamType))?.name;
+      label = (ContentManager.getJamTypes().find((o: any) => o.id === jamType))?.name;
     }
 
     return label?.length > 0 ? label : i18n.t('Unavailable');
-  }
-
-  getJamTypes() {
-    return [
-      {
-        id: 'call',
-        name: i18n.t('Call'),
-        icon: 'megaphone',
-      },
-      {
-        id: 'looking',
-        name: i18n.t('Looking'),
-        icon: 'link',
-      },
-      {
-        id: 'event',
-        name: i18n.t('Event'),
-        icon: 'users',
-      },
-      {
-        id: 'random',
-        name: i18n.t('Random'),
-        icon: 'infinite',
-      },
-    ];
   }
 };
 
