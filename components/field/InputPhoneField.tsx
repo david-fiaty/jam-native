@@ -99,6 +99,42 @@ const InputPhoneField = ({
     }
   };
 
+  const renderFlagComponent = () => {
+    let flagComponent: any = (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+      >
+        <TextView size={15}
+        >
+          {renderFlag(selectedCountry?.code)}
+        </TextView>
+
+        <TextView>{selectedCountry?.prefix}</TextView>
+      </BoxView>
+    );
+
+    if (inline === true) {
+      flagComponent = (
+        <TouchableOpacity
+          onPress={() => {
+            ModalManager.toggleModal('CountryPhoneCodesList', {
+              resource: resource,
+              fieldKey: phoneNumberFieldKey,
+              parentKey: parentKey,
+              rules: rules,
+            });
+          }}
+        >
+          {flagComponent}
+        </TouchableOpacity>
+      );
+    }
+
+    return flagComponent;
+  };
+
   const renderSelectList = () => {
     return (
       <SelectListField
@@ -130,24 +166,7 @@ const InputPhoneField = ({
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-
-        <TouchableOpacity
-          onPress={() => {
-            ModalManager.toggleModal('CountryPhoneCodesList', {
-              resource: resource,
-              fieldKey: phoneNumberFieldKey,
-              parentKey: parentKey,
-              rules: rules,
-            });
-          }}
-        >
-          <TextView size={15}
-          >
-            {renderFlag(selectedCountry?.code)}
-          </TextView>
-
-          <TextView>{selectedCountry?.prefix}</TextView>
-        </TouchableOpacity>
+        {renderFlagComponent()}
 
         <InputTextField
           resource={resource}
@@ -169,20 +188,7 @@ const InputPhoneField = ({
       return (
         <>
           {FormManager.renderLabel(inputlabel, rules)}
-
-          <BoxView
-            direction="row"
-            align="center"
-            justify="flex-start"
-          >
-            <View>
-              {renderSelectList()}
-            </View>
-            <View style={{ flexShrink: 1 }}>
-              {renderInputText()}
-            </View>
-          </BoxView>
-
+          {renderInputText()}
           {FormManager.renderError(phoneNumberFieldKey, parentKey)}
         </>
       );
