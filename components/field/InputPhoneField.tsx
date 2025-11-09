@@ -210,14 +210,22 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhonePrefixValue = () => {
-    return selectedCountry?.code || '';
+    if (!compact) {
+      return selectedCountry?.code || '';
+    }
+    else {
+      return selectedCountry?.code || '';
+    }
   };
 
   const getCurrentPhoneNumberValue = () => {
-    return phoneNumberFieldValue;
+    if (!compact) {
+      return phoneNumberFieldValue;
+    }
+    else {
+      return phoneNumberFieldValue;
+    }
   };
-
-
 
   useEffect(() => {
     if (!isLoaded) {
