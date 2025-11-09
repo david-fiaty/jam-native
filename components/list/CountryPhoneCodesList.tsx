@@ -15,9 +15,10 @@ type Props = {
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
+  value?: any;
 };
 
-const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules }: Props) => {
+const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const formData: any = useSelector((state: any) => state.form[resource]);
@@ -26,13 +27,12 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules }: Props) 
 
   const toggleItem = (entityId: number) => {
     let idArray: any[] = [entityId];
+    let targetCountry: any = listData.find((o: any) => o.code == idArray[0]);
+
+    let fieldValue: string = targetCountry.prefix + (value || '').replaceAll(' ', '');
     setSelectedIds(idArray);
 
-    console.log(idArray);
-    let targetCountry: any = listData.find((o: any) => o.code == idArray[0]);
-    console.log(targetCountry);
-
-    //FormManager.updateField(resource, fieldKey, idArray, rules, parentKey);
+    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
