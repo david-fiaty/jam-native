@@ -90,7 +90,7 @@ const InputPhoneField = ({
     //console.log(selectedCountry);
     //console.log(targetCountry);
 
-    //console.log(selectedCountry)
+    console.log(phoneNumberFieldValue)
     return;
 
     if (fieldValue) {
@@ -235,7 +235,7 @@ const InputPhoneField = ({
     if (compact) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
-        phoneNumberFieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
+        return phoneNumberFieldValue.replace(targetCountry.prefix, '');
       }
     }
 
