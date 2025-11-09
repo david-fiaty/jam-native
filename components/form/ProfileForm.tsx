@@ -9,7 +9,6 @@ import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
 import SpinnerView from "@/components/view/SpinnerView";
-import ProfileTypeField from "@/components/field/ProfileTypeField";
 import FormManager from "@/manager/FormManager";
 import BoxView from "@/components/view/BoxView";
 import ProfileFormPersonal from "./profile-form/ProfileFormPersonal";
@@ -136,7 +135,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         optionLabelKey="label"
         optionValueKey="id"
         data={StaticData.profileTypes}
-      //disabled={resource == 'profile'}
+        //disabled={resource == 'profile'}
       />
 
       {/* All profiles */}
