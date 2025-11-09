@@ -124,6 +124,7 @@ const InputPhoneField = ({
               fieldKey: phoneNumberFieldKey,
               parentKey: parentKey,
               rules: rules,
+              value: phoneNumberFieldValue,
             });
           }}
         >
@@ -144,7 +145,7 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={selectedCountry?.code || ''}
+        value={getCurrentPhonePrefixValue()}
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
@@ -172,7 +173,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={phoneNumberFieldKey}
           parentKey={parentKey}
-          value={phoneNumberFieldValue}
+          value={getCurrentPhoneNumberValue()}
           rules={[]}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
@@ -205,6 +206,24 @@ const InputPhoneField = ({
           {FormManager.renderError(phoneNumberFieldKey, parentKey)}
         </>
       );
+    }
+  };
+
+  const getCurrentPhonePrefixValue = () => {
+    if (!compact) {
+      return selectedCountry?.code || '';
+    }
+    else {
+      return selectedCountry?.code || '';
+    }
+  };
+
+  const getCurrentPhoneNumberValue = () => {
+    if (!compact) {
+      return phoneNumberFieldValue;
+    }
+    else {
+      return phoneNumberFieldValue;
     }
   };
 
