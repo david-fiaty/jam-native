@@ -47,17 +47,6 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         compact={true}
       />
 
-      <InputTextField
-        resource={resource}
-        fieldKey="phone_number"
-        rules={['string']}
-        value={formData?.phone_number || ''}
-        label={i18n.t('Phone number')}
-        placeholder={i18n.t('Enter your phone number')}
-        keyboardType="number-pad"
-      />
-      {FormManager.renderError('phone_number')}
-
       <InputTextareaField
         resource={resource}
         fieldKey="profile_description"
