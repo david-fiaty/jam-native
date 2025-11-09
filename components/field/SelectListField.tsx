@@ -20,6 +20,7 @@ type Props = {
   elementStyle?: any;
   optionValueKey?: any;
   optionLabelKey?: any;
+  search?: boolean;
   onChangeValue?: (option: any) => void;
   renderItem?: (item: any, selected: boolean) => JSX.Element;
 };
@@ -39,6 +40,7 @@ const SelectListField = ({
   elementStyle,
   optionValueKey,
   optionLabelKey,
+  search,
   onChangeValue,
   renderItem
 }: Props) => {
@@ -88,10 +90,7 @@ const SelectListField = ({
   };
 
   useEffect(() => {
-    if (!isLoaded) {
-      setListData(buildOptions(data));
-      setIsLoaded(true);
-    }
+    setListData(buildOptions(data));
   }, [isLoaded, data]);
 
   return (
@@ -108,7 +107,7 @@ const SelectListField = ({
           iconStyle={styles.iconStyle}
           itemTextStyle={styles.itemTextStyle}
           containerStyle={containerStyle}
-          search={false}
+          search={search}
           disable={disabled}
           maxHeight={300}
           labelField="label"
