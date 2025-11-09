@@ -110,63 +110,51 @@ const InputPhoneField = ({
 
   const renderSelectList = () => {
     return (
-      <>
-        {FormManager.renderLabel(selectLabel, rules)}
-
-        <SelectListField
-          theme={theme}
-          resource={resource}
-          fieldKey={phonePrefixFieldKey}
-          parentKey={parentKey}
-          rules={[]}
-          placeholder={selectPlaceholder}
-          value={selectedCountry?.code}
-          data={countryOptions}
-          onChangeValue={onChangeCodeValue}
-          disabled={disabled}
-          elementStyle={styles.selectListField}
-          containerStyle={containerStyle}
-          renderItem={renderItem}
-        />
-
-        {FormManager.renderError(phonePrefixFieldKey, parentKey)}
-      </>
+      <SelectListField
+        theme={theme}
+        resource={resource}
+        fieldKey={phonePrefixFieldKey}
+        parentKey={parentKey}
+        rules={[]}
+        placeholder={selectPlaceholder}
+        value={selectedCountry?.code}
+        data={countryOptions}
+        onChangeValue={onChangeCodeValue}
+        disabled={disabled}
+        elementStyle={styles.selectListField}
+        containerStyle={containerStyle}
+        renderItem={renderItem}
+      />
     );
   };
 
   const renderInputText = () => {
     return (
-      <>
-        {FormManager.renderLabel(inputlabel, rules)}
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={[containerStyle, styles.container]}
+        gap={Layout.space.base / 1.6}
+      >
+        <TextView size={15}>
+          {renderFlag(selectedCountry?.code)}
+        </TextView>
 
-        <BoxView
-          direction="row"
-          align="center"
-          justify="flex-start"
-          style={[containerStyle, styles.container]}
-          gap={Layout.space.base / 1.6}
-        >
-          <TextView size={15}>
-            {renderFlag(selectedCountry?.code)}
-          </TextView>
+        <TextView>{selectedCountry?.prefix}</TextView>
 
-          <TextView>{selectedCountry?.prefix}</TextView>
-
-          <InputTextField
-            resource={resource}
-            fieldKey={phoneNumberFieldKey}
-            parentKey={parentKey}
-            value={phoneNumberFieldValue || ''}
-            rules={[]}
-            placeholder={inputPlaceholder}
-            keyboardType="number-pad"
-            onChangeText={onChangePhoneValue}
-            containerStyle={styles.inputTextField}
-          />
-        </BoxView>
-
-        {FormManager.renderError(phoneNumberFieldKey, parentKey)}
-      </>
+        <InputTextField
+          resource={resource}
+          fieldKey={phoneNumberFieldKey}
+          parentKey={parentKey}
+          value={phoneNumberFieldValue || ''}
+          rules={[]}
+          placeholder={inputPlaceholder}
+          keyboardType="number-pad"
+          onChangeText={onChangePhoneValue}
+          containerStyle={styles.inputTextField}
+        />
+      </BoxView>
     );
   };
 
@@ -186,9 +174,13 @@ const InputPhoneField = ({
 
   return (
     <>
+      {FormManager.renderLabel(selectLabel, rules)}
       {renderSelectList()}
+      {FormManager.renderError(phonePrefixFieldKey, parentKey)}
 
+      {FormManager.renderLabel(inputlabel, rules)}
       {renderInputText()}
+      {FormManager.renderError(phoneNumberFieldKey, parentKey)}
     </>
   );
 };
