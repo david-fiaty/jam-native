@@ -1,4 +1,4 @@
-import React, { JSX, useState, useEffect } from "react";
+import React, { JSX, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { Layout } from "@/constants/Layout";
@@ -18,8 +18,6 @@ type Props = {
   disabled?: any;
   containerStyle?: any;
   elementStyle?: any;
-  optionValueKey?: any;
-  optionLabelKey?: any;
   onChangeValue?: (option: any) => void;
   renderItem?: (item: any, selected: boolean) => JSX.Element;
 };
@@ -35,16 +33,13 @@ const SelectListField = ({
   label,
   placeholder,
   disabled,
-  containerStyle,
   elementStyle,
-  optionValueKey,
-  optionLabelKey,
+  containerStyle,
   onChangeValue,
   renderItem
 }: Props) => {
-  const [listData, setListData] = useState<any[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  
+  const [selectedValue, setSelectedValue] = useState<any>(null);
+
   elementStyle = {
     ...styles.element,
     ...(disabled === true ? styles.disabled : {}),
@@ -56,16 +51,11 @@ const SelectListField = ({
     ...(containerStyle || {}),
   };
 
-  const buildOptions = (optionsData: any) => {
-    return [...(optionsData || [])].map((item: any) => {
-      return {
-        value: item?.[optionValueKey],
-        label: item?.[optionLabelKey],
-      }
-    });
-  };
+  if (value && !selectedValue) setSelectedValue(value);
 
   const onChange = (option: any) => {
+    setSelectedValue(option.value);
+
     if (onChangeValue) {
       if (onChangeValue) onChangeValue(option);
     }
@@ -87,21 +77,14 @@ const SelectListField = ({
     }
   };
 
-  useEffect(() => {
-    if (!isLoaded) {
-      setListData(buildOptions(data));
-      setIsLoaded(true);
-    }
-  }, [isLoaded, data]);
-
   return (
     <>
       {FormManager.renderLabel(label, rules)}
 
       <View style={styles.container}>
         <Dropdown
-          value={value}
-          data={listData}
+          value={selectedValue}
+          data={data}
           style={elementStyle}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}

@@ -5,9 +5,9 @@ import TextView from "@/components/view/TextView";
 import JamViewCollapsible from "./JamViewCollapsible";
 import i18n from "@/translation/i18n";
 import DataManager from "@/manager/DataManager";
-import EntityManager from "@/manager/EntityManager";
 import SectorsViewField from "@/components/field/SectorsViewField";
 import SubSectorsViewField from "@/components/field/SubSectorsViewField";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   row?: any;
@@ -55,7 +55,7 @@ const JamViewDetails = ({ row, sectorsData }: Props) => {
       >
         <TextView>
           <TextView style={styles.detailLabel}>{`${i18n.t("Location")} `}</TextView>
-          {EntityManager.getLocationTypes().find(
+          {ContentManager.getLocationTypes().find(
             (o: any) => o.id == row?.location_type
           )?.name || i18n.t("Unavailable")}
         </TextView>
