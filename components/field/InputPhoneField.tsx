@@ -87,7 +87,7 @@ const InputPhoneField = ({
 
   const onChangePhoneValue = (fieldValue: any) => {
     //let targetCountry: any = getSelectedCountry();
-    console.log(fieldValue);
+    console.log(selectedCountry);
     //console.log(targetCountry);
 
     //console.log(selectedCountry)
@@ -247,10 +247,10 @@ const InputPhoneField = ({
       if (!countryOptions?.length) {
         setCountryOptions(getCountryOptions());
       }
-
-      setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
+
+    setSelectedCountry(getSelectedCountry());
   }, [isLoaded, value, countryOptions]);
 
   return renderComponent();
