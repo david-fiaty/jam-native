@@ -108,7 +108,7 @@ const InputPhoneField = ({
       >
         <TextView size={15}
         >
-          {renderFlag(getSelectedCountry().code)}
+          {renderFlag(getSelectedCountry()?.code)}
         </TextView>
 
         <TextView>{getSelectedCountry()?.prefix}</TextView>
