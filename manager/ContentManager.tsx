@@ -1,6 +1,23 @@
 import i18n from "@/translation/i18n";
  
 class ContentManager {
+  getLocationTypes() {
+    return [
+      {
+        id: 'online',
+        name: i18n.t('Online'),
+      },
+      {
+        id: 'physical',
+        name: i18n.t('Physical'),
+      },
+      {
+        id: 'online_physical',
+        name: i18n.t('Online/Physical'),
+      },
+    ];
+  }
+
   getProfileTypes() {
     return [ 
       {

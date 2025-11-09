@@ -1,5 +1,5 @@
-import EntityManager from '@/manager/EntityManager';
 import SelectListField from './SelectListField';
+import ContentManager from '@/manager/ContentManager';
 
 type Props = {
   resource?: any;
@@ -36,7 +36,7 @@ const LocationTypeField = ({
       parentKey={parentKey}
       rules={rules}
       value={value}
-      data={buildOptions(EntityManager.getLocationTypes())}
+      data={buildOptions(ContentManager.getLocationTypes())}
       label={label}
       placeholder={placeholder}
     />
