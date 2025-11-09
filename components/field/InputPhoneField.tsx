@@ -15,7 +15,6 @@ import ModalManager from "@/manager/ModalManager";
 type Props = {
   theme?: string;
   resource?: any;
-  fieldKey?: any;
   phoneNumberFieldKey?: any;
   phoneNumberFieldValue?: any;
   phonePrefixFieldKey?: any;
@@ -35,7 +34,6 @@ type Props = {
 const InputPhoneField = ({
   theme,
   resource,
-  fieldKey,
   phoneNumberFieldKey,
   phoneNumberFieldValue,
   phonePrefixFieldKey,
@@ -95,16 +93,9 @@ const InputPhoneField = ({
         fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
       }
 
-      if (fieldKey) {
-        FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
-          countryCode: selectedCountry.code,
-        });
-      }
-      else if (phoneNumberFieldKey) {
-        FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-          countryCode: selectedCountry.code,
-        });
-      }
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: selectedCountry.code,
+      });
     }
   };
 
@@ -130,7 +121,7 @@ const InputPhoneField = ({
           onPress={() => {
             ModalManager.toggleModal('CountryPhoneCodesList', {
               resource: resource,
-              fieldKey: fieldKey,
+              fieldKey: phoneNumberFieldKey,
               parentKey: parentKey,
               rules: rules,
             });
@@ -181,7 +172,7 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={phoneNumberFieldKey}
           parentKey={parentKey}
-          value={phoneNumberFieldValue || ''}
+          value={phoneNumberFieldValue}
           rules={[]}
           placeholder={inputPlaceholder}
           keyboardType="number-pad"
@@ -198,7 +189,7 @@ const InputPhoneField = ({
         <>
           {FormManager.renderLabel(inputlabel, rules)}
           {renderInputText()}
-          {FormManager.renderError(fieldKey, parentKey)}
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
         </>
       );
     }
