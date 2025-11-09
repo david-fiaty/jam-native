@@ -10,6 +10,7 @@ import TextView from "../view/TextView";
 import InputTextField from "./InputTextField";
 import StaticData from "@/constants/StaticData";
 import SelectListField from "./SelectListField";
+import ContentManager from "@/manager/ContentManager";
 
 type Props = {
   theme?: string;
@@ -49,7 +50,8 @@ const InputPhoneField = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
-  const defaultCountry: any = StaticData.countryPhoneCodes.find((o: any) => o.code == 'tg');
+  const countryList: any[] = ContentManager.getCountryPhoneCodes();
+  const defaultCountry: any = countryList.find((o: any) => o.code == 'tg');
 
   containerStyle = {
     ...(containerStyle || {}),
@@ -57,7 +59,7 @@ const InputPhoneField = ({
   };
 
   const getCountryOptions = () => {
-    let countries: any[] = StaticData.countryPhoneCodes;
+    let countries: any[] = [...countryList];
 
     if (Config.allowedCountries.phone.length > 0) {
       countries = countries.filter((o: any) => {
