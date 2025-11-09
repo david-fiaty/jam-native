@@ -176,7 +176,7 @@ const InputPhoneField = ({
           value={getCurrentPhoneNumberValue()}
           rules={[]}
           placeholder={inputPlaceholder}
-          keyboardType="number-pad"
+          //keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
           containerStyle={styles.inputTextField}
         />
@@ -223,9 +223,15 @@ const InputPhoneField = ({
       return phoneNumberFieldValue;
     }
     else {
-      console.log(phoneNumberFieldValue);
-      console.log(parsePhoneNumber('+228' + phoneNumberFieldValue))
-      
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phoneNumberFieldValue);
+
+
+      console.log(targetCountry)
+
+
+      //console.log(phoneNumberFieldValue);
+      //console.log(parsePhoneNumber('+228' + phoneNumberFieldValue))
+
       return phoneNumberFieldValue;
     }
   };
