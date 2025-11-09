@@ -42,7 +42,6 @@ const SelectListField = ({
   onChangeValue,
   renderItem
 }: Props) => {
-  const [selectedValue, setSelectedValue] = useState<any>(null);
   const [listData, setListData] = useState<any[]>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   
@@ -57,8 +56,6 @@ const SelectListField = ({
     ...(containerStyle || {}),
   };
 
-  if (value && !selectedValue) setSelectedValue(value);
-
   const buildOptions = (optionsData: any) => {
     return [...(optionsData || [])].map((item: any) => {
       return {
@@ -69,8 +66,6 @@ const SelectListField = ({
   };
 
   const onChange = (option: any) => {
-    setSelectedValue(option.value);
-
     if (onChangeValue) {
       if (onChangeValue) onChangeValue(option);
     }
@@ -105,8 +100,8 @@ const SelectListField = ({
 
       <View style={styles.container}>
         <Dropdown
-          value={selectedValue}
-          data={data}
+          value={value}
+          data={listData}
           style={elementStyle}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
