@@ -86,15 +86,22 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
+    //let targetCountry: any = getSelectedCountry();
+    console.log(fieldValue);
+    //console.log(targetCountry);
+
+    //console.log(selectedCountry)
+    return;
+
     if (fieldValue) {
-      let parsedNumber: any = parsePhoneNumber(fieldValue, selectedCountry.code.toUpperCase());
+      let parsedNumber: any = parsePhoneNumber(fieldValue, targetCountry.code.toUpperCase());
       if (parsedNumber && parsedNumber.isValid()) {
-        fieldValue = new AsYouType().input(selectedCountry.prefix + fieldValue);
-        fieldValue = fieldValue.replace(`${selectedCountry.prefix} `, '');
+        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
+        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
       }
 
       FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-        countryCode: selectedCountry.code,
+        countryCode: targetCountry.code,
       });
     }
   };
@@ -108,10 +115,10 @@ const InputPhoneField = ({
       >
         <TextView size={15}
         >
-          {renderFlag(selectedCountry?.code)}
+          {renderFlag(getSelectedCountry()?.code)}
         </TextView>
 
-        <TextView>{selectedCountry?.prefix}</TextView>
+        <TextView>{getSelectedCountry()?.prefix}</TextView>
       </BoxView>
     );
 
@@ -145,7 +152,7 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={getCurrentPhonePrefixValue()}
+        value={getSelectedCountry()?.prefix}
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
@@ -176,7 +183,7 @@ const InputPhoneField = ({
           value={getCurrentPhoneNumberValue()}
           rules={[]}
           placeholder={inputPlaceholder}
-          keyboardType="number-pad"
+          //keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
           containerStyle={styles.inputTextField}
         />
@@ -209,22 +216,30 @@ const InputPhoneField = ({
     }
   };
 
-  const getCurrentPhonePrefixValue = () => {
-    if (!compact) {
-      return selectedCountry?.code || '';
+  const getSelectedCountry = () => {
+    if (compact) {
+      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+      if (targetCountry) {
+        return targetCountry;
+      }
+    }
+    else if (selectedCountry) {
+      return selectedCountry;
     }
     else {
-      return selectedCountry?.code || '';
+      return defaultCountry;
     }
   };
 
   const getCurrentPhoneNumberValue = () => {
-    if (!compact) {
-      return phoneNumberFieldValue;
+    if (compact) {
+      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+      if (targetCountry) {
+        phoneNumberFieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
+      }
     }
-    else {
-      return phoneNumberFieldValue;
-    }
+
+    return phoneNumberFieldValue;
   };
 
   useEffect(() => {
@@ -233,13 +248,10 @@ const InputPhoneField = ({
         setCountryOptions(getCountryOptions());
       }
 
-      if (!selectedCountry) {
-        setSelectedCountry(defaultCountry);
-      }
-
+      setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
-  }, [isLoaded, value, selectedCountry, defaultCountry, countryOptions]);
+  }, [isLoaded, value, countryOptions]);
 
   return renderComponent();
 };
