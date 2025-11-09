@@ -1,6 +1,19 @@
 import i18n from "@/translation/i18n";
 
 class ContentManager {
+  getPrivacyStatusTypes() {
+    return [ 
+      {
+        id: 'private',
+        label: i18n.t('Private'),
+      },
+      {
+        id: 'public',
+        label: i18n.t('Public'),
+      },
+    ];
+  }
+
   getExperienceLevels() {
     return [
       {
@@ -11,7 +24,7 @@ class ContentManager {
         id: 'less_than_1_year',
         label: i18n.t('Less than 1 year'),
       },
-    ]; 
+    ];
   }
 
   getJamTypes() {
