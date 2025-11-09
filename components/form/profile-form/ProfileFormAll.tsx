@@ -41,9 +41,9 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
 
       <InputPhoneField
         resource={resource}
-        fieldKey="phone_number"
+        phoneNumberFieldKey="phone_number"
+        phoneNumberFieldValue={formData?.phone_number || ''}
         rules={['phone']}
-        value={formData?.phone_number || ''}
         inputlabel={i18n.t('Phone number')}
         inputPlaceholder={i18n.t('Enter your phone number')}
         theme="white"
