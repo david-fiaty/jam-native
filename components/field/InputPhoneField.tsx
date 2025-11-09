@@ -210,24 +210,20 @@ const InputPhoneField = ({
   };
 
   const getSelectedCountry = () => {
-
-    console.log(phoneNumberFieldValue);
-    
     if (compact) {
-      return {
-        prefix: '+33',
-        code: 'fr',
-      };
+      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+      if (targetCountry) {
+        return targetCountry;
+      }
     }
-    
-    
-    return selectedCountry?.code || '';
+    else {
+      return selectedCountry?.code || '';
+    }
   };
 
   const getCurrentPhoneNumberValue = () => {
     if (compact) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
-      
       if (targetCountry) {
         phoneNumberFieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
       }
