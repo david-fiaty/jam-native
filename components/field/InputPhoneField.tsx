@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
   inputTextField: {
     backgroundColor: 'transparent',
     borderWidth: 0,
-    paddingLeft: Layout.space.base / 2,
+    paddingLeft: Layout.space.base / 3,
   },
   listItem: {
     paddingVertical: Layout.space.base,
