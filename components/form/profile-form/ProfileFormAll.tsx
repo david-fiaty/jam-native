@@ -6,6 +6,7 @@ import InputTextareaField from "@/components/field/InputTextareaField";
 import InputPasswordField from "@/components/field/InputPasswordField";
 import ProfileGroupNetworks from "./groups/ProfileGroupNetworks";
 import ProfileGroupAddress from "./groups/ProfileGroupAddress";
+import InputPhoneField from "@/components/field/InputPhoneField";
 
 type Props = {
   resource: any;
@@ -13,6 +14,9 @@ type Props = {
 };
 
 const ProfileFormAll = ({ resource, formData }: Props) => {
+
+  console.log(formData?.phone_number)
+
   return (
     <>
       <InputTextField
@@ -35,16 +39,15 @@ const ProfileFormAll = ({ resource, formData }: Props) => {
         trim={true}
       />
 
-      <InputTextField
+      <InputPhoneField
         resource={resource}
-        fieldKey="phone_number"
-        rules={['string']}
-        value={formData?.phone_number || ''}
-        label={i18n.t('Phone number')}
-        placeholder={i18n.t('Enter your phone number')}
-        keyboardType="number-pad"
+        phoneNumberFieldKey="phone_number"
+        phoneNumberFieldValue={formData?.phone_number || ''}
+        rules={['phone']}
+        inputlabel={i18n.t('Phone number')}
+        inputPlaceholder={i18n.t('Enter your phone number')}
+        compact={true}
       />
-      {FormManager.renderError('phone_number')}
 
       <InputTextareaField
         resource={resource}
