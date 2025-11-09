@@ -4,6 +4,7 @@ import DataManager from './DataManager';
 import UserManager from './UserManager';
 import i18n from '@/translation/i18n';
 import FormManager from './FormManager';
+import ContentManager from './ContentManager';
 
 class EntityManager {
   async listJams(options?: any, search?: boolean) {
@@ -42,7 +43,7 @@ class EntityManager {
       profile_id: profileId,
       page_size: Config.paginationSize,
       page: 1,
-    }; 
+    };
 
     return await DataManager.get('listProjects', { ...defaults, ...options }, variables, search);
   }
@@ -193,8 +194,8 @@ class EntityManager {
   async addJam(data: any) {
     let payload: any = FormManager.objectToFormData(data);
     let response: any = await DataManager.post('addJam', payload);
-    let success: boolean = false;  
- 
+    let success: boolean = false;
+
     if (response?.id > 0) {
       UserManager.updateProfileReference('profile_jams', response.id);
       success = true;
@@ -213,7 +214,7 @@ class EntityManager {
     if (response?.id > 0) {
       UserManager.updateProfileReference('profile_projects', response.id);
       success = true;
-    } 
+    }
 
     return {
       success: success,
@@ -334,63 +335,21 @@ class EntityManager {
   getJamOwnerName(item: any) {
     let ownerName: string = item?.profile?.profile_name;
 
-    if (ownerName?.length > Config.maxUserNameLength) {  
+    if (ownerName?.length > Config.maxUserNameLength) {
       ownerName = ownerName.substring(0, Config.maxUserNameLength) + '...';
-    } 
+    }
 
     return ownerName;
   }
 
   getJamTypeLabel(jamType: string) {
-    let label: any = '';
+    let label: any = ''; 
 
     if (jamType?.length > 0) {
-      label = (this.getJamTypes().find((o: any) => o.id === jamType))?.name;
+      label = (ContentManager.getJamTypes().find((o: any) => o.id === jamType))?.name;
     }
 
-    return label?.length > 0 ? label: i18n.t('Unavailable');
-  }
-
-  getJamTypes() {
-    return [
-      {
-        id: 'call',
-        name: i18n.t('Call'),
-        icon: 'megaphone',
-      },
-      {
-        id: 'looking',
-        name: i18n.t('Looking'),
-        icon: 'link',
-      },
-      {
-        id: 'event',
-        name: i18n.t('Event'),
-        icon: 'users',
-      },
-      {
-        id: 'random',
-        name: i18n.t('Random'),
-        icon: 'infinite',
-      },
-    ];
-  }
-
-  getLocationTypes() {
-    return [
-      {
-        id: 'online',
-        name: i18n.t('Online'),
-      },
-      {
-        id: 'physical',
-        name: i18n.t('Physical'),
-      },
-      {
-        id: 'online_physical',
-        name: i18n.t('Online/Physical'),
-      },
-    ];
+    return label?.length > 0 ? label : i18n.t('Unavailable');
   }
 };
 

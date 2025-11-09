@@ -6,7 +6,7 @@ import InputTextField from './InputTextField';
 import FormManager from '@/manager/FormManager';
 import ModalManager from '@/manager/ModalManager';
 import BoxView from '../view/BoxView';
-import StaticData from '@/constants/StaticData';
+import ContentManager from '@/manager/ContentManager';
 
 type Props = {
   resource: string;
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const WeekDaysField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder }: Props) => {
-  const listData: any[] = StaticData.weekDays;
+  const listData: any[] = ContentManager.getWeekDays();
 
   const onPress = () => {
     ModalManager.toggleModal('WeekDaysList', {
