@@ -210,6 +210,9 @@ const InputPhoneField = ({
   };
 
   const getSelectedCountry = () => {
+
+    console.log(phoneNumberFieldValue);
+    
     if (compact) {
       return {
         prefix: '+33',
