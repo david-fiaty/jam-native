@@ -191,7 +191,7 @@ const InputPhoneField = ({
         <>
           {FormManager.renderLabel(inputlabel, rules)}
           {renderInputText()}
-          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+          {FormManager.renderError(fieldKey, parentKey)}
         </>
       );
     }
