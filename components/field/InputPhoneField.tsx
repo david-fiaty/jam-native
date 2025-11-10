@@ -95,20 +95,6 @@ const InputPhoneField = ({
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
-    
-    /*
-    if (fieldValue) {
-      let parsedNumber: any = parsePhoneNumber(fieldValue, targetCountry.code.toUpperCase());
-      if (parsedNumber && parsedNumber.isValid()) {
-        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
-        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
-      }
-
-      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-        countryCode: targetCountry.code,
-      });
-    }
-      */
   };
 
   const renderFlagComponent = () => {
