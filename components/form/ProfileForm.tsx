@@ -115,8 +115,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(formData?.phone_number)
-
   return (
     <View style={Layout.formContainer}>
       <ProfileImageField
