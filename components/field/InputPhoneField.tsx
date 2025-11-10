@@ -88,11 +88,8 @@ const InputPhoneField = ({
   const onChangePhoneValue = (fieldValue: any) => {
     let targetCountry: any = getSelectedCountry();
     
-    console.log(targetCountry);
-
-    //console.log(phoneNumberFieldValue)
-    return;
-
+    //fieldValue = targetCountry.prefix + (fieldValue || '');
+    
     if (fieldValue) {
       let parsedNumber: any = parsePhoneNumber(fieldValue, targetCountry.code.toUpperCase());
       if (parsedNumber && parsedNumber.isValid()) {
@@ -217,7 +214,7 @@ const InputPhoneField = ({
   };
 
   const getSelectedCountry = () => {
-    if (compact) {
+    if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
         return targetCountry;
