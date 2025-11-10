@@ -11,6 +11,7 @@ import InputTextField from "./InputTextField";
 import SelectListField from "./SelectListField";
 import ContentManager from "@/manager/ContentManager";
 import ModalManager from "@/manager/ModalManager";
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   theme?: string;
@@ -171,10 +172,10 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={phoneNumberFieldKey}
           parentKey={parentKey}
-          value={getCurrentPhoneNumberValue()}
+          value={getCurrentPhoneNumber()}
           rules={[]}
           placeholder={inputPlaceholder}
-          //keyboardType="number-pad"
+          keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
           containerStyle={styles.inputTextField}
         />
@@ -222,7 +223,7 @@ const InputPhoneField = ({
     }
   };
 
-  const getCurrentPhoneNumberValue = () => {
+  const getCurrentPhoneNumber = () => {
     if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
@@ -242,6 +243,13 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, value, countryOptions]);
+
+    useEffect(() => {
+      (async () => {
+        await UserManager.getLocationCountry();
+      })();
+    }, []);
+  
 
   return renderComponent();
 };
