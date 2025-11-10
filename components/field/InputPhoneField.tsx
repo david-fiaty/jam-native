@@ -52,13 +52,24 @@ const InputPhoneField = ({
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
+  const [defaultCountry, setDefaultCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const countryList: any[] = ContentManager.getCountryPhoneCodes();
-  const defaultCountry: any = countryList.find((o: any) => o.code == 'tg');
 
   containerStyle = {
     ...(containerStyle || {}),
     ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+  };
+
+  const getDefaultCountry = async () => {
+    let code: string = Config.defaultCountry;
+    let locationAddress: any = await UserManager.getLocationAddress();
+
+    if (locationAddress && locationAddress?.isoCountryCode) {
+      code = locationAddress.isoCountryCode.toLowerCase();
+    }
+
+    return countryList.find((o: any) => o.code == code);
   };
 
   const getCountryOptions = () => {
@@ -235,21 +246,17 @@ const InputPhoneField = ({
   };
 
   useEffect(() => {
+    (async () => {
+      setDefaultCountry(await getDefaultCountry());
+    })();
+    
     if (!isLoaded) {
-      if (!countryOptions?.length) {
-        setCountryOptions(getCountryOptions());
-        setSelectedCountry(getSelectedCountry());
-      }
+      setCountryOptions(getCountryOptions());
+      setDefaultCountry(getDefaultCountry());
+      setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
   }, [isLoaded, value, countryOptions]);
-
-  useEffect(() => {
-    (async () => {
-      console.log(await UserManager.getLocationAddress());
-    })();
-  }, []);
-
 
   return renderComponent();
 };
