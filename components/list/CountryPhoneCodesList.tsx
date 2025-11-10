@@ -28,10 +28,21 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const toggleItem = (entityId: number) => {
     let idArray: any[] = [entityId];
     let targetCountry: any = listData.find((o: any) => o.code == idArray[0]);
-    let fieldValue: string = targetCountry.prefix + (value || '');
+    let fieldValue: string = targetCountry.prefix + removePrefix(value);
 
     setSelectedIds(idArray);
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
+  };
+
+  const removePrefix = (fieldValue: any) => {  
+    if (fieldValue) {
+      let prefixList: any [] = listData.map((o: any) => o.prefix);
+      let foundPrefix: any = prefixList.find((prefix: any) => fieldValue.startsWith(prefix));
+      
+      return fieldValue.replace(foundPrefix, '');
+    }
+
+    return '';
   };
 
   const renderItem = (row: any) => {
