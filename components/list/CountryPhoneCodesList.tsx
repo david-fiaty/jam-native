@@ -27,18 +27,18 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let fieldValue: string = targetCountry.prefix + removeAnyPrefix(value);
+    let fieldValue: string = targetCountry.prefix + extractNumber(value);
 
     setSelectedIds([entityId]);
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
-  const removeAnyPrefix = (fieldValue: any) => {  
+  const extractNumber = (fieldValue: any) => {  
     if (fieldValue) {
       let prefixList: any [] = listData.map((o: any) => o.prefix);
       let foundPrefix: any = prefixList.find((prefix: any) => fieldValue.startsWith(prefix));
       
-      return fieldValue.replace(foundPrefix, '');
+      return fieldValue.replace(foundPrefix, '').replaceAll(' ', '');
     }
 
     return '';
