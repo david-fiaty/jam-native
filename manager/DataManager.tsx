@@ -2,6 +2,7 @@ import { Config } from '@/constants/Config';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 import moment from "moment";
+import ContentManager from './ContentManager';
 
 class DataManager {
   async get(key: any, options?: any, variables?: any, search?: boolean) {
@@ -169,6 +170,21 @@ class DataManager {
 
     return clone;
   }
+  
+  isPhoneNumberPrefix = (value: string) => {
+    return ContentManager.getCountryPhoneCodes().some((o: any) => value == o.prefix);
+  }
+
+  extractPhoneNumber = (value: any) => {
+    if (value) {
+      let prefixList: any[] = ContentManager.getCountryPhoneCodes().map((o: any) => o.prefix);
+      let foundPrefix: any = prefixList.find((prefix: any) => value.startsWith(prefix));
+
+      return value.replace(foundPrefix, '').replaceAll(' ', '');
+    }
+
+    return '';
+  };
 };
 
 export default (new DataManager());
