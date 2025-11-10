@@ -118,7 +118,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   console.log(formData?.phone_number)
 
   return (
-    <View style={[Layout.formContainer]}>
+    <View style={Layout.formContainer}>
       <ProfileImageField
         resource={resource}
         fieldKey="upload_profile_picture"
