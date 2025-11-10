@@ -86,13 +86,10 @@ const InputPhoneField = ({
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
-    //let targetCountry: any = getSelectedCountry();
-    console.log(fieldValue);
-    //console.log(targetCountry);
-
-    //console.log(selectedCountry)
-    return;
-
+    let targetCountry: any = getSelectedCountry();
+    
+    //fieldValue = targetCountry.prefix + (fieldValue || '');
+    
     if (fieldValue) {
       let parsedNumber: any = parsePhoneNumber(fieldValue, targetCountry.code.toUpperCase());
       if (parsedNumber && parsedNumber.isValid()) {
@@ -217,7 +214,7 @@ const InputPhoneField = ({
   };
 
   const getSelectedCountry = () => {
-    if (compact) {
+    if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
         return targetCountry;
@@ -235,7 +232,7 @@ const InputPhoneField = ({
     if (compact) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
-        phoneNumberFieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
+        return phoneNumberFieldValue.replace(targetCountry.prefix, '');
       }
     }
 
@@ -246,9 +243,8 @@ const InputPhoneField = ({
     if (!isLoaded) {
       if (!countryOptions?.length) {
         setCountryOptions(getCountryOptions());
+        setSelectedCountry(getSelectedCountry());
       }
-
-      setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
   }, [isLoaded, value, countryOptions]);
