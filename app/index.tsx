@@ -6,7 +6,7 @@ import { setCurrentLanguage } from '@/redux/slices/UserSlice';
 import { Config } from '@/constants/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18next from 'i18next';
-import ScreenManager from '@/manager/ScreenManager'; 
+import ScreenManager from '@/manager/ScreenManager';
 import EntityManager from '@/manager/EntityManager';
 
 export default () => {
@@ -28,7 +28,7 @@ export default () => {
   useEffect(() => {
     (async () => {
       await setLanguage();
-  
+
       const [sectors, countries, professions, venueTypes, organizationTypes, culturalActivityTypes] = await Promise.all([
         EntityManager.getSectors(),
         EntityManager.getCountries(),
@@ -49,14 +49,14 @@ export default () => {
   }, []);
 
   useEffect(() => {
-    if (!rootNavigationState?.key) return; 
+    if (!rootNavigationState?.key) return;
     if (!appReady) return;
     if (hasRedirected.current) return;
 
     hasRedirected.current = true;
 
     setTimeout(() => {
-      router.replace(Config.defaultRoute); 
+      router.replace(Config.defaultRoute);
     }, 0);
   }, [rootNavigationState, appReady]);
 }
