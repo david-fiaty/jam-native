@@ -11,6 +11,7 @@ import InputTextField from "./InputTextField";
 import SelectListField from "./SelectListField";
 import ContentManager from "@/manager/ContentManager";
 import ModalManager from "@/manager/ModalManager";
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   theme?: string;
@@ -242,6 +243,13 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, value, countryOptions]);
+
+    useEffect(() => {
+      (async () => {
+        await UserManager.getLocationCountry();
+      })();
+    }, []);
+  
 
   return renderComponent();
 };
