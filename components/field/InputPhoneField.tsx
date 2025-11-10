@@ -244,12 +244,12 @@ const InputPhoneField = ({
     }
   }, [isLoaded, value, countryOptions]);
 
-    useEffect(() => {
-      (async () => {
-        await UserManager.getLocationCountry();
-      })();
-    }, []);
-  
+  useEffect(() => {
+    (async () => {
+      console.log(await UserManager.getLocationAddress());
+    })();
+  }, []);
+
 
   return renderComponent();
 };
