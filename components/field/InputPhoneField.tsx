@@ -11,6 +11,7 @@ import InputTextField from "./InputTextField";
 import SelectListField from "./SelectListField";
 import ContentManager from "@/manager/ContentManager";
 import ModalManager from "@/manager/ModalManager";
+import UserManager from "@/manager/UserManager";
 
 type Props = {
   theme?: string;
@@ -51,13 +52,24 @@ const InputPhoneField = ({
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
+  const [defaultCountry, setDefaultCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const countryList: any[] = ContentManager.getCountryPhoneCodes();
-  const defaultCountry: any = countryList.find((o: any) => o.code == 'tg');
 
   containerStyle = {
     ...(containerStyle || {}),
     ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+  };
+
+  const getDefaultCountry = async () => {
+    let code: string = Config.defaultCountry;
+    let locationAddress: any = await UserManager.getLocationAddress();
+
+    if (locationAddress && locationAddress?.isoCountryCode) {
+      code = locationAddress.isoCountryCode.toLowerCase();
+    }
+
+    return countryList.find((o: any) => o.code == code);
   };
 
   const getCountryOptions = () => {
@@ -143,7 +155,7 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={getSelectedCountry()?.prefix}
+        value={getSelectedCountry()?.code}
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
@@ -171,10 +183,10 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={phoneNumberFieldKey}
           parentKey={parentKey}
-          value={getCurrentPhoneNumberValue()}
+          value={getCurrentPhoneNumber()}
           rules={[]}
           placeholder={inputPlaceholder}
-          //keyboardType="number-pad"
+          keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
           containerStyle={styles.inputTextField}
         />
@@ -222,7 +234,7 @@ const InputPhoneField = ({
     }
   };
 
-  const getCurrentPhoneNumberValue = () => {
+  const getCurrentPhoneNumber = () => {
     if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
@@ -234,11 +246,14 @@ const InputPhoneField = ({
   };
 
   useEffect(() => {
+    (async () => {
+      setDefaultCountry(await getDefaultCountry());
+    })();
+
     if (!isLoaded) {
-      if (!countryOptions?.length) {
-        setCountryOptions(getCountryOptions());
-        setSelectedCountry(getSelectedCountry());
-      }
+      setCountryOptions(getCountryOptions());
+      setDefaultCountry(getDefaultCountry());
+      setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
   }, [isLoaded, value, countryOptions]);

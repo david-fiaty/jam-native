@@ -62,7 +62,7 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
     })();
   }, [isLoaded]);
 
-  if (!isLoaded || !currentLocation?.latitude || !currentLocation?.longitude) return <SpinnerView />;
+  if (!isLoaded || !currentLocation?.coords?.latitude || !currentLocation?.coords?.longitude) return <SpinnerView />;
   
   return (
     <BoxView 

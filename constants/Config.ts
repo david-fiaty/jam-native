@@ -20,8 +20,9 @@ export const Config: any = {
   notificationUpdateInterval: 10000,
   messageDisplayDuration: 3500,
   searchDebounceDuration: 1000,
+  defaultCountry: 'tg',
   allowedCountries: {
-    phone: [],
+    phone: [], 
     jam: ['bj', 'bf', 'gh', 'ci', 'ke', 'ng', 'sn', 'tg'], 
   },
   defaultLocation: {
