@@ -128,7 +128,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       direction="column" 
       align="flex-start" 
       justify="flex-start" 
-      style={Layout.screenContent}
+      style={Layout.formContainer}
     >
       <InputTextField
         value={searchValue}
