@@ -9,6 +9,8 @@ import TextView from '../view/TextView';
 import IconView from '../view/IconView';
 import FormManager from '@/manager/FormManager';
 import ContentManager from '@/manager/ContentManager';
+import InputTextField from '../field/InputTextField';
+import i18n from '@/translation/i18n';
 
 type Props = {
   resource: string;
@@ -21,24 +23,64 @@ type Props = {
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [isSearching, setIsSearching] = useState<boolean>(false);
+  const [listData, setListData] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const appState: any = useSelector((state: any) => state.app, shallowEqual);
-  const listData: any[] = ContentManager.getCountryPhoneCodes();
+  const countryList: any = ContentManager.getCountryPhoneCodes(); 
+
+  const getListData = (filterValue?: string) => {
+    if (filterValue) {
+      return countryList.filter((o: any) => o.name.toLowerCase().startsWith(filterValue.toLowerCase()));
+    }
+
+    return countryList;
+  }
+
+  const clearSearch = async () => {
+    setIsSearching(true);
+    setIsSearching(false);
+    setSearchValue('');
+    setListData(getListData());
+  };
+
+  const onChangeSearch = (text: string) => {
+    setSearchValue(text);
+    setListData(getListData(text));
+  };
+
+  const renderSearchIcon = () => {
+    if (!isSearching && searchValue) {
+      return (
+        <IconView
+          name="delete"
+          theme="clear"
+          onPress={clearSearch}
+        />
+      );
+    }
+    else if (isSearching) {
+      return <SpinnerView size="small" />;
+    }
+
+    return <></>;
+  };
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let fieldValue: string = targetCountry.prefix + removeAnyPrefix(value);
+    let fieldValue: string = targetCountry.prefix + extractNumber(value);
 
     setSelectedIds([entityId]);
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
-  const removeAnyPrefix = (fieldValue: any) => {  
+  const extractNumber = (fieldValue: any) => {
     if (fieldValue) {
-      let prefixList: any [] = listData.map((o: any) => o.prefix);
+      let prefixList: any[] = listData.map((o: any) => o.prefix);
       let foundPrefix: any = prefixList.find((prefix: any) => fieldValue.startsWith(prefix));
-      
-      return fieldValue.replace(foundPrefix, '');
+
+      return fieldValue.replace(foundPrefix, '').replaceAll(' ', '');
     }
 
     return '';
@@ -74,6 +116,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   useEffect(() => {
     if (!isLoaded) {
       setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
+      setListData(getListData());
       setIsLoaded(true);
     }
   }, [formData, fieldKey, parentKey, selectedIds, appState]);
@@ -81,7 +124,19 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
+    <BoxView 
+      direction="column" 
+      align="flex-start" 
+      justify="flex-start" 
+      style={Layout.screenContent}
+    >
+      <InputTextField
+        value={searchValue}
+        placeholder={i18n.t('Search...')}
+        onChangeText={onChangeSearch}
+        rightIcon={renderSearchIcon()}
+      />
+
       <View style={Layout.borderedListContainer}>
         {listData?.length > 0 &&
           <ListView
