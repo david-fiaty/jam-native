@@ -30,6 +30,7 @@ type Props = {
   disabled?: boolean;
   compact?: boolean;
   containerStyle?: any;
+  formatPhoneNumber?: boolean;
 };
 
 const InputPhoneField = ({
@@ -49,12 +50,15 @@ const InputPhoneField = ({
   disabled,
   compact,
   containerStyle,
+  formatPhoneNumber,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [defaultCountry, setDefaultCountry] = useState<any>(null);
   const [countryOptions, setCountryOptions] = useState<any[]>([]);
   const countryList: any[] = ContentManager.getCountryPhoneCodes();
+
+  formatPhoneNumber = formatPhoneNumber === false ? false : true;
 
   containerStyle = {
     ...(containerStyle || {}),
@@ -101,7 +105,7 @@ const InputPhoneField = ({
     let targetCountry: any = getSelectedCountry();
 
     if (targetCountry) {
-      fieldValue = targetCountry.prefix + (fieldValue || '');
+      fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
     }
 
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
@@ -238,7 +242,12 @@ const InputPhoneField = ({
     if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
-        return phoneNumberFieldValue.replace(targetCountry.prefix, '');
+        if (formatPhoneNumber) {
+          return (new AsYouType().input(phoneNumberFieldValue)).replace(`${targetCountry.prefix} `, '');
+        }
+        else {
+          return phoneNumberFieldValue.replace(targetCountry.prefix, '');
+        }
       }
     }
 
