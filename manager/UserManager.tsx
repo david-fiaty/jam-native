@@ -232,7 +232,7 @@ class UserManager {
     let geocode: any = await Location.reverseGeocodeAsync(location.coords);
 
     if (geocode.length > 0) {
-      return geocode;
+      return geocode[0]; 
     }
 
     return null;
