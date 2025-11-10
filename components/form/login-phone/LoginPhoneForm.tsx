@@ -77,6 +77,7 @@ const LoginPhoneForm = () => {
         inputPlaceholder={i18n.t('Enter your phone number')}
         selectPlaceholder={i18n.t('Select your country')}
         theme="white"
+        formatPhoneNumber={true}
       />
 
       <InputPasswordField
