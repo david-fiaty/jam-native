@@ -74,11 +74,11 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let variables: any = { '[profile_id]': profileId };
     let success: boolean = false;
-     
+
     //let payload: any = FormManager.objectToFormData({ ...defaults, ...data }); 
     let payload: any = { ...defaults, ...data };
     let response: any = await DataManager.put('updateProfile', payload, variables);
- 
+
     if (response?.id > 0) success = true;
 
     return {
@@ -121,7 +121,7 @@ class UserManager {
       label = (ContentManager.getProfileTypes().find((o: any) => o.id === profileType))?.label;
     }
 
-    return label?.length > 0 ? label: i18n.t('Unavailable');
+    return label?.length > 0 ? label : i18n.t('Unavailable');
   }
 
   getProfileDisplayName(item: any) {
@@ -144,15 +144,15 @@ class UserManager {
     options = options || {};
     let profileData: any = {};
     let localProfileData: any = null;
-    
+
     if (params?.profile_id > 0) {
       let variables: any = { '[profile_id]': params.profile_id };
       let defaults: any = {};
       profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
     else {
-      let userState: any = Store.getState().user; 
-      profileData = {...userState.profileData};
+      let userState: any = Store.getState().user;
+      profileData = { ...userState.profileData };
     }
 
     if (ScreenManager.isWeb()) {
@@ -232,6 +232,22 @@ class UserManager {
     return location;
   }
 
+  async getLocationCountry() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Permission to access location was denied');
+      return;
+    }
+
+    let location = await Location.getCurrentPositionAsync({});
+    const geocode = await Location.reverseGeocodeAsync(location.coords);
+
+    if (geocode.length > 0) {
+      console.log('Country:', geocode[0].country);
+      console.log('Country Code:', geocode[0].isoCountryCode);
+    }
+  } 
+
   async likeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
     let success: boolean = false;
@@ -277,7 +293,7 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
-      
+
       this.updateProfileReference('liked_jams', entityId);
     }
 
@@ -343,8 +359,8 @@ class UserManager {
   }
 
   updateProfileReference(key: string, value: any) {
-    let profileData: any = {...Store.getState().user.profileData};
-    let array: any [] = profileData?.[key] || [];
+    let profileData: any = { ...Store.getState().user.profileData };
+    let array: any[] = profileData?.[key] || [];
 
     profileData[key] = array.includes(value) ? array.filter(v => v !== value) : [...array, value];
 
