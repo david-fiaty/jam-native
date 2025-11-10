@@ -253,10 +253,6 @@ const InputPhoneField = ({
 
     return phoneNumberFieldValue;
   };
-
-  const isPhonePrefix = (fieldValue: string) => {
-    return countryList.some((o: any) => fieldValue == o.prefix);
-  }
   
   useEffect(() => {
     (async () => {
