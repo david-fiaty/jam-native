@@ -109,7 +109,11 @@ const CollaboratorsList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
+    <BoxView 
+      align="flex-start" 
+      justify="flex-start" 
+      style={Layout.formContainer}
+    >
       <InputTextField
         value={searchValue}
         containerStyle={styles.inputTextFieldContainer}

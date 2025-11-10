@@ -243,7 +243,7 @@ const InputPhoneField = ({
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
         if (formatPhoneNumber) {
-          return (new AsYouType().input(phoneNumberFieldValue)).replace(`${targetCountry.prefix} `, '');
+          return (new AsYouType().input(phoneNumberFieldValue)).replace(targetCountry.prefix, '');
         }
         else {
           return phoneNumberFieldValue.replace(targetCountry.prefix, '');
@@ -254,6 +254,10 @@ const InputPhoneField = ({
     return phoneNumberFieldValue;
   };
 
+  const isPhonePrefix = (fieldValue: string) => {
+    return countryList.some((o: any) => fieldValue == o.prefix);
+  }
+  
   useEffect(() => {
     (async () => {
       setDefaultCountry(await getDefaultCountry());

@@ -8,6 +8,7 @@ import SpinnerView from "../view/SpinnerView";
 import TextView from '../view/TextView';
 import IconView from '../view/IconView';
 import FormManager from '@/manager/FormManager';
+import i18n from '@/translation/i18n';
 
 type Props = {
   resource: string;
@@ -74,7 +75,11 @@ const CountriesList = ({ resource, fieldKey, parentKey, rules }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView align="flex-start" justify="flex-start" style={Layout.screenContent}>
+    <BoxView 
+      align="flex-start" 
+      justify="flex-start" 
+      style={Layout.formContainer}
+    >
       <View style={Layout.borderedListContainer}>
         {listData?.length > 0 &&
           <ListView
@@ -82,6 +87,10 @@ const CountriesList = ({ resource, fieldKey, parentKey, rules }: Props) => {
             renderItem={(row: any) => renderItem(row)}
           />
         }
+
+        {!listData?.length && (
+          <TextView>{i18n.t('No results available')}</TextView>
+        )}
       </View>
     </BoxView>
   );
