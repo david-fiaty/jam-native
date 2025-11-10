@@ -30,9 +30,9 @@ const JamsMapView = () => {
     let latitudeDelta: any = 0.2;
     let longitudeDelta: any = 0.2;
 
-    if (currentLocation?.latitude && currentLocation?.longitude) {
-      latitude = currentLocation.latitude;
-      longitude = currentLocation.longitude;
+    if (currentLocation?.coords?.latitude && currentLocation?.coords?.longitude) {
+      latitude = currentLocation.coords.latitude;
+      longitude = currentLocation.coords.longitude;
     }
 
     return {
@@ -106,7 +106,7 @@ const JamsMapView = () => {
     }
   }, [searchState]);
 
-  if (!currentLocation?.latitude || !currentLocation?.longitude || !isLoaded) return <SpinnerView />;
+  if (!currentLocation?.coords?.latitude || !currentLocation?.coords?.longitude || !isLoaded) return <SpinnerView />;
 
   return (
       <View style={styles.container}>
