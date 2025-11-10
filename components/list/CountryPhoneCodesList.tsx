@@ -28,7 +28,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const [listData, setListData] = useState<any[]>([]);
   const formData: any = useSelector((state: any) => state.form[resource]);
   const appState: any = useSelector((state: any) => state.app, shallowEqual);
-  const countryList: any = ContentManager.getCountryPhoneCodes(); 
+  const countryList: any = ContentManager.getCountryPhoneCodes();
 
   const getListData = (filterValue?: string) => {
     if (filterValue) {
@@ -124,10 +124,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <BoxView 
-      direction="column" 
-      align="flex-start" 
-      justify="flex-start" 
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
       style={Layout.formContainer}
     >
       <InputTextField
@@ -135,6 +135,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeSearch}
         rightIcon={renderSearchIcon()}
+        theme="white"
       />
 
       <View style={Layout.borderedListContainer}>
@@ -144,6 +145,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
             renderItem={(row: any) => renderItem(row)}
           />
         }
+
+        {!listData?.length && (
+          <TextView>{i18n.t('No results available')}</TextView>
+        )}
       </View>
     </BoxView>
   );
