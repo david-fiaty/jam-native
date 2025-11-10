@@ -227,7 +227,7 @@ class UserManager {
     return location;
   }
 
-  async getLocationCountry() {
+  async getLocationAddress() {
     let location: any = await this.getLocation();
     let geocode: any = await Location.reverseGeocodeAsync(location.coords);
 
