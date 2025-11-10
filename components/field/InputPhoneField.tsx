@@ -104,7 +104,7 @@ const InputPhoneField = ({
   const onChangePhoneValue = (fieldValue: any) => {
     let targetCountry: any = getSelectedCountry();
 
-    if (targetCountry) {
+    if (targetCountry && compact === true) {
       fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
     }
 
@@ -239,19 +239,17 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    if (compact && phoneNumberFieldValue) {
-      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
-      if (targetCountry) {
-        if (formatPhoneNumber) {
-          return (new AsYouType().input(phoneNumberFieldValue)).replace(targetCountry.prefix, '');
-        }
-        else {
-          return phoneNumberFieldValue.replace(targetCountry.prefix, '');
-        }
-      }
+    let fieldValue: any = phoneNumberFieldValue;
+    let targetCountry: any = countryList.find((o: any) => fieldValue.startsWith(o.prefix));
+
+    if (targetCountry && formatPhoneNumber) {
+      fieldValue = (new AsYouType().input(fieldValue)).replace(targetCountry.prefix, '');
+    } 
+    else if (targetCountry) {
+      fieldValue = fieldValue.replace(targetCountry.prefix, '');
     }
 
-    return phoneNumberFieldValue;
+    return fieldValue;
   };
   
   useEffect(() => {
