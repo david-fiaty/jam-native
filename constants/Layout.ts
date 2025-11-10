@@ -192,7 +192,7 @@ export const Layout = {
     height: space.base*4,
   },
   borderedListContainer: {
-    width: '100%',
+    width: '100%', 
     borderWidth: borderWidth.base,
     borderRadius: radius.round,
     borderColor: colors.primary,
