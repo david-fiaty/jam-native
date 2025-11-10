@@ -116,7 +116,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={[Layout.formContainer]}>
+    <View style={Layout.formContainer}>
       <ProfileImageField
         resource={resource}
         fieldKey="upload_profile_picture"
