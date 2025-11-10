@@ -240,8 +240,8 @@ const InputPhoneField = ({
 
   const getCurrentPhoneNumber = () => {
     let fieldValue: any = phoneNumberFieldValue;
-    let targetCountry: any = countryList.find((o: any) => fieldValue.startsWith(o.prefix));
-
+    let targetCountry: any = getSelectedCountry();
+    
     if (targetCountry && formatPhoneNumber) {
       fieldValue = (new AsYouType().input(fieldValue)).replace(targetCountry.prefix, '');
     } 
