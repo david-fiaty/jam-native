@@ -171,10 +171,10 @@ const InputPhoneField = ({
           resource={resource}
           fieldKey={phoneNumberFieldKey}
           parentKey={parentKey}
-          value={getCurrentPhoneNumberValue()}
+          value={getCurrentPhoneNumber()}
           rules={[]}
           placeholder={inputPlaceholder}
-          //keyboardType="number-pad"
+          keyboardType="number-pad"
           onChangeText={onChangePhoneValue}
           containerStyle={styles.inputTextField}
         />
@@ -222,7 +222,7 @@ const InputPhoneField = ({
     }
   };
 
-  const getCurrentPhoneNumberValue = () => {
+  const getCurrentPhoneNumber = () => {
     if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
