@@ -87,9 +87,16 @@ const InputPhoneField = ({
 
   const onChangePhoneValue = (fieldValue: any) => {
     let targetCountry: any = getSelectedCountry();
+
+    if (targetCountry) {
+      fieldValue = targetCountry.prefix + (fieldValue || '');
+    }
+
+    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
     
-    //fieldValue = targetCountry.prefix + (fieldValue || '');
-    
+    /*
     if (fieldValue) {
       let parsedNumber: any = parsePhoneNumber(fieldValue, targetCountry.code.toUpperCase());
       if (parsedNumber && parsedNumber.isValid()) {
@@ -101,6 +108,7 @@ const InputPhoneField = ({
         countryCode: targetCountry.code,
       });
     }
+      */
   };
 
   const renderFlagComponent = () => {
@@ -229,7 +237,7 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumberValue = () => {
-    if (compact) {
+    if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
         return phoneNumberFieldValue.replace(targetCountry.prefix, '');
