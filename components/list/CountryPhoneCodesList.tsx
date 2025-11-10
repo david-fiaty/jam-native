@@ -26,15 +26,14 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const listData: any[] = ContentManager.getCountryPhoneCodes();
 
   const toggleItem = (entityId: number) => {
-    let idArray: any[] = [entityId];
-    let targetCountry: any = listData.find((o: any) => o.code == idArray[0]);
-    let fieldValue: string = targetCountry.prefix + removePrefix(value);
+    let targetCountry: any = listData.find((o: any) => o.code == entityId);
+    let fieldValue: string = targetCountry.prefix + removeAnyPrefix(value);
 
-    setSelectedIds(idArray);
+    setSelectedIds([entityId]);
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
-  const removePrefix = (fieldValue: any) => {  
+  const removeAnyPrefix = (fieldValue: any) => {  
     if (fieldValue) {
       let prefixList: any [] = listData.map((o: any) => o.prefix);
       let foundPrefix: any = prefixList.find((prefix: any) => fieldValue.startsWith(prefix));

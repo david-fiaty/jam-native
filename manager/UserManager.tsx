@@ -74,11 +74,11 @@ class UserManager {
     let profileId: number = await this.getProfileId();
     let variables: any = { '[profile_id]': profileId };
     let success: boolean = false;
-     
+
     //let payload: any = FormManager.objectToFormData({ ...defaults, ...data }); 
     let payload: any = { ...defaults, ...data };
     let response: any = await DataManager.put('updateProfile', payload, variables);
- 
+
     if (response?.id > 0) success = true;
 
     return {
@@ -121,7 +121,7 @@ class UserManager {
       label = (ContentManager.getProfileTypes().find((o: any) => o.id === profileType))?.label;
     }
 
-    return label?.length > 0 ? label: i18n.t('Unavailable');
+    return label?.length > 0 ? label : i18n.t('Unavailable');
   }
 
   getProfileDisplayName(item: any) {
@@ -144,15 +144,15 @@ class UserManager {
     options = options || {};
     let profileData: any = {};
     let localProfileData: any = null;
-    
+
     if (params?.profile_id > 0) {
       let variables: any = { '[profile_id]': params.profile_id };
       let defaults: any = {};
       profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
     else {
-      let userState: any = Store.getState().user; 
-      profileData = {...userState.profileData};
+      let userState: any = Store.getState().user;
+      profileData = { ...userState.profileData };
     }
 
     if (ScreenManager.isWeb()) {
@@ -210,27 +210,33 @@ class UserManager {
     const { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== 'granted') {
-      // Todo - Handle location permission error display
       return null;
     }
 
     let location: any = await Location.getCurrentPositionAsync({});
 
-    if (location) {
+    if (!location) {
       location = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      };
-    }
-    else {
-      location = {
-        latitude: Config.defaultLocation.latitude,
-        longitude: Config.defaultLocation.longitude,
+        coords: {
+          latitude: Config.defaultLocation.latitude,
+          longitude: Config.defaultLocation.longitude,
+        },
       };
     }
 
     return location;
   }
+
+  async getLocationAddress() {
+    let location: any = await this.getLocation();
+    let geocode: any = await Location.reverseGeocodeAsync(location.coords);
+
+    if (geocode.length > 0) {
+      return geocode[0]; 
+    }
+
+    return null;
+  } 
 
   async likeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
@@ -277,7 +283,7 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The Jam was unliked.');
-      
+
       this.updateProfileReference('liked_jams', entityId);
     }
 
@@ -343,8 +349,8 @@ class UserManager {
   }
 
   updateProfileReference(key: string, value: any) {
-    let profileData: any = {...Store.getState().user.profileData};
-    let array: any [] = profileData?.[key] || [];
+    let profileData: any = { ...Store.getState().user.profileData };
+    let array: any[] = profileData?.[key] || [];
 
     profileData[key] = array.includes(value) ? array.filter(v => v !== value) : [...array, value];
 
