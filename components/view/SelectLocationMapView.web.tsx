@@ -29,9 +29,9 @@ const SelectLocationMapView = ({ resource, latitude, longitude }: Props) => {
     let lat: any = Config.defaultLocation.latitude;
     let lng: any = Config.defaultLocation.longitude;
 
-    if (currentLocation?.latitude && currentLocation?.longitude) {
-      lat = currentLocation.latitude;
-      lng = currentLocation.longitude;
+    if (currentLocation?.coords?.latitude && currentLocation?.coords?.longitude) {
+      lat = currentLocation.coords.latitude;
+      lng = currentLocation.coords.longitude;
     }
 
     return { lat: lat, lng: lng };

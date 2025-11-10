@@ -210,22 +210,17 @@ class UserManager {
     const { status } = await Location.requestForegroundPermissionsAsync();
 
     if (status !== 'granted') {
-      // Todo - Handle location permission error display
       return null;
     }
 
     let location: any = await Location.getCurrentPositionAsync({});
 
-    if (location) {
+    if (!location) {
       location = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-      };
-    }
-    else {
-      location = {
-        latitude: Config.defaultLocation.latitude,
-        longitude: Config.defaultLocation.longitude,
+        coords: {
+          latitude: Config.defaultLocation.latitude,
+          longitude: Config.defaultLocation.longitude,
+        },
       };
     }
 
@@ -233,19 +228,14 @@ class UserManager {
   }
 
   async getLocationCountry() {
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      console.log('Permission to access location was denied');
-      return;
-    }
-
-    let location = await Location.getCurrentPositionAsync({});
-    const geocode = await Location.reverseGeocodeAsync(location.coords);
+    let location: any = await this.getLocation();
+    let geocode: any = await Location.reverseGeocodeAsync(location.coords);
 
     if (geocode.length > 0) {
-      console.log('Country:', geocode[0].country);
-      console.log('Country Code:', geocode[0].isoCountryCode);
+      return geocode;
     }
+
+    return null;
   } 
 
   async likeJam(entityId: any) {
