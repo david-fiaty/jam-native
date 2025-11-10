@@ -42,6 +42,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     setIsSearching(true);
     setIsSearching(false);
     setSearchValue('');
+    setListData(getListData());
   };
 
   const onChangeSearch = (text: string) => {
