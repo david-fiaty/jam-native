@@ -155,7 +155,7 @@ const InputPhoneField = ({
         parentKey={parentKey}
         rules={[]}
         placeholder={selectPlaceholder}
-        value={getSelectedCountry()?.prefix}
+        value={getSelectedCountry()?.code}
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
@@ -249,7 +249,7 @@ const InputPhoneField = ({
     (async () => {
       setDefaultCountry(await getDefaultCountry());
     })();
-    
+
     if (!isLoaded) {
       setCountryOptions(getCountryOptions());
       setDefaultCountry(getDefaultCountry());
