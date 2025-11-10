@@ -242,8 +242,8 @@ const InputPhoneField = ({
     if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
       if (targetCountry) {
-        if (formatPhoneNumber && !isPhonePrefix(phoneNumberFieldValue)) {
-          return (new AsYouType().input(phoneNumberFieldValue)).replace(`${targetCountry.prefix} `, '');
+        if (formatPhoneNumber) {
+          return (new AsYouType().input(phoneNumberFieldValue)).replace(targetCountry.prefix, '');
         }
         else {
           return phoneNumberFieldValue.replace(targetCountry.prefix, '');
@@ -255,8 +255,7 @@ const InputPhoneField = ({
   };
 
   const isPhonePrefix = (fieldValue: string) => {
-    
-    return true;
+    return countryList.some((o: any) => fieldValue == o.prefix);
   }
   
   useEffect(() => {
