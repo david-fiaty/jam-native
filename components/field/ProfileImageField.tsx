@@ -72,6 +72,8 @@ const ProfileImageField = ({
   };
 
   const getImageUrl = (uri: any) => {
+    if (!uri) return '';
+
     if (uri.startsWith('file://')) {
       return uri;
     }
