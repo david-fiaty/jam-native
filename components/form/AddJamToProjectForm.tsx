@@ -42,6 +42,8 @@ const AddJamToProjectForm = () => {
   const toggleItemSelection = (row: any) => {
     let idArray: any [] = [...(selectedIds || [])];
 
+    console.log(row.item.id)
+
     if (idArray.includes(row.item.id)) {
       idArray = idArray.filter((id: any) => id != row.item.id);
     }
@@ -61,8 +63,6 @@ const AddJamToProjectForm = () => {
 
   if (!isLoaded) return <SpinnerView />;
 
-  console.log(selectedIds)
-
   return (
     <BoxView
       align="flex-start"
@@ -78,7 +78,8 @@ const AddJamToProjectForm = () => {
         emptyMessage={i18n.t('No data available.')}
         isPublic={false}
         onItemPress={toggleItemSelection}
-        //addable={true}
+        addable={false}
+        selectable={true}
       />
 
       <DividerView />
