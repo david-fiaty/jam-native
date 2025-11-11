@@ -122,8 +122,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         fieldKey="upload_profile_picture"
         rules={['required']}
         label={i18n.t('Profile Image')}
-        value={"/media/files/24cdae83-6c30-4ef8-ae37-8be3ac63375b.jpg"}
-        //value={formData?.profile_picture?.url || ''}
+        value={formData?.profile_picture?.url || ''}
       />
 
       <SelectListField
