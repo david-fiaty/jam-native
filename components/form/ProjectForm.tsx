@@ -11,7 +11,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import FormManager from "@/manager/FormManager";
-import PrivacyStatusField from "../field/PrivacyStatusField";
 import ButtonView from "../view/ButtonView";
 import SpinnerView from "../view/SpinnerView";
 import SelectListField from "../field/SelectListField";
