@@ -38,16 +38,21 @@ const ProfileImageField = ({
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
 
-  const deleteMedia = (data: any) => {
-    let mediaList: any[] = [];
-    
-    setSelectedMedia(mediaList);
-
-    if (onDeleteItem) {
-      onDeleteItem(mediaList);
+  const deleteMedia = (uri: string) => {
+    if (uri == currentImageUrl) {
+      setCurrentImageUrl('');
+      setCurrentImageExists(false);
     }
     else {
-      FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
+      let mediaList: any[] = [];
+      setSelectedMedia(mediaList);
+
+      if (onDeleteItem) {
+        onDeleteItem(mediaList);
+      }
+      else {
+        FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
+      }
     }
   };
 
@@ -71,18 +76,29 @@ const ProfileImageField = ({
     };
   };
 
-  const renderImagePreview = (data: any) => {
-    const isSelected: boolean = isImagePreviewSelected(data.fileName);
+  const getImageUrl = (uri: any) => {
+    if (!uri) return '';
+
+    if (uri.startsWith('file://')) {
+      return uri;
+    }
+    else {
+      return MediaManager.getImageUrl(uri);
+    }
+  };
+
+  const renderImagePreview = (uri: string) => {
+    const isSelected: boolean = isImagePreviewSelected(uri);
     const imageStyle: any = getImagePreviewStyles(isSelected);
 
     return (
       <TouchableOpacity
-        key={data.uri}
-        onPress={() => togglePreviewSelection(data.fileName)}
+        key={uri}
+        onPress={() => togglePreviewSelection(uri)}
       >
         <ImageView
-          key={data.uri}
-          uri={data.uri}
+          key={uri}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -92,7 +108,7 @@ const ProfileImageField = ({
         {isSelected &&
           <TouchableOpacity
             style={styles.deleteMedia}
-            onPress={() => deleteMedia(data)}
+            onPress={() => deleteMedia(uri)}
           >
             <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
@@ -133,7 +149,7 @@ const ProfileImageField = ({
   useEffect(() => {
     if (!isLoaded) {
       (async () => {
-        let imageUrl: any = MediaManager.getImageUrl(value);
+        let imageUrl: any = getImageUrl(value);
         setCurrentImageUrl(imageUrl);
         setCurrentImageExists(await MediaManager.imageExists(imageUrl));
       })();
@@ -149,35 +165,45 @@ const ProfileImageField = ({
       <BoxView direction="row" align="center">
         {!selectedMedia?.length && !currentImageExists && (
           <TouchableOpacity onPress={pickImage}>
-            <BoxView 
-              direction="row" 
-              align="center" 
-              justify="flex-start" 
-              style={[styles.iconContainer, { width: imageSize.width, height: imageSize.height}]}
+            <BoxView
+              direction="row"
+              align="center"
+              justify="flex-start"
+              style={[styles.iconContainer, { width: imageSize.width, height: imageSize.height }]}
             >
-              <IconView 
-                name="image" 
-                theme="secondary" 
-                size={22} 
-                padding={40} 
-                radius="round" 
+              <IconView
+                name="image"
+                theme="secondary"
+                size={22}
+                padding={40}
+                radius="round"
               />
             </BoxView>
           </TouchableOpacity>
         )}
 
-        {selectedMedia?.length > 0 &&
-          <BoxView 
-            direction="row" 
-            align="flex-start" 
-            justify="left" 
+        {selectedMedia?.length > 0 && (
+          <BoxView
+            direction="row"
+            align="flex-start"
+            justify="left"
           >
-            {renderImagePreview(selectedMedia[0])}
+            {renderImagePreview(selectedMedia[0].uri)}
           </BoxView>
-        }
+        )}
+
+        {!selectedMedia?.length && currentImageExists && (
+          <BoxView
+            direction="row"
+            align="flex-start"
+            justify="left"
+          >
+            {renderImagePreview(currentImageUrl)}
+          </BoxView>
+        )}
       </BoxView>
 
-      {FormManager.renderError(fieldKey, parentKey)}
+      {!currentImageExists && FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
