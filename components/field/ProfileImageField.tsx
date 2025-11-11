@@ -51,21 +51,29 @@ const ProfileImageField = ({
     }
   };
 
-  const updatePreviewSelection = (data: any) => {
-    setSelectedPreview([data.fileName]);
+  const updatePreviewSelection = (uri: string) => {
+    setSelectedPreview([uri]);
   };
 
-  const renderImagePreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.fileName);
-    const imageStyle = {
+  const isImagePreviewSelected = (uri: string) => {
+    return selectedPreview.includes(uri);
+  };
+
+  const getImagePreviewStyles = (isSelected: boolean) => {
+    return {
       ...styles.mediaPreview,
       ...isSelected ? styles.selectedPreview : {},
     };
+  };
+
+  const renderImagePreview = (data: any) => {
+    const isSelected: boolean = isImagePreviewSelected(data.fileName);
+    const imageStyle: any = getImagePreviewStyles(isSelected);
 
     return (
       <TouchableOpacity
         key={data.uri}
-        onPress={() => updatePreviewSelection(data)}
+        onPress={() => updatePreviewSelection(data.fileName)}
       >
         <ImageView
           key={data.uri}
