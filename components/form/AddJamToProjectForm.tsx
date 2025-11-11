@@ -54,6 +54,9 @@ const AddJamToProjectForm = () => {
       scroll={true}
       style={Layout.formContainer}
     >
+
+      <DividerView />
+      
       <ProfileProjectsField
         idArray={profileData?.profile_projects || []}
         emptyMessage={i18n.t('No data available.')}
