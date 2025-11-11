@@ -39,12 +39,10 @@ const AddJamToProjectForm = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setProfileData(userState.profileData)
-        setIsLoaded(true);
-      }
-    })();
+    if (!isLoaded) {
+      setProfileData(userState.profileData)
+      setIsLoaded(true);
+    }
   }, [isLoaded, userState]);
 
   if (!isLoaded) return <SpinnerView />;
@@ -68,7 +66,7 @@ const AddJamToProjectForm = () => {
       <ButtonView
         label={i18n.t('Submit')}
         isProcessing={isProcessing}
-        //onPress={submitForm}
+        onPress={submitForm}
       />
     </BoxView>
   );
