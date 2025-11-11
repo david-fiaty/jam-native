@@ -15,6 +15,7 @@ import ProfileProjectsField from '../field/ProfileProjectsField';
 const AddJamToProjectForm = () => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
+  const [selectedIds, setSelectedIds] = useState<any[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const userState: any = useSelector((state: any) => state.user);
 
@@ -39,7 +40,16 @@ const AddJamToProjectForm = () => {
   };
 
   const toggleItemSelection = (row: any) => {
-    console.log(row.item.id, row.item.name)
+    let idArray: any [] = [...(selectedIds || [])];
+
+    if (idArray.includes(row.item.id)) {
+      idArray = idArray.filter((id: any) => id != row.item.id);
+    }
+    else {
+      idArray.push(row.item.id);
+    }
+
+    setSelectedIds(idArray);
   };
 
   useEffect(() => {
@@ -50,6 +60,8 @@ const AddJamToProjectForm = () => {
   }, [isLoaded, userState]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(selectedIds)
 
   return (
     <BoxView
