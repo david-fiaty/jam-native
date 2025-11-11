@@ -34,6 +34,7 @@ import OrganizationTypesList from '../list/OrganizationTypesList';
 import WeekDaysList from '../list/WeekDaysList';
 import CulturalActivitiesList from '../list/CulturalActivitiesList';
 import CountryPhoneCodesList from '../list/CountryPhoneCodesList';
+import AddJamToProjectForm from '../form/AddJamToProjectForm';
 
 type Props = {
   currentSection?: any;
@@ -251,6 +252,11 @@ const ModalView = ({ currentSection, style }: Props) => {
         id: 'JamFormSection',
         title: i18n.t('Edit Jam'),
         render: (params: any) => <JamFormSection {...params} />,
+      },
+      {
+        id: 'AddJamToProjectForm',
+        title: i18n.t('Add JAM! to project'),
+        render: (params: any) => <AddJamToProjectForm {...params} />,
       },
       {
         id: 'PrivateProfileSection',
