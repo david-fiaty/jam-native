@@ -72,6 +72,8 @@ const ProfileImageField = ({
   };
 
   const getImageUrl = (uri: any) => {
+    if (!uri) return '';
+
     if (uri.startsWith('file://')) {
       return uri;
     }
@@ -175,7 +177,7 @@ const ProfileImageField = ({
           </TouchableOpacity>
         )}
 
-        {selectedMedia?.length > 0 &&
+        {selectedMedia?.length > 0 && (
           <BoxView 
             direction="row" 
             align="flex-start" 
@@ -183,7 +185,17 @@ const ProfileImageField = ({
           >
             {renderImagePreview(selectedMedia[0].uri)}
           </BoxView>
-        }
+        )}
+
+        {!selectedMedia?.length && currentImageExists && (
+          <BoxView 
+            direction="row" 
+            align="flex-start" 
+            justify="left" 
+          >
+            {renderImagePreview(currentImageUrl)}
+          </BoxView>
+        )}
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)}
