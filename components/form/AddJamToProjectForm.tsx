@@ -18,59 +18,12 @@ const AddJamToProjectForm = () => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const userState: any = useSelector((state: any) => state.user);
 
-  useEffect(() => {
-    (async () => {
-      if (!isLoaded) {
-        setProfileData(userState.profileData)
-        setIsLoaded(true);
-      }
-    })();
-  }, [isLoaded, userState]);
-
-  console.log('--', profileData?.id)
-
-  return (
-    <BoxView
-      align="flex-start"
-      justify="flex-start"
-      scroll={true}
-      style={Layout.formContainer}
-    >
-      <ProfileProjectsField
-        idArray={profileData?.profile_projects || []}
-        emptyMessage={i18n.t('No data available.')}
-        isPublic={false}
-      //addable={true}
-      />
-
-      <DividerView />
-
-      <ButtonView
-        label={i18n.t('Submit')}
-        isProcessing={isProcessing}
-        //onPress={submitForm}
-      />
-    </BoxView>
-  );
-
-
-  // Todo - Implement component
-  return <TextView>Add jam to project form</TextView>;
-
-
-
-  const [selectedIds, setSelectedIds] = useState<any>([]);
-  const activeModal: any = ScreenManager.getActiveModal();
-  const entityId: number = activeModal.params.entityId;
-
-  const updateSelection = (row: any) => {
-    setSelectedIds([row.item.id]);
-  };
-
   const submitForm = async () => {
+    return false;
+
     setIsProcessing(true);
     let result: any = await EntityManager.addJamToProject(selectedIds[0], {
-      profile_id: profileId,
+      profile_id: profileData?.id,
       items_ids: [entityId],
     });
 
@@ -85,7 +38,14 @@ const AddJamToProjectForm = () => {
     setIsProcessing(false);
   };
 
-
+  useEffect(() => {
+    (async () => {
+      if (!isLoaded) {
+        setProfileData(userState.profileData)
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, userState]);
 
   if (!isLoaded) return <SpinnerView />;
 
@@ -94,30 +54,22 @@ const AddJamToProjectForm = () => {
       align="flex-start"
       justify="flex-start"
       scroll={true}
-      style={Layout.screenContent}
+      style={Layout.formContainer}
     >
-      <BackButton
-        title={i18n.t('Add Jam to project')}
-        onPress={() => ModalManager.toggleModal('AddJamToProjectForm')}
-      />
-      <TextView>{i18n.t('Select a project from your profile:')}</TextView>
-      <DividerView theme="secondary" />
-
-      <ProfileProjectsList
-        onListItemPress={(row: any) => updateSelection(row)}
-        isAddable={true}
-        multiSelect={false}
-        //idArray={[14, 18, 19]} // Todo - Remove test
-        idArray={profileData?.profile_projects}
+      <ProfileProjectsField
+        idArray={profileData?.profile_projects || []}
+        emptyMessage={i18n.t('No data available.')}
+        isPublic={false}
+        //addable={true}
       />
 
-      <DividerView theme="secondary" />
+      <DividerView />
+
       <ButtonView
         label={i18n.t('Submit')}
         isProcessing={isProcessing}
-        onPress={submitForm}
+        //onPress={submitForm}
       />
-
     </BoxView>
   );
 };
