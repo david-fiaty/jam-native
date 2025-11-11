@@ -10,6 +10,7 @@ import DataManager from '@/manager/DataManager';
 import UserManager from '@/manager/UserManager';
 import IconView from './IconView';
 import TextView from './TextView';
+import ModalManager from '@/manager/ModalManager';
 
 type Props = {
   jamId?: any;
@@ -66,13 +67,13 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
       canDisplay: () => isEntityOwner,
-      onPress: () => ScreenManager.toggleModal('AddJamToProjectForm', { jamId: jamId }), // Todo - Update component
+      onPress: () => ModalManager.toggleModal('AddJamToProjectForm', { jamId: jamId }), // Todo - Update component
     },
     {
       label: i18n.t('Edit Jam'),
       icon: 'edit',
       canDisplay: () => isEntityOwner,
-      onPress: () => ScreenManager.toggleModal('JamForm', { jamId: jamId }),
+      onPress: () => ModalManager.toggleModal('JamForm', { jamId: jamId }),
     },
     {
       label: i18n.t('Report Jam'),
