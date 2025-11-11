@@ -16,7 +16,6 @@ import InputTextField from "../field/InputTextField";
 import InputTextareaField from "../field/InputTextareaField";
 import UserManager from "@/manager/UserManager";
 import DatePickerField from "../field/DatePickerField";
-import LocationTypeField from "../field/LocationTypeField";
 import EntityManager from "@/manager/EntityManager";
 import CollaboratorsField from "../field/CollaboratorsField";
 import FormManager from "@/manager/FormManager";
