@@ -124,15 +124,19 @@ const ProfileImageField = ({
 
   useEffect(() => {
     if (!isLoaded) {
+      (async () => {
+        setImageExists(await MediaManager.imageExists(value));
+      })();
+
       setSelectedMedia(value ? [value] : []);
       setIsLoaded(true);
     }
   }, [isLoaded, value]);
 
   useEffect(() => {
-    (async () => {
-      setImageExists(await MediaManager.imageExists(value));
-    })();
+    
+      
+    
   }, [value]);
 
   return (
@@ -140,7 +144,7 @@ const ProfileImageField = ({
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="row" align="center">
-        {(!selectedMedia?.length || !imageExists) && (
+        {(!selectedMedia?.length && !imageExists) && (
           <TouchableOpacity onPress={pickImage}>
             <BoxView 
               direction="row" 
