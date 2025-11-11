@@ -1,4 +1,4 @@
-import { Linking, View } from 'react-native';
+import { Linking, View, Image } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import { Config } from '@/constants/Config';
 import ScreenManager from "@/manager/ScreenManager";
@@ -63,6 +63,17 @@ class MediaManager {
     }
 
     return output;
+  }
+
+  imageExists = async (url: string): Promise<boolean> => {
+    if (!url) return false;
+    
+    try {
+      const response = await fetch(url, { method: 'GET' });
+      return response.ok;
+    } catch (error) {
+      return false;
+    }
   }
 }
 

@@ -63,7 +63,7 @@ const LocationPickerField = ({
         />
       </TouchableOpacity>
 
-      {/*FormManager.renderError(latitudeKey, parentKey)*/}
+      {(!latitudeValue || !longitudeValue) && FormManager.renderError(latitudeKey, parentKey)}
     </>
   );
 };
