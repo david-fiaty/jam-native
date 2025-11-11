@@ -138,7 +138,7 @@ const ProfileImageField = ({
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="row" align="center">
-        {!selectedMedia?.length && !imageExists && (
+        {!selectedMedia?.length || !imageExists && (
           <TouchableOpacity onPress={pickImage}>
             <BoxView 
               direction="row" 
