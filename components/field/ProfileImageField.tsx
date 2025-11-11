@@ -6,6 +6,7 @@ import ImageView from '../view/ImageView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
 import FormManager from "@/manager/FormManager";
+import MediaManager from "@/manager/MediaManager";
 
 type Props = {
   resource?: any;
@@ -39,7 +40,7 @@ const ProfileImageField = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
-  const imageSize: any = 122;
+  const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
     let mediaList: any[] = [];
@@ -73,8 +74,8 @@ const ProfileImageField = ({
         <ImageView
           key={data.uri}
           uri={data.uri}
-          width={imageSize}
-          height={imageSize}
+          width={imageSize.width}
+          height={imageSize.height}
           resizeMode="cover"
           style={imageStyle}
         />
@@ -138,13 +139,13 @@ const ProfileImageField = ({
               direction="row" 
               align="center" 
               justify="flex-start" 
-              style={styles.iconContainer}
+              style={[styles.iconContainer, { width: imageSize.width, height: imageSize.height}]}
             >
               <IconView 
                 name="image" 
                 theme="secondary" 
-                size={26} 
-                padding={48} 
+                size={22} 
+                padding={40} 
                 radius="round" 
               />
             </BoxView>
