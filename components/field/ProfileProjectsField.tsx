@@ -29,15 +29,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
 
   const onPressEvent = (row: any) => {
     if (onItemPress && selectable) {
-      let idArray: any[] = [...(selectedIds || [])];
-
-      if (idArray.includes(row.item.id)) {
-        idArray = idArray.filter((id: any)=> id != row.item.id);
-      }
-      else {
-        idArray.push(row.item.id);
-      }
-
+      let idArray: any[] = [row.item.id];
       setSelectedIds(idArray);
       onItemPress(idArray);
     } 
