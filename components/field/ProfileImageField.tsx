@@ -39,15 +39,20 @@ const ProfileImageField = ({
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (uri: string) => {
-    let mediaList: any[] = [];
-    
-    setSelectedMedia(mediaList);
-
-    if (onDeleteItem) {
-      onDeleteItem(mediaList);
+    if (uri == currentImageUrl) {
+      setCurrentImageUrl('');
+      setCurrentImageExists(false);
     }
     else {
-      FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
+      let mediaList: any[] = [];
+      setSelectedMedia(mediaList);
+
+      if (onDeleteItem) {
+        onDeleteItem(mediaList);
+      }
+      else {
+        FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
+      }
     }
   };
 
@@ -160,45 +165,45 @@ const ProfileImageField = ({
       <BoxView direction="row" align="center">
         {!selectedMedia?.length && !currentImageExists && (
           <TouchableOpacity onPress={pickImage}>
-            <BoxView 
-              direction="row" 
-              align="center" 
-              justify="flex-start" 
-              style={[styles.iconContainer, { width: imageSize.width, height: imageSize.height}]}
+            <BoxView
+              direction="row"
+              align="center"
+              justify="flex-start"
+              style={[styles.iconContainer, { width: imageSize.width, height: imageSize.height }]}
             >
-              <IconView 
-                name="image" 
-                theme="secondary" 
-                size={22} 
-                padding={40} 
-                radius="round" 
+              <IconView
+                name="image"
+                theme="secondary"
+                size={22}
+                padding={40}
+                radius="round"
               />
             </BoxView>
           </TouchableOpacity>
         )}
 
         {selectedMedia?.length > 0 && (
-          <BoxView 
-            direction="row" 
-            align="flex-start" 
-            justify="left" 
+          <BoxView
+            direction="row"
+            align="flex-start"
+            justify="left"
           >
             {renderImagePreview(selectedMedia[0].uri)}
           </BoxView>
         )}
 
         {!selectedMedia?.length && currentImageExists && (
-          <BoxView 
-            direction="row" 
-            align="flex-start" 
-            justify="left" 
+          <BoxView
+            direction="row"
+            align="flex-start"
+            justify="left"
           >
             {renderImagePreview(currentImageUrl)}
           </BoxView>
         )}
       </BoxView>
 
-      {FormManager.renderError(fieldKey, parentKey)}
+      {!currentImageExists && FormManager.renderError(fieldKey, parentKey)}
     </>
   );
 };
