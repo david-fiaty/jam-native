@@ -55,6 +55,8 @@ const AddJamToProjectForm = ( { jamId }: Props ) => {
       style={Layout.formContainer}
     >
       <DividerView />
+
+      { /* Todo - Display the jam to add */}
       
       <TextView>{i18n.t('Select a project from your profile')}:</TextView>
       
