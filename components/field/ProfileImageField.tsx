@@ -15,9 +15,6 @@ type Props = {
   rules?: any;
   label?: any;
   value?: any;
-  placeholder?: string;
-  preview?: boolean;
-  multiple?: any;
   mediaTypes?: any;
   onSelectItem?: (data: any) => void;
   onDeleteItem?: (data: any) => void;
@@ -30,9 +27,6 @@ const ProfileImageField = ({
   rules,
   label,
   value,
-  placeholder,
-  preview,
-  multiple,
   mediaTypes,
   onSelectItem,
   onDeleteItem
@@ -101,7 +95,7 @@ const ProfileImageField = ({
       aspect: [4, 3],
       quality: 1,
       base64: true,
-      allowsMultipleSelection: (multiple === true ? true : false),
+      allowsMultipleSelection: false,
     });
   };
 
@@ -140,7 +134,7 @@ const ProfileImageField = ({
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="row" align="center">
-        {(!selectedMedia?.length || (value && !currentImageExists)) && (
+        {!selectedMedia?.length && !currentImageExists && (
           <TouchableOpacity onPress={pickImage}>
             <BoxView 
               direction="row" 
@@ -159,7 +153,7 @@ const ProfileImageField = ({
           </TouchableOpacity>
         )}
 
-        {selectedMedia?.length > 0 && preview &&
+        {selectedMedia?.length > 0 &&
           <BoxView 
             direction="row" 
             align="flex-start" 
