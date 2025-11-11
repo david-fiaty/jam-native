@@ -66,6 +66,8 @@ class MediaManager {
   }
 
   imageExists = async (url: string): Promise<boolean> => {
+    if (!url) return false;
+    
     try {
       const response = await fetch(url, { method: 'GET' });
       return response.ok;

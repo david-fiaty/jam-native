@@ -38,7 +38,8 @@ const ProfileImageField = ({
   onDeleteItem
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [imageExists, setImageExists] = useState<boolean>(false);
+  const [currentImageUrl, setCurrentImageUrl] = useState<string>('');
+  const [currentImageExists, setCurrentImageExists] = useState<boolean>(false);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
@@ -125,10 +126,11 @@ const ProfileImageField = ({
   useEffect(() => {
     if (!isLoaded) {
       (async () => {
-        setImageExists(await MediaManager.imageExists(MediaManager.getImageUrl(value)));
+        let imageUrl: any = MediaManager.getImageUrl(value);
+        setCurrentImageUrl(imageUrl);
+        setCurrentImageExists(await MediaManager.imageExists(imageUrl));
       })();
 
-      setSelectedMedia(value ? [value] : []);
       setIsLoaded(true);
     }
   }, [isLoaded, value]);
@@ -138,7 +140,7 @@ const ProfileImageField = ({
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="row" align="center">
-        {!selectedMedia?.length || !imageExists && (
+        {(!selectedMedia?.length || (value && !currentImageExists)) && (
           <TouchableOpacity onPress={pickImage}>
             <BoxView 
               direction="row" 
