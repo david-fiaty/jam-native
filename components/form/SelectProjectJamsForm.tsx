@@ -80,11 +80,11 @@ const SelectProjectJamsForm = ({ resource, field, idArray, multiSelect, emptyMes
       >
         {output}
 
-        {isSelected &&
+        {isSelected && (
           <View style={styles.selectedItem}>
             <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
           </View> 
-        } 
+        )} 
       </TouchableOpacity>
     );
   };
