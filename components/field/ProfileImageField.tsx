@@ -38,7 +38,7 @@ const ProfileImageField = ({
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
 
-  const deleteMedia = (data: any) => {
+  const deleteMedia = (uri: string) => {
     let mediaList: any[] = [];
     
     setSelectedMedia(mediaList);
@@ -71,18 +71,27 @@ const ProfileImageField = ({
     };
   };
 
-  const renderImagePreview = (data: any) => {
-    const isSelected: boolean = isImagePreviewSelected(data.fileName);
+  const getImageUrl = (uri: any) => {
+    if (uri.startsWith('file://')) {
+      return uri;
+    }
+    else {
+      return MediaManager.getImageUrl(uri);
+    }
+  };
+
+  const renderImagePreview = (uri: string) => {
+    const isSelected: boolean = isImagePreviewSelected(uri);
     const imageStyle: any = getImagePreviewStyles(isSelected);
 
     return (
       <TouchableOpacity
-        key={data.uri}
-        onPress={() => togglePreviewSelection(data.fileName)}
+        key={uri}
+        onPress={() => togglePreviewSelection(uri)}
       >
         <ImageView
-          key={data.uri}
-          uri={data.uri}
+          key={uri}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -92,7 +101,7 @@ const ProfileImageField = ({
         {isSelected &&
           <TouchableOpacity
             style={styles.deleteMedia}
-            onPress={() => deleteMedia(data)}
+            onPress={() => deleteMedia(uri)}
           >
             <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
@@ -133,7 +142,7 @@ const ProfileImageField = ({
   useEffect(() => {
     if (!isLoaded) {
       (async () => {
-        let imageUrl: any = MediaManager.getImageUrl(value);
+        let imageUrl: any = getImageUrl(value);
         setCurrentImageUrl(imageUrl);
         setCurrentImageExists(await MediaManager.imageExists(imageUrl));
       })();
@@ -172,7 +181,7 @@ const ProfileImageField = ({
             align="flex-start" 
             justify="left" 
           >
-            {renderImagePreview(selectedMedia[0])}
+            {renderImagePreview(selectedMedia[0].uri)}
           </BoxView>
         }
       </BoxView>
