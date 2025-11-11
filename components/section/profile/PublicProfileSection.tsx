@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import BoxView from "@/components/view/BoxView";
 import ProfileView from "@/components/view/ProfileView";
 
@@ -19,7 +19,6 @@ const PublicProfileSection = ({ profileId, itemData }: Props) => {
       <ProfileView
         profileId={profileId}
         isPublic={true}
-      //itemData={itemData}
       />
     </BoxView>
   );
