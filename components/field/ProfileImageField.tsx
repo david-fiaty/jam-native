@@ -38,7 +38,7 @@ const ProfileImageField = ({
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
 
-  const deleteMedia = (data: any) => {
+  const deleteMedia = (uri: string) => {
     let mediaList: any[] = [];
     
     setSelectedMedia(mediaList);
@@ -80,18 +80,18 @@ const ProfileImageField = ({
     }
   };
 
-  const renderImagePreview = (data: any) => {
-    const isSelected: boolean = isImagePreviewSelected(data.uri);
+  const renderImagePreview = (uri: string) => {
+    const isSelected: boolean = isImagePreviewSelected(uri);
     const imageStyle: any = getImagePreviewStyles(isSelected);
 
     return (
       <TouchableOpacity
-        key={data.uri}
-        onPress={() => togglePreviewSelection(data.uri)}
+        key={uri}
+        onPress={() => togglePreviewSelection(uri)}
       >
         <ImageView
-          key={data.uri}
-          uri={data.uri}
+          key={uri}
+          uri={uri}
           width={imageSize.width}
           height={imageSize.height}
           resizeMode="cover"
@@ -101,7 +101,7 @@ const ProfileImageField = ({
         {isSelected &&
           <TouchableOpacity
             style={styles.deleteMedia}
-            onPress={() => deleteMedia(data)}
+            onPress={() => deleteMedia(uri)}
           >
             <IconView name="delete" theme="primary" size={12} padding={3.5} />
           </TouchableOpacity>
@@ -181,7 +181,7 @@ const ProfileImageField = ({
             align="flex-start" 
             justify="left" 
           >
-            {renderImagePreview(selectedMedia[0])}
+            {renderImagePreview(selectedMedia[0].uri)}
           </BoxView>
         }
       </BoxView>
