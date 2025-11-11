@@ -45,8 +45,7 @@ const ProfileImageField = ({
   const imageSize: any = MediaManager.getThumbnailSize();
 
   const deleteMedia = (data: any) => {
-    let mediaList = [...selectedMedia];
-    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
+    let mediaList: any[] = [];
     setSelectedMedia(mediaList);
 
     if (onDeleteItem) {
@@ -58,15 +57,7 @@ const ProfileImageField = ({
   };
 
   const updatePreviewSelection = (data: any) => {
-    let mediaList = [...selectedPreview];
-    if (!selectedPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
-      setSelectedPreview(mediaList);
-    }
-    else {
-      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
-      setSelectedPreview(mediaList);
-    }
+    setSelectedPreview([data.fileName]);
   };
 
   const renderImagePreview = (data: any) => {
@@ -117,11 +108,7 @@ const ProfileImageField = ({
     let result: any = await launchBrowser();
 
     if (!result.canceled && result?.assets?.length) {
-      let mediaList: any = [...selectedMedia];
-      for (const row of result?.assets) {
-        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
-        if (!mediaExists) mediaList.push(row);
-      }
+      let mediaList: any = [result.assets[0]];
 
       setSelectedMedia(mediaList);
       setSelectedPreview([]);
@@ -137,7 +124,7 @@ const ProfileImageField = ({
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedMedia(value || []);
+      setSelectedMedia(value ? [value] : []);
       setIsLoaded(true);
     }
   }, [isLoaded, value]);
