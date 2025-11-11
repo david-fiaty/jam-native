@@ -71,14 +71,23 @@ const ProfileImageField = ({
     };
   };
 
+  const getImageUrl = (uri: any) => {
+    if (uri.startsWith('file://')) {
+      return uri;
+    }
+    else {
+      return MediaManager.getImageUrl(uri);
+    }
+  };
+
   const renderImagePreview = (data: any) => {
-    const isSelected: boolean = isImagePreviewSelected(data.fileName);
+    const isSelected: boolean = isImagePreviewSelected(data.uri);
     const imageStyle: any = getImagePreviewStyles(isSelected);
 
     return (
       <TouchableOpacity
         key={data.uri}
-        onPress={() => togglePreviewSelection(data.fileName)}
+        onPress={() => togglePreviewSelection(data.uri)}
       >
         <ImageView
           key={data.uri}
@@ -133,7 +142,7 @@ const ProfileImageField = ({
   useEffect(() => {
     if (!isLoaded) {
       (async () => {
-        let imageUrl: any = MediaManager.getImageUrl(value);
+        let imageUrl: any = getImageUrl(value);
         setCurrentImageUrl(imageUrl);
         setCurrentImageExists(await MediaManager.imageExists(imageUrl));
       })();
