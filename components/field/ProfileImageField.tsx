@@ -51,8 +51,13 @@ const ProfileImageField = ({
     }
   };
 
-  const updatePreviewSelection = (uri: string) => {
-    setSelectedPreview([uri]);
+  const togglePreviewSelection = (uri: string) => {
+    if (selectedPreview.includes(uri)) {
+      setSelectedPreview([]);
+    }
+    else {
+      setSelectedPreview([uri]);
+    }
   };
 
   const isImagePreviewSelected = (uri: string) => {
@@ -73,7 +78,7 @@ const ProfileImageField = ({
     return (
       <TouchableOpacity
         key={data.uri}
-        onPress={() => updatePreviewSelection(data.fileName)}
+        onPress={() => togglePreviewSelection(data.fileName)}
       >
         <ImageView
           key={data.uri}
