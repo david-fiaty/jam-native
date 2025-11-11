@@ -1,13 +1,11 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
 import ModalManager from "@/manager/ModalManager";
@@ -22,7 +20,6 @@ type Props = {
 const numColumns = 3;
 
 const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
-  const router = useRouter();
   const [profileProjects, setProfileProjects] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
@@ -104,7 +101,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         />
       )}
 
-      {!profileProjects?.length && (renderAddButton())}
+      {!profileProjects?.length && addable && renderAddButton()}
     </View>
   );
 };
