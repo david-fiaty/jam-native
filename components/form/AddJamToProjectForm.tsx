@@ -39,9 +39,8 @@ const AddJamToProjectForm = () => {
     setIsProcessing(false);
   };
 
-  const toggleItemSelection = (data: any) => {
-    console.log(data)
-
+  const toggleItemSelection = (idArray: any) => {
+    setSelectedIds(idArray);
   };
 
   useEffect(() => {
