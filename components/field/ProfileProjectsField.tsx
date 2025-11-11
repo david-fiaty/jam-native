@@ -9,6 +9,7 @@ import SpinnerView from "../view/SpinnerView";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
 import ModalManager from "@/manager/ModalManager";
+import IconView from "../view/IconView";
 
 type Props = {
   idArray?: any;
@@ -83,6 +84,12 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
     return (
       <TouchableOpacity onPress={() => onPressEvent(row)}>
         {output}
+
+        {true && (
+          <View style={styles.selectedItem}>
+            <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+          </View> 
+        )} 
       </TouchableOpacity>
     );
   };
@@ -135,6 +142,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: Layout.space.base,
     flex: 1,
+  },
+  selectedItem: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
   },
 });
 
