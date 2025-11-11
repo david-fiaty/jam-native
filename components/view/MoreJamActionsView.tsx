@@ -46,37 +46,37 @@ const MoreJamActionsView = ({ jamId }: Props) => {
 
   const actions: any = [
     {
-      label: i18n.t('Save Jam'),
+      label: i18n.t('Save JAM!'),
       icon: 'save',
       canDisplay: () => true,
       onPress: () => saveJam(),
     },
     {
-      label: i18n.t('Like Jam'),
+      label: i18n.t('Like JAM!'),
       icon: 'like',
       canDisplay: () => true,
       onPress: () => likeJam(),
     },
     {
-      label: i18n.t('Share Jam'),
+      label: i18n.t('Share JAM!'),
       icon: 'share',
       canDisplay: () => true,
       onPress: () => EntityManager.shareJam(jamId),
     },
     {
-      label: i18n.t('Add Jam to project'),
+      label: i18n.t('Add JAM! to project'),
       icon: 'plus',
       canDisplay: () => isEntityOwner,
       onPress: () => ModalManager.toggleModal('AddJamToProjectForm', { jamId: jamId }),
     },
     {
-      label: i18n.t('Edit Jam'),
+      label: i18n.t('Edit JAM!'),
       icon: 'edit',
       canDisplay: () => isEntityOwner,
       onPress: () => ModalManager.toggleModal('JamForm', { jamId: jamId }),
     },
     {
-      label: i18n.t('Report Jam'),
+      label: i18n.t('Report JAM!'),
       icon: 'report',
       canDisplay: () => !isEntityOwner,
       onPress: () => {
@@ -106,12 +106,12 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       },
     },
     {
-      label: i18n.t('Delete Jam'),
+      label: i18n.t('Delete JAM!'),
       icon: 'delete',
       canDisplay: () => isEntityOwner,
       onPress: () => {
         Alert.alert(
-          i18n.t('Report'),
+          i18n.t('Delete JAM!'),
           i18n.t('This item will be deleted. Would you like to proceed?'),
           [
             {
