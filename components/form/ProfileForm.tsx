@@ -123,8 +123,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
         rules={['required']}
         label={i18n.t('Profile Image')}
         value={formData?.profile_picture?.url || ''}
-        preview={true} 
-        multiple={false}
       />
 
       <SelectListField

@@ -15,9 +15,6 @@ type Props = {
   rules?: any;
   label?: any;
   value?: any;
-  placeholder?: string;
-  preview?: boolean;
-  multiple?: any;
   mediaTypes?: any;
   onSelectItem?: (data: any) => void;
   onDeleteItem?: (data: any) => void;
@@ -30,14 +27,13 @@ const ProfileImageField = ({
   rules,
   label,
   value,
-  placeholder,
-  preview,
-  multiple,
   mediaTypes,
   onSelectItem,
   onDeleteItem
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [currentImageUrl, setCurrentImageUrl] = useState<string>('');
+  const [currentImageExists, setCurrentImageExists] = useState<boolean>(false);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
   const imageSize: any = MediaManager.getThumbnailSize();
@@ -55,21 +51,34 @@ const ProfileImageField = ({
     }
   };
 
-  const updatePreviewSelection = (data: any) => {
-    setSelectedPreview([data.fileName]);
+  const togglePreviewSelection = (uri: string) => {
+    if (selectedPreview.includes(uri)) {
+      setSelectedPreview([]);
+    }
+    else {
+      setSelectedPreview([uri]);
+    }
   };
 
-  const renderImagePreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.fileName);
-    const imageStyle = {
+  const isImagePreviewSelected = (uri: string) => {
+    return selectedPreview.includes(uri);
+  };
+
+  const getImagePreviewStyles = (isSelected: boolean) => {
+    return {
       ...styles.mediaPreview,
       ...isSelected ? styles.selectedPreview : {},
     };
+  };
+
+  const renderImagePreview = (data: any) => {
+    const isSelected: boolean = isImagePreviewSelected(data.fileName);
+    const imageStyle: any = getImagePreviewStyles(isSelected);
 
     return (
       <TouchableOpacity
         key={data.uri}
-        onPress={() => updatePreviewSelection(data)}
+        onPress={() => togglePreviewSelection(data.fileName)}
       >
         <ImageView
           key={data.uri}
@@ -99,7 +108,7 @@ const ProfileImageField = ({
       aspect: [4, 3],
       quality: 1,
       base64: true,
-      allowsMultipleSelection: (multiple === true ? true : false),
+      allowsMultipleSelection: false,
     });
   };
 
@@ -123,7 +132,12 @@ const ProfileImageField = ({
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedMedia(value ? [value] : []);
+      (async () => {
+        let imageUrl: any = MediaManager.getImageUrl(value);
+        setCurrentImageUrl(imageUrl);
+        setCurrentImageExists(await MediaManager.imageExists(imageUrl));
+      })();
+
       setIsLoaded(true);
     }
   }, [isLoaded, value]);
@@ -133,7 +147,7 @@ const ProfileImageField = ({
       {FormManager.renderLabel(label, rules)}
 
       <BoxView direction="row" align="center">
-        {!selectedMedia?.length && (
+        {!selectedMedia?.length && !currentImageExists && (
           <TouchableOpacity onPress={pickImage}>
             <BoxView 
               direction="row" 
@@ -152,15 +166,13 @@ const ProfileImageField = ({
           </TouchableOpacity>
         )}
 
-        {selectedMedia?.length > 0 && preview &&
+        {selectedMedia?.length > 0 &&
           <BoxView 
             direction="row" 
             align="flex-start" 
             justify="left" 
           >
-            {selectedMedia.map((data: any) => {
-              if (data?.uri) return renderImagePreview(data);
-            })}
+            {renderImagePreview(selectedMedia[0])}
           </BoxView>
         }
       </BoxView>
