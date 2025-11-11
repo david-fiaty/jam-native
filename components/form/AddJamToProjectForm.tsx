@@ -57,6 +57,7 @@ const AddJamToProjectForm = () => {
 
       <DividerView />
       
+      <TextView>{i18n.t('Select projects from your profile')}:</TextView>
       <ProfileProjectsField
         idArray={profileData?.profile_projects || []}
         emptyMessage={i18n.t('No data available.')}
