@@ -54,7 +54,6 @@ const AddJamToProjectForm = () => {
       scroll={true}
       style={Layout.formContainer}
     >
-
       <DividerView />
       
       <TextView>{i18n.t('Select projects from your profile')}:</TextView>
@@ -62,6 +61,7 @@ const AddJamToProjectForm = () => {
         idArray={profileData?.profile_projects || []}
         emptyMessage={i18n.t('No data available.')}
         isPublic={false}
+        onItemPress={(row: any) => console.log(row) }
         //addable={true}
       />
 
