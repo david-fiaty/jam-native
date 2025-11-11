@@ -159,9 +159,7 @@ const ProfileImageField = ({
             align="flex-start" 
             justify="left" 
           >
-            {selectedMedia.map((data: any) => {
-              if (data?.uri) return renderImagePreview(data);
-            })}
+            {renderImagePreview(selectedMedia[0])}
           </BoxView>
         }
       </BoxView>
