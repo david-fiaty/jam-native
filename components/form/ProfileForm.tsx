@@ -8,7 +8,6 @@ import ButtonView from "@/components/view/ButtonView";
 import i18n from "@/translation/i18n";
 import UserManager from "@/manager/UserManager";
 import ScreenManager from "@/manager/ScreenManager";
-import SpinnerView from "@/components/view/SpinnerView";
 import FormManager from "@/manager/FormManager";
 import ProfileFormPersonal from "./profile-form/ProfileFormPersonal";
 import ProfileFormOrganization from "./profile-form/ProfileFormOrganization";
@@ -112,8 +111,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       }
     })();
   }, [isLoaded]);
-
-  if (!isLoaded) return <SpinnerView />;
 
   return (
     <View style={Layout.formContainer}>
