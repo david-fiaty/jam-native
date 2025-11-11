@@ -15,20 +15,26 @@ type Props = {
   isPublic?: boolean;
   emptyMessage?: any;
   addable?: boolean;
+  onItemPress?: (row: any) => void;
 };
 
 const numColumns = 3;
 
-const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
+const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, onItemPress }: Props) => {
   const [profileProjects, setProfileProjects] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
-  const onItemPress = (row: any) => {
-    ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
-      projectId: row?.item?.id,
-      title: row?.item?.title,
-      itemData: JSON.stringify(row?.item),
-    });
+  const onPressEvent = (row: any) => {
+    if (onItemPress) {
+      onItemPress(row);
+    }
+    else {
+      ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
+        projectId: row?.item?.id,
+        title: row?.item?.title,
+        itemData: JSON.stringify(row?.item),
+      });
+    }
   };
 
   const renderAddButton = () => {
@@ -60,7 +66,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     }
 
     return (
-      <TouchableOpacity onPress={() => onItemPress(row)}>
+      <TouchableOpacity onPress={() => onPressEvent(row)}>
         {output}
       </TouchableOpacity>
     );
