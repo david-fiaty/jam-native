@@ -27,14 +27,22 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
   const imageSize = MediaManager.getThumbnailSize();
 
   const onPressEvent = (row: any) => {
-    if (onItemPress) {
-      if (selectable) {
-        onItemPress(row);
+    if (onItemPress && selectable) {
+      let idArray: any[] = [...(selectedIds || [])];
+
+      if (idArray.includes(row.item.id)) {
+        idArray = idArray.filter((id: any)=> id != row.item.id);
       }
       else {
-        onItemPress(row);
+        idArray.push(row.item.id);
       }
+
+      setSelectedIds(idArray);
+      onItemPress(idArray);
     } 
+    else if (onItemPress) {
+      onItemPress(row);
+    }
     else {
       ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
         projectId: row?.item?.id,
