@@ -70,6 +70,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
   const renderItem = (row: any) => {
     let output: any = null;
     let imageUrl: any = row?.item?.firstJam?.medias?.[0]?.url;
+    let isSelected: boolean = (selectedIds || []).includes(row.item.id);
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
@@ -85,7 +86,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
       <TouchableOpacity onPress={() => onPressEvent(row)}>
         {output}
 
-        {true && (
+        {isSelected && (
           <View style={styles.selectedItem}>
             <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
           </View> 
