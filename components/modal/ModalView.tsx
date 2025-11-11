@@ -255,7 +255,7 @@ const ModalView = ({ currentSection, style }: Props) => {
       },
       {
         id: 'AddJamToProjectForm',
-        title: i18n.t('Add JAM! to projects'),
+        title: i18n.t('Add JAM! to project'),
         render: (params: any) => <AddJamToProjectForm {...params} />,
       },
       {
