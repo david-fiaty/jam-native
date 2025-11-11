@@ -9,6 +9,7 @@ import SpinnerView from "../view/SpinnerView";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
 import ModalManager from "@/manager/ModalManager";
+import IconView from "../view/IconView";
 
 type Props = {
   idArray?: any;
@@ -28,15 +29,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
 
   const onPressEvent = (row: any) => {
     if (onItemPress && selectable) {
-      let idArray: any[] = [...(selectedIds || [])];
-
-      if (idArray.includes(row.item.id)) {
-        idArray = idArray.filter((id: any)=> id != row.item.id);
-      }
-      else {
-        idArray.push(row.item.id);
-      }
-
+      let idArray: any[] = [row.item.id];
       setSelectedIds(idArray);
       onItemPress(idArray);
     } 
@@ -69,6 +62,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
   const renderItem = (row: any) => {
     let output: any = null;
     let imageUrl: any = row?.item?.firstJam?.medias?.[0]?.url;
+    let isSelected: boolean = (selectedIds || []).includes(row.item.id);
 
     if (row?.item?.id == "addItem") {
       output = renderAddButton();
@@ -83,6 +77,12 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, select
     return (
       <TouchableOpacity onPress={() => onPressEvent(row)}>
         {output}
+
+        {isSelected && (
+          <View style={styles.selectedItem}>
+            <IconView name="checkmark" theme="primary" size={12} padding={3.5} />
+          </View> 
+        )} 
       </TouchableOpacity>
     );
   };
@@ -135,6 +135,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: Layout.space.base,
     flex: 1,
+  },
+  selectedItem: {
+    position: 'absolute',
+    top: 5,
+    right: 5,
   },
 });
 
