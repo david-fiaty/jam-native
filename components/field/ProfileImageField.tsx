@@ -132,7 +132,34 @@ const ProfileImageField = ({
   return (
     <>
       {FormManager.renderLabel(label, rules)}
-      
+
+      <BoxView direction="row" align="center">
+        {/*!selectedMedia?.length*/ true && (
+          <TouchableOpacity onPress={pickImage}>
+            <BoxView direction="row" align="center" justify="flex-start" style={styles.iconContainer}>
+              <IconView name="image" theme="secondary" size={26} padding={48} radius="round" />
+            </BoxView>
+          </TouchableOpacity>
+        )}
+
+
+        {selectedMedia?.length > 0 && preview &&
+          <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
+            {selectedMedia.map((data: any) => {
+              if (data?.uri) return renderImagePreview(data);
+            })}
+          </BoxView>
+        }
+      </BoxView>
+
+      {FormManager.renderError(fieldKey, parentKey)}
+    </>
+  );
+
+  return (
+    <>
+      {FormManager.renderLabel(label, rules)}
+
       <View style={styles.container}>
         <TouchableOpacity onPress={pickImage}>
           <InputTextField
@@ -158,6 +185,9 @@ const ProfileImageField = ({
 
 const styles = StyleSheet.create({
   container: {},
+  iconContainer: {
+    width: '100%',
+  },
   previewContainer: {
     paddingVertical: Layout.space.base,
     gap: Layout.space.base * 1,
