@@ -38,6 +38,10 @@ const AddJamToProjectForm = () => {
     setIsProcessing(false);
   };
 
+  const toggleItemSelection = (row: any) => {
+    console.log(row.item.id, row.item.name)
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setProfileData(userState.profileData)
@@ -61,7 +65,7 @@ const AddJamToProjectForm = () => {
         idArray={profileData?.profile_projects || []}
         emptyMessage={i18n.t('No data available.')}
         isPublic={false}
-        onItemPress={(row: any) => console.log(row) }
+        onItemPress={toggleItemSelection}
         //addable={true}
       />
 
