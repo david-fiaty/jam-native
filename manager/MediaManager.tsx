@@ -67,11 +67,9 @@ class MediaManager {
 
   imageExists = async (url: string): Promise<boolean> => {
     try {
-      const result = await Image.prefetch(url);
-
-      console.log(result)
-      return result;
-    } catch {
+      const response = await fetch(url, { method: 'GET' });
+      return response.ok;
+    } catch (error) {
       return false;
     }
   }
