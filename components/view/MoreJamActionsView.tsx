@@ -67,7 +67,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
       label: i18n.t('Add Jam to project'),
       icon: 'plus',
       canDisplay: () => isEntityOwner,
-      onPress: () => ModalManager.toggleModal('AddJamToProjectForm', { jamId: jamId }), // Todo - Update component
+      onPress: () => ModalManager.toggleModal('AddJamToProjectForm', { jamId: jamId }),
     },
     {
       label: i18n.t('Edit Jam'),
