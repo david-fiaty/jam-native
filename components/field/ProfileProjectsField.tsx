@@ -1,13 +1,11 @@
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { useState, useEffect } from "react";
-import { useRouter } from "expo-router";
 import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
 import ListView from "../view/ListView";
 import EntityManager from "@/manager/EntityManager";
 import SpinnerView from "../view/SpinnerView";
-import SectionManager from "@/manager/SectionManager";
 import MediaManager from "@/manager/MediaManager";
 import AddItemButton from "../button/AddItemButton";
 import ModalManager from "@/manager/ModalManager";
@@ -17,21 +15,41 @@ type Props = {
   isPublic?: boolean;
   emptyMessage?: any;
   addable?: boolean;
+  selectable?: boolean;
+  onItemPress?: (row: any) => void;
 };
 
 const numColumns = 3;
 
-const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Props) => {
-  const router = useRouter();
+const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, selectable, onItemPress }: Props) => {
+  const [selectedIds, setSelectedIds] = useState<any[]>([]);
   const [profileProjects, setProfileProjects] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
-  const onItemPress = (row: any) => {
-    ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
-      projectId: row?.item?.id,
-      title: row?.item?.title,
-      itemData: JSON.stringify(row?.item),
-    });
+  const onPressEvent = (row: any) => {
+    if (onItemPress && selectable) {
+      let idArray: any[] = [...(selectedIds || [])];
+
+      if (idArray.includes(row.item.id)) {
+        idArray = idArray.filter((id: any)=> id != row.item.id);
+      }
+      else {
+        idArray.push(row.item.id);
+      }
+
+      setSelectedIds(idArray);
+      onItemPress(idArray);
+    } 
+    else if (onItemPress) {
+      onItemPress(row);
+    }
+    else {
+      ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
+        projectId: row?.item?.id,
+        title: row?.item?.title,
+        itemData: JSON.stringify(row?.item),
+      });
+    }
   };
 
   const renderAddButton = () => {
@@ -63,7 +81,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
     }
 
     return (
-      <TouchableOpacity onPress={() => onItemPress(row)}>
+      <TouchableOpacity onPress={() => onPressEvent(row)}>
         {output}
       </TouchableOpacity>
     );
@@ -104,7 +122,7 @@ const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable }: Prop
         />
       )}
 
-      {!profileProjects?.length && (renderAddButton())}
+      {!profileProjects?.length && addable && renderAddButton()}
     </View>
   );
 };
