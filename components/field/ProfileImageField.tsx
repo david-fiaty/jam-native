@@ -3,11 +3,8 @@ import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import * as ImagePicker from 'expo-image-picker';
 import ImageView from '../view/ImageView';
-import TextView from '../view/TextView';
 import BoxView from '../view/BoxView';
 import IconView from '../view/IconView';
-import MediaManager from '@/manager/MediaManager';
-import InputTextField from "./InputTextField";
 import FormManager from "@/manager/FormManager";
 
 type Props = {
@@ -42,10 +39,11 @@ const ProfileImageField = ({
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedMedia, setSelectedMedia] = useState<any>([]);
   const [selectedPreview, setSelectedPreview] = useState<any>([]);
-  const imageSize: any = MediaManager.getThumbnailSize();
+  const imageSize: any = 122;
 
   const deleteMedia = (data: any) => {
     let mediaList: any[] = [];
+    
     setSelectedMedia(mediaList);
 
     if (onDeleteItem) {
@@ -75,8 +73,8 @@ const ProfileImageField = ({
         <ImageView
           key={data.uri}
           uri={data.uri}
-          width={imageSize.width}
-          height={imageSize.height}
+          width={imageSize}
+          height={imageSize}
           resizeMode="cover"
           style={imageStyle}
         />
@@ -136,14 +134,29 @@ const ProfileImageField = ({
       <BoxView direction="row" align="center">
         {!selectedMedia?.length && (
           <TouchableOpacity onPress={pickImage}>
-            <BoxView direction="row" align="center" justify="flex-start" style={styles.iconContainer}>
-              <IconView name="image" theme="secondary" size={26} padding={48} radius="round" />
+            <BoxView 
+              direction="row" 
+              align="center" 
+              justify="flex-start" 
+              style={styles.iconContainer}
+            >
+              <IconView 
+                name="image" 
+                theme="secondary" 
+                size={26} 
+                padding={48} 
+                radius="round" 
+              />
             </BoxView>
           </TouchableOpacity>
         )}
 
         {selectedMedia?.length > 0 && preview &&
-          <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
+          <BoxView 
+            direction="row" 
+            align="flex-start" 
+            justify="left" 
+          >
             {selectedMedia.map((data: any) => {
               if (data?.uri) return renderImagePreview(data);
             })}
@@ -154,42 +167,12 @@ const ProfileImageField = ({
       {FormManager.renderError(fieldKey, parentKey)}
     </>
   );
-
-  return (
-    <>
-      {FormManager.renderLabel(label, rules)}
-
-      <View style={styles.container}>
-        <TouchableOpacity onPress={pickImage}>
-          <InputTextField
-            readOnly={true}
-            placeholder={placeholder}
-            rightIcon={<IconView name="image" theme="transparent" />}
-          />
-        </TouchableOpacity>
-
-        {selectedMedia?.length > 0 && preview &&
-          <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-            {selectedMedia.map((data: any) => {
-              if (data?.uri) return renderImagePreview(data);
-            })}
-          </BoxView>
-        }
-      </View>
-
-      {FormManager.renderError(fieldKey, parentKey)}
-    </>
-  );
 };
 
 const styles = StyleSheet.create({
   container: {},
   iconContainer: {
     width: '100%',
-  },
-  previewContainer: {
-    paddingVertical: Layout.space.base,
-    gap: Layout.space.base * 1,
   },
   mediaPreview: {
     borderRadius: Layout.radius.round,
