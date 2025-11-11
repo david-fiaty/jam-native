@@ -15,19 +15,26 @@ type Props = {
   isPublic?: boolean;
   emptyMessage?: any;
   addable?: boolean;
+  selectable?: boolean;
   onItemPress?: (row: any) => void;
 };
 
 const numColumns = 3;
 
-const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, onItemPress }: Props) => {
+const ProfileProjectsField = ({ idArray, isPublic, emptyMessage, addable, selectable, onItemPress }: Props) => {
+  const [selectedIds, setSelectedIds] = useState<any[]>([]);
   const [profileProjects, setProfileProjects] = useState<any[]>([]);
   const imageSize = MediaManager.getThumbnailSize();
 
   const onPressEvent = (row: any) => {
     if (onItemPress) {
-      onItemPress(row);
-    }
+      if (selectable) {
+        onItemPress(row);
+      }
+      else {
+        onItemPress(row);
+      }
+    } 
     else {
       ModalManager.toggleModal(isPublic ? 'PublicProjectSection' : 'PrivateProjectSection', {
         projectId: row?.item?.id,
