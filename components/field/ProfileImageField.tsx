@@ -1,187 +1,113 @@
-import { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { Layout } from '@/constants/Layout';
-import * as ImagePicker from 'expo-image-picker';
-import ImageView from '../view/ImageView';
-import TextView from '../view/TextView';
-import BoxView from '../view/BoxView';
-import IconView from '../view/IconView';
+import { useState, useEffect } from 'react';
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { Layout } from "@/constants/Layout";
+import BoxView from "../view/BoxView";
+import MediaPickerField from './MediaPickerField';
+import ImageView from "../view/ImageView";
+import IconView from "../view/IconView";
 import MediaManager from '@/manager/MediaManager';
-import InputTextField from "./InputTextField";
-import FormManager from "@/manager/FormManager";
+import FormManager from '@/manager/FormManager';
 
 type Props = {
   resource?: any;
   fieldKey?: any;
   parentKey?: any;
   rules?: any;
-  label?: any;
   value?: any;
-  placeholder?: string;
-  preview?: boolean;
-  multiple?: any;
-  mediaTypes?: any;
-  onSelectItem?: (data: any) => void;
-  onDeleteItem?: (data: any) => void;
+  label?: any;
+  placeholder?: any;
+  onChangeValue?: (data: any) => void;
 };
 
-const ProfileImageField = ({
-  resource,
-  fieldKey,
-  parentKey,
-  rules,
-  label,
-  value,
-  placeholder,
-  preview,
-  multiple,
-  mediaTypes,
-  onSelectItem,
-  onDeleteItem
-}: Props) => {
+const ProfileImageField = ({ resource, fieldKey, parentKey, rules, value, label, placeholder, onChangeValue }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [selectedMedia, setSelectedMedia] = useState<any>([]);
-  const [selectedPreview, setSelectedPreview] = useState<any>([]);
-  const imageSize: any = MediaManager.getThumbnailSize();
+  const [uri, setUri] = useState<any>('');
 
-  const deleteMedia = (data: any) => {
-    let mediaList = [...selectedMedia];
-    mediaList = mediaList.filter((item: any) => item.fileName !== data.fileName);
-    setSelectedMedia(mediaList);
-
-    if (onDeleteItem) {
-      onDeleteItem(mediaList);
+  const getImageUrl = (uri: any) => {
+    if (uri.startsWith('file://')) {
+      return uri;
     }
     else {
-      FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
+      return MediaManager.getImageUrl(uri);
     }
   };
 
-  const updatePreviewSelection = (data: any) => {
-    let mediaList = [...selectedPreview];
-    if (!selectedPreview.includes(data.fileName)) {
-      mediaList.push(data.fileName);
-      setSelectedPreview(mediaList);
-    }
-    else {
-      mediaList = mediaList.filter((item: any) => item.fileName === data.fileName);
-      setSelectedPreview(mediaList);
-    }
+  const onSelectItem = (data: any) => {
+    let uri: string = getImageUrl(data[0].uri);
+    setUri(uri);
+    if (onChangeValue) onChangeValue(data);
   };
 
-  const renderImagePreview = (data: any) => {
-    const isSelected = selectedPreview.includes(data.fileName);
-    const imageStyle = {
-      ...styles.mediaPreview,
-      ...isSelected ? styles.selectedPreview : {},
-    };
-
-    return (
-      <TouchableOpacity
-        key={data.uri}
-        onPress={() => updatePreviewSelection(data)}
-      >
-        <ImageView
-          key={data.uri}
-          uri={data.uri}
-          width={imageSize.width}
-          height={imageSize.height}
-          resizeMode="cover"
-          style={imageStyle}
-        />
-
-        {isSelected &&
-          <TouchableOpacity
-            style={styles.deleteMedia}
-            onPress={() => deleteMedia(data)}
-          >
-            <IconView name="delete" theme="primary" size={12} padding={3.5} />
-          </TouchableOpacity>
-        }
-      </TouchableOpacity>
-    );
-  };
-
-  const launchBrowser = async () => {
-    return await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: mediaTypes || [],
-      allowsEditing: false,
-      aspect: [4, 3],
-      quality: 1,
-      base64: true,
-      allowsMultipleSelection: (multiple === true ? true : false),
-    });
-  };
-
-  const pickImage = async () => {
-    let result: any = await launchBrowser();
-
-    if (!result.canceled && result?.assets?.length) {
-      let mediaList: any = [...selectedMedia];
-      for (const row of result?.assets) {
-        let mediaExists: boolean = mediaList.some((item: any) => item.fileName === row.fileName);
-        if (!mediaExists) mediaList.push(row);
-      }
-
-      setSelectedMedia(mediaList);
-      setSelectedPreview([]);
-
-      if (onSelectItem) {
-        onSelectItem(mediaList);
-      }
-      else {
-        FormManager.updateField(resource, fieldKey, mediaList, rules, parentKey);
-      }
-    }
+  const deleteImage = () => {
+    setUri('');
   };
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedMedia(value || []);
+      setUri(value ? getImageUrl(value) : '');
       setIsLoaded(true);
     }
-  }, [isLoaded, value]);
+  }, [value, isLoaded]);
 
   return (
     <>
-      {FormManager.renderLabel(label, rules)}
-      
-      <View style={styles.container}>
-        <TouchableOpacity onPress={pickImage}>
-          <InputTextField
-            readOnly={true}
-            placeholder={placeholder}
-            rightIcon={<IconView name="image" theme="transparent" />}
-          />
-        </TouchableOpacity>
+      <MediaPickerField
+        resource={resource}
+        fieldKey={fieldKey}
+        parentKey={parentKey}
+        rules={rules}
+        mediaTypes={['images']}
+        multiple={false}
+        label={label}
+        preview={true}
+        /*
+        label={
+          <BoxView direction="row" align="center">
+            {!uri?.length && (
+              <BoxView direction="row" align="center" justify="flex-start" style={styles.iconContainer}>
+                <IconView name="image" theme="secondary" size={26} padding={48} radius="round" />
+              </BoxView>
+            )}
 
-        {selectedMedia?.length > 0 && preview &&
-          <BoxView direction="row" align="flex-start" justify="left" style={styles.previewContainer}>
-            {selectedMedia.map((data: any) => {
-              if (data?.uri) return renderImagePreview(data);
-            })}
+            {uri?.length > 0 && (
+              <BoxView
+                direction="row"
+                align="center"
+                justify="space-between"
+              >
+                <ImageView
+                  uri={uri}
+                  width={132}
+                  height={132}
+                  resizeMode="cover"
+                  style={styles.imagePreview}
+                />
+
+                <TouchableOpacity
+                  style={styles.deleteImage}
+                  onPress={deleteImage}
+                >
+                  <IconView name="delete" theme="primary" size={12} padding={3.5} />
+                </TouchableOpacity>
+              </BoxView>
+            )}
           </BoxView>
         }
-      </View>
-
-      {FormManager.renderError(fieldKey, parentKey)}
+          */
+        onSelectItem={onSelectItem}
+      />
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  previewContainer: {
-    paddingVertical: Layout.space.base,
-    gap: Layout.space.base * 1,
+  iconContainer: {
+    width: '100%',
   },
-  mediaPreview: {
+  imagePreview: {
     borderRadius: Layout.radius.round,
   },
-  selectedPreview: {
-    opacity: 0.7,
-  },
-  deleteMedia: {
+  deleteImage: {
     position: 'absolute',
     top: 5,
     right: 5,
