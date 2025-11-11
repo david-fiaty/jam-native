@@ -64,6 +64,21 @@ class MediaManager {
 
     return output;
   }
+
+  imageExists = async (url: string): Promise<boolean> => {
+    try {
+      const head = await fetch(url, { method: 'HEAD' });
+      if (head.ok) return true;
+
+      const get = await fetch(url, {
+        method: 'GET',
+        headers: { Range: 'bytes=0-10' },
+      });
+      return get.ok;
+    } catch (error) {
+      return false;
+    }
+  };
 }
 
 const styles: any = {
