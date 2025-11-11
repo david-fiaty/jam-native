@@ -396,7 +396,7 @@ class ContentManager {
         "code": "cr",
       },
       {
-        "name": i18n.t("Cote d'Ivoire"),
+        "name": i18n.t("Ivory Coast"),
         "prefix": "+225",
         "code": "ci",
       },
