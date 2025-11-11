@@ -12,7 +12,11 @@ import DividerView from '../view/DividerView';
 import ModalManager from '@/manager/ModalManager';
 import ProfileProjectsField from '../field/ProfileProjectsField';
 
-const AddJamToProjectForm = () => {
+type Props = {
+  jamId: any;
+};
+
+const AddJamToProjectForm = ( { jamId }: Props ) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<any>({});
   const [selectedIds, setSelectedIds] = useState<any[]>([]);
@@ -20,12 +24,10 @@ const AddJamToProjectForm = () => {
   const userState: any = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
-    return false;
-
     setIsProcessing(true);
     let result: any = await EntityManager.addJamToProject(selectedIds[0], {
       profile_id: profileData?.id,
-      items_ids: [entityId],
+      items_ids: [jamId],
     });
 
     let message: any = {
@@ -45,7 +47,7 @@ const AddJamToProjectForm = () => {
 
   useEffect(() => {
     if (!isLoaded) {
-      setProfileData(userState.profileData)
+      setProfileData(userState.profileData);
       setIsLoaded(true);
     }
   }, [isLoaded, userState]);
