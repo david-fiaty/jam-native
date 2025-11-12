@@ -364,7 +364,7 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The JAM! was successfully deleted.');
-      this.updateProfileReference('deleted_jams', entityId);
+      this.updateLocalReference('deleted_jams', entityId);
     }
 
     return {
@@ -417,6 +417,10 @@ class UserManager {
 
     Store.dispatch(setProfileData(profileData));
   }
+
+  async updateLocalReference(key: string, value: any) {
+    // Todo - Update local storage with deleted item id
+  } 
 
   async getViewedNotifications() {
     let idArray: any = '';
