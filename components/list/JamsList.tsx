@@ -31,8 +31,8 @@ const JamsList = ({ idArray }: Props) => {
     );
   };
 
-  const getListData = async () => {
-    setListData(await EntityManager.getJams(idArray));
+  const getListData = async (itemIds: any[]) => {
+    setListData(await EntityManager.getJams(itemIds));
   };
 
   const fetchListData = async () => {
@@ -58,7 +58,7 @@ const JamsList = ({ idArray }: Props) => {
     (async () => {
       if (!isLoaded) {
         if (idArray?.length > 0) {
-          await getListData();
+          await getListData(idArray);
         }
         else {
           await fetchListData();
