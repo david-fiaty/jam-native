@@ -133,12 +133,16 @@ const MoreJamActionsView = ({ jamId }: Props) => {
               text: i18n.t('Yes'),
               onPress: () => {
                 let result: any = EntityManager.deleteJam(jamId);
-                if (result?.error) {
-                  ScreenManager.showMessage({
+                let message: any = {
                     title: i18n.t('Delete'),
-                    content: i18n.t('Delete action failed, please try again.'),
-                  });
+                    content: i18n.t('The JAM! was successfully deleted.'),
                 }
+
+                if (result?.error) {
+                  message.title = i18n.t('Delete action failed, please try again.');
+                }
+  
+                ScreenManager.showMessage(message);            
               },
             },
           ]
@@ -165,7 +169,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
               <SpinnerView size="small" />
             </View>
           )}
-          
+
           {isProcessing !== item?.showSpinner && (
             <IconView
               name={item?.icon}
