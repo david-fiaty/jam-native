@@ -133,16 +133,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
               text: i18n.t('Yes'),
               onPress: async () => {
                 let result: any = await UserManager.deleteJam(jamId);
-                let message: any = {
-                  title: i18n.t('Delete'),
-                  content: i18n.t('The JAM! was successfully deleted.'),
-                };
-
-                if (result?.error) {
-                  message.title = i18n.t('Delete action failed, please try again.');
-                }
-
-                ScreenManager.showMessage(message);
+                ScreenManager.showMessage(result.message);
               },
             },
           ]
