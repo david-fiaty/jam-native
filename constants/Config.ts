@@ -33,6 +33,7 @@ export const Config: any = {
     currentLanguage: 'language',
     profileData: 'profileData',
     viewedNotifications: 'viewedNotifications', 
+    deletedJams: 'deletedJams',
   },
   forceLogin: {
     enabled: true,
