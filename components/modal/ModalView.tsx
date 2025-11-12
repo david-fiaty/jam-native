@@ -292,10 +292,7 @@ const ModalView = ({ currentSection, style }: Props) => {
         ...{
           showTitle: true,
           showBackButton: true,
-          params: {
-            ...(o?.params || {}),
-            ...(currentModal?.params || {}),
-          },
+          params: {},
           toolbarButton: {},
           editButton: {},
           sectionId: null,
