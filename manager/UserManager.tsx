@@ -420,11 +420,11 @@ class UserManager {
   async updateLocalReference(key: string, value: any) {
     if (ScreenManager.isWeb()) {
       let storedData: any = localStorage.getItem(Config.storageKeys?.[key]);
-      let idArray: any = JSON.parse(storedData || []);
+      let idArray: any = [...new Set([...JSON.parse(storedData || '[]'), value])];
     }
     else {
       let storedData: any = await AsyncStorage.getItem(Config.storageKeys?.[key]);
-      let idArray: any = JSON.parse(storedData || []);
+      let idArray: any = [...new Set([...JSON.parse(storedData || '[]'), value])]; 
     }
   } 
 
