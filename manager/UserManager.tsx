@@ -419,12 +419,16 @@ class UserManager {
 
   async updateLocalReference(key: string, value: any) {
     if (ScreenManager.isWeb()) {
-      let storedData: any = localStorage.getItem(Config.storageKeys?.[key]);
-      let idArray: any = [...new Set([...JSON.parse(storedData || '[]'), value])];
+      let storedData: any = localStorage.getItem(Config.storageKeys[key]);
+      let idArray: any[] = [...new Set([...JSON.parse(storedData || '[]'), value])];
+       
+      localStorage.setItem(Config.storageKeys[key], JSON.stringify(idArray));
     }
     else {
-      let storedData: any = await AsyncStorage.getItem(Config.storageKeys?.[key]);
-      let idArray: any = [...new Set([...JSON.parse(storedData || '[]'), value])]; 
+      let storedData: any = await AsyncStorage.getItem(Config.storageKeys[key]);
+      let idArray: any[] = [...new Set([...JSON.parse(storedData || '[]'), value])]; 
+
+      await AsyncStorage.setItem(Config.storageKeys[key], JSON.stringify(idArray));
     }
   } 
 
