@@ -442,7 +442,7 @@ class UserManager {
       idArray = await AsyncStorage.getItem(Config.storageKeys.viewedNotifications);
     }
 
-    return JSON.parse(idArray || '[]');
+    return JSON.parse(idArray || '[]') || [];
   }
 
   async getDeletedJams() {
@@ -454,8 +454,8 @@ class UserManager {
     else {
       idArray = await AsyncStorage.getItem(Config.storageKeys.deletedJams);
     }
-
-    return JSON.parse(idArray || '[]');
+ 
+    return JSON.parse(idArray || '[]') || [];
   }
 }
 
