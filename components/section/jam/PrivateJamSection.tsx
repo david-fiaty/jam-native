@@ -16,13 +16,12 @@ const PrivateJamSection = ({ jamId, idArray, itemData }: Props) => {
       align="center"
       justify="flex-start"
       style={styles.container}
-      scroll={true}
+      scroll={!idArray?.length}
     >
       {jamId && (
         <JamView
           isPublic={false}
           jamId={jamId}
-          //itemData={itemData}
         />
       )}
 
