@@ -19,8 +19,11 @@ type Props = {
 const MoreJamActionsView = ({ jamId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [isEntityOwner, setIsEntityOwner] = useState<boolean>(false);
+  const [isProcessing, setIsProcessing] = useState<any>(null);
 
   const saveJam = async () => {
+    setIsProcessing('save_jam');
+
     let result: any = await EntityManager.saveJam(jamId);
 
     let message: any = {
@@ -30,9 +33,12 @@ const MoreJamActionsView = ({ jamId }: Props) => {
 
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
+
+    setIsProcessing(null);
   };
 
   const likeJam = async () => {
+    setIsProcessing('like_jam');
     let result: any = await UserManager.likeJam(jamId);
 
     let message: any = {
@@ -42,18 +48,22 @@ const MoreJamActionsView = ({ jamId }: Props) => {
 
     if (result?.error) message.content = i18n.t(result.error)
     ScreenManager.showMessage(message);
+
+    setIsProcessing(null);
   };
 
   const actions: any = [
     {
       label: i18n.t('Save JAM!'),
       icon: 'save',
+      showSpinner: 'save_jam',
       canDisplay: () => true,
       onPress: () => saveJam(),
     },
     {
       label: i18n.t('Like JAM!'),
       icon: 'like',
+      showSpinner: 'like_jam',
       canDisplay: () => true,
       onPress: () => likeJam(),
     },
@@ -144,13 +154,26 @@ const MoreJamActionsView = ({ jamId }: Props) => {
 
     return (
       <TouchableOpacity onPress={onItemPress}>
-        <BoxView direction="row" align="center" justify="flex-start" style={styles.listItem}>
-          <IconView
-            name={item?.icon}
-            theme="tertiary"
-            size={12}
-            padding={6.5}
-          />
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+          style={styles.listItem}
+        >
+          {isProcessing === item?.showSpinner && (
+            <View style={styles.spinnerContainer}>
+              <SpinnerView size="small" />
+            </View>
+          )}
+          
+          {isProcessing !== item?.showSpinner && (
+            <IconView
+              name={item?.icon}
+              theme="tertiary"
+              size={12}
+              padding={6.5}
+            />
+          )}
 
           <TextView>{item?.label}</TextView>
         </BoxView>
@@ -191,8 +214,11 @@ const styles = StyleSheet.create({
   listItem: {
     ...Layout.listItem,
     ...{
-      padding: Layout.space.base/1.3,
+      padding: Layout.space.base / 1.3,
     },
+  },
+  spinnerContainer: {
+    marginLeft: 5,
   },
 });
 
