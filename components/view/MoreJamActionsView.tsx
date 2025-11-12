@@ -25,29 +25,34 @@ const MoreJamActionsView = ({ jamId }: Props) => {
     setIsProcessing('save_jam');
 
     let result: any = await UserManager.saveJam(jamId);
-
-    let message: any = {
-      title: i18n.t('Save Jam'),
-      content: i18n.t('Jam successfully saved.'),
-    };
-
-    if (result?.error) message.content = i18n.t(result.error)
-    ScreenManager.showMessage(message);
+    ScreenManager.showMessage(result.message);
 
     setIsProcessing(null);
   };
 
   const likeJam = async () => {
     setIsProcessing('like_jam');
+
     let result: any = await UserManager.likeJam(jamId);
+    ScreenManager.showMessage(result.message);
 
-    let message: any = {
-      title: i18n.t('Like Jam'),
-      content: i18n.t('Jam successfully liked.'),
-    };
+    setIsProcessing(null);
+  };
 
-    if (result?.error) message.content = i18n.t(result.error)
-    ScreenManager.showMessage(message);
+  const deleteJam = async () => {
+    setIsProcessing('delete_jam');
+
+    let result: any = await UserManager.deleteJam(jamId);
+    ScreenManager.showMessage(result.message);
+
+    setIsProcessing(null);
+  };
+
+  const reportJam = async () => {
+    setIsProcessing('report_jam');
+
+    let result: any = await UserManager.reportItem('jam', jamId);
+    ScreenManager.showMessage(result.message);
 
     setIsProcessing(null);
   };
@@ -88,6 +93,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
     {
       label: i18n.t('Report JAM!'),
       icon: 'report',
+      showSpinner: 'report_jam',
       canDisplay: () => !isEntityOwner,
       onPress: () => {
         Alert.alert(
@@ -101,10 +107,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
             },
             {
               text: i18n.t('Yes'),
-              onPress: async () => {
-                let result: any = await UserManager.reportItem('jam', jamId);
-                ScreenManager.showMessage(result.message);
-              },
+              onPress: async () => reportJam(),
             },
           ]
         );
@@ -113,6 +116,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
     {
       label: i18n.t('Delete JAM!'),
       icon: 'delete',
+      showSpinner: 'delete_jam',
       canDisplay: () => isEntityOwner,
       onPress: () => {
         Alert.alert(
@@ -126,10 +130,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
             },
             {
               text: i18n.t('Yes'),
-              onPress: async () => {
-                let result: any = await UserManager.deleteJam(jamId);
-                ScreenManager.showMessage(result.message);
-              },
+              onPress: async () => deleteJam(),
             },
           ]
         );
