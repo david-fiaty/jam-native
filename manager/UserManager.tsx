@@ -364,7 +364,7 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The JAM! was successfully deleted.');
-      this.updateLocalReference('deleted_jams', entityId);
+      await this.updateLocalReference('deleted_jams', entityId);
     }
 
     return {
