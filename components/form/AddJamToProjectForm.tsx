@@ -9,16 +9,21 @@ import EntityManager from '@/manager/EntityManager';
 import ButtonView from '../view/ButtonView';
 import DividerView from '../view/DividerView';
 import ProfileProjectsField from '../field/ProfileProjectsField';
+import MediaManager from '@/manager/MediaManager';
+import ImageView from '../view/ImageView';
 
 type Props = {
   jamId: any;
 };
 
-const AddJamToProjectForm = ( { jamId }: Props ) => {
-  const [profileData, setProfileData] = useState<any>({});
+const AddJamToProjectForm = ({ jamId }: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
+  const [jamData, setJamData] = useState<any>({});
   const [selectedIds, setSelectedIds] = useState<any[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const userState: any = useSelector((state: any) => state.user);
+  const profileData: any = userState.profileData;
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -43,9 +48,25 @@ const AddJamToProjectForm = ( { jamId }: Props ) => {
     setSelectedIds(idArray);
   };
 
+  const renderJamItem = (row?: any) => {
+    return (
+      <ImageView
+        uri={MediaManager.getImageUrl(row?.medias?.[0]?.url)}
+        width={100}
+        height={100}
+        resizeMode="cover"
+      />
+    );
+  };
+
   useEffect(() => {
-    setProfileData(userState.profileData);
-  }, [userState]);
+    (async () => {
+      if (!isLoaded) {
+        setJamData((await EntityManager.getJams([jamId]))?.[0]);
+        setIsLoaded(true);
+      }
+    })();
+  }, [isLoaded, jamId]);
 
   return (
     <BoxView
@@ -54,22 +75,30 @@ const AddJamToProjectForm = ( { jamId }: Props ) => {
       scroll={true}
       style={Layout.formContainer}
     >
-      <DividerView />
+      <BoxView
+        align="flex-start"
+        justify="flex-start"
+      >
+        <TextView>{i18n.t('Selected JAM!')}</TextView>
+        {renderJamItem(jamData)}
+      </BoxView>
 
-      { /* Todo - Display the jam to add */}
-      
-      <TextView>{i18n.t('Select a project from your profile')}:</TextView>
-      
       <DividerView />
       
-      <ProfileProjectsField
-        idArray={profileData?.profile_projects || []}
-        emptyMessage={i18n.t('No data available.')}
-        isPublic={false}
-        onItemPress={toggleItemSelection}
-        addable={false}
-        selectable={true}
-      />
+      <BoxView
+        align="flex-start"
+        justify="flex-start"
+      >
+        <TextView>{i18n.t('Select a project from your profile')}</TextView>
+        <ProfileProjectsField
+          idArray={profileData?.profile_projects || []}
+          emptyMessage={i18n.t('No data available.')}
+          isPublic={false}
+          onItemPress={toggleItemSelection}
+          addable={false}
+          selectable={true}
+        />
+      </BoxView>
 
       <DividerView />
 
