@@ -232,11 +232,11 @@ class UserManager {
     let geocode: any = await Location.reverseGeocodeAsync(location.coords);
 
     if (geocode.length > 0) {
-      return geocode[0]; 
+      return geocode[0];
     }
 
     return null;
-  } 
+  }
 
   async likeJam(entityId: any) {
     let profileData: any = await this.getProfileData();
@@ -246,7 +246,7 @@ class UserManager {
       content: i18n.t('Could not perform this action. Please try again.'),
     };
 
-    let response = await DataManager.post('likeJam', {
+    let response: any = await DataManager.post('likeJam', {
       profile_id: profileData.id,
       item_id: entityId,
       like_action: 'like',
@@ -274,7 +274,7 @@ class UserManager {
       content: i18n.t('Could not perform this action. Please try again.'),
     };
 
-    let response = await DataManager.post('likeJam', {
+    let response: any = await DataManager.post('likeJam', {
       profile_id: profileData.id,
       item_id: entityId,
       like_action: 'unlike',
@@ -302,7 +302,7 @@ class UserManager {
       content: i18n.t('Could not perform this action. Please try again.'),
     };
 
-    let response = await DataManager.post('saveJam', {
+    let response: any = await DataManager.post('saveJam', {
       profile_id: profileData.id,
       save_items_ids: [entityId],
     });
@@ -329,7 +329,7 @@ class UserManager {
       content: i18n.t('Could not perform this action. Please try again.'),
     };
 
-    let response = await DataManager.post('unsaveJam', {
+    let response: any = await DataManager.post('unsaveJam', {
       profile_id: profileData.id,
       unsave_items_ids: [entityId],
     });
@@ -349,13 +349,29 @@ class UserManager {
   }
 
   async deleteJam(entityId: any) {
-    let profileId = await this.getProfileId();
+    let profileData: any = await this.getProfileData();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Delete'),
+      content: i18n.t('Could not perform the delete action. Please try again.'),
+    };
+
     let response = await DataManager.delete('deleteJam', {
-      profile_id: profileId,
+      profile_id: profileData.id,
       items_ids: [entityId],
     });
 
-    return response;
+    if (!response?.error) {
+      success = true;
+      message.content = i18n.t('The JAM! was successfully deleted.');
+      this.updateProfileReference('deleted_jams', entityId);
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
   }
 
   async likeProject(entityId: any) {
@@ -395,7 +411,9 @@ class UserManager {
     let profileData: any = { ...Store.getState().user.profileData };
     let array: any[] = profileData?.[key] || [];
 
-    profileData[key] = array.includes(value) ? array.filter(v => v !== value) : [...array, value];
+    profileData[key] = array.includes(value) 
+      ? array.filter((v: any) => v !== value) 
+      : [...array, value];
 
     Store.dispatch(setProfileData(profileData));
   }
