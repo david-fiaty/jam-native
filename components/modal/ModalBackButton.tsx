@@ -104,7 +104,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
       {Object.keys(currentModal?.toolbarButton || {})?.length > 0 && renderToolbarButton()}
 
-      {Object.keys(currentModal?.editButton || {})?.length > 0 && renderEditButton()}
+      {Object.keys(currentModal?.editButton || {})?.length > 0 && !currentModal?.params?.idArray?.length && renderEditButton()}
     </BoxView>
   );
 };
