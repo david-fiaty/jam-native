@@ -24,7 +24,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
   const saveJam = async () => {
     setIsProcessing('save_jam');
 
-    let result: any = await EntityManager.saveJam(jamId);
+    let result: any = await UserManager.saveJam(jamId);
 
     let message: any = {
       title: i18n.t('Save Jam'),
