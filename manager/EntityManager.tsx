@@ -54,7 +54,10 @@ class EntityManager {
       items_ids: idArray,
     };
 
-    return await DataManager.get('getJams', { ...defaults, ...options });
+    let data: any[] = await DataManager.get('getJams', { ...defaults, ...options });
+    let deletedIds: any[] = await UserManager.getDeletedJams(); 
+
+    return data.filter((o: any) => !deletedIds.includes(o.id));
   }
 
   async getProfiles(idArray: any) {
