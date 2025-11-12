@@ -348,6 +348,49 @@ class UserManager {
     };
   }
 
+  async deleteJam(entityId: any) {
+    let profileId = await this.getProfileId();
+    let response = await DataManager.delete('deleteJam', {
+      profile_id: profileId,
+      items_ids: [entityId],
+    });
+
+    return response;
+  }
+
+  async likeProject(entityId: any) {
+    let profileId = await this.getProfileId();
+    let response = await DataManager.post('likeProject', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'like',
+    });
+
+    return response;
+  }
+
+  async unlikeProject(entityId: any) {
+    let profileId = await this.getProfileId();
+    let response = await DataManager.post('likeProject', {
+      profile_id: profileId,
+      item_id: entityId,
+      like_action: 'unlike',
+    });
+
+    return response;
+  }
+
+  async unsaveProject(entityId: any) {
+    let profileId = await this.getProfileId();
+    let response = await DataManager.post('unsaveProject', {
+      profile_id: profileId,
+      unsave_items_ids: [entityId],
+    });
+
+    return response;
+  }
+
+
   updateProfileReference(key: string, value: any) {
     let profileData: any = { ...Store.getState().user.profileData };
     let array: any[] = profileData?.[key] || [];
