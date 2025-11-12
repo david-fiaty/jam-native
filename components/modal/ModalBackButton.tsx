@@ -18,6 +18,54 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
     return true;
   };
 
+  const renderEditButton = () => {
+    return (
+      <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
+        <TouchableOpacity
+          onPress={() => ModalManager.toggleModal(currentModal?.editButton?.component, {
+            [currentModal?.editButton?.idField]: currentModal?.params?.[currentModal?.editButton?.idField],
+          })}
+        >
+          <BoxView direction="row" align="center" justify="flex-end">
+            <TextView>{currentModal?.editButton?.label}</TextView>
+
+            {currentModal?.editButton?.icon && (
+              <IconView
+                name={currentModal?.editButton?.icon}
+                theme="transparent"
+                padding={0}
+                size={14}
+              />
+            )}
+          </BoxView>
+        </TouchableOpacity>
+      </BoxView>
+    );
+  };
+
+  const renderToolbarButton = () => {
+    return (
+      <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
+        <TouchableOpacity
+          onPress={() => ModalManager.toggleModal(currentModal?.toolbarButton?.component)}
+        >
+          <BoxView direction="row" align="center" justify="flex-end">
+            <TextView>{currentModal?.toolbarButton?.label}</TextView>
+            
+            {currentModal?.toolbarButton?.icon && (
+              <IconView
+                name={currentModal?.toolbarButton?.icon}
+                theme="transparent"
+                padding={0}
+                size={14}
+              />
+            )}
+          </BoxView>
+        </TouchableOpacity>
+      </BoxView>
+    );
+  };
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -26,7 +74,7 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
 
     return () => backHandler.remove();
   }, []);
-  
+
   if (!visible === true) {
     return <></>;
   }
@@ -54,47 +102,9 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
         </TextView>
       </BoxView>
 
-      {Object.keys(currentModal?.toolbarButton || {})?.length > 0 && (
-        <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
-          <TouchableOpacity
-            onPress={() => ModalManager.toggleModal(currentModal?.toolbarButton?.component)}
-          >
-            <BoxView direction="row" align="center" justify="flex-end">
-              <TextView>{currentModal?.toolbarButton?.label}</TextView>
-              {currentModal?.toolbarButton?.icon && (
-                <IconView
-                  name={currentModal?.toolbarButton?.icon}
-                  theme="transparent"
-                  padding={0}
-                  size={14}
-                />
-              )}
-            </BoxView>
-          </TouchableOpacity>
-        </BoxView>
-      )}
+      {Object.keys(currentModal?.toolbarButton || {})?.length > 0 && renderToolbarButton()}
 
-      {Object.keys(currentModal?.editButton || {})?.length > 0 && (
-        <BoxView direction="row" align="center" justify="flex-end" style={styles.toolbar}>
-          <TouchableOpacity
-            onPress={() => ModalManager.toggleModal(currentModal?.editButton?.component, {
-              [currentModal?.editButton?.idField]: currentModal?.params?.[currentModal?.editButton?.idField],
-            })}
-          >
-            <BoxView direction="row" align="center" justify="flex-end">
-              <TextView>{currentModal?.editButton?.label}</TextView>
-              {currentModal?.editButton?.icon && (
-                <IconView
-                  name={currentModal?.editButton?.icon}
-                  theme="transparent"
-                  padding={0}
-                  size={14}
-                />
-              )}
-            </BoxView>
-          </TouchableOpacity>
-        </BoxView>
-      )}
+      {Object.keys(currentModal?.editButton || {})?.length > 0 && renderEditButton()}
     </BoxView>
   );
 };
