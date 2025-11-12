@@ -18,7 +18,6 @@ type Props = {
 
 const AddJamToProjectForm = ({ jamId }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-
   const [jamData, setJamData] = useState<any>({});
   const [selectedIds, setSelectedIds] = useState<any[]>([]);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
