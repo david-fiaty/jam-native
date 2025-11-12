@@ -24,6 +24,7 @@ const AddJamToProjectForm = ({ jamId }: Props) => {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const userState: any = useSelector((state: any) => state.user);
   const profileData: any = userState.profileData;
+  const imageSize: any = MediaManager.getThumbnailSize();
 
   const submitForm = async () => {
     setIsProcessing(true);
@@ -52,8 +53,8 @@ const AddJamToProjectForm = ({ jamId }: Props) => {
     return (
       <ImageView
         uri={MediaManager.getImageUrl(row?.medias?.[0]?.url)}
-        width={100}
-        height={100}
+        width={imageSize.width}
+        height={imageSize.height}
         resizeMode="cover"
       />
     );
@@ -79,17 +80,17 @@ const AddJamToProjectForm = ({ jamId }: Props) => {
         align="flex-start"
         justify="flex-start"
       >
-        <TextView>{i18n.t('Selected JAM!')}</TextView>
+        <TextView>{i18n.t('Selected item')}</TextView>
         {renderJamItem(jamData)}
       </BoxView>
 
       <DividerView />
-      
+
       <BoxView
         align="flex-start"
         justify="flex-start"
       >
-        <TextView>{i18n.t('Select a project from your profile')}</TextView>
+        <TextView>{i18n.t('Select a project from your profile')}*</TextView>
         <ProfileProjectsField
           idArray={profileData?.profile_projects || []}
           emptyMessage={i18n.t('No data available.')}
@@ -106,6 +107,7 @@ const AddJamToProjectForm = ({ jamId }: Props) => {
         label={i18n.t('Submit')}
         isProcessing={isProcessing}
         onPress={submitForm}
+        disabled={!selectedIds?.length}
       />
     </BoxView>
   );
