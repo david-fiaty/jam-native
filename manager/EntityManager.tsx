@@ -80,17 +80,30 @@ class EntityManager {
     return await DataManager.get('getProjects', { ...defaults, ...options });
   }
 
-  async getProfile(profileId: number, options?: any) {
+  async getProfile(entityId: number, options?: any) {
     options = options || {};
     let defaults = {};
-    let profileData = [];
-    let variables: any = { '[profile_id]': profileId };
+    let entityData = {};
+    let variables: any = { '[profile_id]': entityId };
 
-    if (profileId > 0) {
-      profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
+    if (entityId > 0) {
+      entityData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
-    return profileData || {};
+    return entityData || {};
+  }
+
+  async getJam(entityId: number, options?: any) {
+    options = options || {};
+    let defaults = {};
+    let entityData = {};
+    let variables: any = { '[jam_id]': entityId };
+
+    if (entityId > 0) {
+      entityData = await DataManager.get('getJam', { ...defaults, ...options }, variables);
+    }
+
+    return entityData || {};
   }
 
   async updateJam(entityId: number, options: any) {

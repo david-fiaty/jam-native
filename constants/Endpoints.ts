@@ -37,6 +37,11 @@ const Endpoints: any = {
     cacheable: false,
     dataKey: null, 
   },
+  getJam: {
+    path: '/jams/[jam_id]/', 
+    cacheable: false,
+    dataKey: null, 
+  },
   getProjects: {
     path: '/projects/',
     cacheable: false,
