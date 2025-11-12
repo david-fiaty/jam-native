@@ -104,6 +104,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
               onPress: async () => {
                 let result: any = await UserManager.reportItem('jam', jamId);
                 ScreenManager.showMessage(result.message);
+                ModalManager.toggleModal('MoreJamActionsView');
               },
             },
           ]
@@ -129,6 +130,7 @@ const MoreJamActionsView = ({ jamId }: Props) => {
               onPress: async () => {
                 let result: any = await UserManager.deleteJam(jamId);
                 ScreenManager.showMessage(result.message);
+                ModalManager.toggleModal('MoreJamActionsView');
               },
             },
           ]
