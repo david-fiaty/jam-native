@@ -17,9 +17,6 @@ class ModalManager {
       activeModals.pop();
     } 
     else {
-      console.log('hhhhhhhhhhhh')
-      console.log(activeModals[activeModals.length - 1])
-
       activeModals.push({
         id: modalId,
         params: params,
