@@ -276,23 +276,6 @@ class EntityManager {
     }
   }
 
-  async reportItem(type: string, entityId: any) {
-    let profileId: number = await UserManager.getProfileId();
-    let isAnonymous: boolean = profileId > 0;
-    let payload: any = {
-      reporting_person_is_anonymous: isAnonymous,
-      reporting_profile_id: profileId,
-      reporting_content_type: type,
-      reporting_content_id: entityId,
-      reporting_cause: '',
-      reporting_comment: '',
-    };
-
-    let response = await DataManager.post('report', payload);
-
-    return response;
-  }
-
   getJamOwnerName(item: any) {
     let ownerName: string = item?.profile?.profile_name;
 

@@ -102,13 +102,8 @@ const MoreJamActionsView = ({ jamId }: Props) => {
             {
               text: i18n.t('Yes'),
               onPress: async () => {
-                let result: any = await EntityManager.reportItem('jam', jamId);
-                if (result?.error) {
-                  ScreenManager.showMessage({
-                    title: i18n.t('Report'),
-                    content: i18n.t('Report action failed, please try again.'),
-                  });
-                }
+                let result: any = await UserManager.reportItem('jam', jamId);
+                ScreenManager.showMessage(result.message);
               },
             },
           ]
