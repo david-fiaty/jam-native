@@ -254,7 +254,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was liked.');
+      message.content = i18n.t('The content was successfully liked.');
 
       this.updateProfileReference('liked_jams', entityId);
     }
@@ -282,7 +282,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was unliked.');
+      message.content = i18n.t('The content was successfully unliked.');
 
       this.updateProfileReference('liked_jams', entityId);
     }
@@ -309,7 +309,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was saved.');
+      message.content = i18n.t('The content was successfully saved.');
 
       this.updateProfileReference('saved_jams', entityId);
     }
@@ -336,7 +336,7 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The Jam was unsaved.');
+      message.content = i18n.t('The content was successfully unsaved.');
 
       this.updateProfileReference('saved_jams', entityId);
     }
@@ -363,8 +363,39 @@ class UserManager {
 
     if (!response?.error) {
       success = true;
-      message.content = i18n.t('The JAM! was successfully deleted.');
+      message.content = i18n.t('The content was successfully deleted.');
       await this.updateLocalReference('deletedJams', entityId);
+    }
+
+    return {
+      success: success,
+      response: response,
+      message: message,
+    };
+  }
+
+  async reportItem(type: string, entityId: any) {
+    let profileData: any = await this.getProfileData();
+    let success: boolean = false;
+    let message: any = {
+      title: i18n.t('Report'),
+      content: i18n.t('Could not perform the report action. Please try again.'),
+    };
+
+    let payload: any = {
+      reporting_person_is_anonymous: parseInt(profileData.id) > 0,
+      reporting_profile_id: profileData.id,
+      reporting_content_type: type,
+      reporting_content_id: entityId,
+      reporting_cause: '',
+      reporting_comment: '',
+    };
+
+    let response: any = await DataManager.post('report', payload);
+
+    if (!response?.error) {
+      success = true;
+      message.content = i18n.t('The content was successfully reported.');
     }
 
     return {
@@ -410,8 +441,8 @@ class UserManager {
     let profileData: any = { ...Store.getState().user.profileData };
     let array: any[] = profileData?.[key] || [];
 
-    profileData[key] = array.includes(value) 
-      ? array.filter((v: any) => v !== value) 
+    profileData[key] = array.includes(value)
+      ? array.filter((v: any) => v !== value)
       : [...array, value];
 
     Store.dispatch(setProfileData(profileData));
@@ -421,16 +452,16 @@ class UserManager {
     if (ScreenManager.isWeb()) {
       let storedData: any = localStorage.getItem(Config.storageKeys[key]);
       let idArray: any[] = [...new Set([...JSON.parse(storedData || '[]'), value])];
-       
+
       localStorage.setItem(Config.storageKeys[key], JSON.stringify(idArray));
     }
     else {
       let storedData: any = await AsyncStorage.getItem(Config.storageKeys[key]);
-      let idArray: any[] = [...new Set([...JSON.parse(storedData || '[]'), value])]; 
+      let idArray: any[] = [...new Set([...JSON.parse(storedData || '[]'), value])];
 
       await AsyncStorage.setItem(Config.storageKeys[key], JSON.stringify(idArray));
     }
-  } 
+  }
 
   async getViewedNotifications() {
     let idArray: any = '';
@@ -454,7 +485,7 @@ class UserManager {
     else {
       idArray = await AsyncStorage.getItem(Config.storageKeys.deletedJams);
     }
- 
+
     return JSON.parse(idArray || '[]') || [];
   }
 }
