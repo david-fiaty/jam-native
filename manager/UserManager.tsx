@@ -444,6 +444,19 @@ class UserManager {
 
     return JSON.parse(idArray || '[]');
   }
+
+  async getDeletedJams() {
+    let idArray: any = '';
+
+    if (ScreenManager.isWeb()) {
+      idArray = localStorage.getItem(Config.storageKeys.deletedJams);
+    }
+    else {
+      idArray = await AsyncStorage.getItem(Config.storageKeys.deletedJams);
+    }
+
+    return JSON.parse(idArray || '[]');
+  }
 }
 
 export default (new UserManager());
