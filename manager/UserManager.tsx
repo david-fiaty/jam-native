@@ -406,7 +406,6 @@ class UserManager {
     return response;
   }
 
-
   updateProfileReference(key: string, value: any) {
     let profileData: any = { ...Store.getState().user.profileData };
     let array: any[] = profileData?.[key] || [];
@@ -419,7 +418,17 @@ class UserManager {
   }
 
   async updateLocalReference(key: string, value: any) {
-    // Todo - Update local storage with deleted item id
+    let idArray: any[] = [];
+    let storedData: any = null;
+
+    if (ScreenManager.isWeb()) {
+      storedData = localStorage.getItem(Config.storageKeys.deletedJams);
+      idArray = JSON.parse(storedData || []);
+    }
+    else {
+      storedData = await AsyncStorage.getItem(Config.storageKeys.deletedJams);
+      idArray = JSON.parse(storedData || []);
+    }
   } 
 
   async getViewedNotifications() {
