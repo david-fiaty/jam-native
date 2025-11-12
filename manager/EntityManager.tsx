@@ -255,7 +255,7 @@ class EntityManager {
   }
 
   async shareJam(entityId: any) {
-    let entity = await this.getJams([entityId]);
+    let entity: any = await this.getJams([entityId]);
     let message: string = '';
 
     if (entity?.title?.length) {
@@ -268,7 +268,7 @@ class EntityManager {
 
     if (entity?.caption?.length) {
       message += entity.caption;
-    }
+    } 
 
     try {
       const result = await Share.share({
