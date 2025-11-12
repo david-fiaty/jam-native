@@ -364,7 +364,7 @@ class UserManager {
     if (!response?.error) {
       success = true;
       message.content = i18n.t('The JAM! was successfully deleted.');
-      await this.updateLocalReference('deleted_jams', entityId);
+      await this.updateLocalReference('deletedJams', entityId);
     }
 
     return {
@@ -418,16 +418,13 @@ class UserManager {
   }
 
   async updateLocalReference(key: string, value: any) {
-    let idArray: any[] = [];
-    let storedData: any = null;
-
     if (ScreenManager.isWeb()) {
-      storedData = localStorage.getItem(Config.storageKeys.deletedJams);
-      idArray = JSON.parse(storedData || []);
+      let storedData: any = localStorage.getItem(Config.storageKeys?.[key]);
+      let idArray: any = JSON.parse(storedData || []);
     }
     else {
-      storedData = await AsyncStorage.getItem(Config.storageKeys.deletedJams);
-      idArray = JSON.parse(storedData || []);
+      let storedData: any = await AsyncStorage.getItem(Config.storageKeys?.[key]);
+      let idArray: any = JSON.parse(storedData || []);
     }
   } 
 
