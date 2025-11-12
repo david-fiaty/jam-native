@@ -66,6 +66,14 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
     );
   };
 
+  const canRenderToolbarButton = () => {
+    return Object.keys(currentModal?.toolbarButton || {})?.length > 0;
+  };
+
+  const canRenderEditButton = () => {
+    return Object.keys(currentModal?.editButton || {})?.length > 0 && !currentModal?.params?.idArray?.length;
+  };
+
   useEffect(() => {
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -102,9 +110,9 @@ const ModalBackButton = ({ currentModal, visible }: Props) => {
         </TextView>
       </BoxView>
 
-      {Object.keys(currentModal?.toolbarButton || {})?.length > 0 && renderToolbarButton()}
+      {canRenderToolbarButton() && renderToolbarButton()}
 
-      {Object.keys(currentModal?.editButton || {})?.length > 0 && !currentModal?.params?.idArray?.length && renderEditButton()}
+      {canRenderEditButton() && renderEditButton()}
     </BoxView>
   );
 };
