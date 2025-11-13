@@ -41,6 +41,8 @@ const ImageSlideshow = ({ data }: Props) => {
   const onScrollView2Scroll = (targetRef: any) => {
     if (isSyncing.current) return;
     isSyncing.current = true;
+
+    
     
     console.log('pager scroll', {
       currentIndex: currentIndex,
