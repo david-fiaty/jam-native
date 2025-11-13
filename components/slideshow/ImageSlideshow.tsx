@@ -40,50 +40,36 @@ const ImageSlideshow = ({ data }: Props) => {
       <TouchableOpacity
         key={`dot-${index}`}
         style={styles.dot}
-        //onPress={() => onDotPress(index)}
+      //onPress={() => onDotPress(index)}
       />
     );
   };
 
-return (
-  <>
-    <BoxView
-      direction="row"
-      align="center"
-      justify="flex-start"
-      style={styles.wrapper}
-    >
-      <ScrollView
-        horizontal={true}
+  return (
+    <>
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={styles.wrapper}
       >
-        {data?.map((item: any, index: number) => renderItem(item, index))}
-      </ScrollView>
-    </BoxView>
+        <ScrollView
+          horizontal={true}
+        >
+          {data?.map((item: any, index: number) => renderItem(item, index))}
+        </ScrollView>
+      </BoxView>
 
-    <BoxView
-      direction="row"
-      align="center"
-      justify="center"
-      style={styles.pager}
-    >
-      {data?.map((item: any, index: number) => renderDot(item, index))}
-    </BoxView>
-  </>
-);
-
-
-return (
-  <View style={styles.wrapper}>
-    <Swiper
-      showsButtons={false}
-      paginationStyle={styles.pager}
-      dot={<View style={styles.dot} />}
-      activeDot={<View style={styles.activeDot} />}
-    >
-      {data?.map((item: any, index: number) => renderItem(item, index))}
-    </Swiper>
-  </View>
-);
+      <BoxView
+        direction="row"
+        align="center"
+        justify="center"
+        style={styles.pager}
+      >
+        {data?.map((item: any, index: number) => renderDot(item, index))}
+      </BoxView>
+    </>
+  );
 };
 
 const styles = StyleSheet.create({
