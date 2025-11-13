@@ -64,11 +64,7 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
       </BoxView>
 
       <ProjectJamsField
-        //resource={resource}
-        //fieldKey="jams_ids"
-        //rules={['required', 'array']}
         value={projectData?.jams || []}
-        //label={`${i18n.t('Jams')} (${formData?.jams_ids?.length || 0})`}
         emptyMessage={i18n.t('No data available.')}
         isPublic={true}
         addable={false}
