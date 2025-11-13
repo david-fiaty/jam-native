@@ -23,7 +23,7 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const isSyncing: any = useRef(false);
 
-  const onScroll = (e: any, targetRef: any) => {
+  const onScrollView1Scroll = (e: any, targetRef: any) => {
     if (isSyncing.current) return;
     isSyncing.current = true;
 
@@ -34,6 +34,10 @@ const ImageSlideshow = ({ data }: Props) => {
     setCurrentIndex(Math.round(x / w));
 
     setTimeout(() => (isSyncing.current = false), 0);
+  };
+
+  const onScrollView2Scroll = (targetRef: any) => {
+    console.log('pager scroll')
   };
 
   const onDotPress = (index: number, targetRef: any) => {
@@ -86,7 +90,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, scrollView2Ref)}
+        onScroll={(e) => onScrollView1Scroll(e, scrollView2Ref)}
         contentContainerStyle={styles.sliderScrollView}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
@@ -97,7 +101,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, scrollView1Ref)}
+        onScroll={(e) => onScrollView2Scroll(scrollView1Ref)}
         contentContainerStyle={styles.pagerScrollView}
       >
         {data?.map((item: any, index: number) => renderDot(item, index))}
