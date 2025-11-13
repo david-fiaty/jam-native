@@ -38,6 +38,8 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const onDotPress = (index: number, targetRef: any) => {
     setCurrentIndex(index);
+    console.log(index)
+
     //let x: number = slideWidth / currentIndex;
     //targetRef.current?.scrollTo({ x: x, animated: true });
   }; 
