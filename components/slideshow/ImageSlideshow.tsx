@@ -29,7 +29,7 @@ const ImageSlideshow = ({ data }: Props) => {
 
     let x: number = e.nativeEvent.contentOffset.x;
     let w: number = slideWidth;
-    
+
     targetRef.current?.scrollTo({ x, animated: false });
     setCurrentIndex(Math.round(x / w));
 
@@ -37,7 +37,12 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   const onScrollView2Scroll = (targetRef: any) => {
+    if (isSyncing.current) return;
+    isSyncing.current = true;
+    
     console.log('pager scroll')
+
+    setTimeout(() => (isSyncing.current = false), 0);
   };
 
   const onDotPress = (index: number, targetRef: any) => {
@@ -50,7 +55,7 @@ const ImageSlideshow = ({ data }: Props) => {
     setCurrentIndex(index);
 
     setTimeout(() => (isSyncing.current = false), 0);
-  }; 
+  };
 
   const renderItem = (item: any, index: number) => {
     return (
