@@ -23,7 +23,7 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const isSyncing: any = useRef(false);
 
-  const onScroll = (e: any, targetRef: any, isPager: boolean = false) => {
+  const onScroll = (e: any, targetRef: any) => {
     if (isSyncing.current) return;
     isSyncing.current = true;
 
@@ -97,7 +97,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, scrollView1Ref, true)}
+        onScroll={(e) => onScroll(e, scrollView1Ref)}
         contentContainerStyle={styles.pagerScrollView}
       >
         {data?.map((item: any, index: number) => renderDot(item, index))}
