@@ -39,6 +39,8 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const onDotPress = (index: number) => {
     setCurrentIndex(index);
+
+    //scrollView1Ref.current?.scrollTo({ x: 200, animated: true });
   }; 
 
   const renderItem = (item: any, index: number) => {
