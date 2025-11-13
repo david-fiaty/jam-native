@@ -243,16 +243,15 @@ class EntityManager {
 
     for (let i = 0; i < projects.length; i++) {
       if (projects[i].id != 'addItem' && projects[i]?.jams?.length > 0) {
-        let jamsList: any[] = await this.getJams(projects[i].jams);
-        projects[i].firstJam = jamsList[0];
+        projects[i].firstJam = await this.getJam(projects[i].jams[0]);
       }
     } 
 
-    return projects
+    return projects;
   }
 
   async shareJam(entityId: any) {
-    let entity: any = await this.getJams([entityId]);
+    let entity: any = await this.getJam(entityId); 
     let message: string = '';
 
     if (entity?.title?.length) {

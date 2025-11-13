@@ -25,7 +25,7 @@ const JamView = ({ jamId, itemData, isPublic, onListItemAction }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamData(itemData || (await EntityManager.getJams([jamId]))?.[0]);
+        setJamData(itemData || await EntityManager.getJam(jamId));
         setIsLoaded(true);
       }
     })();

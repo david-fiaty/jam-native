@@ -30,7 +30,7 @@ const HostsList = ({ jamId }: Props) => {
   };
 
   const getProfiles = async () => {
-    let jamData: any = (await EntityManager.getJams([jamId]))?.[0];
+    let jamData: any = await EntityManager.getJam(jamId);
     let jamHosts: any = await EntityManager.getProfiles([jamData.profile.id, ...jamData?.collaborators || []]);
 
     return jamHosts;  
