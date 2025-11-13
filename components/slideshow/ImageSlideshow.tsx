@@ -39,6 +39,7 @@ const ImageSlideshow = ({ data }: Props) => {
       direction="row" 
       align="center" 
       justify="flex-start"
+      style={styles.wrapper}
     >
       <ScrollView 
         horizontal={true}
@@ -73,20 +74,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: slideHeight,
     width: slideWidth,
-  },
-  title: {
-    color: Layout.colors.primary,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    width: '100%',
-    marginBottom: Layout.space.base,
-    paddingHorizontal: Layout.space.base * 3,
-  },
-  content: {
-    color: Layout.colors.primary,
-    textAlign: 'center',
-    width: '100%',
-    paddingHorizontal: Layout.space.base * 2.1,
   },
   pager: {
     top: slideHeight + Layout.space.base,
