@@ -69,37 +69,25 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <>
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
+      <ScrollView
+        ref={scrollView1Ref}
+        horizontal={true}
+        scrollEventThrottle={16}
+        onScroll={(e) => onScroll(e, scrollView2Ref)}
+        contentContainerStyle={styles.sliderScrollView}
       >
-        <ScrollView
-          ref={scrollView1Ref}
-          horizontal={true}
-          scrollEventThrottle={16}
-          onScroll={(e) => onScroll(e, scrollView2Ref)}
-          contentContainerStyle={styles.slideerScrollView}
-        >
-          {data?.map((item: any, index: number) => renderItem(item, index))}
-        </ScrollView>
-      </BoxView>
+        {data?.map((item: any, index: number) => renderItem(item, index))}
+      </ScrollView>
 
-      <BoxView
-        direction="row"
-        align="center"
-        justify="center"
+      <ScrollView
+        ref={scrollView2Ref}
+        horizontal={true}
+        scrollEventThrottle={16}
+        onScroll={(e) => onScroll(e, scrollView1Ref)}
+        contentContainerStyle={styles.pagerScrollView}
       >
-        <ScrollView
-          ref={scrollView2Ref}
-          horizontal={true}
-          scrollEventThrottle={16}
-          onScroll={(e) => onScroll(e, scrollView1Ref)}
-          contentContainerStyle={styles.pagerScrollView}
-        >
-          {data?.map((item: any, index: number) => renderDot(item, index))}
-        </ScrollView>
-      </BoxView>
+        {data?.map((item: any, index: number) => renderDot(item, index))}
+      </ScrollView>
     </>
   );
 };
@@ -117,9 +105,9 @@ const styles = StyleSheet.create({
   },
   pagerScrollView: {
     flex: 1,
-    gap: Layout.space.base/2,
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    gap: Layout.space.base / 2,
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'gray',
     padding: Layout.space.base,
   },
