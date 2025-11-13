@@ -252,7 +252,7 @@ class EntityManager {
   }
 
   async shareJam(entityId: any) {
-    let entity: any = await this.getJams([entityId]);
+    let entity: any = await this.getJam(entityId);
     let message: string = '';
 
     if (entity?.title?.length) {
