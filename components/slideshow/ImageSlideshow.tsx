@@ -17,8 +17,8 @@ const wrapperHeight: number = 346;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
-  const scrollView1Ref: any = useRef<ScrollView>(null);
-  const scrollView2Ref: any = useRef<ScrollView>(null);
+  const sliderScrollViewRef: any = useRef<ScrollView>(null);
+  const pagerScrollViewRef: any = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const isSyncing: any = useRef(false);
@@ -76,7 +76,7 @@ const ImageSlideshow = ({ data }: Props) => {
       <TouchableOpacity
         key={`dot-${index}`}
         style={dotStyle}
-        onPress={() => onDotPress(index, scrollView1Ref)}
+        onPress={() => onDotPress(index, sliderScrollViewRef)}
       />
     );
   };
@@ -84,22 +84,22 @@ const ImageSlideshow = ({ data }: Props) => {
   return (
     <>
       <ScrollView
-        ref={scrollView1Ref}
+        ref={sliderScrollViewRef}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, scrollView2Ref)}
+        onScroll={(e) => onScroll(e, pagerScrollViewRef)}
         contentContainerStyle={styles.sliderScrollView}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
       </ScrollView>
 
       <ScrollView
-        ref={scrollView2Ref}
+        ref={pagerScrollViewRef}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, scrollView1Ref, true)}
+        onScroll={(e) => onScroll(e, sliderScrollViewRef, true)}
         contentContainerStyle={styles.pagerScrollView}
       >
         {data?.map((item: any, index: number) => renderDot(item, index))}
