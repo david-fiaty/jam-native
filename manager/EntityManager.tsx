@@ -55,7 +55,7 @@ class EntityManager {
     };
 
     let data: any[] = await DataManager.get('getJams', { ...defaults, ...options });
-    let deletedIds: any[] = await UserManager.getDeletedJams(); 
+    let deletedIds: any[] = await UserManager.getDeletedJams();
 
     return data.filter((o: any) => !deletedIds.includes(o.id));
   }
@@ -80,17 +80,30 @@ class EntityManager {
     return await DataManager.get('getProjects', { ...defaults, ...options });
   }
 
-  async getProfile(profileId: number, options?: any) {
+  async getProfile(entityId: number, options?: any) {
     options = options || {};
     let defaults = {};
-    let profileData = [];
-    let variables: any = { '[profile_id]': profileId };
+    let entityData = {};
+    let variables: any = { '[profile_id]': entityId };
 
-    if (profileId > 0) {
-      profileData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
+    if (entityId > 0) {
+      entityData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
     }
 
-    return profileData || {};
+    return entityData || {};
+  }
+
+  async getJam(entityId: number, options?: any) {
+    options = options || {};
+    let defaults = {};
+    let entityData = {};
+    let variables: any = { '[jam_id]': entityId };
+
+    if (entityId > 0) {
+      entityData = await DataManager.get('getJam', { ...defaults, ...options }, variables);
+    }
+
+    return entityData || {};
   }
 
   async updateJam(entityId: number, options: any) {
@@ -226,23 +239,20 @@ class EntityManager {
   }
 
   async addProjectsImages(projectsData: any) {
-    return await Promise.all(
-      projectsData.map(async (item: any) => {
-        if (item.id != 'addItem') {
-          return {
-            ...item,
-            firstJam: (await this.getJams([item?.jams[0]]))?.[0], // Todo - Handle no jam[0] found
-          }
-        }
-        else {
-          return item;
-        }
-      })
-    );
+    let projects: any[] = [...projectsData];
+
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].id != 'addItem' && projects[i]?.jams?.length > 0) {
+        let jamsList: any[] = await this.getJams(projects[i].jams);
+        projects[i].firstJam = jamsList[0];
+      }
+    } 
+
+    return projects
   }
 
   async shareJam(entityId: any) {
-    let entity = await this.getJams([entityId]);
+    let entity: any = await this.getJams([entityId]);
     let message: string = '';
 
     if (entity?.title?.length) {
@@ -287,7 +297,7 @@ class EntityManager {
   }
 
   getJamTypeLabel(jamType: string) {
-    let label: any = ''; 
+    let label: any = '';
 
     if (jamType?.length > 0) {
       label = (ContentManager.getJamTypes().find((o: any) => o.id === jamType))?.name;
