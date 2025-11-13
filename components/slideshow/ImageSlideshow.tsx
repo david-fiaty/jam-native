@@ -31,15 +31,21 @@ const ImageSlideshow = ({ data }: Props) => {
     let w: number = slideWidth;
     
     targetRef.current?.scrollTo({ x, animated: false });
-    setCurrentIndex(Math.abs(Math.round(x / w)));
+    setCurrentIndex(Math.round(x / w));
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
 
   const onDotPress = (index: number, targetRef: any) => {
+    if (isSyncing.current) return;
+    isSyncing.current = true;
+
+    let x: number = slideWidth * index;
+
+    targetRef.current?.scrollTo({ x: x, animated: false });
     setCurrentIndex(index);
-    //let x: number = slideWidth / currentIndex;
-    //targetRef.current?.scrollTo({ x: x, animated: true });
+
+    setTimeout(() => (isSyncing.current = false), 0);
   }; 
 
   const renderItem = (item: any, index: number) => {
