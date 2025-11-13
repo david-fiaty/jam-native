@@ -24,14 +24,15 @@ const ImageSlideshow = ({ data }: Props) => {
 
   const isSyncing: any = useRef(false);
 
-  const onScroll = (e: any, targetRef: any) => {
+  const onScroll = (e: any, targetRef: any, isPager: boolean = false) => {
     if (isSyncing.current) return;
-
     isSyncing.current = true;
-    const x = e.nativeEvent.contentOffset.x;
 
+    let x: number = e.nativeEvent.contentOffset.x;
+    let w: number = slideWidth;
+    
     targetRef.current?.scrollTo({ x, animated: false });
-    setCurrentIndex(Math.abs(Math.round(x / slideWidth)));
+    setCurrentIndex(Math.abs(Math.round(x / w)));
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
@@ -85,7 +86,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, scrollView1Ref)}
+        onScroll={(e) => onScroll(e, scrollView1Ref, true)}
         contentContainerStyle={styles.pagerScrollView}
       >
         {data?.map((item: any, index: number) => renderDot(item, index))}
