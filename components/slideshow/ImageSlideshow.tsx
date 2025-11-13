@@ -31,9 +31,7 @@ const ImageSlideshow = ({ data }: Props) => {
     const x = e.nativeEvent.contentOffset.x;
 
     targetRef.current?.scrollTo({ x, animated: false });
-
-    const index = Math.abs(Math.round(x / slideWidth));
-    setCurrentIndex(index);
+    setCurrentIndex(Math.abs(Math.round(x / slideWidth)));
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
