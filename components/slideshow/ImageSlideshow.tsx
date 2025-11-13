@@ -37,11 +37,15 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   const onDotPress = (index: number, targetRef: any) => {
-    setCurrentIndex(index);
-    console.log(index)
+    if (isSyncing.current) return;
+    isSyncing.current = true;
 
-    //let x: number = slideWidth / currentIndex;
-    //targetRef.current?.scrollTo({ x: x, animated: true });
+    let x: number = slideWidth * index;
+    
+    targetRef.current?.scrollTo({ x: x, animated: false });
+    setCurrentIndex(index);
+
+    setTimeout(() => (isSyncing.current = false), 0);
   }; 
 
   const renderItem = (item: any, index: number) => {
