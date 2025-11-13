@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import React from 'react';
 import Swiper from 'react-native-swiper';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
+import BoxView from '../view/BoxView';
 
 type Props = {
   data?: any;
@@ -32,6 +33,21 @@ const ImageSlideshow = ({ data }: Props) => {
       </View>
     );
   };
+
+  return (
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="flex-start"
+    >
+      <ScrollView 
+        horizontal={true}
+      >
+        {data?.map((item: any, index: number) => renderItem(item, index))}
+      </ScrollView>
+    </BoxView>
+  );
+
 
   return (
     <View style={styles.wrapper}>
