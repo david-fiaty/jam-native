@@ -68,8 +68,10 @@ const ImageSlideshow = ({ data }: Props) => {
         style={styles.wrapper}
       >
         <ScrollView
-          horizontal={true}
           ref={scrollView1Ref}
+          horizontal={true}
+          scrollEventThrottle={16}
+          onScroll={(e) => onScroll(e, scrollView2Ref)}
         >
           {data?.map((item: any, index: number) => renderItem(item, index))}
         </ScrollView>
@@ -82,8 +84,10 @@ const ImageSlideshow = ({ data }: Props) => {
         style={styles.pager}
       >
         <ScrollView
-          horizontal={true}
           ref={scrollView2Ref}
+          horizontal={true}
+          scrollEventThrottle={16}
+          onScroll={(e) => onScroll(e, scrollView1Ref)}
         >
           {data?.map((item: any, index: number) => renderDot(item, index))}
         </ScrollView>
