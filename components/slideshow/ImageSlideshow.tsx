@@ -31,7 +31,7 @@ const ImageSlideshow = ({ data }: Props) => {
     let w: number = slideWidth;
 
     targetRef.current?.scrollTo({ x, animated: false });
-    setCurrentIndex(Math.round(x / w));
+    setCurrentIndex(Math.abs(Math.round(x / w)));
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
@@ -43,7 +43,7 @@ const ImageSlideshow = ({ data }: Props) => {
     console.log('pager scroll', {
       currentIndex: currentIndex,
     })
-    
+
     //let x: number = slideWidth * index;
     //targetRef.current?.scrollTo({ x: x, animated: false });
     //setCurrentIndex(index);
