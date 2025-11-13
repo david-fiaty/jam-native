@@ -38,11 +38,14 @@ const ImageSlideshow = ({ data }: Props) => {
     setTimeout(() => (isSyncing.current = false), 0);
   };
 
-  const onScrollView2Scroll = (e: any, targetRef: any) => {
+  const onScrollView2Scroll = (targetRef: any) => {
     if (isSyncing.current) return;
     isSyncing.current = true;
+    
+    console.log('pager scroll', {
+      currentIndex: currentIndex,
+    })
 
-    console.log(currentIndex)
     //let x: number = slideWidth * currentIndex;
     //targetRef.current?.scrollTo({ x: x, animated: false });
     //setCurrentIndex(index);
@@ -111,7 +114,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScrollView2Scroll(e, scrollView1Ref)}
+        onScroll={(e) => onScrollView2Scroll(scrollView1Ref)}
         contentContainerStyle={styles.pagerScrollView}
       >
         {data?.map((item: any, index: number) => renderDot(item, index))}
