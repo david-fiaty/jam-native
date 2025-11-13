@@ -14,7 +14,9 @@ const TabsView = ({ tabs, currentTab, onItemPress }: Props) => {
     const tabStyle: any = row.id == currentTab ? styles.currentTab : {};
 
     const onTabPress = (tabId: string) => {
-      if (onItemPress) onItemPress(tabId);
+      if (onItemPress) {
+        onItemPress(tabId);
+      }
     };
 
     return (
