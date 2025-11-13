@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import Swiper from 'react-native-swiper';
@@ -18,10 +18,11 @@ const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
-  const scrollView1Ref = useRef<ScrollView>(null);
-  const scrollView2Ref = useRef<ScrollView>(null);
+  const scrollView1Ref: any = useRef<ScrollView>(null);
+  const scrollView2Ref: any = useRef<ScrollView>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const isSyncing = useRef(false);
+  const isSyncing: any = useRef(false);
 
   const onScroll = (e: any, targetRef: any) => {
     if (isSyncing.current) return;
@@ -30,6 +31,11 @@ const ImageSlideshow = ({ data }: Props) => {
     const x = e.nativeEvent.contentOffset.x;
 
     targetRef.current?.scrollTo({ x, animated: false });
+
+    //const index = Math.round(x / ITEM_WIDTH);
+    //setCurrentIndex(index);
+
+
     setTimeout(() => (isSyncing.current = false), 0);
   };
 
@@ -50,10 +56,15 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   const renderDot = (item: any, index: number) => {
+    let dotStyle: any = {
+      ...styles.dot,
+      ...(index === currentIndex ? styles.activeDot : {}),
+    };
+
     return (
       <TouchableOpacity
         key={`dot-${index}`}
-        style={styles.dot}
+        style={dotStyle}
       //onPress={() => onDotPress(index)}
       />
     );
