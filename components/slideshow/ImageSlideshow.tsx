@@ -72,6 +72,7 @@ const ImageSlideshow = ({ data }: Props) => {
       <ScrollView
         ref={scrollView1Ref}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={(e) => onScroll(e, scrollView2Ref)}
         contentContainerStyle={styles.sliderScrollView}
@@ -82,6 +83,7 @@ const ImageSlideshow = ({ data }: Props) => {
       <ScrollView
         ref={scrollView2Ref}
         horizontal={true}
+        showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
         onScroll={(e) => onScroll(e, scrollView1Ref)}
         contentContainerStyle={styles.pagerScrollView}
