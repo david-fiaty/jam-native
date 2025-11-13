@@ -73,13 +73,13 @@ const ImageSlideshow = ({ data }: Props) => {
         direction="row"
         align="center"
         justify="flex-start"
-        style={styles.wrapper}
       >
         <ScrollView
           ref={scrollView1Ref}
           horizontal={true}
           scrollEventThrottle={16}
           onScroll={(e) => onScroll(e, scrollView2Ref)}
+          contentContainerStyle={styles.slideerScrollView}
         >
           {data?.map((item: any, index: number) => renderItem(item, index))}
         </ScrollView>
@@ -105,7 +105,7 @@ const ImageSlideshow = ({ data }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  sliderScrollView: {
     height: wrapperHeight,
     marginTop: Layout.space.base / 2,
   },
