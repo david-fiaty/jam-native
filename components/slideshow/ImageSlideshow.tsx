@@ -89,14 +89,12 @@ const ImageSlideshow = ({ data }: Props) => {
         direction="row"
         align="center"
         justify="center"
-        style={styles.pager}
       >
         <ScrollView
           ref={scrollView2Ref}
           horizontal={true}
           scrollEventThrottle={16}
           onScroll={(e) => onScroll(e, scrollView1Ref)}
-          style={{backgroundColor: 'gray'}}
           contentContainerStyle={styles.pagerScrollView}
         >
           {data?.map((item: any, index: number) => renderDot(item, index))}
@@ -117,14 +115,13 @@ const styles = StyleSheet.create({
     height: slideHeight,
     width: slideWidth,
   },
-  pager: {
-    backgroundColor: 'red',
-    height: pagerHeight,
-  },
   pagerScrollView: {
     flex: 1,
+    gap: Layout.space.base/2,
     justifyContent: 'center', 
     alignItems: 'center', 
+    backgroundColor: 'gray',
+    padding: Layout.space.base,
   },
   dot: {
     backgroundColor: Layout.colors.white,
