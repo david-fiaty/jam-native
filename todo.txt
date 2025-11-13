@@ -149,8 +149,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Integration input phone field
 - Optimisation globale validation et soumission formulaires 
 - Amelioration add jam to project form
-- Bug fix selection contenu sur share feature 
-- Bug fix sur project jams list view
 
 # SIGNUP FIELDS
 Numero Whatsapp (login)
