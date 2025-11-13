@@ -62,7 +62,7 @@ const AddJamToProjectForm = ({ jamId }: Props) => {
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
-        setJamData((await EntityManager.getJams([jamId]))?.[0]);
+        setJamData(await EntityManager.getJam(jamId));
         setIsLoaded(true);
       }
     })();
