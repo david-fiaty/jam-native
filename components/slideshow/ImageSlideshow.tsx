@@ -67,7 +67,7 @@ const ImageSlideshow = ({ data }: Props) => {
 const styles = StyleSheet.create({
   wrapper: {
     height: wrapperHeight,
-    marginTop: Layout.space.base,
+    marginTop: Layout.space.base/2,
   },
   slide: {
     justifyContent: 'center',
