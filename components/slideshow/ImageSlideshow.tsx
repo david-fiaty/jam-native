@@ -37,6 +37,10 @@ const ImageSlideshow = ({ data }: Props) => {
     setTimeout(() => (isSyncing.current = false), 0);
   };
 
+  const onDotPress = (index: number) => {
+    setCurrentIndex(index);
+  }; 
+
   const renderItem = (item: any, index: number) => {
     return (
       <View
@@ -63,7 +67,7 @@ const ImageSlideshow = ({ data }: Props) => {
       <TouchableOpacity
         key={`dot-${index}`}
         style={dotStyle}
-      //onPress={() => onDotPress(index)}
+        onPress={() => onDotPress(index)}
       />
     );
   };
