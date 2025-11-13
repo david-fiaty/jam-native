@@ -48,7 +48,7 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
 
       <BoxView direction="row" align="center" justify="space-between" style={styles.groupTitleContainer}>
         <TextView style={styles.groupTitle}>
-          {i18n.t('Jams')} ({projectData?.jams?.length || 0})
+          {i18n.t('Project JAM!s')} ({projectData?.jams?.length || 0})
         </TextView>
 
         {isPublic && (
@@ -64,9 +64,9 @@ const ProjectView = ({ projectId, itemData, isPublic }: Props) => {
       </BoxView>
 
       <ProjectJamsField
-        idArray={projectData?.jams || []}
+        value={projectData?.jams || []}
         emptyMessage={i18n.t('No data available.')}
-        isPublic={isPublic}
+        isPublic={true}
         addable={false}
         deletable={false}
       />
