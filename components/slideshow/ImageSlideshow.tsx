@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import React from 'react';
 import Swiper from 'react-native-swiper';
@@ -18,6 +18,7 @@ const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
+
   const renderItem = (item: any, index: number) => {
     return (
       <View
@@ -34,40 +35,61 @@ const ImageSlideshow = ({ data }: Props) => {
     );
   };
 
-  return (
-    <BoxView 
-      direction="row" 
-      align="center" 
+  const renderDot = (item: any, index: number) => {
+    return (
+      <TouchableOpacity
+        key={`dot-${index}`}
+        style={styles.dot}
+        //onPress={() => onDotPress(index)}
+      />
+    );
+  };
+
+return (
+  <>
+    <BoxView
+      direction="row"
+      align="center"
       justify="flex-start"
       style={styles.wrapper}
     >
-      <ScrollView 
+      <ScrollView
         horizontal={true}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
       </ScrollView>
     </BoxView>
-  );
+
+    <BoxView
+      direction="row"
+      align="center"
+      justify="center"
+      style={styles.pager}
+    >
+      {data?.map((item: any, index: number) => renderDot(item, index))}
+    </BoxView>
+  </>
+);
 
 
-  return (
-    <View style={styles.wrapper}>
-      <Swiper
-        showsButtons={false}
-        paginationStyle={styles.pager}
-        dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}
-      >
-        {data?.map((item: any, index: number) => renderItem(item, index))}
-      </Swiper>
-    </View>
-  );
+return (
+  <View style={styles.wrapper}>
+    <Swiper
+      showsButtons={false}
+      paginationStyle={styles.pager}
+      dot={<View style={styles.dot} />}
+      activeDot={<View style={styles.activeDot} />}
+    >
+      {data?.map((item: any, index: number) => renderItem(item, index))}
+    </Swiper>
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
   wrapper: {
     height: wrapperHeight,
-    marginTop: Layout.space.base/2,
+    marginTop: Layout.space.base / 2,
   },
   slide: {
     justifyContent: 'center',
@@ -76,7 +98,7 @@ const styles = StyleSheet.create({
     width: slideWidth,
   },
   pager: {
-    top: slideHeight + Layout.space.base,
+    backgroundColor: 'red',
     height: pagerHeight,
   },
   dot: {
