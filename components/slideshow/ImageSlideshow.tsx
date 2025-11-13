@@ -32,9 +32,8 @@ const ImageSlideshow = ({ data }: Props) => {
 
     targetRef.current?.scrollTo({ x, animated: false });
 
-    //const index = Math.round(x / ITEM_WIDTH);
-    //setCurrentIndex(index);
-
+    const index = Math.abs(Math.round(x / e.nativeEvent.contentSize.width));
+    setCurrentIndex(index);
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
@@ -61,6 +60,7 @@ const ImageSlideshow = ({ data }: Props) => {
       ...(index === currentIndex ? styles.activeDot : {}),
     };
 
+    console.log(currentIndex)
     return (
       <TouchableOpacity
         key={`dot-${index}`}
