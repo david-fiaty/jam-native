@@ -21,30 +21,19 @@ const ImageSlideshow = ({ data }: Props) => {
   const scrollView2Ref: any = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-
   const isSyncing: any = useRef(false);
-  const lastOffset: any = useRef(0);
-  
-  const onScrollView1Scroll = (e: any, targetRef: any) => {
+
+  const onScroll = (e: any, targetRef: any, isPager: boolean = false) => {
     if (isSyncing.current) return;
     isSyncing.current = true;
 
     let x: number = e.nativeEvent.contentOffset.x;
     let w: number = slideWidth;
 
-    targetRef.current?.scrollTo({ x, animated: false });
-    setCurrentIndex(Math.abs(Math.round(x / w)));
-
-    setTimeout(() => (isSyncing.current = false), 0);
-  };
-
-  const onScrollView2Scroll = (targetRef: any) => {
-    if (isSyncing.current) return;
-    isSyncing.current = true;
+    console.log(x, isPager)
     
-    //let x: number = slideWidth * currentIndex;
-    //targetRef.current?.scrollTo({ x: x, animated: false });
-    //setCurrentIndex(index);
+    targetRef.current?.scrollTo({ x, animated: false });
+    setCurrentIndex(Math.round(x / w));
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
@@ -59,7 +48,7 @@ const ImageSlideshow = ({ data }: Props) => {
     setCurrentIndex(index);
 
     setTimeout(() => (isSyncing.current = false), 0);
-  };
+  }; 
 
   const renderItem = (item: any, index: number) => {
     return (
@@ -99,7 +88,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScrollView1Scroll(e, scrollView2Ref)}
+        onScroll={(e) => onScroll(e, scrollView2Ref)}
         contentContainerStyle={styles.sliderScrollView}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
@@ -110,7 +99,7 @@ const ImageSlideshow = ({ data }: Props) => {
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
-        onScroll={(e) => onScrollView2Scroll(scrollView1Ref)}
+        onScroll={(e) => onScroll(e, scrollView1Ref, true)}
         contentContainerStyle={styles.pagerScrollView}
       >
         {data?.map((item: any, index: number) => renderDot(item, index))}
