@@ -29,7 +29,7 @@ const ImageSlideshow = ({ data }: Props) => {
     isSyncing.current = true;
 
     let x: number = e.nativeEvent.contentOffset.x;
-    let w: number = slideWidth;
+    let w: number = isPager ? 8 : slideWidth;
     
     targetRef.current?.scrollTo({ x, animated: false });
     setCurrentIndex(Math.abs(Math.round(x / w)));
