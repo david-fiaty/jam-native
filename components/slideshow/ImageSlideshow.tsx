@@ -11,10 +11,9 @@ type Props = {
   data?: any;
 };
 
-const dotSize: number = 8;
+const dotSize: number = 20;
 const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
-const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
@@ -29,7 +28,7 @@ const ImageSlideshow = ({ data }: Props) => {
     isSyncing.current = true;
 
     let x: number = e.nativeEvent.contentOffset.x;
-    let w: number = isPager ? 8 : slideWidth;
+    let w: number = slideWidth;
     
     targetRef.current?.scrollTo({ x, animated: false });
     setCurrentIndex(Math.abs(Math.round(x / w)));
@@ -37,10 +36,10 @@ const ImageSlideshow = ({ data }: Props) => {
     setTimeout(() => (isSyncing.current = false), 0);
   };
 
-  const onDotPress = (index: number) => {
+  const onDotPress = (index: number, targetRef: any) => {
     setCurrentIndex(index);
-
-    //scrollView1Ref.current?.scrollTo({ x: 200, animated: true });
+    //let x: number = slideWidth / currentIndex;
+    //targetRef.current?.scrollTo({ x: x, animated: true });
   }; 
 
   const renderItem = (item: any, index: number) => {
@@ -69,7 +68,7 @@ const ImageSlideshow = ({ data }: Props) => {
       <TouchableOpacity
         key={`dot-${index}`}
         style={dotStyle}
-        onPress={() => onDotPress(index)}
+        onPress={() => onDotPress(index, scrollView1Ref)}
       />
     );
   };
