@@ -43,6 +43,7 @@ const ImageSlideshow = ({ data }: Props) => {
     console.log('pager scroll', {
       currentIndex: currentIndex,
     })
+    
     //let x: number = slideWidth * index;
     //targetRef.current?.scrollTo({ x: x, animated: false });
     //setCurrentIndex(index);
