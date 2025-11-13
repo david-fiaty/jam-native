@@ -40,7 +40,12 @@ const ImageSlideshow = ({ data }: Props) => {
     if (isSyncing.current) return;
     isSyncing.current = true;
     
-    console.log('pager scroll')
+    console.log('pager scroll', {
+      currentIndex: currentIndex,
+    })
+    //let x: number = slideWidth * index;
+    //targetRef.current?.scrollTo({ x: x, animated: false });
+    //setCurrentIndex(index);
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
