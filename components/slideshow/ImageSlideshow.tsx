@@ -1,6 +1,6 @@
+import React, { useRef } from "react";
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import React from 'react';
 import Swiper from 'react-native-swiper';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
@@ -18,6 +18,20 @@ const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
+  const scrollView1Ref = useRef<ScrollView>(null);
+  const scrollView2Ref = useRef<ScrollView>(null);
+
+  const isSyncing = useRef(false);
+
+  const onScroll = (e: any, targetRef: any) => {
+    if (isSyncing.current) return;
+
+    isSyncing.current = true;
+    const x = e.nativeEvent.contentOffset.x;
+
+    targetRef.current?.scrollTo({ x, animated: false });
+    setTimeout(() => (isSyncing.current = false), 0);
+  };
 
   const renderItem = (item: any, index: number) => {
     return (
@@ -55,6 +69,7 @@ const ImageSlideshow = ({ data }: Props) => {
       >
         <ScrollView
           horizontal={true}
+          ref={scrollView1Ref}
         >
           {data?.map((item: any, index: number) => renderItem(item, index))}
         </ScrollView>
@@ -66,7 +81,12 @@ const ImageSlideshow = ({ data }: Props) => {
         justify="center"
         style={styles.pager}
       >
-        {data?.map((item: any, index: number) => renderDot(item, index))}
+        <ScrollView
+          horizontal={true}
+          ref={scrollView2Ref}
+        >
+          {data?.map((item: any, index: number) => renderDot(item, index))}
+        </ScrollView>
       </BoxView>
     </>
   );
