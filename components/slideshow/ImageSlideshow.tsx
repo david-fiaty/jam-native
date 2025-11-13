@@ -58,7 +58,6 @@ const ImageSlideshow = ({ data }: Props) => {
       ...(index === currentIndex ? styles.activeDot : {}),
     };
 
-    console.log(currentIndex)
     return (
       <TouchableOpacity
         key={`dot-${index}`}
@@ -97,6 +96,8 @@ const ImageSlideshow = ({ data }: Props) => {
           horizontal={true}
           scrollEventThrottle={16}
           onScroll={(e) => onScroll(e, scrollView1Ref)}
+          style={{backgroundColor: 'gray'}}
+          contentContainerStyle={styles.pagerScrollView}
         >
           {data?.map((item: any, index: number) => renderDot(item, index))}
         </ScrollView>
@@ -119,6 +120,11 @@ const styles = StyleSheet.create({
   pager: {
     backgroundColor: 'red',
     height: pagerHeight,
+  },
+  pagerScrollView: {
+    flex: 1,
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
   dot: {
     backgroundColor: Layout.colors.white,
