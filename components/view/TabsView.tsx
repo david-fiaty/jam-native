@@ -31,7 +31,12 @@ const TabsView = ({ tabs, currentTab, onItemPress }: Props) => {
   };
 
   return (
-    <BoxView direction="row" align="center" justify="flex-start" style={styles.tabContainer}>
+    <BoxView 
+      direction="row" 
+      align="center" 
+      justify="flex-start" 
+      style={styles.tabContainer}
+    >
       <ScrollView 
         horizontal={true}
         style={styles.tabContainer}
