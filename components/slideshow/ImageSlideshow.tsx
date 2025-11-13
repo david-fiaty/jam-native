@@ -94,16 +94,9 @@ const styles = StyleSheet.create({
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
-    marginHorizontal: 3,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
   },
 });
 
