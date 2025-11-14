@@ -67,7 +67,7 @@ const ImageSlideshow = ({ data }: Props) => {
         data={data}
         dotStyle={styles.dot}
         activeDotStyle={styles.activeDot}
-        containerStyle={{ gap: 5, marginTop: 10 }}
+        containerStyle={styles.pager}
         onPress={onPressPagination}
       />
     </View>
@@ -86,6 +86,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: slideHeight,
     width: slideWidth,
+  },
+  pager: {
+    gap: 5, 
+    marginTop: Layout.space.base,
   },
   dot: {
     backgroundColor: Layout.colors.white,
