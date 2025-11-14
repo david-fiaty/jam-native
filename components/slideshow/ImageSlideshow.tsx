@@ -43,29 +43,34 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   return (
-    <View style={styles.wrapper}>
-      <Carousel
-        ref={ref}
-        width={slideWidth}
-        height={slideHeight}
-        data={data}
-        windowSize={3}
-        onProgressChange={progress}
-        renderItem={({ index }) => renderItem(data[index], index)}
-        onConfigurePanGesture={gestureChain => (
-          gestureChain.activeOffsetX([-10, 10])
-        )}
-      />
+    <>
+      <View style={styles.wrapper}>
+        <Carousel
+          ref={ref}
+          width={slideWidth}
+          height={slideHeight}
+          data={data}
+          windowSize={3}
+          onProgressChange={progress}
+          renderItem={({ index }) => renderItem(data[index], index)}
+          onConfigurePanGesture={gestureChain => (
+            gestureChain.activeOffsetX([-10, 10])
+          )}
+        />
+      </View>
 
-      <Pagination.Basic
-        progress={progress}
-        data={data}
-        dotStyle={styles.dot}
-        activeDotStyle={styles.activeDot}
-        containerStyle={styles.pager}
-        onPress={onPressPagination}
-      />
-    </View>
+
+      {data?.length > 1 && (
+        <Pagination.Basic
+          progress={progress}
+          data={data}
+          dotStyle={styles.dot}
+          activeDotStyle={styles.activeDot}
+          containerStyle={styles.pager}
+          onPress={onPressPagination}
+        />
+      )}
+    </>
   );
 };
 
@@ -83,8 +88,8 @@ const styles = StyleSheet.create({
     width: slideWidth,
   },
   pager: {
-    gap: 5, 
-    marginTop: Layout.space.base,
+    gap: 5,
+    marginBottom: Layout.space.base/2,
   },
   dot: {
     backgroundColor: Layout.colors.white,
