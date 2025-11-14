@@ -31,7 +31,7 @@ const ImageSlideshow = ({ data }: Props) => {
     let w: number = slideWidth;
 
     //console.log(x, isPager)
-    
+
     targetRef.current?.scrollTo({ x, animated: false });
     setCurrentIndex(Math.round(x / w));
 
@@ -48,7 +48,7 @@ const ImageSlideshow = ({ data }: Props) => {
     setCurrentIndex(index);
 
     setTimeout(() => (isSyncing.current = false), 0);
-  }; 
+  };
 
   const renderItem = (item: any, index: number) => {
     return (
@@ -83,27 +83,40 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <>
-      <ScrollView
-        ref={sliderScrollViewRef}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, pagerScrollViewRef)}
-        contentContainerStyle={styles.sliderScrollView}
+      <BoxView
+        direction="row"
+        align="center"
+        justify="center"
       >
-        {data?.map((item: any, index: number) => renderItem(item, index))}
-      </ScrollView>
+        <ScrollView
+          ref={sliderScrollViewRef}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={16}
+          onScroll={(e) => onScroll(e, pagerScrollViewRef)}
+          contentContainerStyle={styles.sliderScrollView}
+        >
+          {data?.map((item: any, index: number) => renderItem(item, index))}
+        </ScrollView>
+      </BoxView>
 
-      <ScrollView
-        ref={pagerScrollViewRef}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, sliderScrollViewRef, true)}
-        contentContainerStyle={styles.pagerScrollView}
+      <BoxView
+        direction="row"
+        align="center"
+        justify="center"
+        style={styles.pagerContainer}
       >
-        {data?.map((item: any, index: number) => renderDot(item, index))}
-      </ScrollView>
+        <ScrollView
+          ref={pagerScrollViewRef}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          scrollEventThrottle={16}
+          onScroll={(e) => onScroll(e, sliderScrollViewRef, true)}
+          contentContainerStyle={styles.pagerScrollViewContentContainer}
+        >
+          {data?.map((item: any, index: number) => renderDot(item, index))}
+        </ScrollView>
+      </BoxView>
     </>
   );
 };
@@ -119,7 +132,11 @@ const styles = StyleSheet.create({
     height: slideHeight,
     width: slideWidth,
   },
-  pagerScrollView: {
+  pagerContainer: {
+    width: 60, 
+    alignSelf: 'center',
+  },
+  pagerScrollViewContentContainer: {
     flex: 1,
     gap: Layout.space.base / 2,
     justifyContent: 'center',
