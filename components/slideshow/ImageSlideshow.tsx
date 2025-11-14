@@ -4,7 +4,7 @@ import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
 import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { useSharedValue, useDerivedValue } from "react-native-reanimated";
+import { useSharedValue } from "react-native-reanimated";
 import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
 
 type Props = {
@@ -19,13 +19,9 @@ const ImageSlideshow = ({ data }: Props) => {
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
 
-  const currentProgress = useDerivedValue(() => {
-    return progress.value;
-  });
-
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
-      count: index - currentProgress.value,
+      count: index - progress.value,
       animated: true,
     });
   };
@@ -87,7 +83,7 @@ const styles = StyleSheet.create({
     width: slideWidth,
   },
   pager: {
-    gap: 5,
+    gap: 5, 
     marginTop: Layout.space.base,
   },
   dot: {
