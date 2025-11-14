@@ -1,15 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import React from 'react';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
-
+import { StyleSheet, Text, View } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import { useSharedValue } from "react-native-reanimated";
-import Carousel, {
-  ICarouselInstance,
-  Pagination,
-} from "react-native-reanimated-carousel";
+import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
 
 type Props = {
   data?: any;
