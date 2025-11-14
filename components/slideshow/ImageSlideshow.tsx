@@ -55,9 +55,12 @@ const ImageSlideshow = ({ data }: Props) => {
         height={slideHeight}
         data={data}
         onProgressChange={progress}
-        renderItem={({ index }) => renderItem(data[index], index) }
+        renderItem={({ index }) => renderItem(data[index], index)}
+        onConfigurePanGesture={gestureChain => (
+          gestureChain.activeOffsetX([-10, 10])
+        )}
       />
- 
+
       <Pagination.Basic
         progress={progress}
         data={data}
@@ -77,6 +80,7 @@ const styles = StyleSheet.create({
     marginTop: Layout.space.base,
   },
   slide: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     height: slideHeight,
