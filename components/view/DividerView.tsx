@@ -1,5 +1,4 @@
-import { StyleSheet } from 'react-native';
-import { Divider } from '@rneui/themed';
+import { StyleSheet, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
 
 type Props = {
@@ -11,7 +10,7 @@ const DividerView = ({theme, style}: Props) => {
   const dividerStyle = theme ? Layout.theme[theme] : Layout.theme.white;
 
   return (
-    <Divider style={[styles.container, dividerStyle, style]} />
+    <View style={[styles.container, dividerStyle, style]} />
   );
 };
 
