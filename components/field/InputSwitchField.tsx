@@ -1,6 +1,5 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet } from "react-native";
-import { Switch } from "@rneui/base";
+import { StyleSheet, Switch } from "react-native";
 import BoxView from "../view/BoxView";
 import TextView from "../view/TextView";
 import i18n from "@/translation/i18n";
