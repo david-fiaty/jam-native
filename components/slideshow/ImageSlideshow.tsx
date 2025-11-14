@@ -1,22 +1,34 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Swiper from 'react-native-swiper';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
 
+import PagerView from 'react-native-pager-view';
+
+
 type Props = {
   data?: any;
 };
 
-const dotSize: number = 8;
+const dotSize: number = 40;
 const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
 const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
+  const [page, setPage] = useState(0);
+  const pagerRef = useRef<PagerView>(null);
+
+  const goToPage = (index: number) => {
+    if (pagerRef.current) {
+      pagerRef.current.setPage(index);
+    }
+  };
+
   const renderItem = (item: any, index: number) => {
     return (
       <View
@@ -34,6 +46,38 @@ const ImageSlideshow = ({ data }: Props) => {
   };
 
   return (
+    <>
+      <PagerView
+        ref={pagerRef}
+        style={styles.pagerView}
+        initialPage={0}
+        onPageSelected={(e) => setPage(e.nativeEvent.position)}
+      >
+        {data?.map((item: any, index: number) => renderItem(item, index))}
+      </PagerView>
+
+      <View style={styles.dotsContainer}>
+        {data.map((_, i) => (
+          <TouchableOpacity
+            key={i}
+            onPress={() => goToPage(i)}
+          >
+            <View
+
+              style={[
+                styles.dot,
+                { opacity: page === i ? 1 : 0.3, transform: [{ scale: page === i ? 1.1 : 1 }] },
+              ]}
+            />
+
+          </TouchableOpacity>
+        ))}
+
+      </View>
+    </>
+  );
+
+  return (
     <View style={styles.wrapper}>
       <Swiper
         showsButtons={false}
@@ -48,6 +92,15 @@ const ImageSlideshow = ({ data }: Props) => {
 };
 
 const styles = StyleSheet.create({
+
+  pagerView: {
+    flex: 1,
+  },
+  dotsContainer: {
+    flexDirection: "row",
+    marginTop: 10,
+  },
+
   wrapper: {
     height: wrapperHeight,
     marginTop: Layout.space.base,
