@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Layout } from '@/constants/Layout';
 import React, { useState, useRef } from 'react';
+import { StyleSheet, Text, TouchableOpacity, View, PanResponder } from 'react-native';
+import { Layout } from '@/constants/Layout';
 import Swiper from 'react-native-swiper';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
@@ -29,6 +29,21 @@ const ImageSlideshow = ({ data }: Props) => {
     }
   };
 
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gesture) =>
+        Math.abs(gesture.dx) > 10, // activate on horizontal move
+      onPanResponderRelease: (_, gesture) => {
+        if (gesture.dx < -20 && page < data.length - 1) {
+          goToPage(page + 1); // swipe left → next page
+        } else if (gesture.dx > 20 && page > 0) {
+          goToPage(page - 1); // swipe right → previous page
+        }
+      },
+    })
+  ).current;
+
+
   const renderItem = (item: any, index: number) => {
     return (
       <View
@@ -56,23 +71,25 @@ const ImageSlideshow = ({ data }: Props) => {
         {data?.map((item: any, index: number) => renderItem(item, index))}
       </PagerView>
 
-      <View style={styles.dotsContainer}>
-        {data.map((_, i) => (
-          <TouchableOpacity
-            key={i}
-            onPress={() => goToPage(i)}
-          >
-            <View
+      <View style={styles.swipeArea} {...panResponder.panHandlers}>
+        <View style={styles.dotsContainer}>
+          {data.map((_, i) => (
+            <TouchableOpacity
+              key={i}
+              onPress={() => goToPage(i)}
+            >
+              <View
 
-              style={[
-                styles.dot,
-                { opacity: page === i ? 1 : 0.3, transform: [{ scale: page === i ? 1.1 : 1 }] },
-              ]}
-            />
+                style={[
+                  styles.dot,
+                  { opacity: page === i ? 1 : 0.3, transform: [{ scale: page === i ? 1.1 : 1 }] },
+                ]}
+              />
 
-          </TouchableOpacity>
-        ))}
+            </TouchableOpacity>
+          ))}
 
+        </View>
       </View>
     </>
   );
@@ -93,6 +110,9 @@ const ImageSlideshow = ({ data }: Props) => {
 
 const styles = StyleSheet.create({
 
+  swipeArea: {
+    paddingVertical: 12, // larger touch/swipe zone
+  },
   pagerView: {
     flex: 1,
   },
