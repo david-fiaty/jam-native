@@ -26,7 +26,7 @@ const TextSlideshow = ({ data }: Props) => {
 
   const renderItem = (item: any, index: number) => {
     return (
-      <View 
+      <View
         key={`dot-${index}`}
         style={styles.slide}
       >
@@ -37,7 +37,7 @@ const TextSlideshow = ({ data }: Props) => {
         <Text style={styles.content}>
           {item.content}
         </Text>
-      </View>      
+      </View>
     );
   };
 
@@ -48,6 +48,8 @@ const TextSlideshow = ({ data }: Props) => {
         width={slideWidth}
         height={slideHeight}
         data={data}
+        enabled={data?.length > 1}
+        loop={data?.length > 1}
         windowSize={3}
         onProgressChange={progress}
         renderItem={({ index }) => renderItem(data[index], index)}
@@ -82,16 +84,16 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     width: '100%',
     marginBottom: Layout.space.base,
-    paddingHorizontal: Layout.space.base*3,
+    paddingHorizontal: Layout.space.base * 3,
   },
   content: {
     color: Layout.colors.primary,
     textAlign: 'center',
     width: '100%',
-    paddingHorizontal: Layout.space.base*2.1,
+    paddingHorizontal: Layout.space.base * 2.1,
   },
   pager: {
-    gap: 5, 
+    gap: 5,
     marginTop: Layout.space.base,
   },
   dot: {

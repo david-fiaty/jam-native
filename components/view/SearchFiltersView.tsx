@@ -21,8 +21,13 @@ const SearchFiltersView = () => {
         align="center"
         justify="space-between"
       >
-        <BoxView direction="row" align="center" justify="flex-start">
+        <BoxView 
+          direction="row" 
+          align="center" 
+          justify="flex-start"
+        >
           <TextView>{i18n.t('Filter results')}</TextView>
+          
           {resultCount && (
             <View style={styles.resultCountContainer}>
               <TextView 
