@@ -50,6 +50,7 @@ const ImageSlideshow = ({ data }: Props) => {
           width={slideWidth}
           height={slideHeight}
           data={data}
+          loop={data?.length > 1}
           windowSize={3}
           onProgressChange={progress}
           renderItem={({ index }) => renderItem(data[index], index)}
