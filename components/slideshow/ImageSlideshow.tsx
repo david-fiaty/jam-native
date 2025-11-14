@@ -6,17 +6,32 @@ import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
 
+import { useSharedValue } from "react-native-reanimated";
+import Carousel, {
+  ICarouselInstance,
+  Pagination,
+} from "react-native-reanimated-carousel";
+
 type Props = {
   data?: any;
 };
 
-const dotSize: number = 8;
 const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
-const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
+
+  const ref = React.useRef<ICarouselInstance>(null);
+  const progress = useSharedValue<number>(0);
+
+  const onPressPagination = (index: number) => {
+    ref.current?.scrollTo({
+      count: index - progress.value,
+      animated: true,
+    });
+  };
+
   const renderItem = (item: any, index: number) => {
     return (
       <View
@@ -35,20 +50,30 @@ const ImageSlideshow = ({ data }: Props) => {
 
   return (
     <View style={styles.wrapper}>
-      <Swiper
-        showsButtons={false}
-        paginationStyle={styles.pager}
-        dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}
-      >
-        {data?.map((item: any, index: number) => renderItem(item, index))}
-      </Swiper>
+      <Carousel
+        ref={ref}
+        width={slideWidth}
+        height={slideHeight}
+        data={data}
+        onProgressChange={progress}
+        renderItem={({ index }) => renderItem(data[index], index) }
+      />
+ 
+      <Pagination.Basic
+        progress={progress}
+        data={data}
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+        containerStyle={{ gap: 5, marginTop: 10 }}
+        onPress={onPressPagination}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   wrapper: {
+    flex: 1,
     height: wrapperHeight,
     marginTop: Layout.space.base,
   },
@@ -58,41 +83,15 @@ const styles = StyleSheet.create({
     height: slideHeight,
     width: slideWidth,
   },
-  title: {
-    color: Layout.colors.primary,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    width: '100%',
-    marginBottom: Layout.space.base,
-    paddingHorizontal: Layout.space.base * 3,
-  },
-  content: {
-    color: Layout.colors.primary,
-    textAlign: 'center',
-    width: '100%',
-    paddingHorizontal: Layout.space.base * 2.1,
-  },
-  pager: {
-    top: slideHeight + Layout.space.base,
-    height: pagerHeight,
-  },
   dot: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
+    borderRadius: 50,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
+    borderRadius: 50,
   },
 });
 
