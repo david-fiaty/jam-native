@@ -30,10 +30,17 @@ const ImageSlideshow = ({ data }: Props) => {
     let x: number = e.nativeEvent.contentOffset.x;
     let w: number = slideWidth;
 
-    //console.log(x, isPager)
-    
-    targetRef.current?.scrollTo({ x, animated: false });
+    targetRef.current?.scrollTo({ x: x, animated: false });
     setCurrentIndex(Math.round(x / w));
+    
+    /*
+    if (isPager === true && currentIndex == 0) {
+      setCurrentIndex(1);
+    }
+    else {
+      setCurrentIndex(Math.round(x / w));
+    }
+    */
 
     setTimeout(() => (isSyncing.current = false), 0);
   };
