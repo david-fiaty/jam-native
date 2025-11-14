@@ -59,7 +59,6 @@ const ImageSlideshow = ({ data }: Props) => {
         />
       </View>
 
-
       {data?.length > 1 && (
         <Pagination.Basic
           progress={progress}
