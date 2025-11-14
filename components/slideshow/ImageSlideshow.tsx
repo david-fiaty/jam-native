@@ -54,6 +54,7 @@ const ImageSlideshow = ({ data }: Props) => {
         width={slideWidth}
         height={slideHeight}
         data={data}
+        windowSize={2}
         onProgressChange={progress}
         renderItem={({ index }) => renderItem(data[index], index)}
         onConfigurePanGesture={gestureChain => (
