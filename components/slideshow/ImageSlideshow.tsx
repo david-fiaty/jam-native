@@ -1,62 +1,22 @@
-import React, { useRef, useState } from "react";
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
+import React from 'react';
 import Swiper from 'react-native-swiper';
 import ImageView from '../view/ImageView';
 import MediaManager from '@/manager/MediaManager';
 import ScreenManager from '@/manager/ScreenManager';
-import BoxView from '../view/BoxView';
 
 type Props = {
   data?: any;
 };
 
-const dotSize: number = 20;
+const dotSize: number = 8;
 const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
+const pagerHeight: number = 20;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
-  const sliderScrollViewRef: any = useRef<ScrollView>(null);
-  const pagerScrollViewRef: any = useRef<ScrollView>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const isSyncing: any = useRef(false);
-
-  const onScroll = (e: any, targetRef: any, isPager: boolean = false) => {
-    if (isSyncing.current) return;
-    isSyncing.current = true;
-
-    let x: number = e.nativeEvent.contentOffset.x;
-    let w: number = slideWidth;
-
-    targetRef.current?.scrollTo({ x: x, animated: false });
-    setCurrentIndex(Math.round(x / w));
-    
-    /*
-    if (isPager === true && currentIndex == 0) {
-      setCurrentIndex(1);
-    }
-    else {
-      setCurrentIndex(Math.round(x / w));
-    }
-    */
-
-    setTimeout(() => (isSyncing.current = false), 0);
-  };
-
-  const onDotPress = (index: number, targetRef: any) => {
-    if (isSyncing.current) return;
-    isSyncing.current = true;
-
-    let x: number = slideWidth * index;
-
-    targetRef.current?.scrollTo({ x: x, animated: false });
-    setCurrentIndex(index);
-
-    setTimeout(() => (isSyncing.current = false), 0);
-  }; 
-
   const renderItem = (item: any, index: number) => {
     return (
       <View
@@ -73,52 +33,24 @@ const ImageSlideshow = ({ data }: Props) => {
     );
   };
 
-  const renderDot = (item: any, index: number) => {
-    let dotStyle: any = {
-      ...styles.dot,
-      ...(index === currentIndex ? styles.activeDot : {}),
-    };
-
-    return (
-      <TouchableOpacity
-        key={`dot-${index}`}
-        style={dotStyle}
-        onPress={() => onDotPress(index, sliderScrollViewRef)}
-      />
-    );
-  };
-
   return (
-    <>
-      <ScrollView
-        ref={sliderScrollViewRef}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, pagerScrollViewRef)}
-        contentContainerStyle={styles.sliderScrollView}
+    <View style={styles.wrapper}>
+      <Swiper
+        showsButtons={false}
+        paginationStyle={styles.pager}
+        dot={<View style={styles.dot} />}
+        activeDot={<View style={styles.activeDot} />}
       >
         {data?.map((item: any, index: number) => renderItem(item, index))}
-      </ScrollView>
-
-      <ScrollView
-        ref={pagerScrollViewRef}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        scrollEventThrottle={16}
-        onScroll={(e) => onScroll(e, sliderScrollViewRef, true)}
-        contentContainerStyle={styles.pagerScrollView}
-      >
-        {data?.map((item: any, index: number) => renderDot(item, index))}
-      </ScrollView>
-    </>
+      </Swiper>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  sliderScrollView: {
+  wrapper: {
     height: wrapperHeight,
-    marginTop: Layout.space.base / 2,
+    marginTop: Layout.space.base,
   },
   slide: {
     justifyContent: 'center',
@@ -126,13 +58,23 @@ const styles = StyleSheet.create({
     height: slideHeight,
     width: slideWidth,
   },
-  pagerScrollView: {
-    flex: 1,
-    gap: Layout.space.base / 2,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'gray',
-    padding: Layout.space.base,
+  title: {
+    color: Layout.colors.primary,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    width: '100%',
+    marginBottom: Layout.space.base,
+    paddingHorizontal: Layout.space.base * 3,
+  },
+  content: {
+    color: Layout.colors.primary,
+    textAlign: 'center',
+    width: '100%',
+    paddingHorizontal: Layout.space.base * 2.1,
+  },
+  pager: {
+    top: slideHeight + Layout.space.base,
+    height: pagerHeight,
   },
   dot: {
     backgroundColor: Layout.colors.white,
@@ -141,9 +83,16 @@ const styles = StyleSheet.create({
     width: dotSize,
     height: dotSize,
     borderRadius: dotSize,
+    marginHorizontal: 3,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
+    borderColor: Layout.colors.primary,
+    borderWidth: Layout.borderWidth.base,
+    width: dotSize,
+    height: dotSize,
+    borderRadius: dotSize,
+    marginHorizontal: 3,
   },
 });
 
