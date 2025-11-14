@@ -1,18 +1,29 @@
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import React from 'react';
-import Swiper from 'react-native-swiper';
+import { useSharedValue } from "react-native-reanimated";
+import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
+import ScreenManager from '@/manager/ScreenManager';
 
 type Props = {
   data?: any;
 };
 
-const dotSize: number = 8;
+const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 const slideHeight: number = 100;
 const wrapperHeight: number = 140;
-const pagerHeight: number = 20;
 
 const TextSlideshow = ({ data }: Props) => {
+  const ref = React.useRef<ICarouselInstance>(null);
+  const progress = useSharedValue<number>(0);
+
+  const onPressPagination = (index: number) => {
+    ref.current?.scrollTo({
+      count: index - progress.value,
+      animated: true,
+    });
+  };
+
   const renderItem = (item: any, index: number) => {
     return (
       <View 
@@ -32,14 +43,27 @@ const TextSlideshow = ({ data }: Props) => {
 
   return (
     <View style={styles.wrapper}>
-      <Swiper
-        showsButtons={false}
-        paginationStyle={styles.pager}
-        dot={<View style={styles.dot} />}
-        activeDot={<View style={styles.activeDot} />}
-      >
-        {data?.map((item: any, index: number) => renderItem(item, index))}
-      </Swiper>
+      <Carousel
+        ref={ref}
+        width={slideWidth}
+        height={slideHeight}
+        data={data}
+        windowSize={3}
+        onProgressChange={progress}
+        renderItem={({ index }) => renderItem(data[index], index)}
+        onConfigurePanGesture={gestureChain => (
+          gestureChain.activeOffsetX([-10, 10])
+        )}
+      />
+
+      <Pagination.Basic
+        progress={progress}
+        data={data}
+        dotStyle={styles.dot}
+        activeDotStyle={styles.activeDot}
+        containerStyle={styles.pager}
+        onPress={onPressPagination}
+      />
     </View>
   );
 };
@@ -70,26 +94,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: Layout.space.base*2.1,
   },
   pager: {
-    top: slideHeight + Layout.space.base,
-    height: pagerHeight,
+    gap: 5, 
+    marginTop: Layout.space.base,
   },
   dot: {
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
     borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
+    borderRadius: 50,
   },
   activeDot: {
     backgroundColor: Layout.colors.primary,
-    borderColor: Layout.colors.primary,
-    borderWidth: Layout.borderWidth.base,
-    width: dotSize,
-    height: dotSize,
-    borderRadius: dotSize,
-    marginHorizontal: 3,
+    borderRadius: 50,
   },
 });
 
