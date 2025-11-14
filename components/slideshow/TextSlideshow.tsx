@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { useSharedValue } from "react-native-reanimated";
+import { useSharedValue, useAnimatedReaction, runOnJS } from "react-native-reanimated";
 import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
 import ScreenManager from '@/manager/ScreenManager';
 
@@ -15,18 +15,26 @@ const wrapperHeight: number = 140;
 
 const TextSlideshow = ({ data }: Props) => {
   const ref = React.useRef<ICarouselInstance>(null);
+  const [progressJS, setProgressJS] = React.useState(0);
   const progress = useSharedValue<number>(0);
+
+  useAnimatedReaction(
+    () => progress.value,
+    (val) => {
+      runOnJS(setProgressJS)(val);
+    }
+  );
 
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
-      count: index - progress.value,
+      count: index - progressJS,
       animated: true,
     });
   };
 
   const renderItem = (item: any, index: number) => {
     return (
-      <View 
+      <View
         key={`dot-${index}`}
         style={styles.slide}
       >
@@ -37,7 +45,7 @@ const TextSlideshow = ({ data }: Props) => {
         <Text style={styles.content}>
           {item.content}
         </Text>
-      </View>      
+      </View>
     );
   };
 
@@ -85,16 +93,16 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     width: '100%',
     marginBottom: Layout.space.base,
-    paddingHorizontal: Layout.space.base*3,
+    paddingHorizontal: Layout.space.base * 3,
   },
   content: {
     color: Layout.colors.primary,
     textAlign: 'center',
     width: '100%',
-    paddingHorizontal: Layout.space.base*2.1,
+    paddingHorizontal: Layout.space.base * 2.1,
   },
   pager: {
-    gap: 5, 
+    gap: 5,
     marginTop: Layout.space.base,
   },
   dot: {
