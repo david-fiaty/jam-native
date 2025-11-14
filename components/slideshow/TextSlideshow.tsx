@@ -51,9 +51,6 @@ const TextSlideshow = ({ data }: Props) => {
         windowSize={3}
         onProgressChange={progress}
         renderItem={({ index }) => renderItem(data[index], index)}
-        onConfigurePanGesture={gestureChain => (
-          gestureChain.activeOffsetX([-10, 10])
-        )}
       />
 
       <Pagination.Basic
