@@ -12,6 +12,11 @@ const GoogleLoginButton = () => {
 
   const onPress = () => {
     // Todo - Implement google login buton
+    let payload: any = {
+      provider: 'google',
+      authorization_code: 'AQDvlhmWEOysFyWkXsFYb5WzKw-B4p1sY7l-6QxY6vbG0FYePXVYoTvTr-PcmBgDZxPPAWxEe61LJPJ0f6Vn40A4FtyACrJs4-ce6mYKb6m9hP2BfIghno9iSP-U8MwLtKsTafDa-515WCVewp1swQFp9EJImbTr1HVvcPNFYKNMfnfS3sFsc5E76yqkWbJjm3rkScWLGj2qa5H1Re9kpdzGAXVhPtDF4wH4rJTKrgyZCaWqzpSisGy1VsS7rrLL6fGgx1yH0oOepk3Td0c1E99xM9Ofyc8ln0QOf4qgu-UBDJEd7SeKXBMSuD5BvHnCE5QO4lLlGq-hSu4tbhTu2ElHBRRrOYPsQDb3LEeZagMQHP7zQE-xJ1iFO22o21iWqCJvTXkscUQBRe_2JZbBVNWRkuzZmJXHe6lm9pxCJHYO9w',
+    };
+
     console.log('on google button press', expoConfig?.android?.package);
   };
 
