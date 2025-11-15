@@ -14,8 +14,8 @@ const slideHeight: number = 100;
 const wrapperHeight: number = 140;
 
 const TextSlideshow = ({ data }: Props) => {
-  const ref = React.useRef<ICarouselInstance>(null);
-  const progress = useSharedValue<number>(0);
+  const ref: any = React.useRef<ICarouselInstance>(null);
+  const progress: any = useSharedValue<number>(0);
 
   configureReanimatedLogger({
     strict: false,
