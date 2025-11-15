@@ -171,20 +171,22 @@ class DataManager {
     return clone;
   }
   
-  isPhoneNumberPrefix = (value: string) => {
+  isPhoneNumberPrefix(value: string) {
     return ContentManager.getCountryPhoneCodes().some((o: any) => value == o.prefix);
   }
 
-  extractPhoneNumber = (value: any) => {
+  extractPhoneNumber(value: any) {
     if (value) {
       let prefixList: any[] = ContentManager.getCountryPhoneCodes().map((o: any) => o.prefix);
       let foundPrefix: any = prefixList.find((prefix: any) => value.startsWith(prefix));
 
-      return value.replace(foundPrefix, '').replaceAll(' ', '');
+      if (foundPrefix) {
+        return value.replace(foundPrefix, '').replaceAll(' ', '');
+      } 
     }
 
     return '';
-  };
+  }
 };
 
 export default (new DataManager());
