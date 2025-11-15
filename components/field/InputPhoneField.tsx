@@ -263,8 +263,6 @@ const InputPhoneField = ({
     }
   }, [isLoaded, countryOptions]);
 
-  console.log(getCurrentPhoneNumber(), phoneNumberFieldValue);
-
   return renderComponent();
 };
 
