@@ -16,8 +16,8 @@ const wrapperHeight: number = 346;
 const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
 
 const ImageSlideshow = ({ data }: Props) => {
-  const ref = React.useRef<ICarouselInstance>(null);
-  const progress = useSharedValue<number>(0);
+  const ref: any = React.useRef<ICarouselInstance>(null);
+  const progress: any = useSharedValue<number>(0);
 
   configureReanimatedLogger({
     strict: false,
