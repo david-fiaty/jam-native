@@ -4,7 +4,7 @@ export const Config: any = {
   defaultRoute: '/welcome',
   apiUrl: 'https://dev.jammm.app/backend/api/v1',
   imageUrl: 'https://dev.jammm.app/backend',
-  mapApiKey: 'AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM',
+  googleMapApiKey: 'AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM',
   geocodeUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   storageKey: '@jam',
   mainSection: 'jams',

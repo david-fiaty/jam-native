@@ -180,7 +180,7 @@ Longitude
 - Implement image cache : https://github.com/echowaves/expo-cached-image
 - Implement reverse geocoding
   /*
-  let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.mapApiKey}`;
+  let url = `${Config.geocodeUrl}?latlng=${coords.latitude},${coords.longitude}&key=${Config.googleMapApiKey}`;
 
   try {
     let response: any = await fetch(url);
