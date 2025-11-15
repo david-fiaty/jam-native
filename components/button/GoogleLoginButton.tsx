@@ -6,29 +6,27 @@ import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 import ImageView from '../view/ImageView';
 
-const source = require('@/assets/images/google-logo.png'); 
-
-const config = Constants.expoConfig;
-
 const GoogleLoginButton = () => {
+  const source: any = require('@/assets/images/google-logo.png');
+  const expoConfig: any = Constants.expoConfig;
 
   const onPress = () => {
     // Todo - Implement google login buton
-    console.log('on google button press', config?.android?.package);
+    console.log('on google button press', expoConfig?.android?.package);
   };
 
   return (
-    <TouchableOpacity 
-      onPress={onPress} 
+    <TouchableOpacity
+      onPress={onPress}
       style={styles.container}
     >
-      <BoxView 
-        direction="row" 
-        align="center" 
-        justify="flex-start" 
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
       >
-        <ImageView 
-          path={source} 
+        <ImageView
+          path={source}
           width={32}
           height={32}
           resizeMode="cover"
@@ -42,10 +40,10 @@ const GoogleLoginButton = () => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    borderWidth: Layout.borderWidth.base, 
+    borderWidth: Layout.borderWidth.base,
     borderColor: Layout.colors.primary,
     borderRadius: Layout.radius.round,
-    padding: Layout.space.base/2,
+    padding: Layout.space.base / 2,
   },
 });
 
