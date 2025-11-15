@@ -243,9 +243,9 @@ const InputPhoneField = ({
     let fieldValue: string = '';
     
     if (phoneNumber) {
-
+      fieldValue = phoneNumber;
     }
-    
+
     /*
     if (targetCountry && formatPhoneNumber) {
       fieldValue = (new AsYouType().input(fieldValue)).replace(targetCountry.prefix, '');
