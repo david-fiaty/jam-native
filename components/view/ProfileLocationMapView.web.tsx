@@ -20,7 +20,7 @@ const ProfileLocationMapView = ({ itemData }: Props) => {
   const [currentLocation, setCurrentLocation] = useState<any>(null);
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: Config.mapApiKey,
+    googleMapsApiKey: Config.googleMapApiKey,
   });
 
   const getInitialRegion = () => {
