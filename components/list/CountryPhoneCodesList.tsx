@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
+import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
@@ -70,8 +71,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let fieldValue: string = targetCountry.prefix + DataManager.extractPhoneNumber(value);
+    let phoneNumber: string = DataManager.extractPhoneNumber(value); 
+    let fieldValue: string = targetCountry.prefix;
 
+    if (phoneNumber) {
+      fieldValue += phoneNumber;
+    }
+    
     setSelectedIds([entityId]);
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
