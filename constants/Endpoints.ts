@@ -185,6 +185,11 @@ const Endpoints: any = {
     cacheable: false,
     dataKey: null,
   },
+  socialAuth: {
+    path: '/social-login-or-register-first-step/',
+    cacheable: false,
+    dataKey: null,
+  },
 };
 
 export default Endpoints;

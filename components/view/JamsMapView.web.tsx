@@ -27,7 +27,7 @@ const JamsMapView = () => {
   const searchTabs: any[] = SearchManager.getSearchTabs();
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: Config.mapApiKey,
+    googleMapsApiKey: Config.googleMapApiKey,
   });
 
   const getInitialRegion = () => {
