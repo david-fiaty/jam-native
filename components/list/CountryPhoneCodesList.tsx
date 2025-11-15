@@ -72,16 +72,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
     let phoneNumber: string = DataManager.extractPhoneNumber(value); 
-    let fieldValue: string = '';
-    
+    let fieldValue: string = targetCountry.prefix;
+
     if (phoneNumber) {
-      fieldValue = targetCountry.prefix + phoneNumber;
-    }
-    else if (DataManager.isPhoneNumberPrefix(value)) {
-      fieldValue = targetCountry.prefix;
-    }
-    else {
-      fieldValue = '';
+      fieldValue += phoneNumber;
     }
     
     setSelectedIds([entityId]);
