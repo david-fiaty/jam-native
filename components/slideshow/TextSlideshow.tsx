@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Layout } from '@/constants/Layout';
-import { useSharedValue } from "react-native-reanimated";
+import { useSharedValue, configureReanimatedLogger } from "react-native-reanimated";
 import Carousel, { ICarouselInstance, Pagination } from "react-native-reanimated-carousel";
 import ScreenManager from '@/manager/ScreenManager';
 
@@ -16,6 +16,10 @@ const wrapperHeight: number = 140;
 const TextSlideshow = ({ data }: Props) => {
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
+
+  configureReanimatedLogger({
+    strict: false,
+  });
 
   const onPressPagination = (index: number) => {
     ref.current?.scrollTo({
