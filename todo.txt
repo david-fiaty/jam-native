@@ -151,6 +151,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Amelioration add jam to project form
 - Amelioration animation slideshows texte et images
 - Bug fixes sur share feature et project form
+- Implementation appel Google Login (manque traitement reponse)
 
 # SIGNUP FIELDS
 Numero Whatsapp (login)
