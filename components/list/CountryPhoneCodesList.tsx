@@ -71,17 +71,21 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    //let fieldValue: string = targetCountry.prefix + DataManager.extractPhoneNumber(value);
-
+    let phoneNumber: string = DataManager.extractPhoneNumber(value); 
+    let fieldValue: string = '';
     
-
-    //console.log(targetCountry);
-    
-    console.log(parsePhoneNumber('+228 90'))
-
+    if (phoneNumber) {
+      fieldValue = targetCountry.prefix + phoneNumber;
+    }
+    else if (DataManager.isPhoneNumberPrefix(value)) {
+      fieldValue = targetCountry.prefix;
+    }
+    else {
+      fieldValue = '';
+    }
     
     setSelectedIds([entityId]);
-    //FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
+    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
