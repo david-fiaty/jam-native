@@ -1,16 +1,37 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { Linking, StyleSheet, TouchableOpacity } from 'react-native';
 import { Layout } from '@/constants/Layout';
 import Constants from 'expo-constants';
 import BoxView from '../view/BoxView';
 import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 import ImageView from '../view/ImageView';
+import { Config } from '@/constants/Config';
 
 const GoogleLoginButton = () => {
   const source: any = require('@/assets/images/google-logo.png');
   const expoConfig: any = Constants.expoConfig;
 
+  const redirectUri = "http://localhost:3000/login";
+  const clientId = Config.googleAuthClientId;
+  const scope = "openid email profile";
+  const state = Math.random().toString(36).substring(2);
+  const authUrl =
+    `https://accounts.google.com/o/oauth2/v2/auth` +
+    `?response_type=code` +
+    `&client_id=${clientId}` +
+    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
+    `&scope=${encodeURIComponent(scope)}` +
+    `&state=${state}` +
+    `&prompt=select_account`; // 👈 Forces account chooser every time
+
+
   const onPress = () => {
+
+    Linking.openURL(authUrl).catch((err: any) => {
+      console.error('Failed to open URL:', err)
+    });
+    
+    /*
     // Todo - Implement google login buton
     let payload: any = {
       provider: 'google',
@@ -18,6 +39,8 @@ const GoogleLoginButton = () => {
     };
 
     console.log('on google button press', expoConfig?.android?.package);
+
+    */
   };
 
   return (
