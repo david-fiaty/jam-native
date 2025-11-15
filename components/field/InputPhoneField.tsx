@@ -22,7 +22,6 @@ type Props = {
   phonePrefixFieldValue?: any;
   parentKey?: any;
   rules?: any;
-  value?: string;
   inputlabel?: any;
   selectLabel?: any;
   inputPlaceholder?: any;
@@ -42,7 +41,6 @@ const InputPhoneField = ({
   phonePrefixFieldValue,
   parentKey,
   rules,
-  value,
   inputlabel,
   selectLabel,
   inputPlaceholder,
@@ -263,7 +261,9 @@ const InputPhoneField = ({
       setSelectedCountry(getSelectedCountry());
       setIsLoaded(true);
     }
-  }, [isLoaded, value, countryOptions]);
+  }, [isLoaded, countryOptions]);
+
+  console.log(getCurrentPhoneNumber(), phoneNumberFieldValue);
 
   return renderComponent();
 };
