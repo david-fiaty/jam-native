@@ -242,6 +242,10 @@ const InputPhoneField = ({
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue); 
     let fieldValue: string = '';
     
+    if (phoneNumber) {
+
+    }
+    
     /*
     if (targetCountry && formatPhoneNumber) {
       fieldValue = (new AsYouType().input(fieldValue)).replace(targetCountry.prefix, '');
