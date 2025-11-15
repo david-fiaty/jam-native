@@ -156,7 +156,7 @@ class ContentManager {
         "code": "dz",
       },
       {
-        "name": i18n.t("AmericanSamoa"),
+        "name": i18n.t("American Samoa"),
         "prefix": "+1684",
         "code": "as",
       },
