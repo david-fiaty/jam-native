@@ -7,7 +7,7 @@ export const Config: any = {
   googleMapApiKey: 'AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM',
   googleGeocodeUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
   googleAuthClientId: '811182156187-2p26v2vuqm3vop5iuikftv80fkea2huu.apps.googleusercontent.com',
-  facebookAuthClientId: '373201195846239',
+  facebookAuthClientId: '373201195846239', 
   instagramAuthClientId: '684282327603640',
   storageKey: '@jam',
   mainSection: 'jams',
