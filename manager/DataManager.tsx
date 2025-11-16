@@ -179,10 +179,14 @@ class DataManager {
     if (value) {
       let prefixList: any[] = ContentManager.getCountryPhoneCodes().map((o: any) => o.prefix);
       let foundPrefix: any = prefixList.find((prefix: any) => value.startsWith(prefix));
+      let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
 
       if (foundPrefix) {
         return value.replace(foundPrefix, '').replaceAll(' ', '');
       } 
+      else if (isDigits) { 
+        return value; 
+      }
     }
 
     return '';
