@@ -22,14 +22,13 @@ type Props = {
 };
 
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
+  const listRef: any = useRef(null);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
   const countryList: any = ContentManager.getCountryPhoneCodes();
-
-  const listRef: any = useRef(null);
 
   const getListData = (filterValue?: string) => {
     if (filterValue) {
