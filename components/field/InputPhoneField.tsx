@@ -239,25 +239,21 @@ const InputPhoneField = ({
 
   const getCurrentPhoneNumber = () => {
     let targetCountry: any = getSelectedCountry();
-    let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue); 
+    let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
-    
+
     if (phoneNumber) {
       fieldValue = phoneNumber;
-    }
 
-    /*
-    if (targetCountry && formatPhoneNumber) {
-      fieldValue = (new AsYouType().input(fieldValue)).replace(targetCountry.prefix, '');
-    } 
-    else if (targetCountry) {
-      fieldValue = fieldValue.replace(targetCountry.prefix, '');
+      if (targetCountry && formatPhoneNumber) {
+        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
+        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
+      }
     }
-      */
 
     return fieldValue;
   };
-  
+
   useEffect(() => {
     (async () => {
       setDefaultCountry(await getDefaultCountry());
