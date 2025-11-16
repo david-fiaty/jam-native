@@ -23,13 +23,10 @@ type Props = {
 };
 
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
-  const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
-  const appState: any = useSelector((state: any) => state.app, shallowEqual);
   const countryList: any = ContentManager.getCountryPhoneCodes();
 
   const getListData = (filterValue?: string) => {
@@ -93,7 +90,6 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue += phoneNumber;
     }
 
-    setSelectedCountry(targetCountry)
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
@@ -126,7 +122,6 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedCountry(getSelectedCountry());
       setListData(getListData());
       setIsLoaded(true);
     }
