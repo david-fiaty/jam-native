@@ -38,7 +38,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSelectedCountry = () => {
-    if (selectedCountry) {
+    if (selectedCountry && typeof selectedCountry !== 'undefined') {
       return selectedCountry;
     }
     else if (value) {
@@ -93,14 +93,16 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue += phoneNumber;
     }
 
-    setSelectedCountry(targetCountry)
-    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
+    setSelectedCountry(targetCountry);
+
+    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
   };
 
   const renderItem = (row: any) => {
-    //let isSelected: boolean = selectedCountry?.code == row?.item?.code;
     let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
-    
+
     return (
       <TouchableOpacity
         key={row?.item?.code}
@@ -143,7 +145,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       style={Layout.formContainer}
     >
       <InputTextField
-        value={searchValue}
+        value={getSelectedCountry()?.name || searchValue}
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeSearch}
         rightIcon={renderSearchIcon()}
