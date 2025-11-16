@@ -42,12 +42,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const getSelectedCountry = () => {
     let parsedNumber: any = parsePhoneNumber(value);
+    let targetCountry: any = null;
 
     if (parsedNumber) {
-      return [parsedNumber.country.toLowerCase()];
+      targetCountry = listData.find((o: any) => o.code == parsedNumber.country.toLowerCase());
     }
 
-    return [];
+    return targetCountry;
   };
 
   const clearSearch = async () => {
