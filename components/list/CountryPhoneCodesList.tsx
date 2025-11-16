@@ -55,6 +55,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     return null;
   };
 
+  const getSearchValue = () => {
+    return searchValue;
+  };
+
   const clearSearch = async () => {
     setIsSearching(true);
     setIsSearching(false);
@@ -130,7 +134,6 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   useEffect(() => {
     if (!isLoaded) {
       setSelectedCountry(getSelectedCountry());
-      setSearchValue(getSelectedCountry()?.name);
       setListData(getListData());
       setIsLoaded(true);
     }
@@ -146,7 +149,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       style={Layout.formContainer}
     >
       <InputTextField
-        value={searchValue}
+        value={getSearchValue()}
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeSearch}
         rightIcon={renderSearchIcon()}
