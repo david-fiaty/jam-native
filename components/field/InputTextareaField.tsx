@@ -40,7 +40,7 @@ const InputTextareaField = ({
     ...(containerStyle || {}),
     ...{
       height: numerOfLines*Layout.space.base,
-    }
+    },
   }
 
   return (
@@ -67,7 +67,7 @@ const InputTextareaField = ({
 const styles = StyleSheet.create({
   element: {
     width: '100%',
-    paddingTop: Layout.space.base / 2,
+    paddingTop: Layout.space.base,
     height: 'auto',
   },
 });
