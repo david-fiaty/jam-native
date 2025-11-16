@@ -45,7 +45,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     let targetCountry: any = null;
 
     if (parsedNumber) {
-      targetCountry = listData.find((o: any) => o.code == parsedNumber.country.toLowerCase());
+      targetCountry = listData.find((o: any) => o?.code == parsedNumber.country.toLowerCase());
     }
 
     return targetCountry;
@@ -95,7 +95,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const renderItem = (row: any) => {
     let isSelected: boolean = selectedCountry?.code == row?.item?.code;
-    
+
     return (
       <TouchableOpacity
         key={row?.item?.code}
@@ -129,6 +129,8 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  console.log(getSelectedCountry())
 
   return (
     <BoxView
