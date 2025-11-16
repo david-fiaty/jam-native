@@ -13,6 +13,7 @@ type Props = {
   containerStyle?: object;
   disabled?: boolean;
   readOnly?: boolean;
+  numerOfLines?: any;
   onSubmitEditing?: () => void;
   onChangeText?: (value: any) => void;
 };
@@ -28,9 +29,19 @@ const InputTextareaField = ({
   containerStyle,
   disabled,
   readOnly,
+  numerOfLines,
   onChangeText,
   onSubmitEditing,
 }: Props) => {
+
+  numerOfLines = numerOfLines || 10;
+
+  containerStyle = {
+    ...(containerStyle || {}),
+    ...{
+      height: numerOfLines*Layout.space.base,
+    }
+  }
 
   return (
     <InputTextField
@@ -43,7 +54,7 @@ const InputTextareaField = ({
       placeholder={placeholder}
       multiline={true}
       textAlignVertical="top"
-      numberOfLines={10}
+      numberOfLines={numerOfLines}
       disabled={disabled}
       readOnly={readOnly}
       containerStyle={[Layout.formField, styles.element, containerStyle]}
