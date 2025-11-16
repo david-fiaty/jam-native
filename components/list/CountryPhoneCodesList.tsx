@@ -95,7 +95,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const renderItem = (row: any) => {
     let targetCountry: any = listData.find((o: any) => o.code == row.item.code);
-    let isSelected: boolean = targetCountry.code == selectedCountry?.name;
+    let isSelected: boolean = targetCountry.code == selectedCountry?.code;
     
     return (
       <TouchableOpacity
