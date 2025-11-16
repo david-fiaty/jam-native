@@ -38,7 +38,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSelectedCountry = () => {
-    if (selectedCountry) {
+    if (selectedCountry && typeof selectedCountry !== 'undefined') {
       return selectedCountry;
     }
     else if (value) {
@@ -53,12 +53,6 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     }
 
     return null;
-  };
-
-  const getSearchValue = () => {
-
-    console.log(isLoaded)
-    return searchValue;
   };
 
   const clearSearch = async () => {
@@ -151,7 +145,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       style={Layout.formContainer}
     >
       <InputTextField
-        value={getSearchValue()}
+        value={searchValue}
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeSearch}
         rightIcon={renderSearchIcon()}
