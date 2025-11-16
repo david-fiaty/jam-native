@@ -183,6 +183,9 @@ class DataManager {
       if (foundPrefix) {
         return value.replace(foundPrefix, '').replaceAll(' ', '');
       } 
+      else if (!isNaN(parseFloat(value)) && isFinite(value)) {
+        return value; 
+      }
     }
 
     return '';
