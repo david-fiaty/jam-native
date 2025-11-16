@@ -165,6 +165,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
         {listData?.length > 0 &&
           <ListView
             ref={listRef}
+            keyExtractor={(item) => item}
             data={listData}
             renderItem={(row: any) => renderItem(row)}
           />
