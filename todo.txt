@@ -152,7 +152,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Bug fixes sur share feature
 - Finalisation project form
 - FInalisation add jam to project form
-- Implementation appel Google Login (manque traitement reponse)
+- Implementation Google Login (manque traitement reponse)
 
 # SIGNUP FIELDS
 Numero Whatsapp (login)
