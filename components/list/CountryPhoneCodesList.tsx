@@ -38,7 +38,17 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     }
 
     return countryList;
-  }
+  };
+
+  const getSelectedIds = () => {
+    let parsedNumber: any = parsePhoneNumber(value);
+
+    if (parsedNumber) {
+      return [parsedNumber.country.toLowerCase()];
+    }
+
+    return [];
+  };
 
   const clearSearch = async () => {
     setIsSearching(true);
@@ -71,13 +81,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let phoneNumber: string = DataManager.extractPhoneNumber(value); 
+    let phoneNumber: string = DataManager.extractPhoneNumber(value);
     let fieldValue: string = targetCountry.prefix;
 
     if (phoneNumber) {
       fieldValue += phoneNumber;
     }
-    
+
     setSelectedIds([entityId]);
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
@@ -112,13 +122,16 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
+      setSelectedIds(getSelectedIds());
       setListData(getListData());
       setIsLoaded(true);
     }
   }, [formData, fieldKey, parentKey, selectedIds, appState]);
 
   if (!isLoaded) return <SpinnerView />;
+
+  //console.log(value)
+  //console.log(parsePhoneNumber(value))
 
   return (
     <BoxView
