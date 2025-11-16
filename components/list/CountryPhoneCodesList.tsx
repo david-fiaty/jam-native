@@ -94,11 +94,12 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     }
 
     setSelectedCountry(targetCountry)
-    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
+    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
   };
 
   const renderItem = (row: any) => {
-    //let isSelected: boolean = selectedCountry?.code == row?.item?.code;
     let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
     
     return (
