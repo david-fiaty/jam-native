@@ -94,7 +94,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     }
 
     setSelectedCountry(targetCountry);
-    
+
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
@@ -102,7 +102,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const renderItem = (row: any) => {
     let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
-    
+
     return (
       <TouchableOpacity
         key={row?.item?.code}
@@ -130,6 +130,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   useEffect(() => {
     if (!isLoaded) {
       setSelectedCountry(getSelectedCountry());
+      setSearchValue(getSelectedCountry()?.name);
       setListData(getListData());
       setIsLoaded(true);
     }
