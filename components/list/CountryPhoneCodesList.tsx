@@ -145,8 +145,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       style={Layout.formContainer}
     >
       <InputTextField
-        //value={searchValue}
-        value={getSelectedCountry()?.name}
+        value={getSelectedCountry()?.name || searchValue}
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeSearch}
         rightIcon={renderSearchIcon()}
