@@ -95,6 +95,7 @@ const InputPhoneField = ({
 
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = countryList.find((o: any) => o.code == item.value);
+
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
@@ -225,6 +226,7 @@ const InputPhoneField = ({
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
       let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+
       if (targetCountry) {
         return targetCountry;
       }
@@ -241,6 +243,9 @@ const InputPhoneField = ({
     let targetCountry: any = getSelectedCountry();
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
+
+    console.log(phoneNumberFieldValue)
+    console.log(phoneNumber)
 
     if (phoneNumber) {
       fieldValue = phoneNumber;
