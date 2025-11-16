@@ -151,7 +151,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Amelioration animation slideshows (welcome screen et jam images)
 - Bug fixes sur share feature
 - Finalisation project form
-- FInalisation add jam to project form
+- Finalisation add jam to project form
 - Implementation Google Login (manque traitement reponse)
 
 # SIGNUP FIELDS
