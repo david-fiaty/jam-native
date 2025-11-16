@@ -4,6 +4,7 @@ import { Config } from "@/constants/Config";
 import ScreenManager from "@/manager/ScreenManager";
 
 type Props = {
+  ref: any;
   data: any;
   numColumns?: number;
   scrollEnabled?: boolean;
@@ -21,6 +22,7 @@ type Props = {
 };
 
 const ListView = ({
+  ref,
   data,
   numColumns,
   scrollEnabled,
@@ -36,12 +38,9 @@ const ListView = ({
   keyExtractor,
   renderItem,
 }: Props) => {
-
-  const listRef = useRef<any>(null);
-
   return (
     <FlatList
-      ref={listRef}
+      ref={ref}
       data={data || []}
       numColumns={numColumns || 1}
       initialNumToRender={data?.length || Config.paginationSize}
