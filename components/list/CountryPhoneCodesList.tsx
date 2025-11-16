@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import parsePhoneNumber from 'libphonenumber-js';
@@ -28,6 +28,8 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
   const countryList: any = ContentManager.getCountryPhoneCodes();
+
+  const listRef: any = useRef(null);
 
   const getListData = (filterValue?: string) => {
     if (filterValue) {
@@ -127,6 +129,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     );
   };
 
+  const goToItem = (index: number) => {
+    listRef.current?.scrollToIndex({
+      index,
+      animated: true,
+    });
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setSelectedCountry(getSelectedCountry());
@@ -155,6 +164,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       <View style={Layout.borderedListContainer}>
         {listData?.length > 0 &&
           <ListView
+            ref={listRef}
             data={listData}
             renderItem={(row: any) => renderItem(row)}
           />
