@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Layout } from "@/constants/Layout";
 import parsePhoneNumber from 'libphonenumber-js';
@@ -22,6 +22,7 @@ type Props = {
 };
 
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
+  const listRef: any = useRef(null);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
@@ -38,7 +39,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSelectedCountry = () => {
-    if (selectedCountry) {
+    if (selectedCountry && typeof selectedCountry !== 'undefined') {
       return selectedCountry;
     }
     else if (value) {
@@ -93,14 +94,16 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue += phoneNumber;
     }
 
-    setSelectedCountry(targetCountry)
-    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
+    setSelectedCountry(targetCountry);
+
+    FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
   };
 
   const renderItem = (row: any) => {
-    //let isSelected: boolean = selectedCountry?.code == row?.item?.code;
     let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
-    
+
     return (
       <TouchableOpacity
         key={row?.item?.code}
@@ -125,6 +128,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     );
   };
 
+  const goToItem = (index: number) => {
+    listRef.current?.scrollToIndex({
+      index,
+      animated: true,
+    });
+  };
+
   useEffect(() => {
     if (!isLoaded) {
       setSelectedCountry(getSelectedCountry());
@@ -143,7 +153,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       style={Layout.formContainer}
     >
       <InputTextField
-        value={searchValue}
+        value={getSelectedCountry()?.name || searchValue}
         placeholder={i18n.t('Search...')}
         onChangeText={onChangeSearch}
         rightIcon={renderSearchIcon()}
@@ -153,6 +163,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       <View style={Layout.borderedListContainer}>
         {listData?.length > 0 &&
           <ListView
+            ref={listRef}
             data={listData}
             renderItem={(row: any) => renderItem(row)}
           />
