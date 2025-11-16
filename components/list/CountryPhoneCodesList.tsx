@@ -41,14 +41,18 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSelectedCountry = () => {
-    let parsedNumber: any = parsePhoneNumber(value);
-    let targetCountry: any = null;
+    if (value) {
+      let parsedNumber: any = parsePhoneNumber(value);
+      let targetCountry: any = null;
 
-    if (parsedNumber) {
-      targetCountry = listData.find((o: any) => o?.code == parsedNumber.country.toLowerCase());
+      if (parsedNumber) {
+        targetCountry = listData.find((o: any) => o?.code == parsedNumber.country.toLowerCase());
+      }
+
+      return targetCountry;
     }
 
-    return targetCountry;
+    return null;
   };
 
   const clearSearch = async () => {
