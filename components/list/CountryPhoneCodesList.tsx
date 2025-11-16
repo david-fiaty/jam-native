@@ -93,7 +93,8 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue += phoneNumber;
     }
 
-    setSelectedCountry(targetCountry)
+    setSelectedCountry(targetCountry);
+    
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
