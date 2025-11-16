@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import parsePhoneNumber from 'libphonenumber-js';
 import BoxView from "../view/BoxView";
@@ -39,7 +38,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSelectedCountry = () => {
-    if (value) {
+    if (selectedCountry) {
+      return selectedCountry;
+    }
+    else if (value) {
       let parsedNumber: any = parsePhoneNumber(value);
       let targetCountry: any = null;
 
@@ -96,8 +98,9 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const renderItem = (row: any) => {
-    let isSelected: boolean = selectedCountry?.code == row?.item?.code;
-
+    //let isSelected: boolean = selectedCountry?.code == row?.item?.code;
+    let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
+    
     return (
       <TouchableOpacity
         key={row?.item?.code}
