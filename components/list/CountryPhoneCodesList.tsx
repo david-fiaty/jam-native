@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
 import parsePhoneNumber from 'libphonenumber-js';
 import BoxView from "../view/BoxView";
@@ -28,8 +27,6 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
-  const formData: any = useSelector((state: any) => state.form[resource]);
-  const appState: any = useSelector((state: any) => state.app, shallowEqual);
   const countryList: any = ContentManager.getCountryPhoneCodes();
 
   const getListData = (filterValue?: string) => {
@@ -41,7 +38,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSelectedCountry = () => {
-    if (value) {
+    if (selectedCountry) {
+      return selectedCountry;
+    }
+    else if (value) {
       let parsedNumber: any = parsePhoneNumber(value);
       let targetCountry: any = null;
 
@@ -98,8 +98,9 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const renderItem = (row: any) => {
+    //let isSelected: boolean = selectedCountry?.code == row?.item?.code;
     let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
-
+    
     return (
       <TouchableOpacity
         key={row?.item?.code}
