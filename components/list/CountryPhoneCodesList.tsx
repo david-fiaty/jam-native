@@ -23,6 +23,7 @@ type Props = {
 };
 
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
+  const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -90,11 +91,12 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue += phoneNumber;
     }
 
+    setSelectedCountry(targetCountry)
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
-    let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
+    let isSelected: boolean = selectedCountry?.code == row?.item?.code;
 
     return (
       <TouchableOpacity
@@ -122,6 +124,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   useEffect(() => {
     if (!isLoaded) {
+      setSelectedCountry(getSelectedCountry());
       setListData(getListData());
       setIsLoaded(true);
     }
