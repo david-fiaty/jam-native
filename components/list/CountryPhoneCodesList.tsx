@@ -56,6 +56,8 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   };
 
   const getSearchValue = () => {
+
+    console.log(isLoaded)
     return searchValue;
   };
 
