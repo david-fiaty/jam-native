@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
-import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
+import parsePhoneNumber from 'libphonenumber-js';
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
@@ -23,7 +23,7 @@ type Props = {
 };
 
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
-  const [selectedIds, setSelectedIds] = useState<any>([]);
+  const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -40,7 +40,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     return countryList;
   };
 
-  const getSelectedIds = () => {
+  const getSelectedCountry = () => {
     let parsedNumber: any = parsePhoneNumber(value);
 
     if (parsedNumber) {
@@ -88,14 +88,14 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue += phoneNumber;
     }
 
-    setSelectedIds([entityId]);
+    setSelectedCountry(targetCountry)
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
     let targetCountry: any = listData.find((o: any) => o.code == row.item.code);
-    let isSelected: boolean = selectedIds.includes(targetCountry.code);
-
+    let isSelected: boolean = targetCountry.code == selectedCountry?.name;
+    
     return (
       <TouchableOpacity
         key={row?.item?.code}
@@ -122,16 +122,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedIds(getSelectedIds());
+      setSelectedCountry(getSelectedCountry());
       setListData(getListData());
       setIsLoaded(true);
     }
-  }, [formData, fieldKey, parentKey, selectedIds, appState]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
-
-  //console.log(value)
-  //console.log(parsePhoneNumber(value))
 
   return (
     <BoxView
