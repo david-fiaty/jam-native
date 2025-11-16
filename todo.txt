@@ -148,10 +148,10 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # New release
 - Integration input phone field
 - Optimisation globale validation et soumission formulaires 
-- Amelioration add jam to project form
 - Amelioration animation slideshows texte et images
 - Bug fixes sur share feature
 - Finalisation project form
+- FInalisation add jam to project form
 - Implementation appel Google Login (manque traitement reponse)
 
 # SIGNUP FIELDS
