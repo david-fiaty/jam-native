@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { useSelector, shallowEqual } from 'react-redux';
 import { Layout } from "@/constants/Layout";
-import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
+import parsePhoneNumber from 'libphonenumber-js';
 import BoxView from "../view/BoxView";
 import ListView from "../view/ListView";
 import SpinnerView from "../view/SpinnerView";
@@ -23,7 +23,7 @@ type Props = {
 };
 
 const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: Props) => {
-  const [selectedIds, setSelectedIds] = useState<any>([]);
+  const [selectedCountry, setSelectedCountry] = useState<any>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>('');
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -38,7 +38,22 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     }
 
     return countryList;
-  }
+  };
+
+  const getSelectedCountry = () => {
+    if (value) {
+      let parsedNumber: any = parsePhoneNumber(value);
+      let targetCountry: any = null;
+
+      if (parsedNumber) {
+        targetCountry = listData.find((o: any) => o?.code == parsedNumber.country.toLowerCase());
+      }
+
+      return targetCountry;
+    }
+
+    return null;
+  };
 
   const clearSearch = async () => {
     setIsSearching(true);
@@ -71,19 +86,19 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let phoneNumber: string = DataManager.extractPhoneNumber(value); 
+    let phoneNumber: string = DataManager.extractPhoneNumber(value);
     let fieldValue: string = targetCountry.prefix;
 
     if (phoneNumber) {
       fieldValue += phoneNumber;
     }
-    
-    setSelectedIds([entityId]);
+
+    setSelectedCountry(targetCountry)
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey);
   };
 
   const renderItem = (row: any) => {
-    let isSelected: boolean = selectedIds.includes(row.item.code);
+    let isSelected: boolean = getSelectedCountry()?.code == row?.item?.code;
 
     return (
       <TouchableOpacity
@@ -111,11 +126,11 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   useEffect(() => {
     if (!isLoaded) {
-      setSelectedIds(formData?.[parentKey]?.[fieldKey] || []);
+      setSelectedCountry(getSelectedCountry());
       setListData(getListData());
       setIsLoaded(true);
     }
-  }, [formData, fieldKey, parentKey, selectedIds, appState]);
+  }, [isLoaded]);
 
   if (!isLoaded) return <SpinnerView />;
 
