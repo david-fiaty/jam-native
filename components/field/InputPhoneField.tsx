@@ -12,6 +12,7 @@ import SelectListField from "./SelectListField";
 import ContentManager from "@/manager/ContentManager";
 import ModalManager from "@/manager/ModalManager";
 import UserManager from "@/manager/UserManager";
+import DataManager from "@/manager/DataManager";
 
 type Props = {
   theme?: string;
@@ -237,19 +238,22 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let fieldValue: any = phoneNumberFieldValue;
     let targetCountry: any = getSelectedCountry();
-    
-    if (targetCountry && formatPhoneNumber) {
-      fieldValue = (new AsYouType().input(fieldValue)).replace(targetCountry.prefix, '');
-    } 
-    else if (targetCountry) {
-      fieldValue = fieldValue.replace(targetCountry.prefix, '');
+    let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+    let fieldValue: string = '';
+
+    if (phoneNumber) {
+      fieldValue = phoneNumber;
+
+      if (targetCountry && formatPhoneNumber) {
+        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
+        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
+      }
     }
 
     return fieldValue;
   };
-  
+
   useEffect(() => {
     (async () => {
       setDefaultCountry(await getDefaultCountry());
