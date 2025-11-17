@@ -177,8 +177,7 @@ class DataManager {
 
   extractPhoneNumber(value: any) {
     if (value) {
-      let prefixList: any[] = ContentManager.getCountryPhoneCodes().map((o: any) => o.prefix);
-      let foundPrefix: any = prefixList.find((prefix: any) => value.startsWith(prefix));
+      let foundPrefix: any = ContentManager.getCountryPhoneCodes().find((o: any) => value.startsWith(o.prefix))?.prefix;
       let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
 
       if (foundPrefix) {
