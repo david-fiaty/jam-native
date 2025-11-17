@@ -182,7 +182,7 @@ extractPhoneNumber(value: any) {
       } 
       else if (isDigits) { 
         return value; 
-      }
+      } 
     }
 
     return '';
