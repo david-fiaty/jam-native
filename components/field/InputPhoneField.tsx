@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { AsYouType } from 'libphonenumber-js';
+import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
@@ -244,6 +244,8 @@ const InputPhoneField = ({
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
 
+    console.log(phoneNumber, fieldValue)
+
     if (phoneNumber) {
       fieldValue = phoneNumber;
 
@@ -288,7 +290,7 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.primary,
   },
   inputTextField: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'red',
     borderWidth: 0,
     paddingLeft: 0,
   },
