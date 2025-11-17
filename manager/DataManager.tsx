@@ -3,6 +3,7 @@ import parsePhoneNumber from 'libphonenumber-js';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 import moment from "moment";
+import ContentManager from './ContentManager';
 
 class DataManager {
   async get(key: any, options?: any, variables?: any, search?: boolean) {
@@ -171,6 +172,23 @@ class DataManager {
     return clone;
   }
 
+extractPhoneNumber(value: any) {
+    if (value) {
+      let foundPrefix: any = ContentManager.getCountryPhoneCodes().find((o: any) => value.startsWith(o.prefix))?.prefix;
+      let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
+
+      if (foundPrefix) {
+        return value.replace(foundPrefix, '').replaceAll(' ', '');
+      } 
+      else if (isDigits) { 
+        return value; 
+      }
+    }
+
+    return '';
+  }
+
+  /*
   extractPhoneNumber(value: any) {
     if (value) {
       let phoneNumber: any = parsePhoneNumber(value)?.nationalNumber || null;
@@ -189,6 +207,7 @@ class DataManager {
 
     return '';
   }
+    */
 };
 
 export default (new DataManager());
