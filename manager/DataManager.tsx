@@ -1,5 +1,5 @@
 import { Config } from '@/constants/Config';
-import parsePhoneNumber from 'libphonenumber-js';
+import parsePhoneNumber, { getCountries, getCountryCallingCode } from 'libphonenumber-js';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 import moment from "moment";
@@ -172,6 +172,21 @@ class DataManager {
     return clone;
   }
 
+  getCountryPhonePrefix = (countryCode: any) => {
+    if (countryCode) {
+      let callingCode: string = getCountryCallingCode(countryCode.toUpperCase());
+
+      if (callingCode) {
+        return `+${callingCode}`;
+      }
+      else {
+        return ''; 
+      }
+    }
+
+    return '';
+  };
+
   /*
   extractPhoneNumber(value: any) {
     if (value) {
@@ -194,10 +209,10 @@ class DataManager {
     if (value) {
       let phoneNumber: any = parsePhoneNumber(value)?.nationalNumber || null;
       let isDigits: boolean = !value.startsWith('+') && !isNaN(parseFloat(value)) && isFinite(value);
-       
+
       if (phoneNumber) {
         return phoneNumber;
-      } 
+      }
       else if (isDigits) {
         return value;
       }
@@ -207,7 +222,7 @@ class DataManager {
     }
 
     return '';
-  } 
+  }
 };
 
 export default (new DataManager());
