@@ -172,23 +172,24 @@ class DataManager {
     return clone;
   }
 
-extractPhoneNumber(value: any) {
+  /*
+  extractPhoneNumber(value: any) {
     if (value) {
       let foundPrefix: any = ContentManager.getCountryPhoneCodes().find((o: any) => value.startsWith(o.prefix))?.prefix;
       let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
 
       if (foundPrefix) {
         return value.replace(foundPrefix, '').replaceAll(' ', '');
-      } 
-      else if (isDigits) { 
-        return value; 
-      } 
+      }
+      else if (isDigits) {
+        return value;
+      }
     }
 
     return '';
   }
+  */
 
-  /*
   extractPhoneNumber(value: any) {
     if (value) {
       let phoneNumber: any = parsePhoneNumber(value)?.nationalNumber || null;
@@ -206,8 +207,7 @@ extractPhoneNumber(value: any) {
     }
 
     return '';
-  }
-    */
+  } 
 };
 
 export default (new DataManager());
