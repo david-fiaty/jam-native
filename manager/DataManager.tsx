@@ -1,8 +1,10 @@
 import { Config } from '@/constants/Config';
+import parsePhoneNumber from 'libphonenumber-js';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 import moment from "moment";
 import ContentManager from './ContentManager';
+
 
 class DataManager {
   async get(key: any, options?: any, variables?: any, search?: boolean) {
@@ -177,14 +179,17 @@ class DataManager {
 
   extractPhoneNumber(value: any) {
     if (value) {
-      let foundPrefix: any = ContentManager.getCountryPhoneCodes().find((o: any) => value.startsWith(o.prefix))?.prefix;
-      let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
-
-      if (foundPrefix) {
-        return value.replace(foundPrefix, '').replaceAll(' ', '');
+      let phoneNumber: any = parsePhoneNumber(value)?.nationalNumber || null;
+      let isDigits: boolean = !value.startsWith('+') && !isNaN(parseFloat(value)) && isFinite(value);
+       
+      if (phoneNumber) {
+        return phoneNumber;
       } 
-      else if (isDigits) { 
-        return value; 
+      else if (isDigits) {
+        return value;
+      }
+      else {
+        return '';
       }
     }
 
