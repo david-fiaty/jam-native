@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { AsYouType } from 'libphonenumber-js';
+import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
@@ -268,6 +268,8 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, countryOptions]);
+
+  console.log(parsePhoneNumber('+22890')?.nationalNumber)
 
   return renderComponent();
 };
