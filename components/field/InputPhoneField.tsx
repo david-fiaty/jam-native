@@ -269,13 +269,6 @@ const InputPhoneField = ({
     }
   }, [isLoaded, countryOptions]);
 
-  //console.log(DataManager.extractPhoneNumber('+1284'))
-  //console.log(parsePhoneNumber('+1284', 'VG'))
-
-  //console.log(parsePhoneNumber('+1284'))
-  //console.log(getCountries())
-  console.log(getCountryCallingCode('TG'))
-
   return renderComponent();
 };
 
