@@ -125,7 +125,7 @@ const InputPhoneField = ({
           {renderFlag(getSelectedCountry()?.code)}
         </TextView>
 
-        <TextView>{getSelectedCountry()?.prefix?.replaceAll(' ', '')}</TextView>
+        <TextView>{getSelectedCountry()?.prefix}</TextView>
       </BoxView>
     );
 
