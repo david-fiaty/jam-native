@@ -244,8 +244,6 @@ const InputPhoneField = ({
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
 
-    console.log(phoneNumber, fieldValue)
-
     if (phoneNumber) {
       fieldValue = phoneNumber;
 
@@ -270,6 +268,9 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, countryOptions]);
+
+  //console.log(DataManager.extractPhoneNumber('+1284'))
+  //console.log(parsePhoneNumber('+1284', 'VG'))
 
   return renderComponent();
 };
