@@ -112,6 +112,14 @@ class FormManager {
 
     return <></>;
   }
+ 
+  hasErrors(resource: string) {
+    return this.getErrors(resource).length > 0;   
+  }
+
+  getErrors(resource: string) {
+    return (Store.getState().form.errors || []).filter((o: any) => o.resource == resource);   
+  }
 
   updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any, params?: any) {
     if (!resource || !fieldKey) return;

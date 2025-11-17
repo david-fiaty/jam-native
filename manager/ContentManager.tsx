@@ -156,7 +156,7 @@ class ContentManager {
         "code": "dz",
       },
       {
-        "name": i18n.t("American Samoa"), 
+        "name": i18n.t("American Samoa"),
         "prefix": "+1684",
         "code": "as",
       },
@@ -251,7 +251,7 @@ class ContentManager {
         "code": "bz",
       },
       {
-        "name": i18n.t("Benin"), 
+        "name": i18n.t("Benin"),
         "prefix": "+229",
         "code": "bj",
       },
@@ -259,7 +259,7 @@ class ContentManager {
         "name": i18n.t("Bermuda"),
         "prefix": "+1441",
         "code": "bm",
-      }, 
+      },
       {
         "name": i18n.t("Bhutan"),
         "prefix": "+975",
@@ -1345,7 +1345,10 @@ class ContentManager {
         "prefix": "+263",
         "code": "zw",
       },
-    ];
+    ].map((o: any) => ({
+      ...o,
+      key: o.name.toLowerCase(),
+    }));
   }
 };
 
