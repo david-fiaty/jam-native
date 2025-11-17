@@ -62,7 +62,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
   };
 
   const isSubmitDisabled = () => {
-    return FormManager.hasErrors(resource);
+    return false;
   };
 
   useEffect(() => {
