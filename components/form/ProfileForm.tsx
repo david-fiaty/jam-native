@@ -106,6 +106,10 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     }));
   };
 
+  const isSubmitDisabled = () => {
+    return !formData?.profile_type?.length || FormManager.hasErrors(resource);
+  };
+
   useEffect(() => {
     (async () => {
       if (!isLoaded) {
@@ -164,7 +168,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
           label={i18n.t('Submit')}
           isProcessing={isProcessing}
           onPress={submitForm}
-          disabled={!formData?.profile_type?.length}
+          disabled={isSubmitDisabled()}
         />
       </View>
     </View>
