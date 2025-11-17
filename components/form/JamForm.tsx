@@ -61,6 +61,10 @@ const JamForm = ({ jamId, isPublic }: Props) => {
     setIsProcessing(false);
   };
 
+  const isSubmitDisabled = () => {
+    return FormManager.hasErrors(resource);
+  };
+
   useEffect(() => {
     if (!hasLoadedOnce.current) {
       hasLoadedOnce.current = true;
@@ -228,6 +232,7 @@ const JamForm = ({ jamId, isPublic }: Props) => {
             label={i18n.t('Post')}
             isProcessing={isProcessing}
             onPress={submitForm}
+            disabled={isSubmitDisabled()}
           />
         </View>
 
