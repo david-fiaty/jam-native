@@ -269,8 +269,6 @@ const InputPhoneField = ({
     }
   }, [isLoaded, countryOptions]);
 
-  console.log(parsePhoneNumber('+22890')?.nationalNumber)
-
   return renderComponent();
 };
 
