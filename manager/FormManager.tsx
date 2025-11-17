@@ -112,11 +112,11 @@ class FormManager {
 
     return <></>;
   }
-
+ 
   hasErrors(resource: string) {
     return this.getErrors(resource).length > 0;   
   }
-  
+
   getErrors(resource: string) {
     return (Store.getState().form.errors || []).filter((o: any) => o.resource == resource);   
   }
