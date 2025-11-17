@@ -113,6 +113,10 @@ class FormManager {
     return <></>;
   }
 
+  getErrors(resource: string) {
+    return Store.getState().form.errors;  
+  }
+
   updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any, params?: any) {
     if (!resource || !fieldKey) return;
 
