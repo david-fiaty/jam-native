@@ -98,6 +98,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
+    let parsedNumber: any = parsePhoneNumber(value);
+
+    //console.log(parsedNumber)
+
+    console.log(targetCountry)
+
+    /*
     let phoneNumber: string = DataManager.extractPhoneNumber(value);
     let fieldValue: string = targetCountry.prefix;
 
@@ -110,6 +117,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
+    */
   };
 
   const renderItem = (row: any) => {
