@@ -33,8 +33,9 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
   const submitForm = async () => {
 
+    console.log(FormManager.hasErrors(resource));
     console.log(FormManager.getErrors(resource));
-    
+
     return;
 
     /*
