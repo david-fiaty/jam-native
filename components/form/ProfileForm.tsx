@@ -33,6 +33,8 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
   const submitForm = async () => {
 
+    console.log(FormManager.getErrors(resource));
+    
     return;
 
     /*
