@@ -107,7 +107,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   };
 
   const isSubmitDisabled = () => {
-    return !formData?.profile_type?.length || FormManager.hasErrors(resource);
+    return !formData?.profile_type?.length;
   };
 
   useEffect(() => {
