@@ -32,7 +32,8 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const getListData = (filterValue?: string) => {
     if (filterValue) {
-      return countryList.filter((o: any) => o.name.toLowerCase().startsWith(filterValue.toLowerCase()));
+      filterValue = filterValue.toLowerCase();
+      return countryList.filter((o: any) => o.key.startsWith(filterValue));
     }
 
     return countryList;
