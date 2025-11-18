@@ -244,15 +244,26 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let targetCountry: any = getSelectedCountry();
+    let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+    let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
     let fieldValue: string = '';
 
-    if (phoneNumberFieldValue) {
+    if (targetCountry && phoneNumberFieldValue) {
       fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
 
+      //console.log(phonePrefix, fieldValue)
+      //console.log('aaa', parsePhoneNumber(phonePrefix + fieldValue))
+      //console.log(new AsYouType('VG').input(phonePrefix + fieldValue));
+      
+      //console.log('111111111', parsePhoneNumber('+128490880983'))
+      //console.log('222222222', parsePhoneNumber('+22890880983'))
+
       if (formatPhoneNumber) {
-        //fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
-        //fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
+        let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+
+        if (parsedNumber) {
+          console.log('---', phonePrefix, `+${parsedNumber.countryCallingCode}`);
+        }
       }
     }
 
