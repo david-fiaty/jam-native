@@ -98,16 +98,13 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let parsedNumber: any = parsePhoneNumber(value);
-    let fieldValue: string = '';
+    let phoneNumber: string = DataManager.extractPhoneNumber(value);
+    let fieldValue: string = targetCountry.prefix;
 
-    if (targetCountry.prefix == value) {
-      fieldValue = value;
-    } 
-    else if (parsedNumber) {
-      fieldValue = parsedNumber.number;
+    if (phoneNumber) {
+      fieldValue += phoneNumber;
     }
-    
+
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
