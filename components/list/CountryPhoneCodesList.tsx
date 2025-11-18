@@ -100,6 +100,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
     let fieldValue: string = targetCountry.prefix;
 
+    if (value) {
+      console.log('ooo', value)
+    }
+
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
