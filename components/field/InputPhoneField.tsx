@@ -261,8 +261,11 @@ const InputPhoneField = ({
       if (formatPhoneNumber) {
         let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
 
-        if (parsedNumber) {
-          console.log('---', phonePrefix, `+${parsedNumber.countryCallingCode}`);
+        if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+          
+        }
+        else {
+
         }
       }
     }
