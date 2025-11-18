@@ -87,141 +87,6 @@ const InputPhoneField = ({
     return countries;
   };
 
-  const renderFlag = (code: string) => {
-    if (code) {
-      return getUnicodeFlagIcon(code.toUpperCase());
-    }
-  };
-
-  const onChangeCodeValue = (item: any) => {
-    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
-
-    setSelectedCountry(targetCountry);
-
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
-  };
-
-  const onChangePhoneValue = (fieldValue: any) => {
-    let targetCountry: any = getSelectedCountry();
-
-    if (targetCountry && compact === true) {
-      fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
-    }
-
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
-  };
-
-  const renderFlagComponent = () => {
-    let flagComponent: any = (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-      >
-        <TextView size={15}
-        >
-          {renderFlag(getSelectedCountry()?.code)}
-        </TextView>
-
-        <TextView>{getSelectedCountry()?.prefix}</TextView>
-      </BoxView>
-    );
-
-    if (compact === true) {
-      flagComponent = (
-        <TouchableOpacity
-          onPress={() => {
-            ModalManager.toggleModal('CountryPhoneCodesList', {
-              resource: resource,
-              fieldKey: phoneNumberFieldKey,
-              parentKey: parentKey,
-              rules: rules,
-              value: phoneNumberFieldValue,
-            });
-          }}
-        >
-          {flagComponent}
-        </TouchableOpacity>
-      );
-    }
-
-    return flagComponent;
-  };
-
-  const renderSelectList = () => {
-    return (
-      <SelectListField
-        theme={theme}
-        resource={resource}
-        fieldKey={phonePrefixFieldKey}
-        parentKey={parentKey}
-        rules={[]}
-        placeholder={selectPlaceholder}
-        value={getSelectedCountry()?.code}
-        data={countryOptions}
-        optionLabelKey="name"
-        optionValueKey="code"
-        onChangeValue={onChangeCodeValue}
-        disabled={disabled}
-        elementStyle={styles.selectListField}
-        containerStyle={containerStyle}
-        search={true}
-      />
-    );
-  };
-
-  const renderInputText = () => {
-    return (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-        style={[containerStyle, styles.container]}
-        gap={Layout.space.base / 1.6}
-      >
-        {renderFlagComponent()}
-
-        <InputTextField
-          resource={resource}
-          fieldKey={phoneNumberFieldKey}
-          parentKey={parentKey}
-          value={getCurrentPhoneNumber()}
-          rules={[]}
-          placeholder={inputPlaceholder}
-          keyboardType="number-pad"
-          onChangeText={onChangePhoneValue}
-          containerStyle={styles.inputTextField}
-        />
-      </BoxView>
-    );
-  };
-
-  const renderComponent = () => {
-    if (compact === true) {
-      return (
-        <>
-          {FormManager.renderLabel(inputlabel, rules)}
-          {renderInputText()}
-          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
-        </>
-      );
-    }
-    else {
-      return (
-        <>
-          {FormManager.renderLabel(selectLabel, rules)}
-          {renderSelectList()}
-          {FormManager.renderError(phonePrefixFieldKey, parentKey)}
-
-          {FormManager.renderLabel(inputlabel, rules)}
-          {renderInputText()}
-          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
-        </>
-      );
-    }
-  };
 
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
@@ -265,6 +130,125 @@ const InputPhoneField = ({
     return fieldValue;
   };
 
+  const onChangeCodeValue = (item: any) => {
+    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
+
+    setSelectedCountry(targetCountry);
+
+    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
+  };
+
+  const onChangePhoneValue = (fieldValue: any) => {
+    let targetCountry: any = getSelectedCountry();
+
+    if (targetCountry && compact === true) {
+      fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
+    }
+
+    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
+  };
+
+  const renderFlag = (code: string) => {
+    if (code) {
+      return getUnicodeFlagIcon(code.toUpperCase());
+    }
+  };
+
+  const renderSelectList = () => {
+    return (
+      <SelectListField
+        theme={theme}
+        resource={resource}
+        fieldKey={phonePrefixFieldKey}
+        parentKey={parentKey}
+        rules={[]}
+        placeholder={selectPlaceholder}
+        value={getSelectedCountry()?.code}
+        data={countryOptions}
+        optionLabelKey="name"
+        optionValueKey="code"
+        onChangeValue={onChangeCodeValue}
+        disabled={disabled}
+        elementStyle={styles.selectListField}
+        containerStyle={containerStyle}
+        search={true}
+      />
+    );
+  };
+
+  const renderInputText = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={[containerStyle, styles.container]}
+        gap={Layout.space.base / 1.6}
+      >
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              if (compact === true) {
+                ModalManager.toggleModal('CountryPhoneCodesList', {
+                  resource: resource,
+                  fieldKey: phoneNumberFieldKey,
+                  parentKey: parentKey,
+                  rules: rules,
+                  value: phoneNumberFieldValue,
+                });
+              }
+            }}
+          >
+            <TextView size={15}>
+              {renderFlag(getSelectedCountry()?.code)}&nbsp;{getSelectedCountry()?.prefix}
+            </TextView>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.fieldContainer}>
+          <InputTextField
+            resource={resource}
+            fieldKey={phoneNumberFieldKey}
+            parentKey={parentKey}
+            value={getCurrentPhoneNumber()}
+            rules={[]}
+            placeholder={inputPlaceholder}
+            keyboardType="number-pad"
+            onChangeText={onChangePhoneValue}
+            containerStyle={styles.inputTextField}
+          />
+        </View>
+      </BoxView>
+    );
+  };
+
+  const renderComponent = () => {
+    if (compact === true) {
+      return (
+        <>
+          {FormManager.renderLabel(inputlabel, rules)}
+          {renderInputText()}
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+        </>
+      );
+    }
+    else {
+      return (
+        <>
+          {FormManager.renderLabel(selectLabel, rules)}
+          {renderSelectList()}
+          {FormManager.renderError(phonePrefixFieldKey, parentKey)}
+
+          {FormManager.renderLabel(inputlabel, rules)}
+          {renderInputText()}
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+        </>
+      );
+    }
+  };
+
   useEffect(() => {
     (async () => {
       setDefaultCountry(await getDefaultCountry());
@@ -284,6 +268,7 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    flex: 1,
     paddingLeft: Layout.space.base,
   },
   containerStyleWhite: {
@@ -296,10 +281,14 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
+  fieldContainer: {
+    flexShrink: 1,
+  },
   inputTextField: {
-    backgroundColor: 'red',
+    backgroundColor: 'gray',
     borderWidth: 0,
     paddingLeft: 0,
+    flexShrink: 1,
   },
   listItem: {
     paddingVertical: Layout.space.base,
