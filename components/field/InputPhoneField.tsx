@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import { AsYouType } from 'libphonenumber-js';
+import parsePhoneNumber, { AsYouType, getCountries, getCountryCallingCode } from 'libphonenumber-js';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
@@ -225,10 +225,14 @@ const InputPhoneField = ({
 
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
-      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+      let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
 
       if (targetCountry) {
         return targetCountry;
+      }
+      else {
+        return defaultCountry;
       }
     }
     else if (selectedCountry) {
@@ -240,16 +244,21 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let targetCountry: any = getSelectedCountry();
-    let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+    let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+    let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
     let fieldValue: string = '';
 
-    if (phoneNumber) {
-      fieldValue = phoneNumber;
+    if (targetCountry && phoneNumberFieldValue) {
+      fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
 
-      if (targetCountry && formatPhoneNumber) {
-        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
-        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
+      if (formatPhoneNumber) {
+        let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+        let isFullPrefix: boolean = phonePrefix == `+${parsedNumber.countryCallingCode}`;
+
+        if (parsedNumber && isFullPrefix) {
+          fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+          fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+        }
       }
     }
 
@@ -288,7 +297,7 @@ const styles = StyleSheet.create({
     borderColor: Layout.colors.primary,
   },
   inputTextField: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'red',
     borderWidth: 0,
     paddingLeft: 0,
   },
