@@ -210,6 +210,7 @@ const InputPhoneField = ({
 
         <View style={styles.fieldContainer}>
           <InputTextField
+            theme={theme}
             resource={resource}
             fieldKey={phoneNumberFieldKey}
             parentKey={parentKey}
