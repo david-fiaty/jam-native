@@ -174,9 +174,9 @@ class DataManager {
 
   extractPhonePrefix(phoneNumber: string) {
     if (!phoneNumber) return '';
-
+ 
     let countryList: any[] = ContentManager.getCountryPhoneCodes();
-    let phone: string = String(phoneNumber).trim();
+    let phone: string = String(phoneNumber).trim().replaceAll(' ', '');
     let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
 
     for (const entry of sorted) {
@@ -192,7 +192,7 @@ class DataManager {
     if (!phoneNumber) return '';
 
     let countryList: any[] = ContentManager.getCountryPhoneCodes();
-    let phone: string = String(phoneNumber).trim();
+    let phone: string = String(phoneNumber).trim().replaceAll(' ', '');
     let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
 
     for (const entry of sorted) {
