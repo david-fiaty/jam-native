@@ -187,13 +187,11 @@ const InputPhoneField = ({
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-        <View style={styles.fieldContainer}>
+        <View>
           <TextView size={15}>
-            {renderFlag(getSelectedCountry()?.code)}
+            {renderFlag(getSelectedCountry()?.code)}&nbsp;{getSelectedCountry()?.prefix}
           </TextView>
         </View>
-
-        <TextView>{getSelectedCountry()?.prefix}</TextView>
 
         <View style={styles.fieldContainer}>
           <InputTextField
