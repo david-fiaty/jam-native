@@ -107,10 +107,11 @@ const InputPhoneField = ({
     if (targetCountry && compact === true) {
       fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
     }
-
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
+    else if (targetCountry) {
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
+      });
+    }
   };
 
   const renderFlagComponent = () => {
@@ -225,9 +226,7 @@ const InputPhoneField = ({
 
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
-      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
-
-      console.log(phoneNumberFieldValue, targetCountry)
+      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue == o.prefix);
 
       if (targetCountry) {
         return targetCountry;
