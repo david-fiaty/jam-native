@@ -112,6 +112,9 @@ const InputPhoneField = ({
         countryCode: targetCountry.code,
       });
     }
+    else {
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey);
+    }
   };
 
   const renderFlagComponent = () => {
