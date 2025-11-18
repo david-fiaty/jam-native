@@ -172,6 +172,24 @@ class DataManager {
     return clone;
   }
 
+  extractPhonePrefix(phoneNumber: string) {
+    let countryList: any = ContentManager.getCountryPhoneCodes();
+    let current: string = phoneNumber.toString();
+
+    while (current.length > 1) {
+      const match = countryList.find((o: any) => current.startsWith(o.prefix));
+
+      if (match) {
+        return match.prefix;
+      }
+
+      current = current.slice(0, -1);
+    }
+
+    return null;
+  }
+
+  /*
   getCountryPhonePrefix = (countryCode: any) => {
     if (countryCode) {
       let callingCode: string = getCountryCallingCode(countryCode.toUpperCase());
@@ -185,7 +203,8 @@ class DataManager {
     } 
 
     return '';
-  };
+  }
+  */
 
   /*
   extractPhoneNumber(value: any) {
@@ -205,6 +224,7 @@ class DataManager {
   }
   */
 
+  /*
   extractPhoneNumber(value: any) {
     if (value) {
       let phoneNumber: any = parsePhoneNumber(value)?.nationalNumber || null;
@@ -223,6 +243,8 @@ class DataManager {
 
     return '';
   }
+
+*/
 };
 
 export default (new DataManager());
