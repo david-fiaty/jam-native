@@ -225,6 +225,15 @@ const InputPhoneField = ({
 
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
+      let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
+
+      console.log(phonePrefix, targetCountry);
+
+
+
+      return defaultCountry;
+      /*
       let targetCountry: any = countryList.find((o: any) => o.prefix == phoneNumberFieldValue);
       if (targetCountry) {
         return targetCountry;
@@ -240,6 +249,7 @@ const InputPhoneField = ({
           return targetCountry;
         }
       }
+      */
     }
     else if (selectedCountry) {
       return selectedCountry;
