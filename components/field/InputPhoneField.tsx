@@ -113,43 +113,6 @@ const InputPhoneField = ({
     });
   };
 
-  const renderFlagComponent = () => {
-    let flagComponent: any = (
-      <BoxView
-        direction="row"
-        align="center"
-        justify="flex-start"
-      >
-        <TextView size={15}
-        >
-          {renderFlag(getSelectedCountry()?.code)}
-        </TextView>
-
-        <TextView>{getSelectedCountry()?.prefix}</TextView>
-      </BoxView>
-    );
-
-    if (compact === true) {
-      flagComponent = (
-        <TouchableOpacity
-          onPress={() => {
-            ModalManager.toggleModal('CountryPhoneCodesList', {
-              resource: resource,
-              fieldKey: phoneNumberFieldKey,
-              parentKey: parentKey,
-              rules: rules,
-              value: phoneNumberFieldValue,
-            });
-          }}
-        >
-          {flagComponent}
-        </TouchableOpacity>
-      );
-    }
-
-    return flagComponent;
-  };
-
   const renderSelectList = () => {
     return (
       <SelectListField
@@ -177,11 +140,35 @@ const InputPhoneField = ({
       <BoxView
         direction="row"
         align="center"
-        justify="space-between"
+        justify="flex-start"
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-        {renderFlagComponent()}
+        <BoxView
+          direction="row"
+          align="center"
+          justify="flex-start"
+        >
+          <TouchableOpacity
+            onPress={() => {
+              if (compact === true) {
+                ModalManager.toggleModal('CountryPhoneCodesList', {
+                  resource: resource,
+                  fieldKey: phoneNumberFieldKey,
+                  parentKey: parentKey,
+                  rules: rules,
+                  value: phoneNumberFieldValue,
+                });
+              }
+            }}
+          >
+            <TextView size={15}>
+              {renderFlag(getSelectedCountry()?.code)}
+            </TextView>
+
+            <TextView>{getSelectedCountry()?.prefix}</TextView>
+          </TouchableOpacity>
+        </BoxView>
 
         <InputTextField
           resource={resource}
