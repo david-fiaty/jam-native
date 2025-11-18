@@ -254,6 +254,7 @@ const InputPhoneField = ({
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
 
+    console.log(phoneNumberFieldValue, targetCountry)
     /*
     if (phoneNumber) {
       fieldValue = phoneNumber;
