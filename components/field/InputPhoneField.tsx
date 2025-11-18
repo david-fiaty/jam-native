@@ -254,6 +254,7 @@ const InputPhoneField = ({
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
 
+    /*
     if (phoneNumber) {
       fieldValue = phoneNumber;
 
@@ -263,6 +264,7 @@ const InputPhoneField = ({
       }
     }
 
+    */
     return fieldValue;
   };
 
