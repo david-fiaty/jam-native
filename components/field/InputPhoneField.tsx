@@ -136,7 +136,7 @@ const InputPhoneField = ({
 
     setSelectedCountry(targetCountry);
 
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
+    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules);
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
@@ -241,7 +241,6 @@ const InputPhoneField = ({
         <>
           {FormManager.renderLabel(selectLabel, rules)}
           {renderSelectList()}
-          {FormManager.renderError(phonePrefixFieldKey, parentKey)}
 
           {FormManager.renderLabel(inputlabel, rules)}
           {renderInputText()}
