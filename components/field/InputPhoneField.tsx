@@ -260,12 +260,11 @@ const InputPhoneField = ({
 
       if (formatPhoneNumber) {
         let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+        let isFullPrefix: boolean = phonePrefix == `+${parsedNumber.countryCallingCode}`;
 
-        if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
-          
-        }
-        else {
-
+        if (parsedNumber && isFullPrefix) {
+          fieldValue = new AsYouType().input(phonePrefix + fieldValue);
+          fieldValue = fieldValue.replace(`${phonePrefix} `, '');
         }
       }
     }
