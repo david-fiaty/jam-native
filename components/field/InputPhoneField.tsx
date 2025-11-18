@@ -251,19 +251,12 @@ const InputPhoneField = ({
     if (targetCountry && phoneNumberFieldValue) {
       fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
 
-      //console.log(phonePrefix, fieldValue)
-      //console.log('aaa', parsePhoneNumber(phonePrefix + fieldValue))
-      //console.log(new AsYouType('VG').input(phonePrefix + fieldValue));
-      
-      //console.log('111111111', parsePhoneNumber('+128490880983'))
-      //console.log('222222222', parsePhoneNumber('+22890880983'))
-
       if (formatPhoneNumber) {
         let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
         let isFullPrefix: boolean = phonePrefix == `+${parsedNumber.countryCallingCode}`;
 
         if (parsedNumber && isFullPrefix) {
-          fieldValue = new AsYouType().input(phonePrefix + fieldValue);
+          fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
           fieldValue = fieldValue.replace(`${phonePrefix} `, '');
         }
       }
