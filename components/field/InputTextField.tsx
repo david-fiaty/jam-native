@@ -55,10 +55,10 @@ const InputTextField = ({
 
   if (theme == 'white') {
     containerStyle = {
-      ...(containerStyle || {}),
       ...styles.containerStyle,
       ...styles.containerStyleWhite,
-      ...{ paddingRight: (rightIcon ? Layout.space.base*3.5 : Layout.space.base) }
+      ...{ paddingRight: (rightIcon ? Layout.space.base*3.5 : Layout.space.base) },
+      ...(containerStyle || {}),
     };
   }
 
