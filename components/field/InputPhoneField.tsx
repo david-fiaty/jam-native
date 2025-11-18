@@ -130,21 +130,6 @@ const InputPhoneField = ({
     return fieldValue;
   };
 
-  const onChangeCodeValue = (item: any) => {
-    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
-
-    setSelectedCountry(targetCountry);
-
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
-    //onChangePhoneValue(phoneNumberFieldValue)
-
-    /*
-    FormManager.updateField(resource, phoneNumberFieldKey, targetCountry.prefix + phoneNumberFieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
-    */
-  };
-
   const onChangePhoneValue = (fieldValue: any) => {
     let targetCountry: any = getSelectedCountry();
 
@@ -176,11 +161,15 @@ const InputPhoneField = ({
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
-        onChangeValue={onChangeCodeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
         containerStyle={containerStyle}
         search={true}
+        onChangeValue={(item: any) => {
+          let targetCountry: any = countryList.find((o: any) => o.code == item.value);
+          setSelectedCountry(targetCountry);
+          FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
+        }}
       />
     );
   };
