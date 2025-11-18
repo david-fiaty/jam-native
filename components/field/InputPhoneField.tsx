@@ -273,6 +273,7 @@ const InputPhoneField = ({
     }
   }, [isLoaded, countryOptions]);
 
+  //console.log(DataManager.extractPhoneNumber('+128401'));
   //console.log(DataManager.extractPhonePrefix('+2289088'));
   //console.log(new AsYouType().input('+22890880983'))
   
