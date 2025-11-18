@@ -182,7 +182,7 @@ class DataManager {
       else {
         return ''; 
       }
-    }
+    } 
 
     return '';
   };
