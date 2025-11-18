@@ -177,7 +177,7 @@ const InputPhoneField = ({
       <BoxView
         direction="row"
         align="center"
-        justify="flex-start"
+        justify="space-between"
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
