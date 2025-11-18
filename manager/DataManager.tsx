@@ -173,20 +173,19 @@ class DataManager {
   }
 
   extractPhonePrefix(phoneNumber: string) {
-    let countryList: any = ContentManager.getCountryPhoneCodes();
-    let current: string = phoneNumber.toString();
+    if (!phoneNumber) return null;
 
-    while (current.length > 1) {
-      const match = countryList.find((o: any) => current.startsWith(o.prefix));
-
-      if (match) {
-        return match.prefix;
+    let countryList: any[] = ContentManager.getCountryPhoneCodes();
+    let phone: string = String(phoneNumber).trim();
+    let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
+ 
+    for (const entry of sorted) {
+      if (phone.startsWith(entry.prefix)) {
+        return entry.prefix;
       }
-
-      current = current.slice(0, -1);
     }
 
-    return null;
+    return null; 
   }
 
   /*
