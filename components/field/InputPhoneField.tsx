@@ -187,13 +187,15 @@ const InputPhoneField = ({
         style={[containerStyle, styles.container]}
         gap={Layout.space.base / 1.6}
       >
-        <TextView size={15}>
-          {renderFlag(getSelectedCountry()?.code)}
-        </TextView>
+        <View style={styles.fieldContainer}>
+          <TextView size={15}>
+            {renderFlag(getSelectedCountry()?.code)}
+          </TextView>
+        </View>
 
         <TextView>{getSelectedCountry()?.prefix}</TextView>
 
-        <View style={styles.inputTextFieldContainer}>
+        <View style={styles.fieldContainer}>
           <InputTextField
             resource={resource}
             fieldKey={phoneNumberFieldKey}
@@ -267,7 +269,7 @@ const styles = StyleSheet.create({
     backgroundColor: Layout.colors.white,
     borderColor: Layout.colors.primary,
   },
-  inputTextFieldContainer: {
+  fieldContainer: {
     flexShrink: 1,
   },
   inputTextField: {
