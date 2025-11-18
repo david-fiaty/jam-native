@@ -225,10 +225,20 @@ const InputPhoneField = ({
 
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
-      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
-
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phoneNumberFieldValue);
       if (targetCountry) {
         return targetCountry;
+      }
+      else {
+        let parsedNumber: any = parsePhoneNumber(phoneNumberFieldValue);
+        if (parsedNumber) {
+          targetCountry = countryList.find((o: any) => o.code == parsedNumber.country.toLowerCase());
+          return targetCountry;
+        }
+        else {
+          targetCountry = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+          return targetCountry;
+        }
       }
     }
     else if (selectedCountry) {
@@ -268,10 +278,6 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, countryOptions]);
-
-  //console.log('---', parsePhoneNumber('+1284'))
-
-  //console.log('---', parsePhoneNumber('+22890'))
 
   return renderComponent();
 };
