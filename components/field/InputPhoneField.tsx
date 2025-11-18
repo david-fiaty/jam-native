@@ -244,11 +244,19 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
+    let targetCountry: any = getSelectedCountry();
+    let fieldValue: string = '';
+
     if (phoneNumberFieldValue) {
-      return DataManager.extractPhoneNumber(phoneNumberFieldValue);
+      fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+
+      if (formatPhoneNumber) {
+        //fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
+        //fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
+      }
     }
 
-    return '';
+    return fieldValue;
   };
 
   useEffect(() => {
