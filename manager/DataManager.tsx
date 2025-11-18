@@ -1,4 +1,5 @@
 import { Config } from '@/constants/Config';
+import parsePhoneNumber, { getCountries, getCountryCallingCode } from 'libphonenumber-js';
 import Endpoints from '@/constants/Endpoints';
 import ApiManager from './ApiManager';
 import moment from "moment";
@@ -170,26 +171,38 @@ class DataManager {
 
     return clone;
   }
-  
-  isPhoneNumberPrefix(value: string) {
-    return ContentManager.getCountryPhoneCodes().some((o: any) => value == o.prefix);
-  }
 
-  extractPhoneNumber(value: any) {
-    if (value) {
-      let foundPrefix: any = ContentManager.getCountryPhoneCodes().find((o: any) => value.startsWith(o.prefix))?.prefix;
-      let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
+  extractPhonePrefix(phoneNumber: string) {
+    if (!phoneNumber) return '';
+ 
+    let countryList: any[] = ContentManager.getCountryPhoneCodes();
+    let phone: string = String(phoneNumber).trim().replaceAll(' ', '');
+    let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
 
-      if (foundPrefix) {
-        return value.replace(foundPrefix, '').replaceAll(' ', '');
-      } 
-      else if (isDigits) { 
-        return value; 
+    for (const entry of sorted) {
+      if (phone.startsWith(entry.prefix)) {
+        return entry.prefix;
       }
     }
 
-    return '';
+    return null;
   }
-};
+
+  extractPhoneNumber(phoneNumber: string) {
+    if (!phoneNumber) return '';
+
+    let countryList: any[] = ContentManager.getCountryPhoneCodes();
+    let phone: string = String(phoneNumber).trim().replaceAll(' ', '');
+    let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
+
+    for (const entry of sorted) {
+      if (phone.startsWith(entry.prefix)) {
+        return phone.slice(entry.prefix.length); 
+      }
+    }
+
+    return phone;
+  }
+}
 
 export default (new DataManager());

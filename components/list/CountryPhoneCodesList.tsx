@@ -29,11 +29,21 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const [isSearching, setIsSearching] = useState<boolean>(false);
   const [listData, setListData] = useState<any[]>([]);
   const countryList: any = ContentManager.getCountryPhoneCodes();
+  const countryCache: any = new Map<string, any[]>();
 
   const getListData = (filterValue?: string) => {
     if (filterValue) {
-      filterValue = filterValue.toLowerCase();
-      return countryList.filter((o: any) => o.key.startsWith(filterValue));
+      let key: string = filterValue.toLowerCase();
+      let result: any[] = [];
+
+      if (countryCache.has(key)) {
+        return countryCache.get(key);
+      }
+
+      result = countryList.filter((o: any) => o.key.startsWith(key));
+      countryCache.set(key, result);
+
+      return result;
     }
 
     return countryList;
@@ -47,7 +57,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       let parsedNumber: any = parsePhoneNumber(value);
       let targetCountry: any = null;
 
-      if (parsedNumber) {
+      if (parsedNumber && parsedNumber?.country) {
         targetCountry = listData.find((o: any) => o?.code == parsedNumber.country.toLowerCase());
       }
 
@@ -88,11 +98,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
-    let phoneNumber: string = DataManager.extractPhoneNumber(value);
     let fieldValue: string = targetCountry.prefix;
 
-    if (phoneNumber) {
-      fieldValue += phoneNumber;
+    if (value) {
+      fieldValue += DataManager.extractPhoneNumber(value);
     }
 
     setSelectedCountry(targetCountry);
