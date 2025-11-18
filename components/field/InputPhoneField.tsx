@@ -244,14 +244,11 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let targetCountry: any = getSelectedCountry();
-    let fieldValue: string = '';
-
     if (phoneNumberFieldValue) {
-      fieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
+      return DataManager.extractPhoneNumber(phoneNumberFieldValue);
     }
 
-    return fieldValue;
+    return '';
   };
 
   useEffect(() => {
