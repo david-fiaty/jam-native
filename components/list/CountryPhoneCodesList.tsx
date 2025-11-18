@@ -57,7 +57,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       let parsedNumber: any = parsePhoneNumber(value);
       let targetCountry: any = null;
 
-      if (parsedNumber) {
+      if (parsedNumber && parsedNumber?.country) {
         targetCountry = listData.find((o: any) => o?.code == parsedNumber.country.toLowerCase());
       }
 
