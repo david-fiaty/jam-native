@@ -279,12 +279,6 @@ const InputPhoneField = ({
     }
   }, [isLoaded, countryOptions]);
 
-  //console.log(getSelectedCountry())
-
-  //console.log('---', parsePhoneNumber('+1284'))
-
-  //console.log('---', parsePhoneNumber('+22890'))
-
   return renderComponent();
 };
 
