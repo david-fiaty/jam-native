@@ -101,7 +101,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     let fieldValue: string = targetCountry.prefix;
 
     if (value) {
-      console.log('ooo', value)
+      //fieldValue = fieldValue + value.replace(targetCountry.prefix, '')
     }
 
     setSelectedCountry(targetCountry);
