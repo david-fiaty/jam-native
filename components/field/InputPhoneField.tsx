@@ -244,11 +244,22 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let targetCountry: any = getSelectedCountry();
+    let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+    let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
     let fieldValue: string = '';
 
-    if (phoneNumberFieldValue) {
-      fieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
+    if (targetCountry && phoneNumberFieldValue) {
+      fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+
+      if (formatPhoneNumber) {
+        let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+        let isFullPrefix: boolean = phonePrefix == `+${parsedNumber.countryCallingCode}`;
+
+        if (parsedNumber && isFullPrefix) {
+          fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+          fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+        }
+      }
     }
 
     return fieldValue;
