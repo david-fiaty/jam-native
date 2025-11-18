@@ -99,11 +99,15 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
   const toggleItem = (entityId: number) => {
     let targetCountry: any = listData.find((o: any) => o.code == entityId);
     let parsedNumber: any = parsePhoneNumber(value);
+    let fieldValue: string = '';
 
-    //console.log(parsedNumber)
+    if (targetCountry.prefix == value) {
+      fieldValue = value;
+    } 
+    else if (parsedNumber) {
 
-    console.log(targetCountry)
-
+    }
+    
     /*
     let phoneNumber: string = DataManager.extractPhoneNumber(value);
     let fieldValue: string = targetCountry.prefix;
