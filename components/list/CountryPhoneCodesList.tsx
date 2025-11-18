@@ -105,23 +105,14 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
       fieldValue = value;
     } 
     else if (parsedNumber) {
-
+      fieldValue = parsedNumber.number;
     }
     
-    /*
-    let phoneNumber: string = DataManager.extractPhoneNumber(value);
-    let fieldValue: string = targetCountry.prefix;
-
-    if (phoneNumber) {
-      fieldValue += phoneNumber;
-    }
-
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, fieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
-    */
   };
 
   const renderItem = (row: any) => {
