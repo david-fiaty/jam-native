@@ -101,9 +101,10 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     let phoneNumber: string = DataManager.extractPhoneNumber(value);
     let fieldValue: string = targetCountry.prefix;
 
+    /*
     if (phoneNumber) {
       fieldValue += phoneNumber;
-    }
+    }*/
 
     setSelectedCountry(targetCountry);
 

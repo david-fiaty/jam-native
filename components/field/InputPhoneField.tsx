@@ -225,10 +225,20 @@ const InputPhoneField = ({
 
   const getSelectedCountry = () => {
     if (compact && phoneNumberFieldValue) {
-      let targetCountry: any = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
-
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phoneNumberFieldValue);
       if (targetCountry) {
         return targetCountry;
+      }
+      else {
+        let parsedNumber: any = parsePhoneNumber(phoneNumberFieldValue);
+        if (parsedNumber) {
+          targetCountry = countryList.find((o: any) => o.code == parsedNumber.country.toLowerCase());
+          return targetCountry;
+        }
+        else {
+          targetCountry = countryList.find((o: any) => phoneNumberFieldValue.startsWith(o.prefix));
+          return targetCountry;
+        }
       }
     }
     else if (selectedCountry) {
@@ -241,16 +251,10 @@ const InputPhoneField = ({
 
   const getCurrentPhoneNumber = () => {
     let targetCountry: any = getSelectedCountry();
-    let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
 
-    if (phoneNumber) {
-      fieldValue = phoneNumber;
-
-      if (targetCountry && formatPhoneNumber) {
-        fieldValue = new AsYouType().input(targetCountry.prefix + fieldValue);
-        fieldValue = fieldValue.replace(`${targetCountry.prefix} `, '');
-      }
+    if (phoneNumberFieldValue) {
+      fieldValue = phoneNumberFieldValue.replace(targetCountry.prefix, '');
     }
 
     return fieldValue;
@@ -269,10 +273,8 @@ const InputPhoneField = ({
     }
   }, [isLoaded, countryOptions]);
 
-  //console.log('---', parsePhoneNumber('+1284'))
-
-  //console.log('---', parsePhoneNumber('+22890'))
-
+  //console.log(new AsYouType().input('+22890880983'))
+  
   return renderComponent();
 };
 
