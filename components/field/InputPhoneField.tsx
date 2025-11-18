@@ -188,9 +188,23 @@ const InputPhoneField = ({
         gap={Layout.space.base / 1.6}
       >
         <View>
-          <TextView size={15}>
-            {renderFlag(getSelectedCountry()?.code)}&nbsp;{getSelectedCountry()?.prefix}
-          </TextView>
+          <TouchableOpacity
+            onPress={() => {
+              if (compact === true) {
+                ModalManager.toggleModal('CountryPhoneCodesList', {
+                  resource: resource,
+                  fieldKey: phoneNumberFieldKey,
+                  parentKey: parentKey,
+                  rules: rules,
+                  value: phoneNumberFieldValue,
+                });
+              }
+            }}
+          >
+            <TextView size={15}>
+              {renderFlag(getSelectedCountry()?.code)}&nbsp;{getSelectedCountry()?.prefix}
+            </TextView>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.fieldContainer}>
