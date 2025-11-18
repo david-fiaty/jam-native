@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
-import parsePhoneNumber, { AsYouType } from 'libphonenumber-js';
+import parsePhoneNumber, { AsYouType, getCountries, getCountryCallingCode } from 'libphonenumber-js';
 import { Layout } from "@/constants/Layout";
 import { Config } from "@/constants/Config";
 import getUnicodeFlagIcon from 'country-flag-icons/unicode';
@@ -244,8 +244,6 @@ const InputPhoneField = ({
     let phoneNumber: string = DataManager.extractPhoneNumber(phoneNumberFieldValue);
     let fieldValue: string = '';
 
-    console.log(phoneNumber, fieldValue)
-
     if (phoneNumber) {
       fieldValue = phoneNumber;
 
@@ -270,6 +268,10 @@ const InputPhoneField = ({
       setIsLoaded(true);
     }
   }, [isLoaded, countryOptions]);
+
+  //console.log('---', parsePhoneNumber('+1284'))
+
+  //console.log('---', parsePhoneNumber('+22890'))
 
   return renderComponent();
 };
