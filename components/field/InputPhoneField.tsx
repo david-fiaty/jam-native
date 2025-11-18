@@ -110,7 +110,7 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue: DataManager.extractPhonePrefix(phoneNumberFieldValue);
+    let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue : DataManager.extractPhonePrefix(phoneNumberFieldValue);
     let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
     let fieldValue: string = '';
 
@@ -119,9 +119,8 @@ const InputPhoneField = ({
 
       if (formatPhoneNumber) {
         let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
-        let isFullPrefix: boolean = phonePrefix == `+${parsedNumber.countryCallingCode}`;
 
-        if (parsedNumber && isFullPrefix) {
+        if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
           fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
           fieldValue = fieldValue.replace(`${phonePrefix} `, '');
         }
@@ -137,6 +136,13 @@ const InputPhoneField = ({
     setSelectedCountry(targetCountry);
 
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
+    //onChangePhoneValue(phoneNumberFieldValue)
+
+    /*
+    FormManager.updateField(resource, phoneNumberFieldKey, targetCountry.prefix + phoneNumberFieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
+    */
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
