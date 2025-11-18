@@ -285,7 +285,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   inputTextField: {
-    backgroundColor: 'gray',
     borderWidth: 0,
     paddingLeft: 0,
     flexShrink: 1,
