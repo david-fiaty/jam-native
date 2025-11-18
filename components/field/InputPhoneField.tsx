@@ -62,6 +62,7 @@ const InputPhoneField = ({
   containerStyle = {
     ...(containerStyle || {}),
     ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+    ...(compact === true ? { flex: 1 } : {}),
   };
 
   const getDefaultCountry = async () => {
@@ -268,7 +269,6 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    flex: 1,
     paddingLeft: Layout.space.base,
   },
   containerStyleWhite: {
