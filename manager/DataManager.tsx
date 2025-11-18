@@ -178,72 +178,29 @@ class DataManager {
     let countryList: any[] = ContentManager.getCountryPhoneCodes();
     let phone: string = String(phoneNumber).trim();
     let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
- 
+
     for (const entry of sorted) {
       if (phone.startsWith(entry.prefix)) {
         return entry.prefix;
       }
     }
 
-    return null; 
+    return null;
   }
 
-  /*
-  getCountryPhonePrefix = (countryCode: any) => {
-    if (countryCode) {
-      let callingCode: string = getCountryCallingCode(countryCode.toUpperCase());
+  extractPhoneNumber(phoneNumber: string) {
+    let countryList: any[] = ContentManager.getCountryPhoneCodes();
+    let phone: string = String(phoneNumber).trim();
+    let sorted: any[] = countryList.slice().sort((a, b) => b.prefix.length - a.prefix.length);
 
-      if (callingCode) {
-        return `+${callingCode}`;
-      }
-      else {
-        return ''; 
-      }
-    } 
-
-    return '';
-  }
-  */
-
-  /*
-  extractPhoneNumber(value: any) {
-    if (value) {
-      let foundPrefix: any = ContentManager.getCountryPhoneCodes().find((o: any) => value.startsWith(o.prefix))?.prefix;
-      let isDigits: boolean = !isNaN(parseFloat(value)) && isFinite(value);
-
-      if (foundPrefix) {
-        return value.replace(foundPrefix, '').replaceAll(' ', '');
-      }
-      else if (isDigits) {
-        return value;
+    for (const entry of sorted) {
+      if (phone.startsWith(entry.prefix)) {
+        return phone.slice(entry.prefix.length); 
       }
     }
 
-    return '';
+    return phone;
   }
-  */
-
-  /*
-  extractPhoneNumber(value: any) {
-    if (value) {
-      let phoneNumber: any = parsePhoneNumber(value)?.nationalNumber || null;
-      let isDigits: boolean = !value.startsWith('+') && !isNaN(parseFloat(value)) && isFinite(value);
-
-      if (phoneNumber) {
-        return phoneNumber;
-      }
-      else if (isDigits) {
-        return value;
-      }
-      else {
-        return '';
-      }
-    }
-
-    return '';
-  }
-
-*/
-};
+}
 
 export default (new DataManager());
