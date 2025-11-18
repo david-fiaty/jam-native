@@ -110,7 +110,7 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+    let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue: DataManager.extractPhonePrefix(phoneNumberFieldValue);
     let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
     let fieldValue: string = '';
 
