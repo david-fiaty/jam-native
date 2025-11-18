@@ -146,14 +146,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 - Trim textarea fields like input text fields?
 
 # New release
-- Integration input phone field
-- Optimisation globale validation et soumission formulaires 
-- Amelioration animation slideshows (welcome screen et jam images)
-- Bug fixes sur share feature
-- Bug fixes sur more jam actions
-- Finalisation project form
-- Finalisation add jam to project form
-- Implementation Google Login (manque traitement reponse)
+- Bug fixes sur phone field
 
 # SIGNUP FIELDS
 Numero Whatsapp (login)
