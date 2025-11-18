@@ -53,7 +53,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
     if (selectedCountry && typeof selectedCountry !== 'undefined') {
       return selectedCountry;
     }
-    else if (value) {
+    else if (value && typeof value !== 'undefined') {
       let parsedNumber: any = parsePhoneNumber(value);
       let targetCountry: any = null;
 
