@@ -11,7 +11,6 @@ import ScreenManager from "@/manager/ScreenManager";
 import InputPasswordField from "@/components/field/InputPasswordField";
 import InputPhoneField from "@/components/field/InputPhoneField";
 import ContentManager from "@/manager/ContentManager";
-import PhoneField from "@/phone-field/PhoneField";
 
 const resource: string = 'login';
 
@@ -64,10 +63,7 @@ const LoginPhoneForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={Layout.formContainer}>
-
-      <PhoneField mode="split" />
-      
+    <View style={Layout.formContainer}>      
       <InputPhoneField
         resource={resource}
         phoneNumberFieldKey="phone_without_country_code"
