@@ -11,10 +11,10 @@ interface PhoneFieldProps {
   placeholder?: string;
   disabled?: boolean;
   rules?: any[];
-  format?: boolean;
-  flags?: boolean;
-  onChange?: (data: any) => void;
-  onValidate?: (data: any) => void;
+  formatValue?: boolean;
+  showFlags?: boolean;
+  onChangeValue?: (data: any) => void;
+  onValidateValue?: (data: any) => void;
 }
 
 const PhoneField = ({ 
@@ -27,10 +27,10 @@ const PhoneField = ({
   placeholder, 
   disabled, 
   rules, 
-  format,
-  flags,
-  onChange, 
-  onValidate
+  formatValue,
+  showFlags,
+  onChangeValue, 
+  onValidateValue
 }: PhoneFieldProps) => {
   mode = mode || 'inline';
   value = value || '';
