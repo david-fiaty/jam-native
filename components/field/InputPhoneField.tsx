@@ -62,6 +62,7 @@ const InputPhoneField = ({
   containerStyle = {
     ...(containerStyle || {}),
     ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+    ...(compact === true ? { flex: 1 } : {}),
   };
 
   const getDefaultCountry = async () => {
@@ -109,33 +110,46 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
-    let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
-    let fieldValue: string = '';
+    if (compact === true) {
+      let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue : DataManager.extractPhonePrefix(phoneNumberFieldValue);
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
+      let fieldValue: string = '';
 
-    if (targetCountry && phoneNumberFieldValue) {
-      fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+      if (targetCountry && phoneNumberFieldValue) {
+        fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
 
-      if (formatPhoneNumber) {
-        let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
-        let isFullPrefix: boolean = phonePrefix == `+${parsedNumber.countryCallingCode}`;
+        if (formatPhoneNumber) {
+          let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
 
-        if (parsedNumber && isFullPrefix) {
-          fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
-          fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+            fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+            fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          }
         }
       }
+
+      return fieldValue;
     }
+    else {
+      let fieldValue: string = '';
+      let targetCountry: any = getSelectedCountry();
+      let phonePrefix: string = targetCountry.prefix;
 
-    return fieldValue;
-  };
+      if (phoneNumberFieldValue) {
+        fieldValue = phoneNumberFieldValue;
 
-  const onChangeCodeValue = (item: any) => {
-    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
+        if (formatPhoneNumber) {
+          let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
 
-    setSelectedCountry(targetCountry);
+          if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+            fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+            fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          }
+        }
+      }
 
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix, rules, parentKey);
+      return fieldValue;
+    }
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
@@ -144,6 +158,19 @@ const InputPhoneField = ({
     if (targetCountry && compact === true) {
       fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
     }
+
+    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+      countryCode: targetCountry.code,
+    });
+  };
+
+  const onChangeCodeValue = (item: any) => {
+    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
+    let fieldValue: string = phoneNumberFieldValue; 
+
+    setSelectedCountry(targetCountry);
+    
+    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
 
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
@@ -169,11 +196,11 @@ const InputPhoneField = ({
         data={countryOptions}
         optionLabelKey="name"
         optionValueKey="code"
-        onChangeValue={onChangeCodeValue}
         disabled={disabled}
         elementStyle={styles.selectListField}
         containerStyle={containerStyle}
         search={true}
+        onChangeValue={onChangeCodeValue}
       />
     );
   };
@@ -209,6 +236,7 @@ const InputPhoneField = ({
 
         <View style={styles.fieldContainer}>
           <InputTextField
+            theme={theme}
             resource={resource}
             fieldKey={phoneNumberFieldKey}
             parentKey={parentKey}
@@ -239,7 +267,6 @@ const InputPhoneField = ({
         <>
           {FormManager.renderLabel(selectLabel, rules)}
           {renderSelectList()}
-          {FormManager.renderError(phonePrefixFieldKey, parentKey)}
 
           {FormManager.renderLabel(inputlabel, rules)}
           {renderInputText()}
@@ -268,7 +295,6 @@ const InputPhoneField = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    flex: 1,
     paddingLeft: Layout.space.base,
   },
   containerStyleWhite: {
@@ -285,7 +311,6 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   inputTextField: {
-    backgroundColor: 'gray',
     borderWidth: 0,
     paddingLeft: 0,
     flexShrink: 1,
