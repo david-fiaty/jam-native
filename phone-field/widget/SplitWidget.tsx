@@ -18,10 +18,10 @@ interface PhoneFieldProps {
   onValidateValue?: (data: any) => void;
 }
 
-const SplitPhoneField = ( props: PhoneFieldProps ) => {
+const SplitWidget = ( props: PhoneFieldProps ) => {
   return (
     <Text>Inline phone field</Text>
   );
 };
 
-export default SplitPhoneField;
+export default SplitWidget;
