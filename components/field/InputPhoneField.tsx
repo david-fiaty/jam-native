@@ -114,7 +114,7 @@ const InputPhoneField = ({
       let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue : DataManager.extractPhonePrefix(phoneNumberFieldValue);
       let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
       let fieldValue: string = '';
-      
+
       if (targetCountry && phoneNumberFieldValue) {
         fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
 
@@ -133,11 +133,21 @@ const InputPhoneField = ({
     else {
       let fieldValue: string = '';
       let targetCountry: any = getSelectedCountry();
-      
+      let phonePrefix: string = targetCountry.prefix;
+
       if (phoneNumberFieldValue) {
         fieldValue = phoneNumberFieldValue;
+
+        if (formatPhoneNumber) {
+          let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+
+          if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+            fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+            fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          }
+        }
       }
-      
+
       return fieldValue;
     }
   };
