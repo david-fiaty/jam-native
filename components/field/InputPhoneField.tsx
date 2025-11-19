@@ -166,11 +166,10 @@ const InputPhoneField = ({
 
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = countryList.find((o: any) => o.code == item.value);
-    let fieldValue: string = ''; 
-
-    //targetCountry.prefix;
+    let fieldValue: string = phoneNumberFieldValue; 
 
     setSelectedCountry(targetCountry);
+    
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
 
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
