@@ -26,7 +26,7 @@ const PhoneField = ({
   disabled, 
   rules, 
   onChange, 
-  onValidate 
+  onValidate
 }: PhoneFieldProps) => {
   mode = mode || 'inline';
   value = value || '';
