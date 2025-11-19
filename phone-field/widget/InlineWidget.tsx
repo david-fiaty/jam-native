@@ -13,6 +13,7 @@ interface PhoneFieldProps {
   formatValue?: boolean;
   showFlags?: boolean;
   modalSelection: boolean;
+  searchEnabled: boolean;
   containerStyle?: any;
   onChangeValue?: (data: any) => void;
   onValidateValue?: (data: any) => void;
