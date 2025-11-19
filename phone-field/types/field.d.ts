@@ -1,6 +1,4 @@
-import { Text } from "react-native";
-
-interface PhoneFieldProps {
+export interface PhoneFieldProps {
   id?: any;
   ref?: any;
   layout?: 'inline' | 'split';
@@ -18,11 +16,3 @@ interface PhoneFieldProps {
   onChangeValue?: (data: any) => void;
   onValidateValue?: (data: any) => void;
 }
-
-const SplitWidget = ( props: PhoneFieldProps ) => {
-  return (
-    <Text>Split phone widget</Text>
-  );
-};
-
-export default SplitWidget;
