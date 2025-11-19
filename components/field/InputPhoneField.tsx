@@ -158,10 +158,7 @@ const InputPhoneField = ({
     let targetCountry: any = getSelectedCountry();
 
     if (onChangeValue) {
-      onChangeValue({
-        phonePrefix: targetCountry.prefix,
-        phoneNumber: (fieldValue || '').replaceAll(' ', ''),
-      });
+      onChangeValue(getOnChangeData(targetCountry.prefix, fieldValue));
     }
     else {
       if (targetCountry && compact === true) {
@@ -181,10 +178,7 @@ const InputPhoneField = ({
     setSelectedCountry(targetCountry);
 
     if (onChangeValue) {
-      onChangeValue({
-        phonePrefix: targetCountry.prefix,
-        phoneNumber: (fieldValue || '').replaceAll(' ', ''),
-      });
+      onChangeValue(getOnChangeData(targetCountry.prefix, fieldValue));
     }
     else {
       FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
@@ -192,6 +186,13 @@ const InputPhoneField = ({
         countryCode: targetCountry.code,
       });
     }
+  };
+
+  const getOnChangeData = (phonePrefix: any, phoneNumber: any) => {
+    return {
+      phonePrefix: phonePrefix,
+      phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+    };
   };
 
   const renderFlag = (code: string) => {
