@@ -31,6 +31,7 @@ type Props = {
   compact?: boolean;
   containerStyle?: any;
   formatPhoneNumber?: boolean;
+  onChangeValue?: (data: any) => void;
 };
 
 const InputPhoneField = ({
@@ -50,6 +51,7 @@ const InputPhoneField = ({
   compact,
   containerStyle,
   formatPhoneNumber,
+  onChangeValue,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
@@ -133,9 +135,9 @@ const InputPhoneField = ({
     else {
       let fieldValue: string = '';
       let targetCountry: any = getSelectedCountry();
-      let phonePrefix: string = targetCountry.prefix;
+      let phonePrefix: string = targetCountry?.prefix;
 
-      if (phoneNumberFieldValue) {
+      if (phonePrefix && phoneNumberFieldValue) {
         fieldValue = phoneNumberFieldValue;
 
         if (formatPhoneNumber) {
@@ -162,19 +164,32 @@ const InputPhoneField = ({
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
+
+    onChangeValueEvent(targetCountry.prefix, fieldValue);
   };
 
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = countryList.find((o: any) => o.code == item.value);
-    let fieldValue: string = phoneNumberFieldValue; 
+    let fieldValue: string = phoneNumberFieldValue;
 
     setSelectedCountry(targetCountry);
-    
+
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
 
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
+
+    onChangeValueEvent(targetCountry.prefix, fieldValue);
+  };
+
+  const onChangeValueEvent = (phonePrefix: string, phoneNumber: string) => {
+    if (onChangeValue) {
+      onChangeValue({
+        phonePrefix: phonePrefix,
+        phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+      });
+    }
   };
 
   const renderFlag = (code: string) => {
@@ -229,7 +244,7 @@ const InputPhoneField = ({
             }}
           >
             <TextView size={15}>
-              {renderFlag(getSelectedCountry()?.code)}&nbsp;{getSelectedCountry()?.prefix}
+              {renderFlag(getSelectedCountry()?.code)}&nbsp;&nbsp;{getSelectedCountry()?.prefix}
             </TextView>
           </TouchableOpacity>
         </View>
