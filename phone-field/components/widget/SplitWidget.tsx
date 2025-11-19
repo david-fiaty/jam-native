@@ -1,7 +1,11 @@
 import { Text } from "react-native";
 import { PhoneFieldProps } from "@/phone-field/types/field";
 
-const SplitWidget = ( props: PhoneFieldProps ) => {
+interface SplitWidgetProps extends PhoneFieldProps {
+
+}
+
+const SplitWidget = ( props: SplitWidgetProps ) => {
   return (
     <Text>Split phone widget</Text>
   );
