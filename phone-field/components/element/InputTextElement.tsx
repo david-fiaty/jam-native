@@ -1,9 +1,6 @@
 import { Text } from "react-native";
-import { TextInput, TextInputProps } from "react-native";
-
-interface InputTextElementProps extends TextInputProps {
-
-}
+import { TextInput } from "react-native";
+import { InputTextElementProps } from "@/phone-field/types/element";
 
 const InputTextElement = (props: InputTextElementProps) => {
   return (
