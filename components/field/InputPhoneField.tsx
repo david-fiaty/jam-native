@@ -31,6 +31,7 @@ type Props = {
   compact?: boolean;
   containerStyle?: any;
   formatPhoneNumber?: boolean;
+  onChangeValue?: (value: any) => void;
 };
 
 const InputPhoneField = ({
@@ -50,6 +51,7 @@ const InputPhoneField = ({
   compact,
   containerStyle,
   formatPhoneNumber,
+  onChangeValue,
 }: Props) => {
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState<any>(null);
@@ -133,9 +135,9 @@ const InputPhoneField = ({
     else {
       let fieldValue: string = '';
       let targetCountry: any = getSelectedCountry();
-      let phonePrefix: string = targetCountry.prefix;
+      let phonePrefix: string = targetCountry?.prefix;
 
-      if (phoneNumberFieldValue) {
+      if (phonePrefix && phoneNumberFieldValue) {
         fieldValue = phoneNumberFieldValue;
 
         if (formatPhoneNumber) {
@@ -162,6 +164,10 @@ const InputPhoneField = ({
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
+
+    if (onChangeValue) {
+      onChangeValue(fieldValue);
+    }
   };
 
   const onChangeCodeValue = (item: any) => {
@@ -175,6 +181,10 @@ const InputPhoneField = ({
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
+    
+    if (onChangeValue) {
+      onChangeValue(fieldValue);
+    }
   };
 
   const renderFlag = (code: string) => {
