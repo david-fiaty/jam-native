@@ -10,6 +10,7 @@ interface PhoneFieldProps {
 
 const PhoneField = ({ mode, value, onChange }: PhoneFieldProps) => {
   mode = mode || 'inline';
+  value = value || '';
 
   if (mode == 'inline') {
     return (
