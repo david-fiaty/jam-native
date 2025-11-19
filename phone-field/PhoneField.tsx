@@ -13,6 +13,7 @@ interface PhoneFieldProps {
   rules?: any[];
   formatValue?: boolean;
   showFlags?: boolean;
+  containerStyle?: any;
   onChangeValue?: (data: any) => void;
   onValidateValue?: (data: any) => void;
 }
@@ -29,6 +30,7 @@ const PhoneField = ({
   rules, 
   formatValue,
   showFlags,
+  containerStyle,
   onChangeValue, 
   onValidateValue
 }: PhoneFieldProps) => {
