@@ -110,24 +110,36 @@ const InputPhoneField = ({
   };
 
   const getCurrentPhoneNumber = () => {
-    let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue : DataManager.extractPhonePrefix(phoneNumberFieldValue);
-    let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
-    let fieldValue: string = '';
+    if (compact === true) {
+      let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue : DataManager.extractPhonePrefix(phoneNumberFieldValue);
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
+      let fieldValue: string = '';
+      
+      if (targetCountry && phoneNumberFieldValue) {
+        fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
 
-    if (targetCountry && phoneNumberFieldValue) {
-      fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+        if (formatPhoneNumber) {
+          let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
 
-      if (formatPhoneNumber) {
-        let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
-
-        if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
-          fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
-          fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+            fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+            fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          }
         }
       }
-    }
 
-    return fieldValue;
+      return fieldValue;
+    }
+    else {
+      let fieldValue: string = '';
+      let targetCountry: any = getSelectedCountry();
+      
+      if (phoneNumberFieldValue) {
+        fieldValue = phoneNumberFieldValue;
+      }
+      
+      return fieldValue;
+    }
   };
 
   const onChangePhoneValue = (fieldValue: any) => {
