@@ -5,7 +5,9 @@ interface PhoneFieldProps {
   id?: any;
   ref?: any;
   mode?: 'inline' | 'split';
-  value?: string;
+  value?: any;
+  defaultValue?: any;
+  defaultCountry?: any;
   placeholder?: string;
   disabled?: boolean;
   rules?: any[];
@@ -13,7 +15,19 @@ interface PhoneFieldProps {
   onValidate?: (data: any) => void;
 }
 
-const PhoneField = ({ id, ref, mode, value, placeholder, disabled, rules, onChange, onValidate }: PhoneFieldProps) => {
+const PhoneField = ({ 
+  id, 
+  ref, 
+  mode, 
+  value, 
+  defaultValue, 
+  defaultCountry,
+  placeholder, 
+  disabled, 
+  rules, 
+  onChange, 
+  onValidate 
+}: PhoneFieldProps) => {
   mode = mode || 'inline';
   value = value || '';
 
