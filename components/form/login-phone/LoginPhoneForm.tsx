@@ -63,8 +63,7 @@ const LoginPhoneForm = () => {
   if (!isLoaded) return <SpinnerView />;
 
   return (
-    <View style={Layout.formContainer}>
-      
+    <View style={Layout.formContainer}>      
       <InputPhoneField
         resource={resource}
         phoneNumberFieldKey="phone_without_country_code"
