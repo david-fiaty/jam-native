@@ -66,7 +66,7 @@ const LoginPhoneForm = () => {
   return (
     <View style={Layout.formContainer}>
 
-      <PhoneField mode="split" />
+      <PhoneField layout="inline" />
       
       <InputPhoneField
         resource={resource}
