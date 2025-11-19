@@ -19,7 +19,7 @@ interface PhoneFieldProps {
   onValidateValue?: (data: any) => void;
 }
 
-const PhoneField = ( props: PhoneFieldProps) => {
+const PhoneField = ( props: PhoneFieldProps ) => {
   const mode: string = props?.mode || 'inline';
 
   if (mode == 'inline') {
