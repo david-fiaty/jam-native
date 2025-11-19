@@ -2,6 +2,8 @@ import InlinePhoneField from "./InlinePhoneField";
 import SplitPhoneField from "./SplitPhoneField";
 
 interface PhoneFieldProps {
+  id?: any;
+  ref?: any;
   mode?: 'inline' | 'split';
   value?: string;
   placeholder?: string;
@@ -11,7 +13,7 @@ interface PhoneFieldProps {
   onValidate?: (data: any) => void;
 }
 
-const PhoneField = ({ mode, value, placeholder, disabled, rules, onChange, onValidate }: PhoneFieldProps) => {
+const PhoneField = ({ id, ref, mode, value, placeholder, disabled, rules, onChange, onValidate }: PhoneFieldProps) => {
   mode = mode || 'inline';
   value = value || '';
 
