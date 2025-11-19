@@ -157,15 +157,21 @@ const InputPhoneField = ({
   const onChangePhoneValue = (fieldValue: any) => {
     let targetCountry: any = getSelectedCountry();
 
-    if (targetCountry && compact === true) {
-      fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
+    if (onChangeValue) {
+      onChangeValue({
+        phonePrefix: targetCountry.prefix,
+        phoneNumber: (fieldValue || '').replaceAll(' ', ''),
+      });
     }
+    else {
+      if (targetCountry && compact === true) {
+        fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
+      }
 
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
-
-    onChangeValueEvent(targetCountry.prefix, fieldValue);
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
+      });
+    }
   };
 
   const onChangeCodeValue = (item: any) => {
@@ -174,20 +180,16 @@ const InputPhoneField = ({
 
     setSelectedCountry(targetCountry);
 
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
-
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
-
-    onChangeValueEvent(targetCountry.prefix, fieldValue);
-  };
-
-  const onChangeValueEvent = (phonePrefix: string, phoneNumber: string) => {
     if (onChangeValue) {
       onChangeValue({
-        phonePrefix: phonePrefix,
-        phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+        phonePrefix: targetCountry.prefix,
+        phoneNumber: (fieldValue || '').replaceAll(' ', ''),
+      });
+    }
+    else {
+      FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
       });
     }
   };
