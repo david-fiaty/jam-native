@@ -157,15 +157,18 @@ const InputPhoneField = ({
   const onChangePhoneValue = (fieldValue: any) => {
     let targetCountry: any = getSelectedCountry();
 
-    if (targetCountry && compact === true) {
-      fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
+    if (onChangeValue) {
+      onChangeValue(getOnChangeData(targetCountry.prefix, fieldValue));
     }
+    else {
+      if (targetCountry && compact === true) {
+        fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
+      }
 
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
-
-    onChangeValueEvent(targetCountry.prefix, fieldValue);
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
+      });
+    }
   };
 
   const onChangeCodeValue = (item: any) => {
@@ -174,22 +177,22 @@ const InputPhoneField = ({
 
     setSelectedCountry(targetCountry);
 
-    FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
-
-    FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
-      countryCode: targetCountry.code,
-    });
-
-    onChangeValueEvent(targetCountry.prefix, fieldValue);
-  };
-
-  const onChangeValueEvent = (phonePrefix: string, phoneNumber: string) => {
     if (onChangeValue) {
-      onChangeValue({
-        phonePrefix: phonePrefix,
-        phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+      onChangeValue(getOnChangeData(targetCountry.prefix, fieldValue));
+    }
+    else {
+      FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
       });
     }
+  };
+
+  const getOnChangeData = (phonePrefix: any, phoneNumber: any) => {
+    return {
+      phonePrefix: phonePrefix,
+      phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+    };
   };
 
   const renderFlag = (code: string) => {
