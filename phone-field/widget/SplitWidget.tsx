@@ -21,7 +21,7 @@ interface PhoneFieldProps {
 
 const SplitWidget = ( props: PhoneFieldProps ) => {
   return (
-    <Text>Inline phone field</Text>
+    <Text>Split phone widget</Text>
   );
 };
 

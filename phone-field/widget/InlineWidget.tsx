@@ -21,7 +21,7 @@ interface PhoneFieldProps {
 
 const InlineWidget = ( props: PhoneFieldProps) => {
   return (
-    <Text>Inline phone field</Text>
+    <Text>Inline phone widget</Text>
   );
 };
 
