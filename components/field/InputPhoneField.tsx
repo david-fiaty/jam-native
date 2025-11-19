@@ -31,7 +31,7 @@ type Props = {
   compact?: boolean;
   containerStyle?: any;
   formatPhoneNumber?: boolean;
-  onChangeValue?: (value: any) => void;
+  onChangeValue?: (data: any) => void;
 };
 
 const InputPhoneField = ({
@@ -165,14 +165,12 @@ const InputPhoneField = ({
       countryCode: targetCountry.code,
     });
 
-    if (onChangeValue) {
-      onChangeValue(fieldValue);
-    }
+    onChangeValueEvent(targetCountry.prefix, fieldValue);
   };
 
   const onChangeCodeValue = (item: any) => {
     let targetCountry: any = countryList.find((o: any) => o.code == item.value);
-    let fieldValue: string = phoneNumberFieldValue; 
+    let fieldValue: string = phoneNumberFieldValue;
 
     setSelectedCountry(targetCountry);
 
@@ -181,9 +179,16 @@ const InputPhoneField = ({
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
       countryCode: targetCountry.code,
     });
-    
+
+    onChangeValueEvent(targetCountry.prefix, fieldValue);
+  };
+
+  const onChangeValueEvent = (phonePrefix: string, phoneNumber: string) => {
     if (onChangeValue) {
-      onChangeValue(fieldValue);
+      onChangeValue({
+        phonePrefix: phonePrefix,
+        phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+      });
     }
   };
 
