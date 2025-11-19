@@ -78,6 +78,7 @@ const LoginPhoneForm = () => {
         selectPlaceholder={i18n.t('Select your country')}
         theme="white"
         formatPhoneNumber={true}
+        onChangeValue={(data: any) => console.log('---', data)}
       />
 
       <InputPasswordField
