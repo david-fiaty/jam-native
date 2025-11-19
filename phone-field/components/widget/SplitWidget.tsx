@@ -1,23 +1,5 @@
 import { Text } from "react-native";
-
-interface PhoneFieldProps {
-  id?: any;
-  ref?: any;
-  layout?: 'inline' | 'split';
-  value?: any;
-  defaultValue?: any;
-  defaultCountry?: any;
-  placeholder?: string;
-  disabled?: boolean;
-  rules?: any[];
-  formatValue?: boolean;
-  showFlags?: boolean;
-  modalSelection?: boolean;
-  searchEnabled?: boolean;
-  containerStyle?: any;
-  onChangeValue?: (data: any) => void;
-  onValidateValue?: (data: any) => void;
-}
+import { PhoneFieldProps } from "@/phone-field/types/field";
 
 const SplitWidget = ( props: PhoneFieldProps ) => {
   return (

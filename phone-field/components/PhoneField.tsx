@@ -1,24 +1,6 @@
 import InlineWidget from "./widget/InlineWidget";
 import SplitWidget from "./widget/SplitWidget";
-
-interface PhoneFieldProps {
-  id?: any;
-  ref?: any;
-  layout?: 'inline' | 'split';
-  value?: any;
-  defaultValue?: any;
-  defaultCountry?: any;
-  placeholder?: string;
-  disabled?: boolean;
-  rules?: any[];
-  formatValue?: boolean;
-  showFlags?: boolean;
-  modalSelection?: boolean;
-  searchEnabled?: boolean;
-  containerStyle?: any;
-  onChangeValue?: (data: any) => void;
-  onValidateValue?: (data: any) => void;
-}
+import { PhoneFieldProps } from "../types/field";
 
 const PhoneField = ( props: PhoneFieldProps ) => {
   const layout: string = props?.layout || 'inline';
