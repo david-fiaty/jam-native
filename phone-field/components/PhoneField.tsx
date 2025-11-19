@@ -1,18 +1,18 @@
-import InlineWidget from "./widget/InlineWidget";
-import SplitWidget from "./widget/SplitWidget";
 import { PhoneFieldProps } from "../types/field";
+import InlineField from "./field/InlineField";
+import SplitField from "./field/SplitField";
 
 const PhoneField = ( props: PhoneFieldProps ) => {
   const layout: string = props?.layout || 'inline';
 
   if (layout == 'inline') {
     return (
-      <InlineWidget {...props} />
+      <InlineField {...props} />
     );
   }
   else if (layout == 'split') {
     return (
-      <SplitWidget {...props} />
+      <SplitField {...props} />
     );
   }
 };

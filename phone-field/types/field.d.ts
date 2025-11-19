@@ -16,3 +16,11 @@ export interface PhoneFieldProps {
   onChangeValue?: (data: any) => void;
   onValidateValue?: (data: any) => void;
 }
+
+export interface InlineFieldProps extends PhoneFieldProps {
+
+}
+
+export interface SplitFieldProps extends PhoneFieldProps {
+
+}
