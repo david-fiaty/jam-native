@@ -169,7 +169,7 @@ const InputPhoneField = ({
     let fieldValue: string = phoneNumberFieldValue; 
 
     setSelectedCountry(targetCountry);
-    
+
     FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
 
     FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
@@ -229,7 +229,7 @@ const InputPhoneField = ({
             }}
           >
             <TextView size={15}>
-              {renderFlag(getSelectedCountry()?.code)}&nbsp;{getSelectedCountry()?.prefix}
+              {renderFlag(getSelectedCountry()?.code)}&nbsp;&nbsp;{getSelectedCountry()?.prefix}
             </TextView>
           </TouchableOpacity>
         </View>
