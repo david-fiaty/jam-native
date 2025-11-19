@@ -1,4 +1,5 @@
 import { Text } from "react-native";
+import InputTextElement from "../element/InputTextElement";
 
 interface PhoneFieldProps {
   id?: any;
@@ -19,9 +20,12 @@ interface PhoneFieldProps {
   onValidateValue?: (data: any) => void;
 }
 
-const InlineWidget = ( props: PhoneFieldProps) => {
+const InlineWidget = (props: PhoneFieldProps) => {
   return (
-    <Text>Inline phone widget</Text>
+    <>
+      <Text>Inline phone widget</Text>
+      <InputTextElement {...props} />
+    </>
   );
 };
 
