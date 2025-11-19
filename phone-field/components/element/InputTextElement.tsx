@@ -7,7 +7,7 @@ interface InputTextElementProps extends TextInputProps {
 
 const InputTextElement = (props: InputTextElementProps) => {
   return (
-    <Text>Input text element</Text>
+    <TextInput {...props} /> 
   );
 };
 
