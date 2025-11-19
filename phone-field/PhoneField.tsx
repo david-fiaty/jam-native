@@ -19,34 +19,17 @@ interface PhoneFieldProps {
   onValidateValue?: (data: any) => void;
 }
 
-const PhoneField = ({ 
-  id, 
-  ref, 
-  mode, 
-  value, 
-  defaultValue, 
-  defaultCountry,
-  placeholder, 
-  disabled, 
-  rules, 
-  formatValue,
-  showFlags,
-  modalSelection,
-  containerStyle,
-  onChangeValue, 
-  onValidateValue
-}: PhoneFieldProps) => {
-  mode = mode || 'inline';
-  value = value || '';
+const PhoneField = ( props: PhoneFieldProps) => {
+  const mode: string = props?.mode || 'inline';
 
   if (mode == 'inline') {
     return (
-      <InlinePhoneField />
+      <InlinePhoneField {...props} />
     );
   }
   else if (mode == 'split') {
     return (
-      <SplitPhoneField />
+      <SplitPhoneField {...props} />
     );
   }
 };
