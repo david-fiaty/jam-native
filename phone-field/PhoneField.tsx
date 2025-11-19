@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import InlinePhoneField from "./InlinePhoneField";
 import SplitPhoneField from "./SplitPhoneField";
 
