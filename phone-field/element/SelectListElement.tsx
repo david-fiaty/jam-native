@@ -1,6 +1,6 @@
 import { Text } from "react-native";
 
-const SelectListElement= () => {
+const SelectListElement = () => {
   return (
     <Text>Input text element</Text>
   );

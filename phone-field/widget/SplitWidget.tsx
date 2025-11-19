@@ -3,7 +3,7 @@ import { Text } from "react-native";
 interface PhoneFieldProps {
   id?: any;
   ref?: any;
-  mode?: 'inline' | 'split';
+  layout?: 'inline' | 'split';
   value?: any;
   defaultValue?: any;
   defaultCountry?: any;
@@ -12,7 +12,8 @@ interface PhoneFieldProps {
   rules?: any[];
   formatValue?: boolean;
   showFlags?: boolean;
-  modalSelection: boolean;
+  modalSelection?: boolean;
+  searchEnabled?: boolean;
   containerStyle?: any;
   onChangeValue?: (data: any) => void;
   onValidateValue?: (data: any) => void;
@@ -20,7 +21,7 @@ interface PhoneFieldProps {
 
 const SplitWidget = ( props: PhoneFieldProps ) => {
   return (
-    <Text>Inline phone field</Text>
+    <Text>Split phone widget</Text>
   );
 };
 
