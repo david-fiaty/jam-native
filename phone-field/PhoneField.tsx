@@ -1,5 +1,5 @@
-import InlinePhoneField from "./InlinePhoneField";
-import SplitPhoneField from "./SplitPhoneField";
+import InlineWidget from "./widget/InlineWidget";
+import SplitWidget from "./widget/SplitWidget";
 
 interface PhoneFieldProps {
   id?: any;
@@ -24,12 +24,12 @@ const PhoneField = ( props: PhoneFieldProps ) => {
 
   if (mode == 'inline') {
     return (
-      <InlinePhoneField {...props} />
+      <InlineWidget {...props} />
     );
   }
   else if (mode == 'split') {
     return (
-      <SplitPhoneField {...props} />
+      <SplitWidget {...props} />
     );
   }
 };
