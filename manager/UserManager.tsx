@@ -79,7 +79,7 @@ class UserManager {
     let payload: any = FormManager.objectToFormData({ ...defaults, ...data });  
     let response: any = await DataManager.put('updateProfile', payload, variables);
      
-    if (response?.id > 0) success = true;
+    if (response?.id > 0) success = true; 
 
     return {
       success: success,
