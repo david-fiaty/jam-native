@@ -11,6 +11,7 @@ import * as Device from "expo-device";
 import i18n from '@/translation/i18n';
 import ScreenManager from './ScreenManager';
 import ContentManager from './ContentManager';
+import FormManager from './FormManager';
 
 class UserManager {
   async sendSignupCode(data: any) {
@@ -75,10 +76,12 @@ class UserManager {
     let variables: any = { '[profile_id]': profileId };
     let success: boolean = false;
 
-    //let payload: any = FormManager.objectToFormData({ ...defaults, ...data }); 
-    let payload: any = { ...defaults, ...data };
+    let payload: any = FormManager.objectToFormData({ ...defaults, ...data }); 
+    //let payload: any = { ...defaults, ...data }; 
     let response: any = await DataManager.put('updateProfile', payload, variables);
 
+    console.log(response);
+     
     if (response?.id > 0) success = true;
 
     return {
