@@ -60,10 +60,13 @@ class FormManager {
     }]));
   }
 
-  addServerErrors(resource: string, errors: any) {
+  addServerErrors(resource: string, result: any) {
     let formErrors: any[] = [...Store.getState().form.errors];
+    let errors: any[] = result?.data?.meta || result?.data || {}; 
 
-    for (const [key, val] of Object.entries(errors || {})) {
+    console.log('2 ---> errors', errors)
+
+    for (const [key, val] of Object.entries(errors)) {
       let message: any = i18n.t('Invalid field value');
 
       if (Array.isArray(val) && val?.length > 0) {
