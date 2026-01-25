@@ -137,7 +137,6 @@ const InputTextField = ({
       </BoxView>
 
       {FormManager.renderError(fieldKey, parentKey)} 
-      <Text>{fieldKey} --- {parentKey}</Text>
     </>
   );
 };
