@@ -159,8 +159,6 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   manager_email: erreur serveur meme si champ optionnel inexistant
   total_creation_or_rehersal_rooms: erreur serveur meme si champ optionnel inexistant
 
-
-
 # SIGNUP FIELDS
 Numero Whatsapp (login)
 Email address (login)
