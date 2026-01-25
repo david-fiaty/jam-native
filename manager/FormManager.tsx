@@ -64,8 +64,6 @@ class FormManager {
     let formErrors: any[] = [...Store.getState().form.errors];
     let errors: any[] = result?.data?.meta || result?.data || {}; 
 
-    console.log('2 ---> errors', errors)
-
     for (const [key, val] of Object.entries(errors)) {
       let message: any = i18n.t('Invalid field value');
 
@@ -81,6 +79,8 @@ class FormManager {
         message: message,
       });
     }
+
+console.log('2 ---> form errors', formErrors) 
 
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
