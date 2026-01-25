@@ -6,7 +6,7 @@ import i18n from "@/translation/i18n";
 import ScreenManager from "./ScreenManager";
 import DataManager from "./DataManager";
 import TextView from "@/components/view/TextView";
- 
+
 class FormManager {
   renderLabel(label: any, rules?: any) {
     let isRequired: boolean = (rules || []).includes('required');
@@ -61,9 +61,8 @@ class FormManager {
   }
 
   addServerErrors(resource: string, result: any) {
-    //let formErrors: any[] = [...Store.getState().form.errors]; // Todo - Enable or remove
-    let formErrors: any[] = []; 
-    let errors: any[] = result?.data?.meta || result?.data || {}; 
+    let formErrors: any[] = [];
+    let errors: any[] = result?.data?.meta || result?.data || {};
 
     for (const [key, val] of Object.entries(errors)) {
       let message: any = i18n.t('Invalid field value');
@@ -80,14 +79,12 @@ class FormManager {
         }
       }
       else if (val) {
-        message = val;
+        formErrors.push({
+          key: key,
+          message: val, 
+        });
       }
-
-      formErrors.push({
-        key: key,
-        message: message,
-      });
-    } 
+    }
 
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
@@ -122,13 +119,13 @@ class FormManager {
 
     return <></>;
   }
- 
+
   hasErrors(resource: string) {
-    return this.getErrors(resource).length > 0;   
+    return this.getErrors(resource).length > 0;
   }
 
   getErrors(resource: string) {
-    return (Store.getState().form.errors || []).filter((o: any) => o.resource == resource);   
+    return (Store.getState().form.errors || []).filter((o: any) => o.resource == resource);
   }
 
   updateField(resource: string, fieldKey: any, value: any, rules: any[] = [], parentKey?: any, params?: any) {
@@ -168,7 +165,7 @@ class FormManager {
 
     for (const rule of rules) {
       if (fieldRules?.[rule] && !fieldRules[rule].run(fieldValue, params)) {
-        errors.push({ 
+        errors.push({
           key: targetKey,
           message: fieldRules[rule].error(),
         });
@@ -201,7 +198,7 @@ class FormManager {
           if (value && params?.countryCode) {
             let parsedNumber: any = parsePhoneNumber(value, params.countryCode.toUpperCase());
             let isValid: boolean = parsedNumber && parsedNumber.isValid();
-             
+
             return isValid;
           }
 
