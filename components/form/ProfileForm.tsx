@@ -32,13 +32,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   const userState = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
-
-    console.log(FormManager.hasErrors(resource));
-    console.log(FormManager.getErrors(resource));
-
-    return;
-
-    /*
     setIsProcessing(true);
 
     if (onSubmit) {
@@ -55,8 +48,10 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
       let result: any = await UserManager.updateProfile(data);
 
+      console.log('1 --> result', result);
+
       if (result?.success === false) {
-        FormManager.addServerErrors(resource, result?.data?.meta);
+        FormManager.addServerErrors(resource, result);
 
         ScreenManager.showMessage({
           title: i18n.t('Profile update'),
@@ -76,7 +71,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     }
 
     setIsProcessing(false);
-    */
   };
 
   const loadFormData = async () => {

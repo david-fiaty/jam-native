@@ -40,7 +40,7 @@ const CountryPhoneCodesList = ({ resource, fieldKey, parentKey, rules, value }: 
         return countryCache.get(key);
       }
 
-      result = countryList.filter((o: any) => o.key.startsWith(key));
+      result = countryList.filter((o: any) => o.key.contains(key));
       countryCache.set(key, result);
 
       return result;
