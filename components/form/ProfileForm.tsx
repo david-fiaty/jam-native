@@ -48,8 +48,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
 
       let result: any = await UserManager.updateProfile(data);
 
-      console.log('1 --> result', result);
-
       if (result?.success === false) {
         FormManager.addServerErrors(resource, result);
 
