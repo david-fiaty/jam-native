@@ -40,7 +40,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     else {
 
       let data: any = { ...formData };
-
+      
       delete data.profile_picture;
       if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
         delete data.upload_profile_picture;
