@@ -148,6 +148,16 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
 # New release
 - Bug fixes sur phone field
 
+# API VALIDATION ISSUES
+- All profiles
+  profile_name: pas de validation serveur 
+  profile_description: pas de validation serveur
+
+- Profile Venue
+
+
+
+
 # SIGNUP FIELDS
 Numero Whatsapp (login)
 Email address (login)
@@ -169,8 +179,6 @@ Venue Types Names
 Country name
 Latitude
 Longitude
-
-
 
 # Todo 
 - Implement image cache : https://github.com/echowaves/expo-cached-image
