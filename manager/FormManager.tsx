@@ -61,7 +61,8 @@ class FormManager {
   }
 
   addServerErrors(resource: string, result: any) {
-    let formErrors: any[] = [...Store.getState().form.errors];
+    //let formErrors: any[] = [...Store.getState().form.errors];
+    let formErrors: any[] = []; 
     let errors: any[] = result?.data?.meta || result?.data || {}; 
 
     for (const [key, val] of Object.entries(errors)) {
@@ -108,6 +109,9 @@ console.log('2 ---> form errors', formErrors)
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
+
+    console.log('------')
+    console.log(formErrors) 
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;
