@@ -1,9 +1,9 @@
-import React, { JSX, useState, useEffect } from "react";
+import { Layout } from "@/constants/Layout";
+import FormManager from "@/manager/FormManager";
+import React, { JSX, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import { Layout } from "@/constants/Layout";
 import TextView from "../view/TextView";
-import FormManager from "@/manager/FormManager";
 
 type Props = {
   theme?: string;
@@ -59,11 +59,11 @@ const SelectListField = ({
   };
 
   const buildOptions = (optionsData: any) => {
-    return [...(optionsData || [])].map((item: any) => {
+    return [...(optionsData || [])].map((o: any) => {
       return {
-        value: item?.[optionValueKey],
-        label: item?.[optionLabelKey],
-      }
+        value: o?.[optionValueKey],
+        label: o?.[optionLabelKey],
+      };
     });
   };
 

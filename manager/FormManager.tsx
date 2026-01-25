@@ -60,14 +60,24 @@ class FormManager {
     }]));
   }
 
-  addServerErrors(resource: string, errors: any) {
-    let formErrors: any[] = [...Store.getState().form.errors];
+  addServerErrors(resource: string, result: any) {
+    //let formErrors: any[] = [...Store.getState().form.errors]; // Todo - Enable or remove
+    let formErrors: any[] = []; 
+    let errors: any[] = result?.data?.meta || result?.data || {}; 
 
-    for (const [key, val] of Object.entries(errors || {})) {
+    for (const [key, val] of Object.entries(errors)) {
       let message: any = i18n.t('Invalid field value');
 
       if (Array.isArray(val) && val?.length > 0) {
         message = val[0];
+      }
+      else if (typeof val === "object" && Object.keys(val).length > 0) {
+        for (const [k, v] of Object.entries(val)) {
+          formErrors.push({
+            key: k,
+            message: v,
+          });
+        }
       }
       else if (val) {
         message = val;
@@ -77,7 +87,7 @@ class FormManager {
         key: key,
         message: message,
       });
-    }
+    } 
 
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
