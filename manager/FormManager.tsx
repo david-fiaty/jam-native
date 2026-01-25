@@ -65,7 +65,7 @@ class FormManager {
     let formErrors: any[] = []; 
     let errors: any[] = result?.data?.meta || result?.data || {}; 
 
-    for (const [key, val] of Object.entries(errors)) {
+    for (const [key, val] of Object.entries(errors)) { 
       let message: any = i18n.t('Invalid field value');
 
       if (Array.isArray(val) && val?.length > 0) {
