@@ -39,7 +39,7 @@ export const Config: any = {
     deletedJams: 'deletedJams',
   },
   forceLogin: {
-    enabled: true,
+    enabled: false,
     credentials: {
       email: 'mitsiomotu@yopmail.com',
       password: 'Password1234',
