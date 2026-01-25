@@ -61,7 +61,7 @@ class FormManager {
   }
 
   addServerErrors(resource: string, result: any) {
-    //let formErrors: any[] = [...Store.getState().form.errors];
+    //let formErrors: any[] = [...Store.getState().form.errors]; // Todo - Enable or remove
     let formErrors: any[] = []; 
     let errors: any[] = result?.data?.meta || result?.data || {}; 
 
@@ -71,6 +71,14 @@ class FormManager {
       if (Array.isArray(val) && val?.length > 0) {
         message = val[0];
       }
+      else if (typeof val === "object" && Object.keys(val).length > 0) {
+        for (const [k, v] of Object.entries(val)) {
+          formErrors.push({
+            key: k,
+            message: v,
+          });
+        }
+      }
       else if (val) {
         message = val;
       }
@@ -79,9 +87,7 @@ class FormManager {
         key: key,
         message: message,
       });
-    }
-
-console.log('2 ---> form errors', formErrors) 
+    } 
 
     Store.dispatch(setFormErrors<any>([...formErrors, {
       ...{ resource: resource },
@@ -109,9 +115,6 @@ console.log('2 ---> form errors', formErrors)
     let targetKey: string = this.getTargetKey(key);
     let formErrors: any[] = Store.getState().form.errors;
     let fieldError: any = formErrors.findLast((o: any) => o.key === targetKey);
-
-    console.log('------')
-    console.log(formErrors) 
 
     if (fieldError) {
       return <FieldErrorView message={fieldError.message} />;
