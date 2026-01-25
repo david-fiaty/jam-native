@@ -13,7 +13,7 @@ type Props = {
 
 const slideHeight: number = Layout.imageSlideshow.height;
 const wrapperHeight: number = 346;
-const slideWidth: number = ScreenManager.window.width - Layout.space.base * 3;
+const slideWidth: number = (ScreenManager.window.width - Layout.space.base * 3) - Layout.borderWidth.base;
 
 const ImageSlideshow = ({ data }: Props) => {
   const ref: any = React.useRef<ICarouselInstance>(null);
