@@ -1,5 +1,5 @@
 import React, { useState, useEffect, JSX } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { Layout } from "@/constants/Layout";
 import BoxView from "../view/BoxView";
 import FormManager from "@/manager/FormManager";
@@ -136,7 +136,8 @@ const InputTextField = ({
         )}
       </BoxView>
 
-      {!!rules?.length && FormManager.renderError(fieldKey, parentKey)}
+      {FormManager.renderError(fieldKey, parentKey)} 
+      <Text>{fieldKey} --- {parentKey}</Text>
     </>
   );
 };
