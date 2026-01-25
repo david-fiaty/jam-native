@@ -154,7 +154,7 @@ https://medium.com/@kalebjdavenport/how-to-create-a-grid-layout-in-react-native-
   profile_description: pas de validation serveur
 
 - Profile Venue
-
+  creation_year: erreur serveur meme si champ optionnel vide (null)
 
 
 
