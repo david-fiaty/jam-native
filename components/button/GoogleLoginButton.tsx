@@ -12,16 +12,15 @@ import { useEffect } from 'react';
 
 const GoogleLoginButton = () => {
   const source: any = require('@/assets/images/google-logo.png');
-  const clientId: string = Config.googleAuthClientId;
+  const clientId: string = Config.googleAuth.clientId;
   const expoConfig: any = Constants.expoConfig;
   
   //const redirectUri: string = AuthSession.makeRedirectUri({ scheme: expoConfig.scheme });
-  //const redirectUri = 'http://localhost:3000';
-  const redirectUri = 'https://auth.expo.io/@david-fiaty/jam-native';
+  const redirectUri = Config.googleAuth.redirectUri;
 
   const discovery: any = {
-    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
-    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+    authorizationEndpoint: Config.googleAuth.authorizationEndpoint,
+    tokenEndpoint: Config.googleAuth.tokenEndpoint,
   };
 
   const [request, response, promptAsync] = AuthSession.useAuthRequest({
