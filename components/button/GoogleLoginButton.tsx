@@ -11,38 +11,24 @@ import * as AuthSession from 'expo-auth-session';
 
 const GoogleLoginButton = () => {
   const source: any = require('@/assets/images/google-logo.png');
-  const redirectUri = AuthSession.makeRedirectUri({ useProxy: true } as any);
-  const clientId = Config.googleAuthClientId;
-  const scope = "openid email profile";
-  const state = Math.random().toString(36).substring(2);
-
-  /*
-  const authUrl =
-    `https://accounts.google.com/o/oauth2/v2/auth` +
-    `?response_type=code` +
-    `&client_id=${clientId}` +
-    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
-    `&scope=${encodeURIComponent(scope)}` +
-    `&state=${state}` +
-    `&prompt=select_account`;
-
-  */
+  const clientId: string = Config.googleAuthClientId;
 
   const discovery: any = {
     authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
     tokenEndpoint: 'https://oauth2.googleapis.com/token',
   };
 
+  const params: any = {
+    clientId,
+    scopes: ['openid', 'profile', 'email'],
+    redirectUri: AuthSession.makeRedirectUri({ useProxy: true } as any),
+    responseType: AuthSession.ResponseType.Code,
+    prompt: AuthSession.Prompt.SelectAccount,
+  };
+
   const onPress = async () => {
-    const [request, response, promptAsync] = AuthSession.useAuthRequest({
-      clientId,
-      scopes: ['openid', 'profile', 'email'],
-      redirectUri: AuthSession.makeRedirectUri({ useProxy: true } as any),
-      responseType: AuthSession.ResponseType.Code,
-      prompt: AuthSession.Prompt.SelectAccount,
-    }, discovery);
-
-
+    const [request, response, promptAsync] = AuthSession.useAuthRequest(params, discovery);
+    
     console.log('request --- ', request);
     console.log('response --- ', request);
   };
