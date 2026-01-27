@@ -30,10 +30,6 @@ const GoogleLoginButton = () => {
     prompt: AuthSession.Prompt.SelectAccount,
   }, discovery);
 
-
-  console.log('request ----', request)
-  console.log('response ----', response)
-
   const onPress = () => {
     promptAsync();
   };
@@ -42,6 +38,9 @@ const GoogleLoginButton = () => {
     if (response?.type === 'success') {
       const { code } = response.params;
       console.log('Google auth code:', code);
+    }
+    else {
+      console.log('google auth response ----', response)
     }
   }, [response]);
 
