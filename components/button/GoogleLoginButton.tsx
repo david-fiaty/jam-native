@@ -6,41 +6,31 @@ import i18n from '@/translation/i18n';
 import TextView from '../view/TextView';
 import ImageView from '../view/ImageView';
 import { Config } from '@/constants/Config';
+import * as AuthSession from 'expo-auth-session';
+
 
 const GoogleLoginButton = () => {
   const source: any = require('@/assets/images/google-logo.png');
-  const expoConfig: any = Constants.expoConfig;
+  const clientId: string = Config.googleAuthClientId;
 
-  const redirectUri = "http://localhost:3000/login";
-  const clientId = Config.googleAuthClientId;
-  const scope = "openid email profile";
-  const state = Math.random().toString(36).substring(2);
-  const authUrl =
-    `https://accounts.google.com/o/oauth2/v2/auth` +
-    `?response_type=code` +
-    `&client_id=${clientId}` +
-    `&redirect_uri=${encodeURIComponent(redirectUri)}` +
-    `&scope=${encodeURIComponent(scope)}` +
-    `&state=${state}` +
-    `&prompt=select_account`; // 👈 Forces account chooser every time
+  const discovery: any = {
+    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+  };
 
+  const params: any = {
+    clientId,
+    scopes: ['openid', 'profile', 'email'],
+    redirectUri: AuthSession.makeRedirectUri({ useProxy: true } as any),
+    responseType: AuthSession.ResponseType.Code,
+    prompt: AuthSession.Prompt.SelectAccount,
+  };
 
-  const onPress = () => {
-
-    Linking.openURL(authUrl).catch((err: any) => {
-      console.error('Failed to open URL:', err)
-    });
+  const onPress = async () => {
+    const [request, response, promptAsync] = AuthSession.useAuthRequest(params, discovery);
     
-    /*
-    // Todo - Implement google login buton
-    let payload: any = {
-      provider: 'google',
-      authorization_code: 'AQDvlhmWEOysFyWkXsFYb5WzKw-B4p1sY7l-6QxY6vbG0FYePXVYoTvTr-PcmBgDZxPPAWxEe61LJPJ0f6Vn40A4FtyACrJs4-ce6mYKb6m9hP2BfIghno9iSP-U8MwLtKsTafDa-515WCVewp1swQFp9EJImbTr1HVvcPNFYKNMfnfS3sFsc5E76yqkWbJjm3rkScWLGj2qa5H1Re9kpdzGAXVhPtDF4wH4rJTKrgyZCaWqzpSisGy1VsS7rrLL6fGgx1yH0oOepk3Td0c1E99xM9Ofyc8ln0QOf4qgu-UBDJEd7SeKXBMSuD5BvHnCE5QO4lLlGq-hSu4tbhTu2ElHBRRrOYPsQDb3LEeZagMQHP7zQE-xJ1iFO22o21iWqCJvTXkscUQBRe_2JZbBVNWRkuzZmJXHe6lm9pxCJHYO9w',
-    };
-
-    console.log('on google button press', expoConfig?.android?.package);
-
-    */
+    console.log('request --- ', request);
+    console.log('response --- ', request);
   };
 
   return (
