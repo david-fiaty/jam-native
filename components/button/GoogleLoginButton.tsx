@@ -14,8 +14,14 @@ const GoogleLoginButton = () => {
   const source: any = require('@/assets/images/google-logo.png');
   const clientId: string = Config.googleAuthClientId;
 
-  const redirectUri: string = AuthSession.makeRedirectUri({ useProxy: true } as any);
+  const expoConfig: any = Constants.expoConfig;
+
+return ;
+
+  const redirectUri: string = AuthSession.makeRedirectUri({ scheme: 'jam-native' } as any);
   //const redirectUri = 'http://localhost:3000';
+
+  
 
   const discovery: any = {
     authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
