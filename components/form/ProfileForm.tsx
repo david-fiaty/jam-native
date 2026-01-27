@@ -32,13 +32,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
   const userState = useSelector((state: any) => state.user);
 
   const submitForm = async () => {
-
-    console.log(FormManager.hasErrors(resource));
-    console.log(FormManager.getErrors(resource));
-
-    return;
-
-    /*
     setIsProcessing(true);
 
     if (onSubmit) {
@@ -47,7 +40,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     else {
 
       let data: any = { ...formData };
-
+      
       delete data.profile_picture;
       if (data.hasOwnProperty('upload_profile_picture') && data.upload_profile_picture === null) {
         delete data.upload_profile_picture;
@@ -56,7 +49,7 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
       let result: any = await UserManager.updateProfile(data);
 
       if (result?.success === false) {
-        FormManager.addServerErrors(resource, result?.data?.meta);
+        FormManager.addServerErrors(resource, result);
 
         ScreenManager.showMessage({
           title: i18n.t('Profile update'),
@@ -76,7 +69,6 @@ const ProfileForm = ({ resource, onSubmit }: Props) => {
     }
 
     setIsProcessing(false);
-    */
   };
 
   const loadFormData = async () => {

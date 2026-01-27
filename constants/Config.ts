@@ -6,9 +6,15 @@ export const Config: any = {
   imageUrl: 'https://dev.jammm.app/backend',
   googleMapApiKey: 'AIzaSyCAEf0XHIfZFbXXLLANyLGi84RLqwKMKKM',
   googleGeocodeUrl: 'https://maps.googleapis.com/maps/api/geocode/json',
-  googleAuthClientId: '811182156187-2p26v2vuqm3vop5iuikftv80fkea2huu.apps.googleusercontent.com',
-  facebookAuthClientId: '373201195846239', 
+  facebookAuthClientId: '373201195846239',
   instagramAuthClientId: '684282327603640',
+  googleAuth: {
+    clientId: '811182156187-2p26v2vuqm3vop5iuikftv80fkea2huu.apps.googleusercontent.com',
+    redirectUri: 'https://auth.expo.io/@david-fiaty/jam-native',
+    //redirectUri: 'http://localhost:3000',
+    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
+    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+  },
   storageKey: '@jam',
   mainSection: 'jams',
   defaultLanguage: 'en',
@@ -25,8 +31,8 @@ export const Config: any = {
   searchDebounceDuration: 1000,
   defaultCountry: 'tg',
   allowedCountries: {
-    phone: [], 
-    jam: ['bj', 'bf', 'gh', 'ci', 'ke', 'ng', 'sn', 'tg'], 
+    phone: [],
+    jam: ['bj', 'bf', 'gh', 'ci', 'ke', 'ng', 'sn', 'tg'],
   },
   defaultLocation: {
     latitude: 8.6195,
@@ -35,7 +41,7 @@ export const Config: any = {
   storageKeys: {
     currentLanguage: 'language',
     profileData: 'profileData',
-    viewedNotifications: 'viewedNotifications', 
+    viewedNotifications: 'viewedNotifications',
     deletedJams: 'deletedJams',
   },
   forceLogin: {
