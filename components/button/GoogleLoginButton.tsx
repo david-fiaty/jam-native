@@ -15,7 +15,9 @@ const GoogleLoginButton = () => {
   const clientId: string = Config.googleAuthClientId;
   const expoConfig: any = Constants.expoConfig;
   
-  const redirectUri: string = AuthSession.makeRedirectUri({ scheme: expoConfig.scheme });
+  //const redirectUri: string = AuthSession.makeRedirectUri({ scheme: expoConfig.scheme });
+  //const redirectUri = 'http://localhost:3000';
+  const redirectUri = 'https://auth.expo.io/@david-fiaty/jam-native';
 
   const discovery: any = {
     authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
