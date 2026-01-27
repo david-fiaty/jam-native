@@ -7,31 +7,43 @@ import TextView from '../view/TextView';
 import ImageView from '../view/ImageView';
 import { Config } from '@/constants/Config';
 import * as AuthSession from 'expo-auth-session';
+import { useEffect } from 'react';
 
 
 const GoogleLoginButton = () => {
   const source: any = require('@/assets/images/google-logo.png');
-  const clientId: string = Config.googleAuthClientId;
+  const clientId: string = Config.googleAuth.clientId;
+  const expoConfig: any = Constants.expoConfig;
+  
+  //const redirectUri: string = AuthSession.makeRedirectUri({ scheme: expoConfig.scheme });
+  const redirectUri = Config.googleAuth.redirectUri;
 
   const discovery: any = {
-    authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
-    tokenEndpoint: 'https://oauth2.googleapis.com/token',
+    authorizationEndpoint: Config.googleAuth.authorizationEndpoint,
+    tokenEndpoint: Config.googleAuth.tokenEndpoint,
   };
 
-  const params: any = {
+  const [request, response, promptAsync] = AuthSession.useAuthRequest({
     clientId,
     scopes: ['openid', 'profile', 'email'],
-    redirectUri: AuthSession.makeRedirectUri({ useProxy: true } as any),
+    redirectUri,
     responseType: AuthSession.ResponseType.Code,
     prompt: AuthSession.Prompt.SelectAccount,
+  }, discovery);
+
+  const onPress = () => {
+    promptAsync();
   };
 
-  const onPress = async () => {
-    const [request, response, promptAsync] = AuthSession.useAuthRequest(params, discovery);
-    
-    console.log('request --- ', request);
-    console.log('response --- ', request);
-  };
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { code } = response.params;
+      console.log('Google auth code:', code);
+    }
+    else {
+      console.log('google auth response ----', response)
+    }
+  }, [response]);
 
   return (
     <TouchableOpacity
