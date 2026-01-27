@@ -17,8 +17,6 @@ const GoogleLoginButton = () => {
   
   const redirectUri: string = AuthSession.makeRedirectUri({ scheme: expoConfig.scheme });
 
-  console.log(redirectUri);
-
   const discovery: any = {
     authorizationEndpoint: 'https://accounts.google.com/o/oauth2/v2/auth',
     tokenEndpoint: 'https://oauth2.googleapis.com/token',
@@ -31,6 +29,10 @@ const GoogleLoginButton = () => {
     responseType: AuthSession.ResponseType.Code,
     prompt: AuthSession.Prompt.SelectAccount,
   }, discovery);
+
+
+  console.log('request ----', request)
+  console.log('response ----', response)
 
   const onPress = () => {
     promptAsync();
