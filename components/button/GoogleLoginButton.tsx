@@ -23,13 +23,15 @@ const GoogleLoginButton = () => {
     tokenEndpoint: Config.googleAuth.tokenEndpoint,
   };
 
-  const [request, response, promptAsync] = AuthSession.useAuthRequest({
+  const params: any = {
     clientId,
     scopes: ['openid', 'profile', 'email'],
     redirectUri,
     responseType: AuthSession.ResponseType.Code,
     prompt: AuthSession.Prompt.SelectAccount,
-  }, discovery);
+  };
+
+  const [request, response, promptAsync] = AuthSession.useAuthRequest(params, discovery);
 
   const onPress = () => {
     promptAsync();
