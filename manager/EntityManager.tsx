@@ -1,0 +1,309 @@
+import { Share } from 'react-native';
+import { Config } from '@/constants/Config';
+import DataManager from './DataManager';
+import UserManager from './UserManager';
+import i18n from '@/translation/i18n';
+import FormManager from './FormManager';
+import ContentManager from './ContentManager';
+
+class EntityManager {
+  async listJams(options?: any, search?: boolean) {
+    options = options || {};
+    let profileId = await UserManager.getProfileId();
+    let variables = {};
+    let defaults = {
+      profile_id: profileId,
+      page_size: Config.paginationSize,
+      page: 1,
+      jam_type: 'all',
+    };
+
+    return await DataManager.get('listJams', { ...defaults, ...options }, variables, search);
+  }
+
+  async listProfiles(options?: any, search?: boolean) {
+    options = options || {};
+    let profileId = await UserManager.getProfileId();
+    let variables = {};
+    let defaults = {
+      profile_id: profileId,
+      page_size: Config.paginationSize,
+      page: 1,
+      profile_type: 'all',
+    };
+
+    return await DataManager.get('listProfiles', { ...defaults, ...options }, variables, search);
+  }
+
+  async listProjects(options?: any, search?: boolean) {
+    options = options || {};
+    let variables = {};
+    let profileId = await UserManager.getProfileId();
+    let defaults = {
+      profile_id: profileId,
+      page_size: Config.paginationSize,
+      page: 1,
+    };
+
+    return await DataManager.get('listProjects', { ...defaults, ...options }, variables, search);
+  }
+
+  async getJams(idArray: any) {
+    let defaults = {};
+    let options = {
+      items_ids: idArray,
+    };
+
+    let data: any[] = await DataManager.get('getJams', { ...defaults, ...options });
+    let deletedIds: any[] = await UserManager.getDeletedJams();
+
+    return data.filter((o: any) => !deletedIds.includes(o.id));
+  }
+
+  async getProfiles(idArray: any) {
+    let defaults: any = {};
+    let options: any = {
+      items_ids: idArray,
+    };
+
+    let response: any = await DataManager.get('getProfiles', { ...defaults, ...options });
+
+    return response;
+  }
+
+  async getProjects(idArray: any) {
+    let defaults = {};
+    let options = {
+      items_ids: idArray,
+    };
+
+    return await DataManager.get('getProjects', { ...defaults, ...options });
+  }
+
+  async getProfile(entityId: number, options?: any) {
+    options = options || {};
+    let defaults = {};
+    let entityData = {};
+    let variables: any = { '[profile_id]': entityId };
+
+    if (entityId > 0) {
+      entityData = await DataManager.get('getProfile', { ...defaults, ...options }, variables);
+    }
+
+    return entityData || {};
+  }
+
+  async getJam(entityId: number, options?: any) {
+    options = options || {};
+    let defaults = {};
+    let entityData = {};
+    let variables: any = { '[jam_id]': entityId };
+
+    if (entityId > 0) {
+      entityData = await DataManager.get('getJam', { ...defaults, ...options }, variables);
+    }
+
+    return entityData || {};
+  }
+
+  async updateJam(entityId: number, options: any) {
+    let defaults: any = {};
+    let variables: any = { '[entity_id]': entityId };
+
+    return await DataManager.put('updateJam', { ...defaults, ...options }, variables);
+  }
+
+  async getComments(idArray: any) {
+    let defaults = {};
+    let options = {
+      items_ids: idArray,
+    };
+
+    return await DataManager.get('getComments', { ...defaults, ...options });
+  }
+
+  async addComment(entityId: any, commentText: string) {
+    let profileId: any = await UserManager.getProfileId();
+    let success: boolean = false
+    let defaults: any = {};
+    let options: any = {
+      item_id: entityId,
+      profile_id: profileId,
+      comment_text: commentText,
+    };
+
+    let response: any = await DataManager.post('addComment', { ...defaults, ...options });
+
+    if (response?.comment?.id > 0) success = true;
+
+    return {
+      success: success,
+      response: response,
+    };
+  }
+
+  async addJamToProject(projectId: number, options?: any) {
+    let defaults: any = {};
+    let variables: any = { '[project_id]': projectId };
+
+    return await DataManager.put('addJamToProject', { ...defaults, ...options }, variables);
+  }
+
+  async getSectors(options?: any) {
+    options = options || {};
+    let defaults = {};
+    let data: any = await DataManager.get('sectors', { ...defaults, ...options });
+
+    if (options?.items_ids?.length) {
+      data = data.filter((o: any) => options.items_ids.includes(o.id));
+    }
+
+    return data;
+  }
+
+  async getProfessions(options?: any) {
+    options = options || {};
+    let defaults = {};
+    let data: any = await DataManager.get('professions', { ...defaults, ...options });
+
+    if (options?.items_ids?.length) {
+      data = data.filter((o: any) => options.items_ids.includes(o.id));
+    }
+
+    return data;
+  }
+
+  async getCountries() {
+    //let language = await UserManager.getLanguage();
+    // Todo - Fix creates error in components
+    let language = 'en';
+    let options = { lang: language };
+
+    return await DataManager.get('countries', options);
+  }
+
+  async getVenueTypes() {
+    // Todo - Add language
+    // let language = await UserManager.getLanguage();
+    //let options: any = { lang: language };
+    let options: any = {};
+
+    return await DataManager.get('venueTypes', options);
+  }
+
+  async getOrganizationTypes() {
+    //let language = await UserManager.getLanguage();
+    let language = 'en';
+    let options = { lang: language };
+
+    return await DataManager.get('organizationTypes', options);
+  }
+
+  async getCulturalActivitiesTypes() {
+    //let language = await UserManager.getLanguage();
+    let language = 'en';
+    let options = { lang: language };
+
+    return await DataManager.get('culturalActivities', options);
+  }
+
+  async addJam(data: any) {
+    let payload: any = FormManager.objectToFormData(data);
+    let response: any = await DataManager.post('addJam', payload);
+    let success: boolean = false;
+
+    if (response?.id > 0) {
+      UserManager.updateProfileReference('profile_jams', response.id);
+      success = true;
+    }
+
+    return {
+      success: success,
+      response: response,
+    };
+  }
+
+  async addProject(data: any) {
+    let response: any = await DataManager.post('addProject', data);
+    let success: boolean = false;
+
+    if (response?.id > 0) {
+      UserManager.updateProfileReference('profile_projects', response.id);
+      success = true;
+    }
+
+    return {
+      success: success,
+      response: response,
+    };
+  }
+
+  async addProjectsImages(projectsData: any) {
+    let projects: any[] = [...projectsData];
+
+    for (let i = 0; i < projects.length; i++) {
+      if (projects[i].id != 'addItem' && projects[i]?.jams?.length > 0) {
+        projects[i].firstJam = await this.getJam(projects[i].jams[0]);
+      }
+    } 
+
+    return projects;
+  }
+
+  async shareJam(entityId: any) {
+    let entity: any = await this.getJam(entityId); 
+    let message: string = '';
+
+    if (entity?.title?.length) {
+      message += entity.title;
+    }
+
+    if (entity?.title?.length && entity?.caption?.length) {
+      message += ' | ';
+    }
+
+    if (entity?.caption?.length) {
+      message += entity.caption;
+    }
+
+    try {
+      const result = await Share.share({
+        message: message,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  getJamOwnerName(item: any) {
+    let ownerName: string = item?.profile?.profile_name;
+
+    if (ownerName?.length > Config.maxUserNameLength) {
+      ownerName = ownerName.substring(0, Config.maxUserNameLength) + '...';
+    }
+
+    return ownerName;
+  }
+
+  getJamTypeLabel(jamType: string) {
+    let label: any = '';
+
+    if (jamType?.length > 0) {
+      label = (ContentManager.getJamTypes().find((o: any) => o.id === jamType))?.name;
+    }
+
+    return label?.length > 0 ? label : i18n.t('Unavailable');
+  }
+};
+
+export default (new EntityManager());

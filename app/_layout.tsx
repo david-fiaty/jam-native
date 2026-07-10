@@ -1,61 +1,71 @@
-import { useEffect } from 'react';
-import 'react-native-reanimated';
-import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { Stack, useRouter } from 'expo-router';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { Colors } from '@/constants/GlobalStyles';
-import HeaderBar from '@/components/navigation/HeaderBar';
+import { Provider } from 'react-redux';
+import { BackHandler } from 'react-native';
+import { Layout } from '@/constants/Layout';
+import * as ExpoSplashScreen from 'expo-splash-screen';
+import Store from "@/redux/Store";
+import SectionManager from '@/manager/SectionManager'
+import ScreenManager from '@/manager/ScreenManager';
 
-const headerOptions = { 
-  header: (props: object) => <HeaderBar />,    
-  headerShown: true,
-  statusBarColor: Colors.background,
-  statusBarStyle: 'dark',
-  headerTintColor: Colors.background,    
-  headerStyle: {
-    backgroundColor: Colors.background, 
-  },
-};
+ExpoSplashScreen.preventAutoHideAsync();
 
-const fadeAnimationOptions = {  
-  animation: 'fade',
-  animationDuration: 2000,
-};
+const RootLayout = () => {
+  const router = useRouter();
 
-SplashScreen.preventAutoHideAsync();
+  const defaults: any = ScreenManager.isIos() ? {
+    headerShown: false,
+  } : { 
+    statusBarStyle: 'dark',
+    animation: 'fade',
+    headerShown: false,
+    headerTintColor: Layout.colors.white,    
+    headerStyle: {
+      backgroundColor: Layout.colors.white, 
+    },
+  };
 
-export default function RootLayout() {
-  const [loaded] = useFonts({
+  const navigation: any = {
+    showHeader: true,
+    showFooter: true,
+    showHeaderButtons: true,
+    showHeaderSearch: true,
+    isRoot: false,
+  };
+
+  const [isLoaded, isError] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+  const onBackPress = () => {  
+    SectionManager.back(router);
+    return true;
+  };
 
-  if (!loaded) {
-    return null;
-  }
+  useEffect(() => {
+    if (isLoaded || isError) {
+      ExpoSplashScreen.hideAsync();
+    }
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress,
+    );
+
+    return () => backHandler.remove();
+  }, [isLoaded, isError]);
+
+  if (!isLoaded && !isError) return <></>; 
 
   return (
-    <ThemeProvider value={DefaultTheme}>
+    <Provider store={Store}>
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="main" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="jams" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="add-jam" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="profile" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="login" options={{ headerShown: false }} />
-        <Stack.Screen name="about" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="legal" options={{...headerOptions, ...fadeAnimationOptions }} />
-        <Stack.Screen name="password" options={{ headerShown: false }} />
-        <Stack.Screen name="username" options={{ headerShown: false }} />
-        <Stack.Screen name="language" options={{ headerShown: false }} />
-        <Stack.Screen name="map" options={{...headerOptions, ...fadeAnimationOptions }} />
+        <Stack.Screen name="index" options={{ ...defaults, ...navigation }} />
+        <Stack.Screen name="[sectionId]" options={{ ...defaults, ...navigation }} />
       </Stack>
-    </ThemeProvider>
+    </Provider>
   );
 }
+
+export default RootLayout;

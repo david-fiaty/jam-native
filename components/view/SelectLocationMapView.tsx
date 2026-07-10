@@ -1,0 +1,101 @@
+import MapView, { Marker, MapPressEvent, PROVIDER_GOOGLE, PROVIDER_DEFAULT } from "react-native-maps";
+import { useState, useEffect } from "react";
+import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
+import { Layout } from "@/constants/Layout";
+import i18n from "@/translation/i18n";
+import BoxView from "./BoxView";
+import ButtonView from "./ButtonView";
+import ModalManager from "@/manager/ModalManager";
+import FormManager from "@/manager/FormManager";
+
+type Props = {
+  resource?: any;
+  parentKey?: any;
+  latitude?: any;
+  longitude?: any;
+  rules?: any;
+};
+
+const SelectLocationMapView = ({ resource, parentKey, latitude, longitude, rules }: Props) => {
+  const [selectedLocation, setSelectedLocation] = useState<any>(null);
+
+  const updateSelectedLocation = () => {
+    updateCoordinates(selectedLocation?.latitude, selectedLocation?.longitude);
+    ModalManager.toggleModal('SelectLocationMapView');
+  };
+
+  const onMapPress = (event: MapPressEvent) => {
+    let coord: any = event.nativeEvent.coordinate;
+    setSelectedLocation(coord);   
+    updateCoordinates(coord.latitude, coord.longitude);
+  };
+
+  const updateCoordinates = (lat: any, lng: any) => {
+    FormManager.updateField(resource, latitude.key, lat, rules, parentKey);
+    FormManager.updateField(resource, longitude.key, lng, rules, parentKey);
+  };
+
+  useEffect(() => {
+    setSelectedLocation({ latitude: latitude?.value, longitude: longitude?.value });
+  }, [latitude, longitude]);
+
+  return (
+    <BoxView
+      direction="column"
+      align="flex-start"
+      justify="flex-start"
+      style={[Layout.screenContent, styles.container]}
+    >
+      <TouchableWithoutFeedback>
+        <View style={styles.mapContainer}>
+          <MapView
+            style={styles.map}
+            provider={PROVIDER_DEFAULT}
+            customMapStyle={Layout.mapStyle}
+            showsUserLocation={true}
+            showsMyLocationButton={true}
+            onPress={onMapPress}
+          >
+            <Marker
+              pinColor={Layout.colors.tertiary}
+              title={i18n.t("Selected location")}
+              description={i18n.t("This is the selected location")} // Todo - Reverse geocoding
+              coordinate={{
+                latitude: parseFloat(selectedLocation?.latitude),
+                longitude: parseFloat(selectedLocation?.longitude),
+              }}
+            />
+          </MapView>
+        </View>
+      </TouchableWithoutFeedback>
+
+      <ButtonView
+        label={i18n.t('Submit')}
+        onPress={updateSelectedLocation}
+        containerStyle={styles.confirmButton}
+      />
+    </BoxView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 0,
+    paddingTop: Layout.space.base * 1.5,
+    position: 'relative',
+  },
+  confirmButton: {
+    bottom: '9%',
+    position: 'absolute',
+  },
+  mapContainer: {
+    width: '100%',
+    height: '100%',
+    flexGrow: 1,
+  },
+  map: {
+    flex: 1,
+  },
+});
+
+export default SelectLocationMapView;

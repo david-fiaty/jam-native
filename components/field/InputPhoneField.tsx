@@ -1,0 +1,342 @@
+import React, { useState, useEffect } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import parsePhoneNumber, { AsYouType, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+import { Layout } from "@/constants/Layout";
+import { Config } from "@/constants/Config";
+import getUnicodeFlagIcon from 'country-flag-icons/unicode';
+import BoxView from "../view/BoxView";
+import FormManager from "@/manager/FormManager";
+import TextView from "../view/TextView";
+import InputTextField from "./InputTextField";
+import SelectListField from "./SelectListField";
+import ContentManager from "@/manager/ContentManager";
+import ModalManager from "@/manager/ModalManager";
+import UserManager from "@/manager/UserManager";
+import DataManager from "@/manager/DataManager";
+
+type Props = {
+  theme?: string;
+  resource?: any;
+  phoneNumberFieldKey?: any;
+  phoneNumberFieldValue?: any;
+  phonePrefixFieldKey?: any;
+  phonePrefixFieldValue?: any;
+  parentKey?: any;
+  rules?: any;
+  inputlabel?: any;
+  selectLabel?: any;
+  inputPlaceholder?: any;
+  selectPlaceholder?: any;
+  disabled?: boolean;
+  compact?: boolean;
+  containerStyle?: any;
+  formatPhoneNumber?: boolean;
+  onChangeValue?: (data: any) => void;
+};
+
+const InputPhoneField = ({
+  theme,
+  resource,
+  phoneNumberFieldKey,
+  phoneNumberFieldValue,
+  phonePrefixFieldKey,
+  phonePrefixFieldValue,
+  parentKey,
+  rules,
+  inputlabel,
+  selectLabel,
+  inputPlaceholder,
+  selectPlaceholder,
+  disabled,
+  compact,
+  containerStyle,
+  formatPhoneNumber,
+  onChangeValue,
+}: Props) => {
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  const [selectedCountry, setSelectedCountry] = useState<any>(null);
+  const [defaultCountry, setDefaultCountry] = useState<any>(null);
+  const [countryOptions, setCountryOptions] = useState<any[]>([]);
+  const countryList: any[] = ContentManager.getCountryPhoneCodes();
+
+  formatPhoneNumber = formatPhoneNumber === false ? false : true;
+
+  containerStyle = {
+    ...(containerStyle || {}),
+    ...(theme == 'white' ? styles.containerStyleWhite : Layout.formField),
+    ...(compact === true ? { flex: 1 } : {}),
+  };
+
+  const getDefaultCountry = async () => {
+    let code: string = Config.defaultCountry;
+    let locationAddress: any = await UserManager.getLocationAddress();
+
+    if (locationAddress && locationAddress?.isoCountryCode) {
+      code = locationAddress.isoCountryCode.toLowerCase();
+    }
+
+    return countryList.find((o: any) => o.code == code);
+  };
+
+  const getCountryOptions = () => {
+    let countries: any[] = [...countryList];
+
+    if (Config.allowedCountries.phone.length > 0) {
+      countries = countries.filter((o: any) => {
+        return Config.allowedCountries.phone.includes(o.code);
+      });
+    }
+
+    return countries;
+  };
+
+
+  const getSelectedCountry = () => {
+    if (compact && phoneNumberFieldValue) {
+      let phonePrefix: any = DataManager.extractPhonePrefix(phoneNumberFieldValue);
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
+
+      if (targetCountry) {
+        return targetCountry;
+      }
+      else {
+        return defaultCountry;
+      }
+    }
+    else if (selectedCountry) {
+      return selectedCountry;
+    }
+    else {
+      return defaultCountry;
+    }
+  };
+
+  const getCurrentPhoneNumber = () => {
+    if (compact === true) {
+      let phonePrefix: any = (!compact && phonePrefixFieldValue) ? phonePrefixFieldValue : DataManager.extractPhonePrefix(phoneNumberFieldValue);
+      let targetCountry: any = countryList.find((o: any) => o.prefix == phonePrefix);
+      let fieldValue: string = '';
+
+      if (targetCountry && phoneNumberFieldValue) {
+        fieldValue = DataManager.extractPhoneNumber(phoneNumberFieldValue);
+
+        if (formatPhoneNumber) {
+          let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+
+          if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+            fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+            fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          }
+        }
+      }
+
+      return fieldValue;
+    }
+    else {
+      let fieldValue: string = '';
+      let targetCountry: any = getSelectedCountry();
+      let phonePrefix: string = targetCountry?.prefix;
+
+      if (phonePrefix && phoneNumberFieldValue) {
+        fieldValue = phoneNumberFieldValue;
+
+        if (formatPhoneNumber) {
+          let parsedNumber: any = parsePhoneNumber(phonePrefix + fieldValue);
+
+          if (parsedNumber && phonePrefix == `+${parsedNumber.countryCallingCode}`) {
+            fieldValue = new AsYouType(targetCountry.code.toUpperCase()).input(phonePrefix + fieldValue);
+            fieldValue = fieldValue.replace(`${phonePrefix} `, '');
+          }
+        }
+      }
+
+      return fieldValue;
+    }
+  };
+
+  const onChangePhoneValue = (fieldValue: any) => {
+    let targetCountry: any = getSelectedCountry();
+
+    if (onChangeValue) {
+      onChangeValue(getOnChangeData(targetCountry.prefix, fieldValue));
+    }
+    else {
+      if (targetCountry && compact === true) {
+        fieldValue = targetCountry.prefix + (fieldValue || '').replaceAll(' ', '');
+      }
+
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
+      });
+    }
+  };
+
+  const onChangeCodeValue = (item: any) => {
+    let targetCountry: any = countryList.find((o: any) => o.code == item.value);
+    let fieldValue: string = phoneNumberFieldValue;
+
+    setSelectedCountry(targetCountry);
+
+    if (onChangeValue) {
+      onChangeValue(getOnChangeData(targetCountry.prefix, fieldValue));
+    }
+    else {
+      FormManager.updateField(resource, phonePrefixFieldKey, targetCountry.prefix);
+      FormManager.updateField(resource, phoneNumberFieldKey, fieldValue, rules, parentKey, {
+        countryCode: targetCountry.code,
+      });
+    }
+  };
+
+  const getOnChangeData = (phonePrefix: any, phoneNumber: any) => {
+    return {
+      phonePrefix: phonePrefix,
+      phoneNumber: (phoneNumber || '').replaceAll(' ', ''),
+    };
+  };
+
+  const renderFlag = (code: string) => {
+    if (code) {
+      return getUnicodeFlagIcon(code.toUpperCase());
+    }
+  };
+
+  const renderSelectList = () => {
+    return (
+      <SelectListField
+        theme={theme}
+        resource={resource}
+        fieldKey={phonePrefixFieldKey}
+        parentKey={parentKey}
+        rules={[]}
+        placeholder={selectPlaceholder}
+        value={getSelectedCountry()?.code}
+        data={countryOptions}
+        optionLabelKey="name"
+        optionValueKey="code"
+        disabled={disabled}
+        elementStyle={styles.selectListField}
+        containerStyle={containerStyle}
+        search={true}
+        onChangeValue={onChangeCodeValue}
+      />
+    );
+  };
+
+  const renderInputText = () => {
+    return (
+      <BoxView
+        direction="row"
+        align="center"
+        justify="flex-start"
+        style={[containerStyle, styles.container]}
+        gap={Layout.space.base / 1.6}
+      >
+        <View>
+          <TouchableOpacity
+            onPress={() => {
+              if (compact === true) {
+                ModalManager.toggleModal('CountryPhoneCodesList', {
+                  resource: resource,
+                  fieldKey: phoneNumberFieldKey,
+                  parentKey: parentKey,
+                  rules: rules,
+                  value: phoneNumberFieldValue,
+                });
+              }
+            }}
+          >
+            <TextView size={15}>
+              {renderFlag(getSelectedCountry()?.code)}&nbsp;&nbsp;{getSelectedCountry()?.prefix}
+            </TextView>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.fieldContainer}>
+          <InputTextField
+            theme={theme}
+            resource={resource}
+            fieldKey={phoneNumberFieldKey}
+            parentKey={parentKey}
+            value={getCurrentPhoneNumber()}
+            rules={[]}
+            placeholder={inputPlaceholder}
+            keyboardType="number-pad"
+            onChangeText={onChangePhoneValue}
+            containerStyle={styles.inputTextField}
+          />
+        </View>
+      </BoxView>
+    );
+  };
+
+  const renderComponent = () => {
+    if (compact === true) {
+      return (
+        <>
+          {FormManager.renderLabel(inputlabel, rules)}
+          {renderInputText()}
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+        </>
+      );
+    }
+    else {
+      return (
+        <>
+          {FormManager.renderLabel(selectLabel, rules)}
+          {renderSelectList()}
+
+          {FormManager.renderLabel(inputlabel, rules)}
+          {renderInputText()}
+          {FormManager.renderError(phoneNumberFieldKey, parentKey)}
+        </>
+      );
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      setDefaultCountry(await getDefaultCountry());
+    })();
+
+    if (!isLoaded) {
+      setCountryOptions(getCountryOptions());
+      setDefaultCountry(getDefaultCountry());
+      setSelectedCountry(getSelectedCountry());
+      setIsLoaded(true);
+    }
+  }, [isLoaded, countryOptions]);
+
+  return renderComponent();
+};
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    paddingLeft: Layout.space.base,
+  },
+  containerStyleWhite: {
+    backgroundColor: Layout.colors.white,
+    borderWidth: Layout.borderWidth.base,
+    borderRadius: Layout.radius.round,
+    borderColor: Layout.colors.primary,
+  },
+  selectListField: {
+    backgroundColor: Layout.colors.white,
+    borderColor: Layout.colors.primary,
+  },
+  fieldContainer: {
+    flexShrink: 1,
+  },
+  inputTextField: {
+    borderWidth: 0,
+    paddingLeft: 0,
+    flexShrink: 1,
+  },
+  listItem: {
+    paddingVertical: Layout.space.base,
+    paddingHorizontal: Layout.space.base,
+  },
+});
+
+export default InputPhoneField;
