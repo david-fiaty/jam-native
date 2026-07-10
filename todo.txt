@@ -34,6 +34,11 @@ pm2 start "npx expo start --web" --name jam-mobile
 pm2 startup
 pm2 save
 
+# Generate SHA-1 keystore 
+npx expo run:android
+keytool -list -v -keystore "C:\wamp64\www\dev\react\jam-native\android\app\debug.keystore" -alias androiddebugkey -storepass android -keypass android
+SHA1: 5E:8F:16:06:2E:A3:CD:2C:4A:0D:54:78:76:BA:A6:F3:8C:AB:F6:25
+
 # Google maps
 AIzaSyB91uv-OuWw6iNMjVZmuHJsRVDHP9baCq0
 
